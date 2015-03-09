@@ -1,0 +1,713 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CB1C76541AAB144800680FE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76531AAB144800680FE3 /* main.m */; };
+		CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76561AAB144800680FE3 /* AppDelegate.m */; };
+		CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1C765B1AAB144800680FE3 /* Main.storyboard */; };
+		CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB1C765E1AAB144800680FE3 /* Images.xcassets */; };
+		CB1C766E1AAB144900680FE3 /* evercamPlayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C766D1AAB144900680FE3 /* evercamPlayTests.m */; };
+		CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C767A1AAB7DE900680FE3 /* SWRevealViewController.m */; };
+		CB1C76811AAB837400680FE3 /* CamerasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C767F1AAB837400680FE3 /* CamerasViewController.m */; };
+		CB1C76821AAB837400680FE3 /* CamerasViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76801AAB837400680FE3 /* CamerasViewController.xib */; };
+		CB1C76861AAB85DC00680FE3 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76841AAB85DC00680FE3 /* WelcomeViewController.m */; };
+		CB1C76871AAB85DC00680FE3 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76851AAB85DC00680FE3 /* WelcomeViewController.xib */; };
+		CB1C76B21AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768A1AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png */; };
+		CB1C76B31AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768B1AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png */; };
+		CB1C76B41AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768C1AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png */; };
+		CB1C76B51AAB871A00680FE3 /* btn_radio_off_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768D1AAB871A00680FE3 /* btn_radio_off_holo_dark.png */; };
+		CB1C76B61AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768E1AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png */; };
+		CB1C76B71AAB871A00680FE3 /* btn_radio_on_disabled_focused_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768F1AAB871A00680FE3 /* btn_radio_on_disabled_focused_holo_dark.png */; };
+		CB1C76B81AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76901AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png */; };
+		CB1C76B91AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76911AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png */; };
+		CB1C76BA1AAB871A00680FE3 /* btn_radio_on_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76921AAB871A00680FE3 /* btn_radio_on_holo_dark.png */; };
+		CB1C76BB1AAB871A00680FE3 /* btn_radio_on_pressed_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76931AAB871A00680FE3 /* btn_radio_on_pressed_holo_dark.png */; };
+		CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76941AAB871A00680FE3 /* cam_unavailable.png */; };
+		CB1C76BD1AAB871A00680FE3 /* dot_off_red.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76951AAB871A00680FE3 /* dot_off_red.png */; };
+		CB1C76BE1AAB871A00680FE3 /* dot_on_red.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76961AAB871A00680FE3 /* dot_on_red.png */; };
+		CB1C76BF1AAB871A00680FE3 /* evercam_play512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76971AAB871A00680FE3 /* evercam_play512x512.png */; };
+		CB1C76C01AAB871A00680FE3 /* evercam_play_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76981AAB871A00680FE3 /* evercam_play_192x192.png */; };
+		CB1C76C11AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76991AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png */; };
+		CB1C76C21AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769A1AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png */; };
+		CB1C76C31AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769B1AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png */; };
+		CB1C76C41AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769C1AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png */; };
+		CB1C76C51AAB871A00680FE3 /* evercamtheme_textfield_focused_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769D1AAB871A00680FE3 /* evercamtheme_textfield_focused_holo_dark.9.png */; };
+		CB1C76C61AAB871A00680FE3 /* hikvision.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769E1AAB871A00680FE3 /* hikvision.png */; };
+		CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769F1AAB871A00680FE3 /* ic_action_new.png */; };
+		CB1C76C81AAB871A00680FE3 /* ic_action_overflow.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A01AAB871A00680FE3 /* ic_action_overflow.png */; };
+		CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A11AAB871A00680FE3 /* ic_action_refresh.png */; };
+		CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A21AAB871A00680FE3 /* ic_action_save.png */; };
+		CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A31AAB871A00680FE3 /* ic_add_person.png */; };
+		CB1C76CC1AAB871A00680FE3 /* ic_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A41AAB871A00680FE3 /* ic_clock.png */; };
+		CB1C76CD1AAB871A00680FE3 /* ic_content_undo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A51AAB871A00680FE3 /* ic_content_undo.png */; };
+		CB1C76CE1AAB871A00680FE3 /* ic_navigation_back.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A61AAB871A00680FE3 /* ic_navigation_back.png */; };
+		CB1C76CF1AAB871A00680FE3 /* ic_navigation_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A71AAB871A00680FE3 /* ic_navigation_cancel.png */; };
+		CB1C76D01AAB871A00680FE3 /* ic_navigation_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A81AAB871A00680FE3 /* ic_navigation_refresh.png */; };
+		CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A91AAB871A00680FE3 /* ic_person.png */; };
+		CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76AA1AAB871A00680FE3 /* evercam_icon.png */; };
+		CB1C76D51AAB871A00680FE3 /* icon_gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76AD1AAB871A00680FE3 /* icon_gallery.png */; };
+		CB1C76D61AAB871A00680FE3 /* play_page_feature.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76AE1AAB871A00680FE3 /* play_page_feature.png */; };
+		CB1C76D71AAB871A00680FE3 /* play_page_intro.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76AF1AAB871A00680FE3 /* play_page_intro.png */; };
+		CB1C76D81AAB871A00680FE3 /* play_page_next.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76B01AAB871A00680FE3 /* play_page_next.png */; };
+		CB1C76D91AAB871A00680FE3 /* title_background.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76B11AAB871A00680FE3 /* title_background.png */; };
+		CB1C76DB1AAB8E5D00680FE3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76DA1AAB8E5D00680FE3 /* Default-568h@2x.png */; };
+		CB1C76DF1AAB921800680FE3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76DD1AAB921800680FE3 /* LoginViewController.m */; };
+		CB1C76E01AAB921800680FE3 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76DE1AAB921800680FE3 /* LoginViewController.xib */; };
+		CB1C76E61AAB965A00680FE3 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76E41AAB965A00680FE3 /* SignupViewController.m */; };
+		CB1C76E71AAB965B00680FE3 /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76E51AAB965A00680FE3 /* SignupViewController.xib */; };
+		CB1C76ED1AAC6ACE00680FE3 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76EB1AAC6ACE00680FE3 /* MenuViewController.m */; };
+		CB1C76EE1AAC6ACE00680FE3 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76EC1AAC6ACE00680FE3 /* MenuViewController.xib */; };
+		CB1C76F71AAC6FF500680FE3 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76F51AAC6FF500680FE3 /* reveal-icon.png */; };
+		CB1C76F81AAC6FF500680FE3 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76F61AAC6FF500680FE3 /* reveal-icon@2x.png */; };
+		CB1C76FC1AAD834700680FE3 /* UILabel+ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76FB1AAD834700680FE3 /* UILabel+ActionSheet.m */; };
+		CB1C77001AAD84F900680FE3 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76FE1AAD84F900680FE3 /* AccountsViewController.m */; };
+		CB1C77011AAD84F900680FE3 /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76FF1AAD84F900680FE3 /* AccountsViewController.xib */; };
+		CB1C77051AAD85A200680FE3 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C77031AAD85A200680FE3 /* AccountCell.m */; };
+		CB1C77061AAD85A200680FE3 /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C77041AAD85A200680FE3 /* AccountCell.xib */; };
+		CB1C770C1AAD8FEB00680FE3 /* AddAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C770A1AAD8FEB00680FE3 /* AddAccountCell.m */; };
+		CB1C770D1AAD8FEB00680FE3 /* AddAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C770B1AAD8FEB00680FE3 /* AddAccountCell.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CB1C76681AAB144900680FE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB1C76461AAB144700680FE3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CB1C764D1AAB144700680FE3;
+			remoteInfo = evercamPlay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CB1C764E1AAB144800680FE3 /* evercamPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evercamPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB1C76521AAB144800680FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB1C76531AAB144800680FE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CB1C76551AAB144800680FE3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CB1C76561AAB144800680FE3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CB1C765C1AAB144800680FE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CB1C765E1AAB144800680FE3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CB1C76671AAB144900680FE3 /* evercamPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = evercamPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB1C766C1AAB144900680FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB1C766D1AAB144900680FE3 /* evercamPlayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = evercamPlayTests.m; sourceTree = "<group>"; };
+		CB1C76791AAB7DE900680FE3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		CB1C767A1AAB7DE900680FE3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		CB1C767E1AAB837400680FE3 /* CamerasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CamerasViewController.h; sourceTree = "<group>"; };
+		CB1C767F1AAB837400680FE3 /* CamerasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CamerasViewController.m; sourceTree = "<group>"; };
+		CB1C76801AAB837400680FE3 /* CamerasViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CamerasViewController.xib; sourceTree = "<group>"; };
+		CB1C76831AAB85DC00680FE3 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		CB1C76841AAB85DC00680FE3 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		CB1C76851AAB85DC00680FE3 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		CB1C768A1AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_off_disabled_focused_holo_dark.png; sourceTree = "<group>"; };
+		CB1C768B1AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_off_disabled_holo_dark.png; sourceTree = "<group>"; };
+		CB1C768C1AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_off_focused_holo_dark.png; sourceTree = "<group>"; };
+		CB1C768D1AAB871A00680FE3 /* btn_radio_off_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_off_holo_dark.png; sourceTree = "<group>"; };
+		CB1C768E1AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_off_pressed_holo_dark.png; sourceTree = "<group>"; };
+		CB1C768F1AAB871A00680FE3 /* btn_radio_on_disabled_focused_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_on_disabled_focused_holo_dark.png; sourceTree = "<group>"; };
+		CB1C76901AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_on_disabled_holo_dark.png; sourceTree = "<group>"; };
+		CB1C76911AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_on_focused_holo_dark.png; sourceTree = "<group>"; };
+		CB1C76921AAB871A00680FE3 /* btn_radio_on_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_on_holo_dark.png; sourceTree = "<group>"; };
+		CB1C76931AAB871A00680FE3 /* btn_radio_on_pressed_holo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_radio_on_pressed_holo_dark.png; sourceTree = "<group>"; };
+		CB1C76941AAB871A00680FE3 /* cam_unavailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cam_unavailable.png; sourceTree = "<group>"; };
+		CB1C76951AAB871A00680FE3 /* dot_off_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot_off_red.png; sourceTree = "<group>"; };
+		CB1C76961AAB871A00680FE3 /* dot_on_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot_on_red.png; sourceTree = "<group>"; };
+		CB1C76971AAB871A00680FE3 /* evercam_play512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercam_play512x512.png; sourceTree = "<group>"; };
+		CB1C76981AAB871A00680FE3 /* evercam_play_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercam_play_192x192.png; sourceTree = "<group>"; };
+		CB1C76991AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercamtheme_textfield_activated_holo_dark.9.png; sourceTree = "<group>"; };
+		CB1C769A1AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercamtheme_textfield_default_holo_dark.9.png; sourceTree = "<group>"; };
+		CB1C769B1AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercamtheme_textfield_disabled_focused_holo_dark.9.png; sourceTree = "<group>"; };
+		CB1C769C1AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercamtheme_textfield_disabled_holo_dark.9.png; sourceTree = "<group>"; };
+		CB1C769D1AAB871A00680FE3 /* evercamtheme_textfield_focused_holo_dark.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercamtheme_textfield_focused_holo_dark.9.png; sourceTree = "<group>"; };
+		CB1C769E1AAB871A00680FE3 /* hikvision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hikvision.png; sourceTree = "<group>"; };
+		CB1C769F1AAB871A00680FE3 /* ic_action_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_action_new.png; sourceTree = "<group>"; };
+		CB1C76A01AAB871A00680FE3 /* ic_action_overflow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_action_overflow.png; sourceTree = "<group>"; };
+		CB1C76A11AAB871A00680FE3 /* ic_action_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_action_refresh.png; sourceTree = "<group>"; };
+		CB1C76A21AAB871A00680FE3 /* ic_action_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_action_save.png; sourceTree = "<group>"; };
+		CB1C76A31AAB871A00680FE3 /* ic_add_person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_add_person.png; sourceTree = "<group>"; };
+		CB1C76A41AAB871A00680FE3 /* ic_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_clock.png; sourceTree = "<group>"; };
+		CB1C76A51AAB871A00680FE3 /* ic_content_undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_content_undo.png; sourceTree = "<group>"; };
+		CB1C76A61AAB871A00680FE3 /* ic_navigation_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_navigation_back.png; sourceTree = "<group>"; };
+		CB1C76A71AAB871A00680FE3 /* ic_navigation_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_navigation_cancel.png; sourceTree = "<group>"; };
+		CB1C76A81AAB871A00680FE3 /* ic_navigation_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_navigation_refresh.png; sourceTree = "<group>"; };
+		CB1C76A91AAB871A00680FE3 /* ic_person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_person.png; sourceTree = "<group>"; };
+		CB1C76AA1AAB871A00680FE3 /* evercam_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercam_icon.png; sourceTree = "<group>"; };
+		CB1C76AD1AAB871A00680FE3 /* icon_gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_gallery.png; sourceTree = "<group>"; };
+		CB1C76AE1AAB871A00680FE3 /* play_page_feature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_page_feature.png; sourceTree = "<group>"; };
+		CB1C76AF1AAB871A00680FE3 /* play_page_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_page_intro.png; sourceTree = "<group>"; };
+		CB1C76B01AAB871A00680FE3 /* play_page_next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_page_next.png; sourceTree = "<group>"; };
+		CB1C76B11AAB871A00680FE3 /* title_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_background.png; sourceTree = "<group>"; };
+		CB1C76DA1AAB8E5D00680FE3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CB1C76DC1AAB921800680FE3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		CB1C76DD1AAB921800680FE3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		CB1C76DE1AAB921800680FE3 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		CB1C76E31AAB965A00680FE3 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		CB1C76E41AAB965A00680FE3 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		CB1C76E51AAB965A00680FE3 /* SignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupViewController.xib; sourceTree = "<group>"; };
+		CB1C76EA1AAC6ACE00680FE3 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		CB1C76EB1AAC6ACE00680FE3 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		CB1C76EC1AAC6ACE00680FE3 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		CB1C76F51AAC6FF500680FE3 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
+		CB1C76F61AAC6FF500680FE3 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
+		CB1C76FA1AAD834700680FE3 /* UILabel+ActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+ActionSheet.h"; sourceTree = "<group>"; };
+		CB1C76FB1AAD834700680FE3 /* UILabel+ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ActionSheet.m"; sourceTree = "<group>"; };
+		CB1C76FD1AAD84F900680FE3 /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
+		CB1C76FE1AAD84F900680FE3 /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
+		CB1C76FF1AAD84F900680FE3 /* AccountsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountsViewController.xib; sourceTree = "<group>"; };
+		CB1C77021AAD85A200680FE3 /* AccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountCell.h; sourceTree = "<group>"; };
+		CB1C77031AAD85A200680FE3 /* AccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
+		CB1C77041AAD85A200680FE3 /* AccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
+		CB1C77091AAD8FEB00680FE3 /* AddAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountCell.h; sourceTree = "<group>"; };
+		CB1C770A1AAD8FEB00680FE3 /* AddAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountCell.m; sourceTree = "<group>"; };
+		CB1C770B1AAD8FEB00680FE3 /* AddAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountCell.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CB1C764B1AAB144700680FE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB1C76641AAB144900680FE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CB1C76451AAB144700680FE3 = {
+			isa = PBXGroup;
+			children = (
+				CB1C76DA1AAB8E5D00680FE3 /* Default-568h@2x.png */,
+				CB1C76501AAB144800680FE3 /* evercamPlay */,
+				CB1C766A1AAB144900680FE3 /* evercamPlayTests */,
+				CB1C764F1AAB144800680FE3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CB1C764F1AAB144800680FE3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C764E1AAB144800680FE3 /* evercamPlay.app */,
+				CB1C76671AAB144900680FE3 /* evercamPlayTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB1C76501AAB144800680FE3 /* evercamPlay */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C76771AAB7DE900680FE3 /* 3rdParty */,
+				CB1C767D1AAB834000680FE3 /* ViewControllers */,
+				CB1C76551AAB144800680FE3 /* AppDelegate.h */,
+				CB1C76561AAB144800680FE3 /* AppDelegate.m */,
+				CB1C765B1AAB144800680FE3 /* Main.storyboard */,
+				CB1C765E1AAB144800680FE3 /* Images.xcassets */,
+				CB1C76881AAB871A00680FE3 /* Resources */,
+				CB1C76511AAB144800680FE3 /* Supporting Files */,
+			);
+			path = evercamPlay;
+			sourceTree = "<group>";
+		};
+		CB1C76511AAB144800680FE3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C76521AAB144800680FE3 /* Info.plist */,
+				CB1C76531AAB144800680FE3 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB1C766A1AAB144900680FE3 /* evercamPlayTests */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C766D1AAB144900680FE3 /* evercamPlayTests.m */,
+				CB1C766B1AAB144900680FE3 /* Supporting Files */,
+			);
+			path = evercamPlayTests;
+			sourceTree = "<group>";
+		};
+		CB1C766B1AAB144900680FE3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C766C1AAB144900680FE3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C76F91AAD834700680FE3 /* UILabel+ActionSheet */,
+				CB1C76781AAB7DE900680FE3 /* SWRevealViewController */,
+			);
+			path = 3rdParty;
+			sourceTree = "<group>";
+		};
+		CB1C76781AAB7DE900680FE3 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C76791AAB7DE900680FE3 /* SWRevealViewController.h */,
+				CB1C767A1AAB7DE900680FE3 /* SWRevealViewController.m */,
+			);
+			path = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		CB1C767D1AAB834000680FE3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C76EA1AAC6ACE00680FE3 /* MenuViewController.h */,
+				CB1C76EB1AAC6ACE00680FE3 /* MenuViewController.m */,
+				CB1C76EC1AAC6ACE00680FE3 /* MenuViewController.xib */,
+				CB1C767E1AAB837400680FE3 /* CamerasViewController.h */,
+				CB1C767F1AAB837400680FE3 /* CamerasViewController.m */,
+				CB1C76801AAB837400680FE3 /* CamerasViewController.xib */,
+				CB1C76831AAB85DC00680FE3 /* WelcomeViewController.h */,
+				CB1C76841AAB85DC00680FE3 /* WelcomeViewController.m */,
+				CB1C76851AAB85DC00680FE3 /* WelcomeViewController.xib */,
+				CB1C76DC1AAB921800680FE3 /* LoginViewController.h */,
+				CB1C76DD1AAB921800680FE3 /* LoginViewController.m */,
+				CB1C76DE1AAB921800680FE3 /* LoginViewController.xib */,
+				CB1C76E31AAB965A00680FE3 /* SignupViewController.h */,
+				CB1C76E41AAB965A00680FE3 /* SignupViewController.m */,
+				CB1C76E51AAB965A00680FE3 /* SignupViewController.xib */,
+				CB1C76FD1AAD84F900680FE3 /* AccountsViewController.h */,
+				CB1C76FE1AAD84F900680FE3 /* AccountsViewController.m */,
+				CB1C76FF1AAD84F900680FE3 /* AccountsViewController.xib */,
+				CB1C77021AAD85A200680FE3 /* AccountCell.h */,
+				CB1C77031AAD85A200680FE3 /* AccountCell.m */,
+				CB1C77041AAD85A200680FE3 /* AccountCell.xib */,
+				CB1C77091AAD8FEB00680FE3 /* AddAccountCell.h */,
+				CB1C770A1AAD8FEB00680FE3 /* AddAccountCell.m */,
+				CB1C770B1AAD8FEB00680FE3 /* AddAccountCell.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CB1C76881AAB871A00680FE3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C76891AAB871A00680FE3 /* image */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CB1C76891AAB871A00680FE3 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C768A1AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png */,
+				CB1C768B1AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png */,
+				CB1C768C1AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png */,
+				CB1C768D1AAB871A00680FE3 /* btn_radio_off_holo_dark.png */,
+				CB1C768E1AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png */,
+				CB1C768F1AAB871A00680FE3 /* btn_radio_on_disabled_focused_holo_dark.png */,
+				CB1C76901AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png */,
+				CB1C76911AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png */,
+				CB1C76921AAB871A00680FE3 /* btn_radio_on_holo_dark.png */,
+				CB1C76931AAB871A00680FE3 /* btn_radio_on_pressed_holo_dark.png */,
+				CB1C76941AAB871A00680FE3 /* cam_unavailable.png */,
+				CB1C76951AAB871A00680FE3 /* dot_off_red.png */,
+				CB1C76961AAB871A00680FE3 /* dot_on_red.png */,
+				CB1C76971AAB871A00680FE3 /* evercam_play512x512.png */,
+				CB1C76981AAB871A00680FE3 /* evercam_play_192x192.png */,
+				CB1C76991AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png */,
+				CB1C769A1AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png */,
+				CB1C769B1AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png */,
+				CB1C769C1AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png */,
+				CB1C769D1AAB871A00680FE3 /* evercamtheme_textfield_focused_holo_dark.9.png */,
+				CB1C769E1AAB871A00680FE3 /* hikvision.png */,
+				CB1C769F1AAB871A00680FE3 /* ic_action_new.png */,
+				CB1C76A01AAB871A00680FE3 /* ic_action_overflow.png */,
+				CB1C76A11AAB871A00680FE3 /* ic_action_refresh.png */,
+				CB1C76A21AAB871A00680FE3 /* ic_action_save.png */,
+				CB1C76A31AAB871A00680FE3 /* ic_add_person.png */,
+				CB1C76A41AAB871A00680FE3 /* ic_clock.png */,
+				CB1C76A51AAB871A00680FE3 /* ic_content_undo.png */,
+				CB1C76A61AAB871A00680FE3 /* ic_navigation_back.png */,
+				CB1C76A71AAB871A00680FE3 /* ic_navigation_cancel.png */,
+				CB1C76A81AAB871A00680FE3 /* ic_navigation_refresh.png */,
+				CB1C76A91AAB871A00680FE3 /* ic_person.png */,
+				CB1C76AA1AAB871A00680FE3 /* evercam_icon.png */,
+				CB1C76F51AAC6FF500680FE3 /* reveal-icon.png */,
+				CB1C76F61AAC6FF500680FE3 /* reveal-icon@2x.png */,
+				CB1C76AD1AAB871A00680FE3 /* icon_gallery.png */,
+				CB1C76AE1AAB871A00680FE3 /* play_page_feature.png */,
+				CB1C76AF1AAB871A00680FE3 /* play_page_intro.png */,
+				CB1C76B01AAB871A00680FE3 /* play_page_next.png */,
+				CB1C76B11AAB871A00680FE3 /* title_background.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		CB1C76F91AAD834700680FE3 /* UILabel+ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C76FA1AAD834700680FE3 /* UILabel+ActionSheet.h */,
+				CB1C76FB1AAD834700680FE3 /* UILabel+ActionSheet.m */,
+			);
+			path = "UILabel+ActionSheet";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CB1C764D1AAB144700680FE3 /* evercamPlay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB1C76711AAB144900680FE3 /* Build configuration list for PBXNativeTarget "evercamPlay" */;
+			buildPhases = (
+				CB1C764A1AAB144700680FE3 /* Sources */,
+				CB1C764B1AAB144700680FE3 /* Frameworks */,
+				CB1C764C1AAB144700680FE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = evercamPlay;
+			productName = evercamPlay;
+			productReference = CB1C764E1AAB144800680FE3 /* evercamPlay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CB1C76661AAB144900680FE3 /* evercamPlayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB1C76741AAB144900680FE3 /* Build configuration list for PBXNativeTarget "evercamPlayTests" */;
+			buildPhases = (
+				CB1C76631AAB144900680FE3 /* Sources */,
+				CB1C76641AAB144900680FE3 /* Frameworks */,
+				CB1C76651AAB144900680FE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB1C76691AAB144900680FE3 /* PBXTargetDependency */,
+			);
+			name = evercamPlayTests;
+			productName = evercamPlayTests;
+			productReference = CB1C76671AAB144900680FE3 /* evercamPlayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CB1C76461AAB144700680FE3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = evercom;
+				TargetAttributes = {
+					CB1C764D1AAB144700680FE3 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					CB1C76661AAB144900680FE3 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = CB1C764D1AAB144700680FE3;
+					};
+				};
+			};
+			buildConfigurationList = CB1C76491AAB144700680FE3 /* Build configuration list for PBXProject "evercamPlay" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CB1C76451AAB144700680FE3;
+			productRefGroup = CB1C764F1AAB144800680FE3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CB1C764D1AAB144700680FE3 /* evercamPlay */,
+				CB1C76661AAB144900680FE3 /* evercamPlayTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CB1C764C1AAB144700680FE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1C76CE1AAB871A00680FE3 /* ic_navigation_back.png in Resources */,
+				CB1C76D01AAB871A00680FE3 /* ic_navigation_refresh.png in Resources */,
+				CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */,
+				CB1C76D71AAB871A00680FE3 /* play_page_intro.png in Resources */,
+				CB1C76871AAB85DC00680FE3 /* WelcomeViewController.xib in Resources */,
+				CB1C76B31AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png in Resources */,
+				CB1C76E71AAB965B00680FE3 /* SignupViewController.xib in Resources */,
+				CB1C77011AAD84F900680FE3 /* AccountsViewController.xib in Resources */,
+				CB1C76DB1AAB8E5D00680FE3 /* Default-568h@2x.png in Resources */,
+				CB1C76D61AAB871A00680FE3 /* play_page_feature.png in Resources */,
+				CB1C76BE1AAB871A00680FE3 /* dot_on_red.png in Resources */,
+				CB1C76821AAB837400680FE3 /* CamerasViewController.xib in Resources */,
+				CB1C76B61AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png in Resources */,
+				CB1C76B21AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png in Resources */,
+				CB1C76C01AAB871A00680FE3 /* evercam_play_192x192.png in Resources */,
+				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
+				CB1C76D51AAB871A00680FE3 /* icon_gallery.png in Resources */,
+				CB1C76C11AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png in Resources */,
+				CB1C76C41AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png in Resources */,
+				CB1C76CD1AAB871A00680FE3 /* ic_content_undo.png in Resources */,
+				CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */,
+				CB1C76B91AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png in Resources */,
+				CB1C76B81AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png in Resources */,
+				CB1C76F71AAC6FF500680FE3 /* reveal-icon.png in Resources */,
+				CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */,
+				CB1C76B41AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png in Resources */,
+				CB1C76BD1AAB871A00680FE3 /* dot_off_red.png in Resources */,
+				CB1C76EE1AAC6ACE00680FE3 /* MenuViewController.xib in Resources */,
+				CB1C76E01AAB921800680FE3 /* LoginViewController.xib in Resources */,
+				CB1C76BB1AAB871A00680FE3 /* btn_radio_on_pressed_holo_dark.png in Resources */,
+				CB1C76CF1AAB871A00680FE3 /* ic_navigation_cancel.png in Resources */,
+				CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */,
+				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
+				CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */,
+				CB1C770D1AAD8FEB00680FE3 /* AddAccountCell.xib in Resources */,
+				CB1C76C81AAB871A00680FE3 /* ic_action_overflow.png in Resources */,
+				CB1C76C61AAB871A00680FE3 /* hikvision.png in Resources */,
+				CB1C76CC1AAB871A00680FE3 /* ic_clock.png in Resources */,
+				CB1C76F81AAC6FF500680FE3 /* reveal-icon@2x.png in Resources */,
+				CB1C76B51AAB871A00680FE3 /* btn_radio_off_holo_dark.png in Resources */,
+				CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */,
+				CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */,
+				CB1C76C21AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png in Resources */,
+				CB1C76B71AAB871A00680FE3 /* btn_radio_on_disabled_focused_holo_dark.png in Resources */,
+				CB1C76C51AAB871A00680FE3 /* evercamtheme_textfield_focused_holo_dark.9.png in Resources */,
+				CB1C76BA1AAB871A00680FE3 /* btn_radio_on_holo_dark.png in Resources */,
+				CB1C77061AAD85A200680FE3 /* AccountCell.xib in Resources */,
+				CB1C76D91AAB871A00680FE3 /* title_background.png in Resources */,
+				CB1C76D81AAB871A00680FE3 /* play_page_next.png in Resources */,
+				CB1C76BF1AAB871A00680FE3 /* evercam_play512x512.png in Resources */,
+				CB1C76C31AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB1C76651AAB144900680FE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CB1C764A1AAB144700680FE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1C76861AAB85DC00680FE3 /* WelcomeViewController.m in Sources */,
+				CB1C76811AAB837400680FE3 /* CamerasViewController.m in Sources */,
+				CB1C76DF1AAB921800680FE3 /* LoginViewController.m in Sources */,
+				CB1C77051AAD85A200680FE3 /* AccountCell.m in Sources */,
+				CB1C76ED1AAC6ACE00680FE3 /* MenuViewController.m in Sources */,
+				CB1C77001AAD84F900680FE3 /* AccountsViewController.m in Sources */,
+				CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */,
+				CB1C76541AAB144800680FE3 /* main.m in Sources */,
+				CB1C76E61AAB965A00680FE3 /* SignupViewController.m in Sources */,
+				CB1C770C1AAD8FEB00680FE3 /* AddAccountCell.m in Sources */,
+				CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */,
+				CB1C76FC1AAD834700680FE3 /* UILabel+ActionSheet.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB1C76631AAB144900680FE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1C766E1AAB144900680FE3 /* evercamPlayTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CB1C76691AAB144900680FE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CB1C764D1AAB144700680FE3 /* evercamPlay */;
+			targetProxy = CB1C76681AAB144900680FE3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CB1C765B1AAB144800680FE3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB1C765C1AAB144800680FE3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CB1C766F1AAB144900680FE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CB1C76701AAB144900680FE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CB1C76721AAB144900680FE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = evercamPlay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CB1C76731AAB144900680FE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = evercamPlay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CB1C76751AAB144900680FE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = evercamPlayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/evercamPlay.app/evercamPlay";
+			};
+			name = Debug;
+		};
+		CB1C76761AAB144900680FE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = evercamPlayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/evercamPlay.app/evercamPlay";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CB1C76491AAB144700680FE3 /* Build configuration list for PBXProject "evercamPlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB1C766F1AAB144900680FE3 /* Debug */,
+				CB1C76701AAB144900680FE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB1C76711AAB144900680FE3 /* Build configuration list for PBXNativeTarget "evercamPlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB1C76721AAB144900680FE3 /* Debug */,
+				CB1C76731AAB144900680FE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CB1C76741AAB144900680FE3 /* Build configuration list for PBXNativeTarget "evercamPlayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB1C76751AAB144900680FE3 /* Debug */,
+				CB1C76761AAB144900680FE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CB1C76461AAB144700680FE3 /* Project object */;
+}
