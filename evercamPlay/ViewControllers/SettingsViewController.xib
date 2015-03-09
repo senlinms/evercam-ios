@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountsViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController">
             <connections>
-                <outlet property="btnMenu" destination="iTI-Ki-o4c" id="9eh-81-t2i"/>
-                <outlet property="tableView" destination="DPf-jW-h1F" id="Fae-Bb-Ivp"/>
+                <outlet property="btnMenu" destination="FvM-Vy-rDA" id="faP-ch-wqA"/>
+                <outlet property="tableView" destination="8FU-K7-r0z" id="AJy-1H-00g"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,21 +16,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7z3-ru-jte" userLabel="titlebar">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="15i-fo-AM4" userLabel="titlebar">
                     <rect key="frame" x="0.0" y="20" width="320" height="52"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMv-W1-hGr" userLabel="line">
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LwI-uG-6PI" userLabel="line">
                             <rect key="frame" x="0.0" y="50" width="320" height="2"/>
                             <color key="backgroundColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTI-Ki-o4c">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FvM-Vy-rDA">
                             <rect key="frame" x="8" y="11" width="30" height="30"/>
                             <state key="normal" backgroundImage="evercam_icon.png">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Accounts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHZ-wd-Oeg">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wd4-vh-LhA">
                             <rect key="frame" x="118" y="15" width="85" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,17 +39,19 @@
                     </subviews>
                     <color key="backgroundColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DPf-jW-h1F">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" style="grouped" rowHeight="54" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8FU-K7-r0z">
                     <rect key="frame" x="0.0" y="72" width="320" height="496"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="oCw-UD-i0C"/>
-                        <outlet property="delegate" destination="-1" id="fP9-g5-bpP"/>
+                        <outlet property="dataSource" destination="-1" id="7tT-3g-BQg"/>
+                        <outlet property="delegate" destination="-1" id="XGc-MO-Q7f"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="258" y="175"/>
         </view>
     </objects>
     <resources>

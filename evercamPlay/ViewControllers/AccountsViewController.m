@@ -12,6 +12,7 @@
 #import "SWRevealViewController.h"
 #import "UILabel+ActionSheet.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIAlertController+NoBorderText.h"
 
 @interface AccountsViewController ()
 
@@ -39,7 +40,8 @@
     [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
     UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
     [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
-//    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
+    
+    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,6 +59,31 @@
 {
     NSNumber *number = (NSNumber *)object;
     NSLog(@"%d", number.integerValue);
+
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Are you sure you want to remove this user?"
+                                  message:@"Removing a user will remove the user from Evercam Play but the Evercam account will still exist."
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* cancel = [UIAlertAction
+                         actionWithTitle:@"Cancel"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    UIAlertAction* remove = [UIAlertAction
+                             actionWithTitle:@"Remove"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 //[alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+    
+    [alert addAction:cancel];
+    [alert addAction:remove];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark UITableViewDelegate
@@ -127,7 +154,7 @@
                                      }];
             UIAlertAction* cancel = [UIAlertAction
                                      actionWithTitle:@"Cancel"
-                                     style:UIAlertActionStyleDefault
+                                     style:UIAlertActionStyleCancel
                                      handler:^(UIAlertAction * action)
                                      {
                                          [alert dismissViewControllerAnimated:YES completion:nil];
@@ -177,6 +204,7 @@
                 textField.borderStyle = UITextBorderStyleNone;
                 textField.textColor = [UIColor whiteColor];
                 [textField setFont:[UIFont systemFontOfSize:17]];
+                
                 if ([textField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
                     UIColor *color = [UIColor lightTextColor];
                     textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];

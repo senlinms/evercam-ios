@@ -71,6 +71,11 @@
 		CB1C77061AAD85A200680FE3 /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C77041AAD85A200680FE3 /* AccountCell.xib */; };
 		CB1C770C1AAD8FEB00680FE3 /* AddAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C770A1AAD8FEB00680FE3 /* AddAccountCell.m */; };
 		CB1C770D1AAD8FEB00680FE3 /* AddAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C770B1AAD8FEB00680FE3 /* AddAccountCell.xib */; };
+		CB1C77151AAE1A4400680FE3 /* UIAlertController+NoBorderText.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C77141AAE1A4400680FE3 /* UIAlertController+NoBorderText.m */; };
+		CB1C77191AAE28BC00680FE3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C77171AAE28BC00680FE3 /* SettingsViewController.m */; };
+		CB1C771A1AAE28BC00680FE3 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C77181AAE28BC00680FE3 /* SettingsViewController.xib */; };
+		CB1C771E1AAE3B4F00680FE3 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C771C1AAE3B4F00680FE3 /* FeedbackViewController.m */; };
+		CB1C771F1AAE3B4F00680FE3 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1C771D1AAE3B4F00680FE3 /* FeedbackViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +168,14 @@
 		CB1C77091AAD8FEB00680FE3 /* AddAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountCell.h; sourceTree = "<group>"; };
 		CB1C770A1AAD8FEB00680FE3 /* AddAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountCell.m; sourceTree = "<group>"; };
 		CB1C770B1AAD8FEB00680FE3 /* AddAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountCell.xib; sourceTree = "<group>"; };
+		CB1C77131AAE1A4400680FE3 /* UIAlertController+NoBorderText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+NoBorderText.h"; sourceTree = "<group>"; };
+		CB1C77141AAE1A4400680FE3 /* UIAlertController+NoBorderText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+NoBorderText.m"; sourceTree = "<group>"; };
+		CB1C77161AAE28BC00680FE3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		CB1C77171AAE28BC00680FE3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		CB1C77181AAE28BC00680FE3 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		CB1C771B1AAE3B4F00680FE3 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		CB1C771C1AAE3B4F00680FE3 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		CB1C771D1AAE3B4F00680FE3 /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +259,7 @@
 		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				CB1C77121AAE1A4400680FE3 /* UIAlertController+NoBorderText */,
 				CB1C76F91AAD834700680FE3 /* UILabel+ActionSheet */,
 				CB1C76781AAB7DE900680FE3 /* SWRevealViewController */,
 			);
@@ -282,6 +296,12 @@
 				CB1C76FD1AAD84F900680FE3 /* AccountsViewController.h */,
 				CB1C76FE1AAD84F900680FE3 /* AccountsViewController.m */,
 				CB1C76FF1AAD84F900680FE3 /* AccountsViewController.xib */,
+				CB1C77161AAE28BC00680FE3 /* SettingsViewController.h */,
+				CB1C77171AAE28BC00680FE3 /* SettingsViewController.m */,
+				CB1C77181AAE28BC00680FE3 /* SettingsViewController.xib */,
+				CB1C771B1AAE3B4F00680FE3 /* FeedbackViewController.h */,
+				CB1C771C1AAE3B4F00680FE3 /* FeedbackViewController.m */,
+				CB1C771D1AAE3B4F00680FE3 /* FeedbackViewController.xib */,
 				CB1C77021AAD85A200680FE3 /* AccountCell.h */,
 				CB1C77031AAD85A200680FE3 /* AccountCell.m */,
 				CB1C77041AAD85A200680FE3 /* AccountCell.xib */,
@@ -354,6 +374,15 @@
 				CB1C76FB1AAD834700680FE3 /* UILabel+ActionSheet.m */,
 			);
 			path = "UILabel+ActionSheet";
+			sourceTree = "<group>";
+		};
+		CB1C77121AAE1A4400680FE3 /* UIAlertController+NoBorderText */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C77131AAE1A4400680FE3 /* UIAlertController+NoBorderText.h */,
+				CB1C77141AAE1A4400680FE3 /* UIAlertController+NoBorderText.m */,
+			);
+			path = "UIAlertController+NoBorderText";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +481,7 @@
 				CB1C76B21AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png in Resources */,
 				CB1C76C01AAB871A00680FE3 /* evercam_play_192x192.png in Resources */,
 				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
+				CB1C771F1AAE3B4F00680FE3 /* FeedbackViewController.xib in Resources */,
 				CB1C76D51AAB871A00680FE3 /* icon_gallery.png in Resources */,
 				CB1C76C11AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png in Resources */,
 				CB1C76C41AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png in Resources */,
@@ -475,6 +505,7 @@
 				CB1C76C61AAB871A00680FE3 /* hikvision.png in Resources */,
 				CB1C76CC1AAB871A00680FE3 /* ic_clock.png in Resources */,
 				CB1C76F81AAC6FF500680FE3 /* reveal-icon@2x.png in Resources */,
+				CB1C771A1AAE28BC00680FE3 /* SettingsViewController.xib in Resources */,
 				CB1C76B51AAB871A00680FE3 /* btn_radio_off_holo_dark.png in Resources */,
 				CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */,
 				CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */,
@@ -505,6 +536,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB1C76861AAB85DC00680FE3 /* WelcomeViewController.m in Sources */,
+				CB1C77151AAE1A4400680FE3 /* UIAlertController+NoBorderText.m in Sources */,
+				CB1C771E1AAE3B4F00680FE3 /* FeedbackViewController.m in Sources */,
 				CB1C76811AAB837400680FE3 /* CamerasViewController.m in Sources */,
 				CB1C76DF1AAB921800680FE3 /* LoginViewController.m in Sources */,
 				CB1C77051AAD85A200680FE3 /* AccountCell.m in Sources */,
@@ -516,6 +549,7 @@
 				CB1C770C1AAD8FEB00680FE3 /* AddAccountCell.m in Sources */,
 				CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */,
 				CB1C76FC1AAD834700680FE3 /* UILabel+ActionSheet.m in Sources */,
+				CB1C77191AAE28BC00680FE3 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +732,7 @@
 				CB1C76731AAB144900680FE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CB1C76741AAB144900680FE3 /* Build configuration list for PBXNativeTarget "evercamPlayTests" */ = {
 			isa = XCConfigurationList;
@@ -706,6 +741,7 @@
 				CB1C76761AAB144900680FE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

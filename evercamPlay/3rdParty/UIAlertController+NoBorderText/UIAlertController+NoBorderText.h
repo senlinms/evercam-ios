@@ -1,5 +1,5 @@
 //
-//  UILabel+ActionSheet.h
+//  UIAlertController+NoBorderText.h
 //  Testplus
 //
 //  Created by Muhammad Ali Yousaf on 16/12/2014.
@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-@interface UILabel (FontAppearance)
+@interface UIAlertController (NoBorderText)
 
-@property (nonatomic, copy) UIFont * appearanceFont UI_APPEARANCE_SELECTOR;
 @end
 
