@@ -31,6 +31,8 @@
 #import "SWRevealViewController.h"
 #import "CamerasViewController.h"
 #import "AccountsViewController.h"
+#import "SettingsViewController.h"
+#import "FeedbackViewController.h"
 
 @interface MenuViewController()
 {
@@ -52,6 +54,12 @@
     [super viewDidLoad];
 	
     self.title = NSLocalizedString(@"Menu", nil);
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = _rearTableView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
+    [self.rearTableView.layer insertSublayer:gradient atIndex:0];
+    self.rearTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
 }
 
 
@@ -72,6 +80,9 @@
     if (nil == cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.contentView.backgroundColor = [UIColor clearColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
     }
 	
     NSString *text = nil;
@@ -122,10 +133,46 @@
     {
         newFrontController = [[AccountsViewController alloc] init];
     }
+    else if (row == 2)
+    {
+        newFrontController = [[SettingsViewController alloc] init];
+    }
+    else if (row == 3)
+    {
+        newFrontController = [[FeedbackViewController alloc] init];
+    }
     else if (row == 4)
     {
-        [revealController.navigationController popViewControllerAnimated:YES];
-        _presentedRow = 0;
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            
+            UIAlertController * alert=   [UIAlertController
+                                          alertControllerWithTitle:nil
+                                          message:@"Are you sure you want to sign out?"
+                                          preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* no = [UIAlertAction
+                                 actionWithTitle:@"No"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+            UIAlertAction* yes = [UIAlertAction
+                                     actionWithTitle:@"Yes"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                         [revealController.navigationController popViewControllerAnimated:YES];
+                                         _presentedRow = 0;
+                                     }];
+            
+            [alert addAction:no];
+            [alert addAction:yes];
+            [self presentViewController:alert animated:YES completion:nil];
+        });
+        
         return;
     }
     

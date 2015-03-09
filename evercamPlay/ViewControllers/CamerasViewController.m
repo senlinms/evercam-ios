@@ -53,7 +53,7 @@
     [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
     UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
     [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
-//    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
+    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
 
 }
 
@@ -86,7 +86,7 @@
                              }];
     UIAlertAction* cancel = [UIAlertAction
                            actionWithTitle:@"Cancel"
-                           style:UIAlertActionStyleDefault
+                           style:UIAlertActionStyleCancel
                            handler:^(UIAlertAction * action)
                            {
                                [view dismissViewControllerAnimated:YES completion:nil];

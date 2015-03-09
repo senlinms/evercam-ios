@@ -48,6 +48,11 @@
     [[self navigationController] pushViewController:vc animated:YES];
 }
 
+- (IBAction)changePage:(id)sender {
+    CGFloat x = self.pageControl.currentPage * self.tutorialScrollView.frame.size.width;
+    [self.tutorialScrollView setContentOffset:CGPointMake(x, 0) animated:YES];
+}
+
 #pragma mark UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.isDragging || scrollView.isDecelerating){
