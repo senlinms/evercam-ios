@@ -52,13 +52,13 @@
 - (void)useAccount: (id)object
 {
     NSNumber *number = (NSNumber *)object;
-    NSLog(@"%d", number.integerValue);
+
 }
 
 - (void)removeAccount: (id)object
 {
     NSNumber *number = (NSNumber *)object;
-    NSLog(@"%d", number.integerValue);
+
 
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:@"Are you sure you want to remove this user?"
