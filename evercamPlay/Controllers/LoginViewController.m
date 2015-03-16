@@ -11,6 +11,7 @@
 #import "MenuViewController.h"
 #import "CamerasViewController.h"
 #import "SignupViewController.h"
+#import "EvercamShell.h"
 
 @interface LoginViewController ()
 {
@@ -36,7 +37,6 @@
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
         // TODO: Add fall-back code to set placeholder color.
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,17 +69,101 @@
 
 - (IBAction)onLogin:(id)sender
 {
-    CamerasViewController *camerasViewController = [[CamerasViewController alloc] init];
-    MenuViewController *menuViewController = [[MenuViewController alloc] init];
+    NSString *username = _txt_username.text;
+    NSString *password = _txt_password.text;
     
-    UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:camerasViewController];
-    frontNavigationController.navigationBarHidden = YES;
-    UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-    rearNavigationController.navigationBarHidden = YES;
+    if ([username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Username required"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_username becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if ([username containsString:@" "])
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Invalid username"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_username becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if (password.length <= 0)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Password required"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_password becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
 
-    SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
-    [self.navigationController pushViewController:revealController animated:YES];
+    [_activityIndicator startAnimating];
+    [[EvercamShell shell] requestEvercamAPIKeyFromEvercamUser:username Password:password WithBlock:^(EvercamApiKeyPair *userKeyPair, NSError *error) {
+        [_activityIndicator stopAnimating];
+        if (error == nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                CamerasViewController *camerasViewController = [[CamerasViewController alloc] init];
+                MenuViewController *menuViewController = [[MenuViewController alloc] init];
+                
+                UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:camerasViewController];
+                frontNavigationController.navigationBarHidden = YES;
+                UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+                rearNavigationController.navigationBarHidden = YES;
+                
+                SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+                [self.navigationController pushViewController:revealController animated:YES];
+            });
+        }
+        else
+        {
+            NSLog(@"Error %li: %@", (long)error.code, error.description);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertController * alert=   [UIAlertController
+                                              alertControllerWithTitle:error.description
+                                              message:nil
+                                              preferredStyle:UIAlertControllerStyleAlert];
+                [self presentViewController:alert animated:YES completion:nil];
+            });
+        }
+    }];
+}
 
+- (IBAction)onBack:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onCreateAccount:(id)sender

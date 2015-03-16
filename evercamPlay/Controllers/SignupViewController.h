@@ -17,6 +17,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *txt_email;
 @property (nonatomic, strong) IBOutlet UITextField *txt_password;
 @property (nonatomic, strong) IBOutlet UITextField *txt_confirmPassword;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)onCreateAccount:(id)sender;
 @end
