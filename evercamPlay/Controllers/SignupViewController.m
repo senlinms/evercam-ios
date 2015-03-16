@@ -7,6 +7,9 @@
 //
 
 #import "SignupViewController.h"
+#import "EvercamUser.h"
+#import "EvercamShell.h"
+#import "LoginViewController.h"
 
 @interface SignupViewController ()
 {
@@ -70,10 +73,269 @@
                                                   object:nil];
 }
 
+#pragma mark Validation 
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+#pragma mark UI Action
 - (IBAction)onCreateAccount:(id)sender
 {
+    EvercamUser *user = [EvercamUser new];
+    NSString *firstname = _txt_firstname.text;
+    NSString *lastname = _txt_lastname.text;
+    NSString *email = _txt_email.text;
+    NSString *username = _txt_username.text;
+    NSString *password = _txt_password.text;
+    NSString *country = _txt_country.text;
+    NSString *repassword = _txt_confirmPassword.text;
     
     
+    // firstname
+    if ([firstname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
+    {
+        UIAlertController * alert= [UIAlertController
+                                      alertControllerWithTitle:@"Firstname required"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_firstname becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else
+    {
+        user.firstname = firstname;
+    }
+    
+    // lastname
+    if ([lastname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Lastname required"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_lastname becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else
+    {
+        user.lastname = lastname;
+    }
+
+    // username
+    if ([username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Username required"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_username becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if ([username containsString:@" "])
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Invalid username"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_username becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if (username.length < 3)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Username is too short"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_username becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else
+    {
+        user.username = username;
+    }
+    // country
+    user.country = country;
+    
+    // email
+    if ([email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Email required"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_email becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if ([self NSStringIsValidEmail:email] == NO)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Invalid email"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_email becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else
+    {
+        user.email = email;
+    }
+    
+    // Password 
+    if (password.length <= 0)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Password required"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_password becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if (repassword.length <= 0)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Confirm password required"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [_txt_confirmPassword becomeFirstResponder];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if ([password isEqualToString:repassword] == NO)
+    {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Password not match"
+                                      message:nil
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else
+    {
+        user.password = password;
+    }
+
+    [_activityIndicator startAnimating];
+    [[EvercamShell shell] createUser:user WithBlock:^(EvercamUser *newuser, NSError *error) {
+        [_activityIndicator stopAnimating];
+        if (error == nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+                NSMutableArray *vcArr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+                [vcArr removeLastObject];
+                [vcArr addObject:vc];
+                [self.navigationController setViewControllers:vcArr animated:YES];
+            });
+        }
+        else
+        {
+            NSLog(@"Error %li: %@", (long)error.code, error.description);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertController * alert=   [UIAlertController
+                                              alertControllerWithTitle:error.description
+                                              message:nil
+                                              preferredStyle:UIAlertControllerStyleAlert];
+                [self presentViewController:alert animated:YES completion:nil];
+            });
+        }
+    }];
 }
 
 - (IBAction)onBack:(id)sender

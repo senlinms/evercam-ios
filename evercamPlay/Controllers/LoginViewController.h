@@ -12,7 +12,9 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 @property (nonatomic, strong) IBOutlet UITextField *txt_username;
 @property (nonatomic, strong) IBOutlet UITextField *txt_password;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)onLogin:(id)sender;
+- (IBAction)onBack:(id)sender;
 
 @end
