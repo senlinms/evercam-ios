@@ -23,6 +23,22 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPSessionManager.h"
 
+#define MSG_API_KEY_REQUIRED @"Developer API key and API ID required"
+#define MSG_USER_API_KEY_REQUIRED @"User API key and API ID required"
+#define MSG_INVALID_USER_KEY @"Invalid user api key/id"
+#define MSG_INVALID_DEVELOPER_KEY @"Invalid developer api key/id"
+#define MSG_INVALID_AUTH @"Invalid auth"
+#define MSG_SERVER_ERROR @"Evercam internal server error."
+
+#define CODE_OK 200
+#define CODE_CREATE 201
+#define CODE_UNAUTHORISED 401
+#define CODE_FORBIDDEN 403
+#define CODE_ERROR 400
+#define CODE_NOT_FOUND 404
+#define CODE_CONFLICT 409
+#define CODE_SERVER_ERROR 500
+
 @interface AFEvercamAPIClient : AFHTTPSessionManager
 
 + (instancetype)sharedClient;

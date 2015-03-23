@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NIDropDown.h"
 
-@interface SignupViewController : UIViewController
+@interface SignupViewController : UIViewController <NIDropDownDelegate>
+
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 @property (nonatomic, strong) IBOutlet UITextField *txt_firstname;
 @property (nonatomic, strong) IBOutlet UITextField *txt_lastname;
-@property (nonatomic, strong) IBOutlet UITextField *txt_country;
+@property (nonatomic, strong) IBOutlet UIButton *btn_country;
 @property (nonatomic, strong) IBOutlet UITextField *txt_username;
 @property (nonatomic, strong) IBOutlet UITextField *txt_email;
 @property (nonatomic, strong) IBOutlet UITextField *txt_password;

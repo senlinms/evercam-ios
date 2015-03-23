@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDAF1ABD675100420CE1 /* NIDropDown.m */; };
+		CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */; };
+		CB01CDB71ABE057E00420CE1 /* EvercamCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB61ABE057E00420CE1 /* EvercamCamera.m */; };
 		CB1C76541AAB144800680FE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76531AAB144800680FE3 /* main.m */; };
 		CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76561AAB144800680FE3 /* AppDelegate.m */; };
 		CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1C765B1AAB144800680FE3 /* Main.storyboard */; };
@@ -106,6 +109,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CB01CDAE1ABD675100420CE1 /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
+		CB01CDAF1ABD675100420CE1 /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
+		CB01CDB21ABDFC9F00420CE1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		CB01CDB51ABE057E00420CE1 /* EvercamCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCamera.h; sourceTree = "<group>"; };
+		CB01CDB61ABE057E00420CE1 /* EvercamCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCamera.m; sourceTree = "<group>"; };
 		CB1C764E1AAB144800680FE3 /* evercamPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evercamPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1C76521AAB144800680FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB1C76531AAB144800680FE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -275,6 +284,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB01CDAD1ABD675000420CE1 /* NIDropDown */ = {
+			isa = PBXGroup;
+			children = (
+				CB01CDAE1ABD675100420CE1 /* NIDropDown.h */,
+				CB01CDAF1ABD675100420CE1 /* NIDropDown.m */,
+			);
+			path = NIDropDown;
+			sourceTree = "<group>";
+		};
+		CB01CDB11ABDFC9F00420CE1 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				CB01CDB21ABDFC9F00420CE1 /* MBProgressHUD.h */,
+				CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		CB1C76451AAB144700680FE3 = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +369,8 @@
 			isa = PBXGroup;
 			children = (
 				CB44E80C1AAE9DD800A78C11 /* AFNetworking */,
+				CB01CDB11ABDFC9F00420CE1 /* MBProgressHUD */,
+				CB01CDAD1ABD675000420CE1 /* NIDropDown */,
 				CB1C77121AAE1A4400680FE3 /* UIAlertController+NoBorderText */,
 				CB1C76F91AAD834700680FE3 /* UILabel+ActionSheet */,
 				CB1C76781AAB7DE900680FE3 /* SWRevealViewController */,
@@ -525,6 +554,8 @@
 				CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */,
 				CB44E8841AAED4E700A78C11 /* EvercamShell.h */,
 				CB44E8851AAED4E700A78C11 /* EvercamShell.m */,
+				CB01CDB51ABE057E00420CE1 /* EvercamCamera.h */,
+				CB01CDB61ABE057E00420CE1 /* EvercamCamera.m */,
 				CB44E88A1AAEDD2D00A78C11 /* EvercamApiKeyPair.h */,
 				CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */,
 				CB92361B1AB2DABF0031E23A /* EvercamUser.h */,
@@ -755,10 +786,13 @@
 			files = (
 				CB44E8741AAE9E7D00A78C11 /* LoginViewController.m in Sources */,
 				CB44E8481AAE9DD800A78C11 /* UIImageView+AFNetworking.m in Sources */,
+				CB01CDB71ABE057E00420CE1 /* EvercamCamera.m in Sources */,
 				CB44E8891AAED82000A78C11 /* AFEvercamAPIClient.m in Sources */,
 				CB44E84A1AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.m in Sources */,
 				CB44E87E1AAE9E7D00A78C11 /* AccountCell.m in Sources */,
 				CB44E8411AAE9DD800A78C11 /* AFSecurityPolicy.m in Sources */,
+				CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */,
+				CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */,
 				CB44E84B1AAE9DD800A78C11 /* UIWebView+AFNetworking.m in Sources */,
 				CB1C77151AAE1A4400680FE3 /* UIAlertController+NoBorderText.m in Sources */,
 				CB44E83F1AAE9DD800A78C11 /* AFURLSessionManager.m in Sources */,
