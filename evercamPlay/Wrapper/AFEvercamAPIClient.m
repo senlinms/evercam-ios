@@ -24,6 +24,7 @@
 
 static NSString * const AFEverCamAPIBaseURLString = @"https://api.evercam.io/v1/";
 
+
 @implementation AFEvercamAPIClient
 
 + (instancetype)sharedClient {
@@ -32,6 +33,20 @@ static NSString * const AFEverCamAPIBaseURLString = @"https://api.evercam.io/v1/
     dispatch_once(&onceToken, ^{
         _sharedClient = [[AFEvercamAPIClient alloc] initWithBaseURL:[NSURL URLWithString:AFEverCamAPIBaseURLString]];
         _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        _sharedClient.requestSerializer = [AFJSONRequestSerializer serializer];
+        _sharedClient.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        NSMutableIndexSet* codes = [NSMutableIndexSet indexSet];
+        [codes addIndex:CODE_OK];
+        [codes addIndex:CODE_CREATE];
+        [codes addIndex:CODE_UNAUTHORISED];
+        [codes addIndex:CODE_FORBIDDEN];
+        [codes addIndex:CODE_ERROR];
+        [codes addIndex:CODE_NOT_FOUND];
+        [codes addIndex:CODE_CONFLICT];
+        [codes addIndex:CODE_SERVER_ERROR];
+        
+        _sharedClient.responseSerializer.acceptableStatusCodes = codes;
     });
     
     return _sharedClient;

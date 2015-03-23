@@ -51,13 +51,13 @@
 
 - (void)useAccount: (id)object
 {
-    NSNumber *number = (NSNumber *)object;
+//    NSNumber *number = (NSNumber *)object;
 
 }
 
 - (void)removeAccount: (id)object
 {
-    NSNumber *number = (NSNumber *)object;
+//    NSNumber *number = (NSNumber *)object;
 
 
     UIAlertController * alert=   [UIAlertController

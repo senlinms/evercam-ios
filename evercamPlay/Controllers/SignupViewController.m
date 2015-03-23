@@ -14,6 +14,7 @@
 @interface SignupViewController ()
 {
     UITextField *activeTextField;
+    NIDropDown *dropDown;
 }
 
 @end
@@ -32,7 +33,6 @@
         UIColor *color = [UIColor lightTextColor];
         self.txt_firstname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"First name" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_lastname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Last name" attributes:@{NSForegroundColorAttributeName: color}];
-        self.txt_country.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Please select" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_username.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_email.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_password.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
@@ -85,6 +85,33 @@
 }
 
 #pragma mark UI Action
+- (IBAction)onCountry:(id)sender
+{
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier: @"en_US"];
+    NSArray *countryArray = [NSLocale ISOCountryCodes];
+    NSMutableArray *sortedCountryArray = [[NSMutableArray alloc] init];
+
+    for (NSString *countryCode in countryArray)
+    {
+        NSString *displayNameString = [locale displayNameForKey:NSLocaleCountryCode value:countryCode];
+        [sortedCountryArray addObject:displayNameString];
+    }
+    
+    [sortedCountryArray sortUsingSelector:@selector(compare:)];
+    NSArray * arrImage = [[NSArray alloc] init];
+
+    if(dropDown == nil) {
+        CGFloat f = 200;
+        dropDown = [[NIDropDown alloc] showDropDown:sender height:&f textArray:sortedCountryArray imageArray:arrImage direction:@"down"] ;
+        dropDown.delegate = self;
+    }
+    else {
+        [dropDown hideDropDown:sender];
+        dropDown = nil;
+    }
+
+}
+
 - (IBAction)onCreateAccount:(id)sender
 {
     EvercamUser *user = [EvercamUser new];
@@ -93,9 +120,22 @@
     NSString *email = _txt_email.text;
     NSString *username = _txt_username.text;
     NSString *password = _txt_password.text;
-    NSString *country = _txt_country.text;
+    NSString *country = _btn_country.titleLabel.text;
     NSString *repassword = _txt_confirmPassword.text;
+    NSString *countrycode = @"";
     
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier: @"en_US"];
+    NSArray *countryArray = [NSLocale ISOCountryCodes];
+    
+    for (NSString *countryCode in countryArray)
+    {
+        NSString *displayNameString = [locale displayNameForKey:NSLocaleCountryCode value:countryCode];
+        if ([displayNameString isEqualToString:country])
+        {
+            countrycode = countryCode;
+            break;
+        }
+    }
     
     // firstname
     if ([firstname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
@@ -205,7 +245,7 @@
         user.username = username;
     }
     // country
-    user.country = country;
+    user.country = countrycode;
     
     // email
     if ([email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
@@ -316,22 +356,34 @@
         [_activityIndicator stopAnimating];
         if (error == nil)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-                NSMutableArray *vcArr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-                [vcArr removeLastObject];
-                [vcArr addObject:vc];
-                [self.navigationController setViewControllers:vcArr animated:YES];
-            });
+            if (newuser)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+                    NSMutableArray *vcArr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+                    [vcArr removeLastObject];
+                    [vcArr addObject:vc];
+                    [self.navigationController setViewControllers:vcArr animated:YES];
+                });
+            }
         }
         else
         {
-            NSLog(@"Error %li: %@", (long)error.code, error.description);
+            NSLog(@"Error %li: %@", (long)error.code, error.localizedDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle:error.description
-                                              message:nil
+                                              alertControllerWithTitle: @"Error"
+                                              message:error.localizedDescription
                                               preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* ok = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+                [alert addAction:ok];
                 [self presentViewController:alert animated:YES completion:nil];
             });
         }
@@ -352,10 +404,6 @@
         [self.txt_lastname becomeFirstResponder];
     }
     else if (textField == self.txt_lastname)
-    {
-        [self.txt_country becomeFirstResponder];
-    }
-    else if (textField == self.txt_country)
     {
         [self.txt_username becomeFirstResponder];
     }
@@ -427,6 +475,11 @@
     }
     
     [UIView commitAnimations];
+}
+
+#pragma mark NIDropdown delegate
+- (void) niDropDownDelegateMethod: (NIDropDown *) sender {
+    dropDown = nil;
 }
 
 @end

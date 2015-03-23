@@ -27,6 +27,7 @@
 #import "CamerasViewController.h"
 #import "SWRevealViewController.h"
 #import "UILabel+ActionSheet.h"
+#import "EvercamShell.h"
 
 @interface CamerasViewController()
 
@@ -54,7 +55,17 @@
     UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
     [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
     [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
-
+    
+    [[EvercamShell shell] getAllCameras:@"marco" includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
+        if (error == nil)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }];
 }
 
 #pragma mark - Action

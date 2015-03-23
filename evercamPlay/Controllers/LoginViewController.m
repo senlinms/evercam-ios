@@ -150,13 +150,20 @@
         else
         {
             NSLog(@"Error %li: %@", (long)error.code, error.description);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle:error.description
-                                              message:nil
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                [self presentViewController:alert animated:YES completion:nil];
-            });
+            UIAlertController * alert=   [UIAlertController
+                                          alertControllerWithTitle: @"Error"
+                                          message:error.localizedDescription
+                                          preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction
+                                 actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+            [alert addAction:ok];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }];
 }
