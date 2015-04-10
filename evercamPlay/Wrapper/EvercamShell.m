@@ -10,6 +10,7 @@
 #import "EvercamApiKeyPair.h"
 #import "EvercamUser.h"
 #import "EvercamCamera.h"
+#import "EvercamCameraUtil.h"
 #import "AFEvercamAPIClient.h"
 
 #import "UIAlertView+AFNetworking.h"
@@ -115,6 +116,55 @@ static EvercamShell *instance = nil;
     [task resume];
 }
 
+- (void) getUserFromId:(NSString *) userId withBlock:(void (^)(EvercamUser *newuser, NSError *error))block {
+    if (keyPair && userId) {
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:keyPair.apiId, @"api_id",
+                                                 keyPair.apiKey, @"api_key",
+                                                 nil];
+        
+        NSURLSessionDataTask *task= [[AFEvercamAPIClient sharedClient] GET:[NSString stringWithFormat:@"users/%@", userId] parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
+            NSArray *userArray = [JSON valueForKeyPath:@"users"];
+            NSDictionary *user0 = userArray[0];
+            
+            NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
+            NSLog( @"%@", JSON );
+            
+            if (r.statusCode == CODE_OK)
+            {
+                EvercamUser *newUser = [[EvercamUser alloc] initWithDictionary:user0];
+                if (block) {
+                    block(newUser, nil);
+                }
+            }
+            else if (r.statusCode == CODE_UNAUTHORISED || r.statusCode == CODE_FORBIDDEN)
+            {
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : MSG_INVALID_USER_KEY };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(nil, error);
+                }
+            }
+            else
+            {
+                NSString *message = [JSON valueForKeyPath:@"message"];
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : message };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(nil, error);
+                }
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (block) {
+                block(nil, error);
+            }
+        }];
+        
+        [task resume];
+    }
+}
+
 /**
  * Returns the set of cameras associated with given conditions
  * API key pair has to be specified before calling this method
@@ -129,13 +179,48 @@ static EvercamShell *instance = nil;
 {
     if (keyPair)
     {
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:keyPair.apiId, @"api_id",
+        NSDictionary *parameters;
+        if (userId)
+            parameters = [NSDictionary dictionaryWithObjectsAndKeys:keyPair.apiId, @"api_id",
                                 keyPair.apiKey, @"api_key",
                                 includeShared ? @"true" : @"false", @"include_shared",
                                 includeThumbnail ? @"true" : @"false", @"thumbnail",
+                                userId, @"user_id",
                                 nil];
+        else
+            parameters = [NSDictionary dictionaryWithObjectsAndKeys:keyPair.apiId, @"api_id",
+                                        keyPair.apiKey, @"api_key",
+                                        includeShared ? @"true" : @"false", @"include_shared",
+                                        includeThumbnail ? @"true" : @"false", @"thumbnail",
+                                        nil];
+
+        [EvercamCameraUtil getByUrl:@"cameras" Parameters:parameters WithBlock:block];
+    }
+}
+
+- (void)getSnapshotFromEvercam:(EvercamCamera *)camera withBlock:(void (^)(NSData *imgData, NSError *error))block {
+    return [self getSnapshotFromCamId:camera.camId withBlock:block];
+}
+
+- (void)getSnapshotFromCamId:(NSString *)cameraID withBlock:(void (^)(NSData *imgData, NSError *error))block {
+    if (keyPair)
+    {
+        NSString *url = [NSString stringWithFormat:@"%@cameras/%@/live/snapshot.jpg?api_id=%@&api_key=%@",
+                         [AFEvercamAPIClient sharedClient].baseUrl,
+                         cameraID,
+                         keyPair.apiId,
+                         keyPair.apiKey];
         
-        [EvercamCamera getByUrl:@"cameras" Parameters:parameters WithBlock:block];
+        dispatch_async(dispatch_get_global_queue(0,0), ^{
+            NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // WARNING: is the cell still using the same data by this point??
+                if (block) {
+                    block(data, nil);
+                }
+            });
+        });
+        
     }
 }
 

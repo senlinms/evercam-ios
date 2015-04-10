@@ -1,15 +1,16 @@
 //
-//  EvercamCamera.m
+//  EvercamCameraUtil.m
 //  evercamPlay
 //
 //  Created by jw on 3/22/15.
 //  Copyright (c) 2015 evercom. All rights reserved.
 //
 
-#import "EvercamCamera.h"
+#import "EvercamCameraUtil.h"
 #import "AFEvercamAPIClient.h"
+#import "EvercamCamera.h"
 
-@implementation EvercamCamera
+@implementation EvercamCameraUtil
 
 /**
  * Get camera list by requesting a specified URL and parameters as a map
@@ -32,7 +33,12 @@
         
         if (r.statusCode == CODE_OK)
         {
-            NSArray *cameraArray = [JSON valueForKeyPath:@"cameras"];
+            NSArray *jsonCameraArray = [JSON valueForKeyPath:@"cameras"];
+            NSMutableArray *cameraArray = [NSMutableArray new];
+            for (NSDictionary *jsonCamData in jsonCameraArray) {
+                EvercamCamera *camera = [[EvercamCamera alloc] initWithDictionary:jsonCamData];
+                [cameraArray addObject:camera];
+            }
             if (block)
                 block(cameraArray, nil);
         }

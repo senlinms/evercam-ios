@@ -12,6 +12,10 @@
 #import "CamerasViewController.h"
 #import "SignupViewController.h"
 #import "EvercamShell.h"
+#import "AppUser.h"
+#import "EvercamUser.h"
+#import "EvercamApiKeyPair.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 {
@@ -37,6 +41,9 @@
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
         // TODO: Add fall-back code to set placeholder color.
     }
+    
+    self.txt_password.text = @"marcopolo";
+    self.txt_username.text = @"marco";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,24 +138,51 @@
 
     [_activityIndicator startAnimating];
     [[EvercamShell shell] requestEvercamAPIKeyFromEvercamUser:username Password:password WithBlock:^(EvercamApiKeyPair *userKeyPair, NSError *error) {
-        [_activityIndicator stopAnimating];
         if (error == nil)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                CamerasViewController *camerasViewController = [[CamerasViewController alloc] init];
-                MenuViewController *menuViewController = [[MenuViewController alloc] init];
-                
-                UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:camerasViewController];
-                frontNavigationController.navigationBarHidden = YES;
-                UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-                rearNavigationController.navigationBarHidden = YES;
-                
-                SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
-                [self.navigationController pushViewController:revealController animated:YES];
-            });
+            [[EvercamShell shell] getUserFromId:username withBlock:^(EvercamUser *newuser, NSError *error) {
+                [_activityIndicator stopAnimating];
+                if (error == nil) {
+                    AppUser *user = [APP_DELEGATE userWithName:newuser.username];
+                    [user setDataWithEvercamUser:newuser];
+                    [user setApiKeyPairWithApiKey:userKeyPair.apiKey andApiId:userKeyPair.apiId];
+                    [APP_DELEGATE saveContext];
+//                    [APP_DELEGATE setDefaultUser:user];
+                    
+                    CamerasViewController *camerasViewController = [[CamerasViewController alloc] init];
+                    MenuViewController *menuViewController = [[MenuViewController alloc] init];
+                    
+                    UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:camerasViewController];
+                    frontNavigationController.navigationBarHidden = YES;
+                    UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+                    rearNavigationController.navigationBarHidden = YES;
+                    
+                    SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+                    [self.navigationController pushViewController:revealController animated:YES];
+
+                } else {
+                    NSLog(@"Error %li: %@", (long)error.code, error.description);
+                    UIAlertController * alert=   [UIAlertController
+                                                  alertControllerWithTitle: @"Error"
+                                                  message:error.localizedDescription
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction* ok = [UIAlertAction
+                                         actionWithTitle:@"OK"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                             [alert dismissViewControllerAnimated:YES completion:nil];
+                                         }];
+                    [alert addAction:ok];
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+            }];
+            
         }
         else
         {
+            [_activityIndicator stopAnimating];
             NSLog(@"Error %li: %@", (long)error.code, error.description);
             UIAlertController * alert=   [UIAlertController
                                           alertControllerWithTitle: @"Error"
