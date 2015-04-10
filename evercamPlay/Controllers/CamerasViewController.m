@@ -27,9 +27,16 @@
 #import "CamerasViewController.h"
 #import "SWRevealViewController.h"
 #import "UILabel+ActionSheet.h"
+#import "CameraViewCell.h"
 #import "EvercamShell.h"
+#import "EvercamCamera.h"
+#import "CameraPlayViewController.h"
+#import "AppDelegate.h"
 
 @interface CamerasViewController()
+{
+    NSMutableArray *cameraArray;
+}
 
 // Private Methods:
 - (IBAction)pushExample:(id)sender;
@@ -45,27 +52,27 @@
 {
 	[super viewDidLoad];
 	
+    cameraArray = [[NSMutableArray alloc] initWithCapacity:0];
+
     SWRevealViewController *revealController = [self revealViewController];
     
     [self.btnMenu addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
-    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
-    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
-    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
+    [self.camerasView registerNib:[UINib nibWithNibName:@"CameraViewCell" bundle:nil] forCellWithReuseIdentifier: @"CameraViewCell"];
     
-    [[EvercamShell shell] getAllCameras:@"marco" includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
-        if (error == nil)
-        {
-            
-        }
-        else
-        {
-            
-        }
-    }];
+    [self onRefresh:nil];
+}
+
+- (void)showLoadingView {
+    [self.loadingIndicator startAnimating];
+    self.btnRefresh.hidden = YES;
+}
+
+- (void)hideLoadingView {
+    [self.loadingIndicator stopAnimating];
+    self.btnRefresh.hidden = NO;
 }
 
 #pragma mark - Action
@@ -113,7 +120,42 @@
 
 - (IBAction)onRefresh: (id)sender
 {
+    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
+    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
+    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
+    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
     
+    [self showLoadingView];
+    [[EvercamShell shell] getAllCameras:@"marco" includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
+        [self hideLoadingView];
+        if (error == nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cameraArray = [NSMutableArray arrayWithArray:cameras];
+                [self.camerasView reloadData];
+            });
+        }
+        else
+        {
+            NSLog(@"Error %li: %@", (long)error.code, error.localizedDescription);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertController * alert=   [UIAlertController
+                                              alertControllerWithTitle: @"Error"
+                                              message:error.localizedDescription
+                                              preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* ok = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+                [alert addAction:ok];
+                [self presentViewController:alert animated:YES completion:nil];
+            });
+        }
+    }];
 }
 
 
@@ -134,5 +176,35 @@
 	UIViewController *stubController = [[UIViewController alloc] init];
 	stubController.view.backgroundColor = [UIColor whiteColor];
 	[self.navigationController pushViewController:stubController animated:YES];
+}
+#pragma mark UICollectionView
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return cameraArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CameraViewCell *cell = (CameraViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"CameraViewCell" forIndexPath:indexPath];
+    
+    EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
+    cell.titleLabel.text = cameraInfo.name;
+    [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl]];
+    if (cameraInfo.isOnline) {
+        cell.imvOffline.hidden = YES;
+    } else {
+        cell.imvOffline.hidden = NO;
+    }
+    
+    return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
+    CameraPlayViewController *cameraPlayVC = [[CameraPlayViewController alloc] initWithNibName:@"CameraPlayViewController" bundle:nil];
+    cameraPlayVC.cameraInfo = cameraInfo;
+    
+    [[APP_DELEGATE viewController] pushViewController:cameraPlayVC animated:YES];
 }
 @end

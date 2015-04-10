@@ -52,4 +52,8 @@ static NSString * const AFEverCamAPIBaseURLString = @"https://api.evercam.io/v1/
     return _sharedClient;
 }
 
+- (NSString *)baseUrl {
+    return AFEverCamAPIBaseURLString;
+}
+
 @end

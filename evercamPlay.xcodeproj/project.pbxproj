@@ -7,9 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41208A351AD7244A009C4FC2 /* AppUser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41208A331AD7244A009C4FC2 /* AppUser.xcdatamodeld */; };
+		41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A3B1AD725CC009C4FC2 /* AppUser.m */; };
+		4157369D1AD59ED4005B38DF /* EvercamRights.m in Sources */ = {isa = PBXBuildFile; fileRef = 4157369C1AD59ED4005B38DF /* EvercamRights.m */; };
+		41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */; };
+		41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */; };
+		41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB491AD6CE7F0016ACCA /* VideoToolbox.framework */; };
+		41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB4B1AD6CE880016ACCA /* CoreGraphics.framework */; };
+		41BEFB5B1AD6D0630016ACCA /* EaglUIVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB561AD6D0630016ACCA /* EaglUIVIew.m */; };
+		41BEFB5C1AD6D0630016ACCA /* gst_ios_init.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB581AD6D0630016ACCA /* gst_ios_init.m */; };
+		41BEFB5D1AD6D0630016ACCA /* gst-launch-remote.c in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB591AD6D0630016ACCA /* gst-launch-remote.c */; };
+		41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB641AD6DB480016ACCA /* libstdc++.dylib */; };
+		41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB661AD6DB560016ACCA /* libresolv.dylib */; };
+		41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB681AD6DBAA0016ACCA /* CoreFoundation.framework */; };
+		41BEFB6B1AD6DBB50016ACCA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB6A1AD6DBB50016ACCA /* AVFoundation.framework */; };
+		41BEFB6D1AD6DBD30016ACCA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB6C1AD6DBD30016ACCA /* CoreMedia.framework */; };
+		41BEFB6F1AD6DBE40016ACCA /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB6E1AD6DBE40016ACCA /* CoreVideo.framework */; };
+		41BEFB711AD6DBE80016ACCA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB701AD6DBE80016ACCA /* CoreAudio.framework */; };
+		41BEFB731AD6DBF80016ACCA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB721AD6DBF80016ACCA /* AudioToolbox.framework */; };
+		41BEFB751AD6DC020016ACCA /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB741AD6DC020016ACCA /* OpenGLES.framework */; };
+		41BEFB771AD6DC0E0016ACCA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB761AD6DC0E0016ACCA /* AssetsLibrary.framework */; };
+		41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB781AD6DC180016ACCA /* QuartzCore.framework */; };
+		41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */; };
+		41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB7C1AD708730016ACCA /* icon_offline.png */; };
 		CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDAF1ABD675100420CE1 /* NIDropDown.m */; };
 		CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */; };
-		CB01CDB71ABE057E00420CE1 /* EvercamCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB61ABE057E00420CE1 /* EvercamCamera.m */; };
+		CB01CDB71ABE057E00420CE1 /* EvercamCameraUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */; };
+		CB01CDBA1AC00AFB00420CE1 /* EvercamCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB91AC00AFB00420CE1 /* EvercamCamera.m */; };
 		CB1C76541AAB144800680FE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76531AAB144800680FE3 /* main.m */; };
 		CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76561AAB144800680FE3 /* AppDelegate.m */; };
 		CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1C765B1AAB144800680FE3 /* Main.storyboard */; };
@@ -95,7 +119,13 @@
 		CB44E8861AAED4E700A78C11 /* EvercamShell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8851AAED4E700A78C11 /* EvercamShell.m */; };
 		CB44E8891AAED82000A78C11 /* AFEvercamAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */; };
 		CB44E88C1AAEDD2D00A78C11 /* EvercamApiKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */; };
+		CB840D1B1ACAF36D00F289A9 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D161ACAF36D00F289A9 /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CB840D1C1ACAF36D00F289A9 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D181ACAF36D00F289A9 /* ImageCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1A1ACAF36D00F289A9 /* ImageCacheObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */; };
+		CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB840D201ACAF38900F289A9 /* CameraViewCell.xib */; };
 		CB92361D1AB2DABF0031E23A /* EvercamUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB92361C1AB2DABF0031E23A /* EvercamUser.m */; };
+		CBC9EC341AD79F4F00A5852B /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9EC331AD79F4F00A5852B /* GStreamer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,12 +139,43 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41208A341AD7244A009C4FC2 /* AppUser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppUser.xcdatamodel; sourceTree = "<group>"; };
+		41208A3A1AD725CC009C4FC2 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUser.h; sourceTree = "<group>"; };
+		41208A3B1AD725CC009C4FC2 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUser.m; sourceTree = "<group>"; };
+		4157369B1AD59ED4005B38DF /* EvercamRights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamRights.h; sourceTree = "<group>"; };
+		4157369C1AD59ED4005B38DF /* EvercamRights.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamRights.m; sourceTree = "<group>"; };
+		41BEFB3F1AD609A10016ACCA /* CameraPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraPlayViewController.h; sourceTree = "<group>"; };
+		41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraPlayViewController.m; sourceTree = "<group>"; };
+		41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraPlayViewController.xib; sourceTree = "<group>"; };
+		41BEFB491AD6CE7F0016ACCA /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		41BEFB4B1AD6CE880016ACCA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		41BEFB551AD6D0630016ACCA /* EaglUIVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaglUIVIew.h; sourceTree = "<group>"; };
+		41BEFB561AD6D0630016ACCA /* EaglUIVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EaglUIVIew.m; sourceTree = "<group>"; };
+		41BEFB571AD6D0630016ACCA /* gst_ios_init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gst_ios_init.h; sourceTree = "<group>"; };
+		41BEFB581AD6D0630016ACCA /* gst_ios_init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gst_ios_init.m; sourceTree = "<group>"; };
+		41BEFB591AD6D0630016ACCA /* gst-launch-remote.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "gst-launch-remote.c"; sourceTree = "<group>"; };
+		41BEFB5A1AD6D0630016ACCA /* gst-launch-remote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gst-launch-remote.h"; sourceTree = "<group>"; };
+		41BEFB641AD6DB480016ACCA /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		41BEFB661AD6DB560016ACCA /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		41BEFB681AD6DBAA0016ACCA /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		41BEFB6A1AD6DBB50016ACCA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		41BEFB6C1AD6DBD30016ACCA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		41BEFB6E1AD6DBE40016ACCA /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		41BEFB701AD6DBE80016ACCA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		41BEFB721AD6DBF80016ACCA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		41BEFB741AD6DC020016ACCA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		41BEFB761AD6DC0E0016ACCA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		41BEFB781AD6DC180016ACCA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		41BEFB7C1AD708730016ACCA /* icon_offline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_offline.png; sourceTree = "<group>"; };
 		CB01CDAE1ABD675100420CE1 /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
 		CB01CDAF1ABD675100420CE1 /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
 		CB01CDB21ABDFC9F00420CE1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		CB01CDB51ABE057E00420CE1 /* EvercamCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCamera.h; sourceTree = "<group>"; };
-		CB01CDB61ABE057E00420CE1 /* EvercamCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCamera.m; sourceTree = "<group>"; };
+		CB01CDB51ABE057E00420CE1 /* EvercamCameraUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraUtil.h; sourceTree = "<group>"; };
+		CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraUtil.m; sourceTree = "<group>"; };
+		CB01CDB81AC00AFB00420CE1 /* EvercamCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCamera.h; sourceTree = "<group>"; };
+		CB01CDB91AC00AFB00420CE1 /* EvercamCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCamera.m; sourceTree = "<group>"; };
 		CB1C764E1AAB144800680FE3 /* evercamPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evercamPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1C76521AAB144800680FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB1C76531AAB144800680FE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -240,6 +301,15 @@
 		CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEvercamAPIClient.m; sourceTree = "<group>"; };
 		CB44E88A1AAEDD2D00A78C11 /* EvercamApiKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamApiKeyPair.h; sourceTree = "<group>"; };
 		CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamApiKeyPair.m; sourceTree = "<group>"; };
+		CB840D151ACAF36D00F289A9 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		CB840D161ACAF36D00F289A9 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		CB840D171ACAF36D00F289A9 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
+		CB840D181ACAF36D00F289A9 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
+		CB840D191ACAF36D00F289A9 /* ImageCacheObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCacheObject.h; sourceTree = "<group>"; };
+		CB840D1A1ACAF36D00F289A9 /* ImageCacheObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCacheObject.m; sourceTree = "<group>"; };
+		CB840D1E1ACAF38900F289A9 /* CameraViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewCell.h; sourceTree = "<group>"; };
+		CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewCell.m; sourceTree = "<group>"; };
+		CB840D201ACAF38900F289A9 /* CameraViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewCell.xib; sourceTree = "<group>"; };
 		CB9235EF1AB038EF0031E23A /* API.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = API.java; sourceTree = "<group>"; };
 		CB9235F01AB038EF0031E23A /* ApiKeyPair.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = ApiKeyPair.java; sourceTree = "<group>"; };
 		CB9235F11AB038EF0031E23A /* Auth.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Auth.java; sourceTree = "<group>"; };
@@ -264,6 +334,7 @@
 		CB9236041AB038EF0031E23A /* Vendor.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Vendor.java; sourceTree = "<group>"; };
 		CB92361B1AB2DABF0031E23A /* EvercamUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamUser.h; sourceTree = "<group>"; };
 		CB92361C1AB2DABF0031E23A /* EvercamUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUser.m; sourceTree = "<group>"; };
+		CBC9EC331AD79F4F00A5852B /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +342,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */,
+				41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */,
+				41BEFB771AD6DC0E0016ACCA /* AssetsLibrary.framework in Frameworks */,
+				41BEFB751AD6DC020016ACCA /* OpenGLES.framework in Frameworks */,
+				41BEFB731AD6DBF80016ACCA /* AudioToolbox.framework in Frameworks */,
+				41BEFB711AD6DBE80016ACCA /* CoreAudio.framework in Frameworks */,
+				41BEFB6F1AD6DBE40016ACCA /* CoreVideo.framework in Frameworks */,
+				41BEFB6D1AD6DBD30016ACCA /* CoreMedia.framework in Frameworks */,
+				CBC9EC341AD79F4F00A5852B /* GStreamer.framework in Frameworks */,
+				41BEFB6B1AD6DBB50016ACCA /* AVFoundation.framework in Frameworks */,
+				41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */,
+				41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */,
+				41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */,
+				41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */,
+				41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +370,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41208A391AD725CC009C4FC2 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				41208A3A1AD725CC009C4FC2 /* AppUser.h */,
+				41208A3B1AD725CC009C4FC2 /* AppUser.m */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		4157369A1AD59E93005B38DF /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				CB44E88A1AAEDD2D00A78C11 /* EvercamApiKeyPair.h */,
+				CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */,
+				CB01CDB81AC00AFB00420CE1 /* EvercamCamera.h */,
+				CB01CDB91AC00AFB00420CE1 /* EvercamCamera.m */,
+				CB92361B1AB2DABF0031E23A /* EvercamUser.h */,
+				CB92361C1AB2DABF0031E23A /* EvercamUser.m */,
+				4157369B1AD59ED4005B38DF /* EvercamRights.h */,
+				4157369C1AD59ED4005B38DF /* EvercamRights.m */,
+			);
+			name = DataModels;
+			sourceTree = "<group>";
+		};
+		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBC9EC331AD79F4F00A5852B /* GStreamer.framework */,
+				41BEFB781AD6DC180016ACCA /* QuartzCore.framework */,
+				41BEFB761AD6DC0E0016ACCA /* AssetsLibrary.framework */,
+				41BEFB741AD6DC020016ACCA /* OpenGLES.framework */,
+				41BEFB721AD6DBF80016ACCA /* AudioToolbox.framework */,
+				41BEFB701AD6DBE80016ACCA /* CoreAudio.framework */,
+				41BEFB6E1AD6DBE40016ACCA /* CoreVideo.framework */,
+				41BEFB6C1AD6DBD30016ACCA /* CoreMedia.framework */,
+				41BEFB6A1AD6DBB50016ACCA /* AVFoundation.framework */,
+				41BEFB681AD6DBAA0016ACCA /* CoreFoundation.framework */,
+				41BEFB4B1AD6CE880016ACCA /* CoreGraphics.framework */,
+				41BEFB491AD6CE7F0016ACCA /* VideoToolbox.framework */,
+				41BEFB661AD6DB560016ACCA /* libresolv.dylib */,
+				41BEFB641AD6DB480016ACCA /* libstdc++.dylib */,
+				41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		41BEFB4E1AD6CF770016ACCA /* GStreamer */ = {
+			isa = PBXGroup;
+			children = (
+				41BEFB551AD6D0630016ACCA /* EaglUIVIew.h */,
+				41BEFB561AD6D0630016ACCA /* EaglUIVIew.m */,
+				41BEFB571AD6D0630016ACCA /* gst_ios_init.h */,
+				41BEFB581AD6D0630016ACCA /* gst_ios_init.m */,
+				41BEFB591AD6D0630016ACCA /* gst-launch-remote.c */,
+				41BEFB5A1AD6D0630016ACCA /* gst-launch-remote.h */,
+			);
+			path = GStreamer;
+			sourceTree = "<group>";
+		};
 		CB01CDAD1ABD675000420CE1 /* NIDropDown */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +450,7 @@
 		CB1C76451AAB144700680FE3 = {
 			isa = PBXGroup;
 			children = (
+				41BEFB4D1AD6CE980016ACCA /* Frameworks */,
 				CB44E8821AAEA03300A78C11 /* Default-568h@2x.png */,
 				CB1C76501AAB144800680FE3 /* evercamPlay */,
 				CB1C766A1AAB144900680FE3 /* evercamPlayTests */,
@@ -329,8 +475,10 @@
 				CB1C76771AAB7DE900680FE3 /* 3rdParty */,
 				CB44E84E1AAE9E7D00A78C11 /* Controllers */,
 				CB44E8671AAE9E7D00A78C11 /* View */,
+				41208A391AD725CC009C4FC2 /* CoreData */,
 				CB1C76551AAB144800680FE3 /* AppDelegate.h */,
 				CB1C76561AAB144800680FE3 /* AppDelegate.m */,
+				41208A331AD7244A009C4FC2 /* AppUser.xcdatamodeld */,
 				CB1C765B1AAB144800680FE3 /* Main.storyboard */,
 				CB1C765E1AAB144800680FE3 /* Images.xcassets */,
 				CB1C76881AAB871A00680FE3 /* Resources */,
@@ -368,7 +516,9 @@
 		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				41BEFB4E1AD6CF770016ACCA /* GStreamer */,
 				CB44E80C1AAE9DD800A78C11 /* AFNetworking */,
+				CB840D141ACAF36D00F289A9 /* AsyncImageView */,
 				CB01CDB11ABDFC9F00420CE1 /* MBProgressHUD */,
 				CB01CDAD1ABD675000420CE1 /* NIDropDown */,
 				CB1C77121AAE1A4400680FE3 /* UIAlertController+NoBorderText */,
@@ -430,6 +580,7 @@
 				CB1C76A91AAB871A00680FE3 /* ic_person.png */,
 				CB1C76AA1AAB871A00680FE3 /* evercam_icon.png */,
 				CB1C76AD1AAB871A00680FE3 /* icon_gallery.png */,
+				41BEFB7C1AD708730016ACCA /* icon_offline.png */,
 				CB1C76AE1AAB871A00680FE3 /* play_page_feature.png */,
 				CB1C76AF1AAB871A00680FE3 /* play_page_intro.png */,
 				CB1C76B01AAB871A00680FE3 /* play_page_next.png */,
@@ -550,16 +701,13 @@
 		CB44E84C1AAE9E1F00A78C11 /* Wrapper */ = {
 			isa = PBXGroup;
 			children = (
+				4157369A1AD59E93005B38DF /* DataModels */,
 				CB44E8871AAED82000A78C11 /* AFEvercamAPIClient.h */,
 				CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */,
 				CB44E8841AAED4E700A78C11 /* EvercamShell.h */,
 				CB44E8851AAED4E700A78C11 /* EvercamShell.m */,
-				CB01CDB51ABE057E00420CE1 /* EvercamCamera.h */,
-				CB01CDB61ABE057E00420CE1 /* EvercamCamera.m */,
-				CB44E88A1AAEDD2D00A78C11 /* EvercamApiKeyPair.h */,
-				CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */,
-				CB92361B1AB2DABF0031E23A /* EvercamUser.h */,
-				CB92361C1AB2DABF0031E23A /* EvercamUser.m */,
+				CB01CDB51ABE057E00420CE1 /* EvercamCameraUtil.h */,
+				CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -573,6 +721,9 @@
 				CB44E8521AAE9E7D00A78C11 /* CamerasViewController.h */,
 				CB44E8531AAE9E7D00A78C11 /* CamerasViewController.m */,
 				CB44E8541AAE9E7D00A78C11 /* CamerasViewController.xib */,
+				41BEFB3F1AD609A10016ACCA /* CameraPlayViewController.h */,
+				41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */,
+				41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */,
 				CB44E8551AAE9E7D00A78C11 /* FeedbackViewController.h */,
 				CB44E8561AAE9E7D00A78C11 /* FeedbackViewController.m */,
 				CB44E8571AAE9E7D00A78C11 /* FeedbackViewController.xib */,
@@ -604,8 +755,24 @@
 				CB44E86B1AAE9E7D00A78C11 /* AddAccountCell.h */,
 				CB44E86C1AAE9E7D00A78C11 /* AddAccountCell.m */,
 				CB44E86D1AAE9E7D00A78C11 /* AddAccountCell.xib */,
+				CB840D1E1ACAF38900F289A9 /* CameraViewCell.h */,
+				CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */,
+				CB840D201ACAF38900F289A9 /* CameraViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		CB840D141ACAF36D00F289A9 /* AsyncImageView */ = {
+			isa = PBXGroup;
+			children = (
+				CB840D151ACAF36D00F289A9 /* AsyncImageView.h */,
+				CB840D161ACAF36D00F289A9 /* AsyncImageView.m */,
+				CB840D171ACAF36D00F289A9 /* ImageCache.h */,
+				CB840D181ACAF36D00F289A9 /* ImageCache.m */,
+				CB840D191ACAF36D00F289A9 /* ImageCacheObject.h */,
+				CB840D1A1ACAF36D00F289A9 /* ImageCacheObject.m */,
+			);
+			path = AsyncImageView;
 			sourceTree = "<group>";
 		};
 		CB9235EE1AB038EF0031E23A /* javawrapper */ = {
@@ -728,6 +895,7 @@
 				CB1C76B31AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png in Resources */,
 				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				CB1C76D61AAB871A00680FE3 /* play_page_feature.png in Resources */,
+				41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */,
 				CB1C76BE1AAB871A00680FE3 /* dot_on_red.png in Resources */,
 				CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */,
 				CB1C76B61AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png in Resources */,
@@ -735,12 +903,14 @@
 				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
 				CB44E8771AAE9E7D00A78C11 /* MenuViewController.xib in Resources */,
 				CB1C76D51AAB871A00680FE3 /* icon_gallery.png in Resources */,
+				CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */,
 				CB1C76C11AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png in Resources */,
 				CB1C76C41AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png in Resources */,
 				CB1C76CD1AAB871A00680FE3 /* ic_content_undo.png in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
 				CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */,
 				CB1C76B91AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png in Resources */,
+				41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */,
 				CB1C76B81AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png in Resources */,
 				CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */,
 				CB1C76B41AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png in Resources */,
@@ -786,23 +956,33 @@
 			files = (
 				CB44E8741AAE9E7D00A78C11 /* LoginViewController.m in Sources */,
 				CB44E8481AAE9DD800A78C11 /* UIImageView+AFNetworking.m in Sources */,
-				CB01CDB71ABE057E00420CE1 /* EvercamCamera.m in Sources */,
+				CB01CDB71ABE057E00420CE1 /* EvercamCameraUtil.m in Sources */,
 				CB44E8891AAED82000A78C11 /* AFEvercamAPIClient.m in Sources */,
+				41BEFB5D1AD6D0630016ACCA /* gst-launch-remote.c in Sources */,
 				CB44E84A1AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.m in Sources */,
 				CB44E87E1AAE9E7D00A78C11 /* AccountCell.m in Sources */,
 				CB44E8411AAE9DD800A78C11 /* AFSecurityPolicy.m in Sources */,
+				CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */,
+				41BEFB5B1AD6D0630016ACCA /* EaglUIVIew.m in Sources */,
+				CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */,
 				CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */,
 				CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */,
+				41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */,
 				CB44E84B1AAE9DD800A78C11 /* UIWebView+AFNetworking.m in Sources */,
 				CB1C77151AAE1A4400680FE3 /* UIAlertController+NoBorderText.m in Sources */,
 				CB44E83F1AAE9DD800A78C11 /* AFURLSessionManager.m in Sources */,
 				CB44E87C1AAE9E7D00A78C11 /* WelcomeViewController.m in Sources */,
+				CB840D1B1ACAF36D00F289A9 /* AsyncImageView.m in Sources */,
 				CB44E83D1AAE9DD800A78C11 /* AFURLConnectionOperation.m in Sources */,
+				CB01CDBA1AC00AFB00420CE1 /* EvercamCamera.m in Sources */,
+				41BEFB5C1AD6D0630016ACCA /* gst_ios_init.m in Sources */,
+				4157369D1AD59ED4005B38DF /* EvercamRights.m in Sources */,
 				CB44E8781AAE9E7D00A78C11 /* SettingsViewController.m in Sources */,
 				CB44E87A1AAE9E7D00A78C11 /* SignupViewController.m in Sources */,
 				CB44E83E1AAE9DD800A78C11 /* AFHTTPSessionManager.m in Sources */,
 				CB44E8491AAE9DD800A78C11 /* UIProgressView+AFNetworking.m in Sources */,
 				CB44E8471AAE9DD800A78C11 /* UIButton+AFNetworking.m in Sources */,
+				41208A351AD7244A009C4FC2 /* AppUser.xcdatamodeld in Sources */,
 				CB44E8801AAE9E7D00A78C11 /* AddAccountCell.m in Sources */,
 				CB44E83C1AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m in Sources */,
 				CB44E8431AAE9DD800A78C11 /* AFURLResponseSerialization.m in Sources */,
@@ -815,12 +995,14 @@
 				CB1C76541AAB144800680FE3 /* main.m in Sources */,
 				CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */,
 				CB92361D1AB2DABF0031E23A /* EvercamUser.m in Sources */,
+				CB840D1C1ACAF36D00F289A9 /* ImageCache.m in Sources */,
 				CB1C76FC1AAD834700680FE3 /* UILabel+ActionSheet.m in Sources */,
 				CB44E8441AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				CB44E8701AAE9E7D00A78C11 /* CamerasViewController.m in Sources */,
 				CB44E83B1AAE9DD800A78C11 /* AFHTTPRequestOperation.m in Sources */,
 				CB44E86E1AAE9E7D00A78C11 /* AccountsViewController.m in Sources */,
 				CB44E8451AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
 				CB44E8401AAE9DD800A78C11 /* AFNetworkReachabilityManager.m in Sources */,
 				CB44E8721AAE9E7D00A78C11 /* FeedbackViewController.m in Sources */,
 			);
@@ -935,7 +1117,20 @@
 		CB1C76721AAB144900680FE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"~/Library/Developer/GStreamer/iPhone.sdk",
+					"$(USER_LIBRARY_DIR)/Developer/GStreamer/iPhone.sdk",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"~/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework/Headers\"",
+				);
 				INFOPLIST_FILE = evercamPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -945,7 +1140,20 @@
 		CB1C76731AAB144900680FE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"~/Library/Developer/GStreamer/iPhone.sdk",
+					"$(USER_LIBRARY_DIR)/Developer/GStreamer/iPhone.sdk",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"~/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework/Headers\"",
+				);
 				INFOPLIST_FILE = evercamPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1017,6 +1225,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		41208A331AD7244A009C4FC2 /* AppUser.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				41208A341AD7244A009C4FC2 /* AppUser.xcdatamodel */,
+			);
+			currentVersion = 41208A341AD7244A009C4FC2 /* AppUser.xcdatamodel */;
+			path = AppUser.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CB1C76461AAB144700680FE3 /* Project object */;
 }

@@ -26,9 +26,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CamerasViewController : UIViewController 
+@interface CamerasViewController : UIViewController  <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) IBOutlet UIButton *btnMenu;
 @property (nonatomic, strong) IBOutlet UIButton *btnRefresh;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
-
+@property (nonatomic, strong) IBOutlet UICollectionView *camerasView;
 @end

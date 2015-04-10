@@ -42,5 +42,6 @@
 @interface AFEvercamAPIClient : AFHTTPSessionManager
 
 + (instancetype)sharedClient;
+- (NSString *)baseUrl;
 
 @end

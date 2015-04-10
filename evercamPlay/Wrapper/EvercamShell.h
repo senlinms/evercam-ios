@@ -11,6 +11,7 @@
 
 @class EvercamApiKeyPair;
 @class EvercamUser;
+@class EvercamCamera;
 
 @interface EvercamShell : NSObject
 {
@@ -22,6 +23,10 @@
                                     Password:(NSString*) password
                                    WithBlock:(void (^)(EvercamApiKeyPair *userKeyPair, NSError *error))block;
 - (void) createUser:(EvercamUser*) user WithBlock:(void (^)(EvercamUser *newuser, NSError *error))block;
+- (void) getUserFromId:(NSString *) userId withBlock:(void (^)(EvercamUser *newuser, NSError *error))block;
+
 - (void)getAllCameras: (NSString*)userId includeShared:(BOOL)includeShared includeThumbnail:(BOOL) includeThumbnail withBlock:(void (^)(NSArray *cameras, NSError *error))block;
+- (void)getSnapshotFromEvercam:(EvercamCamera *)camera withBlock:(void (^)(NSData *imgData, NSError *error))block;
+- (void)getSnapshotFromCamId:(NSString *)cameraID withBlock:(void (^)(NSData *imgData, NSError *error))block;
 
 @end
