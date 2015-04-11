@@ -9,6 +9,9 @@
 #import "CameraPlayViewController.h"
 #import "EvercamShell.h"
 #include "gst-launch-remote.h"
+#import "PreferenceUtil.h"
+#import "CustomNavigationController.h"
+#import "AppDelegate.h"
 
 @interface CameraPlayViewController () {
     GstLaunchRemote *launch;
@@ -53,6 +56,31 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self playCamera];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self disableSleep];
+    
+    int sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
+    [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
+    
+    BOOL isForceLandscape = [PreferenceUtil isForceLandscape];
+    if (isForceLandscape) {
+        [(CustomNavigationController *)self.navigationController setIsPortraitMode:NO];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self enableSleep];
+    [(CustomNavigationController *)self.navigationController setIsPortraitMode:NO];
+}
+
+- (void)disableSleep {
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+}
+
+- (void)enableSleep {
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+}
+
 - (void)dealloc {
     if (launch)
     {
@@ -66,7 +94,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (IBAction)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
     viewClosed = true;
     

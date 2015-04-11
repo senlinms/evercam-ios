@@ -8,8 +8,10 @@
 
 #import "FeedbackViewController.h"
 #import "SWRevealViewController.h"
+#import "AppDelegate.h"
+#import <MessageUI/MessageUI.h>
 
-@interface FeedbackViewController ()
+@interface FeedbackViewController () <MFMailComposeViewControllerDelegate>
 {
     UITextField *activeTextField;
 }
@@ -41,6 +43,10 @@
         // TODO: Add fall-back code to set placeholder color.
     }
 
+    if ([APP_DELEGATE defaultUser]) {
+        self.txt_username.text = [NSString stringWithFormat:@"%@ %@", [APP_DELEGATE defaultUser].firstName, [APP_DELEGATE defaultUser].lastName];
+        self.txt_email.text = [APP_DELEGATE defaultUser].email;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +56,21 @@
 
 - (IBAction)onSend:(id)sender
 {
+    NSString *feedback = _txt_feedback.text;
     
+    if ([feedback stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
+    {
+        return;
+    }
+    
+//    if([MFMailComposeViewController canSendMail]) {
+//        MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+//        mailCont.mailComposeDelegate = self;
+//        [mailCont setSubject:@"Evercam Play Feedback"];
+//        mailCont setRe:<#(NSArray *)#>
+//        [mailCont setMessageBody:[@"Your body for this message is " stringByAppendingString:@" this is awesome"] isHTML:NO];
+//        [self presentViewController:mailCont animated:YES completion:nil];
+//    }
 }
 
 #pragma mark UITextFieldDelegate

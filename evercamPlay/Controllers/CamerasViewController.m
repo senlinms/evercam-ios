@@ -32,6 +32,8 @@
 #import "EvercamCamera.h"
 #import "CameraPlayViewController.h"
 #import "AppDelegate.h"
+#import "PreferenceUtil.h"
+#import "CustomNavigationController.h"
 
 @interface CamerasViewController()
 {
@@ -63,6 +65,9 @@
     [self.camerasView registerNib:[UINib nibWithNibName:@"CameraViewCell" bundle:nil] forCellWithReuseIdentifier: @"CameraViewCell"];
     
     [self onRefresh:nil];
+    
+    ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(320 / [PreferenceUtil getCameraPerRow], 320 / [PreferenceUtil getCameraPerRow] * .75);
+    
 }
 
 - (void)showLoadingView {
@@ -124,9 +129,15 @@
     UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
     [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
     [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
+
+    if (![APP_DELEGATE defaultUser]) {
+        return;
+    }
     
+    [[EvercamShell shell] setUserKeyPairWithApiId:[APP_DELEGATE defaultUser].apiId andApiKey:[APP_DELEGATE defaultUser].apiKey];
+
     [self showLoadingView];
-    [[EvercamShell shell] getAllCameras:@"marco" includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
+    [[EvercamShell shell] getAllCameras:[APP_DELEGATE defaultUser].username includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
         [self hideLoadingView];
         if (error == nil)
         {
@@ -205,6 +216,15 @@
     CameraPlayViewController *cameraPlayVC = [[CameraPlayViewController alloc] initWithNibName:@"CameraPlayViewController" bundle:nil];
     cameraPlayVC.cameraInfo = cameraInfo;
     
-    [[APP_DELEGATE viewController] pushViewController:cameraPlayVC animated:YES];
+    CustomNavigationController *cameraPlayNavVC = [[CustomNavigationController alloc] initWithRootViewController:cameraPlayVC];
+    if ([PreferenceUtil isForceLandscape]) {
+        [cameraPlayNavVC setIsPortraitMode:NO];
+    } else {
+        [cameraPlayNavVC setIsPortraitMode:YES];
+    }
+    cameraPlayNavVC.navigationBarHidden = YES;
+    
+    [[APP_DELEGATE viewController] presentViewController:cameraPlayNavVC animated:YES completion:nil];
 }
+
 @end

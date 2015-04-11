@@ -33,6 +33,7 @@
 #import "AccountsViewController.h"
 #import "SettingsViewController.h"
 #import "FeedbackViewController.h"
+#import "AppDelegate.h"
 
 @interface MenuViewController()
 {
@@ -164,7 +165,7 @@
                                      handler:^(UIAlertAction * action)
                                      {
                                          [alert dismissViewControllerAnimated:YES completion:nil];
-                                         [revealController.navigationController popViewControllerAnimated:YES];
+                                         [APP_DELEGATE logout];
                                          _presentedRow = 0;
                                      }];
             

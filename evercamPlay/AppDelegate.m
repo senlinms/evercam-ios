@@ -24,7 +24,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     WelcomeViewController *vc = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:nil];
-    self.viewController = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.viewController = [[CustomNavigationController alloc] initWithRootViewController:vc];
+    self.viewController.isPortraitMode = true;
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
@@ -169,6 +170,11 @@
     return [self newUserWithName:username];
 }
 
+-(void)deleteUser:(AppUser *)user {
+    NSManagedObjectContext *context = [self managedObjectContext];
+    [context deleteObject:user];
+}
+
 - (AppUser *)newUserWithName:(NSString *)username
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -188,6 +194,11 @@
     NSError *error = nil;
     NSArray *array = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     return array;
+}
+
+- (void)logout {
+    [self deleteUser:self.defaultUser];
+    [self.viewController popViewControllerAnimated:YES];
 }
 
 @end
