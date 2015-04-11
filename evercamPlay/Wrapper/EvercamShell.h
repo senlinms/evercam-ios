@@ -19,6 +19,8 @@
 @property (nonatomic, strong) EvercamApiKeyPair *keyPair;
 
 + (EvercamShell *) shell;
+- (void)setUserKeyPairWithApiId:(NSString *)apiId andApiKey:(NSString *)apiKey;
+
 - (void) requestEvercamAPIKeyFromEvercamUser:(NSString*) username
                                     Password:(NSString*) password
                                    WithBlock:(void (^)(EvercamApiKeyPair *userKeyPair, NSError *error))block;

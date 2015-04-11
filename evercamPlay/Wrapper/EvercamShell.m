@@ -30,6 +30,11 @@ static EvercamShell *instance = nil;
     return instance;
 }
 
+- (void)setUserKeyPairWithApiId:(NSString *)apiId andApiKey:(NSString *)apiKey {
+    keyPair.apiId = apiId;
+    keyPair.apiKey = apiKey;
+}
+
 - (void) requestEvercamAPIKeyFromEvercamUser:(NSString*) username
                                                       Password:(NSString*) password
                                                         WithBlock:(void (^)(EvercamApiKeyPair *userKeyPair, NSError *error))block {

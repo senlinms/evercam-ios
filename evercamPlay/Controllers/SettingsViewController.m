@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "SWRevealViewController.h"
+#import "PreferenceUtil.h"
 
 @interface SettingsViewController ()
 
@@ -95,13 +96,23 @@
             cell.textLabel.text = @"Cameras per row";
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
-            cell.detailTextLabel.text = @"2";
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [PreferenceUtil getCameraPerRow]];
         }
         else if (indexPath.row == 1)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:subTitleCellIdentifier];
             cell.textLabel.text = @"Sleep";
-            cell.detailTextLabel.text = @"Never";
+            
+            NSInteger sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
+            if (sleepTimerSecs == 0) {
+                cell.detailTextLabel.text = @"Never";
+            } else if (sleepTimerSecs == 60) {
+                cell.detailTextLabel.text = @"After 1 minute of inactivity";
+            } else if (sleepTimerSecs == 5 * 60) {
+                cell.detailTextLabel.text = @"After 5 minutes of inactivity";
+            } else if (sleepTimerSecs == 30) {
+                cell.detailTextLabel.text = @"After 30 seconds of inactivity";
+            }
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
@@ -110,16 +121,23 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
             cell.textLabel.text = @"Force landscape for live view";
             cell.textLabel.textColor = [UIColor whiteColor];
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            if ([PreferenceUtil isForceLandscape]) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
         }
     }
     else
     {
         if (indexPath.row == 0)
         {
+            NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+            NSString *build = infoDictionary[(NSString*)@"CFBundleShortVersionString"];
+            
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:subTitleCellIdentifier];
             cell.textLabel.text = @"Version";
-            cell.detailTextLabel.text = @"";
+            cell.detailTextLabel.text = build;
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
@@ -157,6 +175,8 @@
                                       {
                                           //Do some thing here
                                           [view dismissViewControllerAnimated:YES completion:nil];
+                                          [PreferenceUtil setCameraPerRow:1];
+                                          [self.tableView reloadData];
                                       }];
                 UIAlertAction* two = [UIAlertAction
                                       actionWithTitle:@"2"
@@ -164,6 +184,18 @@
                                       handler:^(UIAlertAction * action)
                                       {
                                           [view dismissViewControllerAnimated:YES completion:nil];
+                                          [PreferenceUtil setCameraPerRow:2];
+                                          [self.tableView reloadData];
+                                          
+                                      }];
+                UIAlertAction* three = [UIAlertAction
+                                      actionWithTitle:@"3"
+                                      style:UIAlertActionStyleDefault
+                                      handler:^(UIAlertAction * action)
+                                      {
+                                          [view dismissViewControllerAnimated:YES completion:nil];
+                                          [PreferenceUtil setCameraPerRow:3];
+                                          [self.tableView reloadData];
                                           
                                       }];
                 UIAlertAction* cancel = [UIAlertAction
@@ -178,6 +210,7 @@
                 
                 [view addAction:one];
                 [view addAction:two];
+                [view addAction:three];
                 [view addAction:cancel];
                 [self presentViewController:view animated:YES completion:nil];
             });
@@ -198,6 +231,8 @@
                                       {
                                           //Do some thing here
                                           [view dismissViewControllerAnimated:YES completion:nil];
+                                          [PreferenceUtil setSleepTimerSecs:30];
+                                          [self.tableView reloadData];
                                       }];
                 UIAlertAction* onemin = [UIAlertAction
                                       actionWithTitle:@"1 minute"
@@ -205,7 +240,8 @@
                                       handler:^(UIAlertAction * action)
                                       {
                                           [view dismissViewControllerAnimated:YES completion:nil];
-                                          
+                                          [PreferenceUtil setSleepTimerSecs:60];
+                                          [self.tableView reloadData];
                                       }];
                 UIAlertAction* fivemin = [UIAlertAction
                                       actionWithTitle:@"5 minute"
@@ -213,7 +249,8 @@
                                       handler:^(UIAlertAction * action)
                                       {
                                           [view dismissViewControllerAnimated:YES completion:nil];
-                                          
+                                          [PreferenceUtil setSleepTimerSecs:5 * 60];
+                                          [self.tableView reloadData];
                                       }];
                 UIAlertAction* never = [UIAlertAction
                                       actionWithTitle:@"Never"
@@ -221,6 +258,8 @@
                                       handler:^(UIAlertAction * action)
                                       {
                                           [view dismissViewControllerAnimated:YES completion:nil];
+                                          [PreferenceUtil setSleepTimerSecs:0];
+                                          [self.tableView reloadData];
                                           
                                       }];
                 UIAlertAction* cancel = [UIAlertAction
@@ -244,11 +283,18 @@
         }
         else if (indexPath.row == 2)
         {
-            if ([self.tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark)
+            if ([self.tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
                 [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-            else
+                [PreferenceUtil setIsForceLandscape:NO];
+            } else {
                 [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+                [PreferenceUtil setIsForceLandscape:YES];
+            }
 
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.evercam.io"]];
         }
     }
 }

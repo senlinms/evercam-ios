@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		41208A351AD7244A009C4FC2 /* AppUser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41208A331AD7244A009C4FC2 /* AppUser.xcdatamodeld */; };
 		41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A3B1AD725CC009C4FC2 /* AppUser.m */; };
+		41208A441AD8482B009C4FC2 /* PreferenceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A431AD8482B009C4FC2 /* PreferenceUtil.m */; };
+		41208A491AD8A126009C4FC2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41208A481AD8A126009C4FC2 /* MessageUI.framework */; };
+		41208A4F1AD8DCAA009C4FC2 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A4E1AD8DCAA009C4FC2 /* CustomNavigationController.m */; };
 		4157369D1AD59ED4005B38DF /* EvercamRights.m in Sources */ = {isa = PBXBuildFile; fileRef = 4157369C1AD59ED4005B38DF /* EvercamRights.m */; };
 		41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */; };
 		41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */; };
@@ -125,7 +128,7 @@
 		CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */; };
 		CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB840D201ACAF38900F289A9 /* CameraViewCell.xib */; };
 		CB92361D1AB2DABF0031E23A /* EvercamUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB92361C1AB2DABF0031E23A /* EvercamUser.m */; };
-		CBC9EC341AD79F4F00A5852B /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9EC331AD79F4F00A5852B /* GStreamer.framework */; };
+		CBBF50AC1AD976AD0008679E /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF50AB1AD976AD0008679E /* GStreamer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +145,11 @@
 		41208A341AD7244A009C4FC2 /* AppUser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppUser.xcdatamodel; sourceTree = "<group>"; };
 		41208A3A1AD725CC009C4FC2 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUser.h; sourceTree = "<group>"; };
 		41208A3B1AD725CC009C4FC2 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUser.m; sourceTree = "<group>"; };
+		41208A421AD8482B009C4FC2 /* PreferenceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceUtil.h; sourceTree = "<group>"; };
+		41208A431AD8482B009C4FC2 /* PreferenceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceUtil.m; sourceTree = "<group>"; };
+		41208A481AD8A126009C4FC2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		41208A4D1AD8DCAA009C4FC2 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
+		41208A4E1AD8DCAA009C4FC2 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
 		4157369B1AD59ED4005B38DF /* EvercamRights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamRights.h; sourceTree = "<group>"; };
 		4157369C1AD59ED4005B38DF /* EvercamRights.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamRights.m; sourceTree = "<group>"; };
 		41BEFB3F1AD609A10016ACCA /* CameraPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraPlayViewController.h; sourceTree = "<group>"; };
@@ -334,7 +342,7 @@
 		CB9236041AB038EF0031E23A /* Vendor.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Vendor.java; sourceTree = "<group>"; };
 		CB92361B1AB2DABF0031E23A /* EvercamUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamUser.h; sourceTree = "<group>"; };
 		CB92361C1AB2DABF0031E23A /* EvercamUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUser.m; sourceTree = "<group>"; };
-		CBC9EC331AD79F4F00A5852B /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
+		CBBF50AB1AD976AD0008679E /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41208A491AD8A126009C4FC2 /* MessageUI.framework in Frameworks */,
 				41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */,
 				41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */,
 				41BEFB771AD6DC0E0016ACCA /* AssetsLibrary.framework in Frameworks */,
@@ -350,7 +359,7 @@
 				41BEFB711AD6DBE80016ACCA /* CoreAudio.framework in Frameworks */,
 				41BEFB6F1AD6DBE40016ACCA /* CoreVideo.framework in Frameworks */,
 				41BEFB6D1AD6DBD30016ACCA /* CoreMedia.framework in Frameworks */,
-				CBC9EC341AD79F4F00A5852B /* GStreamer.framework in Frameworks */,
+				CBBF50AC1AD976AD0008679E /* GStreamer.framework in Frameworks */,
 				41BEFB6B1AD6DBB50016ACCA /* AVFoundation.framework in Frameworks */,
 				41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */,
 				41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */,
@@ -379,6 +388,24 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		41208A411AD84816009C4FC2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				41208A421AD8482B009C4FC2 /* PreferenceUtil.h */,
+				41208A431AD8482B009C4FC2 /* PreferenceUtil.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		41208A4C1AD8DC59009C4FC2 /* CustomNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				41208A4D1AD8DCAA009C4FC2 /* CustomNavigationController.h */,
+				41208A4E1AD8DCAA009C4FC2 /* CustomNavigationController.m */,
+			);
+			name = CustomNavigationController;
+			sourceTree = "<group>";
+		};
 		4157369A1AD59E93005B38DF /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,7 +424,8 @@
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CBC9EC331AD79F4F00A5852B /* GStreamer.framework */,
+				CBBF50AB1AD976AD0008679E /* GStreamer.framework */,
+				41208A481AD8A126009C4FC2 /* MessageUI.framework */,
 				41BEFB781AD6DC180016ACCA /* QuartzCore.framework */,
 				41BEFB761AD6DC0E0016ACCA /* AssetsLibrary.framework */,
 				41BEFB741AD6DC020016ACCA /* OpenGLES.framework */,
@@ -476,6 +504,7 @@
 				CB44E84E1AAE9E7D00A78C11 /* Controllers */,
 				CB44E8671AAE9E7D00A78C11 /* View */,
 				41208A391AD725CC009C4FC2 /* CoreData */,
+				41208A411AD84816009C4FC2 /* Utils */,
 				CB1C76551AAB144800680FE3 /* AppDelegate.h */,
 				CB1C76561AAB144800680FE3 /* AppDelegate.m */,
 				41208A331AD7244A009C4FC2 /* AppUser.xcdatamodeld */,
@@ -516,6 +545,7 @@
 		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				41208A4C1AD8DC59009C4FC2 /* CustomNavigationController */,
 				41BEFB4E1AD6CF770016ACCA /* GStreamer */,
 				CB44E80C1AAE9DD800A78C11 /* AFNetworking */,
 				CB840D141ACAF36D00F289A9 /* AsyncImageView */,
@@ -998,11 +1028,13 @@
 				CB840D1C1ACAF36D00F289A9 /* ImageCache.m in Sources */,
 				CB1C76FC1AAD834700680FE3 /* UILabel+ActionSheet.m in Sources */,
 				CB44E8441AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				41208A441AD8482B009C4FC2 /* PreferenceUtil.m in Sources */,
 				CB44E8701AAE9E7D00A78C11 /* CamerasViewController.m in Sources */,
 				CB44E83B1AAE9DD800A78C11 /* AFHTTPRequestOperation.m in Sources */,
 				CB44E86E1AAE9E7D00A78C11 /* AccountsViewController.m in Sources */,
 				CB44E8451AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
+				41208A4F1AD8DCAA009C4FC2 /* CustomNavigationController.m in Sources */,
 				CB44E8401AAE9DD800A78C11 /* AFNetworkReachabilityManager.m in Sources */,
 				CB44E8721AAE9E7D00A78C11 /* FeedbackViewController.m in Sources */,
 			);

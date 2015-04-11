@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "AppUser.h"
+#import "CustomNavigationController.h"
 
 #define APP_DELEGATE (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UINavigationController *viewController;
+@property (strong, nonatomic) CustomNavigationController *viewController;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -25,8 +26,10 @@
 
 -(void) saveContext;
 -(AppUser *)userWithName:(NSString *)username;
+-(void)deleteUser:(AppUser *)user;
 -(NSMutableArray *)allUserList;
 
+- (void)logout;
 
 @end
 
