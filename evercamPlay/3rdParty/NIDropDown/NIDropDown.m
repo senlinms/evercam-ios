@@ -26,7 +26,7 @@
 @synthesize animationDirection;
 @synthesize gradient;
 
-- (id)showDropDown:(UIButton *)b:(CGFloat *)height:(NSArray *)arr:(NSArray *)imgArr:(NSString *)direction {
+- (id)showDropDown:(UIButton *)b height:(CGFloat *)height textArray:(NSArray *)arr imageArray:(NSArray *)imgArr direction:(NSString *)direction {
     btnSender = b;
     animationDirection = direction;
     self.table = (UITableView *)[super init];

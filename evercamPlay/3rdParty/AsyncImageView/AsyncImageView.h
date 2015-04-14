@@ -20,10 +20,9 @@
 }
 
 
-- (void)displayImage:(UIImage *)image;
--(void)loadImageFromURL:(NSURL*)url;
--(void)drawImage:(UIImage*)image;
--(void) stopLoadingImage;
+-(void)displayImage:(UIImage *)image;
+-(void)loadImageFromURL:(NSURL*)url withSpinny:(BOOL)hasSpinny;
+-(void)stopLoadingImage;
 
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) UIActivityIndicatorView *spinny;

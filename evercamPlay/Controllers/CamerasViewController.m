@@ -34,8 +34,9 @@
 #import "AppDelegate.h"
 #import "PreferenceUtil.h"
 #import "CustomNavigationController.h"
+#import "AddCameraViewController.h"
 
-@interface CamerasViewController()
+@interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
     NSMutableArray *cameraArray;
 }
@@ -172,7 +173,9 @@
 
 - (void)addCamera
 {
-    
+    AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:@"AddCameraViewController" bundle:nil];
+    [addCameraVC setDelegate:self];
+    [self.navigationController pushViewController:addCameraVC animated:YES];
 }
 
 - (void)scanCamera
@@ -200,7 +203,7 @@
     
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
     cell.titleLabel.text = cameraInfo.name;
-    [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl]];
+    [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:YES];
     if (cameraInfo.isOnline) {
         cell.imvOffline.hidden = YES;
     } else {
@@ -213,8 +216,38 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
+    [self showCamera:cameraInfo];
+}
+
+#pragma mark - AddCameraViewController Delegate Method
+- (void)cameraAdded:(EvercamCamera *)camera {
+    [cameraArray addObject:camera];
+    [self.camerasView reloadData];
+    [self showCamera:camera];
+}
+
+#pragma mark - CameraPlayViewController Delegate Method
+- (void)cameraDeleted:(EvercamCamera *)camera {
+    [cameraArray removeObject:camera];
+    [self.camerasView reloadData];
+}
+
+- (void)cameraEdited:(EvercamCamera *)camera {
+    for (EvercamCamera *cam in cameraArray) {
+        if ([cam.camId isEqualToString:camera.camId]) {
+            [cameraArray removeObject:cam];
+            [cameraArray addObject:camera];
+            [self.camerasView reloadData];
+            break;
+        }
+    }
+}
+
+#pragma mark - Custom Functions
+- (void)showCamera:(EvercamCamera *)camera {
     CameraPlayViewController *cameraPlayVC = [[CameraPlayViewController alloc] initWithNibName:@"CameraPlayViewController" bundle:nil];
-    cameraPlayVC.cameraInfo = cameraInfo;
+    [cameraPlayVC setDelegate:self];
+    cameraPlayVC.cameraInfo = camera;
     
     CustomNavigationController *cameraPlayNavVC = [[CustomNavigationController alloc] initWithRootViewController:cameraPlayVC];
     if ([PreferenceUtil isForceLandscape]) {

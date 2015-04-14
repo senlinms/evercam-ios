@@ -27,7 +27,9 @@
         self.vendor = [cameraDict valueForKey:@"vendor_name"];
         self.model = [cameraDict valueForKey:@"model_name"];
         self.macAddress = [cameraDict valueForKey:@"mac_address"];
-        self.isOnline = [[cameraDict valueForKey:@"is_online"] boolValue];
+        if ([cameraDict valueForKey:@"is_online"] != [NSNull null]) {
+            self.isOnline = [[cameraDict valueForKey:@"is_online"] boolValue];
+        }
         self.thumbnailUrl = [cameraDict valueForKey:@"thumbnail_url"];
 
         self.externalH264Url = @"";
@@ -96,6 +98,23 @@
         NSString *replacedPrefix = [NSString stringWithFormat:@"%@%@:%@@", prefix, self.username, self.password];
         return [url stringByReplacingOccurrencesOfString:prefix withString:replacedPrefix];
     }
+    return @"";
+}
+
+- (BOOL) isHikvision {
+    if ([self.vendor isEqualToString:@"hikvision"]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSString *)getJpgPath {
+    if (self.internalJpgUrl && self.internalJpgUrl.length > 0) {
+        return [NSURL URLWithString:self.internalJpgUrl].path;
+    } else if (self.externalJpgUrl && self.externalJpgUrl.length > 0) {
+        return [NSURL URLWithString:self.externalJpgUrl].path;
+    }
+    
     return @"";
 }
 
