@@ -12,6 +12,7 @@
 @class EvercamApiKeyPair;
 @class EvercamUser;
 @class EvercamCamera;
+@class EvercamCameraBuilder;
 
 @interface EvercamShell : NSObject
 {
@@ -28,7 +29,17 @@
 - (void) getUserFromId:(NSString *) userId withBlock:(void (^)(EvercamUser *newuser, NSError *error))block;
 
 - (void)getAllCameras: (NSString*)userId includeShared:(BOOL)includeShared includeThumbnail:(BOOL) includeThumbnail withBlock:(void (^)(NSArray *cameras, NSError *error))block;
+- (void)createCamera:(EvercamCameraBuilder *)cameraBuilder withBlock:(void (^)(EvercamCamera *camera, NSError *error))block;
+- (void)deleteCamera:(NSString *)cameraId withBlock:(void (^)(BOOL success, NSError *error))block;
+- (void)deleteShareCamera:(NSString *)cameraId andUserId:(NSNumber *)userId withBlock:(void (^)(BOOL success, NSError *error))block;
+- (void)patchCamera:(EvercamCameraBuilder *)cameraBuilder withBlock:(void (^)(EvercamCamera *camera, NSError *error))block ;
 - (void)getSnapshotFromEvercam:(EvercamCamera *)camera withBlock:(void (^)(NSData *imgData, NSError *error))block;
 - (void)getSnapshotFromCamId:(NSString *)cameraID withBlock:(void (^)(NSData *imgData, NSError *error))block;
+
+// for models
+- (void)getAllModelsByVendorId:(NSString *)vendorId withBlock:(void (^)(NSArray *models, NSError *error))block;
+
+// for vendors
+- (void)getAllVendors:(void (^)(NSArray *vendors, NSError *error))block;
 
 @end

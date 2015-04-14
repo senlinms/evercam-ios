@@ -10,6 +10,9 @@
 #import "SWRevealViewController.h"
 #import "AppDelegate.h"
 #import <MessageUI/MessageUI.h>
+#import "SendGrid.h"
+#import "SendGridEmail.h"
+#import "NetworkUtil.h"
 
 @interface FeedbackViewController () <MFMailComposeViewControllerDelegate>
 {
@@ -63,14 +66,46 @@
         return;
     }
     
-//    if([MFMailComposeViewController canSendMail]) {
-//        MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
-//        mailCont.mailComposeDelegate = self;
-//        [mailCont setSubject:@"Evercam Play Feedback"];
-//        mailCont setRe:<#(NSArray *)#>
-//        [mailCont setMessageBody:[@"Your body for this message is " stringByAppendingString:@" this is awesome"] isHTML:NO];
-//        [self presentViewController:mailCont animated:YES completion:nil];
-//    }
+    NSString *fullName = @"";
+    NSString *userEmail = @"";
+    AppUser *user = [APP_DELEGATE defaultUser];
+    if (user) {
+        fullName = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+        userEmail = user.email;
+    }
+    
+    NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+    NSString *version = infoDictionary[(NSString*)@"CFBundleShortVersionString"];
+    
+    SendGrid *sendgrid = [SendGrid apiUser:@"liutingdu" apiKey:@"kangtaooo1"];
+    
+    SendGridEmail *email = [[SendGridEmail alloc] init];
+    email.to = @"play@evercam.io";
+    email.from = userEmail;
+    email.subject = @"Evercam Play Feedback";
+    email.html = [NSString stringWithFormat:@"%@ says: <br><br>%@<br><br>Version: %@<br>Device: %@<br>Network: %@",
+                  fullName,
+                  feedback,
+                  version,
+                  [UIDevice currentDevice].name,
+                  [NetworkUtil getNetworkString]];
+    
+    [sendgrid sendWithWeb:email];
+
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:nil
+                                  message:@"Thanks for the feedback. We take all our feedback seriously, so we will be in a contact"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             _txt_feedback.text = @"";
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark UITextFieldDelegate

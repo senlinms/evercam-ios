@@ -319,8 +319,8 @@ update_position_cb (GstLaunchRemote * self)
     duration = MAX (duration, 0);
   }
 
-  self->app_context.set_current_position (position / GST_MSECOND,
-      duration / GST_MSECOND, self->app_context.app);
+  self->app_context.set_current_position ((guint)(position / GST_MSECOND),
+      (guint)(duration / GST_MSECOND), self->app_context.app);
 
   return TRUE;
 }
@@ -580,7 +580,7 @@ read_line_cb (GObject * source_object, GAsyncResult * res, gpointer user_data)
       guint64 ms = g_ascii_strtoull (position, &endptr, 10);
 
       if (*endptr == '\0') {
-        gst_launch_remote_seek (self, ms);
+        gst_launch_remote_seek (self, (gint)ms);
       } else {
         ok = FALSE;
       }
@@ -598,7 +598,7 @@ read_line_cb (GObject * source_object, GAsyncResult * res, gpointer user_data)
       if (command[0] && command[1]) {
         gint64 port = g_ascii_strtoll (command[1], NULL, 10);
         GST_DEBUG ("Setting netclock %s %" G_GINT64_FORMAT, command[0], port);
-        self->net_clock = gst_net_client_clock_new ("netclock", command[0], port, 0);
+        self->net_clock = gst_net_client_clock_new ("netclock", command[0], (gint)port, 0);
       } else {
         GST_DEBUG ("Unsetting netclock");
       }
@@ -625,8 +625,8 @@ read_line_cb (GObject * source_object, GAsyncResult * res, gpointer user_data)
       GstState s = GST_STATE_VOID_PENDING;
 
       if (self->pipeline) {
-        gst_element_query_duration (self->pipeline, GST_FORMAT_TIME, &duration);
-        gst_element_query_position (self->pipeline, GST_FORMAT_TIME, &position);
+        gst_element_query_duration (self->pipeline, GST_FORMAT_TIME, (gint64*)&duration);
+        gst_element_query_position (self->pipeline, GST_FORMAT_TIME, (gint64*)&position);
         s = GST_STATE (self->pipeline);
       }
 

@@ -9,7 +9,10 @@
 #import "EvercamShell.h"
 #import "EvercamApiKeyPair.h"
 #import "EvercamUser.h"
+#import "EvercamVendor.h"
+#import "EvercamModel.h"
 #import "EvercamCamera.h"
+#import "EvercamCameraBuilder.h"
 #import "EvercamCameraUtil.h"
 #import "AFEvercamAPIClient.h"
 
@@ -203,6 +206,211 @@ static EvercamShell *instance = nil;
     }
 }
 
+- (void)createCamera:(EvercamCameraBuilder *)cameraBuilder withBlock:(void (^)(EvercamCamera *camera, NSError *error))block {
+    if (keyPair) {
+        NSDictionary *parameters = [cameraBuilder toDictionary];
+        
+        NSURLSessionDataTask *task= [[AFEvercamAPIClient sharedClient] POST:@"cameras" parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
+            
+            NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
+            NSLog( @"%@", JSON );
+            
+            if (r.statusCode == CODE_CREATE)
+            {
+                NSArray *jsonCameraArray = [JSON valueForKeyPath:@"cameras"];
+                NSDictionary *jsonCamera = [jsonCameraArray objectAtIndex:0];
+                EvercamCamera *camera = [[EvercamCamera alloc] initWithDictionary:jsonCamera];
+                if (block) {
+                    block(camera, nil);
+                }
+            }
+            else if (r.statusCode == CODE_UNAUTHORISED)
+            {
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : MSG_INVALID_AUTH };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(nil, error);
+                }
+            }
+            else if (r.statusCode == CODE_SERVER_ERROR)
+            {
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : MSG_SERVER_ERROR };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(nil, error);
+                }
+            }
+            else
+            {
+                NSString *message = [JSON valueForKeyPath:@"message"];
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : message };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(nil, error);
+                }
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (block) {
+                block(nil, error);
+            }
+        }];
+        
+        [task resume];
+    }
+}
+
+- (void)deleteCamera:(NSString *)cameraId withBlock:(void (^)(BOOL success, NSError *error))block {
+    if (keyPair) {
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:keyPair.apiId, @"api_id",
+                                    keyPair.apiKey, @"api_key",
+                                    nil];
+        
+        NSURLSessionDataTask *task= [[AFEvercamAPIClient sharedClient] DELETE:[NSString stringWithFormat:@"cameras/%@", cameraId] parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
+            
+            NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
+            NSLog( @"%@", JSON );
+            
+            if (r.statusCode == CODE_OK)
+            {
+                if (block) {
+                    block(true, nil);
+                }
+            }
+            else if (r.statusCode == CODE_UNAUTHORISED)
+            {
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : MSG_INVALID_USER_KEY };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(NO, error);
+                }
+            }
+            else if (r.statusCode == CODE_SERVER_ERROR)
+            {
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : MSG_SERVER_ERROR };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(NO, error);
+                }
+            }
+            else
+            {
+                NSString *message = [JSON valueForKeyPath:@"message"];
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : message };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(NO, error);
+                }
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (block) {
+                block(NO, error);
+            }
+        }];
+        
+        [task resume];
+    }
+}
+
+- (void)deleteShareCamera:(NSString *)cameraId andUserId:(NSNumber *)userId withBlock:(void (^)(BOOL success, NSError *error))block {
+    if (keyPair) {
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:keyPair.apiId, @"api_id",
+                                    keyPair.apiKey, @"api_key",
+                                    userId, @"email",
+                                    nil];
+        
+        NSURLSessionDataTask *task= [[AFEvercamAPIClient sharedClient] DELETE:[NSString stringWithFormat:@"cameras/%@/shares", cameraId] parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
+            
+            NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
+            NSLog( @"%@", JSON );
+            
+            if (r.statusCode == CODE_OK)
+            {
+                if (block) {
+                    block(true, nil);
+                }
+            }
+            else
+            {
+                NSString *message = [JSON valueForKeyPath:@"message"];
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : message };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(NO, error);
+                }
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (block) {
+                block(NO, error);
+            }
+        }];
+        
+        [task resume];
+    }
+}
+
+- (void)patchCamera:(EvercamCameraBuilder *)cameraBuilder withBlock:(void (^)(EvercamCamera *camera, NSError *error))block {
+    if (keyPair) {
+        NSDictionary *parameters = [cameraBuilder toDictionary];
+        
+        NSURLSessionDataTask *task= [[AFEvercamAPIClient sharedClient] PATCH:[NSString stringWithFormat:@"cameras/%@", cameraBuilder.cameraId] parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
+            
+            NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
+            NSLog( @"%@", JSON );
+            
+            if (r.statusCode == CODE_OK)
+            {
+                NSArray *jsonCameraArray = [JSON valueForKeyPath:@"cameras"];
+                NSDictionary *jsonCamera = [jsonCameraArray objectAtIndex:0];
+                EvercamCamera *camera = [[EvercamCamera alloc] initWithDictionary:jsonCamera];
+                if (block) {
+                    block(camera, nil);
+                }
+            }
+            else if (r.statusCode == CODE_UNAUTHORISED || r.statusCode == CODE_FORBIDDEN)
+            {
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : MSG_INVALID_AUTH };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(nil, error);
+                }
+            }
+            else if (r.statusCode == CODE_SERVER_ERROR)
+            {
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : MSG_SERVER_ERROR };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(nil, error);
+                }
+            }
+            else
+            {
+                NSString *message = [JSON valueForKeyPath:@"message"];
+                NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : message };
+                NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                      code:r.statusCode userInfo:errorDictionary];
+                if (block) {
+                    block(nil, error);
+                }
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (block) {
+                block(nil, error);
+            }
+        }];
+        
+        [task resume];
+    }
+}
+
 - (void)getSnapshotFromEvercam:(EvercamCamera *)camera withBlock:(void (^)(NSData *imgData, NSError *error))block {
     return [self getSnapshotFromCamId:camera.camId withBlock:block];
 }
@@ -229,4 +437,107 @@ static EvercamShell *instance = nil;
     }
 }
 
+#pragma mark - Model Functions
+- (void)getAllModelsByVendorId:(NSString *)vendorId withBlock:(void (^)(NSArray *models, NSError *error))block {
+    [self getAllModelsByVendorId:vendorId andLimit:100 andPage:0 andCurrentModelsArray:[NSMutableArray new] withBlock:block];
+}
+
+- (void)getAllModelsByVendorId:(NSString *)vendorId andLimit:(NSInteger)limit andPage:(NSInteger)page andCurrentModelsArray:(NSMutableArray *)currentModelsArray withBlock:(void (^)(NSArray *models, NSError *error))block {
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:vendorId, @"vendor_id",
+                                [NSString stringWithFormat:@"%d", limit], @"limit",
+                                [NSString stringWithFormat:@"%d", page], @"page",
+                                nil];
+    NSURLSessionDataTask *task= [[AFEvercamAPIClient sharedClient] GET:@"models" parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
+        
+        NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
+        NSLog( @"%@", JSON );
+        
+        if (r.statusCode == CODE_OK)
+        {
+            NSArray *jsonModelsArray = [JSON valueForKeyPath:@"models"];
+            NSMutableArray *modelsArray = [NSMutableArray  new];
+            for (NSDictionary *jsonModelDict in jsonModelsArray) {
+                EvercamModel *model = [[EvercamModel alloc] initWithDictionary:jsonModelDict];
+                [modelsArray addObject:model];
+            }
+            
+            NSInteger pageCount = 0;
+            if ([JSON valueForKey:@"pages"]) {
+                pageCount = [[JSON valueForKey:@"pages"] integerValue];
+            }
+            
+            [currentModelsArray addObjectsFromArray:modelsArray];
+            if (pageCount > 0 && page <= pageCount) {                
+                [self getAllModelsByVendorId:vendorId andLimit:limit andPage:page+1 andCurrentModelsArray:currentModelsArray withBlock:block];
+            } else {
+                if (block) {
+                    block(currentModelsArray, nil);
+                }
+            }
+        }
+        else
+        {
+            if (block) {
+                block(currentModelsArray, nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (block) {
+            block(currentModelsArray, nil);
+        }
+    }];
+    
+    [task resume];
+}
+
+#pragma mark - Vendor Functions
+- (void)getAllVendors:(void (^)(NSArray *vendors, NSError *error))block {
+    [self getVendors:@"vendors" withBlock:block];
+}
+
+- (void)getVendors:(NSString *)URLString withBlock:(void (^)(NSArray *vendors, NSError *error))block {
+    NSURLSessionDataTask *task= [[AFEvercamAPIClient sharedClient] GET:URLString parameters:nil success:^(NSURLSessionDataTask *task, id JSON) {
+        
+        NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
+        NSLog( @"%@", JSON );
+        
+        if (r.statusCode == CODE_OK)
+        {
+            NSArray *jsonVendorsArray = [JSON valueForKeyPath:@"vendors"];
+            NSMutableArray *vendorsArray = [NSMutableArray  new];
+            for (NSDictionary *jsonVendorDict in jsonVendorsArray) {
+                EvercamVendor *vendor = [[EvercamVendor alloc] initWithDictionary:jsonVendorDict];
+                [vendorsArray addObject:vendor];
+            }
+            if (block) {
+                block(vendorsArray, nil);
+            }
+        }
+        else if (r.statusCode == CODE_SERVER_ERROR)
+        {
+            NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : MSG_SERVER_ERROR };
+            NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                  code:r.statusCode userInfo:errorDictionary];
+            if (block) {
+                block(nil, error);
+            }
+        }
+        else
+        {
+            NSString *message = [JSON valueForKeyPath:@"message"];
+            NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : message };
+            NSError *error  = [NSError errorWithDomain:@"api.evercam.io"
+                                                  code:r.statusCode userInfo:errorDictionary];
+            if (block) {
+                block(nil, error);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (block) {
+            block(nil, error);
+        }
+    }];
+    
+    [task resume];
+}
 @end

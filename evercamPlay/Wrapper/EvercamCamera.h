@@ -38,5 +38,7 @@
 @property (nonatomic, assign) BOOL isOnline;
 
 - (id) initWithDictionary: (NSDictionary *)cameraDict;
+- (BOOL) isHikvision;
+- (NSString *)getJpgPath;
 @end
 

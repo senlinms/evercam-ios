@@ -36,7 +36,6 @@ static ImageCache *imageCache = nil;
     // Drawing code
 }
 
-
 - (void)dealloc {
     [connection cancel];
     [connection release];
@@ -75,7 +74,7 @@ static ImageCache *imageCache = nil;
     
 }
 
--(void)loadImageFromURL:(NSURL*)url {
+-(void)loadImageFromURL:(NSURL*)url withSpinny:(BOOL)hasSpinny {
     if (spinny != nil) {
         [spinny removeFromSuperview];
         spinny = nil;
@@ -108,14 +107,16 @@ static ImageCache *imageCache = nil;
     }else {
 	}
     
-    spinny = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    spinny.tag = SPINNY_TAG;
-    //spinny.center = self.center;
-	spinny.frame = CGRectMake(self.frame.size.width/2-spinny.frame.size.width/2, self.frame.size.height/2-spinny.frame.size.height/2, spinny.frame.size.width, spinny.frame.size.height); 
-    
-	[spinny startAnimating];
-    [self addSubview:spinny];
-    [spinny release];
+    if (hasSpinny) {
+        spinny = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        spinny.tag = SPINNY_TAG;
+        //spinny.center = self.center;
+        spinny.frame = CGRectMake(self.frame.size.width/2-spinny.frame.size.width/2, self.frame.size.height/2-spinny.frame.size.height/2, spinny.frame.size.width, spinny.frame.size.height);
+        
+        [spinny startAnimating];
+        [self addSubview:spinny];
+        [spinny release];
+    }
    
     NSURLRequest *request = [NSURLRequest requestWithURL:url 
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy 
