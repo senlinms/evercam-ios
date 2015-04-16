@@ -30,6 +30,8 @@
 @implementation AccountsViewController
 
 - (void)viewDidLoad {
+    self.screenName = @"Manage Accounts";
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.tableView registerNib:[UINib nibWithNibName:@"AccountCell" bundle:nil] forCellReuseIdentifier:@"AccountCell"];

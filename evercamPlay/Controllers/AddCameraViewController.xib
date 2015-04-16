@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddCameraViewController">
             <connections>
                 <outlet property="addButton" destination="q1l-d9-B6b" id="kP3-pg-o7a"/>
+                <outlet property="imageContainer" destination="EbD-MK-0ag" id="nsO-Ie-wwB"/>
+                <outlet property="imageView" destination="GS8-g7-9sJ" id="vZy-C5-tFs"/>
                 <outlet property="scrollView" destination="D2T-Gn-tAW" id="Euq-Uq-SnL"/>
                 <outlet property="tfExternalHost" destination="Bd2-3g-ndL" id="qeB-34-WgB"/>
                 <outlet property="tfExternalHttpPort" destination="ro0-vL-mtd" id="9bq-Xj-V3K"/>
@@ -275,7 +277,7 @@
                                             <rect key="frame" x="120" y="0.0" width="192" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="Ql5-xC-f6B"/>
                                             </connections>
@@ -359,7 +361,7 @@
                                             <rect key="frame" x="120" y="0.0" width="192" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="Zld-P5-V8d"/>
                                             </connections>
@@ -440,6 +442,39 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </scrollView>
+                <view hidden="YES" contentMode="scaleToFill" id="EbD-MK-0ag">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view alpha="0.80000001192092896" contentMode="scaleToFill" id="FTS-sg-Hn1">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="tBO-Wh-e6m">
+                            <rect key="frame" x="20" y="188" width="280" height="191"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GS8-g7-9sJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="150"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rd2-mZ-Co2">
+                                    <rect key="frame" x="0.0" y="150" width="280" height="41"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="OK">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="imageViewClose:" destination="-1" eventType="touchUpInside" id="pzc-Dl-twM"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
         </view>

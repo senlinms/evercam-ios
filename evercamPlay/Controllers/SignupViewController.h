@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NIDropDown.h"
+#import "GAI.h"
 
-@interface SignupViewController : UIViewController <NIDropDownDelegate>
+@interface SignupViewController : GAITrackedViewController <NIDropDownDelegate>
 
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 @property (nonatomic, strong) IBOutlet UITextField *txt_firstname;

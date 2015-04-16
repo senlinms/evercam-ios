@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		410747EF1ADC6D45004D10C9 /* BrowseJpgTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 410747EE1ADC6D45004D10C9 /* BrowseJpgTask.m */; };
+		410748731ADF6F3E004D10C9 /* RecordingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 410748711ADF6F3E004D10C9 /* RecordingsViewController.m */; };
+		410748741ADF6F3F004D10C9 /* RecordingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410748721ADF6F3E004D10C9 /* RecordingsViewController.xib */; };
+		410748781ADFDBE0004D10C9 /* btn_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 410748751ADFDBE0004D10C9 /* btn_pause.png */; };
+		410748791ADFDBE0004D10C9 /* btn_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 410748761ADFDBE0004D10C9 /* btn_play.png */; };
+		4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 410748771ADFDBE0004D10C9 /* btn_save.png */; };
+		4107487E1AE006AC004D10C9 /* SnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4107487C1AE006AC004D10C9 /* SnapshotViewController.m */; };
+		4107487F1AE006AC004D10C9 /* SnapshotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */; };
+		410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748841AE04DAB004D10C9 /* CoreTelephony.framework */; };
+		410748871AE04FD0004D10C9 /* BugSense-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748861AE04FD0004D10C9 /* BugSense-iOS.framework */; };
+		410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */; };
 		41208A351AD7244A009C4FC2 /* AppUser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41208A331AD7244A009C4FC2 /* AppUser.xcdatamodeld */; };
 		41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A3B1AD725CC009C4FC2 /* AppUser.m */; };
 		41208A441AD8482B009C4FC2 /* PreferenceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A431AD8482B009C4FC2 /* PreferenceUtil.m */; };
@@ -102,6 +112,7 @@
 		CB1C76D91AAB871A00680FE3 /* title_background.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76B11AAB871A00680FE3 /* title_background.png */; };
 		CB1C76FC1AAD834700680FE3 /* UILabel+ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76FB1AAD834700680FE3 /* UILabel+ActionSheet.m */; };
 		CB1C77151AAE1A4400680FE3 /* UIAlertController+NoBorderText.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C77141AAE1A4400680FE3 /* UIAlertController+NoBorderText.m */; };
+		CB40C5401AE06F9400113F32 /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB40C53F1AE06F9400113F32 /* GStreamer.framework */; };
 		CB44E83B1AAE9DD800A78C11 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8131AAE9DD800A78C11 /* AFHTTPRequestOperation.m */; };
 		CB44E83C1AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8151AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m */; };
 		CB44E83D1AAE9DD800A78C11 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8171AAE9DD800A78C11 /* AFURLConnectionOperation.m */; };
@@ -143,7 +154,6 @@
 		CB44E8861AAED4E700A78C11 /* EvercamShell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8851AAED4E700A78C11 /* EvercamShell.m */; };
 		CB44E8891AAED82000A78C11 /* AFEvercamAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */; };
 		CB44E88C1AAEDD2D00A78C11 /* EvercamApiKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */; };
-		CB66742E1ADCB9AD002B0117 /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB66742D1ADCB9AD002B0117 /* GStreamer.framework */; };
 		CB840D1B1ACAF36D00F289A9 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D161ACAF36D00F289A9 /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB840D1C1ACAF36D00F289A9 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D181ACAF36D00F289A9 /* ImageCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1A1ACAF36D00F289A9 /* ImageCacheObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -165,6 +175,28 @@
 /* Begin PBXFileReference section */
 		410747ED1ADC6D45004D10C9 /* BrowseJpgTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseJpgTask.h; sourceTree = "<group>"; };
 		410747EE1ADC6D45004D10C9 /* BrowseJpgTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseJpgTask.m; sourceTree = "<group>"; };
+		410748701ADF6F3E004D10C9 /* RecordingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingsViewController.h; sourceTree = "<group>"; };
+		410748711ADF6F3E004D10C9 /* RecordingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordingsViewController.m; sourceTree = "<group>"; };
+		410748721ADF6F3E004D10C9 /* RecordingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordingsViewController.xib; sourceTree = "<group>"; };
+		410748751ADFDBE0004D10C9 /* btn_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_pause.png; sourceTree = "<group>"; };
+		410748761ADFDBE0004D10C9 /* btn_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_play.png; sourceTree = "<group>"; };
+		410748771ADFDBE0004D10C9 /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
+		4107487B1AE006AC004D10C9 /* SnapshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotViewController.h; sourceTree = "<group>"; };
+		4107487C1AE006AC004D10C9 /* SnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotViewController.m; sourceTree = "<group>"; };
+		4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController.xib; sourceTree = "<group>"; };
+		410748841AE04DAB004D10C9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		410748861AE04FD0004D10C9 /* BugSense-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "BugSense-iOS.framework"; sourceTree = "<group>"; };
+		410748891AE052C8004D10C9 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		4107488A1AE052C8004D10C9 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		4107488B1AE052C8004D10C9 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		4107488C1AE052C8004D10C9 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		4107488D1AE052C8004D10C9 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		4107488E1AE052C8004D10C9 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		4107488F1AE052C8004D10C9 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		410748901AE052C8004D10C9 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		410748911AE052C8004D10C9 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		410748921AE052C8004D10C9 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		41208A341AD7244A009C4FC2 /* AppUser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppUser.xcdatamodel; sourceTree = "<group>"; };
 		41208A3A1AD725CC009C4FC2 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUser.h; sourceTree = "<group>"; };
 		41208A3B1AD725CC009C4FC2 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUser.m; sourceTree = "<group>"; };
@@ -294,6 +326,7 @@
 		CB1C76FB1AAD834700680FE3 /* UILabel+ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ActionSheet.m"; sourceTree = "<group>"; };
 		CB1C77131AAE1A4400680FE3 /* UIAlertController+NoBorderText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+NoBorderText.h"; sourceTree = "<group>"; };
 		CB1C77141AAE1A4400680FE3 /* UIAlertController+NoBorderText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+NoBorderText.m"; sourceTree = "<group>"; };
+		CB40C53F1AE06F9400113F32 /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
 		CB44E80D1AAE9DD800A78C11 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
 		CB44E8121AAE9DD800A78C11 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		CB44E8131AAE9DD800A78C11 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -367,7 +400,6 @@
 		CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEvercamAPIClient.m; sourceTree = "<group>"; };
 		CB44E88A1AAEDD2D00A78C11 /* EvercamApiKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamApiKeyPair.h; sourceTree = "<group>"; };
 		CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamApiKeyPair.m; sourceTree = "<group>"; };
-		CB66742D1ADCB9AD002B0117 /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
 		CB840D151ACAF36D00F289A9 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		CB840D161ACAF36D00F289A9 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		CB840D171ACAF36D00F289A9 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
@@ -386,8 +418,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */,
 				41208A491AD8A126009C4FC2 /* MessageUI.framework in Frameworks */,
 				41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */,
+				410748871AE04FD0004D10C9 /* BugSense-iOS.framework in Frameworks */,
 				41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */,
 				41BEFB771AD6DC0E0016ACCA /* AssetsLibrary.framework in Frameworks */,
 				41BEFB751AD6DC020016ACCA /* OpenGLES.framework in Frameworks */,
@@ -398,10 +432,11 @@
 				41BEFB6B1AD6DBB50016ACCA /* AVFoundation.framework in Frameworks */,
 				41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */,
 				41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */,
+				410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */,
+				CB40C5401AE06F9400113F32 /* GStreamer.framework in Frameworks */,
 				41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */,
 				41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */,
 				41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */,
-				CB66742E1ADCB9AD002B0117 /* GStreamer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +458,25 @@
 			);
 			path = Task;
 			sourceTree = "<group>";
+		};
+		410748881AE052C8004D10C9 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				410748891AE052C8004D10C9 /* GAI.h */,
+				4107488A1AE052C8004D10C9 /* GAIDictionaryBuilder.h */,
+				4107488B1AE052C8004D10C9 /* GAIEcommerceFields.h */,
+				4107488C1AE052C8004D10C9 /* GAIEcommerceProduct.h */,
+				4107488D1AE052C8004D10C9 /* GAIEcommerceProductAction.h */,
+				4107488E1AE052C8004D10C9 /* GAIEcommercePromotion.h */,
+				4107488F1AE052C8004D10C9 /* GAIFields.h */,
+				410748901AE052C8004D10C9 /* GAILogger.h */,
+				410748911AE052C8004D10C9 /* GAITrackedViewController.h */,
+				410748921AE052C8004D10C9 /* GAITracker.h */,
+				410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */,
+			);
+			name = GoogleAnalytics;
+			path = evercamPlay/GoogleAnalytics;
+			sourceTree = SOURCE_ROOT;
 		};
 		41208A391AD725CC009C4FC2 /* CoreData */ = {
 			isa = PBXGroup;
@@ -512,6 +566,9 @@
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB40C53F1AE06F9400113F32 /* GStreamer.framework */,
+				410748861AE04FD0004D10C9 /* BugSense-iOS.framework */,
+				410748841AE04DAB004D10C9 /* CoreTelephony.framework */,
 				41208A481AD8A126009C4FC2 /* MessageUI.framework */,
 				41BEFB781AD6DC180016ACCA /* QuartzCore.framework */,
 				41BEFB761AD6DC0E0016ACCA /* AssetsLibrary.framework */,
@@ -522,7 +579,6 @@
 				41BEFB6C1AD6DBD30016ACCA /* CoreMedia.framework */,
 				41BEFB6A1AD6DBB50016ACCA /* AVFoundation.framework */,
 				41BEFB681AD6DBAA0016ACCA /* CoreFoundation.framework */,
-				CB66742D1ADCB9AD002B0117 /* GStreamer.framework */,
 				41BEFB4B1AD6CE880016ACCA /* CoreGraphics.framework */,
 				41BEFB491AD6CE7F0016ACCA /* VideoToolbox.framework */,
 				41BEFB661AD6DB560016ACCA /* libresolv.dylib */,
@@ -633,6 +689,7 @@
 		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				410748881AE052C8004D10C9 /* GoogleAnalytics */,
 				413BB27E1AD992890083A5DC /* Reachability */,
 				41208A5E1AD97D44009C4FC2 /* SMTPAPI */,
 				41208A541AD97970009C4FC2 /* SendGrid */,
@@ -669,6 +726,9 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				410748751ADFDBE0004D10C9 /* btn_pause.png */,
+				410748761ADFDBE0004D10C9 /* btn_play.png */,
+				410748771ADFDBE0004D10C9 /* btn_save.png */,
 				CB1C768A1AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png */,
 				CB1C768B1AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png */,
 				CB1C768C1AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png */,
@@ -843,6 +903,9 @@
 				CB44E8521AAE9E7D00A78C11 /* CamerasViewController.h */,
 				CB44E8531AAE9E7D00A78C11 /* CamerasViewController.m */,
 				CB44E8541AAE9E7D00A78C11 /* CamerasViewController.xib */,
+				410748701ADF6F3E004D10C9 /* RecordingsViewController.h */,
+				410748711ADF6F3E004D10C9 /* RecordingsViewController.m */,
+				410748721ADF6F3E004D10C9 /* RecordingsViewController.xib */,
 				413BB2B21ADC10690083A5DC /* ViewCameraViewController.h */,
 				413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */,
 				413BB2B41ADC10690083A5DC /* ViewCameraViewController.xib */,
@@ -858,6 +921,9 @@
 				41BEFB3F1AD609A10016ACCA /* CameraPlayViewController.h */,
 				41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */,
 				41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */,
+				4107487B1AE006AC004D10C9 /* SnapshotViewController.h */,
+				4107487C1AE006AC004D10C9 /* SnapshotViewController.m */,
+				4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */,
 				CB44E8551AAE9E7D00A78C11 /* FeedbackViewController.h */,
 				CB44E8561AAE9E7D00A78C11 /* FeedbackViewController.m */,
 				CB44E8571AAE9E7D00A78C11 /* FeedbackViewController.xib */,
@@ -993,11 +1059,13 @@
 				CB1C76D01AAB871A00680FE3 /* ic_navigation_refresh.png in Resources */,
 				413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */,
 				CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */,
+				4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */,
 				CB1C76D71AAB871A00680FE3 /* play_page_intro.png in Resources */,
 				CB44E86F1AAE9E7D00A78C11 /* AccountsViewController.xib in Resources */,
 				CB44E87D1AAE9E7D00A78C11 /* WelcomeViewController.xib in Resources */,
 				CB44E87B1AAE9E7D00A78C11 /* SignupViewController.xib in Resources */,
 				CB1C76B31AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png in Resources */,
+				410748781ADFDBE0004D10C9 /* btn_pause.png in Resources */,
 				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				CB1C76D61AAB871A00680FE3 /* play_page_feature.png in Resources */,
 				41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */,
@@ -1013,6 +1081,7 @@
 				CB1C76C11AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png in Resources */,
 				CB1C76C41AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png in Resources */,
 				CB1C76CD1AAB871A00680FE3 /* ic_content_undo.png in Resources */,
+				410748741ADF6F3F004D10C9 /* RecordingsViewController.xib in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
 				CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */,
 				CB1C76B91AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png in Resources */,
@@ -1027,6 +1096,7 @@
 				CB1C76CF1AAB871A00680FE3 /* ic_navigation_cancel.png in Resources */,
 				CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */,
 				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
+				410748791ADFDBE0004D10C9 /* btn_play.png in Resources */,
 				CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */,
 				CB1C76C81AAB871A00680FE3 /* ic_action_overflow.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
@@ -1035,6 +1105,7 @@
 				CB1C76CC1AAB871A00680FE3 /* ic_clock.png in Resources */,
 				CB44E8791AAE9E7D00A78C11 /* SettingsViewController.xib in Resources */,
 				CB1C76B51AAB871A00680FE3 /* btn_radio_off_holo_dark.png in Resources */,
+				4107487F1AE006AC004D10C9 /* SnapshotViewController.xib in Resources */,
 				CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */,
 				CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */,
 				CB1C76C21AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png in Resources */,
@@ -1067,6 +1138,7 @@
 				CB44E8481AAE9DD800A78C11 /* UIImageView+AFNetworking.m in Sources */,
 				413BB2A91ADB03AE0083A5DC /* EvercamCameraBuilder.m in Sources */,
 				CB01CDB71ABE057E00420CE1 /* EvercamCameraUtil.m in Sources */,
+				410748731ADF6F3E004D10C9 /* RecordingsViewController.m in Sources */,
 				413BB2B51ADC10690083A5DC /* ViewCameraViewController.m in Sources */,
 				CB44E8891AAED82000A78C11 /* AFEvercamAPIClient.m in Sources */,
 				41BEFB5D1AD6D0630016ACCA /* gst-launch-remote.c in Sources */,
@@ -1126,6 +1198,7 @@
 				CB44E8701AAE9E7D00A78C11 /* CamerasViewController.m in Sources */,
 				CB44E83B1AAE9DD800A78C11 /* AFHTTPRequestOperation.m in Sources */,
 				CB44E86E1AAE9E7D00A78C11 /* AccountsViewController.m in Sources */,
+				4107487E1AE006AC004D10C9 /* SnapshotViewController.m in Sources */,
 				CB44E8451AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
 				41208A5C1AD97971009C4FC2 /* SendGridEmail.m in Sources */,
@@ -1260,6 +1333,10 @@
 				);
 				INFOPLIST_FILE = evercamPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/evercamPlay/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1283,6 +1360,10 @@
 				);
 				INFOPLIST_FILE = evercamPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/evercamPlay/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

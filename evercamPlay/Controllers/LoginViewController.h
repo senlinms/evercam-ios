@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAI.h"
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : GAITrackedViewController
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 @property (nonatomic, strong) IBOutlet UITextField *txt_username;
 @property (nonatomic, strong) IBOutlet UITextField *txt_password;

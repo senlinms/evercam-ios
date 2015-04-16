@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAI.h"
 
-@interface WelcomeViewController : UIViewController
+@interface WelcomeViewController : GAITrackedViewController
 
 @property (nonatomic, strong) IBOutlet UIView *tutorialView;
 @property (nonatomic, strong) IBOutlet UIScrollView *tutorialScrollView;

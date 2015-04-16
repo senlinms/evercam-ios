@@ -18,6 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.screenName = @"Cameras Preferences";
+    
     // Do any additional setup after loading the view from its nib.
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.tableView.bounds;

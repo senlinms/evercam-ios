@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EvercamCamera.h"
+#import "GAI.h"
 
 @protocol ViewCameraViewControllerDelegate <NSObject>
 
@@ -15,7 +16,7 @@
 
 @end
 
-@interface ViewCameraViewController : UIViewController
+@interface ViewCameraViewController : GAITrackedViewController
 
 @property (nonatomic, strong) EvercamCamera *camera;
 

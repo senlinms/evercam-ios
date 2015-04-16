@@ -27,6 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.screenName = @"Login";
     // Do any additional setup after loading the view from its nib.
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = _contentView.bounds;
@@ -158,7 +160,10 @@
                     rearNavigationController.navigationBarHidden = YES;
                     
                     SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
-                    [self.navigationController pushViewController:revealController animated:YES];
+                    NSMutableArray *vcArr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+                    [vcArr removeLastObject];
+                    [vcArr addObject:revealController];
+                    [self.navigationController setViewControllers:vcArr animated:YES];
 
                 } else {
                     NSLog(@"Error %li: %@", (long)error.code, error.description);

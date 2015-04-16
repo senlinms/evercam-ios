@@ -29,6 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.screenName = @"View Camera Detail";
+    
     [self fillCameraDetails];
 }
 
@@ -141,7 +143,7 @@
 }
 
 #pragma mark - AddCameraViewController Delegate Method
-- (void)cameraAdded:(EvercamCamera *)camera;
+- (void)cameraAdded:(EvercamCamera *)camera
 {
     
 }

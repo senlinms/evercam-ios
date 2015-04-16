@@ -11,5 +11,7 @@
 @interface CommonUtil : NSObject
 
 + (NSData *)getDrawable:(NSString *)url;
++ (NSString *)uuidString;
++ (NSArray *)snapshotFiles:(NSString *)cameraId;
 
 @end

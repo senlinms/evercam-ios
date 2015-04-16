@@ -17,6 +17,10 @@
 @interface FeedbackViewController () <MFMailComposeViewControllerDelegate>
 {
     UITextField *activeTextField;
+    
+    __weak IBOutlet UIButton *btnCameraBack1;
+    __weak IBOutlet UIButton *btnCameraBack2;
+    __weak IBOutlet UIButton *btnBack;
 }
 @end
 
@@ -24,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.screenName = @"Feedback Page";
     // Do any additional setup after loading the view from its nib.
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.contentView.bounds;
@@ -50,11 +56,21 @@
         self.txt_username.text = [NSString stringWithFormat:@"%@ %@", [APP_DELEGATE defaultUser].firstName, [APP_DELEGATE defaultUser].lastName];
         self.txt_email.text = [APP_DELEGATE defaultUser].email;
     }
+    
+    if (self.cameraID) {
+        btnBack.hidden = YES;
+        btnCameraBack1.hidden = NO;
+        btnCameraBack2.hidden = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)back:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onSend:(id)sender
@@ -82,13 +98,17 @@
     SendGridEmail *email = [[SendGridEmail alloc] init];
     email.to = @"play@evercam.io";
     email.from = userEmail;
-    email.subject = @"Evercam Play Feedback";
-    email.html = [NSString stringWithFormat:@"%@ says: <br><br>%@<br><br>Version: %@<br>Device: %@<br>Network: %@",
+    email.subject = @"Evercam Play Feedback - iOS";
+    email.html = [NSString stringWithFormat:@"%@ says: <br><br>%@<br><br>App Version: %@<br>Device: %@<br>iOS Version: %@<br>Network: %@",
                   fullName,
                   feedback,
                   version,
                   [UIDevice currentDevice].name,
+                  [UIDevice currentDevice].systemVersion,
                   [NetworkUtil getNetworkString]];
+    if (self.cameraID) {
+        email.html = [email.html stringByAppendingFormat:@"<br>Camera ID: %@", self.cameraID];
+    }
     
     [sendgrid sendWithWeb:email];
 

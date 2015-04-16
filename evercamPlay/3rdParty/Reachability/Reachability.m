@@ -170,6 +170,26 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	return returnValue;
 }
 
++ (instancetype)reachabilityForServer:(NSString *)ipAddress andPort:(NSInteger)port {
+    struct sockaddr_in localWifiAddress;
+    bzero(&localWifiAddress, sizeof(localWifiAddress));
+    localWifiAddress.sin_len = sizeof(localWifiAddress);
+    localWifiAddress.sin_family = AF_INET;
+    
+    localWifiAddress.sin_addr.s_addr = inet_addr([ipAddress UTF8String]);
+    if (port > 0) {
+        localWifiAddress.sin_port = htons(port);
+    }
+    
+    Reachability* returnValue = [self reachabilityWithAddress: &localWifiAddress];
+    if (returnValue != NULL)
+    {
+        returnValue->_alwaysReturnLocalWiFiStatus = YES;
+    }
+    
+    return returnValue;
+}
+
 
 #pragma mark - Start and stop notifier
 

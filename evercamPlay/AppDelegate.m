@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "WelcomeViewController.h"
 #import "AppUser.h"
+#import <BugSense-iOS/BugSenseController.h>
+#import "GAI.h"
 
 @interface AppDelegate ()
 
@@ -28,6 +30,12 @@
     self.viewController.isPortraitMode = true;
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    [BugSenseController sharedControllerWithBugSenseAPIKey:@"32ba4ee6"];
+    
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [GAI sharedInstance].dispatchInterval = 20;
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-52483995-1"];
     
     return YES;
 }

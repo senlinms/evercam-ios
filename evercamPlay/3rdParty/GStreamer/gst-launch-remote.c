@@ -319,8 +319,8 @@ update_position_cb (GstLaunchRemote * self)
     duration = MAX (duration, 0);
   }
 
-  self->app_context.set_current_position ((guint)(position / GST_MSECOND),
-      (guint)(duration / GST_MSECOND), self->app_context.app);
+  self->app_context.set_current_position ((gint)position / GST_MSECOND,
+      (gint)duration / GST_MSECOND, self->app_context.app);
 
   return TRUE;
 }

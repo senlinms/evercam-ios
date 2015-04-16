@@ -11,5 +11,6 @@
 @interface NetworkUtil : NSObject
 
 + (NSString *)getNetworkString;
+BOOL isPortReachable(NSString *url, NSInteger port);
 
 @end
