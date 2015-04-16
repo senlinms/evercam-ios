@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EvercamCamera.h"
+#import "GAI.h"
 
 @protocol AddCameraViewControllerDelegate <NSObject>
 
@@ -16,7 +17,7 @@
 
 @end
 
-@interface AddCameraViewController : UIViewController
+@interface AddCameraViewController : GAITrackedViewController
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *tfID;

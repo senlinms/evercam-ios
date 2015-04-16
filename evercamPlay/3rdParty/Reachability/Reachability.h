@@ -82,6 +82,8 @@ extern NSString *kReachabilityChangedNotification;
  */
 + (instancetype)reachabilityForLocalWiFi;
 
++ (instancetype)reachabilityForServer:(NSString *)ipAddress andPort:(NSInteger)port;
+
 /*!
  * Start listening for reachability notifications on the current run loop.
  */

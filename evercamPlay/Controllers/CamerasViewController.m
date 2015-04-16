@@ -54,6 +54,8 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    
+    self.screenName = @"Camera Grid View";
 	
     cameraArray = [[NSMutableArray alloc] initWithCapacity:0];
 

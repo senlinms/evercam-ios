@@ -6,6 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedbackViewController">
             <connections>
+                <outlet property="btnBack" destination="YcE-26-gnE" id="HG6-8r-IcC"/>
+                <outlet property="btnCameraBack1" destination="7XU-2U-SbN" id="scV-h5-4si"/>
+                <outlet property="btnCameraBack2" destination="UI0-0f-yI2" id="r7c-ML-2P8"/>
                 <outlet property="btnMenu" destination="YcE-26-gnE" id="ChD-oi-nFU"/>
                 <outlet property="contentView" destination="oVs-In-LFT" id="ggo-9B-cIn"/>
                 <outlet property="txt_email" destination="h2m-78-DL8" id="LhF-ey-ALr"/>
@@ -32,6 +35,27 @@
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XU-2U-SbN">
+                            <rect key="frame" x="22" y="10" width="30" height="30"/>
+                            <state key="normal" backgroundImage="evercam_icon.png">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="e6F-5W-dux"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UI0-0f-yI2">
+                            <rect key="frame" x="13" y="8" width="13" height="30"/>
+                            <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
+                            <state key="normal" title="&lt;">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="6dP-U3-v6w"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CE2-ca-fle">
                             <rect key="frame" x="118" y="15" width="85" height="21"/>

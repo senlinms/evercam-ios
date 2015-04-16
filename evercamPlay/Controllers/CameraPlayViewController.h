@@ -10,6 +10,7 @@
 #import "AsyncImageView.h"
 #import "EvercamCamera.h"
 #import "EaglUIView.h"
+#import "GAI.h"
 
 @protocol CameraPlayViewControllerDelegate <NSObject>
 
@@ -18,7 +19,7 @@
 
 @end
 
-@interface CameraPlayViewController : UIViewController {
+@interface CameraPlayViewController : GAITrackedViewController {
     IBOutlet EaglUIView *video_view;
 }
 

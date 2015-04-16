@@ -16,9 +16,13 @@
 #import "EvercamShell.h"
 #import "MBProgressHUD.h"
 #import "CommonUtil.h"
+#import "Reachability.h"
+#import "NetworkUtil.h"
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *imageContainer;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (strong, nonatomic) UITextField *focusedTextField;
@@ -31,6 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.screenName = @"Add/Edit Camera";
     
     [self.scrollView setContentSize:CGSizeMake(0, 655)];
     
@@ -50,11 +56,88 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)imageViewClose:(id)sender {
+    self.imageContainer.hidden = YES;
+}
+
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)test:(id)sender {
+    if (self.tfExternalHost.text.length == 0) {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle: nil
+                                      message:@"Please specify an external IP address."
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    if (self.tfExternalHttpPort.text.length == 0) {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle: nil
+                                      message:@"Please specify either an external HTTP port."
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        BOOL reachable = isPortReachable(self.tfExternalHost.text, [self.tfExternalHttpPort.text integerValue]);
+        [self performSelectorOnMainThread:@selector(isPortReachableDone:) withObject:[NSNumber numberWithBool:reachable] waitUntilDone:YES];
+    });
+}
+
+- (void)isPortReachableDone:(BOOL)reachable {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
+    if (!reachable) {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle: nil
+                                      message:@"The IP address provided is not reachable at the port provided."
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    NSString *jpgUrl = [self buildJpgUrlWithSlash:self.tfSnapshot.text];
+    NSString *externalFullUrl = [self buildFullHttpUrl:self.tfExternalHost.text andPort:[self.tfExternalHttpPort.text integerValue]  andJpgUrl:jpgUrl withUsername:self.tfUsername.text andPassword:self.tfPassword.text];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        NSData *imgData = [CommonUtil getDrawable:externalFullUrl];
+        [self performSelectorOnMainThread:@selector(showImageView:) withObject:imgData waitUntilDone:YES];
+    });
+ 
 }
 
 - (IBAction)add:(id)sender {
@@ -517,8 +600,14 @@
 - (NSString *)buildFullHttpUrl:(NSString *)host andPort:(NSInteger)port andJpgUrl:(NSString *)jpgUrl withUsername:(NSString *)username andPassword:(NSString *)password
 {
     if (port == 0) {
+        if (username.length == 0) {
+            return [NSString stringWithFormat:@"http://%@:80%@", host, jpgUrl];
+        }
         return [NSString stringWithFormat:@"http://%@:%@@%@:80%@", username, password, host, jpgUrl];
     } else {
+        if (username.length == 0) {
+            return [NSString stringWithFormat:@"http://%@:%d%@", host, port, jpgUrl];
+        }
         return [NSString stringWithFormat:@"http://%@:%@@%@:%d%@", username, password, host, port, jpgUrl];
     }
 }
@@ -613,6 +702,29 @@
             return;
         }
     }];
+}
+
+- (void)showImageView:(NSData *)imageData {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    if (imageData) {
+        self.imageContainer.hidden = NO;
+        self.imageView.image = [UIImage imageWithData:imageData];
+    } else {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle: nil
+                                      message:@"The port and URL are open but we can't seem to connect. Check that the username and password are correct and the snapshot ending"
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 @end

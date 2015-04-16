@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAI.h"
 
-@interface FeedbackViewController : UIViewController
+@interface FeedbackViewController : GAITrackedViewController
+
+@property (nonatomic, strong) NSString *cameraID;
+
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 @property (nonatomic, strong) IBOutlet UITextField *txt_username;
 @property (nonatomic, strong) IBOutlet UITextField *txt_email;

@@ -28,6 +28,7 @@
 -(AppUser *)userWithName:(NSString *)username;
 -(void)deleteUser:(AppUser *)user;
 -(NSMutableArray *)allUserList;
+- (NSURL *)applicationDocumentsDirectory;
 
 - (void)logout;
 

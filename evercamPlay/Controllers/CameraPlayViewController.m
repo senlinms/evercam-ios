@@ -15,6 +15,10 @@
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import "BrowseJpgTask.h"
+#import "RecordingsViewController.h"
+#import "FeedbackViewController.h"
+#import "SnapshotViewController.h"
+#import "CommonUtil.h"
 
 @interface CameraPlayViewController () <ViewCameraViewControllerDelegate> {
     GstLaunchRemote *launch;
@@ -22,6 +26,14 @@
     int media_height;
     Boolean dragging_slider;
     BrowseJpgTask *browseJpgTask;
+    BOOL isPlaying;
+    
+    __weak IBOutlet UIButton *playOrPauseButton;
+    __weak IBOutlet UIView *videoController;
+    __weak IBOutlet UIButton *saveButton;
+    
+    __weak IBOutlet UIView *snapshotConfirmView;
+    __weak IBOutlet UIImageView *imvSnapshot;
 }
 
 @end
@@ -54,6 +66,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.screenName = @"Video View";
     
     self.lblName.text = self.cameraInfo.name;
     [self playCamera];
@@ -90,6 +104,43 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
 }
 
+- (void)takeSnapshot {
+    BOOL isDir;
+    NSURL *documentsDirectory = [APP_DELEGATE applicationDocumentsDirectory];
+    NSURL *snapshotDir = [documentsDirectory URLByAppendingPathComponent:self.cameraInfo.camId];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:snapshotDir.path isDirectory:&isDir]) {
+        [[NSFileManager defaultManager] createDirectoryAtURL:snapshotDir withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSURL *snapshotFileURL = [snapshotDir URLByAppendingPathComponent:[CommonUtil uuidString]];
+    
+    NSData *imgData = UIImageJPEGRepresentation(imvSnapshot.image, 1);
+    [imgData writeToURL:snapshotFileURL atomically:YES];
+}
+
+- (void)showSnapshotView {
+    [snapshotConfirmView setHidden:NO];
+    
+    if (self.imageView.hidden) {
+        CGRect rect = [video_view bounds];
+        UIGraphicsBeginImageContext(rect.size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        [video_view.layer renderInContext:context];
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        imvSnapshot.image = img;
+    } else {
+        if (self.imageView.image) {
+            imvSnapshot.image = self.imageView.image;
+        } else {
+            [snapshotConfirmView setHidden:YES];
+        }
+    }
+}
+
+- (void)hideSnapshotView {
+    [snapshotConfirmView setHidden:YES];
+}
+
 - (void)showCameraView {
     ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:@"ViewCameraViewController" bundle:nil];
     viewCameraVC.camera = self.cameraInfo;
@@ -98,6 +149,57 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     viewCamNavVC.navigationBarHidden = YES;
     viewCamNavVC.isPortraitMode = YES;
     [self presentViewController:viewCamNavVC animated:YES completion:nil];
+}
+
+- (void)sendFeedback {
+    FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:@"FeedbackViewController" bundle:nil];
+    feedbackVC.cameraID = self.cameraInfo.camId;
+
+    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:feedbackVC];
+    navVC.isPortraitMode = YES;
+    navVC.navigationBarHidden = YES;
+
+    [self.navigationController presentViewController:navVC animated:YES completion:nil];
+}
+
+- (void)showSavedImages {
+    if ([CommonUtil snapshotFiles:self.cameraInfo.camId].count == 0) {
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle: nil
+                                      message:@"No snapshot saved for this camera."
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    SnapshotViewController *snapshotVC = [[SnapshotViewController alloc] initWithNibName:@"SnapshotViewController" bundle:nil];
+    snapshotVC.cameraId = self.cameraInfo.camId;
+    CustomNavigationController *viewCamNavVC = [[CustomNavigationController alloc] initWithRootViewController:snapshotVC];
+    viewCamNavVC.navigationBarHidden = YES;
+    viewCamNavVC.isPortraitMode = YES;
+    [self presentViewController:viewCamNavVC animated:YES completion:nil];
+}
+
+- (void)viewRecordings {
+    RecordingsViewController *recordingsVC = [[RecordingsViewController alloc] initWithNibName:@"RecordingsViewController" bundle:nil];
+    recordingsVC.cameraId = self.cameraInfo.camId;
+    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:recordingsVC];
+    navVC.isPortraitMode = YES;
+    navVC.navigationBarHidden = YES;
+    
+    [self.navigationController presentViewController:navVC animated:YES completion:nil];
+}
+
+- (void)hideVideoController {
+    videoController.hidden = YES;
 }
 
 - (void)deleteCamera {
@@ -204,6 +306,43 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
 }
 
+- (IBAction)playOrPause:(id)sender {
+    if (isPlaying) {
+        [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_play.png"] forState:UIControlStateNormal];
+        [self stopCamera];
+    } else {
+        [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_pause.png"] forState:UIControlStateNormal];
+        [self playCamera];
+    }
+}
+- (IBAction)handleSingleTap:(id)sender {
+    if (![self.cameraInfo isOnline]) {
+        return;
+    }
+    
+    if (videoController.hidden) {
+        videoController.hidden = NO;
+        
+        [self performSelector:@selector(hideVideoController) withObject:nil afterDelay:5];
+    } else {
+        videoController.hidden = YES;
+    }
+}
+
+- (IBAction)snapshotCancel:(id)sender {
+    [self hideSnapshotView];
+}
+
+- (IBAction)save:(id)sender {
+    videoController.hidden = YES;
+    [self showSnapshotView];
+}
+
+- (IBAction)snapshotSave:(id)sender {
+    [self hideSnapshotView];
+    [self takeSnapshot];
+}
+
 - (IBAction)action:(id)sender {
     UIAlertController * view=   [UIAlertController
                                  alertControllerWithTitle:nil
@@ -234,6 +373,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                    style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * action)
                                    {
+                                       [self showSavedImages];
                                        [view dismissViewControllerAnimated:YES completion:nil];
                                        
                                    }];
@@ -244,17 +384,18 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                      handler:^(UIAlertAction * action)
                                      {
                                          [view dismissViewControllerAnimated:YES completion:nil];
+                                         [self viewRecordings];
                                          
                                      }];
 
-    UIAlertAction* localStorage = [UIAlertAction
-                                   actionWithTitle:@"Local Storage"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * action)
-                                   {
-                                       [view dismissViewControllerAnimated:YES completion:nil];
-                                       
-                                   }];
+//    UIAlertAction* localStorage = [UIAlertAction
+//                                   actionWithTitle:@"Local Storage"
+//                                   style:UIAlertActionStyleDefault
+//                                   handler:^(UIAlertAction * action)
+//                                   {
+//                                       [view dismissViewControllerAnimated:YES completion:nil];
+//                                       
+//                                   }];
 
 
     
@@ -264,6 +405,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                    handler:^(UIAlertAction * action)
                                    {
                                        [view dismissViewControllerAnimated:YES completion:nil];
+                                       [self sendFeedback];
                                        
                                    }];
 
@@ -280,9 +422,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [view addAction:removeCamera];
     [view addAction:savedImages];
     [view addAction:viewRecordings];
-    if (self.cameraInfo.isHikvision && self.cameraInfo.hasCredentials) {
-        [view addAction:localStorage];
-    }
+//    if (self.cameraInfo.isHikvision && self.cameraInfo.hasCredentials) {
+//        [view addAction:localStorage];
+//    }
     [view addAction:sendFeedback];
     [view addAction:cancel];
     
@@ -304,6 +446,26 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     } else {
         self.lblOffline.hidden = NO;
         self.imageView.hidden = YES;
+    }
+    
+    isPlaying = YES;
+}
+
+- (void)stopCamera {
+    isPlaying = NO;
+    
+    if ([self.cameraInfo isOnline]) {
+        if (launch)
+        {
+            gst_launch_remote_free(launch);
+        }
+        
+        if (browseJpgTask) {
+            [browseJpgTask stop];
+            browseJpgTask = nil;
+        }
+    } else {
+        return;
     }
 }
 
