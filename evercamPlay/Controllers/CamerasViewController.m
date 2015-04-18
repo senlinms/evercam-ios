@@ -145,6 +145,7 @@
         if (error == nil)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [AsyncImageView releaseCacheMemory];
                 cameraArray = [NSMutableArray arrayWithArray:cameras];
                 [self.camerasView reloadData];
             });
@@ -205,11 +206,21 @@
     
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
     cell.titleLabel.text = cameraInfo.name;
-    [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:YES];
+    
+    cell.thumbnailImageView.offlineImage = [UIImage imageNamed:@"cam_unavailable.png"];
     if (cameraInfo.isOnline) {
         cell.imvOffline.hidden = YES;
+        [cell.thumbnailImageView setImage:nil];
+        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]] withSpinny:NO];
     } else {
         cell.imvOffline.hidden = NO;
+        [cell.thumbnailImageView setImage:nil];
+        if (cameraInfo.thumbnailUrl && cameraInfo.thumbnailUrl.length > 0) {
+            [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:NO];
+        } else {
+            cell.imvOffline.hidden = YES;
+            [cell.thumbnailImageView displayImage:cell.thumbnailImageView.offlineImage];
+        }
     }
     
     return cell;
@@ -250,6 +261,7 @@
     CameraPlayViewController *cameraPlayVC = [[CameraPlayViewController alloc] initWithNibName:@"CameraPlayViewController" bundle:nil];
     [cameraPlayVC setDelegate:self];
     cameraPlayVC.cameraInfo = camera;
+    cameraPlayVC.cameras = cameraArray;
     
     CustomNavigationController *cameraPlayNavVC = [[CustomNavigationController alloc] initWithRootViewController:cameraPlayVC];
     if ([PreferenceUtil isForceLandscape]) {

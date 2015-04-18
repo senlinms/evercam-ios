@@ -11,6 +11,7 @@
 #import "EvercamCamera.h"
 #import "EaglUIView.h"
 #import "GAI.h"
+#import "NIDropdown.h"
 
 @protocol CameraPlayViewControllerDelegate <NSObject>
 
@@ -19,15 +20,16 @@
 
 @end
 
-@interface CameraPlayViewController : GAITrackedViewController {
+@interface CameraPlayViewController : GAITrackedViewController<NIDropDownDelegate> {
     IBOutlet EaglUIView *video_view;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *btnTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblOffline;
 @property (weak, nonatomic) IBOutlet AsyncImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *lblName;
 
 @property (nonatomic, strong) EvercamCamera *cameraInfo;
+@property (nonatomic, strong) NSArray *cameras;
 
 @property (nonatomic, strong) id<CameraPlayViewControllerDelegate> delegate;
 

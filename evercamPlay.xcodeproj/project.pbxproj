@@ -18,6 +18,8 @@
 		410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748841AE04DAB004D10C9 /* CoreTelephony.framework */; };
 		410748871AE04FD0004D10C9 /* BugSense-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748861AE04FD0004D10C9 /* BugSense-iOS.framework */; };
 		410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */; };
+		410A13B31AE230A9008CA21C /* icon_online.png in Resources */ = {isa = PBXBuildFile; fileRef = 410A13B21AE230A9008CA21C /* icon_online.png */; };
+		410A13B51AE232D5008CA21C /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 410A13B41AE232D5008CA21C /* dropdown.png */; };
 		41208A351AD7244A009C4FC2 /* AppUser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41208A331AD7244A009C4FC2 /* AppUser.xcdatamodeld */; };
 		41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A3B1AD725CC009C4FC2 /* AppUser.m */; };
 		41208A441AD8482B009C4FC2 /* PreferenceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A431AD8482B009C4FC2 /* PreferenceUtil.m */; };
@@ -112,7 +114,6 @@
 		CB1C76D91AAB871A00680FE3 /* title_background.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76B11AAB871A00680FE3 /* title_background.png */; };
 		CB1C76FC1AAD834700680FE3 /* UILabel+ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76FB1AAD834700680FE3 /* UILabel+ActionSheet.m */; };
 		CB1C77151AAE1A4400680FE3 /* UIAlertController+NoBorderText.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C77141AAE1A4400680FE3 /* UIAlertController+NoBorderText.m */; };
-		CB40C5401AE06F9400113F32 /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB40C53F1AE06F9400113F32 /* GStreamer.framework */; };
 		CB44E83B1AAE9DD800A78C11 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8131AAE9DD800A78C11 /* AFHTTPRequestOperation.m */; };
 		CB44E83C1AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8151AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m */; };
 		CB44E83D1AAE9DD800A78C11 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8171AAE9DD800A78C11 /* AFURLConnectionOperation.m */; };
@@ -160,6 +161,7 @@
 		CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */; };
 		CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB840D201ACAF38900F289A9 /* CameraViewCell.xib */; };
 		CB92361D1AB2DABF0031E23A /* EvercamUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB92361C1AB2DABF0031E23A /* EvercamUser.m */; };
+		CBCC13C41AE24BCD0066D62C /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBCC13C31AE24BCD0066D62C /* GStreamer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +199,8 @@
 		410748911AE052C8004D10C9 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		410748921AE052C8004D10C9 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		410A13B21AE230A9008CA21C /* icon_online.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_online.png; sourceTree = "<group>"; };
+		410A13B41AE232D5008CA21C /* dropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdown.png; sourceTree = "<group>"; };
 		41208A341AD7244A009C4FC2 /* AppUser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppUser.xcdatamodel; sourceTree = "<group>"; };
 		41208A3A1AD725CC009C4FC2 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUser.h; sourceTree = "<group>"; };
 		41208A3B1AD725CC009C4FC2 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUser.m; sourceTree = "<group>"; };
@@ -326,7 +330,6 @@
 		CB1C76FB1AAD834700680FE3 /* UILabel+ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ActionSheet.m"; sourceTree = "<group>"; };
 		CB1C77131AAE1A4400680FE3 /* UIAlertController+NoBorderText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+NoBorderText.h"; sourceTree = "<group>"; };
 		CB1C77141AAE1A4400680FE3 /* UIAlertController+NoBorderText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+NoBorderText.m"; sourceTree = "<group>"; };
-		CB40C53F1AE06F9400113F32 /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
 		CB44E80D1AAE9DD800A78C11 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
 		CB44E8121AAE9DD800A78C11 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		CB44E8131AAE9DD800A78C11 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -411,6 +414,7 @@
 		CB840D201ACAF38900F289A9 /* CameraViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewCell.xib; sourceTree = "<group>"; };
 		CB92361B1AB2DABF0031E23A /* EvercamUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamUser.h; sourceTree = "<group>"; };
 		CB92361C1AB2DABF0031E23A /* EvercamUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUser.m; sourceTree = "<group>"; };
+		CBCC13C31AE24BCD0066D62C /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -433,7 +437,7 @@
 				41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */,
 				41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */,
 				410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */,
-				CB40C5401AE06F9400113F32 /* GStreamer.framework in Frameworks */,
+				CBCC13C41AE24BCD0066D62C /* GStreamer.framework in Frameworks */,
 				41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */,
 				41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */,
 				41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */,
@@ -566,7 +570,7 @@
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CB40C53F1AE06F9400113F32 /* GStreamer.framework */,
+				CBCC13C31AE24BCD0066D62C /* GStreamer.framework */,
 				410748861AE04FD0004D10C9 /* BugSense-iOS.framework */,
 				410748841AE04DAB004D10C9 /* CoreTelephony.framework */,
 				41208A481AD8A126009C4FC2 /* MessageUI.framework */,
@@ -742,6 +746,7 @@
 				CB1C76941AAB871A00680FE3 /* cam_unavailable.png */,
 				CB1C76951AAB871A00680FE3 /* dot_off_red.png */,
 				CB1C76961AAB871A00680FE3 /* dot_on_red.png */,
+				410A13B41AE232D5008CA21C /* dropdown.png */,
 				CB1C76991AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png */,
 				CB1C769A1AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png */,
 				CB1C769B1AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png */,
@@ -761,6 +766,7 @@
 				CB1C76A91AAB871A00680FE3 /* ic_person.png */,
 				CB1C76AA1AAB871A00680FE3 /* evercam_icon.png */,
 				CB1C76AD1AAB871A00680FE3 /* icon_gallery.png */,
+				410A13B21AE230A9008CA21C /* icon_online.png */,
 				41BEFB7C1AD708730016ACCA /* icon_offline.png */,
 				CB1C76AE1AAB871A00680FE3 /* play_page_feature.png */,
 				CB1C76AF1AAB871A00680FE3 /* play_page_intro.png */,
@@ -1068,6 +1074,7 @@
 				410748781ADFDBE0004D10C9 /* btn_pause.png in Resources */,
 				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				CB1C76D61AAB871A00680FE3 /* play_page_feature.png in Resources */,
+				410A13B31AE230A9008CA21C /* icon_online.png in Resources */,
 				41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */,
 				CB1C76BE1AAB871A00680FE3 /* dot_on_red.png in Resources */,
 				CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */,
@@ -1098,6 +1105,7 @@
 				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
 				410748791ADFDBE0004D10C9 /* btn_play.png in Resources */,
 				CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */,
+				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
 				CB1C76C81AAB871A00680FE3 /* ic_action_overflow.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
 				CB1C76C61AAB871A00680FE3 /* hikvision.png in Resources */,
@@ -1371,7 +1379,6 @@
 		CB1C76751AAB144900680FE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1391,7 +1398,6 @@
 		CB1C76761AAB144900680FE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

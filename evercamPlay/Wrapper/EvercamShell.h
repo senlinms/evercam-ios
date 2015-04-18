@@ -33,6 +33,7 @@
 - (void)deleteCamera:(NSString *)cameraId withBlock:(void (^)(BOOL success, NSError *error))block;
 - (void)deleteShareCamera:(NSString *)cameraId andUserId:(NSNumber *)userId withBlock:(void (^)(BOOL success, NSError *error))block;
 - (void)patchCamera:(EvercamCameraBuilder *)cameraBuilder withBlock:(void (^)(EvercamCamera *camera, NSError *error))block ;
+- (NSString *)getSnapshotLink:(NSString *)cameraID;
 - (void)getSnapshotFromEvercam:(EvercamCamera *)camera withBlock:(void (^)(NSData *imgData, NSError *error))block;
 - (void)getSnapshotFromCamId:(NSString *)cameraID withBlock:(void (^)(NSData *imgData, NSError *error))block;
 

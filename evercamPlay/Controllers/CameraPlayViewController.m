@@ -27,6 +27,7 @@
     Boolean dragging_slider;
     BrowseJpgTask *browseJpgTask;
     BOOL isPlaying;
+    NIDropDown *dropDown;
     
     __weak IBOutlet UIButton *playOrPauseButton;
     __weak IBOutlet UIView *videoController;
@@ -69,7 +70,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     self.screenName = @"Video View";
     
-    self.lblName.text = self.cameraInfo.name;
+    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
 }
 
@@ -297,6 +298,31 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)cameraItemTapped:(id)sender {
+    NSMutableArray *cameraNameArray = [NSMutableArray new];
+    NSMutableArray * arrImage = [[NSMutableArray alloc] init];
+    
+    for (EvercamCamera *camInfo in self.cameras) {
+        [cameraNameArray addObject:camInfo.name];
+        if (camInfo.isOnline) {
+            [arrImage addObject:[UIImage imageNamed:@"icon_online.png"]];
+        } else {
+            [arrImage addObject:[UIImage imageNamed:@"icon_offline.png"]];
+        }
+    }
+    
+    if(dropDown == nil) {
+        CGFloat f = 300;
+        dropDown = [[NIDropDown alloc] showDropDown:sender height:&f textArray:cameraNameArray imageArray:arrImage direction:@"down"] ;
+        dropDown.delegate = self;
+    }
+    else {
+        [dropDown hideDropDown:sender];
+        dropDown = nil;
+    }
+
+}
+
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -388,14 +414,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                          
                                      }];
 
-//    UIAlertAction* localStorage = [UIAlertAction
-//                                   actionWithTitle:@"Local Storage"
-//                                   style:UIAlertActionStyleDefault
-//                                   handler:^(UIAlertAction * action)
-//                                   {
-//                                       [view dismissViewControllerAnimated:YES completion:nil];
-//                                       
-//                                   }];
+    UIAlertAction* localStorage = [UIAlertAction
+                                   actionWithTitle:@"Local Storage"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [view dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
 
 
     
@@ -432,6 +458,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)playCamera {
+    [self.imageView displayImage:nil];
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
         self.imageView.hidden = NO;
@@ -539,6 +566,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if ([self.delegate respondsToSelector:@selector(cameraEdited:)]) {
         [self.delegate cameraEdited:camera];
     }
+}
+
+#pragma mark NIDropdown delegate
+- (void) niDropDownDidSelectAtIndex: (NSInteger) index {
+    dropDown = nil;
+    self.cameraInfo = [self.cameras objectAtIndex:index];
+    [self playCamera];
 }
 
 @end

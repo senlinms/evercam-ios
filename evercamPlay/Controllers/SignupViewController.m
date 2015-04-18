@@ -548,7 +548,7 @@
 }
 
 #pragma mark NIDropdown delegate
-- (void) niDropDownDelegateMethod: (NIDropDown *) sender {
+- (void) niDropDownDidSelectAtIndex: (NSInteger) index {
     dropDown = nil;
 }
 

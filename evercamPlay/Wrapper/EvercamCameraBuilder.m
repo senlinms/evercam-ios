@@ -61,11 +61,11 @@
     if (self.audioUrl.length > 0) {
         [dict setValue:self.audioUrl forKey:@"audio_url"];
     }
-//    if (self.isPublic) {
-//        [dict setValue:@"1" forKey:@"is_public"];
-//    } else {
-//        [dict setValue:@"0" forKey:@"is_public"];
-//    }
+    if (self.isPublic) {
+        [dict setValue:@"1" forKey:@"is_public"];
+    } else {
+        [dict setValue:@"0" forKey:@"is_public"];
+    }
 //    if (self.isOnline) {
 //        [dict setValue:@"1" forKey:@"is_online"];
 //    } else {
