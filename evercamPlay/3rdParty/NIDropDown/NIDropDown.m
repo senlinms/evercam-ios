@@ -103,23 +103,29 @@
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UIImageView *imgView;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 10, 10, 10)];
+        [imgView setContentMode:UIViewContentModeScaleToFill];
+        [imgView setTag:100];
+        [cell addSubview:imgView];
+    } else {
+        imgView = (UIImageView *)[cell viewWithTag:100];
     }
     if ([self.imageList count] == [self.list count]) {
         cell.textLabel.text =[list objectAtIndex:indexPath.row];
-        cell.imageView.image = [imageList objectAtIndex:indexPath.row];
+        imgView.image = [imageList objectAtIndex:indexPath.row];
     } else if ([self.imageList count] > [self.list count]) {
         cell.textLabel.text =[list objectAtIndex:indexPath.row];
         if (indexPath.row < [imageList count]) {
-            cell.imageView.image = [imageList objectAtIndex:indexPath.row];
+            imgView.image = [imageList objectAtIndex:indexPath.row];
         }
     } else if ([self.imageList count] < [self.list count]) {
         cell.textLabel.text =[list objectAtIndex:indexPath.row];
         if (indexPath.row < [imageList count]) {
-            cell.imageView.image = [imageList objectAtIndex:indexPath.row];
+            imgView.image = [imageList objectAtIndex:indexPath.row];
         }
     }
     
@@ -141,15 +147,10 @@
             [subview removeFromSuperview];
         }
     }
-    imgView.image = c.imageView.image;
-    imgView = [[UIImageView alloc] initWithImage:c.imageView.image];
-    imgView.frame = CGRectMake(5, 5, 25, 25);
-    [btnSender addSubview:imgView];
-    [self myDelegate];
-}
-
-- (void) myDelegate {
-    [self.delegate niDropDownDelegateMethod:self];
+ 
+    if ([self.delegate respondsToSelector:@selector(niDropDownDidSelectAtIndex:)]) {
+        [self.delegate niDropDownDidSelectAtIndex:indexPath.row];
+    }
 }
 
 

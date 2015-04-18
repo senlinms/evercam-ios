@@ -6,9 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraPlayViewController">
             <connections>
+                <outlet property="btnTitle" destination="Trm-Kg-hD7" id="uVR-kv-9HW"/>
                 <outlet property="imageView" destination="BMY-6V-ibb" id="2c2-VS-mUu"/>
                 <outlet property="imvSnapshot" destination="odw-TZ-9Nd" id="8CW-MF-OI4"/>
-                <outlet property="lblName" destination="7ew-IZ-goo" id="bZB-Im-Ikm"/>
                 <outlet property="lblOffline" destination="wrC-9a-tm3" id="ggv-Du-AWj"/>
                 <outlet property="playOrPauseButton" destination="QCn-Zg-5jB" id="f9x-cm-Y1p"/>
                 <outlet property="saveButton" destination="K90-Gg-nvb" id="xir-HM-of1"/>
@@ -55,13 +55,6 @@
                                 <action selector="back:" destination="-1" eventType="touchUpInside" id="g4A-HW-7v7"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cameras" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7ew-IZ-goo">
-                            <rect key="frame" x="56" y="16" width="209" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cTv-9Z-hVP">
                             <rect key="frame" x="280" y="2" width="40" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -75,6 +68,22 @@
                     </subviews>
                     <color key="backgroundColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Trm-Kg-hD7">
+                    <rect key="frame" x="60" y="20" width="180" height="52"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cameraItemTapped:" destination="-1" eventType="touchUpInside" id="fxb-jt-VaG"/>
+                    </connections>
+                </button>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="dropdown.png" id="OyF-4z-dfh">
+                    <rect key="frame" x="220" y="50" width="15" height="15"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="1os-7d-u4m">
                     <rect key="frame" x="0.0" y="72" width="320" height="496"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,6 +199,7 @@
     <resources>
         <image name="btn_pause.png" width="150" height="150"/>
         <image name="btn_save.png" width="150" height="150"/>
+        <image name="dropdown.png" width="50" height="50"/>
         <image name="evercam_icon.png" width="192" height="192"/>
         <image name="pull-out.png" width="80" height="100"/>
     </resources>

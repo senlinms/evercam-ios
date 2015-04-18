@@ -18,6 +18,13 @@ static ImageCache *imageCache = nil;
 @implementation AsyncImageView
 @synthesize spinny;
 
++ (void)releaseCacheMemory {
+    if (imageCache) {
+        [imageCache release];
+        imageCache = nil;
+    }
+}
+
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
     }
@@ -35,6 +42,7 @@ static ImageCache *imageCache = nil;
 - (void)drawRect:(CGRect)rect {
     // Drawing code
 }
+
 
 - (void)dealloc {
     [connection cancel];
@@ -152,6 +160,25 @@ static ImageCache *imageCache = nil;
     
     [data release];
     data = nil;
+}
+
+- (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
+    [connection release];
+    connection = nil;
+    
+    if (spinny != nil) {
+        [spinny removeFromSuperview];
+        spinny = nil;
+    }
+    
+    if ([[self subviews] count] > 0) {
+        [[[self subviews] objectAtIndex:0] removeFromSuperview];
+    }
+    
+    [data release];
+    data = nil;
+    
+    [self setImage:self.offlineImage];
 }
 
 @end

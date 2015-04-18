@@ -9,14 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class NIDropDown;
-@protocol NIDropDownDelegate
-- (void) niDropDownDelegateMethod: (NIDropDown *) sender;
+@protocol NIDropDownDelegate <NSObject>
+- (void) niDropDownDidSelectAtIndex:(NSInteger)index;
 @end
 
 @interface NIDropDown : UIView <UITableViewDelegate, UITableViewDataSource>
 {
     NSString *animationDirection;
-    UIImageView *imgView;
 }
 @property (nonatomic, retain) id <NIDropDownDelegate> delegate;
 @property (nonatomic, retain) NSString *animationDirection;

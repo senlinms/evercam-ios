@@ -411,6 +411,15 @@ static EvercamShell *instance = nil;
     }
 }
 
+- (NSString *)getSnapshotLink:(NSString *)cameraID {
+    NSString *url = [NSString stringWithFormat:@"%@cameras/%@/live/snapshot.jpg?api_id=%@&api_key=%@",
+                     [AFEvercamAPIClient sharedClient].baseUrl,
+                     cameraID,
+                     keyPair.apiId,
+                     keyPair.apiKey];
+    return url;
+}
+
 - (void)getSnapshotFromEvercam:(EvercamCamera *)camera withBlock:(void (^)(NSData *imgData, NSError *error))block {
     return [self getSnapshotFromCamId:camera.camId withBlock:block];
 }
