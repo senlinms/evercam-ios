@@ -31,9 +31,10 @@
     self.screenName = @"Login";
     // Do any additional setup after loading the view from its nib.
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = _contentView.bounds;
+    gradient.frame = self.view.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
-    [self.contentView.layer insertSublayer:gradient atIndex:0];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    self.contentView.contentSize = self.contentView.bounds.size;
     
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor lightTextColor];
@@ -44,8 +45,10 @@
         // TODO: Add fall-back code to set placeholder color.
     }
     
-    self.txt_password.text = @"marcopolo";
-    self.txt_username.text = @"marco";
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [self.view addGestureRecognizer:singleFingerTap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,11 +59,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
+                                             selector:@selector(onKeyboardShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
+                                             selector:@selector(onKeyboardHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 }
@@ -168,7 +171,7 @@
                 } else {
                     NSLog(@"Error %li: %@", (long)error.code, error.description);
                     UIAlertController * alert=   [UIAlertController
-                                                  alertControllerWithTitle: @"Error"
+                                                  alertControllerWithTitle: nil
                                                   message:error.localizedDescription
                                                   preferredStyle:UIAlertControllerStyleAlert];
                     
@@ -190,7 +193,7 @@
             [_activityIndicator stopAnimating];
             NSLog(@"Error %li: %@", (long)error.code, error.description);
             UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle: @"Error"
+                                          alertControllerWithTitle: nil
                                           message:error.localizedDescription
                                           preferredStyle:UIAlertControllerStyleAlert];
             
@@ -237,57 +240,100 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    activeTextField = self.txt_password;
+    activeTextField = textField;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+#pragma mark - UIKeyboard events
+// Called when UIKeyboardWillShowNotification is sent
+- (void)onKeyboardShow:(NSNotification*)notification
 {
-    activeTextField = nil;
+    // if we have no view or are not visible in any window, we don't care
+    if (!self.isViewLoaded || !self.view.window) {
+        return;
+    }
+    
+    NSDictionary *userInfo = [notification userInfo];
+    
+    CGRect keyboardFrameInWindow;
+    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrameInWindow];
+    
+    // the keyboard frame is specified in window-level coordinates. this calculates the frame as if it were a subview of our view, making it a sibling of the scroll view
+    CGRect keyboardFrameInView = [self.view convertRect:keyboardFrameInWindow fromView:nil];
+    
+    CGRect scrollViewKeyboardIntersection = CGRectIntersection(_contentView.frame, keyboardFrameInView);
+    UIEdgeInsets newContentInsets = UIEdgeInsetsMake(0, 0, scrollViewKeyboardIntersection.size.height, 0);
+    
+    // this is an old animation method, but the only one that retains compaitiblity between parameters (duration, curve) and the values contained in the userInfo-Dictionary.
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    [UIView setAnimationCurve:[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
+    
+    _contentView.contentInset = newContentInsets;
+    _contentView.scrollIndicatorInsets = newContentInsets;
+    
+    /*
+     * Depending on visual layout, _focusedControl should either be the input field (UITextField,..) or another element
+     * that should be visible, e.g. a purchase button below an amount text field
+     * it makes sense to set _focusedControl in delegates like -textFieldShouldBeginEditing: if you have multiple input fields
+     */
+    if (activeTextField) {
+        CGRect controlFrameInScrollView = [_contentView convertRect:activeTextField.bounds fromView:activeTextField]; // if the control is a deep in the hierarchy below the scroll view, this will calculate the frame as if it were a direct subview
+        controlFrameInScrollView = CGRectInset(controlFrameInScrollView, 0, -10); // replace 10 with any nice visual offset between control and keyboard or control and top of the scroll view.
+        
+        CGFloat controlVisualOffsetToTopOfScrollview = controlFrameInScrollView.origin.y - _contentView.contentOffset.y;
+        CGFloat controlVisualBottom = controlVisualOffsetToTopOfScrollview + controlFrameInScrollView.size.height;
+        
+        // this is the visible part of the scroll view that is not hidden by the keyboard
+        CGFloat scrollViewVisibleHeight = _contentView.frame.size.height - scrollViewKeyboardIntersection.size.height;
+        
+        if (controlVisualBottom > scrollViewVisibleHeight) { // check if the keyboard will hide the control in question
+            // scroll up until the control is in place
+            CGPoint newContentOffset = _contentView.contentOffset;
+            newContentOffset.y += (controlVisualBottom - scrollViewVisibleHeight);
+            
+            // make sure we don't set an impossible offset caused by the "nice visual offset"
+            // if a control is at the bottom of the scroll view, it will end up just above the keyboard to eliminate scrolling inconsistencies
+            newContentOffset.y = MIN(newContentOffset.y, _contentView.contentSize.height - scrollViewVisibleHeight);
+            
+            [_contentView setContentOffset:newContentOffset animated:NO]; // animated:NO because we have created our own animation context around this code
+        } else if (controlFrameInScrollView.origin.y < _contentView.contentOffset.y) {
+            // if the control is not fully visible, make it so (useful if the user taps on a partially visible input field
+            CGPoint newContentOffset = _contentView.contentOffset;
+            newContentOffset.y = controlFrameInScrollView.origin.y;
+            
+            [_contentView setContentOffset:newContentOffset animated:NO]; // animated:NO because we have created our own animation context around this code
+        }
+    }
+    
+    [UIView commitAnimations];
 }
 
-#pragma mark - Keyboard Event Functions
- - (void)keyboardWillHide:(NSNotification *)notif {
-     UIViewAnimationCurve curve = [[[notif userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
-     NSTimeInterval duration = [[[notif userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-     [UIView beginAnimations:@"resize" context:nil];
-     [UIView setAnimationDuration:duration];
-     [UIView setAnimationCurve:curve];
-     [UIView setAnimationBeginsFromCurrentState:TRUE];
-     
-     // Move view
-     [_contentView setContentOffset:CGPointZero animated:YES];
-     
-     [UIView commitAnimations];
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)onKeyboardHide:(NSNotification*)notification
+{
+    // if we have no view or are not visible in any window, we don't care
+    if (!self.isViewLoaded || !self.view.window) {
+        return;
+    }
+    
+    NSDictionary *userInfo = notification.userInfo;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:[[userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    [UIView setAnimationCurve:[[userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
+    
+    // undo all that keyboardWillShow-magic
+    // the scroll view will adjust its contentOffset apropriately
+    _contentView.contentInset = UIEdgeInsetsZero;
+    _contentView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    
+    [UIView commitAnimations];
 }
- 
- - (void)keyboardWillShow:(NSNotification *)notif {
-     CGRect endFrame = [[[notif userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-     UIViewAnimationCurve curve = [[[notif userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
-     NSTimeInterval duration = [[[notif userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-     [UIView beginAnimations:@"resize" context:nil];
-     [UIView setAnimationDuration:duration];
-     [UIView setAnimationCurve:curve];
-     [UIView setAnimationBeginsFromCurrentState:TRUE];
-     
-     if(([[UIDevice currentDevice].systemVersion floatValue] < 8) &&
-         UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-         int width = endFrame.size.height;
-         endFrame.size.height = endFrame.size.width;
-         endFrame.size.width = width;
-         }
-     
-     CGRect frame = self.view.frame;
-     frame.size.height -= endFrame.size.height;
-     CGPoint fOrigin = activeTextField.frame.origin;
-     fOrigin.y -= _contentView.contentOffset.y;
-     fOrigin.y += _contentView.frame.origin.y;
-     fOrigin.y += activeTextField.frame.size.height;
-     if (!CGRectContainsPoint(frame, fOrigin) ) {
-         CGPoint scrollPoint = CGPointMake(0.0, activeTextField.frame.origin.y + activeTextField.frame.size.height - frame.size.height + _contentView.frame.origin.y);
-         [_contentView setContentOffset:scrollPoint animated:YES];
-     }
-     
-     [UIView commitAnimations];
+
+#pragma mark - UITapGesture Recognizer
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    [activeTextField resignFirstResponder];
 }
 
 @end

@@ -35,6 +35,7 @@
     
     __weak IBOutlet UIView *snapshotConfirmView;
     __weak IBOutlet UIImageView *imvSnapshot;
+    __weak IBOutlet UIActivityIndicatorView *loadingView;
 }
 
 @end
@@ -346,6 +347,10 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         return;
     }
     
+    if ([loadingView isAnimating]) {
+        return;
+    }
+    
     if (videoController.hidden) {
         videoController.hidden = NO;
         
@@ -463,6 +468,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         self.lblOffline.hidden = YES;
         self.imageView.hidden = NO;
         [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
+        [loadingView startAnimating];
         
         if (self.cameraInfo.externalH264Url && self.cameraInfo.externalH264Url.length > 0) {
             [self createPlayer];
@@ -522,7 +528,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         browseJpgTask = nil;
     }
     
-    browseJpgTask = [[BrowseJpgTask alloc] initWithCamera:self.cameraInfo andImageView:self.imageView];
+    browseJpgTask = [[BrowseJpgTask alloc] initWithCamera:self.cameraInfo andImageView:self.imageView andLoadingView:loadingView];
     [browseJpgTask start];
 }
 
@@ -553,6 +559,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     media_height = height;
     dispatch_async(dispatch_get_main_queue(), ^{
         self.imageView.hidden = YES;
+        [loadingView stopAnimating];
         [self viewDidLayoutSubviews];
         [video_view setNeedsLayout];
         [video_view layoutIfNeeded];

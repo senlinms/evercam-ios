@@ -11,6 +11,7 @@
 #import "AppUser.h"
 #import <BugSense-iOS/BugSenseController.h>
 #import "GAI.h"
+#import "EvercamShell.h"
 
 @interface AppDelegate ()
 
@@ -30,12 +31,18 @@
     self.viewController.isPortraitMode = true;
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    [BugSenseController sharedControllerWithBugSenseAPIKey:@"32ba4ee6"];
+    
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
+    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    NSString *bugSenseAPIKey = [contents valueForKey:@"BugSenseAPIKey"];
+    NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
+    
+    [BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
     
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-52483995-1"];
+    [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
     
     return YES;
 }
@@ -77,6 +84,13 @@
     }
 }
 
+- (void)setDefaultUser:(AppUser *)defaultUser {
+    _defaultUser = defaultUser;
+    
+    
+    [[NSUserDefaults standardUserDefaults] setValue:defaultUser.username forKey:@"username"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 #pragma mark - Core Data stack
 
@@ -159,7 +173,20 @@
 }
 
 #pragma  mark - custom functions for data models
--(AppUser *)userWithName:(NSString *)username {
+- (AppUser *)getDefaultUser {
+    NSString *username = [[NSUserDefaults standardUserDefaults] valueForKey:@"username"];
+    if (username && username.length > 0) {
+        AppUser *user = [APP_DELEGATE userWithName:username];
+        if (user) {
+            [[EvercamShell shell] setUserKeyPairWithApiId:user.apiId andApiKey:user.apiKey];
+            return user;
+        }
+    }
+    
+    return nil;
+}
+
+- (AppUser *)userWithName:(NSString *)username {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"AppUser"
                                               inManagedObjectContext:self.managedObjectContext];
@@ -205,6 +232,9 @@
 }
 
 - (void)logout {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"username"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self deleteUser:self.defaultUser];
     [self.viewController popViewControllerAnimated:YES];
 }

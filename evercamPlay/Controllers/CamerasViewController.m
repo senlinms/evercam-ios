@@ -26,7 +26,7 @@
 
 #import "CamerasViewController.h"
 #import "SWRevealViewController.h"
-#import "UILabel+ActionSheet.h"
+//#import "UILabel+ActionSheet.h"
 #import "CameraViewCell.h"
 #import "EvercamShell.h"
 #import "EvercamCamera.h"
@@ -67,6 +67,7 @@
     
     [self.camerasView registerNib:[UINib nibWithNibName:@"CameraViewCell" bundle:nil] forCellWithReuseIdentifier: @"CameraViewCell"];
     
+    [self hideLoadingView];
     [self onRefresh:nil];
     
     ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(320 / [PreferenceUtil getCameraPerRow], 320 / [PreferenceUtil getCameraPerRow] * .75);
@@ -87,51 +88,52 @@
 
 - (IBAction)onAdd: (id)sender
 {
-    UIAlertController * view=   [UIAlertController
-                                 alertControllerWithTitle:nil
-                                 message:nil
-                                 preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction* add = [UIAlertAction
-                         actionWithTitle:@"Add camera manually"
-                         style:UIAlertActionStyleDefault
-                         handler:^(UIAlertAction * action)
-                         {
-                             [self performSelectorOnMainThread:@selector(addCamera) withObject:nil waitUntilDone:NO];
-                             [view dismissViewControllerAnimated:YES completion:nil];
-                             
-                         }];
-    UIAlertAction* scan = [UIAlertAction
-                             actionWithTitle:@"Scan for cameras(beta)"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [self performSelectorOnMainThread:@selector(scanCamera) withObject:nil waitUntilDone:NO];
-                                 [view dismissViewControllerAnimated:YES completion:nil];
-                                 
-                             }];
-    UIAlertAction* cancel = [UIAlertAction
-                           actionWithTitle:@"Cancel"
-                           style:UIAlertActionStyleCancel
-                           handler:^(UIAlertAction * action)
-                           {
-                               [view dismissViewControllerAnimated:YES completion:nil];
-                               
-                           }];
-
-    [view addAction:add];
-    [view addAction:scan];
-    [view addAction:cancel];
-    
-    [self presentViewController:view animated:YES completion:nil];
+    [self addCamera];
+//    UIAlertController * view=   [UIAlertController
+//                                 alertControllerWithTitle:nil
+//                                 message:nil
+//                                 preferredStyle:UIAlertControllerStyleActionSheet];
+//    
+//    UIAlertAction* add = [UIAlertAction
+//                         actionWithTitle:@"Add camera manually"
+//                         style:UIAlertActionStyleDefault
+//                         handler:^(UIAlertAction * action)
+//                         {
+//                             [self performSelectorOnMainThread:@selector(addCamera) withObject:nil waitUntilDone:NO];
+//                             [view dismissViewControllerAnimated:YES completion:nil];
+//                             
+//                         }];
+//    UIAlertAction* scan = [UIAlertAction
+//                             actionWithTitle:@"Scan for cameras(beta)"
+//                             style:UIAlertActionStyleDefault
+//                             handler:^(UIAlertAction * action)
+//                             {
+//                                 [self performSelectorOnMainThread:@selector(scanCamera) withObject:nil waitUntilDone:NO];
+//                                 [view dismissViewControllerAnimated:YES completion:nil];
+//                                 
+//                             }];
+//    UIAlertAction* cancel = [UIAlertAction
+//                           actionWithTitle:@"Cancel"
+//                           style:UIAlertActionStyleCancel
+//                           handler:^(UIAlertAction * action)
+//                           {
+//                               [view dismissViewControllerAnimated:YES completion:nil];
+//                               
+//                           }];
+//
+//    [view addAction:add];
+//    [view addAction:scan];
+//    [view addAction:cancel];
+//    
+//    [self presentViewController:view animated:YES completion:nil];
 }
 
 - (IBAction)onRefresh: (id)sender
 {
-    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
-    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
-    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
-    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
+//    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
+//    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
+//    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
+//    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
 
     if (![APP_DELEGATE defaultUser]) {
         return;
@@ -155,7 +157,7 @@
             NSLog(@"Error %li: %@", (long)error.code, error.localizedDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: @"Error"
+                                              alertControllerWithTitle: nil
                                               message:error.localizedDescription
                                               preferredStyle:UIAlertControllerStyleAlert];
                 
@@ -207,18 +209,30 @@
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
     cell.titleLabel.text = cameraInfo.name;
     
+    CGSize textSize = { 140.0, 20.0 };
+    CGSize size = [cell.titleLabel.text sizeWithFont:cell.titleLabel.font
+                                        constrainedToSize:textSize
+                                            lineBreakMode:NSLineBreakByWordWrapping];
+    CGRect frmOfflineImg = cell.imvOffline.frame;
+    frmOfflineImg.origin.x = size.width + 10;
+    cell.imvOffline.frame = frmOfflineImg;
+    
     cell.thumbnailImageView.offlineImage = [UIImage imageNamed:@"cam_unavailable.png"];
+    cell.secondaryView.hidden = NO;
+    cell.thumbnailImageView.secondaryView = cell.secondaryView;
     if (cameraInfo.isOnline) {
+        cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
         [cell.thumbnailImageView setImage:nil];
         [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]] withSpinny:NO];
     } else {
+        cell.greyImv.hidden = NO;
         cell.imvOffline.hidden = NO;
         [cell.thumbnailImageView setImage:nil];
         if (cameraInfo.thumbnailUrl && cameraInfo.thumbnailUrl.length > 0) {
             [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:NO];
         } else {
-            cell.imvOffline.hidden = YES;
+            cell.secondaryView.hidden = YES;
             [cell.thumbnailImageView displayImage:cell.thumbnailImageView.offlineImage];
         }
     }
@@ -268,6 +282,7 @@
         [cameraPlayNavVC setIsPortraitMode:NO];
     } else {
         [cameraPlayNavVC setIsPortraitMode:YES];
+        [cameraPlayNavVC setHasLandscapeMode:YES];
     }
     cameraPlayNavVC.navigationBarHidden = YES;
     

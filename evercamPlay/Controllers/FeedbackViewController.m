@@ -93,7 +93,12 @@
     NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
     NSString *version = infoDictionary[(NSString*)@"CFBundleShortVersionString"];
     
-    SendGrid *sendgrid = [SendGrid apiUser:@"liutingdu" apiKey:@"kangtaooo1"];
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
+    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    NSString *username = [contents valueForKey:@"SendgridUsername"];
+    NSString *password = [contents valueForKey:@"SendgridPassword"];
+    
+    SendGrid *sendgrid = [SendGrid apiUser:username apiKey:password];
     
     SendGridEmail *email = [[SendGridEmail alloc] init];
     email.to = @"play@evercam.io";

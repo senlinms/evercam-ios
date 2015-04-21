@@ -10,9 +10,11 @@
 #import "AccountCell.h"
 #import "AddAccountCell.h"
 #import "SWRevealViewController.h"
-#import "UILabel+ActionSheet.h"
+#import "MenuViewController.h"
+#import "CamerasViewController.h"
+//#import "UILabel+ActionSheet.h"
 #import <QuartzCore/QuartzCore.h>
-#import "UIAlertController+NoBorderText.h"
+//#import "UIAlertController+NoBorderText.h"
 #import "AppDelegate.h"
 #import "EvercamShell.h"
 #import "EvercamUser.h"
@@ -48,11 +50,11 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
 
-    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
-    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
-    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
-    
-    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
+//    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
+//    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
+//    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
+//    
+//    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
     
     [self getAllUsers];
 }
@@ -75,6 +77,13 @@
     
     [APP_DELEGATE setDefaultUser:user];
     [self.tableView reloadData];
+    
+    // go to cameras view controller
+    SWRevealViewController *revealController = self.revealViewController;
+    CamerasViewController *newFrontController = [[CamerasViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+    navigationController.navigationBarHidden = YES;
+    [revealController pushFrontViewController:navigationController animated:YES];
 }
 
 - (void)showAddAccountAlertWithUsername:(NSString *)username andPassword:(NSString *)password {
@@ -97,12 +106,12 @@
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.text = username;
-        textField.borderStyle = UITextBorderStyleNone;
-        textField.textColor = [UIColor whiteColor];
-        [textField setFont:[UIFont systemFontOfSize:17]];
+//        textField.borderStyle = UITextBorderStyleRoundedRect;
+//        textField.textColor = [UIColor whiteColor];
+//        [textField setFont:[UIFont systemFontOfSize:17]];
         if ([textField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-            UIColor *color = [UIColor lightTextColor];
-            textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email/Username" attributes:@{NSForegroundColorAttributeName: color}];
+//            UIColor *color = [UIColor lightTextColor];
+            textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email/Username" attributes:nil];
         } else {
             NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
         }
@@ -110,14 +119,14 @@
     }];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.borderStyle = UITextBorderStyleNone;
-        textField.textColor = [UIColor whiteColor];
-        [textField setFont:[UIFont systemFontOfSize:17]];
+//        textField.borderStyle = UITextBorderStyleRoundedRect;
+//        textField.textColor = [UIColor whiteColor];
+//        [textField setFont:[UIFont systemFontOfSize:17]];
         textField.text = password;
         
         if ([textField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-            UIColor *color = [UIColor lightTextColor];
-            textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
+//            UIColor *color = [UIColor lightTextColor];
+            textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:nil];
         } else {
             NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
         }
@@ -210,7 +219,7 @@
                 } else {
                     NSLog(@"Error %li: %@", (long)error.code, error.description);
                     UIAlertController * alert=   [UIAlertController
-                                                  alertControllerWithTitle: @"Error"
+                                                  alertControllerWithTitle: nil
                                                   message:error.localizedDescription
                                                   preferredStyle:UIAlertControllerStyleAlert];
                     
@@ -234,7 +243,7 @@
             
             NSLog(@"Error %li: %@", (long)error.code, error.description);
             UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle: @"Error"
+                                          alertControllerWithTitle: nil
                                           message:error.localizedDescription
                                           preferredStyle:UIAlertControllerStyleAlert];
             

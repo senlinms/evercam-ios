@@ -11,5 +11,6 @@
 @interface CustomNavigationController: UINavigationController
 
 @property (nonatomic) BOOL isPortraitMode;
+@property (nonatomic) BOOL hasLandscapeMode;
 
 @end

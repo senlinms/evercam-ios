@@ -69,7 +69,7 @@
     }
     
     if ([self.camera.rights canEdit]) {
-        [self.scrollView setContentSize:CGSizeMake(0, 605)];
+        [self.scrollView setContentSize:CGSizeMake(0, 625)];
         
         if (self.camera.username && self.camera.username.length > 0) {
             self.lblUsername.text = self.camera.username;
@@ -87,10 +87,10 @@
         
         NSString *jpgPath = [self.camera getJpgPath];
         if (jpgPath && jpgPath.length > 0) {
-            self.lblSnapshot.text = jpgPath;
+            self.tvSnapshot.text = jpgPath;
         } else {
-            self.lblSnapshot.text = @"Not specified";
-            self.lblSnapshot.textColor = [UIColor lightGrayColor];
+            self.tvSnapshot.text = @"Not specified";
+            self.tvSnapshot.textColor = [UIColor lightGrayColor];
         }
         
         if (self.camera.externalHost && self.camera.externalHost.length > 0) {

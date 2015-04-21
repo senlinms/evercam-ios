@@ -27,5 +27,6 @@
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) UIActivityIndicatorView *spinny;
 @property (nonatomic, strong) UIImage *offlineImage;
+@property (nonatomic, strong) UIView *secondaryView;
 
 @end

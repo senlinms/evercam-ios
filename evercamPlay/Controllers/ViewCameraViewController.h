@@ -30,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblModel;
 @property (weak, nonatomic) IBOutlet UILabel *lblUsername;
 @property (weak, nonatomic) IBOutlet UILabel *lblPassword;
-@property (weak, nonatomic) IBOutlet UILabel *lblSnapshot;
+@property (weak, nonatomic) IBOutlet UITextView *tvSnapshot;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalHost;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalHTTPPort;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalRTSPPort;

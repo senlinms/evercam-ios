@@ -30,6 +30,7 @@
 -(NSMutableArray *)allUserList;
 - (NSURL *)applicationDocumentsDirectory;
 
+- (AppUser *)getDefaultUser;
 - (void)logout;
 
 @end

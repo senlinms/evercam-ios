@@ -30,5 +30,4 @@
 
 @property (nonatomic, retain) IBOutlet UITableView *rearTableView;
 
-
 @end
