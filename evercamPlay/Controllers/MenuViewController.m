@@ -54,15 +54,9 @@
 {
     [super viewDidLoad];
 	
-    self.title = NSLocalizedString(@"Menu", nil);
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = _rearTableView.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
-    [self.rearTableView.layer insertSublayer:gradient atIndex:0];
     self.rearTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
 }
-
 
 #pragma marl - UITableView Data Source
 
@@ -84,6 +78,9 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
         cell.textLabel.textColor = [UIColor whiteColor];
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 43, 320, 1)];
+        [separator setBackgroundColor:[UIColor colorWithRed:26.f/255.f green:30.f/255.f blue:50.f/255.f alpha:1]];
+        [cell addSubview:separator];
     }
 	
     NSString *text = nil;
@@ -109,6 +106,7 @@
     }
 
     cell.textLabel.text = NSLocalizedString( text,nil );
+    cell.imageView.image = [UIImage imageNamed:@"signout.png"];
 	
     return cell;
 }
@@ -116,6 +114,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // Grab a handle to the reveal controller, as if you'd do with a navigtion controller via self.navigationController.
     SWRevealViewController *revealController = self.revealViewController;
     
@@ -145,7 +144,6 @@
     else if (row == 4)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-
             
             UIAlertController * alert=   [UIAlertController
                                           alertControllerWithTitle:nil

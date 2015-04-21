@@ -40,6 +40,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)landscapeModeChanged:(id)sender {
+    UISwitch *switchView = (UISwitch *)sender;
+    if ([switchView isOn]) {
+        [PreferenceUtil setIsForceLandscape:YES];
+    } else {
+        [PreferenceUtil setIsForceLandscape:NO];
+    }
+}
 
 #pragma mark UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -68,16 +76,16 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    [headerView setBackgroundColor:[UIColor lightTextColor]];
+//    [headerView setBackgroundColor:[UIColor lightTextColor]];
     
-    UILabel *hLabel=[[UILabel alloc] initWithFrame:CGRectMake(10,0,tableView.bounds.size.width - 20,30)];
+    UILabel *hLabel=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 20, 30)];
     hLabel.backgroundColor=[UIColor clearColor];
-    hLabel.textColor = [UIColor darkGrayColor];  // or whatever you want
-    hLabel.font = [UIFont boldSystemFontOfSize:17];
+    hLabel.textColor = [UIColor lightGrayColor];  // or whatever you want
+    hLabel.font = [UIFont boldSystemFontOfSize:14];
     if (section == 0)
-        hLabel.text = @"General";
+        hLabel.text = @"GENERAL";
     else
-        hLabel.text = @"About";
+        hLabel.text = @"ABOUT";
     
     [headerView addSubview:hLabel];
     
@@ -124,10 +132,15 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
             cell.textLabel.text = @"Force landscape for live view";
             cell.textLabel.textColor = [UIColor whiteColor];
+            
+            UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(250, 11.5f, 51.f, 31.f)];
+            [cell addSubview:swtch];
+            [swtch addTarget:self action:@selector(landscapeModeChanged:) forControlEvents:UIControlEventValueChanged];
+            
             if ([PreferenceUtil isForceLandscape]) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                [swtch setOn:YES];
             } else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                [swtch setOn:NO];
             }
         }
     }
@@ -151,8 +164,8 @@
             cell.textLabel.textColor = [UIColor whiteColor];
         }
     }
-    cell.backgroundView.backgroundColor = [UIColor clearColor];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundView.backgroundColor = [UIColor colorWithRed:52.f/255.f green:57.f/255.f blue:61.f/255.f alpha:1];
+    cell.backgroundColor = [UIColor colorWithRed:26.f/255.f green:30.f/255.f blue:35.f/255.f alpha:1];
     cell.selectionStyle =  UITableViewCellSelectionStyleNone;
 
     return cell;
@@ -286,13 +299,13 @@
         }
         else if (indexPath.row == 2)
         {
-            if ([self.tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
-                [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-                [PreferenceUtil setIsForceLandscape:NO];
-            } else {
-                [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-                [PreferenceUtil setIsForceLandscape:YES];
-            }
+//            if ([self.tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+//                [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+//                [PreferenceUtil setIsForceLandscape:NO];
+//            } else {
+//                [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+//                [PreferenceUtil setIsForceLandscape:YES];
+//            }
 
         }
     } else if (indexPath.section == 1) {

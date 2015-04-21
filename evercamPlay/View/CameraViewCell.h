@@ -14,5 +14,7 @@
 @property (nonatomic, strong) IBOutlet AsyncImageView *thumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imvOffline;
+@property (weak, nonatomic) IBOutlet UIView *greyImv;
+@property (weak, nonatomic) IBOutlet UIView *secondaryView;
 
 @end

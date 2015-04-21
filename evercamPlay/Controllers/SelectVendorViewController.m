@@ -14,7 +14,7 @@
 @interface SelectVendorViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *vendorsArray;
+
 
 @end
 
@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self getAllVendors];
+//    [self getAllVendors];
 }
 
 - (void)didReceiveMemoryWarning {

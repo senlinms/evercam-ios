@@ -11,11 +11,12 @@
 
 @implementation BrowseJpgTask
 
-- (id)initWithCamera:(EvercamCamera *)camera andImageView:(UIImageView *)imageView {
+- (id)initWithCamera:(EvercamCamera *)camera andImageView:(UIImageView *)imageView andLoadingView:(UIActivityIndicatorView *)loadingView {
     self = [super init];
     if (self) {
         self.cameraInfo = camera;
         self.imageView = imageView;
+        self.loadingView = loadingView;
     }
     return self;
 }
@@ -36,6 +37,7 @@
     }
     
     [[EvercamShell shell] getSnapshotFromCamId:self.cameraInfo.camId withBlock:^(NSData *imgData, NSError *error) {
+        [self.loadingView stopAnimating];
         if (error == nil && imgData != nil) {
             [self.imageView setImage:[UIImage imageWithData:imgData]];
             self.imageView.hidden = NO;

@@ -18,6 +18,7 @@
 
 @interface SelectModelViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *modelsArray;
 @property (nonatomic, strong) EvercamVendor *selectedVendor;
 @property (nonatomic, strong) EvercamModel *selectedModel;
 @property (nonatomic, strong) id<SelectModelViewControllerDelegate> delegate;

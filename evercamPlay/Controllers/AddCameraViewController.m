@@ -28,6 +28,8 @@
 @property (strong, nonatomic) UITextField *focusedTextField;
 @property (nonatomic, strong) EvercamVendor *currentVendor;
 @property (nonatomic, strong) EvercamModel *currentModel;
+@property (nonatomic, strong) NSArray *vendorsArray;
+@property (nonatomic, strong) NSArray *modelsArray;
 
 @end
 
@@ -49,6 +51,8 @@
     [self.view addGestureRecognizer:singleFingerTap];
     
     [self initialScreen];
+    
+    [self getAllVendors];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,7 +65,53 @@
 }
 
 - (IBAction)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.editCamera) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        if (self.tfID.text.length > 0 ||
+            self.tfName.text.length > 0 ||
+            self.tfVendor.text.length > 0 ||
+            self.tfModel.text.length > 0 ||
+            self.tfUsername.text.length > 0 ||
+            self.tfPassword.text.length > 0 ||
+            self.tfSnapshot.text.length > 0 ||
+            self.tfExternalHost.text.length > 0 ||
+            self.tfExternalHttpPort.text.length > 0 ||
+            self.tfExternalRtspPort.text.length > 0 ||
+            self.tfInternalHost.text.length > 0 ||
+            self.tfInternalHttpPort.text.length > 0 ||
+            self.tfInternalRtspPort.text.length > 0) {
+            
+            UIAlertController * alert=   [UIAlertController
+                                          alertControllerWithTitle: nil
+                                          message:@"You'll lose everything you typed in. Are you sure you want to quit?"
+                                          preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* no = [UIAlertAction
+                                 actionWithTitle:@"No"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+            [alert addAction:no];
+            
+            UIAlertAction* yes = [UIAlertAction
+                                 actionWithTitle:@"Yes"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                     [self.navigationController popViewControllerAnimated:YES];
+                                 }];
+            [alert addAction:yes];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+            
+        } else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
 }
 
 - (IBAction)test:(id)sender {
@@ -200,6 +250,7 @@
     SelectVendorViewController *selectVendorVC = [[SelectVendorViewController alloc] initWithNibName:@"SelectVendorViewController" bundle:nil];
     [selectVendorVC setDelegate:self];
     [selectVendorVC setSelectedVendor:self.currentVendor];
+    [selectVendorVC setVendorsArray:self.vendorsArray];
     [self.navigationController pushViewController:selectVendorVC animated:YES];
 }
 
@@ -329,9 +380,9 @@
 #pragma mark - SelectVendorViewController Delegate Method
 - (void)vendorChanged:(EvercamVendor *)vendor {
     self.currentVendor = vendor;
-    self.currentModel = nil;
     self.tfVendor.text = self.currentVendor.name;
-    self.tfModel.text = @"";
+    
+    [self getAllModels];
 }
 
 #pragma mark - Custom Functions
@@ -348,8 +399,8 @@
         self.tfSnapshot.text = [self.editCamera getJpgPath];
         self.tfExternalHost.text = self.editCamera.externalHost;
         self.tfInternalHost.text = self.editCamera.internalHost;
-        self.tfVendor.text = self.editCamera.vendor;
-        self.tfModel.text = self.editCamera.model;
+//        self.tfVendor.text = self.editCamera.vendor;
+//        self.tfModel.text = self.editCamera.model;
         if (self.editCamera.externalHttpPort != 0) {
             self.tfExternalHttpPort.text = [NSString stringWithFormat:@"%d", self.editCamera.externalHttpPort];
         }
@@ -725,6 +776,65 @@
         [alert addAction:ok];
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+- (void)getAllVendors {
+    [[EvercamShell shell] getAllVendors:^(NSArray *vendors, NSError *error) {
+        self.vendorsArray = vendors;
+        if (self.editCamera) {
+            self.currentVendor = [self getVendorWithName:self.editCamera.vendor];
+            if (self.currentVendor) {
+                self.tfVendor.text = self.currentVendor.name;
+                [self getAllModels];
+            }
+        }
+    }];
+}
+
+- (void)getAllModels {
+    self.modelsArray = nil;
+    if (self.currentVendor) {
+        [[EvercamShell shell] getAllModelsByVendorId:self.currentVendor.vId withBlock:^(NSArray *models, NSError *error) {
+            self.modelsArray = models;
+            if (self.editCamera) {
+                if (self.tfModel.text.length == 0) {
+                    self.currentModel = [self getModelWithName:self.editCamera.model];
+                    self.tfModel.text = self.currentModel.name;
+                    return;
+                }
+            }
+            
+            self.currentModel = [self getModelWithName:@"Default"];
+            if (self.currentModel) {
+                self.tfModel.text = self.tfModel.text;
+                if (self.editCamera == nil) {
+                    self.tfUsername.text = self.currentModel.defaults.authUsername;
+                    self.tfPassword.text = self.currentModel.defaults.authPassword;
+                    self.tfSnapshot.text = self.currentModel.defaults.jpgURL;
+                }
+            }
+        }];
+    }
+}
+
+- (EvercamVendor *)getVendorWithName:(NSString *)vendorName {
+    for (EvercamVendor *vendor in self.vendorsArray) {
+        if ([vendor.name isEqualToString:vendorName]) {
+            return vendor;
+        }
+    }
+    
+    return nil;
+}
+
+- (EvercamModel *)getModelWithName:(NSString *)modelName {
+    for (EvercamModel *model in self.modelsArray) {
+        if ([model.name isEqualToString:modelName]) {
+            return model;
+        }
+    }
+    
+    return nil;
 }
 
 @end

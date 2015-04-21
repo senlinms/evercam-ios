@@ -17,6 +17,7 @@
 
 @interface SelectVendorViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *vendorsArray;
 @property (nonatomic, strong) EvercamVendor *selectedVendor;
 @property (nonatomic, strong) id<SelectVendorViewControllerDelegate> delegate;
 

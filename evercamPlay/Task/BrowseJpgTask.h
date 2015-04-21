@@ -17,8 +17,9 @@
 - (void)stop;
 
 @property (nonatomic) EvercamCamera *cameraInfo;
-@property (nonatomic) UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIActivityIndicatorView *loadingView;
 
-- (id)initWithCamera:(EvercamCamera *)camera andImageView:(UIImageView *)imageView;
+- (id)initWithCamera:(EvercamCamera *)camera andImageView:(UIImageView *)imageView andLoadingView:(UIActivityIndicatorView *)loadingView;
 
 @end

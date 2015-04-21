@@ -179,6 +179,7 @@ static ImageCache *imageCache = nil;
     data = nil;
     
     [self setImage:self.offlineImage];
+    [self.secondaryView setHidden:YES];
 }
 
 @end

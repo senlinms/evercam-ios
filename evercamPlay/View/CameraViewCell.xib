@@ -16,12 +16,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="160" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_offline.png" id="vbO-gt-9Vv">
-                        <rect key="frame" x="10" y="76" width="15" height="15"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Co-2L-gEy">
-                        <rect key="frame" x="8" y="91" width="144" height="21"/>
+                    <view contentMode="scaleToFill" id="H7D-tt-9YF">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="120"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" id="7VF-bx-JsT">
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom_fade.png" id="lbk-PO-wg5">
+                                <rect key="frame" x="0.0" y="100" width="160" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_offline.png" id="vbO-gt-9Vv">
+                                <rect key="frame" x="145" y="105" width="10" height="10"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </imageView>
+                        </subviews>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sdajfl asdlf jasldfj aslkdfs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Co-2L-gEy">
+                        <rect key="frame" x="5" y="100" width="140" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,7 +47,9 @@
             </view>
             <color key="backgroundColor" red="0.25098039215686274" green="0.25490196078431371" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="greyImv" destination="7VF-bx-JsT" id="cnh-HD-RTh"/>
                 <outlet property="imvOffline" destination="vbO-gt-9Vv" id="x8H-CP-vMC"/>
+                <outlet property="secondaryView" destination="H7D-tt-9YF" id="SbE-5o-Xyt"/>
                 <outlet property="thumbnailImageView" destination="taP-13-iYt" id="UcZ-0j-tsG"/>
                 <outlet property="titleLabel" destination="1Co-2L-gEy" id="sgQ-7z-9mj"/>
             </connections>
@@ -40,6 +57,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="bottom_fade.png" width="740" height="88"/>
         <image name="icon_offline.png" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

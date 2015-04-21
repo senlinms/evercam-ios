@@ -9,6 +9,11 @@
 #import "WelcomeViewController.h"
 #import "LoginViewController.h"
 #import "SignupViewController.h"
+#import "AppUser.h"
+#import "AppDelegate.h"
+#import "CamerasViewController.h"
+#import "MenuViewController.h"
+#import "SWRevealViewController.h"
 
 @interface WelcomeViewController ()
 
@@ -25,6 +30,24 @@
     [self.tutorialScrollView addSubview:self.tutorialView];
     self.tutorialView.center = CGPointMake(480, self.tutorialScrollView.frame.size.height/2);
     [self.tutorialScrollView setContentSize:CGSizeMake(960,self.tutorialScrollView.frame.size.height)];
+    
+    AppUser *defaultUser = [APP_DELEGATE getDefaultUser];
+    if (defaultUser) {
+        [APP_DELEGATE setDefaultUser:defaultUser];
+        
+        CamerasViewController *camerasViewController = [[CamerasViewController alloc] init];
+        MenuViewController *menuViewController = [[MenuViewController alloc] init];
+        
+        UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:camerasViewController];
+        frontNavigationController.navigationBarHidden = YES;
+        UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+        rearNavigationController.navigationBarHidden = YES;
+        
+        SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+        NSMutableArray *vcArr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        [vcArr addObject:revealController];
+        [self.navigationController setViewControllers:vcArr animated:YES];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
