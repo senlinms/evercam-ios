@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EvercamCamera.h"
 #import "GAI.h"
+#import "NIDropDown.h"
 
 @protocol AddCameraViewControllerDelegate <NSObject>
 
@@ -17,9 +18,10 @@
 
 @end
 
-@interface AddCameraViewController : GAITrackedViewController
+@interface AddCameraViewController : GAITrackedViewController <NIDropDownDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *formView;
 @property (weak, nonatomic) IBOutlet UITextField *tfID;
 @property (weak, nonatomic) IBOutlet UITextField *tfName;
 @property (weak, nonatomic) IBOutlet UITextField *tfVendor;

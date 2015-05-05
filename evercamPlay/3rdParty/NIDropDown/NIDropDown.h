@@ -10,7 +10,7 @@
 
 @class NIDropDown;
 @protocol NIDropDownDelegate <NSObject>
-- (void) niDropDownDidSelectAtIndex:(NSInteger)index;
+- (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index;
 @end
 
 @interface NIDropDown : UIView <UITableViewDelegate, UITableViewDataSource>

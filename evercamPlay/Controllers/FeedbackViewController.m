@@ -119,7 +119,7 @@
 
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:nil
-                                  message:@"Thanks for the feedback. We take all our feedback seriously, so we will be in a contact"
+                                  message:@"Thanks for the feedback"
                                   preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* ok = [UIAlertAction
                          actionWithTitle:@"OK"

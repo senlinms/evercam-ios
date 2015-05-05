@@ -576,9 +576,10 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 #pragma mark NIDropdown delegate
-- (void) niDropDownDidSelectAtIndex: (NSInteger) index {
+- (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index {
     dropDown = nil;
     self.cameraInfo = [self.cameras objectAtIndex:index];
+    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
 }
 

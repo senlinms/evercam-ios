@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
@@ -26,8 +27,8 @@
                     <rect key="frame" x="0.0" y="20" width="320" height="52"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcE-26-gnE">
-                            <rect key="frame" x="8" y="11" width="30" height="30"/>
-                            <state key="normal" backgroundImage="evercam_icon.png">
+                            <rect key="frame" x="8" y="12" width="27" height="27"/>
+                            <state key="normal" backgroundImage="ic_menu.png">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -90,35 +91,34 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Marco Herbst" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uf7-u4-CSa">
                             <rect key="frame" x="63" y="76" width="249" height="25"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="GHn-mF-JfX"/>
-                            </connections>
-                        </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="marco@evercam.io" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2m-78-DL8">
-                            <rect key="frame" x="63" y="109" width="249" height="25"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="0gs-Zh-TN6"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write your feedback" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aay-2Y-JGh">
                             <rect key="frame" x="8" y="142" width="304" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="w1k-5k-lWB"/>
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caD-DU-MBa" userLabel="line1">
-                            <rect key="frame" x="8" y="173" width="304" height="1"/>
                             <color key="backgroundColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="marco@evercam.io" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2m-78-DL8">
+                            <rect key="frame" x="63" y="109" width="249" height="25"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="0gs-Zh-TN6"/>
+                            </connections>
+                        </textField>
                     </subviews>
                 </scrollView>
             </subviews>
@@ -129,5 +129,6 @@
     </objects>
     <resources>
         <image name="evercam_icon.png" width="192" height="192"/>
+        <image name="ic_menu.png" width="27" height="27"/>
     </resources>
 </document>
