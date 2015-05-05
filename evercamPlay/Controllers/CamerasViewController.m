@@ -149,6 +149,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [AsyncImageView releaseCacheMemory];
                 cameraArray = [NSMutableArray arrayWithArray:cameras];
+                
                 [self.camerasView reloadData];
             });
         }
@@ -249,6 +250,10 @@
 #pragma mark - AddCameraViewController Delegate Method
 - (void)cameraAdded:(EvercamCamera *)camera {
     [cameraArray addObject:camera];
+    NSArray *sortedArray = [cameraArray sortedArrayUsingComparator:^NSComparisonResult(EvercamCamera *c1, EvercamCamera *c2){
+        return [c1.name caseInsensitiveCompare:c2.name];
+    }];
+    cameraArray = [NSMutableArray arrayWithArray:sortedArray];
     [self.camerasView reloadData];
     [self showCamera:camera];
 }

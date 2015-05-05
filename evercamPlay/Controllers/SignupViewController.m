@@ -603,7 +603,8 @@
 }
 
 #pragma mark NIDropdown delegate
-- (void) niDropDownDidSelectAtIndex: (NSInteger) index {
+- (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index
+{
     dropDown = nil;
 }
 

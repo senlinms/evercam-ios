@@ -91,13 +91,27 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 30;
+    return 50;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.list count];
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
@@ -106,7 +120,7 @@
     UIImageView *imgView;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 10, 10, 10)];
         [imgView setContentMode:UIViewContentModeScaleToFill];
         [imgView setTag:100];
@@ -116,14 +130,43 @@
     }
     if ([self.imageList count] == [self.list count]) {
         cell.textLabel.text =[list objectAtIndex:indexPath.row];
+        [cell.textLabel sizeToFit];
+        if (cell.textLabel.frame.size.width >= tableView.frame.size.width)
+        {
+            CGRect frame = cell.textLabel.frame;
+            frame.size.width = tableView.frame.size.width - 40;
+            cell.textLabel.frame = frame;
+        }
+        
+        imgView.frame = CGRectMake(cell.textLabel.frame.size.width+20, 20, 10, 10);
+
         imgView.image = [imageList objectAtIndex:indexPath.row];
     } else if ([self.imageList count] > [self.list count]) {
         cell.textLabel.text =[list objectAtIndex:indexPath.row];
+        [cell.textLabel sizeToFit];
+        if (cell.textLabel.frame.size.width >= tableView.frame.size.width)
+        {
+            CGRect frame = cell.textLabel.frame;
+            frame.size.width = tableView.frame.size.width - 40;
+            cell.textLabel.frame = frame;
+        }
+
+        imgView.frame = CGRectMake(cell.textLabel.frame.size.width+20, 20, 10, 10);
+
         if (indexPath.row < [imageList count]) {
             imgView.image = [imageList objectAtIndex:indexPath.row];
         }
     } else if ([self.imageList count] < [self.list count]) {
         cell.textLabel.text =[list objectAtIndex:indexPath.row];
+        [cell.textLabel sizeToFit];
+        imgView.frame = CGRectMake(cell.textLabel.frame.size.width+20, 20, 10, 10);
+        if (cell.textLabel.frame.size.width >= tableView.frame.size.width)
+        {
+            CGRect frame = cell.textLabel.frame;
+            frame.size.width = tableView.frame.size.width - 40;
+            cell.textLabel.frame = frame;
+        }
+
         if (indexPath.row < [imageList count]) {
             imgView.image = [imageList objectAtIndex:indexPath.row];
         }
@@ -139,8 +182,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self hideDropDown:btnSender];
     
-    UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];
-    [btnSender setTitle:c.textLabel.text forState:UIControlStateNormal];
+    //UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];
+    //[btnSender setTitle:c.textLabel.text forState:UIControlStateNormal];
     
     for (UIView *subview in btnSender.subviews) {
         if ([subview isKindOfClass:[UIImageView class]]) {
@@ -148,8 +191,8 @@
         }
     }
  
-    if ([self.delegate respondsToSelector:@selector(niDropDownDidSelectAtIndex:)]) {
-        [self.delegate niDropDownDidSelectAtIndex:indexPath.row];
+    if ([self.delegate respondsToSelector:@selector(niDropDown:didSelectAtIndex:)]) {
+        [self.delegate niDropDown:self didSelectAtIndex:indexPath.row];
     }
 }
 

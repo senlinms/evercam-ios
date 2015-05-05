@@ -20,7 +20,10 @@
 #import "NetworkUtil.h"
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
-
+{
+    NIDropDown *vendorDropDown;
+    NIDropDown *modelDropDown;
+}
 @property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -29,7 +32,9 @@
 @property (nonatomic, strong) EvercamVendor *currentVendor;
 @property (nonatomic, strong) EvercamModel *currentModel;
 @property (nonatomic, strong) NSArray *vendorsArray;
+@property (nonatomic, strong) NSMutableArray *vendorsNameArray;
 @property (nonatomic, strong) NSArray *modelsArray;
+@property (nonatomic, strong) NSMutableArray *modelsNameArray;
 
 @end
 
@@ -40,6 +45,11 @@
     
     self.screenName = @"Add/Edit Camera";
     
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
     [self.scrollView setContentSize:CGSizeMake(0, 655)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -48,11 +58,35 @@
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
-    [self.view addGestureRecognizer:singleFingerTap];
+    [self.formView addGestureRecognizer:singleFingerTap];
     
     [self initialScreen];
     
+    self.vendorsNameArray = [NSMutableArray array];
+    self.modelsNameArray = [NSMutableArray array];
+    
     [self getAllVendors];
+    
+    if ([self.tfID respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+        UIColor *color = [UIColor lightTextColor];
+        self.tfID.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"roof-cam" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Rooftop Camera" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfVendor.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Select Make" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfModel.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Select Model" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfUsername.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfSnapshot.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/snapshot.jpg" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfExternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"149.5.43.10" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfExternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"External HTTP port" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfExternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"External RTSP port" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfInternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"192.168.1.122" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfInternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal HTTP port" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfInternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal RTSP port" attributes:@{NSForegroundColorAttributeName: color}];
+    } else {
+        NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
+        // TODO: Add fall-back code to set placeholder color.
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,6 +149,7 @@
 }
 
 - (IBAction)test:(id)sender {
+    [self.focusedTextField resignFirstResponder];
     if (self.tfExternalHost.text.length == 0) {
         UIAlertController * alert=   [UIAlertController
                                       alertControllerWithTitle: nil
@@ -247,19 +282,53 @@
 }
 
 - (IBAction)selectMake:(id)sender {
-    SelectVendorViewController *selectVendorVC = [[SelectVendorViewController alloc] initWithNibName:@"SelectVendorViewController" bundle:nil];
-    [selectVendorVC setDelegate:self];
-    [selectVendorVC setSelectedVendor:self.currentVendor];
-    [selectVendorVC setVendorsArray:self.vendorsArray];
-    [self.navigationController pushViewController:selectVendorVC animated:YES];
+    if (self.vendorsArray == nil || self.vendorsArray.count <= 0)
+        return;
+    
+    [self.focusedTextField resignFirstResponder];
+    
+    NSArray * arrImage = [[NSArray alloc] init];
+    
+    if(vendorDropDown == nil) {
+        CGFloat f = 200;
+        vendorDropDown = [[NIDropDown alloc] showDropDown:sender height:&f textArray:self.vendorsNameArray imageArray:arrImage direction:@"down"] ;
+        vendorDropDown.delegate = self;
+    }
+    else {
+        [vendorDropDown hideDropDown:sender];
+        vendorDropDown = nil;
+    }
+    
+//    SelectVendorViewController *selectVendorVC = [[SelectVendorViewController alloc] initWithNibName:@"SelectVendorViewController" bundle:nil];
+//    [selectVendorVC setDelegate:self];
+//    [selectVendorVC setSelectedVendor:self.currentVendor];
+//    [selectVendorVC setVendorsArray:self.vendorsArray];
+//    [self.navigationController pushViewController:selectVendorVC animated:YES];
 }
 
 - (IBAction)selectModel:(id)sender {
-    SelectModelViewController *selectModelVC = [[SelectModelViewController alloc] initWithNibName:@"SelectModelViewController" bundle:nil];
-    [selectModelVC setDelegate:self];
-    [selectModelVC setSelectedVendor:self.currentVendor];
-    [selectModelVC setSelectedModel:self.currentModel];
-    [self.navigationController pushViewController:selectModelVC animated:YES];
+    if (self.modelsArray == nil || self.modelsArray.count <= 0)
+        return;
+    
+    [self.focusedTextField resignFirstResponder];
+    
+    NSArray * arrImage = [[NSArray alloc] init];
+    
+    if(modelDropDown == nil) {
+        CGFloat f = 200;
+        modelDropDown = [[NIDropDown alloc] showDropDown:sender height:&f textArray:self.modelsNameArray imageArray:arrImage direction:@"down"] ;
+        modelDropDown.delegate = self;
+    }
+    else {
+        [modelDropDown hideDropDown:sender];
+        modelDropDown = nil;
+    }
+    
+//    SelectModelViewController *selectModelVC = [[SelectModelViewController alloc] initWithNibName:@"SelectModelViewController" bundle:nil];
+//    [selectModelVC setDelegate:self];
+//    [selectModelVC setSelectedVendor:self.currentVendor];
+//    [selectModelVC setSelectedModel:self.currentModel];
+//    [self.navigationController pushViewController:selectModelVC animated:YES];
 }
 
 #pragma mark - UIKeyboard events
@@ -780,7 +849,17 @@
 
 - (void)getAllVendors {
     [[EvercamShell shell] getAllVendors:^(NSArray *vendors, NSError *error) {
-        self.vendorsArray = vendors;
+        self.vendorsArray = [vendors sortedArrayUsingComparator:^NSComparisonResult(EvercamVendor *v1, EvercamVendor *v2) {
+            return [v1.name caseInsensitiveCompare:v2.name];
+        }];
+
+        [self.vendorsNameArray removeAllObjects];
+        for (EvercamVendor *vendor in self.vendorsArray)
+        {
+            [self.vendorsNameArray addObject:[vendor.name copy]];
+        }
+        
+        
         if (self.editCamera) {
             self.currentVendor = [self getVendorWithName:self.editCamera.vendor];
             if (self.currentVendor) {
@@ -795,7 +874,15 @@
     self.modelsArray = nil;
     if (self.currentVendor) {
         [[EvercamShell shell] getAllModelsByVendorId:self.currentVendor.vId withBlock:^(NSArray *models, NSError *error) {
-            self.modelsArray = models;
+            self.modelsArray = [models sortedArrayUsingComparator:^NSComparisonResult(EvercamModel *m1, EvercamModel *m2) {
+                return [m1.name caseInsensitiveCompare:m2.name];
+            }];
+            
+            [self.modelsNameArray removeAllObjects];
+            for (EvercamModel *model in self.modelsArray)
+                [self.modelsNameArray addObject:[model.name copy]];
+
+            
             if (self.editCamera) {
                 if (self.tfModel.text.length == 0) {
                     self.currentModel = [self getModelWithName:self.editCamera.model];
@@ -835,6 +922,30 @@
     }
     
     return nil;
+}
+
+#pragma mark NIDropdown delegate
+- (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index
+{
+    if (dropdown == vendorDropDown)
+    {
+        vendorDropDown = nil;
+        self.currentVendor = self.vendorsArray[index];
+        self.tfVendor.text = self.currentVendor.name;
+        
+        [self getAllModels];
+    }
+    else if (dropdown == modelDropDown)
+    {
+        modelDropDown = nil;
+        self.currentModel = self.modelsArray[index];
+        self.tfModel.text = self.currentModel.name;
+        if (self.editCamera == nil) {
+            self.tfUsername.text = self.currentModel.defaults.authUsername;
+            self.tfPassword.text = self.currentModel.defaults.authPassword;
+            self.tfSnapshot.text = self.currentModel.defaults.jpgURL;
+        }
+    }
 }
 
 @end

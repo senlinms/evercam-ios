@@ -212,7 +212,7 @@
                     [user setDataWithEvercamUser:newuser];
                     [user setApiKeyPairWithApiKey:userKeyPair.apiKey andApiId:userKeyPair.apiId];
                     [APP_DELEGATE saveContext];
-                    [APP_DELEGATE setDefaultUser:user];
+                    //[APP_DELEGATE setDefaultUser:user];
                     
                     [self getAllUsers];
                     
