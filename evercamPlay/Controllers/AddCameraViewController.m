@@ -290,8 +290,10 @@
     NSArray * arrImage = [[NSArray alloc] init];
     
     if(vendorDropDown == nil) {
-        CGFloat f = 200;
-        vendorDropDown = [[NIDropDown alloc] showDropDown:sender height:&f textArray:self.vendorsNameArray imageArray:arrImage direction:@"down"] ;
+        CGFloat f = self.scrollView.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
+        CGFloat h = (self.vendorsNameArray.count * DropDownCellHeight);
+        
+        vendorDropDown = [[NIDropDown alloc] showDropDown:sender height:(h<=f?&h: &f) textArray:self.vendorsNameArray imageArray:arrImage direction:@"down"] ;
         vendorDropDown.delegate = self;
     }
     else {
@@ -315,8 +317,10 @@
     NSArray * arrImage = [[NSArray alloc] init];
     
     if(modelDropDown == nil) {
-        CGFloat f = 200;
-        modelDropDown = [[NIDropDown alloc] showDropDown:sender height:&f textArray:self.modelsNameArray imageArray:arrImage direction:@"down"] ;
+        CGFloat f = self.scrollView.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
+        CGFloat h = (self.modelsNameArray.count * DropDownCellHeight);
+
+        modelDropDown = [[NIDropDown alloc] showDropDown:sender height:(h<=f?&h: &f) textArray:self.modelsNameArray imageArray:arrImage direction:@"down"] ;
         modelDropDown.delegate = self;
     }
     else {
@@ -433,6 +437,17 @@
 #pragma mark - UITapGesture Recognizer
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
     [self.focusedTextField resignFirstResponder];
+    if (modelDropDown)
+    {
+        [modelDropDown hideDropDown:(UIButton*)self.tfModel];
+        modelDropDown = nil;
+    }
+    if (vendorDropDown)
+    {
+        [vendorDropDown hideDropDown:(UIButton*)self.tfVendor];
+        vendorDropDown = nil;
+    }
+
 }
 
 #pragma mark - SelectModelViewController Delegate Method

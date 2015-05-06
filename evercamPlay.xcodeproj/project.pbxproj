@@ -165,8 +165,6 @@
 		CB92361D1AB2DABF0031E23A /* EvercamUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB92361C1AB2DABF0031E23A /* EvercamUser.m */; };
 		CBDFA55C1AE6B172007CC199 /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDFA55B1AE6B172007CC199 /* GStreamer.framework */; };
 		CBDFA5601AE92806007CC199 /* ic_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = CBDFA55D1AE92806007CC199 /* ic_menu.png */; };
-		CBDFA5611AE92806007CC199 /* ic_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBDFA55E1AE92806007CC199 /* ic_menu@2x.png */; };
-		CBDFA5621AE92806007CC199 /* ic_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBDFA55F1AE92806007CC199 /* ic_menu@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -421,8 +419,6 @@
 		CB92361C1AB2DABF0031E23A /* EvercamUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUser.m; sourceTree = "<group>"; };
 		CBDFA55B1AE6B172007CC199 /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
 		CBDFA55D1AE92806007CC199 /* ic_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu.png; sourceTree = "<group>"; };
-		CBDFA55E1AE92806007CC199 /* ic_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_menu@2x.png"; sourceTree = "<group>"; };
-		CBDFA55F1AE92806007CC199 /* ic_menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_menu@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -771,8 +767,6 @@
 				CB1C76A41AAB871A00680FE3 /* ic_clock.png */,
 				CB1C76A51AAB871A00680FE3 /* ic_content_undo.png */,
 				CBDFA55D1AE92806007CC199 /* ic_menu.png */,
-				CBDFA55E1AE92806007CC199 /* ic_menu@2x.png */,
-				CBDFA55F1AE92806007CC199 /* ic_menu@3x.png */,
 				CB1C76A61AAB871A00680FE3 /* ic_navigation_back.png */,
 				CB1C76A71AAB871A00680FE3 /* ic_navigation_cancel.png */,
 				CB1C76A81AAB871A00680FE3 /* ic_navigation_refresh.png */,
@@ -1075,7 +1069,6 @@
 				41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */,
 				CB1C76BE1AAB871A00680FE3 /* dot_on_red.png in Resources */,
 				CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */,
-				CBDFA5611AE92806007CC199 /* ic_menu@2x.png in Resources */,
 				CB1C76B61AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png in Resources */,
 				CB1C76B21AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png in Resources */,
 				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
@@ -1107,7 +1100,6 @@
 				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
 				CB1C76C81AAB871A00680FE3 /* ic_action_overflow.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
-				CBDFA5621AE92806007CC199 /* ic_menu@3x.png in Resources */,
 				CB1C76C61AAB871A00680FE3 /* hikvision.png in Resources */,
 				CB44E8751AAE9E7D00A78C11 /* LoginViewController.xib in Resources */,
 				CB1C76CC1AAB871A00680FE3 /* ic_clock.png in Resources */,

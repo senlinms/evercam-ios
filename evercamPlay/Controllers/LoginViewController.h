@@ -14,6 +14,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *txt_username;
 @property (nonatomic, strong) IBOutlet UITextField *txt_password;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) IBOutlet UIButton *btn_Signup;
 
 - (IBAction)onLogin:(id)sender;
 - (IBAction)onBack:(id)sender;

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define DropDownCellHeight 44
+
 @class NIDropDown;
 @protocol NIDropDownDelegate <NSObject>
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index;

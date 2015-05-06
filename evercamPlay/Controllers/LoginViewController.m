@@ -277,7 +277,7 @@
      * it makes sense to set _focusedControl in delegates like -textFieldShouldBeginEditing: if you have multiple input fields
      */
     if (activeTextField) {
-        CGRect controlFrameInScrollView = [_contentView convertRect:activeTextField.bounds fromView:activeTextField]; // if the control is a deep in the hierarchy below the scroll view, this will calculate the frame as if it were a direct subview
+        CGRect controlFrameInScrollView = [_contentView convertRect:_btn_Signup.bounds fromView:_btn_Signup]; // if the control is a deep in the hierarchy below the scroll view, this will calculate the frame as if it were a direct subview
         controlFrameInScrollView = CGRectInset(controlFrameInScrollView, 0, -10); // replace 10 with any nice visual offset between control and keyboard or control and top of the scroll view.
         
         CGFloat controlVisualOffsetToTopOfScrollview = controlFrameInScrollView.origin.y - _contentView.contentOffset.y;
