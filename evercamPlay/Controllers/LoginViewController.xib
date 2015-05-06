@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
                 <outlet property="activityIndicator" destination="pAd-Oy-tsc" id="alt-qQ-HIw"/>
+                <outlet property="btn_Signup" destination="Hoq-LM-btG" id="8eX-U2-UTc"/>
                 <outlet property="contentView" destination="3jq-Bt-7Vo" id="txi-Lr-cgn"/>
                 <outlet property="txt_password" destination="g3Q-4X-OgC" id="D3j-4e-CM9"/>
                 <outlet property="txt_username" destination="HIc-7e-9Pf" id="77M-eW-dqK"/>
@@ -58,7 +59,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email/Username" minimumFontSize="17" id="HIc-7e-9Pf">
-                            <rect key="frame" x="28" y="219" width="270" height="30"/>
+                            <rect key="frame" x="18" y="219" width="278" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -68,7 +69,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="g3Q-4X-OgC">
-                            <rect key="frame" x="28" y="257" width="270" height="30"/>
+                            <rect key="frame" x="21" y="262" width="278" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -77,8 +78,29 @@
                                 <outlet property="delegate" destination="-1" id="p66-rd-sFs"/>
                             </connections>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hoq-LM-btG">
+                            <rect key="frame" x="103" y="464" width="121" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="Create Account">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onCreateAccount:" destination="-1" eventType="touchUpInside" id="Tx8-lm-CLg"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" id="zHh-Xi-voV" userLabel="line1">
+                            <rect key="frame" x="18" y="251" width="285" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="Llw-Hk-gZk" userLabel="line2">
+                            <rect key="frame" x="18" y="292" width="285" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jA7-QY-aKB">
-                            <rect key="frame" x="28" y="311" width="270" height="38"/>
+                            <rect key="frame" x="18" y="317" width="285" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="Sign in with Evercam">
@@ -89,34 +111,6 @@
                                 <action selector="onLogin:" destination="-1" eventType="touchUpInside" id="hcM-a1-7IU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="Hoq-LM-btG">
-                            <rect key="frame" x="103" y="464" width="121" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <state key="normal">
-                                <attributedString key="attributedTitle">
-                                    <fragment content="Create Account">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                            </state>
-                            <connections>
-                                <action selector="onCreateAccount:" destination="-1" eventType="touchUpInside" id="Tx8-lm-CLg"/>
-                            </connections>
-                        </button>
-                        <view contentMode="scaleToFill" id="zHh-Xi-voV" userLabel="line1">
-                            <rect key="frame" x="28" y="251" width="270" height="1"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                        </view>
-                        <view contentMode="scaleToFill" id="Llw-Hk-gZk" userLabel="line2">
-                            <rect key="frame" x="28" y="287" width="270" height="1"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </scrollView>

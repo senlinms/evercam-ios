@@ -313,8 +313,10 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
     
     if(dropDown == nil) {
-        CGFloat f = 300;
-        dropDown = [[NIDropDown alloc] showDropDown:sender height:&f textArray:cameraNameArray imageArray:arrImage direction:@"down"] ;
+        CGFloat f = self.view.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
+        CGFloat h = (cameraNameArray.count * DropDownCellHeight);
+
+        dropDown = [[NIDropDown alloc] showDropDown:sender height:(h<=f?&h: &f) textArray:cameraNameArray imageArray:arrImage direction:@"down"] ;
         dropDown.delegate = self;
     }
     else {
@@ -343,6 +345,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
 }
 - (IBAction)handleSingleTap:(id)sender {
+    if (dropDown)
+    {
+        [dropDown hideDropDown:self.btnTitle];
+        dropDown = nil;
+    }
+    
     if (![self.cameraInfo isOnline]) {
         return;
     }
@@ -477,6 +485,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         }
         
     } else {
+        [loadingView stopAnimating];
         self.lblOffline.hidden = NO;
         self.imageView.hidden = YES;
     }
