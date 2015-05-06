@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewCameraViewController">
@@ -10,7 +11,6 @@
                 <outlet property="lblExternalHTTPPort" destination="BKd-GM-Xvl" id="OPp-T1-DeY"/>
                 <outlet property="lblExternalHost" destination="CmY-H9-sj8" id="eJn-Fo-3mp"/>
                 <outlet property="lblExternalRTSPPort" destination="nI2-gY-g8x" id="5ia-ia-Hno"/>
-                <outlet property="lblID" destination="sKp-nb-b3g" id="Dr9-Lu-PXW"/>
                 <outlet property="lblInternalHTTPPort" destination="DRX-CO-H3y" id="uXN-Xg-XBR"/>
                 <outlet property="lblInternalHost" destination="axX-t1-Cn3" id="3zB-dw-0b3"/>
                 <outlet property="lblInternalRTSPPort" destination="Ufm-jt-z8m" id="onq-fC-5Cu"/>
@@ -23,6 +23,7 @@
                 <outlet property="lblVendor" destination="f9M-3I-DkP" id="ICL-SZ-7YC"/>
                 <outlet property="scrollView" destination="D2T-Gn-tAW" id="cB6-Kp-8LU"/>
                 <outlet property="tvSnapshot" destination="R6S-s4-ZSj" id="v1k-vF-oGf"/>
+                <outlet property="txtID" destination="AQV-eR-tIP" id="BgZ-9p-vuL"/>
                 <outlet property="view" destination="9Ru-is-6Ho" id="0Hl-FB-55E"/>
             </connections>
         </placeholder>
@@ -65,23 +66,24 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" id="dnh-1V-mbr">
-                                    <rect key="frame" x="0.0" y="16" width="320" height="30"/>
+                                    <rect key="frame" x="0.0" y="6" width="320" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evercam ID:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ohs-A2-4Rd">
-                                            <rect key="frame" x="11" y="5" width="92" height="21"/>
+                                            <rect key="frame" x="11" y="9" width="92" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sKp-nb-b3g">
-                                            <rect key="frame" x="105" y="0.0" width="207" height="30"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="AQV-eR-tIP">
+                                            <rect key="frame" x="100" y="0.0" width="212" height="40"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                     </subviews>
                                 </view>
                                 <view contentMode="scaleToFill" id="sRN-Ok-5t0">
