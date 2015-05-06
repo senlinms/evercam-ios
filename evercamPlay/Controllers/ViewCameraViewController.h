@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (weak, nonatomic) IBOutlet UILabel *lblID;
+@property (weak, nonatomic) IBOutlet UITextView *txtID;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblOwner;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimezone;
