@@ -1,0 +1,9 @@
+.DS_Store
+
+# Sensitive data in a local file
+local.plist
+
+# User data
+xcuserdata/
+
+
