@@ -18,8 +18,6 @@
 {
     UITextField *activeTextField;
     
-    __weak IBOutlet UIButton *btnCameraBack1;
-    __weak IBOutlet UIButton *btnCameraBack2;
     __weak IBOutlet UIButton *btnBack;
 }
 @end
@@ -58,9 +56,8 @@
     }
     
     if (self.cameraID) {
-        btnBack.hidden = YES;
-        btnCameraBack1.hidden = NO;
-        btnCameraBack2.hidden = NO;
+        self.btnMenu.hidden = YES;
+        btnBack.hidden = NO;
     }
 }
 

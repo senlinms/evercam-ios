@@ -56,7 +56,6 @@
 						<string key="NSFrame">{{0, 20}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="466472599"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4yMDM5MjE1Njg2IDAuMjIzNTI5NDExOCAwLjIzOTIxNTY4NjMAA</bytes>
@@ -79,7 +78,7 @@
 						<bool key="IBUIBounces">NO</bool>
 						<object class="NSColor" key="IBUISeparatorColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xMDE5NjA3ODQzIDAuMTE3NjQ3MDU4OCAwLjE5NjA3ODQzMTQAA</bytes>
+							<bytes key="NSRGB">MC4xNjQ3MDU4ODI0IDAuMTgwMzkyMTU2OSAwLjE5NjA3ODQzMTQAA</bytes>
 						</object>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 						<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
@@ -100,8 +99,8 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="195775939"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC4yMDM5MjE1Njg2IDAuMjIzNTI5NDExOCAwLjIzOTIxNTY4NjMAA</bytes>
 				</object>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>

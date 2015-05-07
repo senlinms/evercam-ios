@@ -103,15 +103,16 @@
     {
         if (indexPath.row == 0)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:subTitleCellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:subTitleCellIdentifier];
             cell.textLabel.text = @"Cameras per row";
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [PreferenceUtil getCameraPerRow]];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 1)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:subTitleCellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:subTitleCellIdentifier];
             cell.textLabel.text = @"Sleep";
             
             NSInteger sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
@@ -126,6 +127,7 @@
             }
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else
         {
@@ -151,7 +153,7 @@
             NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
             NSString *build = infoDictionary[(NSString*)@"CFBundleShortVersionString"];
             
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:subTitleCellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:subTitleCellIdentifier];
             cell.textLabel.text = @"Version";
             cell.detailTextLabel.text = build;
             cell.textLabel.textColor = [UIColor whiteColor];
@@ -162,6 +164,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
             cell.textLabel.text = @"About Evercam";
             cell.textLabel.textColor = [UIColor whiteColor];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     cell.backgroundView.backgroundColor = [UIColor colorWithRed:52.f/255.f green:57.f/255.f blue:61.f/255.f alpha:1];
@@ -315,4 +318,18 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 @end

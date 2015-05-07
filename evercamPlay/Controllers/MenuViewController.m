@@ -87,26 +87,31 @@
     if (row == 0)
     {
         text = @"Cameras";
+        cell.imageView.image = [UIImage imageNamed:@"ic_cameras.png"];
     }
     else if (row == 1)
     {
         text = @"Account";
+        cell.imageView.image = [UIImage imageNamed:@"ic_accounts.png"];
     }
     else if (row == 2)
     {
         text = @"Settings";
+        cell.imageView.image = [UIImage imageNamed:@"ic_settings.png"];
     }
     else if (row == 3)
     {
         text = @"Feedback";
+        cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
     }
     else if (row == 4)
     {
         text = @"Sign Out";
+        cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
     }
 
     cell.textLabel.text = NSLocalizedString( text,nil );
-    cell.imageView.image = [UIImage imageNamed:@"signout.png"];
+
 	
     return cell;
 }

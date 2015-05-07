@@ -7,10 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedbackViewController">
             <connections>
-                <outlet property="btnBack" destination="YcE-26-gnE" id="HG6-8r-IcC"/>
-                <outlet property="btnCameraBack1" destination="7XU-2U-SbN" id="scV-h5-4si"/>
-                <outlet property="btnCameraBack2" destination="UI0-0f-yI2" id="r7c-ML-2P8"/>
-                <outlet property="btnMenu" destination="YcE-26-gnE" id="ChD-oi-nFU"/>
+                <outlet property="btnBack" destination="KGW-cu-gdt" id="AIt-fO-J74"/>
+                <outlet property="btnMenu" destination="YcE-26-gnE" id="bkL-51-vgA"/>
                 <outlet property="contentView" destination="oVs-In-LFT" id="ggo-9B-cIn"/>
                 <outlet property="txt_email" destination="h2m-78-DL8" id="LhF-ey-ALr"/>
                 <outlet property="txt_feedback" destination="aay-2Y-JGh" id="i3C-d0-OfI"/>
@@ -23,47 +21,40 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="obr-Gt-Xbf" userLabel="statusbar">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                    <color key="backgroundColor" red="0.20392156862745098" green="0.22352941176470587" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i0u-Yo-ZuB" userLabel="titlebar">
                     <rect key="frame" x="0.0" y="20" width="320" height="52"/>
                     <subviews>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGW-cu-gdt" userLabel="Back">
+                            <rect key="frame" x="0.0" y="11" width="30" height="30"/>
+                            <state key="normal" backgroundImage="back.png">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="Plv-Tn-UJz"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcE-26-gnE">
-                            <rect key="frame" x="8" y="12" width="27" height="27"/>
+                            <rect key="frame" x="8" y="16" width="20" height="20"/>
                             <state key="normal" backgroundImage="ic_menu.png">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XU-2U-SbN">
-                            <rect key="frame" x="22" y="11" width="30" height="30"/>
-                            <state key="normal" backgroundImage="evercam_icon.png">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="back:" destination="-1" eventType="touchUpInside" id="e6F-5W-dux"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UI0-0f-yI2">
-                            <rect key="frame" x="13" y="11" width="13" height="30"/>
-                            <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
-                            <state key="normal" title="&lt;">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="back:" destination="-1" eventType="touchUpInside" id="6dP-U3-v6w"/>
-                            </connections>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CE2-ca-fle">
                             <rect key="frame" x="118" y="14" width="85" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGP-UH-lZW">
                             <rect key="frame" x="266" y="11" width="46" height="30"/>
                             <state key="normal" title="SEND">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -128,7 +119,7 @@
         </view>
     </objects>
     <resources>
-        <image name="evercam_icon.png" width="192" height="192"/>
-        <image name="ic_menu.png" width="27" height="27"/>
+        <image name="back.png" width="128" height="128"/>
+        <image name="ic_menu.png" width="100" height="100"/>
     </resources>
 </document>
