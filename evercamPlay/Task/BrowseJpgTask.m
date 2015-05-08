@@ -37,7 +37,9 @@
     }
     
     [[EvercamShell shell] getSnapshotFromCamId:self.cameraInfo.camId withBlock:^(NSData *imgData, NSError *error) {
-        [self.loadingView stopAnimating];
+        if (self.loadingView)
+            [self.loadingView stopAnimating];
+        
         if (error == nil && imgData != nil) {
             [self.imageView setImage:[UIImage imageWithData:imgData]];
             self.imageView.hidden = NO;

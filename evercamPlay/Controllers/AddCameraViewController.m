@@ -249,56 +249,150 @@
     if (cameraBuilder != nil) {
         if (!self.editCamera) { // create camera
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            dispatch_async(dispatch_get_global_queue(0,0), ^{
-                BOOL isReachableExternally = [self isSnapshotReachableExternally:cameraBuilder];
-                BOOL isReachableInternally = NO;
-                if (!isReachableExternally) {
-                    isReachableInternally = [self isSnapshotReachableInternally:cameraBuilder];
-                    
-                    if (!isReachableInternally) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                            UIAlertController * alert=   [UIAlertController
-                                                          alertControllerWithTitle:@"Warning"
-                                                          message:@"We can't connect to your camera, are you sure want to add it?"
-                                                          preferredStyle:UIAlertControllerStyleAlert];
-                            
-                            UIAlertAction* no = [UIAlertAction
-                                                 actionWithTitle:@"No"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action)
-                                                 {
-                                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                                 }];
-                            UIAlertAction* yes = [UIAlertAction
-                                                  actionWithTitle:@"Yes"
-                                                  style:UIAlertActionStyleDefault
-                                                  handler:^(UIAlertAction * action)
-                                                  {
-                                                      [alert dismissViewControllerAnimated:YES completion:nil];
-                                                      [self createCamera:cameraBuilder withStatus:NO];
-                                                  }];
-                            
-                            [alert addAction:no];
-                            [alert addAction:yes];
-                            [self presentViewController:alert animated:YES completion:nil];
-                        });
-                        
-                        return;
-                    }
-                }
+            
+            // External URL Check
+            NSString *externalHost = cameraBuilder.externalHost;
+            NSString *username = cameraBuilder.cameraUsername;
+            NSString *password = cameraBuilder.cameraPassword;
+            NSString *jpgUrlString = [self buildJpgUrlWithSlash:cameraBuilder.jpgUrl];
+            
+            if (externalHost && externalHost.length > 0) {
+                // External URL Check
+                NSString *externalFullUrl = [self buildFullHttpUrl:externalHost andPort:cameraBuilder.externalHttpPort andJpgUrl:jpgUrlString withUsername:username andPassword:password];
+                SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                [manager downloadImageWithURL:[NSURL URLWithString:externalFullUrl]
+                                      options:0
+                                     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                         // progression tracking code
+                                     }
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                        if (image) {
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                [self createCamera:cameraBuilder withStatus:YES];
+                                            });
+                                        }
+                                        else
+                                        {
+                                            // Internal URL Check
+                                            NSString *internalHost = cameraBuilder.internalHost;
+                                            NSString *username = cameraBuilder.cameraUsername;
+                                            NSString *password = cameraBuilder.cameraPassword;
+                                            NSString *jpgUrlString = [self buildJpgUrlWithSlash:cameraBuilder.jpgUrl];
+                                            
+                                            if (internalHost && internalHost.length > 0) {
+                                                NSString *internalFullUrl = [self buildFullHttpUrl:internalHost andPort:cameraBuilder.externalHttpPort andJpgUrl:jpgUrlString withUsername:username andPassword:password];
+                                                
+                                                SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                                                [manager downloadImageWithURL:[NSURL URLWithString:internalFullUrl]
+                                                                      options:0
+                                                                     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                                                         // progression tracking code
+                                                                     }
+                                                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                                                        if (image) {
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                                                [self createCamera:cameraBuilder withStatus:YES];
+                                                                            });
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                                                UIAlertController * alert=   [UIAlertController
+                                                                                                              alertControllerWithTitle:@"Warning"
+                                                                                                              message:@"We can't connect to your camera, are you sure want to add it?"
+                                                                                                              preferredStyle:UIAlertControllerStyleAlert];
+                                                                                
+                                                                                UIAlertAction* no = [UIAlertAction
+                                                                                                     actionWithTitle:@"No"
+                                                                                                     style:UIAlertActionStyleDefault
+                                                                                                     handler:^(UIAlertAction * action)
+                                                                                                     {
+                                                                                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                                                     }];
+                                                                                UIAlertAction* yes = [UIAlertAction
+                                                                                                      actionWithTitle:@"Yes"
+                                                                                                      style:UIAlertActionStyleDefault
+                                                                                                      handler:^(UIAlertAction * action)
+                                                                                                      {
+                                                                                                          [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                                                          [self createCamera:cameraBuilder withStatus:NO];
+                                                                                                      }];
+                                                                                
+                                                                                [alert addAction:no];
+                                                                                [alert addAction:yes];
+                                                                                [self presentViewController:alert animated:YES completion:nil];
+                                                                            });
+                                                                        }
+                                                                    }];
+                                            }
+                                            else
+                                            {
+                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                UIAlertController * alert=   [UIAlertController
+                                                                              alertControllerWithTitle:@"Warning"
+                                                                              message:@"We can't connect to your camera, are you sure want to add it?"
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+                                                
+                                                UIAlertAction* no = [UIAlertAction
+                                                                     actionWithTitle:@"No"
+                                                                     style:UIAlertActionStyleDefault
+                                                                     handler:^(UIAlertAction * action)
+                                                                     {
+                                                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                     }];
+                                                UIAlertAction* yes = [UIAlertAction
+                                                                      actionWithTitle:@"Yes"
+                                                                      style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action)
+                                                                      {
+                                                                          [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                          [self createCamera:cameraBuilder withStatus:NO];
+                                                                      }];
+                                                
+                                                [alert addAction:no];
+                                                [alert addAction:yes];
+                                                [self presentViewController:alert animated:YES completion:nil];
+                                            }
+                                        }
+                                    }];
+            }
+            else
+            {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                UIAlertController * alert=   [UIAlertController
+                                              alertControllerWithTitle:@"Warning"
+                                              message:@"We can't connect to your camera, are you sure want to add it?"
+                                              preferredStyle:UIAlertControllerStyleAlert];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    [self createCamera:cameraBuilder withStatus:YES];
-                });
-            });
+                UIAlertAction* no = [UIAlertAction
+                                     actionWithTitle:@"No"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+                UIAlertAction* yes = [UIAlertAction
+                                      actionWithTitle:@"Yes"
+                                      style:UIAlertActionStyleDefault
+                                      handler:^(UIAlertAction * action)
+                                      {
+                                          [alert dismissViewControllerAnimated:YES completion:nil];
+                                          [self createCamera:cameraBuilder withStatus:NO];
+                                      }];
+                
+                [alert addAction:no];
+                [alert addAction:yes];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
         } else { // patch camera
             [self patchCamera:cameraBuilder];
         }
-        
     }
 }
+
 
 - (IBAction)selectMake:(id)sender {
     if (self.vendorsArray == nil || self.vendorsArray.count <= 0)
@@ -727,44 +821,6 @@
     }
     
     return jpgUrl;
-}
-
-- (BOOL) isSnapshotReachableExternally:(EvercamCameraBuilder *)cameraBuilder {
-    NSString *externalHost = cameraBuilder.externalHost;
-    NSString *username = cameraBuilder.cameraUsername;
-    NSString *password = cameraBuilder.cameraPassword;
-    NSString *jpgUrlString = [self buildJpgUrlWithSlash:cameraBuilder.jpgUrl];
-    
-    if (externalHost && externalHost.length > 0) {
-        NSString *externalFullUrl = [self buildFullHttpUrl:externalHost andPort:cameraBuilder.externalHttpPort andJpgUrl:jpgUrlString withUsername:username andPassword:password];
-        NSURL *externalUrl = [NSURL URLWithString:externalFullUrl];
-        NSError *err = nil;
-        if ([externalUrl checkResourceIsReachableAndReturnError:&err])
-        {
-            return YES;
-        }
-    }
-    
-    return NO;
-}
-
-- (BOOL) isSnapshotReachableInternally:(EvercamCameraBuilder *)cameraBuilder {
-    NSString *internalHost = cameraBuilder.internalHost;
-    NSString *username = cameraBuilder.cameraUsername;
-    NSString *password = cameraBuilder.cameraPassword;
-    NSString *jpgUrlString = [self buildJpgUrlWithSlash:cameraBuilder.jpgUrl];
-    
-    if (internalHost && internalHost.length > 0) {
-        NSString *internalFullUrl = [self buildFullHttpUrl:internalHost andPort:cameraBuilder.externalHttpPort andJpgUrl:jpgUrlString withUsername:username andPassword:password];
-        NSURL *internalUrl = [NSURL URLWithString:internalFullUrl];
-        NSError *err = nil;
-        if ([internalUrl checkResourceIsReachableAndReturnError:&err])
-        {
-            return YES;
-        }
-    }
-    
-    return NO;
 }
 
 - (NSString *)buildFullHttpUrl:(NSString *)host andPort:(NSInteger)port andJpgUrl:(NSString *)jpgUrl withUsername:(NSString *)username andPassword:(NSString *)password

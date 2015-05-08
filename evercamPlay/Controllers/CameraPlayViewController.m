@@ -95,6 +95,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         self.titlebar.hidden = NO;
         self.btnTitle.hidden = NO;
         self.downImgView.hidden = NO;
+        video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
     }
 }
 
@@ -191,11 +192,16 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (self.imageView.hidden) {
         CGRect rect = [video_view bounds];
         UIGraphicsBeginImageContext(rect.size);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        [video_view.layer renderInContext:context];
+        [video_view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
         UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        imvSnapshot.image = img;
+
+        rect.origin.y = (rect.size.height - rect.size.width*media_height/media_width)/2;
+        rect.size.height = rect.size.width*media_height/media_width;
+        CGImageRef imageRef = CGImageCreateWithImageInRect([img CGImage], rect);
+        // or use the UIImage wherever you like
+        [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
+        CGImageRelease(imageRef);
     } else {
         if (self.imageView.image) {
             imvSnapshot.image = self.imageView.image;
@@ -564,7 +570,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self.imageView displayImage:nil];
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
-        self.imageView.hidden = NO;
+        self.imageView.hidden = YES;
+        self.lblTimeCode.hidden = YES;
+        
         [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
         [loadingView startAnimating];
         
@@ -578,6 +586,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [loadingView stopAnimating];
         self.lblOffline.hidden = NO;
         self.imageView.hidden = YES;
+        video_view.hidden = YES;
+        
+        if (timeCounter && [timeCounter isValid])
+        {
+            [timeCounter invalidate];
+            timeCounter = nil;
+        }
+        self.lblTimeCode.hidden = YES;
     }
     
     isPlaying = YES;
@@ -597,6 +613,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             [timeCounter invalidate];
             timeCounter = nil;
         }
+        self.lblTimeCode.hidden = YES;
 
         if (browseJpgTask) {
             [browseJpgTask stop];
@@ -614,7 +631,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     ctx.media_size_changed = media_size_changed_proxy;
     ctx.set_current_position = set_current_position_proxy;
     ctx.set_message = set_message_proxy;
-    
+
     if (launch) {
         gst_launch_remote_free(launch);
     }
@@ -628,6 +645,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)createBrowseJpgTask {
+    self.imageView.hidden = NO;
     if (timeCounter && [timeCounter isValid])
     {
         [timeCounter invalidate];
@@ -642,6 +660,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     browseJpgTask = [[BrowseJpgTask alloc] initWithCamera:self.cameraInfo andImageView:self.imageView andLoadingView:loadingView];
     [browseJpgTask start];
     
+    self.lblTimeCode.hidden = NO;
     timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
 }
 
@@ -654,6 +673,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     [userFormatter setTimeZone:[NSTimeZone timeZoneWithName:self.cameraInfo.timezone]];
     NSString *dateConverted = [userFormatter stringFromDate:theDate];
+    if (self.lblTimeCode.hidden)
+        self.lblTimeCode.hidden = NO;
     self.lblTimeCode.text = dateConverted;
 }
 
@@ -669,6 +690,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             [timeCounter invalidate];
             timeCounter = nil;
         }
+        self.lblTimeCode.hidden = NO;
         timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
     });
 }
@@ -694,9 +716,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     dispatch_async(dispatch_get_main_queue(), ^{
         self.imageView.hidden = YES;
         [loadingView stopAnimating];
-        [self viewDidLayoutSubviews];
-        [video_view setNeedsLayout];
-        [video_view layoutIfNeeded];
     });
 }
 
