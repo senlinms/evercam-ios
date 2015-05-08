@@ -71,7 +71,10 @@
     [self onRefresh:nil];
     
     ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(320 / [PreferenceUtil getCameraPerRow], 320 / [PreferenceUtil getCameraPerRow] * .75);
-    
+    if ([PreferenceUtil getCameraPerRow] == 3)
+    {
+        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
+    }
 }
 
 - (void)showLoadingView {

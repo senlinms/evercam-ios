@@ -11,11 +11,6 @@
 
 @implementation CommonUtil
 
-+ (NSData *)getDrawable:(NSString *)url {
-    NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
-    return data;
-}
-
 + (NSString *)uuidString {
     // Returns a UUID
     

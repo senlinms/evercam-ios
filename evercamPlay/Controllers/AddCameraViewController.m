@@ -18,11 +18,14 @@
 #import "CommonUtil.h"
 #import "Reachability.h"
 #import "NetworkUtil.h"
+#import "GCDAsyncSocket.h"
+#import "SDWebImageManager.h"
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
     NIDropDown *vendorDropDown;
     NIDropDown *modelDropDown;
+    GCDAsyncSocket *asyncSocket;
 }
 @property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -187,10 +190,20 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
-        BOOL reachable = isPortReachable(self.tfExternalHost.text, [self.tfExternalHttpPort.text integerValue]);
-        [self performSelectorOnMainThread:@selector(isPortReachableDone:) withObject:[NSNumber numberWithBool:reachable] waitUntilDone:YES];
-    });
+    
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    
+    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+
+    NSString *host = self.tfExternalHost.text;
+    uint16_t port = [self.tfExternalHttpPort.text integerValue];
+    
+    NSError *error = nil;
+    if (![asyncSocket connectToHost:host onPort:port error:&error])
+    {
+        NSLog(@"Error connecting: %@", error);
+        [self isPortReachableDone:FALSE];
+    }
 }
 
 - (void)isPortReachableDone:(BOOL)reachable {
@@ -218,11 +231,17 @@
     NSString *externalFullUrl = [self buildFullHttpUrl:self.tfExternalHost.text andPort:[self.tfExternalHttpPort.text integerValue]  andJpgUrl:jpgUrl withUsername:self.tfUsername.text andPassword:self.tfPassword.text];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
-        NSData *imgData = [CommonUtil getDrawable:externalFullUrl];
-        [self performSelectorOnMainThread:@selector(showImageView:) withObject:imgData waitUntilDone:YES];
-    });
- 
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager downloadImageWithURL:[NSURL URLWithString:externalFullUrl]
+                          options:0
+                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                             // progression tracking code
+                         }
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image) {
+                                [self showImageView:image];
+                            }
+                        }];
 }
 
 - (IBAction)add:(id)sender {
@@ -289,6 +308,12 @@
     
     NSArray * arrImage = [[NSArray alloc] init];
     
+    if (modelDropDown)
+    {
+        [modelDropDown hideDropDown:(UIButton*)self.tfModel];
+        modelDropDown = nil;
+    }
+    
     if(vendorDropDown == nil) {
         CGFloat f = self.scrollView.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
         CGFloat h = (self.vendorsNameArray.count * DropDownCellHeight);
@@ -315,6 +340,12 @@
     [self.focusedTextField resignFirstResponder];
     
     NSArray * arrImage = [[NSArray alloc] init];
+    
+    if (vendorDropDown)
+    {
+        [vendorDropDown hideDropDown:(UIButton*)self.tfVendor];
+        vendorDropDown = nil;
+    }
     
     if(modelDropDown == nil) {
         CGFloat f = self.scrollView.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
@@ -706,13 +737,15 @@
     
     if (externalHost && externalHost.length > 0) {
         NSString *externalFullUrl = [self buildFullHttpUrl:externalHost andPort:cameraBuilder.externalHttpPort andJpgUrl:jpgUrlString withUsername:username andPassword:password];
-        
-        if ([CommonUtil getDrawable:externalFullUrl] != nil) {
+        NSURL *externalUrl = [NSURL URLWithString:externalFullUrl];
+        NSError *err = nil;
+        if ([externalUrl checkResourceIsReachableAndReturnError:&err])
+        {
             return YES;
         }
     }
     
-    return false;
+    return NO;
 }
 
 - (BOOL) isSnapshotReachableInternally:(EvercamCameraBuilder *)cameraBuilder {
@@ -723,13 +756,15 @@
     
     if (internalHost && internalHost.length > 0) {
         NSString *internalFullUrl = [self buildFullHttpUrl:internalHost andPort:cameraBuilder.externalHttpPort andJpgUrl:jpgUrlString withUsername:username andPassword:password];
-        
-        if ([CommonUtil getDrawable:internalFullUrl] != nil) {
+        NSURL *internalUrl = [NSURL URLWithString:internalFullUrl];
+        NSError *err = nil;
+        if ([internalUrl checkResourceIsReachableAndReturnError:&err])
+        {
             return YES;
         }
     }
     
-    return false;
+    return NO;
 }
 
 - (NSString *)buildFullHttpUrl:(NSString *)host andPort:(NSInteger)port andJpgUrl:(NSString *)jpgUrl withUsername:(NSString *)username andPassword:(NSString *)password
@@ -839,11 +874,11 @@
     }];
 }
 
-- (void)showImageView:(NSData *)imageData {
+- (void)showImageView:(UIImage *)image {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    if (imageData) {
+    if (image) {
         self.imageContainer.hidden = NO;
-        self.imageView.image = [UIImage imageWithData:imageData];
+        self.imageView.image = image;
     } else {
         UIAlertController * alert=   [UIAlertController
                                       alertControllerWithTitle: nil
@@ -908,7 +943,7 @@
             
             self.currentModel = [self getModelWithName:@"Default"];
             if (self.currentModel) {
-                self.tfModel.text = self.tfModel.text;
+                self.tfModel.text = self.currentModel.name;
                 if (self.editCamera == nil) {
                     self.tfUsername.text = self.currentModel.defaults.authUsername;
                     self.tfPassword.text = self.currentModel.defaults.authPassword;
@@ -937,6 +972,35 @@
     }
     
     return nil;
+}
+#pragma mark Socket Delegate
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
+{
+    NSLog(@"socket:%p didConnectToHost:%@ port:%hu", sock, host, port);
+    [self isPortReachableDone:TRUE];
+}
+
+- (void)socketDidSecure:(GCDAsyncSocket *)sock
+{
+    NSLog(@"socketDidSecure:%p", sock);
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
+{
+    NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    NSLog(@"socketDidSecure:%p", sock);
+
+}
+
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
+{
+    NSLog(@"socketDidDisconnect:%p withError: %@", sock, err);
 }
 
 #pragma mark NIDropdown delegate

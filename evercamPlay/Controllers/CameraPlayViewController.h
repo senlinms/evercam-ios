@@ -24,8 +24,12 @@
     IBOutlet EaglUIView *video_view;
 }
 
-@property (weak, nonatomic) IBOutlet UIButton *btnTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblTimeCode;
 @property (weak, nonatomic) IBOutlet UILabel *lblOffline;
+@property (weak, nonatomic) IBOutlet UIButton *btnTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *downImgView;
+@property (weak, nonatomic) IBOutlet UIView *titlebar;
+@property (weak, nonatomic) IBOutlet UIView *playerView;
 @property (weak, nonatomic) IBOutlet AsyncImageView *imageView;
 
 @property (nonatomic, strong) EvercamCamera *cameraInfo;

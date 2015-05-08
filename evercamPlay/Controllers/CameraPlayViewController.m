@@ -28,6 +28,7 @@
     BrowseJpgTask *browseJpgTask;
     BOOL isPlaying;
     NIDropDown *dropDown;
+    NSTimer *timeCounter;
     
     __weak IBOutlet UIButton *playOrPauseButton;
     __weak IBOutlet UIView *videoController;
@@ -75,15 +76,74 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self playCamera];
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+
+    if (UIDeviceOrientationIsLandscape(deviceOrientation))
+    {
+        self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height);
+        self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
+        self.titlebar.hidden = YES;
+        self.btnTitle.hidden = YES;
+        self.downImgView.hidden = YES;
+    }
+    else
+    {
+        self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
+        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
+        self.titlebar.hidden = NO;
+        self.btnTitle.hidden = NO;
+        self.downImgView.hidden = NO;
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [self disableSleep];
     
     int sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
     [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
+
+    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    if (UIDeviceOrientationIsLandscape(deviceOrientation))
+    {
+        //LandscapeView
+        self.titlebar.hidden = YES;
+        self.btnTitle.hidden = YES;
+        self.downImgView.hidden = YES;
+    }
+    else
+    {
+        self.titlebar.hidden = NO;
+        self.btnTitle.hidden = NO;
+        self.downImgView.hidden = NO;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self enableSleep];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    if (UIDeviceOrientationIsLandscape(deviceOrientation))
+    {
+        //LandscapeView
+        self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height);
+        self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
+        self.titlebar.hidden = YES;
+        self.btnTitle.hidden = YES;
+        self.downImgView.hidden = YES;
+    }
+    else
+    {
+        self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
+        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
+        self.titlebar.hidden = NO;
+        self.btnTitle.hidden = NO;
+        self.downImgView.hidden = NO;
+    }
 }
 
 - (void)disableSleep {
@@ -98,6 +158,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (launch)
     {
         gst_launch_remote_free(launch);
+    }
+    
+    if (timeCounter && [timeCounter isValid])
+    {
+        [timeCounter invalidate];
+        timeCounter = nil;
     }
     
     if (browseJpgTask) {
@@ -329,6 +395,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 
+    if (timeCounter && [timeCounter isValid])
+    {
+        [timeCounter invalidate];
+        timeCounter = nil;
+    }
+
     if (browseJpgTask) {
         [browseJpgTask stop];
         browseJpgTask = nil;
@@ -345,6 +417,24 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
 }
 - (IBAction)handleSingleTap:(id)sender {
+    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    if (UIDeviceOrientationIsLandscape(deviceOrientation))
+    {
+        //LandscapeView
+        if (self.titlebar.hidden)
+        {
+            self.titlebar.hidden = NO;
+            self.btnTitle.hidden = NO;
+            self.downImgView.hidden = NO;
+        }
+        else
+        {
+            self.titlebar.hidden = YES;
+            self.btnTitle.hidden = YES;
+            self.downImgView.hidden = YES;
+        }
+    }
+    
     if (dropDown)
     {
         [dropDown hideDropDown:self.btnTitle];
@@ -502,6 +592,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             gst_launch_remote_free(launch);
         }
         
+        if (timeCounter && [timeCounter isValid])
+        {
+            [timeCounter invalidate];
+            timeCounter = nil;
+        }
+
         if (browseJpgTask) {
             [browseJpgTask stop];
             browseJpgTask = nil;
@@ -532,6 +628,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)createBrowseJpgTask {
+    if (timeCounter && [timeCounter isValid])
+    {
+        [timeCounter invalidate];
+        timeCounter = nil;
+    }
+    
     if (browseJpgTask) {
         [browseJpgTask stop];
         browseJpgTask = nil;
@@ -539,6 +641,20 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     browseJpgTask = [[BrowseJpgTask alloc] initWithCamera:self.cameraInfo andImageView:self.imageView andLoadingView:loadingView];
     [browseJpgTask start];
+    
+    timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
+}
+
+#pragma mark Timer
+-(void) updateTimeCode
+{
+    NSDate *theDate = [NSDate date];
+    NSDateFormatter *userFormatter = [[NSDateFormatter alloc] init];
+    [userFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+    
+    [userFormatter setTimeZone:[NSTimeZone timeZoneWithName:self.cameraInfo.timezone]];
+    NSString *dateConverted = [userFormatter stringFromDate:theDate];
+    self.lblTimeCode.text = dateConverted;
 }
 
 #pragma mark - Gstreamer callback functions
@@ -546,6 +662,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 -(void) initialized {
     NSLog(@"initialized");
     gst_launch_remote_play(launch);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (timeCounter && [timeCounter isValid])
+        {
+            [timeCounter invalidate];
+            timeCounter = nil;
+        }
+        timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
+    });
 }
 
 -(void) setMessage:(NSString *)message {
