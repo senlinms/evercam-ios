@@ -220,19 +220,19 @@
     frmOfflineImg.origin.x = size.width + 10;
     cell.imvOffline.frame = frmOfflineImg;
     
+    [cell.thumbnailImageView setImage:nil];
     cell.thumbnailImageView.offlineImage = [UIImage imageNamed:@"cam_unavailable.png"];
     cell.secondaryView.hidden = NO;
     cell.thumbnailImageView.secondaryView = cell.secondaryView;
     if (cameraInfo.isOnline) {
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
-        [cell.thumbnailImageView setImage:nil];
+        //must setup second url.
+        cell.thumbnailImageView.secondURL = [NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]];
         [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:NO];
-        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]] withSpinny:NO];
     } else {
         cell.greyImv.hidden = NO;
         cell.imvOffline.hidden = NO;
-        [cell.thumbnailImageView setImage:nil];
         if (cameraInfo.thumbnailUrl && cameraInfo.thumbnailUrl.length > 0) {
             [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:NO];
         } else {

@@ -160,6 +160,12 @@ static ImageCache *imageCache = nil;
     
     [data release];
     data = nil;
+    
+    if (self.secondURL)
+    {
+        [self loadImageFromURL:self.secondURL withSpinny:NO];
+        self.secondURL = nil;
+    }
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
@@ -180,6 +186,12 @@ static ImageCache *imageCache = nil;
     
     [self setImage:self.offlineImage];
     [self.secondaryView setHidden:YES];
+    
+    if (self.secondURL)
+    {
+        [self loadImageFromURL:self.secondURL withSpinny:NO];
+        self.secondURL = nil;
+    }
 }
 
 @end
