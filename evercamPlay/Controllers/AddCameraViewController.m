@@ -238,9 +238,8 @@
                              // progression tracking code
                          }
                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                            if (image) {
-                                [self showImageView:image];
-                            }
+                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                            [self showImageView:image];
                         }];
 }
 
@@ -931,7 +930,6 @@
 }
 
 - (void)showImageView:(UIImage *)image {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     if (image) {
         self.imageContainer.hidden = NO;
         self.imageView.image = image;
@@ -1051,12 +1049,15 @@
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     NSLog(@"socketDidSecure:%p", sock);
-
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
     NSLog(@"socketDidDisconnect:%p withError: %@", sock, err);
+    if (err != nil)
+    {
+        [self isPortReachableDone:FALSE];
+    }
 }
 
 #pragma mark NIDropdown delegate

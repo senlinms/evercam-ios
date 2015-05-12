@@ -189,7 +189,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)showSnapshotView {
     [snapshotConfirmView setHidden:NO];
     
-    if (self.imageView.hidden) {
+    if (self.imageView == nil || self.imageView.hidden == YES) {
         CGRect rect = [video_view bounds];
         UIGraphicsBeginImageContext(rect.size);
         [video_view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
@@ -203,7 +203,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
         CGImageRelease(imageRef);
     } else {
-        if (self.imageView.image) {
+        if (self.imageView && self.imageView.image) {
             imvSnapshot.image = self.imageView.image;
         } else {
             [snapshotConfirmView setHidden:YES];
@@ -567,33 +567,39 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)playCamera {
-    [self.imageView displayImage:nil];
+    if (self.imageView)
+    {
+        [self.imageView removeFromSuperview];
+        self.imageView = nil;
+    }
+
+    if (browseJpgTask)
+    {
+        [browseJpgTask stop];
+        browseJpgTask = nil;
+    }
+    
+    if (timeCounter && [timeCounter isValid])
+    {
+        [timeCounter invalidate];
+        timeCounter = nil;
+    }
+    
+    self.lblTimeCode.hidden = YES;
+    video_view.hidden = YES;
+    
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
-        self.imageView.hidden = YES;
-        self.lblTimeCode.hidden = YES;
-        
-        [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
         [loadingView startAnimating];
-        
         if (self.cameraInfo.externalH264Url && self.cameraInfo.externalH264Url.length > 0) {
             [self createPlayer];
         } else {
             [self createBrowseJpgTask];
+            [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
         }
-        
     } else {
         [loadingView stopAnimating];
         self.lblOffline.hidden = NO;
-        self.imageView.hidden = YES;
-        video_view.hidden = YES;
-        
-        if (timeCounter && [timeCounter isValid])
-        {
-            [timeCounter invalidate];
-            timeCounter = nil;
-        }
-        self.lblTimeCode.hidden = YES;
     }
     
     isPlaying = YES;
@@ -644,19 +650,21 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
 }
 
-- (void)createBrowseJpgTask {
-    self.imageView.hidden = NO;
-    if (timeCounter && [timeCounter isValid])
+- (void)createBrowseView {
+    if (self.imageView)
     {
-        [timeCounter invalidate];
-        timeCounter = nil;
+        [self.imageView removeFromSuperview];
+        self.imageView = nil;
     }
-    
-    if (browseJpgTask) {
-        [browseJpgTask stop];
-        browseJpgTask = nil;
-    }
-    
+    self.imageView = [[AsyncImageView alloc] initWithFrame:CGRectMake(0, 0, self.playerView.frame.size.width, self.playerView.frame.size.height)];
+    self.imageView.autoresizingMask= UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.playerView addSubview:self.imageView];
+    [self.playerView sendSubviewToBack:self.imageView];
+}
+
+- (void)createBrowseJpgTask {
+    [self createBrowseView];
     browseJpgTask = [[BrowseJpgTask alloc] initWithCamera:self.cameraInfo andImageView:self.imageView andLoadingView:loadingView];
     [browseJpgTask start];
     
@@ -673,8 +681,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     [userFormatter setTimeZone:[NSTimeZone timeZoneWithName:self.cameraInfo.timezone]];
     NSString *dateConverted = [userFormatter stringFromDate:theDate];
-    if (self.lblTimeCode.hidden)
-        self.lblTimeCode.hidden = NO;
     self.lblTimeCode.text = dateConverted;
 }
 
@@ -690,17 +696,25 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             [timeCounter invalidate];
             timeCounter = nil;
         }
-        self.lblTimeCode.hidden = NO;
         timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
     });
 }
 
 -(void) setMessage:(NSString *)message {
     NSLog(@"setMessage:%@", message);
-    
-    if ([message hasPrefix:@"Error received from element"]) {
+    if ([message hasPrefix:@"State changed to PLAYING"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            video_view.hidden = NO;
+            self.lblTimeCode.hidden = NO;
+        });
+    }
+    if ([message hasPrefix:@"Error received from element"] ||
+        [message hasPrefix:@"Failed to set pipeline to PLAYING"])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [loadingView startAnimating];
             [self createBrowseJpgTask];
+            [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
         });
     }
 }
@@ -714,7 +728,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     media_width = width;
     media_height = height;
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.imageView.hidden = YES;
         [loadingView stopAnimating];
     });
 }

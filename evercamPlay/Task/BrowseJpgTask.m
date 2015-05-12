@@ -22,9 +22,11 @@
 }
 
 - (void)start {
-    stopped = NO;
-    
-    [self getSnapshot];
+    if (stopped == YES)
+    {
+        stopped = NO;
+       [self getSnapshot];
+    }
 }
 
 - (void)stop {

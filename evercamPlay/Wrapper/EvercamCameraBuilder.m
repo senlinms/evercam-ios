@@ -43,7 +43,7 @@
     if (self.externalHttpPort > 0) {
         [dict setValue:[NSString stringWithFormat:@"%d", self.externalHttpPort] forKey:@"external_http_port"];
     }
-    if (self.internalRtspPort > 0) {
+    if (self.externalRtspPort > 0) {
         [dict setValue:[NSString stringWithFormat:@"%d", self.externalRtspPort] forKey:@"external_rtsp_port"];
     }
     if (self.jpgUrl.length > 0) {

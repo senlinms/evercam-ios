@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="btnTitle" destination="Trm-Kg-hD7" id="uVR-kv-9HW"/>
                 <outlet property="downImgView" destination="OyF-4z-dfh" id="5WB-dw-wNN"/>
-                <outlet property="imageView" destination="BMY-6V-ibb" id="2c2-VS-mUu"/>
                 <outlet property="imvSnapshot" destination="odw-TZ-9Nd" id="8CW-MF-OI4"/>
                 <outlet property="lblOffline" destination="wrC-9a-tm3" id="ggv-Du-AWj"/>
                 <outlet property="lblTimeCode" destination="m48-Yg-pyN" id="V3U-8d-FAb"/>
@@ -43,10 +42,6 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="BMY-6V-ibb" customClass="AsyncImageView">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="496"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera is offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wrC-9a-tm3">
                             <rect key="frame" x="91" y="236" width="138" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -65,7 +60,7 @@
                             </connections>
                         </button>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="fbV-26-bT6">
-                            <rect key="frame" x="142" y="229" width="37" height="37"/>
+                            <rect key="frame" x="142" y="228" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <view hidden="YES" contentMode="scaleToFill" id="Mqv-BR-Rvo">
@@ -94,7 +89,7 @@
                                 </button>
                             </subviews>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07/05/2015 20:40:42" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m48-Yg-pyN">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m48-Yg-pyN">
                             <rect key="frame" x="74" y="467" width="173" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -158,7 +153,7 @@
                             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         </view>
                         <view contentMode="scaleToFill" id="4lE-27-uyN">
-                            <rect key="frame" x="20" y="188" width="280" height="191"/>
+                            <rect key="frame" x="20" y="187" width="280" height="191"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="odw-TZ-9Nd">
@@ -199,6 +194,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
         </view>
     </objects>
     <resources>
