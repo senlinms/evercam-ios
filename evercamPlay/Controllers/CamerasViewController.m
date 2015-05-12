@@ -35,7 +35,6 @@
 #import "PreferenceUtil.h"
 #import "CustomNavigationController.h"
 #import "AddCameraViewController.h"
-#import "SDWebImageManager.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -227,6 +226,7 @@
     if (cameraInfo.isOnline) {
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
+        [cell.thumbnailImageView setImage:nil];
         [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:NO];
         [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]] withSpinny:NO];
     } else {
