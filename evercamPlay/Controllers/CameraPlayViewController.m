@@ -83,7 +83,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (UIDeviceOrientationIsLandscape(deviceOrientation))
     {
         self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height);
-        self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
+//        self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
         self.titlebar.hidden = YES;
         self.btnTitle.hidden = YES;
         self.downImgView.hidden = YES;
@@ -91,7 +91,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     else
     {
         self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
+//        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
         self.titlebar.hidden = NO;
         self.btnTitle.hidden = NO;
         self.downImgView.hidden = NO;
@@ -132,7 +132,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     {
         //LandscapeView
         self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height);
-        self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
+  //      self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
         self.titlebar.hidden = YES;
         self.btnTitle.hidden = YES;
         self.downImgView.hidden = YES;
@@ -140,7 +140,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     else
     {
         self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
+    //    self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
         self.titlebar.hidden = NO;
         self.btnTitle.hidden = NO;
         self.downImgView.hidden = NO;
@@ -522,15 +522,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                          [self viewRecordings];
                                          
                                      }];
-
-    UIAlertAction* localStorage = [UIAlertAction
-                                   actionWithTitle:@"Local Storage"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * action)
-                                   {
-                                       [view dismissViewControllerAnimated:YES completion:nil];
-                                       
-                                   }];
+//
+//    UIAlertAction* localStorage = [UIAlertAction
+//                                   actionWithTitle:@"Local Storage"
+//                                   style:UIAlertActionStyleDefault
+//                                   handler:^(UIAlertAction * action)
+//                                   {
+//                                       [view dismissViewControllerAnimated:YES completion:nil];
+//                                       
+//                                   }];
 
 
     
