@@ -35,12 +35,11 @@
 #import "PreferenceUtil.h"
 #import "CustomNavigationController.h"
 #import "AddCameraViewController.h"
-#import "BrowseJpgTask.h"
+#import "SDWebImageManager.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
     NSMutableArray *cameraArray;
-    NSMutableDictionary *browseTaskMap;
 }
 
 // Private Methods:
@@ -60,7 +59,6 @@
     self.screenName = @"Camera Grid View";
 	
     cameraArray = [[NSMutableArray alloc] initWithCapacity:0];
-    browseTaskMap = [[NSMutableDictionary alloc] initWithCapacity:0];
     
     SWRevealViewController *revealController = [self revealViewController];
     
@@ -88,20 +86,6 @@
 - (void)hideLoadingView {
     [self.loadingIndicator stopAnimating];
     self.btnRefresh.hidden = NO;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    for (BrowseJpgTask *task in [browseTaskMap allValues])
-        [task start];
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    for (BrowseJpgTask *task in [browseTaskMap allValues])
-        [task stop];
-    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Action
@@ -169,11 +153,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [AsyncImageView releaseCacheMemory];
                 cameraArray = [NSMutableArray arrayWithArray:cameras];
-                for (BrowseJpgTask *task in [browseTaskMap allValues])
-                {
-                    [task stop];
-                }
-                browseTaskMap = [NSMutableDictionary dictionaryWithCapacity:0];
                 [self.camerasView reloadData];
             });
         }
@@ -248,15 +227,8 @@
     if (cameraInfo.isOnline) {
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
-        [cell.thumbnailImageView setImage:nil];
+        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:NO];
         [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]] withSpinny:NO];
-        
-        if ([browseTaskMap objectForKey:cameraInfo.camId] == nil)
-        {
-            BrowseJpgTask *task = [[BrowseJpgTask alloc] initWithCamera:cameraInfo andImageView:cell.thumbnailImageView andLoadingView:nil];
-            [browseTaskMap setObject:task forKey: (id)cameraInfo.camId];
-            [task start];
-        }
     } else {
         cell.greyImv.hidden = NO;
         cell.imvOffline.hidden = NO;
@@ -291,11 +263,6 @@
 
 #pragma mark - CameraPlayViewController Delegate Method
 - (void)cameraDeleted:(EvercamCamera *)camera {
-    if ([browseTaskMap objectForKey:camera.camId] != nil)
-    {
-        [browseTaskMap removeObjectForKey:camera.camId];
-        [((BrowseJpgTask*)[browseTaskMap objectForKey:camera.camId]) stop];
-    }
     [cameraArray removeObject:camera];
     [self.camerasView reloadData];
 }
@@ -303,11 +270,6 @@
 - (void)cameraEdited:(EvercamCamera *)camera {
     for (EvercamCamera *cam in cameraArray) {
         if ([cam.camId isEqualToString:camera.camId]) {
-            if ([browseTaskMap objectForKey:cam.camId] != nil)
-            {
-                [browseTaskMap removeObjectForKey:cam.camId];
-                [((BrowseJpgTask*)[browseTaskMap objectForKey:camera.camId]) stop];
-            }
             [cameraArray removeObject:cam];
             [cameraArray addObject:camera];
             [self.camerasView reloadData];

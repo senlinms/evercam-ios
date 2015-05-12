@@ -17,6 +17,7 @@
         self.cameraInfo = camera;
         self.imageView = imageView;
         self.loadingView = loadingView;
+        stopped = YES;
     }
     return self;
 }
@@ -41,6 +42,12 @@
     [[EvercamShell shell] getSnapshotFromCamId:self.cameraInfo.camId withBlock:^(NSData *imgData, NSError *error) {
         if (self.loadingView)
             [self.loadingView stopAnimating];
+        
+        if (stopped == YES)
+        {
+            [self.imageView setImage:nil];
+            return;
+        }
         
         if (error == nil && imgData != nil) {
             [self.imageView setImage:[UIImage imageWithData:imgData]];
