@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "WelcomeViewController.h"
 #import "AppUser.h"
-#import <BugSense-iOS/BugSenseController.h>
+//#import <BugSense-iOS/BugSenseController.h>
 #import "GAI.h"
 #import "EvercamShell.h"
 
@@ -36,10 +36,10 @@
     
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
     NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    NSString *bugSenseAPIKey = [contents valueForKey:@"BugSenseAPIKey"];
+    //NSString *bugSenseAPIKey = [contents valueForKey:@"BugSenseAPIKey"];
     NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
     
-    [BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
+    //[BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
     
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
