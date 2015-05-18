@@ -70,6 +70,7 @@
 		C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639911B05F96200FC5D67 /* WebKit.framework */; };
 		C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639931B05F96C00FC5D67 /* libz.dylib */; };
 		C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */; };
+		C49E9F3B1B0A2BE100E58C85 /* ic_cameras.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E221AFBCE11004FFA8E /* ic_cameras.png */; };
 		CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDAF1ABD675100420CE1 /* NIDropDown.m */; };
 		CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */; };
 		CB01CDB71ABE057E00420CE1 /* EvercamCameraUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */; };
@@ -80,44 +81,18 @@
 		CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB1C765E1AAB144800680FE3 /* Images.xcassets */; };
 		CB1C766E1AAB144900680FE3 /* evercamPlayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C766D1AAB144900680FE3 /* evercamPlayTests.m */; };
 		CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C767A1AAB7DE900680FE3 /* SWRevealViewController.m */; };
-		CB1C76B21AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768A1AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png */; };
-		CB1C76B31AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768B1AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png */; };
-		CB1C76B41AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768C1AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png */; };
-		CB1C76B51AAB871A00680FE3 /* btn_radio_off_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768D1AAB871A00680FE3 /* btn_radio_off_holo_dark.png */; };
-		CB1C76B61AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768E1AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png */; };
-		CB1C76B71AAB871A00680FE3 /* btn_radio_on_disabled_focused_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C768F1AAB871A00680FE3 /* btn_radio_on_disabled_focused_holo_dark.png */; };
-		CB1C76B81AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76901AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png */; };
-		CB1C76B91AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76911AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png */; };
-		CB1C76BA1AAB871A00680FE3 /* btn_radio_on_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76921AAB871A00680FE3 /* btn_radio_on_holo_dark.png */; };
-		CB1C76BB1AAB871A00680FE3 /* btn_radio_on_pressed_holo_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76931AAB871A00680FE3 /* btn_radio_on_pressed_holo_dark.png */; };
 		CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76941AAB871A00680FE3 /* cam_unavailable.png */; };
-		CB1C76BD1AAB871A00680FE3 /* dot_off_red.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76951AAB871A00680FE3 /* dot_off_red.png */; };
-		CB1C76BE1AAB871A00680FE3 /* dot_on_red.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76961AAB871A00680FE3 /* dot_on_red.png */; };
-		CB1C76C11AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76991AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png */; };
-		CB1C76C21AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769A1AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png */; };
-		CB1C76C31AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769B1AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png */; };
-		CB1C76C41AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769C1AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png */; };
-		CB1C76C51AAB871A00680FE3 /* evercamtheme_textfield_focused_holo_dark.9.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769D1AAB871A00680FE3 /* evercamtheme_textfield_focused_holo_dark.9.png */; };
-		CB1C76C61AAB871A00680FE3 /* hikvision.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769E1AAB871A00680FE3 /* hikvision.png */; };
 		CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769F1AAB871A00680FE3 /* ic_action_new.png */; };
-		CB1C76C81AAB871A00680FE3 /* ic_action_overflow.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A01AAB871A00680FE3 /* ic_action_overflow.png */; };
 		CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A11AAB871A00680FE3 /* ic_action_refresh.png */; };
 		CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A21AAB871A00680FE3 /* ic_action_save.png */; };
 		CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A31AAB871A00680FE3 /* ic_add_person.png */; };
-		CB1C76CC1AAB871A00680FE3 /* ic_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A41AAB871A00680FE3 /* ic_clock.png */; };
-		CB1C76CD1AAB871A00680FE3 /* ic_content_undo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A51AAB871A00680FE3 /* ic_content_undo.png */; };
-		CB1C76CE1AAB871A00680FE3 /* ic_navigation_back.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A61AAB871A00680FE3 /* ic_navigation_back.png */; };
-		CB1C76CF1AAB871A00680FE3 /* ic_navigation_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A71AAB871A00680FE3 /* ic_navigation_cancel.png */; };
-		CB1C76D01AAB871A00680FE3 /* ic_navigation_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A81AAB871A00680FE3 /* ic_navigation_refresh.png */; };
 		CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76A91AAB871A00680FE3 /* ic_person.png */; };
 		CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76AA1AAB871A00680FE3 /* evercam_icon.png */; };
 		CB1C76D51AAB871A00680FE3 /* icon_gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76AD1AAB871A00680FE3 /* icon_gallery.png */; };
 		CB1C76D61AAB871A00680FE3 /* play_page_feature.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76AE1AAB871A00680FE3 /* play_page_feature.png */; };
 		CB1C76D71AAB871A00680FE3 /* play_page_intro.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76AF1AAB871A00680FE3 /* play_page_intro.png */; };
 		CB1C76D81AAB871A00680FE3 /* play_page_next.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76B01AAB871A00680FE3 /* play_page_next.png */; };
-		CB1C76D91AAB871A00680FE3 /* title_background.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76B11AAB871A00680FE3 /* title_background.png */; };
 		CB318E261AFBCE11004FFA8E /* ic_accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E211AFBCE11004FFA8E /* ic_accounts.png */; };
-		CB318E271AFBCE11004FFA8E /* ic_cameras.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E221AFBCE11004FFA8E /* ic_cameras.png */; };
 		CB318E281AFBCE11004FFA8E /* ic_feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E231AFBCE11004FFA8E /* ic_feedback.png */; };
 		CB318E291AFBCE11004FFA8E /* ic_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E241AFBCE11004FFA8E /* ic_settings.png */; };
 		CB318E2A1AFBCE11004FFA8E /* ic_signout.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E251AFBCE11004FFA8E /* ic_signout.png */; };
@@ -1163,8 +1138,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB1C76CE1AAB871A00680FE3 /* ic_navigation_back.png in Resources */,
-				CB1C76D01AAB871A00680FE3 /* ic_navigation_refresh.png in Resources */,
+				C49E9F3B1B0A2BE100E58C85 /* ic_cameras.png in Resources */,
 				413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */,
 				CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */,
 				4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */,
@@ -1173,7 +1147,6 @@
 				CB318E281AFBCE11004FFA8E /* ic_feedback.png in Resources */,
 				CB44E87D1AAE9E7D00A78C11 /* WelcomeViewController.xib in Resources */,
 				CB44E87B1AAE9E7D00A78C11 /* SignupViewController.xib in Resources */,
-				CB1C76B31AAB871A00680FE3 /* btn_radio_off_disabled_holo_dark.png in Resources */,
 				410748781ADFDBE0004D10C9 /* btn_pause.png in Resources */,
 				CB318E261AFBCE11004FFA8E /* ic_accounts.png in Resources */,
 				CBDFA5601AE92806007CC199 /* ic_menu.png in Resources */,
@@ -1182,60 +1155,37 @@
 				410A13B31AE230A9008CA21C /* icon_online.png in Resources */,
 				411C90E71AE573D10048FF3D /* bottom_fade.png in Resources */,
 				41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */,
-				CB1C76BE1AAB871A00680FE3 /* dot_on_red.png in Resources */,
 				CB318E2A1AFBCE11004FFA8E /* ic_signout.png in Resources */,
 				CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */,
-				CB1C76B61AAB871A00680FE3 /* btn_radio_off_pressed_holo_dark.png in Resources */,
-				CB1C76B21AAB871A00680FE3 /* btn_radio_off_disabled_focused_holo_dark.png in Resources */,
 				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
 				413BB2B11ADBFB710083A5DC /* pull-out.png in Resources */,
 				CB44E8771AAE9E7D00A78C11 /* MenuViewController.xib in Resources */,
 				CB1C76D51AAB871A00680FE3 /* icon_gallery.png in Resources */,
 				CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */,
-				CB1C76C11AAB871A00680FE3 /* evercamtheme_textfield_activated_holo_dark.9.png in Resources */,
-				CB318E271AFBCE11004FFA8E /* ic_cameras.png in Resources */,
-				CB1C76C41AAB871A00680FE3 /* evercamtheme_textfield_disabled_holo_dark.9.png in Resources */,
-				CB1C76CD1AAB871A00680FE3 /* ic_content_undo.png in Resources */,
 				410748741ADF6F3F004D10C9 /* RecordingsViewController.xib in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
 				CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */,
-				CB1C76B91AAB871A00680FE3 /* btn_radio_on_focused_holo_dark.png in Resources */,
 				413BB2931ADAB6900083A5DC /* AddCameraViewController.xib in Resources */,
 				41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */,
-				CB1C76B81AAB871A00680FE3 /* btn_radio_on_disabled_holo_dark.png in Resources */,
 				CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */,
-				CB1C76B41AAB871A00680FE3 /* btn_radio_off_focused_holo_dark.png in Resources */,
 				CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */,
-				CB1C76BD1AAB871A00680FE3 /* dot_off_red.png in Resources */,
-				CB1C76BB1AAB871A00680FE3 /* btn_radio_on_pressed_holo_dark.png in Resources */,
-				CB1C76CF1AAB871A00680FE3 /* ic_navigation_cancel.png in Resources */,
 				CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */,
 				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
 				410748791ADFDBE0004D10C9 /* btn_play.png in Resources */,
 				CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */,
 				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
-				CB1C76C81AAB871A00680FE3 /* ic_action_overflow.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
-				CB1C76C61AAB871A00680FE3 /* hikvision.png in Resources */,
 				CB44E8751AAE9E7D00A78C11 /* LoginViewController.xib in Resources */,
-				CB1C76CC1AAB871A00680FE3 /* ic_clock.png in Resources */,
 				CB44E8791AAE9E7D00A78C11 /* SettingsViewController.xib in Resources */,
 				411C90E91AE69D030048FF3D /* local.plist in Resources */,
-				CB1C76B51AAB871A00680FE3 /* btn_radio_off_holo_dark.png in Resources */,
 				4107487F1AE006AC004D10C9 /* SnapshotViewController.xib in Resources */,
 				CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */,
 				CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */,
-				CB1C76C21AAB871A00680FE3 /* evercamtheme_textfield_default_holo_dark.9.png in Resources */,
-				CB1C76B71AAB871A00680FE3 /* btn_radio_on_disabled_focused_holo_dark.png in Resources */,
-				CB1C76C51AAB871A00680FE3 /* evercamtheme_textfield_focused_holo_dark.9.png in Resources */,
 				413BB2A31ADAE0A50083A5DC /* SelectModelViewController.xib in Resources */,
-				CB1C76BA1AAB871A00680FE3 /* btn_radio_on_holo_dark.png in Resources */,
 				413BB2B61ADC10690083A5DC /* ViewCameraViewController.xib in Resources */,
-				CB1C76D91AAB871A00680FE3 /* title_background.png in Resources */,
 				411C90EB1AE6A1250048FF3D /* back.png in Resources */,
 				CB1C76D81AAB871A00680FE3 /* play_page_next.png in Resources */,
 				CB318E291AFBCE11004FFA8E /* ic_settings.png in Resources */,
-				CB1C76C31AAB871A00680FE3 /* evercamtheme_textfield_disabled_focused_holo_dark.9.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedbackViewController">
@@ -26,10 +26,10 @@
                     <color key="backgroundColor" red="0.20392156862745098" green="0.22352941176470587" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i0u-Yo-ZuB" userLabel="titlebar">
-                    <rect key="frame" x="0.0" y="20" width="320" height="52"/>
+                    <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                     <subviews>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGW-cu-gdt" userLabel="Back">
-                            <rect key="frame" x="0.0" y="11" width="30" height="30"/>
+                            <rect key="frame" x="0.0" y="6" width="30" height="30"/>
                             <state key="normal" backgroundImage="back.png">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,20 +39,20 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcE-26-gnE">
-                            <rect key="frame" x="8" y="16" width="20" height="20"/>
+                            <rect key="frame" x="11" y="0.0" width="60" height="44"/>
                             <state key="normal" backgroundImage="ic_menu.png">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CE2-ca-fle">
-                            <rect key="frame" x="118" y="14" width="85" height="21"/>
+                            <rect key="frame" x="118" y="10" width="85" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGP-UH-lZW">
-                            <rect key="frame" x="266" y="11" width="46" height="30"/>
+                            <rect key="frame" x="266" y="6" width="46" height="30"/>
                             <state key="normal" title="SEND">
                                 <color key="titleColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -65,22 +65,22 @@
                     <color key="backgroundColor" red="0.20392156862745098" green="0.22352941176470587" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oVs-In-LFT">
-                    <rect key="frame" x="0.0" y="72" width="320" height="496"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We're always looking to improve Evercam Play. so let us know if you have any suggestions." lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzx-ck-ZgG">
-                            <rect key="frame" x="8" y="8" width="304" height="62"/>
+                            <rect key="frame" x="8" y="15" width="304" height="62"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="From:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6U8-mO-LGE">
-                            <rect key="frame" x="8" y="78" width="47" height="21"/>
+                            <rect key="frame" x="8" y="85" width="47" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Marco Herbst" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uf7-u4-CSa">
-                            <rect key="frame" x="63" y="76" width="249" height="25"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uf7-u4-CSa">
+                            <rect key="frame" x="63" y="83" width="249" height="25"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
@@ -89,7 +89,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write your feedback" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aay-2Y-JGh">
-                            <rect key="frame" x="8" y="142" width="304" height="30"/>
+                            <rect key="frame" x="8" y="149" width="304" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -99,10 +99,11 @@
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caD-DU-MBa" userLabel="line1">
+                            <rect key="frame" x="0.0" y="7" width="0.0" height="0.0"/>
                             <color key="backgroundColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="marco@evercam.io" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2m-78-DL8">
-                            <rect key="frame" x="63" y="109" width="249" height="25"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2m-78-DL8">
+                            <rect key="frame" x="63" y="116" width="249" height="25"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
@@ -120,6 +121,6 @@
     </objects>
     <resources>
         <image name="back.png" width="128" height="128"/>
-        <image name="ic_menu.png" width="100" height="100"/>
+        <image name="ic_menu.png" width="300" height="220"/>
     </resources>
 </document>
