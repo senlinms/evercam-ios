@@ -8,7 +8,7 @@
 
 #import "CameraPlayViewController.h"
 #import "EvercamShell.h"
-#include "gst-launch-remote.h"
+//#include "gst-launch-remote.h" //LD
 #import "PreferenceUtil.h"
 #import "CustomNavigationController.h"
 #import "ViewCameraViewController.h"
@@ -21,7 +21,7 @@
 #import "CommonUtil.h"
 
 @interface CameraPlayViewController () <ViewCameraViewControllerDelegate> {
-    GstLaunchRemote *launch;
+//    GstLaunchRemote *launch; //LD
     int media_width;
     int media_height;
     Boolean dragging_slider;
@@ -43,29 +43,30 @@
 
 @implementation CameraPlayViewController
 
-static void set_message_proxy (const gchar *message, gpointer app)
-{
-    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
-    [self setMessage:[NSString stringWithUTF8String:message]];
-}
-
-void set_current_position_proxy (gint position, gint duration, gpointer app)
-{
-    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
-    [self setCurrentPosition:position duration:duration];
-}
-
-void initialized_proxy (gpointer app)
-{
-    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
-    [self initialized];
-}
-
-void media_size_changed_proxy (gint width, gint height, gpointer app)
-{
-    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
-    [self mediaSizeChanged:width height:height];
-}
+//LD
+//static void set_message_proxy (const gchar *message, gpointer app)
+//{
+//    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
+//    [self setMessage:[NSString stringWithUTF8String:message]];
+//}
+//
+//void set_current_position_proxy (gint position, gint duration, gpointer app)
+//{
+//    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
+//    [self setCurrentPosition:position duration:duration];
+//}
+//
+//void initialized_proxy (gpointer app)
+//{
+//    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
+//    [self initialized];
+//}
+//
+//void media_size_changed_proxy (gint width, gint height, gpointer app)
+//{
+//    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
+//    [self mediaSizeChanged:width height:height];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -95,7 +96,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         self.titlebar.hidden = NO;
         self.btnTitle.hidden = NO;
         self.downImgView.hidden = NO;
-        video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
+//        video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height); //LD
     }
 }
 
@@ -156,10 +157,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)dealloc {
-    if (launch)
-    {
-        gst_launch_remote_free(launch);
-    }
+    //LD
+//    if (launch)
+//    {
+//        gst_launch_remote_free(launch);
+//    }
     
     if (timeCounter && [timeCounter isValid])
     {
@@ -188,26 +190,26 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)showSnapshotView {
     [snapshotConfirmView setHidden:NO];
-    
-    if (self.imageView == nil || self.imageView.hidden == YES) {
-        CGRect rect = [video_view bounds];
-        UIGraphicsBeginImageContext(rect.size);
-        [video_view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
-        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-
-        rect.origin.y = (rect.size.height - rect.size.width*media_height/media_width)/2;
-        rect.size.height = rect.size.width*media_height/media_width;
-        CGImageRef imageRef = CGImageCreateWithImageInRect([img CGImage], rect);
-        // or use the UIImage wherever you like
-        [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
-        CGImageRelease(imageRef);
-    } else {
+    //LD
+//    if (self.imageView == nil || self.imageView.hidden == YES) {
+//        CGRect rect = [video_view bounds];
+//        UIGraphicsBeginImageContext(rect.size);
+//        [video_view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
+//        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//
+//        rect.origin.y = (rect.size.height - rect.size.width*media_height/media_width)/2;
+//        rect.size.height = rect.size.width*media_height/media_width;
+//        CGImageRef imageRef = CGImageCreateWithImageInRect([img CGImage], rect);
+//        // or use the UIImage wherever you like
+//        [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
+//        CGImageRelease(imageRef);
+//    } else {
         if (self.imageView && self.imageView.image) {
             imvSnapshot.image = self.imageView.image;
         } else {
             [snapshotConfirmView setHidden:YES];
-        }
+  //      }
     }
 }
 
@@ -586,17 +588,18 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
     
     self.lblTimeCode.hidden = YES;
-    video_view.hidden = YES;
+//    video_view.hidden = YES; //LD
     
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
         [loadingView startAnimating];
-        if (self.cameraInfo.externalH264Url && self.cameraInfo.externalH264Url.length > 0) {
-            [self createPlayer];
-        } else {
+        //LD
+//        if (self.cameraInfo.externalH264Url && self.cameraInfo.externalH264Url.length > 0) {
+//            [self createPlayer];
+//        } else {
             [self createBrowseJpgTask];
             [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
-        }
+ //       }
     } else {
         [loadingView stopAnimating];
         self.lblOffline.hidden = NO;
@@ -609,10 +612,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     isPlaying = NO;
     
     if ([self.cameraInfo isOnline]) {
-        if (launch)
-        {
-            gst_launch_remote_free(launch);
-        }
+        //LD
+//        if (launch)
+//        {
+//            gst_launch_remote_free(launch);
+//        }
         
         if (timeCounter && [timeCounter isValid])
         {
@@ -630,25 +634,26 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
 }
 
-- (void)createPlayer {
-    GstLaunchRemoteAppContext ctx;
-    ctx.app = (__bridge gpointer)(self);
-    ctx.initialized = initialized_proxy;
-    ctx.media_size_changed = media_size_changed_proxy;
-    ctx.set_current_position = set_current_position_proxy;
-    ctx.set_message = set_message_proxy;
-
-    if (launch) {
-        gst_launch_remote_free(launch);
-    }
-    launch = gst_launch_remote_new(&ctx);
-    
-    NSString *pipeline = [NSString stringWithFormat:@"rtspsrc protocols=4  location=%@ user-id=%@ user-pw=%@ latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink", self.cameraInfo.externalH264Url, self.cameraInfo.username, self.cameraInfo.password];
-    launch->real_pipeline_string = (gchar *)[pipeline UTF8String];
-//    launch->real_pipeline_string = "rtspsrc protocols=4  location=rtsp://89.101.130.1:9021/h264/ch1/main/av_stream user-id=admin user-pw=mehcam latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink";
-    
-    gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
-}
+//LD
+//- (void)createPlayer {
+//    GstLaunchRemoteAppContext ctx;
+//    ctx.app = (__bridge gpointer)(self);
+//    ctx.initialized = initialized_proxy;
+//    ctx.media_size_changed = media_size_changed_proxy;
+//    ctx.set_current_position = set_current_position_proxy;
+//    ctx.set_message = set_message_proxy;
+//
+//    if (launch) {
+//        gst_launch_remote_free(launch);
+//    }
+//    launch = gst_launch_remote_new(&ctx);
+//    
+//    NSString *pipeline = [NSString stringWithFormat:@"rtspsrc protocols=4  location=%@ user-id=%@ user-pw=%@ latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink", self.cameraInfo.externalH264Url, self.cameraInfo.username, self.cameraInfo.password];
+//    launch->real_pipeline_string = (gchar *)[pipeline UTF8String];
+////    launch->real_pipeline_string = "rtspsrc protocols=4  location=rtsp://89.101.130.1:9021/h264/ch1/main/av_stream user-id=admin user-pw=mehcam latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink";
+//    
+//    gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
+//}
 
 - (void)createBrowseView {
     if (self.imageView)
@@ -684,53 +689,54 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     self.lblTimeCode.text = dateConverted;
 }
 
-#pragma mark - Gstreamer callback functions
-
--(void) initialized {
-    NSLog(@"initialized");
-    gst_launch_remote_play(launch);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (timeCounter && [timeCounter isValid])
-        {
-            [timeCounter invalidate];
-            timeCounter = nil;
-        }
-        timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
-    });
-}
-
--(void) setMessage:(NSString *)message {
-    NSLog(@"setMessage:%@", message);
-    if ([message hasPrefix:@"State changed to PLAYING"]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            video_view.hidden = NO;
-            self.lblTimeCode.hidden = NO;
-        });
-    }
-    if ([message hasPrefix:@"Error received from element"] ||
-        [message hasPrefix:@"Failed to set pipeline to PLAYING"])
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [loadingView startAnimating];
-            [self createBrowseJpgTask];
-            [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
-        });
-    }
-}
-
--(void) setCurrentPosition:(NSInteger)position duration:(NSInteger)duration {
-
-}
-
--(void) mediaSizeChanged:(NSInteger)width height:(NSInteger)height
-{
-    media_width = width;
-    media_height = height;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [loadingView stopAnimating];
-    });
-}
+//LD
+//#pragma mark - Gstreamer callback functions
+//
+//-(void) initialized {
+//    NSLog(@"initialized");
+//    gst_launch_remote_play(launch);
+//    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if (timeCounter && [timeCounter isValid])
+//        {
+//            [timeCounter invalidate];
+//            timeCounter = nil;
+//        }
+//        timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
+//    });
+//}
+//
+//-(void) setMessage:(NSString *)message {
+//    NSLog(@"setMessage:%@", message);
+//    if ([message hasPrefix:@"State changed to PLAYING"]) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            video_view.hidden = NO;
+//            self.lblTimeCode.hidden = NO;
+//        });
+//    }
+//    if ([message hasPrefix:@"Error received from element"] ||
+//        [message hasPrefix:@"Failed to set pipeline to PLAYING"])
+//    {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [loadingView startAnimating];
+//            [self createBrowseJpgTask];
+//            [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
+//        });
+//    }
+//}
+//
+//-(void) setCurrentPosition:(NSInteger)position duration:(NSInteger)duration {
+//
+//}
+//
+//-(void) mediaSizeChanged:(NSInteger)width height:(NSInteger)height
+//{
+//    media_width = width;
+//    media_height = height;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [loadingView stopAnimating];
+//    });
+//}
 
 #pragma mark - ViewCameraViewController Delegate Method
 - (void)cameraEdited:(EvercamCamera *)camera {

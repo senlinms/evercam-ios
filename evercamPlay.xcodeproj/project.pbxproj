@@ -52,9 +52,6 @@
 		41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */; };
 		41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB491AD6CE7F0016ACCA /* VideoToolbox.framework */; };
 		41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB4B1AD6CE880016ACCA /* CoreGraphics.framework */; };
-		41BEFB5B1AD6D0630016ACCA /* EaglUIVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB561AD6D0630016ACCA /* EaglUIVIew.m */; };
-		41BEFB5C1AD6D0630016ACCA /* gst_ios_init.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB581AD6D0630016ACCA /* gst_ios_init.m */; };
-		41BEFB5D1AD6D0630016ACCA /* gst-launch-remote.c in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB591AD6D0630016ACCA /* gst-launch-remote.c */; };
 		41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB641AD6DB480016ACCA /* libstdc++.dylib */; };
 		41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB661AD6DB560016ACCA /* libresolv.dylib */; };
 		41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB681AD6DBAA0016ACCA /* CoreFoundation.framework */; };
@@ -73,7 +70,6 @@
 		C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639911B05F96200FC5D67 /* WebKit.framework */; };
 		C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639931B05F96C00FC5D67 /* libz.dylib */; };
 		C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */; };
-		C406399B1B0600E900FC5D67 /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398B1B05EF3100FC5D67 /* GStreamer.framework */; };
 		CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDAF1ABD675100420CE1 /* NIDropDown.m */; };
 		CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */; };
 		CB01CDB71ABE057E00420CE1 /* EvercamCameraUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */; };
@@ -282,12 +278,6 @@
 		41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraPlayViewController.xib; sourceTree = "<group>"; };
 		41BEFB491AD6CE7F0016ACCA /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		41BEFB4B1AD6CE880016ACCA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		41BEFB551AD6D0630016ACCA /* EaglUIVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaglUIVIew.h; sourceTree = "<group>"; };
-		41BEFB561AD6D0630016ACCA /* EaglUIVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EaglUIVIew.m; sourceTree = "<group>"; };
-		41BEFB571AD6D0630016ACCA /* gst_ios_init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gst_ios_init.h; sourceTree = "<group>"; };
-		41BEFB581AD6D0630016ACCA /* gst_ios_init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gst_ios_init.m; sourceTree = "<group>"; };
-		41BEFB591AD6D0630016ACCA /* gst-launch-remote.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "gst-launch-remote.c"; sourceTree = "<group>"; };
-		41BEFB5A1AD6D0630016ACCA /* gst-launch-remote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gst-launch-remote.h"; sourceTree = "<group>"; };
 		41BEFB641AD6DB480016ACCA /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		41BEFB661AD6DB560016ACCA /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		41BEFB681AD6DBAA0016ACCA /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -498,7 +488,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C406399B1B0600E900FC5D67 /* GStreamer.framework in Frameworks */,
 				C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */,
 				C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */,
 				C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */,
@@ -677,19 +666,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		41BEFB4E1AD6CF770016ACCA /* GStreamer */ = {
-			isa = PBXGroup;
-			children = (
-				41BEFB551AD6D0630016ACCA /* EaglUIVIew.h */,
-				41BEFB561AD6D0630016ACCA /* EaglUIVIew.m */,
-				41BEFB571AD6D0630016ACCA /* gst_ios_init.h */,
-				41BEFB581AD6D0630016ACCA /* gst_ios_init.m */,
-				41BEFB591AD6D0630016ACCA /* gst-launch-remote.c */,
-				41BEFB5A1AD6D0630016ACCA /* gst-launch-remote.h */,
-			);
-			path = GStreamer;
-			sourceTree = "<group>";
-		};
 		CB01CDAD1ABD675000420CE1 /* NIDropDown */ = {
 			isa = PBXGroup;
 			children = (
@@ -785,7 +761,6 @@
 				41208A541AD97970009C4FC2 /* SendGrid */,
 				41208A4C1AD8DC59009C4FC2 /* CustomNavigationController */,
 				CB318E2B1AFC0875004FFA8E /* GCD */,
-				41BEFB4E1AD6CF770016ACCA /* GStreamer */,
 				CB44E80C1AAE9DD800A78C11 /* AFNetworking */,
 				CB840D141ACAF36D00F289A9 /* AsyncImageView */,
 				CB01CDB11ABDFC9F00420CE1 /* MBProgressHUD */,
@@ -1287,7 +1262,6 @@
 				413BB2B51ADC10690083A5DC /* ViewCameraViewController.m in Sources */,
 				CB44E8891AAED82000A78C11 /* AFEvercamAPIClient.m in Sources */,
 				CB318E571AFC3565004FFA8E /* SDWebImageCompat.m in Sources */,
-				41BEFB5D1AD6D0630016ACCA /* gst-launch-remote.c in Sources */,
 				413BB2921ADAB6900083A5DC /* AddCameraViewController.m in Sources */,
 				413BB2A21ADAE0A40083A5DC /* SelectModelViewController.m in Sources */,
 				413BB29A1ADAD13D0083A5DC /* SelectVendorViewController.m in Sources */,
@@ -1297,7 +1271,6 @@
 				CB318E5E1AFC3565004FFA8E /* UIImage+GIF.m in Sources */,
 				CB44E8411AAE9DD800A78C11 /* AFSecurityPolicy.m in Sources */,
 				CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */,
-				41BEFB5B1AD6D0630016ACCA /* EaglUIVIew.m in Sources */,
 				CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */,
 				CB318E541AFC3565004FFA8E /* MKAnnotationView+WebCache.m in Sources */,
 				CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */,
@@ -1317,7 +1290,6 @@
 				CB44E83D1AAE9DD800A78C11 /* AFURLConnectionOperation.m in Sources */,
 				CB01CDBA1AC00AFB00420CE1 /* EvercamCamera.m in Sources */,
 				41208A5D1AD97971009C4FC2 /* SendGridEmailAttachment.m in Sources */,
-				41BEFB5C1AD6D0630016ACCA /* gst_ios_init.m in Sources */,
 				413BB2811AD992890083A5DC /* Reachability.m in Sources */,
 				4157369D1AD59ED4005B38DF /* EvercamRights.m in Sources */,
 				CB44E8781AAE9E7D00A78C11 /* SettingsViewController.m in Sources */,

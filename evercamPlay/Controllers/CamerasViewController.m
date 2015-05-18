@@ -35,6 +35,7 @@
 #import "PreferenceUtil.h"
 #import "CustomNavigationController.h"
 #import "AddCameraViewController.h"
+#import "FeedbackViewController.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -270,8 +271,7 @@
 - (void)cameraEdited:(EvercamCamera *)camera {
     for (EvercamCamera *cam in cameraArray) {
         if ([cam.camId isEqualToString:camera.camId]) {
-            [cameraArray removeObject:cam];
-            [cameraArray addObject:camera];
+            [cameraArray removeObject:cam];             [cameraArray addObject:camera];
             [self.camerasView reloadData];
             break;
         }

@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
-#include "gst_ios_init.h"
+// #include "gst_ios_init.h" //ld
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        gst_ios_init();
+//        gst_ios_init(); //LD
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }
