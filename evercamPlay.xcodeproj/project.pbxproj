@@ -16,7 +16,6 @@
 		4107487E1AE006AC004D10C9 /* SnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4107487C1AE006AC004D10C9 /* SnapshotViewController.m */; };
 		4107487F1AE006AC004D10C9 /* SnapshotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */; };
 		410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748841AE04DAB004D10C9 /* CoreTelephony.framework */; };
-		410748871AE04FD0004D10C9 /* BugSense-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748861AE04FD0004D10C9 /* BugSense-iOS.framework */; };
 		410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */; };
 		410A13B31AE230A9008CA21C /* icon_online.png in Resources */ = {isa = PBXBuildFile; fileRef = 410A13B21AE230A9008CA21C /* icon_online.png */; };
 		410A13B51AE232D5008CA21C /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 410A13B41AE232D5008CA21C /* dropdown.png */; };
@@ -69,6 +68,12 @@
 		41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB781AD6DC180016ACCA /* QuartzCore.framework */; };
 		41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */; };
 		41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB7C1AD708730016ACCA /* icon_offline.png */; };
+		C406398E1B05F93100FC5D67 /* SplunkMint-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */; };
+		C40639901B05F94F00FC5D67 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */; };
+		C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639911B05F96200FC5D67 /* WebKit.framework */; };
+		C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639931B05F96C00FC5D67 /* libz.dylib */; };
+		C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */; };
+		C406399B1B0600E900FC5D67 /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398B1B05EF3100FC5D67 /* GStreamer.framework */; };
 		CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDAF1ABD675100420CE1 /* NIDropDown.m */; };
 		CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */; };
 		CB01CDB71ABE057E00420CE1 /* EvercamCameraUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */; };
@@ -185,7 +190,6 @@
 		CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */; };
 		CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB840D201ACAF38900F289A9 /* CameraViewCell.xib */; };
 		CB92361D1AB2DABF0031E23A /* EvercamUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB92361C1AB2DABF0031E23A /* EvercamUser.m */; };
-		CBDFA55C1AE6B172007CC199 /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDFA55B1AE6B172007CC199 /* GStreamer.framework */; };
 		CBDFA5601AE92806007CC199 /* ic_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = CBDFA55D1AE92806007CC199 /* ic_menu.png */; };
 /* End PBXBuildFile section */
 
@@ -212,7 +216,6 @@
 		4107487C1AE006AC004D10C9 /* SnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotViewController.m; sourceTree = "<group>"; };
 		4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController.xib; sourceTree = "<group>"; };
 		410748841AE04DAB004D10C9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		410748861AE04FD0004D10C9 /* BugSense-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "BugSense-iOS.framework"; sourceTree = "<group>"; };
 		410748891AE052C8004D10C9 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		4107488A1AE052C8004D10C9 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		4107488B1AE052C8004D10C9 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
@@ -298,6 +301,13 @@
 		41BEFB781AD6DC180016ACCA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		41BEFB7C1AD708730016ACCA /* icon_offline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_offline.png; sourceTree = "<group>"; };
+		C406398B1B05EF3100FC5D67 /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../Library/Frameworks/GStreamer.framework; sourceTree = "<group>"; };
+		C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "SplunkMint-iOS.framework"; sourceTree = "<group>"; };
+		C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C40639911B05F96200FC5D67 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		C40639931B05F96C00FC5D67 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		C40639951B05FBDA00FC5D67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		CB01CDAE1ABD675100420CE1 /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
 		CB01CDAF1ABD675100420CE1 /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
 		CB01CDB21ABDFC9F00420CE1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -480,7 +490,6 @@
 		CB840D201ACAF38900F289A9 /* CameraViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewCell.xib; sourceTree = "<group>"; };
 		CB92361B1AB2DABF0031E23A /* EvercamUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamUser.h; sourceTree = "<group>"; };
 		CB92361C1AB2DABF0031E23A /* EvercamUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUser.m; sourceTree = "<group>"; };
-		CBDFA55B1AE6B172007CC199 /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../Users/jw/Library/Developer/GStreamer/iPhone.sdk/GStreamer.framework; sourceTree = "<group>"; };
 		CBDFA55D1AE92806007CC199 /* ic_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -489,10 +498,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C406399B1B0600E900FC5D67 /* GStreamer.framework in Frameworks */,
+				C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */,
+				C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */,
+				C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */,
 				410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */,
+				C40639901B05F94F00FC5D67 /* SystemConfiguration.framework in Frameworks */,
+				C406398E1B05F93100FC5D67 /* SplunkMint-iOS.framework in Frameworks */,
 				41208A491AD8A126009C4FC2 /* MessageUI.framework in Frameworks */,
 				41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */,
-				410748871AE04FD0004D10C9 /* BugSense-iOS.framework in Frameworks */,
 				41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */,
 				41BEFB771AD6DC0E0016ACCA /* AssetsLibrary.framework in Frameworks */,
 				41BEFB751AD6DC020016ACCA /* OpenGLES.framework in Frameworks */,
@@ -504,7 +518,6 @@
 				41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */,
 				41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */,
 				410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */,
-				CBDFA55C1AE6B172007CC199 /* GStreamer.framework in Frameworks */,
 				41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */,
 				41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */,
 				41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */,
@@ -637,8 +650,13 @@
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CBDFA55B1AE6B172007CC199 /* GStreamer.framework */,
-				410748861AE04FD0004D10C9 /* BugSense-iOS.framework */,
+				C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */,
+				C40639951B05FBDA00FC5D67 /* CoreData.framework */,
+				C40639931B05F96C00FC5D67 /* libz.dylib */,
+				C40639911B05F96200FC5D67 /* WebKit.framework */,
+				C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */,
+				C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */,
+				C406398B1B05EF3100FC5D67 /* GStreamer.framework */,
 				410748841AE04DAB004D10C9 /* CoreTelephony.framework */,
 				41208A481AD8A126009C4FC2 /* MessageUI.framework */,
 				41BEFB781AD6DC180016ACCA /* QuartzCore.framework */,
@@ -1459,14 +1477,15 @@
 		CB1C76721AAB144900680FE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Liuting Du (GD2KDRQNRZ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"~/Library/Developer/GStreamer/iPhone.sdk",
 					"$(USER_LIBRARY_DIR)/Developer/GStreamer/iPhone.sdk",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1480,23 +1499,29 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/evercamPlay/GoogleAnalytics",
 				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "14cfdccf-d97b-4227-b3bc-f69b5c8e7dd0";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
 		CB1C76731AAB144900680FE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: han xiankui (LL6Y26JJBB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: han xiankui (LL6Y26JJBB)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"~/Library/Developer/GStreamer/iPhone.sdk",
 					"$(USER_LIBRARY_DIR)/Developer/GStreamer/iPhone.sdk",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1510,8 +1535,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/evercamPlay/GoogleAnalytics",
 				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "14cfdccf-d97b-4227-b3bc-f69b5c8e7dd0";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
