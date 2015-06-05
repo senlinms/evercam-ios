@@ -14,6 +14,7 @@
 #import "CamerasViewController.h"
 #import "MenuViewController.h"
 #import "SWRevealViewController.h"
+#import "GlobalSettings.h"
 
 @interface WelcomeViewController ()
 
@@ -24,18 +25,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view setHidden:YES];
+    
+    self.navigationController.navigationBarHidden = YES;    
     self.screenName = @"Welcome Page";
     // Do any additional setup after loading the view from its nib.
     self.title = @"";
     [self.tutorialScrollView addSubview:self.tutorialView];
-    self.tutorialView.center = CGPointMake(480, self.tutorialScrollView.frame.size.height/2);
-    [self.tutorialScrollView setContentSize:CGSizeMake(960,self.tutorialScrollView.frame.size.height)];
+    
+    if ([GlobalSettings sharedInstance].isPhone == YES) {
+        self.tutorialView.center = CGPointMake(480, self.tutorialScrollView.frame.size.height/2);
+        [self.tutorialScrollView setContentSize:CGSizeMake(960,self.tutorialScrollView.frame.size.height)];
+    }
+    else {
+        self.tutorialView.frame = CGRectMake(0, 0, self.tutorialView.frame.size.width, self.tutorialView.frame.size.height);
+        [self.tutorialScrollView setContentSize:CGSizeMake(self.view.frame.size.width * 3, 0)];
+    }
+    
     
     AppUser *defaultUser = [APP_DELEGATE getDefaultUser];
     if (defaultUser) {
         [APP_DELEGATE setDefaultUser:defaultUser];
         
-        CamerasViewController *camerasViewController = [[CamerasViewController alloc] init];
+        CamerasViewController *camerasViewController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
         MenuViewController *menuViewController = [[MenuViewController alloc] init];
         
         UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:camerasViewController];
@@ -44,16 +56,20 @@
         rearNavigationController.navigationBarHidden = YES;
         
         SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+        revealController.navigationController.navigationBarHidden = YES;
         NSMutableArray *vcArr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
         [vcArr addObject:revealController];
         [self.navigationController setViewControllers:vcArr animated:YES];
+        
     }
+    else
+        [self.view setHidden:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,13 +79,13 @@
 
 - (IBAction)onSignIn:(id)sender
 {
-    LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle: nil];
+    LoginViewController *vc = [[LoginViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"LoginViewController" : @"LoginViewController_iPad" bundle: nil];
     [[self navigationController] pushViewController:vc animated:YES];
 }
 
 - (IBAction)onSignUp:(id)sender
 {
-    SignupViewController *vc = [[SignupViewController alloc] initWithNibName:@"SignupViewController" bundle: nil];
+    SignupViewController *vc = [[SignupViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SignupViewController" : @"SignupViewController_iPad" bundle: nil];
     [[self navigationController] pushViewController:vc animated:YES];
 }
 

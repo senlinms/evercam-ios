@@ -34,6 +34,9 @@
 #import "SettingsViewController.h"
 #import "FeedbackViewController.h"
 #import "AppDelegate.h"
+#import "GlobalSettings.h"
+#import "GAIDictionaryBuilder.h"
+#import "Config.h"
 
 @interface MenuViewController()
 {
@@ -132,49 +135,40 @@
 
     if (row == 0)
     {
-        newFrontController = [[CamerasViewController alloc] init];
+        newFrontController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
     }
     else if (row == 1)
     {
-        newFrontController = [[AccountsViewController alloc] init];
+        newFrontController = [[AccountsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AccountsViewController" : @"AccountsViewController_iPad" bundle:nil];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+                                                              action:action_manage_account
+                                                               label:label_account
+                                                               value:nil] build]];
+
     }
     else if (row == 2)
     {
-        newFrontController = [[SettingsViewController alloc] init];
+        newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+                                                              action:action_settings
+                                                               label:label_settings
+                                                               value:nil] build]];
     }
     else if (row == 3)
     {
-        newFrontController = [[FeedbackViewController alloc] init];
+        newFrontController = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
     }
     else if (row == 4)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle:nil
-                                          message:@"Are you sure you want to sign out?"
-                                          preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* no = [UIAlertAction
-                                 actionWithTitle:@"No"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            UIAlertAction* yes = [UIAlertAction
-                                     actionWithTitle:@"Yes"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                         [APP_DELEGATE logout];
-                                         _presentedRow = 0;
-                                     }];
-            
-            [alert addAction:no];
-            [alert addAction:yes];
-            [self presentViewController:alert animated:YES completion:nil];
+            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign out", nil) message:NSLocalizedString(@"Are you sure you want to sign out?", nil) delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
+            simpleAlert.tag = 102;
+            [simpleAlert show];            
         });
         
         return;
@@ -186,5 +180,20 @@
     
     _presentedRow = row;  // <- store the presented row
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 102 && buttonIndex == 1) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+                                                              action:action_logout
+                                                               label:label_user_logout
+                                                               value:nil] build]];
+        
+        [APP_DELEGATE logout];
+        _presentedRow = 0;
+    }
+}
+
 
 @end

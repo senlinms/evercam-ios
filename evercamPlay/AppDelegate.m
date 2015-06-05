@@ -11,7 +11,12 @@
 #import "AppUser.h"
 //#import <BugSense-iOS/BugSenseController.h>
 #import "GAI.h"
+#import <SplunkMint-iOS/SplunkMint-iOS.h>
 #import "EvercamShell.h"
+#import "GlobalSettings.h"
+
+#import "Mixpanel.h"
+#define MIXPANEL_TOKEN @"YOUR_TOKEN"
 
 @interface AppDelegate ()
 
@@ -24,11 +29,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    
+    [GlobalSettings sharedInstance].isPhone = YES;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        [GlobalSettings sharedInstance].isPhone = NO;
+    }
+    
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    WelcomeViewController *vc = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:nil];
+    WelcomeViewController *vc = [[WelcomeViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"WelcomeViewController" : @"WelcomeViewController_iPad" bundle:nil];
     self.viewController = [[CustomNavigationController alloc] initWithRootViewController:vc];
     self.viewController.isPortraitMode = true;
     self.window.rootViewController = self.viewController;
@@ -40,6 +54,8 @@
     NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
     
     //[BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
+    NSString *SplunkMintAPIKey = [contents valueForKey:@"SplunkMintAPIKey"];
+    //[[Mint sharedInstance] initAndStartSession:SplunkMintAPIKey];
     
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
@@ -238,7 +254,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self deleteUser:self.defaultUser];
-    [self.viewController popViewControllerAnimated:YES];
+    [self.viewController popToRootViewControllerAnimated:YES];
 }
 
 @end

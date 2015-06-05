@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SnapshotViewController : UIViewController
+@interface SnapshotViewController : UIViewController<UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSString *cameraId;
 

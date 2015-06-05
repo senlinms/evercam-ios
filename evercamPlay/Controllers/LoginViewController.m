@@ -16,6 +16,9 @@
 #import "EvercamUser.h"
 #import "EvercamApiKeyPair.h"
 #import "AppDelegate.h"
+#import "GlobalSettings.h"
+#import "Mixpanel.h"
+#import "Config.h"
 
 @interface LoginViewController ()
 {
@@ -81,65 +84,34 @@
 
 - (IBAction)onLogin:(id)sender
 {
+    
+    
     NSString *username = _txt_username.text;
     NSString *password = _txt_password.text;
     
     if ([username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Username required"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_username becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log in", nil) message:NSLocalizedString(@"Username required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 101;
+        [simpleAlert show];
+        
         return;
     }
     else if ([username containsString:@" "])
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Invalid username"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_username becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log in", nil) message:NSLocalizedString(@"Invalid username", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 102;
+        [simpleAlert show];
+        
         return;
     }
     else if (password.length <= 0)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Password required"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_password becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log in", nil) message:NSLocalizedString(@"Password required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 103;
+        [simpleAlert show];
         return;
     }
-    
 
     [_activityIndicator startAnimating];
     [[EvercamShell shell] requestEvercamAPIKeyFromEvercamUser:username Password:password WithBlock:^(EvercamApiKeyPair *userKeyPair, NSError *error) {
@@ -148,13 +120,20 @@
             [[EvercamShell shell] getUserFromId:username withBlock:^(EvercamUser *newuser, NSError *error) {
                 [_activityIndicator stopAnimating];
                 if (error == nil) {
+                    
+                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                    
+                    [mixpanel track:mixpanel_event_sign_in properties:@{
+                                                                  @"username": newuser.username
+                                                                  }];
+                    
                     AppUser *user = [APP_DELEGATE userWithName:newuser.username];
                     [user setDataWithEvercamUser:newuser];
                     [user setApiKeyPairWithApiKey:userKeyPair.apiKey andApiId:userKeyPair.apiId];
                     [APP_DELEGATE saveContext];
                     [APP_DELEGATE setDefaultUser:user];
                     
-                    CamerasViewController *camerasViewController = [[CamerasViewController alloc] init];
+                    CamerasViewController *camerasViewController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
                     MenuViewController *menuViewController = [[MenuViewController alloc] init];
                     
                     UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:camerasViewController];
@@ -170,20 +149,8 @@
 
                 } else {
                     NSLog(@"Error %li: %@", (long)error.code, error.description);
-                    UIAlertController * alert=   [UIAlertController
-                                                  alertControllerWithTitle: nil
-                                                  message:error.localizedDescription
-                                                  preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction* ok = [UIAlertAction
-                                         actionWithTitle:@"OK"
-                                         style:UIAlertActionStyleDefault
-                                         handler:^(UIAlertAction * action)
-                                         {
-                                             [alert dismissViewControllerAnimated:YES completion:nil];
-                                         }];
-                    [alert addAction:ok];
-                    [self presentViewController:alert animated:YES completion:nil];
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log in", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [simpleAlert show];
                 }
             }];
             
@@ -192,20 +159,9 @@
         {
             [_activityIndicator stopAnimating];
             NSLog(@"Error %li: %@", (long)error.code, error.description);
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle: nil
-                                          message:error.localizedDescription
-                                          preferredStyle:UIAlertControllerStyleAlert];
             
-            UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            [alert addAction:ok];
-            [self presentViewController:alert animated:YES completion:nil];
+            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log in", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [simpleAlert show];
         }
     }];
 }
@@ -334,6 +290,18 @@
 #pragma mark - UITapGesture Recognizer
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
     [activeTextField resignFirstResponder];
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 101 || alertView.tag == 102) {
+        [_txt_username becomeFirstResponder];
+    }
+    else if (alertView.tag == 103)
+    {
+        [_txt_password becomeFirstResponder];
+    }
 }
 
 @end

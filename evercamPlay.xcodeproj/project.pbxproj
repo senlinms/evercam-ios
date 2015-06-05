@@ -35,19 +35,14 @@
 		413BB2841AD992DD0083A5DC /* NetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2831AD992DD0083A5DC /* NetworkUtil.m */; };
 		413BB2921ADAB6900083A5DC /* AddCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2901ADAB6900083A5DC /* AddCameraViewController.m */; };
 		413BB2931ADAB6900083A5DC /* AddCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413BB2911ADAB6900083A5DC /* AddCameraViewController.xib */; };
-		413BB2961ADACABA0083A5DC /* EvercamVendor.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2951ADACABA0083A5DC /* EvercamVendor.m */; };
 		413BB29A1ADAD13D0083A5DC /* SelectVendorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2981ADAD13C0083A5DC /* SelectVendorViewController.m */; };
 		413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413BB2991ADAD13C0083A5DC /* SelectVendorViewController.xib */; };
-		413BB29E1ADAD5F80083A5DC /* EvercamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB29D1ADAD5F80083A5DC /* EvercamModel.m */; };
 		413BB2A21ADAE0A40083A5DC /* SelectModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2A01ADAE0A40083A5DC /* SelectModelViewController.m */; };
 		413BB2A31ADAE0A50083A5DC /* SelectModelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413BB2A11ADAE0A40083A5DC /* SelectModelViewController.xib */; };
-		413BB2A61ADAFA200083A5DC /* EvercamDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2A51ADAFA200083A5DC /* EvercamDefaults.m */; };
-		413BB2A91ADB03AE0083A5DC /* EvercamCameraBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2A81ADB03AE0083A5DC /* EvercamCameraBuilder.m */; };
 		413BB2AF1ADB14640083A5DC /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2AE1ADB14640083A5DC /* CommonUtil.m */; };
 		413BB2B11ADBFB710083A5DC /* pull-out.png in Resources */ = {isa = PBXBuildFile; fileRef = 413BB2B01ADBFB710083A5DC /* pull-out.png */; };
 		413BB2B51ADC10690083A5DC /* ViewCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */; };
 		413BB2B61ADC10690083A5DC /* ViewCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413BB2B41ADC10690083A5DC /* ViewCameraViewController.xib */; };
-		4157369D1AD59ED4005B38DF /* EvercamRights.m in Sources */ = {isa = PBXBuildFile; fileRef = 4157369C1AD59ED4005B38DF /* EvercamRights.m */; };
 		41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */; };
 		41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */; };
 		41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB491AD6CE7F0016ACCA /* VideoToolbox.framework */; };
@@ -65,6 +60,7 @@
 		41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB781AD6DC180016ACCA /* QuartzCore.framework */; };
 		41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */; };
 		41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB7C1AD708730016ACCA /* icon_offline.png */; };
+		5D814025BA9B52C1265ECA86 /* libPods-evercamPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 241B18B5C67528E78AF3CBED /* libPods-evercamPlay.a */; };
 		C406398E1B05F93100FC5D67 /* SplunkMint-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */; };
 		C40639901B05F94F00FC5D67 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */; };
 		C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639911B05F96200FC5D67 /* WebKit.framework */; };
@@ -73,13 +69,10 @@
 		C49E9F3B1B0A2BE100E58C85 /* ic_cameras.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E221AFBCE11004FFA8E /* ic_cameras.png */; };
 		CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDAF1ABD675100420CE1 /* NIDropDown.m */; };
 		CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */; };
-		CB01CDB71ABE057E00420CE1 /* EvercamCameraUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */; };
-		CB01CDBA1AC00AFB00420CE1 /* EvercamCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB91AC00AFB00420CE1 /* EvercamCamera.m */; };
 		CB1C76541AAB144800680FE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76531AAB144800680FE3 /* main.m */; };
 		CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76561AAB144800680FE3 /* AppDelegate.m */; };
 		CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1C765B1AAB144800680FE3 /* Main.storyboard */; };
 		CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB1C765E1AAB144800680FE3 /* Images.xcassets */; };
-		CB1C766E1AAB144900680FE3 /* evercamPlayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C766D1AAB144900680FE3 /* evercamPlayTests.m */; };
 		CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C767A1AAB7DE900680FE3 /* SWRevealViewController.m */; };
 		CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C76941AAB871A00680FE3 /* cam_unavailable.png */; };
 		CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C769F1AAB871A00680FE3 /* ic_action_new.png */; };
@@ -114,23 +107,6 @@
 		CB318E611AFC3565004FFA8E /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CB318E4F1AFC3565004FFA8E /* UIImageView+HighlightedWebCache.m */; };
 		CB318E621AFC3565004FFA8E /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CB318E511AFC3565004FFA8E /* UIImageView+WebCache.m */; };
 		CB318E631AFC3565004FFA8E /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB318E531AFC3565004FFA8E /* UIView+WebCacheOperation.m */; };
-		CB44E83B1AAE9DD800A78C11 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8131AAE9DD800A78C11 /* AFHTTPRequestOperation.m */; };
-		CB44E83C1AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8151AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m */; };
-		CB44E83D1AAE9DD800A78C11 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8171AAE9DD800A78C11 /* AFURLConnectionOperation.m */; };
-		CB44E83E1AAE9DD800A78C11 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E81A1AAE9DD800A78C11 /* AFHTTPSessionManager.m */; };
-		CB44E83F1AAE9DD800A78C11 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E81C1AAE9DD800A78C11 /* AFURLSessionManager.m */; };
-		CB44E8401AAE9DD800A78C11 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E81F1AAE9DD800A78C11 /* AFNetworkReachabilityManager.m */; };
-		CB44E8411AAE9DD800A78C11 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8221AAE9DD800A78C11 /* AFSecurityPolicy.m */; };
-		CB44E8421AAE9DD800A78C11 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8251AAE9DD800A78C11 /* AFURLRequestSerialization.m */; };
-		CB44E8431AAE9DD800A78C11 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8271AAE9DD800A78C11 /* AFURLResponseSerialization.m */; };
-		CB44E8441AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E82A1AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.m */; };
-		CB44E8451AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E82C1AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.m */; };
-		CB44E8461AAE9DD800A78C11 /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E82E1AAE9DD800A78C11 /* UIAlertView+AFNetworking.m */; };
-		CB44E8471AAE9DD800A78C11 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8301AAE9DD800A78C11 /* UIButton+AFNetworking.m */; };
-		CB44E8481AAE9DD800A78C11 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8321AAE9DD800A78C11 /* UIImageView+AFNetworking.m */; };
-		CB44E8491AAE9DD800A78C11 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8351AAE9DD800A78C11 /* UIProgressView+AFNetworking.m */; };
-		CB44E84A1AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8371AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.m */; };
-		CB44E84B1AAE9DD800A78C11 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8391AAE9DD800A78C11 /* UIWebView+AFNetworking.m */; };
 		CB44E86E1AAE9E7D00A78C11 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8501AAE9E7D00A78C11 /* AccountsViewController.m */; };
 		CB44E86F1AAE9E7D00A78C11 /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB44E8511AAE9E7D00A78C11 /* AccountsViewController.xib */; };
 		CB44E8701AAE9E7D00A78C11 /* CamerasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8531AAE9E7D00A78C11 /* CamerasViewController.m */; };
@@ -152,29 +128,72 @@
 		CB44E8801AAE9E7D00A78C11 /* AddAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E86C1AAE9E7D00A78C11 /* AddAccountCell.m */; };
 		CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB44E86D1AAE9E7D00A78C11 /* AddAccountCell.xib */; };
 		CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB44E8821AAEA03300A78C11 /* Default-568h@2x.png */; };
-		CB44E8861AAED4E700A78C11 /* EvercamShell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8851AAED4E700A78C11 /* EvercamShell.m */; };
-		CB44E8891AAED82000A78C11 /* AFEvercamAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */; };
-		CB44E88C1AAEDD2D00A78C11 /* EvercamApiKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */; };
 		CB840D1B1ACAF36D00F289A9 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D161ACAF36D00F289A9 /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB840D1C1ACAF36D00F289A9 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D181ACAF36D00F289A9 /* ImageCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1A1ACAF36D00F289A9 /* ImageCacheObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */; };
 		CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB840D201ACAF38900F289A9 /* CameraViewCell.xib */; };
-		CB92361D1AB2DABF0031E23A /* EvercamUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB92361C1AB2DABF0031E23A /* EvercamUser.m */; };
 		CBDFA5601AE92806007CC199 /* ic_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = CBDFA55D1AE92806007CC199 /* ic_menu.png */; };
+		E30201AC1B16C4DD0006DAE8 /* AccountsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201AB1B16C4DD0006DAE8 /* AccountsViewController_iPad.xib */; };
+		E30201BE1B16C82D0006DAE8 /* alert-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B01B16C82D0006DAE8 /* alert-black-button.png */; };
+		E30201BF1B16C82D0006DAE8 /* alert-black-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B11B16C82D0006DAE8 /* alert-black-button@2x.png */; };
+		E30201C01B16C82D0006DAE8 /* alert-gray-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B21B16C82D0006DAE8 /* alert-gray-button.png */; };
+		E30201C11B16C82D0006DAE8 /* alert-gray-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B31B16C82D0006DAE8 /* alert-gray-button@2x.png */; };
+		E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B41B16C82D0006DAE8 /* alert-green-button.png */; };
+		E30201C31B16C82D0006DAE8 /* alert-green-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B51B16C82D0006DAE8 /* alert-green-button@2x.png */; };
+		E30201C41B16C82D0006DAE8 /* alert-red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B61B16C82D0006DAE8 /* alert-red-button.png */; };
+		E30201C51B16C82D0006DAE8 /* alert-red-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B71B16C82D0006DAE8 /* alert-red-button@2x.png */; };
+		E30201C61B16C82D0006DAE8 /* alert-window-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B81B16C82D0006DAE8 /* alert-window-landscape.png */; };
+		E30201C71B16C82D0006DAE8 /* alert-window-landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201B91B16C82D0006DAE8 /* alert-window-landscape@2x.png */; };
+		E30201C81B16C82D0006DAE8 /* alert-window.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201BA1B16C82D0006DAE8 /* alert-window.png */; };
+		E30201C91B16C82D0006DAE8 /* alert-window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201BB1B16C82D0006DAE8 /* alert-window@2x.png */; };
+		E30201CA1B16C82D0006DAE8 /* alert-yellow-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201BC1B16C82D0006DAE8 /* alert-yellow-button.png */; };
+		E30201CB1B16C82D0006DAE8 /* alert-yellow-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201BD1B16C82D0006DAE8 /* alert-yellow-button@2x.png */; };
+		E30201CD1B16C9CF0006DAE8 /* AddAccountView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201CC1B16C9CF0006DAE8 /* AddAccountView_iPad.xib */; };
+		E30201CF1B16CE290006DAE8 /* SettingsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201CE1B16CE290006DAE8 /* SettingsViewController_iPad.xib */; };
+		E30201D11B16CFE20006DAE8 /* FeedbackViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201D01B16CFE10006DAE8 /* FeedbackViewController_iPad.xib */; };
+		E30201D31B173B4A0006DAE8 /* AccountCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201D21B173B4A0006DAE8 /* AccountCell_iPad.xib */; };
+		E30201D51B173B760006DAE8 /* AddAccountCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201D41B173B760006DAE8 /* AddAccountCell_iPad.xib */; };
+		E30201D71B1782970006DAE8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E30201D61B1782970006DAE8 /* SpriteKit.framework */; };
+		E309006E1B162B7000E5B5C0 /* WelcomeViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E309006D1B162B7000E5B5C0 /* WelcomeViewController_iPad.xib */; };
+		E30900701B163F1200E5B5C0 /* SignupViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E309006F1B163F1200E5B5C0 /* SignupViewController_iPad.xib */; };
+		E30900721B16417400E5B5C0 /* LoginViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30900711B16417400E5B5C0 /* LoginViewController_iPad.xib */; };
+		E30900761B1646D100E5B5C0 /* play_page_feature_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900731B1646D100E5B5C0 /* play_page_feature_iPad@2x.png */; };
+		E30900771B1646D100E5B5C0 /* play_page_intro_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900741B1646D100E5B5C0 /* play_page_intro_iPad@2x.png */; };
+		E30900781B1646D100E5B5C0 /* play_page_next_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900751B1646D100E5B5C0 /* play_page_next_iPad@2x.png */; };
+		E309007A1B16510900E5B5C0 /* CameraPlayViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30900791B16510900E5B5C0 /* CameraPlayViewController_iPad.xib */; };
+		E309007C1B1659DB00E5B5C0 /* CamerasViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E309007B1B1659DB00E5B5C0 /* CamerasViewController_iPad.xib */; };
+		E309007E1B165C4C00E5B5C0 /* CameraViewCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E309007D1B165C4C00E5B5C0 /* CameraViewCell_iPad.xib */; };
+		E30900801B16A2C000E5B5C0 /* AddCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E309007F1B16A2C000E5B5C0 /* AddCameraViewController_iPad.xib */; };
+		E30900881B16B78600E5B5C0 /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E30900831B16B78600E5B5C0 /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E30900891B16B78600E5B5C0 /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E30900851B16B78600E5B5C0 /* BlockAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E309008A1B16B78600E5B5C0 /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = E30900871B16B78600E5B5C0 /* BlockBackground.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E309009B1B16B96000E5B5C0 /* action-black-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E309008D1B16B96000E5B5C0 /* action-black-button-selected.png */; };
+		E309009C1B16B96000E5B5C0 /* action-black-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E309008E1B16B96000E5B5C0 /* action-black-button-selected@2x.png */; };
+		E309009D1B16B96000E5B5C0 /* action-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E309008F1B16B96000E5B5C0 /* action-black-button.png */; };
+		E309009E1B16B96000E5B5C0 /* action-black-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900901B16B96000E5B5C0 /* action-black-button@2x.png */; };
+		E309009F1B16B96000E5B5C0 /* action-gray-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900911B16B96000E5B5C0 /* action-gray-button-selected.png */; };
+		E30900A01B16B96000E5B5C0 /* action-gray-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900921B16B96000E5B5C0 /* action-gray-button-selected@2x.png */; };
+		E30900A11B16B96000E5B5C0 /* action-gray-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900931B16B96000E5B5C0 /* action-gray-button.png */; };
+		E30900A21B16B96000E5B5C0 /* action-gray-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900941B16B96000E5B5C0 /* action-gray-button@2x.png */; };
+		E30900A31B16B96000E5B5C0 /* action-red-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900951B16B96000E5B5C0 /* action-red-button-selected.png */; };
+		E30900A41B16B96000E5B5C0 /* action-red-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900961B16B96000E5B5C0 /* action-red-button-selected@2x.png */; };
+		E30900A51B16B96000E5B5C0 /* action-red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900971B16B96000E5B5C0 /* action-red-button.png */; };
+		E30900A61B16B96000E5B5C0 /* action-red-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900981B16B96000E5B5C0 /* action-red-button@2x.png */; };
+		E30900A71B16B96000E5B5C0 /* action-sheet-panel.png in Resources */ = {isa = PBXBuildFile; fileRef = E30900991B16B96000E5B5C0 /* action-sheet-panel.png */; };
+		E30900A81B16B96000E5B5C0 /* action-sheet-panel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E309009A1B16B96000E5B5C0 /* action-sheet-panel@2x.png */; };
+		E356C9D41B17985D007BB101 /* Pods-evercamPlay.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E356C9D21B17985D007BB101 /* Pods-evercamPlay.debug.xcconfig */; };
+		E356C9D51B17985D007BB101 /* Pods-evercamPlay.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E356C9D31B17985D007BB101 /* Pods-evercamPlay.release.xcconfig */; };
+		E356C9D91B179E2A007BB101 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E356C9D81B179E2A007BB101 /* libicucore.dylib */; };
+		E356C9DB1B17B1D6007BB101 /* SnapshotViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E356C9DA1B17B1D6007BB101 /* SnapshotViewController_iPad.xib */; };
+		E369E4A61B137AB6009D2D9E /* AddAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = E369E4A51B137AB6009D2D9E /* AddAccountView.m */; };
+		E369E4A81B137AC9009D2D9E /* AddAccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E369E4A71B137AC9009D2D9E /* AddAccountView.xib */; };
+		E369E4AB1B137F54009D2D9E /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = E369E4AA1B137F54009D2D9E /* GlobalSettings.m */; };
+		E369E4AF1B14EC0F009D2D9E /* btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E369E4AE1B14EC0F009D2D9E /* btn_close@2x.png */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		CB1C76681AAB144900680FE3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CB1C76461AAB144700680FE3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CB1C764D1AAB144700680FE3;
-			remoteInfo = evercamPlay;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		241B18B5C67528E78AF3CBED /* libPods-evercamPlay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-evercamPlay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		410747ED1ADC6D45004D10C9 /* BrowseJpgTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseJpgTask.h; sourceTree = "<group>"; };
 		410747EE1ADC6D45004D10C9 /* BrowseJpgTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseJpgTask.m; sourceTree = "<group>"; };
 		410748701ADF6F3E004D10C9 /* RecordingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingsViewController.h; sourceTree = "<group>"; };
@@ -226,28 +245,18 @@
 		413BB28F1ADAB6900083A5DC /* AddCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCameraViewController.h; sourceTree = "<group>"; };
 		413BB2901ADAB6900083A5DC /* AddCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCameraViewController.m; sourceTree = "<group>"; };
 		413BB2911ADAB6900083A5DC /* AddCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCameraViewController.xib; sourceTree = "<group>"; };
-		413BB2941ADACABA0083A5DC /* EvercamVendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamVendor.h; sourceTree = "<group>"; };
-		413BB2951ADACABA0083A5DC /* EvercamVendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamVendor.m; sourceTree = "<group>"; };
 		413BB2971ADAD13C0083A5DC /* SelectVendorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectVendorViewController.h; sourceTree = "<group>"; };
 		413BB2981ADAD13C0083A5DC /* SelectVendorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectVendorViewController.m; sourceTree = "<group>"; };
 		413BB2991ADAD13C0083A5DC /* SelectVendorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectVendorViewController.xib; sourceTree = "<group>"; };
-		413BB29C1ADAD5F80083A5DC /* EvercamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamModel.h; sourceTree = "<group>"; };
-		413BB29D1ADAD5F80083A5DC /* EvercamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamModel.m; sourceTree = "<group>"; };
 		413BB29F1ADAE0A40083A5DC /* SelectModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectModelViewController.h; sourceTree = "<group>"; };
 		413BB2A01ADAE0A40083A5DC /* SelectModelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectModelViewController.m; sourceTree = "<group>"; };
 		413BB2A11ADAE0A40083A5DC /* SelectModelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectModelViewController.xib; sourceTree = "<group>"; };
-		413BB2A41ADAFA200083A5DC /* EvercamDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamDefaults.h; sourceTree = "<group>"; };
-		413BB2A51ADAFA200083A5DC /* EvercamDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamDefaults.m; sourceTree = "<group>"; };
-		413BB2A71ADB03AE0083A5DC /* EvercamCameraBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraBuilder.h; sourceTree = "<group>"; };
-		413BB2A81ADB03AE0083A5DC /* EvercamCameraBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraBuilder.m; sourceTree = "<group>"; };
 		413BB2AD1ADB14640083A5DC /* CommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
 		413BB2AE1ADB14640083A5DC /* CommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtil.m; sourceTree = "<group>"; };
 		413BB2B01ADBFB710083A5DC /* pull-out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull-out.png"; sourceTree = "<group>"; };
 		413BB2B21ADC10690083A5DC /* ViewCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCameraViewController.h; sourceTree = "<group>"; };
 		413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewCameraViewController.m; sourceTree = "<group>"; };
 		413BB2B41ADC10690083A5DC /* ViewCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController.xib; sourceTree = "<group>"; };
-		4157369B1AD59ED4005B38DF /* EvercamRights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamRights.h; sourceTree = "<group>"; };
-		4157369C1AD59ED4005B38DF /* EvercamRights.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamRights.m; sourceTree = "<group>"; };
 		41BEFB3F1AD609A10016ACCA /* CameraPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraPlayViewController.h; sourceTree = "<group>"; };
 		41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraPlayViewController.m; sourceTree = "<group>"; };
 		41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraPlayViewController.xib; sourceTree = "<group>"; };
@@ -266,7 +275,7 @@
 		41BEFB781AD6DC180016ACCA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		41BEFB7C1AD708730016ACCA /* icon_offline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_offline.png; sourceTree = "<group>"; };
-		C406398B1B05EF3100FC5D67 /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../Library/Frameworks/GStreamer.framework; sourceTree = "<group>"; };
+		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "SplunkMint-iOS.framework"; sourceTree = "<group>"; };
 		C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C40639911B05F96200FC5D67 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -277,10 +286,6 @@
 		CB01CDAF1ABD675100420CE1 /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
 		CB01CDB21ABDFC9F00420CE1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		CB01CDB51ABE057E00420CE1 /* EvercamCameraUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraUtil.h; sourceTree = "<group>"; };
-		CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraUtil.m; sourceTree = "<group>"; };
-		CB01CDB81AC00AFB00420CE1 /* EvercamCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCamera.h; sourceTree = "<group>"; };
-		CB01CDB91AC00AFB00420CE1 /* EvercamCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCamera.m; sourceTree = "<group>"; };
 		CB1C764E1AAB144800680FE3 /* evercamPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evercamPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1C76521AAB144800680FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB1C76531AAB144800680FE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -288,7 +293,6 @@
 		CB1C76561AAB144800680FE3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CB1C765C1AAB144800680FE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CB1C765E1AAB144800680FE3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CB1C76671AAB144900680FE3 /* evercamPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = evercamPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1C766C1AAB144900680FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB1C766D1AAB144900680FE3 /* evercamPlayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = evercamPlayTests.m; sourceTree = "<group>"; };
 		CB1C76791AAB7DE900680FE3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -371,42 +375,6 @@
 		CB318E511AFC3565004FFA8E /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		CB318E521AFC3565004FFA8E /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		CB318E531AFC3565004FFA8E /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		CB44E80D1AAE9DD800A78C11 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		CB44E8121AAE9DD800A78C11 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		CB44E8131AAE9DD800A78C11 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		CB44E8141AAE9DD800A78C11 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
-		CB44E8151AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
-		CB44E8161AAE9DD800A78C11 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		CB44E8171AAE9DD800A78C11 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		CB44E8191AAE9DD800A78C11 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		CB44E81A1AAE9DD800A78C11 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		CB44E81B1AAE9DD800A78C11 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		CB44E81C1AAE9DD800A78C11 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		CB44E81E1AAE9DD800A78C11 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		CB44E81F1AAE9DD800A78C11 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		CB44E8211AAE9DD800A78C11 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		CB44E8221AAE9DD800A78C11 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		CB44E8241AAE9DD800A78C11 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		CB44E8251AAE9DD800A78C11 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		CB44E8261AAE9DD800A78C11 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		CB44E8271AAE9DD800A78C11 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		CB44E8291AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		CB44E82A1AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		CB44E82B1AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
-		CB44E82C1AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
-		CB44E82D1AAE9DD800A78C11 /* UIAlertView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+AFNetworking.h"; sourceTree = "<group>"; };
-		CB44E82E1AAE9DD800A78C11 /* UIAlertView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+AFNetworking.m"; sourceTree = "<group>"; };
-		CB44E82F1AAE9DD800A78C11 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
-		CB44E8301AAE9DD800A78C11 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
-		CB44E8311AAE9DD800A78C11 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		CB44E8321AAE9DD800A78C11 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		CB44E8331AAE9DD800A78C11 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+AFNetworking.h"; sourceTree = "<group>"; };
-		CB44E8341AAE9DD800A78C11 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
-		CB44E8351AAE9DD800A78C11 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
-		CB44E8361AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
-		CB44E8371AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
-		CB44E8381AAE9DD800A78C11 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
-		CB44E8391AAE9DD800A78C11 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		CB44E84F1AAE9E7D00A78C11 /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
 		CB44E8501AAE9E7D00A78C11 /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
 		CB44E8511AAE9E7D00A78C11 /* AccountsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountsViewController.xib; sourceTree = "<group>"; };
@@ -438,12 +406,6 @@
 		CB44E86C1AAE9E7D00A78C11 /* AddAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountCell.m; sourceTree = "<group>"; };
 		CB44E86D1AAE9E7D00A78C11 /* AddAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountCell.xib; sourceTree = "<group>"; };
 		CB44E8821AAEA03300A78C11 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		CB44E8841AAED4E700A78C11 /* EvercamShell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamShell.h; sourceTree = "<group>"; };
-		CB44E8851AAED4E700A78C11 /* EvercamShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamShell.m; sourceTree = "<group>"; };
-		CB44E8871AAED82000A78C11 /* AFEvercamAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEvercamAPIClient.h; sourceTree = "<group>"; };
-		CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEvercamAPIClient.m; sourceTree = "<group>"; };
-		CB44E88A1AAEDD2D00A78C11 /* EvercamApiKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamApiKeyPair.h; sourceTree = "<group>"; };
-		CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamApiKeyPair.m; sourceTree = "<group>"; };
 		CB840D151ACAF36D00F289A9 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		CB840D161ACAF36D00F289A9 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		CB840D171ACAF36D00F289A9 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
@@ -453,9 +415,70 @@
 		CB840D1E1ACAF38900F289A9 /* CameraViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewCell.h; sourceTree = "<group>"; };
 		CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewCell.m; sourceTree = "<group>"; };
 		CB840D201ACAF38900F289A9 /* CameraViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewCell.xib; sourceTree = "<group>"; };
-		CB92361B1AB2DABF0031E23A /* EvercamUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamUser.h; sourceTree = "<group>"; };
-		CB92361C1AB2DABF0031E23A /* EvercamUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUser.m; sourceTree = "<group>"; };
 		CBDFA55D1AE92806007CC199 /* ic_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu.png; sourceTree = "<group>"; };
+		E30201AB1B16C4DD0006DAE8 /* AccountsViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountsViewController_iPad.xib; sourceTree = "<group>"; };
+		E30201B01B16C82D0006DAE8 /* alert-black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-black-button.png"; sourceTree = "<group>"; };
+		E30201B11B16C82D0006DAE8 /* alert-black-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-black-button@2x.png"; sourceTree = "<group>"; };
+		E30201B21B16C82D0006DAE8 /* alert-gray-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-gray-button.png"; sourceTree = "<group>"; };
+		E30201B31B16C82D0006DAE8 /* alert-gray-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-gray-button@2x.png"; sourceTree = "<group>"; };
+		E30201B41B16C82D0006DAE8 /* alert-green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-green-button.png"; sourceTree = "<group>"; };
+		E30201B51B16C82D0006DAE8 /* alert-green-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-green-button@2x.png"; sourceTree = "<group>"; };
+		E30201B61B16C82D0006DAE8 /* alert-red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-red-button.png"; sourceTree = "<group>"; };
+		E30201B71B16C82D0006DAE8 /* alert-red-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-red-button@2x.png"; sourceTree = "<group>"; };
+		E30201B81B16C82D0006DAE8 /* alert-window-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window-landscape.png"; sourceTree = "<group>"; };
+		E30201B91B16C82D0006DAE8 /* alert-window-landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window-landscape@2x.png"; sourceTree = "<group>"; };
+		E30201BA1B16C82D0006DAE8 /* alert-window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window.png"; sourceTree = "<group>"; };
+		E30201BB1B16C82D0006DAE8 /* alert-window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window@2x.png"; sourceTree = "<group>"; };
+		E30201BC1B16C82D0006DAE8 /* alert-yellow-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-yellow-button.png"; sourceTree = "<group>"; };
+		E30201BD1B16C82D0006DAE8 /* alert-yellow-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-yellow-button@2x.png"; sourceTree = "<group>"; };
+		E30201CC1B16C9CF0006DAE8 /* AddAccountView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountView_iPad.xib; sourceTree = "<group>"; };
+		E30201CE1B16CE290006DAE8 /* SettingsViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController_iPad.xib; sourceTree = "<group>"; };
+		E30201D01B16CFE10006DAE8 /* FeedbackViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController_iPad.xib; sourceTree = "<group>"; };
+		E30201D21B173B4A0006DAE8 /* AccountCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountCell_iPad.xib; sourceTree = "<group>"; };
+		E30201D41B173B760006DAE8 /* AddAccountCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountCell_iPad.xib; sourceTree = "<group>"; };
+		E30201D61B1782970006DAE8 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		E309006D1B162B7000E5B5C0 /* WelcomeViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController_iPad.xib; sourceTree = "<group>"; };
+		E309006F1B163F1200E5B5C0 /* SignupViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupViewController_iPad.xib; sourceTree = "<group>"; };
+		E30900711B16417400E5B5C0 /* LoginViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController_iPad.xib; sourceTree = "<group>"; };
+		E30900731B1646D100E5B5C0 /* play_page_feature_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_page_feature_iPad@2x.png"; sourceTree = "<group>"; };
+		E30900741B1646D100E5B5C0 /* play_page_intro_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_page_intro_iPad@2x.png"; sourceTree = "<group>"; };
+		E30900751B1646D100E5B5C0 /* play_page_next_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_page_next_iPad@2x.png"; sourceTree = "<group>"; };
+		E30900791B16510900E5B5C0 /* CameraPlayViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraPlayViewController_iPad.xib; sourceTree = "<group>"; };
+		E309007B1B1659DB00E5B5C0 /* CamerasViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CamerasViewController_iPad.xib; sourceTree = "<group>"; };
+		E309007D1B165C4C00E5B5C0 /* CameraViewCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewCell_iPad.xib; sourceTree = "<group>"; };
+		E309007F1B16A2C000E5B5C0 /* AddCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCameraViewController_iPad.xib; sourceTree = "<group>"; };
+		E30900821B16B78600E5B5C0 /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
+		E30900831B16B78600E5B5C0 /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
+		E30900841B16B78600E5B5C0 /* BlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAlertView.h; sourceTree = "<group>"; };
+		E30900851B16B78600E5B5C0 /* BlockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAlertView.m; sourceTree = "<group>"; };
+		E30900861B16B78600E5B5C0 /* BlockBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBackground.h; sourceTree = "<group>"; };
+		E30900871B16B78600E5B5C0 /* BlockBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockBackground.m; sourceTree = "<group>"; };
+		E309008B1B16B8DF00E5B5C0 /* BlockUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockUI.h; sourceTree = "<group>"; };
+		E309008D1B16B96000E5B5C0 /* action-black-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button-selected.png"; sourceTree = "<group>"; };
+		E309008E1B16B96000E5B5C0 /* action-black-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button-selected@2x.png"; sourceTree = "<group>"; };
+		E309008F1B16B96000E5B5C0 /* action-black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button.png"; sourceTree = "<group>"; };
+		E30900901B16B96000E5B5C0 /* action-black-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button@2x.png"; sourceTree = "<group>"; };
+		E30900911B16B96000E5B5C0 /* action-gray-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button-selected.png"; sourceTree = "<group>"; };
+		E30900921B16B96000E5B5C0 /* action-gray-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button-selected@2x.png"; sourceTree = "<group>"; };
+		E30900931B16B96000E5B5C0 /* action-gray-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button.png"; sourceTree = "<group>"; };
+		E30900941B16B96000E5B5C0 /* action-gray-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button@2x.png"; sourceTree = "<group>"; };
+		E30900951B16B96000E5B5C0 /* action-red-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button-selected.png"; sourceTree = "<group>"; };
+		E30900961B16B96000E5B5C0 /* action-red-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button-selected@2x.png"; sourceTree = "<group>"; };
+		E30900971B16B96000E5B5C0 /* action-red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button.png"; sourceTree = "<group>"; };
+		E30900981B16B96000E5B5C0 /* action-red-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button@2x.png"; sourceTree = "<group>"; };
+		E30900991B16B96000E5B5C0 /* action-sheet-panel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-sheet-panel.png"; sourceTree = "<group>"; };
+		E309009A1B16B96000E5B5C0 /* action-sheet-panel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-sheet-panel@2x.png"; sourceTree = "<group>"; };
+		E356C9D21B17985D007BB101 /* Pods-evercamPlay.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-evercamPlay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-evercamPlay/Pods-evercamPlay.debug.xcconfig"; sourceTree = "<group>"; };
+		E356C9D31B17985D007BB101 /* Pods-evercamPlay.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-evercamPlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-evercamPlay/Pods-evercamPlay.release.xcconfig"; sourceTree = "<group>"; };
+		E356C9D81B179E2A007BB101 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		E356C9DA1B17B1D6007BB101 /* SnapshotViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController_iPad.xib; sourceTree = "<group>"; };
+		E369E4A41B137AB6009D2D9E /* AddAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountView.h; sourceTree = "<group>"; };
+		E369E4A51B137AB6009D2D9E /* AddAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountView.m; sourceTree = "<group>"; };
+		E369E4A71B137AC9009D2D9E /* AddAccountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountView.xib; sourceTree = "<group>"; };
+		E369E4A91B137F54009D2D9E /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
+		E369E4AA1B137F54009D2D9E /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
+		E369E4AD1B13A737009D2D9E /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		E369E4AE1B14EC0F009D2D9E /* btn_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,6 +486,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E356C9D91B179E2A007BB101 /* libicucore.dylib in Frameworks */,
+				E30201D71B1782970006DAE8 /* SpriteKit.framework in Frameworks */,
 				C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */,
 				C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */,
 				C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */,
@@ -485,13 +510,7 @@
 				41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */,
 				41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */,
 				41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CB1C76641AAB144900680FE3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				5D814025BA9B52C1265ECA86 /* libPods-evercamPlay.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,8 +548,11 @@
 		41208A391AD725CC009C4FC2 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				E369E4AD1B13A737009D2D9E /* Config.h */,
 				41208A3A1AD725CC009C4FC2 /* AppUser.h */,
 				41208A3B1AD725CC009C4FC2 /* AppUser.m */,
+				E369E4A91B137F54009D2D9E /* GlobalSettings.h */,
+				E369E4AA1B137F54009D2D9E /* GlobalSettings.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -588,39 +610,17 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		4157369A1AD59E93005B38DF /* DataModels */ = {
-			isa = PBXGroup;
-			children = (
-				CB44E88A1AAEDD2D00A78C11 /* EvercamApiKeyPair.h */,
-				CB44E88B1AAEDD2D00A78C11 /* EvercamApiKeyPair.m */,
-				CB01CDB81AC00AFB00420CE1 /* EvercamCamera.h */,
-				CB01CDB91AC00AFB00420CE1 /* EvercamCamera.m */,
-				CB92361B1AB2DABF0031E23A /* EvercamUser.h */,
-				CB92361C1AB2DABF0031E23A /* EvercamUser.m */,
-				4157369B1AD59ED4005B38DF /* EvercamRights.h */,
-				4157369C1AD59ED4005B38DF /* EvercamRights.m */,
-				413BB2941ADACABA0083A5DC /* EvercamVendor.h */,
-				413BB2951ADACABA0083A5DC /* EvercamVendor.m */,
-				413BB29C1ADAD5F80083A5DC /* EvercamModel.h */,
-				413BB29D1ADAD5F80083A5DC /* EvercamModel.m */,
-				413BB2A41ADAFA200083A5DC /* EvercamDefaults.h */,
-				413BB2A51ADAFA200083A5DC /* EvercamDefaults.m */,
-				413BB2A71ADB03AE0083A5DC /* EvercamCameraBuilder.h */,
-				413BB2A81ADB03AE0083A5DC /* EvercamCameraBuilder.m */,
-			);
-			name = DataModels;
-			sourceTree = "<group>";
-		};
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E356C9D81B179E2A007BB101 /* libicucore.dylib */,
+				E30201D61B1782970006DAE8 /* SpriteKit.framework */,
 				C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */,
 				C40639951B05FBDA00FC5D67 /* CoreData.framework */,
 				C40639931B05F96C00FC5D67 /* libz.dylib */,
 				C40639911B05F96200FC5D67 /* WebKit.framework */,
 				C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */,
 				C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */,
-				C406398B1B05EF3100FC5D67 /* GStreamer.framework */,
 				410748841AE04DAB004D10C9 /* CoreTelephony.framework */,
 				41208A481AD8A126009C4FC2 /* MessageUI.framework */,
 				41BEFB781AD6DC180016ACCA /* QuartzCore.framework */,
@@ -637,8 +637,19 @@
 				41BEFB661AD6DB560016ACCA /* libresolv.dylib */,
 				41BEFB641AD6DB480016ACCA /* libstdc++.dylib */,
 				41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */,
+				A58069580246AB75973B9260 /* libPods.a */,
+				241B18B5C67528E78AF3CBED /* libPods-evercamPlay.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83F82304D6A047012929A763 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E356C9D21B17985D007BB101 /* Pods-evercamPlay.debug.xcconfig */,
+				E356C9D31B17985D007BB101 /* Pods-evercamPlay.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CB01CDAD1ABD675000420CE1 /* NIDropDown */ = {
@@ -667,6 +678,7 @@
 				CB1C76501AAB144800680FE3 /* evercamPlay */,
 				CB1C766A1AAB144900680FE3 /* evercamPlayTests */,
 				CB1C764F1AAB144800680FE3 /* Products */,
+				83F82304D6A047012929A763 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -674,7 +686,6 @@
 			isa = PBXGroup;
 			children = (
 				CB1C764E1AAB144800680FE3 /* evercamPlay.app */,
-				CB1C76671AAB144900680FE3 /* evercamPlayTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -682,7 +693,6 @@
 		CB1C76501AAB144800680FE3 /* evercamPlay */ = {
 			isa = PBXGroup;
 			children = (
-				CB44E84C1AAE9E1F00A78C11 /* Wrapper */,
 				CB1C76771AAB7DE900680FE3 /* 3rdParty */,
 				CB44E84E1AAE9E7D00A78C11 /* Controllers */,
 				CB44E8671AAE9E7D00A78C11 /* View */,
@@ -730,13 +740,13 @@
 		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				E30900811B16B78600E5B5C0 /* BlockAction */,
 				410748881AE052C8004D10C9 /* GoogleAnalytics */,
 				413BB27E1AD992890083A5DC /* Reachability */,
 				41208A5E1AD97D44009C4FC2 /* SMTPAPI */,
 				41208A541AD97970009C4FC2 /* SendGrid */,
 				41208A4C1AD8DC59009C4FC2 /* CustomNavigationController */,
 				CB318E2B1AFC0875004FFA8E /* GCD */,
-				CB44E80C1AAE9DD800A78C11 /* AFNetworking */,
 				CB840D141ACAF36D00F289A9 /* AsyncImageView */,
 				CB01CDB11ABDFC9F00420CE1 /* MBProgressHUD */,
 				CB01CDAD1ABD675000420CE1 /* NIDropDown */,
@@ -766,6 +776,12 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				E30201AF1B16C82D0006DAE8 /* AlertView */,
+				E309008C1B16B96000E5B5C0 /* ActionSheet */,
+				E30900731B1646D100E5B5C0 /* play_page_feature_iPad@2x.png */,
+				E30900741B1646D100E5B5C0 /* play_page_intro_iPad@2x.png */,
+				E30900751B1646D100E5B5C0 /* play_page_next_iPad@2x.png */,
+				E369E4AE1B14EC0F009D2D9E /* btn_close@2x.png */,
 				411C90EA1AE6A1250048FF3D /* back.png */,
 				411C90E61AE573D10048FF3D /* bottom_fade.png */,
 				410748751ADFDBE0004D10C9 /* btn_pause.png */,
@@ -872,120 +888,17 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
-		CB44E80C1AAE9DD800A78C11 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				CB44E80D1AAE9DD800A78C11 /* AFNetworking.h */,
-				CB44E8111AAE9DD800A78C11 /* NSURLConnection */,
-				CB44E8181AAE9DD800A78C11 /* NSURLSession */,
-				CB44E81D1AAE9DD800A78C11 /* Reachability */,
-				CB44E8201AAE9DD800A78C11 /* Security */,
-				CB44E8231AAE9DD800A78C11 /* Serialization */,
-				CB44E8281AAE9DD800A78C11 /* UIKit+AFNetworking */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		CB44E8111AAE9DD800A78C11 /* NSURLConnection */ = {
-			isa = PBXGroup;
-			children = (
-				CB44E8121AAE9DD800A78C11 /* AFHTTPRequestOperation.h */,
-				CB44E8131AAE9DD800A78C11 /* AFHTTPRequestOperation.m */,
-				CB44E8141AAE9DD800A78C11 /* AFHTTPRequestOperationManager.h */,
-				CB44E8151AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m */,
-				CB44E8161AAE9DD800A78C11 /* AFURLConnectionOperation.h */,
-				CB44E8171AAE9DD800A78C11 /* AFURLConnectionOperation.m */,
-			);
-			path = NSURLConnection;
-			sourceTree = "<group>";
-		};
-		CB44E8181AAE9DD800A78C11 /* NSURLSession */ = {
-			isa = PBXGroup;
-			children = (
-				CB44E8191AAE9DD800A78C11 /* AFHTTPSessionManager.h */,
-				CB44E81A1AAE9DD800A78C11 /* AFHTTPSessionManager.m */,
-				CB44E81B1AAE9DD800A78C11 /* AFURLSessionManager.h */,
-				CB44E81C1AAE9DD800A78C11 /* AFURLSessionManager.m */,
-			);
-			path = NSURLSession;
-			sourceTree = "<group>";
-		};
-		CB44E81D1AAE9DD800A78C11 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				CB44E81E1AAE9DD800A78C11 /* AFNetworkReachabilityManager.h */,
-				CB44E81F1AAE9DD800A78C11 /* AFNetworkReachabilityManager.m */,
-			);
-			path = Reachability;
-			sourceTree = "<group>";
-		};
-		CB44E8201AAE9DD800A78C11 /* Security */ = {
-			isa = PBXGroup;
-			children = (
-				CB44E8211AAE9DD800A78C11 /* AFSecurityPolicy.h */,
-				CB44E8221AAE9DD800A78C11 /* AFSecurityPolicy.m */,
-			);
-			path = Security;
-			sourceTree = "<group>";
-		};
-		CB44E8231AAE9DD800A78C11 /* Serialization */ = {
-			isa = PBXGroup;
-			children = (
-				CB44E8241AAE9DD800A78C11 /* AFURLRequestSerialization.h */,
-				CB44E8251AAE9DD800A78C11 /* AFURLRequestSerialization.m */,
-				CB44E8261AAE9DD800A78C11 /* AFURLResponseSerialization.h */,
-				CB44E8271AAE9DD800A78C11 /* AFURLResponseSerialization.m */,
-			);
-			path = Serialization;
-			sourceTree = "<group>";
-		};
-		CB44E8281AAE9DD800A78C11 /* UIKit+AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				CB44E8291AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.h */,
-				CB44E82A1AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.m */,
-				CB44E82B1AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.h */,
-				CB44E82C1AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.m */,
-				CB44E82D1AAE9DD800A78C11 /* UIAlertView+AFNetworking.h */,
-				CB44E82E1AAE9DD800A78C11 /* UIAlertView+AFNetworking.m */,
-				CB44E82F1AAE9DD800A78C11 /* UIButton+AFNetworking.h */,
-				CB44E8301AAE9DD800A78C11 /* UIButton+AFNetworking.m */,
-				CB44E8311AAE9DD800A78C11 /* UIImageView+AFNetworking.h */,
-				CB44E8321AAE9DD800A78C11 /* UIImageView+AFNetworking.m */,
-				CB44E8331AAE9DD800A78C11 /* UIKit+AFNetworking.h */,
-				CB44E8341AAE9DD800A78C11 /* UIProgressView+AFNetworking.h */,
-				CB44E8351AAE9DD800A78C11 /* UIProgressView+AFNetworking.m */,
-				CB44E8361AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.h */,
-				CB44E8371AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.m */,
-				CB44E8381AAE9DD800A78C11 /* UIWebView+AFNetworking.h */,
-				CB44E8391AAE9DD800A78C11 /* UIWebView+AFNetworking.m */,
-			);
-			path = "UIKit+AFNetworking";
-			sourceTree = "<group>";
-		};
-		CB44E84C1AAE9E1F00A78C11 /* Wrapper */ = {
-			isa = PBXGroup;
-			children = (
-				4157369A1AD59E93005B38DF /* DataModels */,
-				CB44E8871AAED82000A78C11 /* AFEvercamAPIClient.h */,
-				CB44E8881AAED82000A78C11 /* AFEvercamAPIClient.m */,
-				CB44E8841AAED4E700A78C11 /* EvercamShell.h */,
-				CB44E8851AAED4E700A78C11 /* EvercamShell.m */,
-				CB01CDB51ABE057E00420CE1 /* EvercamCameraUtil.h */,
-				CB01CDB61ABE057E00420CE1 /* EvercamCameraUtil.m */,
-			);
-			path = Wrapper;
-			sourceTree = "<group>";
-		};
 		CB44E84E1AAE9E7D00A78C11 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				CB44E84F1AAE9E7D00A78C11 /* AccountsViewController.h */,
 				CB44E8501AAE9E7D00A78C11 /* AccountsViewController.m */,
 				CB44E8511AAE9E7D00A78C11 /* AccountsViewController.xib */,
+				E30201AB1B16C4DD0006DAE8 /* AccountsViewController_iPad.xib */,
 				CB44E8521AAE9E7D00A78C11 /* CamerasViewController.h */,
 				CB44E8531AAE9E7D00A78C11 /* CamerasViewController.m */,
 				CB44E8541AAE9E7D00A78C11 /* CamerasViewController.xib */,
+				E309007B1B1659DB00E5B5C0 /* CamerasViewController_iPad.xib */,
 				410748701ADF6F3E004D10C9 /* RecordingsViewController.h */,
 				410748711ADF6F3E004D10C9 /* RecordingsViewController.m */,
 				410748721ADF6F3E004D10C9 /* RecordingsViewController.xib */,
@@ -995,6 +908,7 @@
 				413BB28F1ADAB6900083A5DC /* AddCameraViewController.h */,
 				413BB2901ADAB6900083A5DC /* AddCameraViewController.m */,
 				413BB2911ADAB6900083A5DC /* AddCameraViewController.xib */,
+				E309007F1B16A2C000E5B5C0 /* AddCameraViewController_iPad.xib */,
 				413BB2971ADAD13C0083A5DC /* SelectVendorViewController.h */,
 				413BB2981ADAD13C0083A5DC /* SelectVendorViewController.m */,
 				413BB2991ADAD13C0083A5DC /* SelectVendorViewController.xib */,
@@ -1004,27 +918,34 @@
 				41BEFB3F1AD609A10016ACCA /* CameraPlayViewController.h */,
 				41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */,
 				41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */,
+				E30900791B16510900E5B5C0 /* CameraPlayViewController_iPad.xib */,
 				4107487B1AE006AC004D10C9 /* SnapshotViewController.h */,
 				4107487C1AE006AC004D10C9 /* SnapshotViewController.m */,
 				4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */,
+				E356C9DA1B17B1D6007BB101 /* SnapshotViewController_iPad.xib */,
 				CB44E8551AAE9E7D00A78C11 /* FeedbackViewController.h */,
 				CB44E8561AAE9E7D00A78C11 /* FeedbackViewController.m */,
 				CB44E8571AAE9E7D00A78C11 /* FeedbackViewController.xib */,
+				E30201D01B16CFE10006DAE8 /* FeedbackViewController_iPad.xib */,
 				CB44E8581AAE9E7D00A78C11 /* LoginViewController.h */,
 				CB44E8591AAE9E7D00A78C11 /* LoginViewController.m */,
 				CB44E85A1AAE9E7D00A78C11 /* LoginViewController.xib */,
+				E30900711B16417400E5B5C0 /* LoginViewController_iPad.xib */,
 				CB44E85B1AAE9E7D00A78C11 /* MenuViewController.h */,
 				CB44E85C1AAE9E7D00A78C11 /* MenuViewController.m */,
 				CB44E85D1AAE9E7D00A78C11 /* MenuViewController.xib */,
 				CB44E85E1AAE9E7D00A78C11 /* SettingsViewController.h */,
 				CB44E85F1AAE9E7D00A78C11 /* SettingsViewController.m */,
 				CB44E8601AAE9E7D00A78C11 /* SettingsViewController.xib */,
+				E30201CE1B16CE290006DAE8 /* SettingsViewController_iPad.xib */,
 				CB44E8611AAE9E7D00A78C11 /* SignupViewController.h */,
 				CB44E8621AAE9E7D00A78C11 /* SignupViewController.m */,
 				CB44E8631AAE9E7D00A78C11 /* SignupViewController.xib */,
+				E309006F1B163F1200E5B5C0 /* SignupViewController_iPad.xib */,
 				CB44E8641AAE9E7D00A78C11 /* WelcomeViewController.h */,
 				CB44E8651AAE9E7D00A78C11 /* WelcomeViewController.m */,
 				CB44E8661AAE9E7D00A78C11 /* WelcomeViewController.xib */,
+				E309006D1B162B7000E5B5C0 /* WelcomeViewController_iPad.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1035,12 +956,19 @@
 				CB44E8681AAE9E7D00A78C11 /* AccountCell.h */,
 				CB44E8691AAE9E7D00A78C11 /* AccountCell.m */,
 				CB44E86A1AAE9E7D00A78C11 /* AccountCell.xib */,
+				E30201D21B173B4A0006DAE8 /* AccountCell_iPad.xib */,
 				CB44E86B1AAE9E7D00A78C11 /* AddAccountCell.h */,
 				CB44E86C1AAE9E7D00A78C11 /* AddAccountCell.m */,
 				CB44E86D1AAE9E7D00A78C11 /* AddAccountCell.xib */,
+				E30201D41B173B760006DAE8 /* AddAccountCell_iPad.xib */,
 				CB840D1E1ACAF38900F289A9 /* CameraViewCell.h */,
 				CB840D1F1ACAF38900F289A9 /* CameraViewCell.m */,
 				CB840D201ACAF38900F289A9 /* CameraViewCell.xib */,
+				E309007D1B165C4C00E5B5C0 /* CameraViewCell_iPad.xib */,
+				E369E4A41B137AB6009D2D9E /* AddAccountView.h */,
+				E369E4A51B137AB6009D2D9E /* AddAccountView.m */,
+				E369E4A71B137AC9009D2D9E /* AddAccountView.xib */,
+				E30201CC1B16C9CF0006DAE8 /* AddAccountView_iPad.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1056,6 +984,62 @@
 				CB840D1A1ACAF36D00F289A9 /* ImageCacheObject.m */,
 			);
 			path = AsyncImageView;
+			sourceTree = "<group>";
+		};
+		E30201AF1B16C82D0006DAE8 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				E30201B01B16C82D0006DAE8 /* alert-black-button.png */,
+				E30201B11B16C82D0006DAE8 /* alert-black-button@2x.png */,
+				E30201B21B16C82D0006DAE8 /* alert-gray-button.png */,
+				E30201B31B16C82D0006DAE8 /* alert-gray-button@2x.png */,
+				E30201B41B16C82D0006DAE8 /* alert-green-button.png */,
+				E30201B51B16C82D0006DAE8 /* alert-green-button@2x.png */,
+				E30201B61B16C82D0006DAE8 /* alert-red-button.png */,
+				E30201B71B16C82D0006DAE8 /* alert-red-button@2x.png */,
+				E30201B81B16C82D0006DAE8 /* alert-window-landscape.png */,
+				E30201B91B16C82D0006DAE8 /* alert-window-landscape@2x.png */,
+				E30201BA1B16C82D0006DAE8 /* alert-window.png */,
+				E30201BB1B16C82D0006DAE8 /* alert-window@2x.png */,
+				E30201BC1B16C82D0006DAE8 /* alert-yellow-button.png */,
+				E30201BD1B16C82D0006DAE8 /* alert-yellow-button@2x.png */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
+		E30900811B16B78600E5B5C0 /* BlockAction */ = {
+			isa = PBXGroup;
+			children = (
+				E309008B1B16B8DF00E5B5C0 /* BlockUI.h */,
+				E30900821B16B78600E5B5C0 /* BlockActionSheet.h */,
+				E30900831B16B78600E5B5C0 /* BlockActionSheet.m */,
+				E30900841B16B78600E5B5C0 /* BlockAlertView.h */,
+				E30900851B16B78600E5B5C0 /* BlockAlertView.m */,
+				E30900861B16B78600E5B5C0 /* BlockBackground.h */,
+				E30900871B16B78600E5B5C0 /* BlockBackground.m */,
+			);
+			path = BlockAction;
+			sourceTree = "<group>";
+		};
+		E309008C1B16B96000E5B5C0 /* ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				E309008D1B16B96000E5B5C0 /* action-black-button-selected.png */,
+				E309008E1B16B96000E5B5C0 /* action-black-button-selected@2x.png */,
+				E309008F1B16B96000E5B5C0 /* action-black-button.png */,
+				E30900901B16B96000E5B5C0 /* action-black-button@2x.png */,
+				E30900911B16B96000E5B5C0 /* action-gray-button-selected.png */,
+				E30900921B16B96000E5B5C0 /* action-gray-button-selected@2x.png */,
+				E30900931B16B96000E5B5C0 /* action-gray-button.png */,
+				E30900941B16B96000E5B5C0 /* action-gray-button@2x.png */,
+				E30900951B16B96000E5B5C0 /* action-red-button-selected.png */,
+				E30900961B16B96000E5B5C0 /* action-red-button-selected@2x.png */,
+				E30900971B16B96000E5B5C0 /* action-red-button.png */,
+				E30900981B16B96000E5B5C0 /* action-red-button@2x.png */,
+				E30900991B16B96000E5B5C0 /* action-sheet-panel.png */,
+				E309009A1B16B96000E5B5C0 /* action-sheet-panel@2x.png */,
+			);
+			path = ActionSheet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1078,24 +1062,6 @@
 			productReference = CB1C764E1AAB144800680FE3 /* evercamPlay.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CB1C76661AAB144900680FE3 /* evercamPlayTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CB1C76741AAB144900680FE3 /* Build configuration list for PBXNativeTarget "evercamPlayTests" */;
-			buildPhases = (
-				CB1C76631AAB144900680FE3 /* Sources */,
-				CB1C76641AAB144900680FE3 /* Frameworks */,
-				CB1C76651AAB144900680FE3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CB1C76691AAB144900680FE3 /* PBXTargetDependency */,
-			);
-			name = evercamPlayTests;
-			productName = evercamPlayTests;
-			productReference = CB1C76671AAB144900680FE3 /* evercamPlayTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1107,10 +1073,6 @@
 				TargetAttributes = {
 					CB1C764D1AAB144700680FE3 = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					CB1C76661AAB144900680FE3 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = CB1C764D1AAB144700680FE3;
 					};
 				};
 			};
@@ -1128,7 +1090,6 @@
 			projectRoot = "";
 			targets = (
 				CB1C764D1AAB144700680FE3 /* evercamPlay */,
-				CB1C76661AAB144900680FE3 /* evercamPlayTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1138,61 +1099,103 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E30900A21B16B96000E5B5C0 /* action-gray-button@2x.png in Resources */,
+				E356C9DB1B17B1D6007BB101 /* SnapshotViewController_iPad.xib in Resources */,
+				E30900781B1646D100E5B5C0 /* play_page_next_iPad@2x.png in Resources */,
+				E30900A41B16B96000E5B5C0 /* action-red-button-selected@2x.png in Resources */,
 				C49E9F3B1B0A2BE100E58C85 /* ic_cameras.png in Resources */,
+				E30900A81B16B96000E5B5C0 /* action-sheet-panel@2x.png in Resources */,
 				413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */,
 				CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */,
 				4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */,
 				CB1C76D71AAB871A00680FE3 /* play_page_intro.png in Resources */,
 				CB44E86F1AAE9E7D00A78C11 /* AccountsViewController.xib in Resources */,
+				E30201CD1B16C9CF0006DAE8 /* AddAccountView_iPad.xib in Resources */,
+				E309007C1B1659DB00E5B5C0 /* CamerasViewController_iPad.xib in Resources */,
+				E30900A61B16B96000E5B5C0 /* action-red-button@2x.png in Resources */,
+				E30201D11B16CFE20006DAE8 /* FeedbackViewController_iPad.xib in Resources */,
+				E30201D31B173B4A0006DAE8 /* AccountCell_iPad.xib in Resources */,
+				E30201BE1B16C82D0006DAE8 /* alert-black-button.png in Resources */,
 				CB318E281AFBCE11004FFA8E /* ic_feedback.png in Resources */,
 				CB44E87D1AAE9E7D00A78C11 /* WelcomeViewController.xib in Resources */,
 				CB44E87B1AAE9E7D00A78C11 /* SignupViewController.xib in Resources */,
+				E30201C71B16C82D0006DAE8 /* alert-window-landscape@2x.png in Resources */,
 				410748781ADFDBE0004D10C9 /* btn_pause.png in Resources */,
+				E309009C1B16B96000E5B5C0 /* action-black-button-selected@2x.png in Resources */,
 				CB318E261AFBCE11004FFA8E /* ic_accounts.png in Resources */,
 				CBDFA5601AE92806007CC199 /* ic_menu.png in Resources */,
+				E30900A31B16B96000E5B5C0 /* action-red-button-selected.png in Resources */,
 				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				CB1C76D61AAB871A00680FE3 /* play_page_feature.png in Resources */,
 				410A13B31AE230A9008CA21C /* icon_online.png in Resources */,
+				E309007E1B165C4C00E5B5C0 /* CameraViewCell_iPad.xib in Resources */,
 				411C90E71AE573D10048FF3D /* bottom_fade.png in Resources */,
+				E30900771B1646D100E5B5C0 /* play_page_intro_iPad@2x.png in Resources */,
 				41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */,
 				CB318E2A1AFBCE11004FFA8E /* ic_signout.png in Resources */,
+				E356C9D51B17985D007BB101 /* Pods-evercamPlay.release.xcconfig in Resources */,
+				E309007A1B16510900E5B5C0 /* CameraPlayViewController_iPad.xib in Resources */,
 				CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */,
 				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
 				413BB2B11ADBFB710083A5DC /* pull-out.png in Resources */,
 				CB44E8771AAE9E7D00A78C11 /* MenuViewController.xib in Resources */,
+				E30900A51B16B96000E5B5C0 /* action-red-button.png in Resources */,
 				CB1C76D51AAB871A00680FE3 /* icon_gallery.png in Resources */,
 				CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */,
+				E30201CF1B16CE290006DAE8 /* SettingsViewController_iPad.xib in Resources */,
 				410748741ADF6F3F004D10C9 /* RecordingsViewController.xib in Resources */,
+				E30201D51B173B760006DAE8 /* AddAccountCell_iPad.xib in Resources */,
+				E30201C61B16C82D0006DAE8 /* alert-window-landscape.png in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
+				E30900761B1646D100E5B5C0 /* play_page_feature_iPad@2x.png in Resources */,
+				E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */,
 				CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */,
+				E30201C91B16C82D0006DAE8 /* alert-window@2x.png in Resources */,
 				413BB2931ADAB6900083A5DC /* AddCameraViewController.xib in Resources */,
 				41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */,
+				E30900A71B16B96000E5B5C0 /* action-sheet-panel.png in Resources */,
+				E309006E1B162B7000E5B5C0 /* WelcomeViewController_iPad.xib in Resources */,
+				E30201C41B16C82D0006DAE8 /* alert-red-button.png in Resources */,
 				CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */,
 				CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */,
+				E369E4AF1B14EC0F009D2D9E /* btn_close@2x.png in Resources */,
+				E30201C31B16C82D0006DAE8 /* alert-green-button@2x.png in Resources */,
 				CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */,
 				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
+				E30201C11B16C82D0006DAE8 /* alert-gray-button@2x.png in Resources */,
 				410748791ADFDBE0004D10C9 /* btn_play.png in Resources */,
 				CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */,
+				E30201AC1B16C4DD0006DAE8 /* AccountsViewController_iPad.xib in Resources */,
+				E356C9D41B17985D007BB101 /* Pods-evercamPlay.debug.xcconfig in Resources */,
+				E369E4A81B137AC9009D2D9E /* AddAccountView.xib in Resources */,
+				E30201BF1B16C82D0006DAE8 /* alert-black-button@2x.png in Resources */,
+				E30201C51B16C82D0006DAE8 /* alert-red-button@2x.png in Resources */,
 				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
+				E30900701B163F1200E5B5C0 /* SignupViewController_iPad.xib in Resources */,
+				E30201CB1B16C82D0006DAE8 /* alert-yellow-button@2x.png in Resources */,
 				CB44E8751AAE9E7D00A78C11 /* LoginViewController.xib in Resources */,
+				E30201C01B16C82D0006DAE8 /* alert-gray-button.png in Resources */,
+				E30201CA1B16C82D0006DAE8 /* alert-yellow-button.png in Resources */,
+				E309009E1B16B96000E5B5C0 /* action-black-button@2x.png in Resources */,
 				CB44E8791AAE9E7D00A78C11 /* SettingsViewController.xib in Resources */,
+				E30900A11B16B96000E5B5C0 /* action-gray-button.png in Resources */,
 				411C90E91AE69D030048FF3D /* local.plist in Resources */,
+				E309009F1B16B96000E5B5C0 /* action-gray-button-selected.png in Resources */,
 				4107487F1AE006AC004D10C9 /* SnapshotViewController.xib in Resources */,
 				CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */,
+				E30900801B16A2C000E5B5C0 /* AddCameraViewController_iPad.xib in Resources */,
 				CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */,
+				E30201C81B16C82D0006DAE8 /* alert-window.png in Resources */,
+				E30900721B16417400E5B5C0 /* LoginViewController_iPad.xib in Resources */,
 				413BB2A31ADAE0A50083A5DC /* SelectModelViewController.xib in Resources */,
 				413BB2B61ADC10690083A5DC /* ViewCameraViewController.xib in Resources */,
+				E309009D1B16B96000E5B5C0 /* action-black-button.png in Resources */,
 				411C90EB1AE6A1250048FF3D /* back.png in Resources */,
 				CB1C76D81AAB871A00680FE3 /* play_page_next.png in Resources */,
+				E30900A01B16B96000E5B5C0 /* action-gray-button-selected@2x.png in Resources */,
+				E309009B1B16B96000E5B5C0 /* action-black-button-selected.png in Resources */,
 				CB318E291AFBCE11004FFA8E /* ic_settings.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CB1C76651AAB144900680FE3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1205,21 +1208,15 @@
 			files = (
 				CB44E8741AAE9E7D00A78C11 /* LoginViewController.m in Sources */,
 				CB318E5C1AFC3565004FFA8E /* SDWebImagePrefetcher.m in Sources */,
-				CB44E8481AAE9DD800A78C11 /* UIImageView+AFNetworking.m in Sources */,
-				413BB2A91ADB03AE0083A5DC /* EvercamCameraBuilder.m in Sources */,
-				CB01CDB71ABE057E00420CE1 /* EvercamCameraUtil.m in Sources */,
 				410748731ADF6F3E004D10C9 /* RecordingsViewController.m in Sources */,
 				413BB2B51ADC10690083A5DC /* ViewCameraViewController.m in Sources */,
-				CB44E8891AAED82000A78C11 /* AFEvercamAPIClient.m in Sources */,
 				CB318E571AFC3565004FFA8E /* SDWebImageCompat.m in Sources */,
 				413BB2921ADAB6900083A5DC /* AddCameraViewController.m in Sources */,
 				413BB2A21ADAE0A40083A5DC /* SelectModelViewController.m in Sources */,
 				413BB29A1ADAD13D0083A5DC /* SelectVendorViewController.m in Sources */,
 				CB318E581AFC3565004FFA8E /* SDWebImageDecoder.m in Sources */,
-				CB44E84A1AAE9DD800A78C11 /* UIRefreshControl+AFNetworking.m in Sources */,
 				CB44E87E1AAE9E7D00A78C11 /* AccountCell.m in Sources */,
 				CB318E5E1AFC3565004FFA8E /* UIImage+GIF.m in Sources */,
-				CB44E8411AAE9DD800A78C11 /* AFSecurityPolicy.m in Sources */,
 				CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */,
 				CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */,
 				CB318E541AFC3565004FFA8E /* MKAnnotationView+WebCache.m in Sources */,
@@ -1228,85 +1225,52 @@
 				CB318E621AFC3565004FFA8E /* UIImageView+WebCache.m in Sources */,
 				41208A611AD97D44009C4FC2 /* SMTPAPI.m in Sources */,
 				CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */,
+				E30900881B16B78600E5B5C0 /* BlockActionSheet.m in Sources */,
 				CB318E5B1AFC3565004FFA8E /* SDWebImageManager.m in Sources */,
 				41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */,
-				CB44E84B1AAE9DD800A78C11 /* UIWebView+AFNetworking.m in Sources */,
-				413BB29E1ADAD5F80083A5DC /* EvercamModel.m in Sources */,
-				CB44E83F1AAE9DD800A78C11 /* AFURLSessionManager.m in Sources */,
 				CB44E87C1AAE9E7D00A78C11 /* WelcomeViewController.m in Sources */,
 				CB318E551AFC3565004FFA8E /* NSData+ImageContentType.m in Sources */,
 				CB840D1B1ACAF36D00F289A9 /* AsyncImageView.m in Sources */,
 				CB318E301AFC0875004FFA8E /* GCDAsyncSocket.m in Sources */,
-				CB44E83D1AAE9DD800A78C11 /* AFURLConnectionOperation.m in Sources */,
-				CB01CDBA1AC00AFB00420CE1 /* EvercamCamera.m in Sources */,
 				41208A5D1AD97971009C4FC2 /* SendGridEmailAttachment.m in Sources */,
 				413BB2811AD992890083A5DC /* Reachability.m in Sources */,
-				4157369D1AD59ED4005B38DF /* EvercamRights.m in Sources */,
 				CB44E8781AAE9E7D00A78C11 /* SettingsViewController.m in Sources */,
 				413BB2AF1ADB14640083A5DC /* CommonUtil.m in Sources */,
 				CB44E87A1AAE9E7D00A78C11 /* SignupViewController.m in Sources */,
-				CB44E83E1AAE9DD800A78C11 /* AFHTTPSessionManager.m in Sources */,
-				413BB2A61ADAFA200083A5DC /* EvercamDefaults.m in Sources */,
-				CB44E8491AAE9DD800A78C11 /* UIProgressView+AFNetworking.m in Sources */,
-				CB44E8471AAE9DD800A78C11 /* UIButton+AFNetworking.m in Sources */,
 				CB318E5F1AFC3565004FFA8E /* UIImage+MultiFormat.m in Sources */,
 				41208A351AD7244A009C4FC2 /* AppUser.xcdatamodeld in Sources */,
+				E30900891B16B78600E5B5C0 /* BlockAlertView.m in Sources */,
 				410747EF1ADC6D45004D10C9 /* BrowseJpgTask.m in Sources */,
 				CB318E591AFC3565004FFA8E /* SDWebImageDownloader.m in Sources */,
 				CB44E8801AAE9E7D00A78C11 /* AddAccountCell.m in Sources */,
-				CB44E83C1AAE9DD800A78C11 /* AFHTTPRequestOperationManager.m in Sources */,
 				CB318E5D1AFC3565004FFA8E /* UIButton+WebCache.m in Sources */,
-				CB44E8431AAE9DD800A78C11 /* AFURLResponseSerialization.m in Sources */,
 				CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */,
-				CB44E8861AAED4E700A78C11 /* EvercamShell.m in Sources */,
-				CB44E8461AAE9DD800A78C11 /* UIAlertView+AFNetworking.m in Sources */,
+				E369E4A61B137AB6009D2D9E /* AddAccountView.m in Sources */,
+				E309008A1B16B78600E5B5C0 /* BlockBackground.m in Sources */,
 				CB318E5A1AFC3565004FFA8E /* SDWebImageDownloaderOperation.m in Sources */,
 				41208A5B1AD97971009C4FC2 /* SendGrid.m in Sources */,
-				CB44E88C1AAEDD2D00A78C11 /* EvercamApiKeyPair.m in Sources */,
 				CB44E8761AAE9E7D00A78C11 /* MenuViewController.m in Sources */,
-				CB44E8421AAE9DD800A78C11 /* AFURLRequestSerialization.m in Sources */,
 				CB318E561AFC3565004FFA8E /* SDImageCache.m in Sources */,
 				CB1C76541AAB144800680FE3 /* main.m in Sources */,
 				CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */,
 				CB318E601AFC3565004FFA8E /* UIImage+WebP.m in Sources */,
 				CB318E611AFC3565004FFA8E /* UIImageView+HighlightedWebCache.m in Sources */,
-				CB92361D1AB2DABF0031E23A /* EvercamUser.m in Sources */,
 				CB840D1C1ACAF36D00F289A9 /* ImageCache.m in Sources */,
-				413BB2961ADACABA0083A5DC /* EvercamVendor.m in Sources */,
-				CB44E8441AAE9DD800A78C11 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				41208A441AD8482B009C4FC2 /* PreferenceUtil.m in Sources */,
+				E369E4AB1B137F54009D2D9E /* GlobalSettings.m in Sources */,
 				413BB2841AD992DD0083A5DC /* NetworkUtil.m in Sources */,
 				CB44E8701AAE9E7D00A78C11 /* CamerasViewController.m in Sources */,
-				CB44E83B1AAE9DD800A78C11 /* AFHTTPRequestOperation.m in Sources */,
 				CB44E86E1AAE9E7D00A78C11 /* AccountsViewController.m in Sources */,
 				4107487E1AE006AC004D10C9 /* SnapshotViewController.m in Sources */,
-				CB44E8451AAE9DD800A78C11 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
 				41208A5C1AD97971009C4FC2 /* SendGridEmail.m in Sources */,
 				41208A4F1AD8DCAA009C4FC2 /* CustomNavigationController.m in Sources */,
-				CB44E8401AAE9DD800A78C11 /* AFNetworkReachabilityManager.m in Sources */,
 				CB318E631AFC3565004FFA8E /* UIView+WebCacheOperation.m in Sources */,
 				CB44E8721AAE9E7D00A78C11 /* FeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CB1C76631AAB144900680FE3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CB1C766E1AAB144900680FE3 /* evercamPlayTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		CB1C76691AAB144900680FE3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CB1C764D1AAB144700680FE3 /* evercamPlay */;
-			targetProxy = CB1C76681AAB144900680FE3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CB1C765B1AAB144800680FE3 /* Main.storyboard */ = {
@@ -1337,7 +1301,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1357,6 +1322,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				PROVISIONING_PROFILE = "8E2D2101-B838-40CB-AA20-E89EBF2DC8FB";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1378,7 +1345,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1391,6 +1359,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				PROVISIONING_PROFILE = "8E2D2101-B838-40CB-AA20-E89EBF2DC8FB";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1398,10 +1368,11 @@
 		};
 		CB1C76721AAB144900680FE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E356C9D21B17985D007BB101 /* Pods-evercamPlay.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Liuting Du (GD2KDRQNRZ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1420,24 +1391,31 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/evercamPlay/GoogleAnalytics",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-all_load",
 					"-ObjC",
 				);
+				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8E2D2101-B838-40CB-AA20-E89EBF2DC8FB";
+				STRIP_INSTALLED_PRODUCT = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
 		CB1C76731AAB144900680FE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E356C9D31B17985D007BB101 /* Pods-evercamPlay.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1456,51 +1434,20 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/evercamPlay/GoogleAnalytics",
+					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-all_load",
 					"-ObjC",
 				);
+				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8E2D2101-B838-40CB-AA20-E89EBF2DC8FB";
+				STRIP_INSTALLED_PRODUCT = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
-			};
-			name = Release;
-		};
-		CB1C76751AAB144900680FE3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = armv7;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = evercamPlayTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/evercamPlay.app/evercamPlay";
-			};
-			name = Debug;
-		};
-		CB1C76761AAB144900680FE3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = armv7;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = evercamPlayTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/evercamPlay.app/evercamPlay";
 			};
 			name = Release;
 		};
@@ -1521,15 +1468,6 @@
 			buildConfigurations = (
 				CB1C76721AAB144900680FE3 /* Debug */,
 				CB1C76731AAB144900680FE3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CB1C76741AAB144900680FE3 /* Build configuration list for PBXNativeTarget "evercamPlayTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CB1C76751AAB144900680FE3 /* Debug */,
-				CB1C76761AAB144900680FE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

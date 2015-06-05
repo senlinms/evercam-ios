@@ -20,6 +20,11 @@
 #import "NetworkUtil.h"
 #import "GCDAsyncSocket.h"
 #import "SDWebImageManager.h"
+#import "GAIDictionaryBuilder.h"
+#import "Config.h"
+#import "BlockAlertView.h"
+#import "Mixpanel.h"
+#import "GlobalSettings.h"
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
@@ -53,7 +58,7 @@
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.view.layer insertSublayer:gradient atIndex:0];
     
-    [self.scrollView setContentSize:CGSizeMake(0, 655)];
+    [self.scrollView setContentSize:CGSizeMake(0, 504)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -74,8 +79,8 @@
         UIColor *color = [UIColor lightTextColor];
         self.tfID.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"roof-cam" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Rooftop Camera" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfVendor.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Select Make" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfModel.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Select Model" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfVendor.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Other" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfModel.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Unknown" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfUsername.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfSnapshot.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/snapshot.jpg" attributes:@{NSForegroundColorAttributeName: color}];
@@ -119,32 +124,9 @@
             self.tfInternalHttpPort.text.length > 0 ||
             self.tfInternalRtspPort.text.length > 0) {
             
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle: nil
-                                          message:@"You'll lose everything you typed in. Are you sure you want to quit?"
-                                          preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* no = [UIAlertAction
-                                 actionWithTitle:@"No"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            [alert addAction:no];
-            
-            UIAlertAction* yes = [UIAlertAction
-                                 actionWithTitle:@"Yes"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                     [self.navigationController popViewControllerAnimated:YES];
-                                 }];
-            [alert addAction:yes];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-            
+            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"You'll lose everything you typed in. Are you sure you want to quit?", nil) delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
+            simpleAlert.tag = 101;
+            [simpleAlert show];
         } else {
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -154,38 +136,17 @@
 - (IBAction)test:(id)sender {
     [self.focusedTextField resignFirstResponder];
     if (self.tfExternalHost.text.length == 0) {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle: nil
-                                      message:@"Please specify an external IP address."
-                                      preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"Please specify an external IP address.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
+        
         return;
     }
     
     if (self.tfExternalHttpPort.text.length == 0) {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle: nil
-                                      message:@"Please specify either an external HTTP port."
-                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"Please specify either an external HTTP port.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     
@@ -210,21 +171,8 @@
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
     if (!reachable) {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle: nil
-                                      message:@"The IP address provided is not reachable at the port provided."
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
-        return;
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"The IP address provided is not reachable at the port provided.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
     }
     
     NSString *jpgUrl = [self buildJpgUrlWithSlash:self.tfSnapshot.text];
@@ -299,30 +247,56 @@
                                                                         {
                                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                                                UIAlertController * alert=   [UIAlertController
-                                                                                                              alertControllerWithTitle:@"Warning"
-                                                                                                              message:@"We can't connect to your camera, are you sure want to add it?"
-                                                                                                              preferredStyle:UIAlertControllerStyleAlert];
-                                                                                
-                                                                                UIAlertAction* no = [UIAlertAction
-                                                                                                     actionWithTitle:@"No"
-                                                                                                     style:UIAlertActionStyleDefault
-                                                                                                     handler:^(UIAlertAction * action)
-                                                                                                     {
-                                                                                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                                                                                     }];
-                                                                                UIAlertAction* yes = [UIAlertAction
-                                                                                                      actionWithTitle:@"Yes"
-                                                                                                      style:UIAlertActionStyleDefault
-                                                                                                      handler:^(UIAlertAction * action)
-                                                                                                      {
-                                                                                                          [alert dismissViewControllerAnimated:YES completion:nil];
-                                                                                                          [self createCamera:cameraBuilder withStatus:NO];
-                                                                                                      }];
-                                                                                
-                                                                                [alert addAction:no];
-                                                                                [alert addAction:yes];
-                                                                                [self presentViewController:alert animated:YES completion:nil];
+                                                                                if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                                                                                    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Warning" message:@"We can't connect to your camera, are you sure want to add it?"];
+                                                                                    
+                                                                                    [alert addButtonWithTitle:@"Yes" imageIdentifier:@"yellow" block:^{
+                                                                                        [self createCamera:cameraBuilder withStatus:NO];
+                                                                                    }];
+                                                                                    
+                                                                                    [alert setCancelButtonWithTitle:@"No" block:nil];
+                                                                                    
+                                                                                    [alert show];
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    UIAlertController * alert=   [UIAlertController
+                                                                                                                  alertControllerWithTitle:@"Warning"
+                                                                                                                  message:@"We can't connect to your camera, are you sure want to add it?"
+                                                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                                                                                    
+                                                                                    UIAlertAction* no = [UIAlertAction
+                                                                                                         actionWithTitle:@"No"
+                                                                                                         style:UIAlertActionStyleDefault
+                                                                                                         handler:^(UIAlertAction * action)
+                                                                                                         {
+                                                                                                             [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                                                         }];
+                                                                                    UIAlertAction* yes = [UIAlertAction
+                                                                                                          actionWithTitle:@"Yes"
+                                                                                                          style:UIAlertActionStyleDefault
+                                                                                                          handler:^(UIAlertAction * action)
+                                                                                                          {
+                                                                                                              [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                                                              [self createCamera:cameraBuilder withStatus:NO];
+                                                                                                          }];
+                                                                                    
+                                                                                    [alert addAction:no];
+                                                                                    [alert addAction:yes];
+
+                                                                                    if ([GlobalSettings sharedInstance].isPhone)
+                                                                                    {
+                                                                                        [self presentViewController:alert animated:YES completion:nil];
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        UIPopoverPresentationController *popPresenter = [alert
+                                                                                                                                         popoverPresentationController];
+                                                                                        popPresenter.sourceView = (UIView *)sender;
+                                                                                        popPresenter.sourceRect = ((UIView *)sender).bounds;
+                                                                                        [self presentViewController:alert animated:YES completion:nil];
+                                                                                    }
+                                                                                }
                                                                             });
                                                                         }
                                                                     }];
@@ -330,30 +304,55 @@
                                             else
                                             {
                                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                UIAlertController * alert=   [UIAlertController
-                                                                              alertControllerWithTitle:@"Warning"
-                                                                              message:@"We can't connect to your camera, are you sure want to add it?"
-                                                                              preferredStyle:UIAlertControllerStyleAlert];
-                                                
-                                                UIAlertAction* no = [UIAlertAction
-                                                                     actionWithTitle:@"No"
-                                                                     style:UIAlertActionStyleDefault
-                                                                     handler:^(UIAlertAction * action)
-                                                                     {
-                                                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                                                     }];
-                                                UIAlertAction* yes = [UIAlertAction
-                                                                      actionWithTitle:@"Yes"
-                                                                      style:UIAlertActionStyleDefault
-                                                                      handler:^(UIAlertAction * action)
-                                                                      {
-                                                                          [alert dismissViewControllerAnimated:YES completion:nil];
-                                                                          [self createCamera:cameraBuilder withStatus:NO];
-                                                                      }];
-                                                
-                                                [alert addAction:no];
-                                                [alert addAction:yes];
-                                                [self presentViewController:alert animated:YES completion:nil];
+                                                if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                                                    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Warning" message:@"We can't connect to your camera, are you sure want to add it?"];
+                                                    
+                                                    [alert addButtonWithTitle:@"Yes" imageIdentifier:@"yellow" block:^{
+                                                        [self createCamera:cameraBuilder withStatus:NO];
+                                                    }];
+                                                    
+                                                    [alert setCancelButtonWithTitle:@"No" block:nil];
+                                                    
+                                                    [alert show];
+                                                }
+                                                else
+                                                {
+                                                    UIAlertController * alert=   [UIAlertController
+                                                                                  alertControllerWithTitle:@"Warning"
+                                                                                  message:@"We can't connect to your camera, are you sure want to add it?"
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                                                    
+                                                    UIAlertAction* no = [UIAlertAction
+                                                                         actionWithTitle:@"No"
+                                                                         style:UIAlertActionStyleDefault
+                                                                         handler:^(UIAlertAction * action)
+                                                                         {
+                                                                             [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                         }];
+                                                    UIAlertAction* yes = [UIAlertAction
+                                                                          actionWithTitle:@"Yes"
+                                                                          style:UIAlertActionStyleDefault
+                                                                          handler:^(UIAlertAction * action)
+                                                                          {
+                                                                              [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                              [self createCamera:cameraBuilder withStatus:NO];
+                                                                          }];
+                                                    
+                                                    [alert addAction:no];
+                                                    [alert addAction:yes];
+                                                    if ([GlobalSettings sharedInstance].isPhone)
+                                                    {
+                                                        [self presentViewController:alert animated:YES completion:nil];
+                                                    }
+                                                    else
+                                                    {
+                                                        UIPopoverPresentationController *popPresenter = [alert
+                                                                                                         popoverPresentationController];
+                                                        popPresenter.sourceView = (UIView *)sender;
+                                                        popPresenter.sourceRect = ((UIView *)sender).bounds;
+                                                        [self presentViewController:alert animated:YES completion:nil];
+                                                    }
+                                                }
                                             }
                                         }
                                     }];
@@ -361,30 +360,55 @@
             else
             {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle:@"Warning"
-                                              message:@"We can't connect to your camera, are you sure want to add it?"
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction* no = [UIAlertAction
-                                     actionWithTitle:@"No"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                UIAlertAction* yes = [UIAlertAction
-                                      actionWithTitle:@"Yes"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          [alert dismissViewControllerAnimated:YES completion:nil];
-                                          [self createCamera:cameraBuilder withStatus:NO];
-                                      }];
-                
-                [alert addAction:no];
-                [alert addAction:yes];
-                [self presentViewController:alert animated:YES completion:nil];
+                if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Warning" message:@"We can't connect to your camera, are you sure want to add it?"];
+                    
+                    [alert addButtonWithTitle:@"Yes" imageIdentifier:@"yellow" block:^{
+                        [self createCamera:cameraBuilder withStatus:NO];
+                    }];
+                    
+                    [alert setCancelButtonWithTitle:@"No" block:nil];
+                    
+                    [alert show];
+                }
+                else
+                {
+                    UIAlertController * alert=   [UIAlertController
+                                                  alertControllerWithTitle:@"Warning"
+                                                  message:@"We can't connect to your camera, are you sure want to add it?"
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction* no = [UIAlertAction
+                                         actionWithTitle:@"No"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                             [alert dismissViewControllerAnimated:YES completion:nil];
+                                         }];
+                    UIAlertAction* yes = [UIAlertAction
+                                          actionWithTitle:@"Yes"
+                                          style:UIAlertActionStyleDefault
+                                          handler:^(UIAlertAction * action)
+                                          {
+                                              [alert dismissViewControllerAnimated:YES completion:nil];
+                                              [self createCamera:cameraBuilder withStatus:NO];
+                                          }];
+                    
+                    [alert addAction:no];
+                    [alert addAction:yes];
+                    if ([GlobalSettings sharedInstance].isPhone)
+                    {
+                        [self presentViewController:alert animated:YES completion:nil];
+                    }
+                    else
+                    {
+                        UIPopoverPresentationController *popPresenter = [alert
+                                                                         popoverPresentationController];
+                        popPresenter.sourceView = (UIView *)sender;
+                        popPresenter.sourceRect = ((UIView *)sender).bounds;
+                        [self presentViewController:alert animated:YES completion:nil];
+                    }
+                }
             }
         } else { // patch camera
             [self patchCamera:cameraBuilder];
@@ -629,38 +653,16 @@
     NSString *cameraID = self.tfID.text;
     NSString *cameraName = self.tfName.text;
     if (cameraID.length == 0) {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle: nil
-                                      message:@"Please specify a unique ID of your camera"
-                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify a unique ID of your camera" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
         return nil;
     }
     
     if (cameraName.length == 0) {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle: nil
-                                      message:@"Please specify a friendly name of your camera"
-                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify a friendly name of your camera" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
         return nil;
     }
     
@@ -682,20 +684,10 @@
     NSString *externalHost = self.tfExternalHost.text;
     NSString *internalHost = self.tfInternalHost.text;
     if (externalHost.length == 0 && internalHost.length == 0) {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle: nil
-                                      message:@"Please specify either an internal or external IP address."
-                                      preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an internal or external IP address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
+        
         return nil;
     }
     if (internalHost.length > 0) {
@@ -707,20 +699,9 @@
             if (internalHttpPort != 0) {
                 cameraBuilder.internalHttpPort = internalHttpPort;
             } else {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Please specify either an internal HTTP port."
-                                              preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an internal HTTP port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [simpleAlert show];
                 
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
                 return nil;
             }
         }
@@ -731,20 +712,9 @@
             if (internalRtspPort != 0) {
                 cameraBuilder.internalRtspPort = internalRtspPort;
             } else {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Please specify either an internal RTSP port."
-                                              preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an internal RTSP port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [simpleAlert show];
                 
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
                 return nil;
             }
         }
@@ -758,20 +728,9 @@
             if (externalHttpPort != 0) {
                 cameraBuilder.externalHttpPort = externalHttpPort;
             } else {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Please specify either an external HTTP port."
-                                              preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an external HTTP port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [simpleAlert show];
                 
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
                 return nil;
             }
         }
@@ -782,20 +741,9 @@
             if (externalRtspPort != 0) {
                 cameraBuilder.externalRtspPort = externalRtspPort;
             } else {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Please specify either an external RTSP port."
-                                              preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an external RTSP port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [simpleAlert show];
                 
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
                 return nil;
             }
         }
@@ -831,9 +779,9 @@
         return [NSString stringWithFormat:@"http://%@:%@@%@:80%@", username, password, host, jpgUrl];
     } else {
         if (username.length == 0) {
-            return [NSString stringWithFormat:@"http://%@:%d%@", host, port, jpgUrl];
+            return [NSString stringWithFormat:@"http://%@:%ld%@", host, (long)port, jpgUrl];
         }
-        return [NSString stringWithFormat:@"http://%@:%@@%@:%d%@", username, password, host, port, jpgUrl];
+        return [NSString stringWithFormat:@"http://%@:%@@%@:%ld%@", username, password, host, (long)port, jpgUrl];
     }
 }
 
@@ -844,41 +792,71 @@
         if (error == nil) {
             camera.isOnline = status;
             
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle: nil
-                                          message:@"Camera created successfully!"
-                                          preferredStyle:UIAlertControllerStyleAlert];
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_add_camera
+                                                                  action:action_addcamera_success_manual
+                                                                   label:label_addcamera_successful_manual
+                                                                   value:nil] build]];
             
-            UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                     [self.navigationController popViewControllerAnimated:YES];
-                                     
-                                     if ([self.delegate respondsToSelector:@selector(cameraAdded:)]) {
-                                         [self.delegate cameraAdded:camera];
-                                     }
-                                 }];
-            [alert addAction:ok];
-            [self presentViewController:alert animated:YES completion:nil];
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
             
+            [mixpanel track:mixpanel_event_create_camera properties:@{
+                                                                @"username": camera.username,
+                                                                @"cameraid" : camera.camId
+                                                                }];
+            
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"Camera created successfully!"];
+                
+                [alert addButtonWithTitle:@"OK" imageIdentifier:@"yellow" block:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                    if ([self.delegate respondsToSelector:@selector(cameraAdded:)]) {
+                        [self.delegate cameraAdded:camera];
+                    }
+                }];
+                
+                [alert show];
+            }
+            else
+            {                
+                UIAlertController * alert=   [UIAlertController
+                                              alertControllerWithTitle: nil
+                                              message:@"Camera created successfully!"
+                                              preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* ok = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                         [self.navigationController popViewControllerAnimated:YES];
+                                         
+                                         if ([self.delegate respondsToSelector:@selector(cameraAdded:)]) {
+                                             [self.delegate cameraAdded:camera];
+                                         }
+                                     }];
+                [alert addAction:ok];
+                
+                if ([GlobalSettings sharedInstance].isPhone)
+                {
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+                else
+                {
+                    UIPopoverPresentationController *popPresenter = [alert
+                                                                     popoverPresentationController];
+                    popPresenter.sourceView = self.view;
+                    popPresenter.sourceRect = self.view.bounds;
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+            }
         } else {
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle: nil
-                                          message:error.localizedDescription
-                                          preferredStyle:UIAlertControllerStyleAlert];
             
-            UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            [alert addAction:ok];
-            [self presentViewController:alert animated:YES completion:nil];
+            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [simpleAlert show];
+            
             return;
         }
     }];
@@ -889,41 +867,58 @@
     [[EvercamShell shell] patchCamera:cameraBuilder withBlock:^(EvercamCamera *camera, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if (error == nil) {
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle: nil
-                                          message:@"Settings updated successfully!"
-                                          preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                     [self.navigationController popViewControllerAnimated:YES];
-                                     
-                                     if ([self.delegate respondsToSelector:@selector(cameraEdited:)]) {
-                                         [self.delegate cameraEdited:camera];
-                                     }
-                                 }];
-            [alert addAction:ok];
-            [self presentViewController:alert animated:YES completion:nil];
-            
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"Settings updated successfully!"];
+                
+                [alert addButtonWithTitle:@"OK" imageIdentifier:@"yellow" block:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                    if ([self.delegate respondsToSelector:@selector(cameraEdited:)]) {
+                        [self.delegate cameraEdited:camera];
+                    }
+                }];
+                
+                [alert show];
+            }
+            else
+            {
+                UIAlertController * alert=   [UIAlertController
+                                              alertControllerWithTitle: nil
+                                              message:@"Settings updated successfully!"
+                                              preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* ok = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                         [self.navigationController popViewControllerAnimated:YES];
+                                         
+                                         if ([self.delegate respondsToSelector:@selector(cameraEdited:)]) {
+                                             [self.delegate cameraEdited:camera];
+                                         }
+                                     }];
+                [alert addAction:ok];
+
+                if ([GlobalSettings sharedInstance].isPhone)
+                {
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+                else
+                {
+                    UIPopoverPresentationController *popPresenter = [alert
+                                                                     popoverPresentationController];
+                    popPresenter.sourceView = self.view;
+                    popPresenter.sourceRect = self.view.bounds;
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+            }
         } else {
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle: nil
-                                          message:error.localizedDescription
-                                          preferredStyle:UIAlertControllerStyleAlert];
             
-            UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            [alert addAction:ok];
-            [self presentViewController:alert animated:YES completion:nil];
+            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [simpleAlert show];
+            
             return;
         }
     }];
@@ -934,20 +929,8 @@
         self.imageContainer.hidden = NO;
         self.imageView.image = image;
     } else {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle: nil
-                                      message:@"The port and URL are open but we can't seem to connect. Check that the username and password are correct and the snapshot ending"
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"", nil) message:@"The port and URL are open but we can't seem to connect. Check that the username and password are correct and the snapshot ending" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
     }
 }
 
@@ -1083,5 +1066,14 @@
         }
     }
 }
+
+#pragma mark UIAlertViewDelegate - Method
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 101 && buttonIndex == 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 
 @end

@@ -14,4 +14,8 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIButton *btnMenu;
 
+@property (nonatomic, weak) IBOutlet UIView *webViewContainer;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activity;
+
 @end

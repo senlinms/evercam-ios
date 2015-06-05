@@ -17,6 +17,9 @@
 #import "EvercamShell.h"
 #import "MBProgressHUD.h"
 #import "CommonUtil.h"
+#import "GAIDictionaryBuilder.h"
+#import "GlobalSettings.h"
+#import "Config.h"
 
 @interface ViewCameraViewController () <AddCameraViewControllerDelegate>
 
@@ -44,7 +47,14 @@
 }
 
 - (IBAction)edit:(id)sender {
-    AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:@"AddCameraViewController" bundle:nil];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_add_camera
+                                                          action:category_add_camera
+                                                           label:label_add_camera_manually
+                                                           value:nil] build]];
+
+    
+    AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:nil];
     addCameraVC.editCamera = self.camera;
     addCameraVC.delegate = self;
     [self.navigationController pushViewController:addCameraVC animated:YES];
@@ -113,25 +123,25 @@
         NSInteger internalRtspPort = self.camera.internalRtspPort;
         
         if (externalHttpPort != 0) {
-            self.lblExternalHTTPPort.text = [NSString stringWithFormat:@"%d", externalHttpPort];
+            self.lblExternalHTTPPort.text = [NSString stringWithFormat:@"%ld", (long)externalHttpPort];
         } else {
             self.lblExternalHTTPPort.text = @"Not specified";
             self.lblExternalHTTPPort.textColor = [UIColor lightGrayColor];
         }
         if (externalRtspPort != 0) {
-            self.lblExternalRTSPPort.text = [NSString stringWithFormat:@"%d", externalRtspPort];
+            self.lblExternalRTSPPort.text = [NSString stringWithFormat:@"%ld", (long)externalRtspPort];
         } else {
             self.lblExternalRTSPPort.text = @"Not specified";
             self.lblExternalRTSPPort.textColor = [UIColor lightGrayColor];
         }
         if (internalHttpPort != 0) {
-            self.lblInternalHTTPPort.text = [NSString stringWithFormat:@"%d", internalHttpPort];
+            self.lblInternalHTTPPort.text = [NSString stringWithFormat:@"%ld", (long)internalHttpPort];
         } else {
             self.lblInternalHTTPPort.text = @"Not specified";
             self.lblInternalHTTPPort.textColor = [UIColor lightGrayColor];
         }
         if (internalRtspPort != 0) {
-            self.lblInternalRTSPPort.text = [NSString stringWithFormat:@"%d", internalRtspPort];
+            self.lblInternalRTSPPort.text = [NSString stringWithFormat:@"%ld", (long)internalRtspPort];
         } else {
             self.lblInternalRTSPPort.text = @"Not specified";
             self.lblInternalRTSPPort.textColor = [UIColor lightGrayColor];

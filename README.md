@@ -21,7 +21,9 @@ Evercam Play allows connect your own IP cameras, public webcams and any Android 
 
     # Checkout from Git
     git clone https://github.com/evercam/evercam-play-ios.git
-
+    pod install
+    # Open Xcode workspace file
+    
 ## Help make it better
 
 The entire Evercam codebase is open source, see details: http://www.evercam.io/open-source

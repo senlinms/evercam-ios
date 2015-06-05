@@ -19,6 +19,8 @@
 #import "FeedbackViewController.h"
 #import "SnapshotViewController.h"
 #import "CommonUtil.h"
+#import "BlockActionSheet.h"
+#import "GlobalSettings.h"
 
 @interface CameraPlayViewController () <ViewCameraViewControllerDelegate> {
 //    GstLaunchRemote *launch; //LD
@@ -71,6 +73,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    videoController.alpha = 0.0;
+    
     self.screenName = @"Video View";
     
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
@@ -103,7 +107,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self disableSleep];
     
-    int sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
+    long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
     [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
 
     UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
@@ -190,26 +194,11 @@
 
 - (void)showSnapshotView {
     [snapshotConfirmView setHidden:NO];
-    //LD
-//    if (self.imageView == nil || self.imageView.hidden == YES) {
-//        CGRect rect = [video_view bounds];
-//        UIGraphicsBeginImageContext(rect.size);
-//        [video_view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
-//        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//
-//        rect.origin.y = (rect.size.height - rect.size.width*media_height/media_width)/2;
-//        rect.size.height = rect.size.width*media_height/media_width;
-//        CGImageRef imageRef = CGImageCreateWithImageInRect([img CGImage], rect);
-//        // or use the UIImage wherever you like
-//        [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
-//        CGImageRelease(imageRef);
-//    } else {
-        if (self.imageView && self.imageView.image) {
-            imvSnapshot.image = self.imageView.image;
-        } else {
-            [snapshotConfirmView setHidden:YES];
-  //      }
+
+    if (self.imageView && self.imageView.image) {
+        imvSnapshot.image = self.imageView.image;
+    } else {
+        [snapshotConfirmView setHidden:YES];
     }
 }
 
@@ -228,7 +217,7 @@
 }
 
 - (void)sendFeedback {
-    FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:@"FeedbackViewController" bundle:nil];
+    FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
     feedbackVC.cameraID = self.cameraInfo.camId;
 
     CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:feedbackVC];
@@ -240,23 +229,12 @@
 
 - (void)showSavedImages {
     if ([CommonUtil snapshotFiles:self.cameraInfo.camId].count == 0) {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle: nil
-                                      message:@"No snapshot saved for this camera."
-                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"No snapshot saved for this camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-    SnapshotViewController *snapshotVC = [[SnapshotViewController alloc] initWithNibName:@"SnapshotViewController" bundle:nil];
+    SnapshotViewController *snapshotVC = [[SnapshotViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SnapshotViewController" : @"SnapshotViewController_iPad" bundle:nil];
     snapshotVC.cameraId = self.cameraInfo.camId;
     CustomNavigationController *viewCamNavVC = [[CustomNavigationController alloc] initWithRootViewController:snapshotVC];
     viewCamNavVC.navigationBarHidden = YES;
@@ -269,108 +247,107 @@
     recordingsVC.cameraId = self.cameraInfo.camId;
     CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:recordingsVC];
     navVC.isPortraitMode = YES;
+    [navVC setHasLandscapeMode:YES];
     navVC.navigationBarHidden = YES;
     
     [self.navigationController presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void)hideVideoController {
-    videoController.hidden = YES;
+    if (isPlaying == YES) {
+        [self showVideoController:NO];
+//        videoController.hidden = YES;
+    }
+    else {
+        [self showVideoController:YES];
+//        videoController.hidden = NO;
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 103) {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
+            [self.delegate cameraDeleted:self.cameraInfo];
+        }
+    }
+    else if (alertView.tag == 101) {
+        [self back:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
+            [self.delegate cameraDeleted:self.cameraInfo];
+        }
+    }
+    else if(alertView.tag == 102 && buttonIndex == 1)
+    {
+        if ([self.cameraInfo.rights canDelete]) {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[EvercamShell shell] deleteCamera:self.cameraInfo.camId withBlock:^(BOOL success, NSError *error) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                if (success) {
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:NSLocalizedString(@"Camera deleted", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    simpleAlert.tag = 101;
+                    [simpleAlert show];
+                } else {
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:@"Failed to delete camera, please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [simpleAlert show];
+                    
+                    return;
+                }
+            }];
+        } else {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[EvercamShell shell] deleteShareCamera:self.cameraInfo.camId andUserId:[APP_DELEGATE defaultUser].userId withBlock:^(BOOL success, NSError *error) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                if (success) {
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:NSLocalizedString(@"Camera deleted", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    simpleAlert.tag = 103;
+                    [simpleAlert show];
+                } else {
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:@"Failed to delete camera, please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [simpleAlert show];
+                    
+                    return;
+                }
+            }];
+        }
+    }
 }
 
 - (void)deleteCamera {
-    if ([self.cameraInfo.rights canDelete]) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[EvercamShell shell] deleteCamera:self.cameraInfo.camId withBlock:^(BOOL success, NSError *error) {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            if (success) {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Camera deleted"
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                         [self back:nil];
-                                         
-                                         if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
-                                             [self.delegate cameraDeleted:self.cameraInfo];
-                                         }
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
-                
-            } else {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Failed to delete camera, please try again"
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
-                return;
-            }
-        }];
-    } else {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[EvercamShell shell] deleteShareCamera:self.cameraInfo.camId andUserId:[APP_DELEGATE defaultUser].userId withBlock:^(BOOL success, NSError *error) {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            if (success) {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Camera deleted"
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                         [self.navigationController popViewControllerAnimated:YES];
-                                         
-                                         if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
-                                             [self.delegate cameraDeleted:self.cameraInfo];
-                                         }
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
-                
-            } else {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Failed to delete camera, please try again"
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
-                return;
-            }
-        }];
-    }
+    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove Camera", nil) message:NSLocalizedString(@"Are you sure you want to remove this camera?", nil) delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
+    simpleAlert.tag = 102;
+    [simpleAlert show];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)showVideoController:(BOOL)willShow
+{
+    if (willShow == YES) {
+        videoController.hidden = NO;
+    }
+    [UIView animateWithDuration:0.30f
+                          delay:0.0f
+                        options: UIViewAnimationOptionAllowUserInteraction
+                     animations: ^{
+                         if (willShow == YES) {
+                             videoController.alpha = 1.0;
+                         }
+                         else
+                             videoController.alpha = 0.0;
+                     }
+                     completion: ^(BOOL finished) {
+                         if (willShow == NO) {
+                             videoController.hidden = YES;
+                         }
+                     }
+     ];
 }
 
 - (IBAction)cameraItemTapped:(id)sender {
@@ -417,9 +394,12 @@
 
 - (IBAction)playOrPause:(id)sender {
     if (isPlaying) {
+        [self.imageView setHidden:YES];
         [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_play.png"] forState:UIControlStateNormal];
         [self stopCamera];
     } else {
+        [self showVideoController:NO];
+//        videoController.hidden = YES;
         [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_pause.png"] forState:UIControlStateNormal];
         [self playCamera];
     }
@@ -458,11 +438,15 @@
     }
     
     if (videoController.hidden) {
-        videoController.hidden = NO;
+        [self showVideoController:YES];
+//        videoController.hidden = NO;
         
         [self performSelector:@selector(hideVideoController) withObject:nil afterDelay:5];
     } else {
-        videoController.hidden = YES;
+        if (isPlaying == YES) {
+            [self showVideoController:NO];
+//            videoController.hidden = YES;
+        }
     }
 }
 
@@ -481,91 +465,114 @@
 }
 
 - (IBAction)action:(id)sender {
-    UIAlertController * view=   [UIAlertController
-                                 alertControllerWithTitle:nil
-                                 message:nil
-                                 preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction* viewDetails = [UIAlertAction
-                          actionWithTitle:@"View Details"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction * action)
-                          {
-                              [view dismissViewControllerAnimated:YES completion:nil];
-                              [self showCameraView];
-                              
-                          }];
-    UIAlertAction* removeCamera = [UIAlertAction
-                           actionWithTitle:@"Remove Camera"
-                           style:UIAlertActionStyleDefault
-                           handler:^(UIAlertAction * action)
-                           {
-                               [view dismissViewControllerAnimated:YES completion:nil];
-                               [self deleteCamera];
-                               
-                           }];
-    
-    UIAlertAction* savedImages = [UIAlertAction
-                                   actionWithTitle:@"Saved Images"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * action)
-                                   {
-                                       [self showSavedImages];
-                                       [view dismissViewControllerAnimated:YES completion:nil];
-                                       
-                                   }];
-    
-    UIAlertAction* viewRecordings = [UIAlertAction
-                                     actionWithTitle:@"View Recordings"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [view dismissViewControllerAnimated:YES completion:nil];
-                                         [self viewRecordings];
-                                         
-                                     }];
-//
-//    UIAlertAction* localStorage = [UIAlertAction
-//                                   actionWithTitle:@"Local Storage"
-//                                   style:UIAlertActionStyleDefault
-//                                   handler:^(UIAlertAction * action)
-//                                   {
-//                                       [view dismissViewControllerAnimated:YES completion:nil];
-//                                       
-//                                   }];
-
-
-    
-    UIAlertAction* sendFeedback = [UIAlertAction
-                                   actionWithTitle:@"Send Feedback"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * action)
-                                   {
-                                       [view dismissViewControllerAnimated:YES completion:nil];
-                                       [self sendFeedback];
-                                       
-                                   }];
-
-    UIAlertAction* cancel = [UIAlertAction
-                             actionWithTitle:@"Cancel"
-                             style:UIAlertActionStyleCancel
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [view dismissViewControllerAnimated:YES completion:nil];
-                                 
-                             }];
-    
-    [view addAction:viewDetails];
-    [view addAction:removeCamera];
-    [view addAction:savedImages];
-    [view addAction:viewRecordings];
-//    if (self.cameraInfo.isHikvision && self.cameraInfo.hasCredentials) {
-//        [view addAction:localStorage];
-//    }
-    [view addAction:sendFeedback];
-    [view addAction:cancel];
-    
-    [self presentViewController:view animated:YES completion:nil];
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+        BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
+        
+        [sheet addButtonWithTitle:@"View Details" block:^{
+            [self showCameraView];
+        }];
+        [sheet addButtonWithTitle:@"Remove Camera" block:^{
+            [self deleteCamera];
+        }];
+        
+        [sheet addButtonWithTitle:@"Saved Images" block:^{
+            [self showSavedImages];
+        }];
+        [sheet addButtonWithTitle:@"View Recordings" block:^{
+            [self viewRecordings];
+        }];
+        [sheet addButtonWithTitle:@"Send Feedback" block:^{
+            [self sendFeedback];
+        }];
+        
+        [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
+        [sheet showInView:self.view];
+    }
+    else
+    {
+        UIAlertController * view=   [UIAlertController
+                                     alertControllerWithTitle:nil
+                                     message:nil
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction* viewDetails = [UIAlertAction
+                                      actionWithTitle:@"View Details"
+                                      style:UIAlertActionStyleDefault
+                                      handler:^(UIAlertAction * action)
+                                      {
+                                          [view dismissViewControllerAnimated:YES completion:nil];
+                                          [self showCameraView];
+                                          
+                                      }];
+        UIAlertAction* removeCamera = [UIAlertAction
+                                       actionWithTitle:@"Remove Camera"
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action)
+                                       {
+                                           [view dismissViewControllerAnimated:YES completion:nil];
+                                           [self deleteCamera];
+                                           
+                                       }];
+        
+        UIAlertAction* savedImages = [UIAlertAction
+                                      actionWithTitle:@"Saved Images"
+                                      style:UIAlertActionStyleDefault
+                                      handler:^(UIAlertAction * action)
+                                      {
+                                          [self showSavedImages];
+                                          [view dismissViewControllerAnimated:YES completion:nil];
+                                          
+                                      }];
+        
+        UIAlertAction* viewRecordings = [UIAlertAction
+                                         actionWithTitle:@"View Recordings"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                             [view dismissViewControllerAnimated:YES completion:nil];
+                                             [self viewRecordings];
+                                             
+                                         }];
+        
+        UIAlertAction* sendFeedback = [UIAlertAction
+                                       actionWithTitle:@"Send Feedback"
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action)
+                                       {
+                                           [view dismissViewControllerAnimated:YES completion:nil];
+                                           [self sendFeedback];
+                                           
+                                       }];
+        
+        UIAlertAction* cancel = [UIAlertAction
+                                 actionWithTitle:@"Cancel"
+                                 style:UIAlertActionStyleCancel
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [view dismissViewControllerAnimated:YES completion:nil];
+                                     
+                                 }];
+        
+        [view addAction:viewDetails];
+        [view addAction:removeCamera];
+        [view addAction:savedImages];
+        [view addAction:viewRecordings];
+        [view addAction:sendFeedback];
+        [view addAction:cancel];
+        
+        if ([GlobalSettings sharedInstance].isPhone)
+        {
+            [self presentViewController:view animated:YES completion:nil];
+        }
+        else
+        {
+            UIPopoverPresentationController *popPresenter = [view
+                                                             popoverPresentationController];
+            popPresenter.sourceView = (UIView *)sender;
+            popPresenter.sourceRect = ((UIView *)sender).bounds;
+            [self presentViewController:view animated:YES completion:nil];
+        }
+    }
 }
 
 - (void)playCamera {

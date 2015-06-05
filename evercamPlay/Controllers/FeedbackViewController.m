@@ -114,20 +114,9 @@
     
     [sendgrid sendWithWeb:email];
 
-    UIAlertController * alert=   [UIAlertController
-                                  alertControllerWithTitle:nil
-                                  message:@"Thanks for the feedback"
-                                  preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* ok = [UIAlertAction
-                         actionWithTitle:@"OK"
-                         style:UIAlertActionStyleDefault
-                         handler:^(UIAlertAction * action)
-                         {
-                             _txt_feedback.text = @"";
-                             [alert dismissViewControllerAnimated:YES completion:nil];
-                         }];
-    [alert addAction:ok];
-    [self presentViewController:alert animated:YES completion:nil];
+    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"evercamPlay", nil) message:NSLocalizedString(@"Thanks for the feedback", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    simpleAlert.tag = 101;
+    [simpleAlert show];    
 }
 
 #pragma mark UITextFieldDelegate
@@ -199,4 +188,13 @@
     
     [UIView commitAnimations];
 }
+
+#pragma mark - UIAlertViewDelegate Method
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 101) {
+        _txt_feedback.text = @"";
+    }
+}
+
 @end

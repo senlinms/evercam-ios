@@ -15,6 +15,10 @@
 #import "SWRevealViewController.h"
 #import "EvercamApiKeyPair.h"
 #import "MenuViewController.h"
+#import "GAIDictionaryBuilder.h"
+#import "Config.h"
+#import "GlobalSettings.h"
+#import "Mixpanel.h"
 
 @interface SignupViewController ()
 {
@@ -143,20 +147,9 @@
     // firstname
     if ([firstname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
-        UIAlertController * alert= [UIAlertController
-                                      alertControllerWithTitle:@"First name required"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_firstname becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"First name required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 101;
+        [simpleAlert show];
         return;
     }
     else
@@ -167,20 +160,10 @@
     // lastname
     if ([lastname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Last name required"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_lastname becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Last name required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 102;
+        [simpleAlert show];
+        
         return;
     }
     else
@@ -191,56 +174,26 @@
     // username
     if ([username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Username required"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_username becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Username required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 103;
+        [simpleAlert show];
+        
         return;
     }
     else if ([username containsString:@" "])
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Invalid username"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_username becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Invalid username", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 104;
+        [simpleAlert show];
+        
         return;
     }
     else if (username.length < 3)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Username is too short"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_username becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Username is too short", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 105;
+        [simpleAlert show];
+        
         return;
     }
     else
@@ -253,38 +206,18 @@
     // email
     if ([email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Email required"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_email becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Email required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 106;
+        [simpleAlert show];
+        
         return;
     }
     else if ([self NSStringIsValidEmail:email] == NO)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Invalid email"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_email becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Email required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 107;
+        [simpleAlert show];
+        
         return;
     }
     else
@@ -295,75 +228,30 @@
     // Password 
     if (password.length <= 0)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Password required"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Password required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 108;
+        [simpleAlert show];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_password becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     else if (repassword.length <= 0)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Confirm password required"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Confirm password required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 109;
+        [simpleAlert show];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 [_txt_confirmPassword becomeFirstResponder];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     else if ([password isEqualToString:repassword] == NO)
     {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Password not match"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Password not match", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
         
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     else if ([password rangeOfString:@" "].location != NSNotFound) {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Password should not contain space"
-                                      message:nil
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction
-                             actionWithTitle:@"OK"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Password should not contain space", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
         return;
     }
     else
@@ -387,13 +275,20 @@
                             [[EvercamShell shell] getUserFromId:username withBlock:^(EvercamUser *newuser, NSError *error) {
                                 [_activityIndicator stopAnimating];
                                 if (error == nil) {
+                                    
+                                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                    
+                                    [mixpanel track:mixpanel_event_sign_up properties:@{
+                                                                                        @"username": newuser.username
+                                                                                        }];
+                                    
                                     AppUser *user = [APP_DELEGATE userWithName:newuser.username];
                                     [user setDataWithEvercamUser:newuser];
                                     [user setApiKeyPairWithApiKey:userKeyPair.apiKey andApiId:userKeyPair.apiId];
                                     [APP_DELEGATE saveContext];
                                     [APP_DELEGATE setDefaultUser:user];
                                     
-                                    CamerasViewController *camerasViewController = [[CamerasViewController alloc] init];
+                                    CamerasViewController *camerasViewController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
                                     MenuViewController *menuViewController = [[MenuViewController alloc] init];
                                     
                                     UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:camerasViewController];
@@ -407,26 +302,20 @@
                                     [vcArr addObject:revealController];
                                     [self.navigationController setViewControllers:vcArr animated:YES];
                                     
+                                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_sign_up
+                                                                                          action:action_signup_success
+                                                                                           label:label_signup_successful
+                                                                                           value:nil] build]];
+                                    
                                     // show successful message
                                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Congratulations, you're now logged in with your Evercam account.\n\nWe've added a demo camera for you - add your own from the menu" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                     [alertView show];
                                     
                                 } else {
                                     NSLog(@"Error %li: %@", (long)error.code, error.description);
-                                    UIAlertController * alert=   [UIAlertController
-                                                                  alertControllerWithTitle: nil
-                                                                  message:error.localizedDescription
-                                                                  preferredStyle:UIAlertControllerStyleAlert];
-                                    
-                                    UIAlertAction* ok = [UIAlertAction
-                                                         actionWithTitle:@"OK"
-                                                         style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * action)
-                                                         {
-                                                             [alert dismissViewControllerAnimated:YES completion:nil];
-                                                         }];
-                                    [alert addAction:ok];
-                                    [self presentViewController:alert animated:YES completion:nil];
+                                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                                    [simpleAlert show];
                                 }
                             }];
                             
@@ -435,20 +324,8 @@
                         {
                             [_activityIndicator stopAnimating];
                             NSLog(@"Error %li: %@", (long)error.code, error.description);
-                            UIAlertController * alert=   [UIAlertController
-                                                          alertControllerWithTitle: nil
-                                                          message:error.localizedDescription
-                                                          preferredStyle:UIAlertControllerStyleAlert];
-                            
-                            UIAlertAction* ok = [UIAlertAction
-                                                 actionWithTitle:@"OK"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action)
-                                                 {
-                                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                                 }];
-                            [alert addAction:ok];
-                            [self presentViewController:alert animated:YES completion:nil];
+                            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                            [simpleAlert show];
                         }
                     }];
                 });
@@ -458,20 +335,8 @@
         {
             NSLog(@"Error %li: %@", (long)error.code, error.localizedDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:error.localizedDescription
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
+                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [simpleAlert show];
             });
         }
     }];
@@ -611,6 +476,29 @@
 #pragma mark - UITapGesture Recognizer
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
     [activeTextField resignFirstResponder];
+}
+
+#pragma mark UIAlertViewDelegate Method
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 101) {
+        [_txt_firstname becomeFirstResponder];
+    }
+    else if (alertView.tag == 102) {
+        [_txt_lastname becomeFirstResponder];
+    }
+    else if (alertView.tag == 103 ||alertView.tag == 104 || alertView.tag == 105) {
+        [_txt_username becomeFirstResponder];
+    }
+    else if (alertView.tag == 106 || alertView.tag == 107) {
+        [_txt_email becomeFirstResponder];
+    }
+    else if (alertView.tag == 108) {
+        [_txt_password becomeFirstResponder];
+    }
+    else if (alertView.tag == 109) {
+        [_txt_confirmPassword becomeFirstResponder];
+    }
 }
 
 @end

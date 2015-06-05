@@ -9,8 +9,13 @@
 #import "SettingsViewController.h"
 #import "SWRevealViewController.h"
 #import "PreferenceUtil.h"
+#import "GlobalSettings.h"
+#import "BlockActionSheet.h"
 
 @interface SettingsViewController ()
+{
+    BOOL isWebLoaded;
+}
 
 @end
 
@@ -18,6 +23,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    isWebLoaded = NO;
+    self.webView.scalesPageToFit = YES;
     
     self.screenName = @"Cameras Preferences";
     
@@ -47,6 +55,19 @@
     } else {
         [PreferenceUtil setIsForceLandscape:NO];
     }
+}
+
+- (IBAction)onCloseWebView:(id)sender
+{
+    [UIView animateWithDuration:0.2f
+                          delay:0.0f
+                        options: UIViewAnimationOptionAllowUserInteraction
+                     animations: ^{
+                         self.webViewContainer.alpha = 0.0;
+                     }
+                     completion: ^(BOOL finished) {
+                     }
+     ];
 }
 
 #pragma mark UITableViewDelegate
@@ -107,7 +128,7 @@
             cell.textLabel.text = @"Cameras per row";
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [PreferenceUtil getCameraPerRow]];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[PreferenceUtil getCameraPerRow]];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 1)
@@ -182,121 +203,197 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                UIAlertController * view=   [UIAlertController
-                                             alertControllerWithTitle:@"Cameras per row"
-                                             message:nil
-                                             preferredStyle:UIAlertControllerStyleActionSheet];
-                
-                UIAlertAction* one = [UIAlertAction
-                                      actionWithTitle:@"1"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          //Do some thing here
-                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          [PreferenceUtil setCameraPerRow:1];
-                                          [self.tableView reloadData];
-                                      }];
-                UIAlertAction* two = [UIAlertAction
-                                      actionWithTitle:@"2"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          [PreferenceUtil setCameraPerRow:2];
-                                          [self.tableView reloadData];
-                                          
-                                      }];
-                UIAlertAction* three = [UIAlertAction
-                                      actionWithTitle:@"3"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          [PreferenceUtil setCameraPerRow:3];
-                                          [self.tableView reloadData];
-                                          
-                                      }];
-                UIAlertAction* cancel = [UIAlertAction
-                                         actionWithTitle:@"Cancel"
-                                         style:UIAlertActionStyleCancel
-                                         handler:^(UIAlertAction * action)
-                                         {
-                                             [view dismissViewControllerAnimated:YES completion:nil];
-                                             
-                                         }];
-                
-                
-                [view addAction:one];
-                [view addAction:two];
-                [view addAction:three];
-                [view addAction:cancel];
-                [self presentViewController:view animated:YES completion:nil];
+                if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                    BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
+                    
+                    [sheet addButtonWithTitle:@"1" block:^{
+                        [PreferenceUtil setCameraPerRow:1];
+                        [self.tableView reloadData];
+                    }];
+                    [sheet addButtonWithTitle:@"2" block:^{
+                        [PreferenceUtil setCameraPerRow:2];
+                        [self.tableView reloadData];
+                    }];
+                    [sheet addButtonWithTitle:@"3" block:^{
+                        [PreferenceUtil setCameraPerRow:3];
+                        [self.tableView reloadData];
+                    }];
+                    
+                    [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
+                    [sheet showInView:self.view];
+                }
+                else
+                {
+                    UIAlertController * view=   [UIAlertController
+                                                 alertControllerWithTitle:@"Cameras per row"
+                                                 message:nil
+                                                 preferredStyle:UIAlertControllerStyleActionSheet];
+                    
+                    UIAlertAction* one = [UIAlertAction
+                                          actionWithTitle:@"1"
+                                          style:UIAlertActionStyleDefault
+                                          handler:^(UIAlertAction * action)
+                                          {
+                                              //Do some thing here
+                                              [view dismissViewControllerAnimated:YES completion:nil];
+                                              [PreferenceUtil setCameraPerRow:1];
+                                              [self.tableView reloadData];
+                                          }];
+                    UIAlertAction* two = [UIAlertAction
+                                          actionWithTitle:@"2"
+                                          style:UIAlertActionStyleDefault
+                                          handler:^(UIAlertAction * action)
+                                          {
+                                              [view dismissViewControllerAnimated:YES completion:nil];
+                                              [PreferenceUtil setCameraPerRow:2];
+                                              [self.tableView reloadData];
+                                              
+                                          }];
+                    UIAlertAction* three = [UIAlertAction
+                                            actionWithTitle:@"3"
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * action)
+                                            {
+                                                [view dismissViewControllerAnimated:YES completion:nil];
+                                                [PreferenceUtil setCameraPerRow:3];
+                                                [self.tableView reloadData];
+                                                
+                                            }];
+                    UIAlertAction* cancel = [UIAlertAction
+                                             actionWithTitle:@"Cancel"
+                                             style:UIAlertActionStyleCancel
+                                             handler:^(UIAlertAction * action)
+                                             {
+                                                 [view dismissViewControllerAnimated:YES completion:nil];
+                                                 
+                                             }];
+                    
+                    
+                    [view addAction:one];
+                    [view addAction:two];
+                    [view addAction:three];
+                    [view addAction:cancel];
+
+                    if ([GlobalSettings sharedInstance].isPhone)
+                    {
+                        [self presentViewController:view animated:YES completion:nil];
+                    }
+                    else
+                    {
+                        UIPopoverPresentationController *popPresenter = [view
+                                                                         popoverPresentationController];
+                        popPresenter.sourceView = [self.tableView cellForRowAtIndexPath:indexPath];
+                        popPresenter.sourceRect = [self.tableView cellForRowAtIndexPath:indexPath].bounds;
+                        [self presentViewController:view animated:YES completion:nil];
+                    }
+                }
             });
         }
         else if (indexPath.row == 1)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                UIAlertController * view=   [UIAlertController
-                                             alertControllerWithTitle:@"Sleep"
-                                             message:nil
-                                             preferredStyle:UIAlertControllerStyleActionSheet];
-                
-                UIAlertAction* halfmin = [UIAlertAction
-                                      actionWithTitle:@"30 seconds"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          //Do some thing here
-                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          [PreferenceUtil setSleepTimerSecs:30];
-                                          [self.tableView reloadData];
-                                      }];
-                UIAlertAction* onemin = [UIAlertAction
-                                      actionWithTitle:@"1 minute"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          [PreferenceUtil setSleepTimerSecs:60];
-                                          [self.tableView reloadData];
-                                      }];
-                UIAlertAction* fivemin = [UIAlertAction
-                                      actionWithTitle:@"5 minute"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          [PreferenceUtil setSleepTimerSecs:5 * 60];
-                                          [self.tableView reloadData];
-                                      }];
-                UIAlertAction* never = [UIAlertAction
-                                      actionWithTitle:@"Never"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          [PreferenceUtil setSleepTimerSecs:0];
-                                          [self.tableView reloadData];
-                                          
-                                      }];
-                UIAlertAction* cancel = [UIAlertAction
-                                         actionWithTitle:@"Cancel"
-                                         style:UIAlertActionStyleCancel
-                                         handler:^(UIAlertAction * action)
-                                         {
-                                             [view dismissViewControllerAnimated:YES completion:nil];
-                                             
-                                         }];
-                
-                
-                [view addAction:halfmin];
-                [view addAction:onemin];
-                [view addAction:fivemin];
-                [view addAction:never];
-                [view addAction:cancel];
-                [self presentViewController:view animated:YES completion:nil];
+                if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                    BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
+                    
+                    [sheet addButtonWithTitle:@"Sleep" block:^{
+                        [PreferenceUtil setSleepTimerSecs:30];
+                        [self.tableView reloadData];
+                    }];
+                    [sheet addButtonWithTitle:@"30 seconds" block:^{
+                        [PreferenceUtil setSleepTimerSecs:30];
+                        [self.tableView reloadData];
+                    }];
+                    [sheet addButtonWithTitle:@"1 minute" block:^{
+                        [PreferenceUtil setSleepTimerSecs:60];
+                        [self.tableView reloadData];
+                    }];
+                    [sheet addButtonWithTitle:@"5 minute" block:^{
+                        [PreferenceUtil setSleepTimerSecs:5 * 60];
+                        [self.tableView reloadData];
+                    }];
+                    [sheet addButtonWithTitle:@"Never" block:^{
+                        [PreferenceUtil setSleepTimerSecs:0];
+                        [self.tableView reloadData];
+                    }];
+                    
+                    [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
+                    [sheet showInView:self.view];
+                }
+                else
+                {
+                    UIAlertController * view=   [UIAlertController
+                                                 alertControllerWithTitle:@"Sleep"
+                                                 message:nil
+                                                 preferredStyle:UIAlertControllerStyleActionSheet];
+                    
+                    UIAlertAction* halfmin = [UIAlertAction
+                                              actionWithTitle:@"30 seconds"
+                                              style:UIAlertActionStyleDefault
+                                              handler:^(UIAlertAction * action)
+                                              {
+                                                  //Do some thing here
+                                                  [view dismissViewControllerAnimated:YES completion:nil];
+                                                  [PreferenceUtil setSleepTimerSecs:30];
+                                                  [self.tableView reloadData];
+                                              }];
+                    UIAlertAction* onemin = [UIAlertAction
+                                             actionWithTitle:@"1 minute"
+                                             style:UIAlertActionStyleDefault
+                                             handler:^(UIAlertAction * action)
+                                             {
+                                                 [view dismissViewControllerAnimated:YES completion:nil];
+                                                 [PreferenceUtil setSleepTimerSecs:60];
+                                                 [self.tableView reloadData];
+                                             }];
+                    UIAlertAction* fivemin = [UIAlertAction
+                                              actionWithTitle:@"5 minute"
+                                              style:UIAlertActionStyleDefault
+                                              handler:^(UIAlertAction * action)
+                                              {
+                                                  [view dismissViewControllerAnimated:YES completion:nil];
+                                                  [PreferenceUtil setSleepTimerSecs:5 * 60];
+                                                  [self.tableView reloadData];
+                                              }];
+                    UIAlertAction* never = [UIAlertAction
+                                            actionWithTitle:@"Never"
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * action)
+                                            {
+                                                [view dismissViewControllerAnimated:YES completion:nil];
+                                                [PreferenceUtil setSleepTimerSecs:0];
+                                                [self.tableView reloadData];
+                                                
+                                            }];
+                    UIAlertAction* cancel = [UIAlertAction
+                                             actionWithTitle:@"Cancel"
+                                             style:UIAlertActionStyleCancel
+                                             handler:^(UIAlertAction * action)
+                                             {
+                                                 [view dismissViewControllerAnimated:YES completion:nil];
+                                                 
+                                             }];
+                    
+                    
+                    [view addAction:halfmin];
+                    [view addAction:onemin];
+                    [view addAction:fivemin];
+                    [view addAction:never];
+                    [view addAction:cancel];
+                    
+                    if ([GlobalSettings sharedInstance].isPhone)
+                    {
+                        [self presentViewController:view animated:YES completion:nil];
+                    }
+                    else
+                    {
+                        UIPopoverPresentationController *popPresenter = [view
+                                                                         popoverPresentationController];
+                        popPresenter.sourceView = [self.tableView cellForRowAtIndexPath:indexPath];
+                        popPresenter.sourceRect = [self.tableView cellForRowAtIndexPath:indexPath].bounds;
+                        [self presentViewController:view animated:YES completion:nil];
+                    }
+                }
             });
 
         }
@@ -313,7 +410,19 @@
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.evercam.io"]];
+            
+            [UIView animateWithDuration:0.2f
+                                  delay:0.0f
+                                options: UIViewAnimationOptionAllowUserInteraction
+                             animations: ^{
+                                 self.webViewContainer.alpha = 1.0;
+                             }
+                             completion: ^(BOOL finished) {
+                             }
+            ];
+            if (isWebLoaded == NO) {
+                [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.evercam.io"]]];
+            }
         }
     }
 }
@@ -332,4 +441,35 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
+
+#pragma mark UIWebViewDelegate Method
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+//    [self.activity startAnimating];
+    
+    return YES;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.activity stopAnimating];
+    isWebLoaded = YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [self.activity stopAnimating];
+    
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//    [alertView show];
+//    return;
+}
+
+
 @end

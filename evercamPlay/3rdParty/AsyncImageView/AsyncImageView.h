@@ -21,7 +21,6 @@
 +(void) releaseCacheMemory;
 -(void) displayImage:(UIImage *)image;
 -(void) loadImageFromURL:(NSURL*)url withSpinny:(BOOL)hasSpinny;
--(void) drawImage:(UIImage*)image;
 -(void) stopLoadingImage;
 
 @property (nonatomic, strong) NSURL *imageURL;

@@ -36,6 +36,9 @@
 #import "CustomNavigationController.h"
 #import "AddCameraViewController.h"
 #import "FeedbackViewController.h"
+#import "GAIDictionaryBuilder.h"
+#import "Config.h"
+#import "GlobalSettings.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -56,6 +59,8 @@
 {
 	[super viewDidLoad];
     
+    self.navigationController.navigationBarHidden = YES;
+    
     self.screenName = @"Camera Grid View";
 	
     cameraArray = [[NSMutableArray alloc] initWithCapacity:0];
@@ -66,16 +71,30 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-    [self.camerasView registerNib:[UINib nibWithNibName:@"CameraViewCell" bundle:nil] forCellWithReuseIdentifier: @"CameraViewCell"];
+    if ([GlobalSettings sharedInstance].isPhone == YES) {
+        [self.camerasView registerNib:[UINib nibWithNibName:@"CameraViewCell" bundle:nil] forCellWithReuseIdentifier: @"CameraViewCell"];
+    }
+    else
+        [self.camerasView registerNib:[UINib nibWithNibName:@"CameraViewCell_iPad" bundle:nil] forCellWithReuseIdentifier: @"CameraViewCellPad"];
+
     
     [self hideLoadingView];
     [self onRefresh:nil];
     
-    ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(320 / [PreferenceUtil getCameraPerRow], 320 / [PreferenceUtil getCameraPerRow] * .75);
+    if ([GlobalSettings sharedInstance].isPhone == YES)
+        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(320.0 / [PreferenceUtil getCameraPerRow], 320.0 / [PreferenceUtil getCameraPerRow] * .75);
+    else
+        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(self.view.frame.size.width / [PreferenceUtil getCameraPerRow], self.view.frame.size.width / [PreferenceUtil getCameraPerRow] * .75);
     if ([PreferenceUtil getCameraPerRow] == 3)
     {
         [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
     }
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.navigationBarHidden = YES;    
 }
 
 - (void)showLoadingView {
@@ -86,6 +105,20 @@
 - (void)hideLoadingView {
     [self.loadingIndicator stopAnimating];
     self.btnRefresh.hidden = NO;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    
+    if (UIDeviceOrientationIsLandscape(deviceOrientation))
+    {
+
+    }
+    else
+    {
+
+    }
 }
 
 #pragma mark - Action
@@ -139,6 +172,13 @@
 //    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
 //    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
 
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+                                                          action:action_refresh
+                                                           label:label_list_refresh
+                                                           value:nil] build]];
+    
+    
     if (![APP_DELEGATE defaultUser]) {
         return;
     }
@@ -160,20 +200,9 @@
         {
             NSLog(@"Error %li: %@", (long)error.code, error.localizedDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:error.localizedDescription
-                                              preferredStyle:UIAlertControllerStyleAlert];
                 
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                     }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                [alertView show];
             });
         }
     }];
@@ -182,7 +211,13 @@
 
 - (void)addCamera
 {
-    AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:@"AddCameraViewController" bundle:nil];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];    
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+                                                          action:category_add_camera
+                                                           label:label_add_camera_manually
+                                                           value:nil] build]];
+    
+    AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:nil];
     [addCameraVC setDelegate:self];
     [self.navigationController pushViewController:addCameraVC animated:YES];
 }
@@ -208,7 +243,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CameraViewCell *cell = (CameraViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"CameraViewCell" forIndexPath:indexPath];
+    CameraViewCell *cell = (CameraViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:[GlobalSettings sharedInstance].isPhone ? @"CameraViewCell":@"CameraViewCellPad" forIndexPath:indexPath];
     
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
     cell.titleLabel.text = cameraInfo.name;
@@ -222,7 +257,7 @@
     cell.imvOffline.frame = frmOfflineImg;
     
     [cell.thumbnailImageView setImage:nil];
-    cell.thumbnailImageView.offlineImage = [UIImage imageNamed:@"cam_unavailable.png"];
+//    cell.thumbnailImageView.offlineImage = [UIImage imageNamed:@"cam_unavailable.png"];
     cell.secondaryView.hidden = NO;
     cell.thumbnailImageView.secondaryView = cell.secondaryView;
     if (cameraInfo.isOnline) {
@@ -280,7 +315,7 @@
 
 #pragma mark - Custom Functions
 - (void)showCamera:(EvercamCamera *)camera {
-    CameraPlayViewController *cameraPlayVC = [[CameraPlayViewController alloc] initWithNibName:@"CameraPlayViewController" bundle:nil];
+    CameraPlayViewController *cameraPlayVC = [[CameraPlayViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CameraPlayViewController" : @"CameraPlayViewController_iPad" bundle:nil];
     [cameraPlayVC setDelegate:self];
     cameraPlayVC.cameraInfo = camera;
     cameraPlayVC.cameras = cameraArray;
