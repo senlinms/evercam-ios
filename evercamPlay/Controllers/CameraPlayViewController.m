@@ -513,7 +513,7 @@
                                       }];
         UIAlertAction* removeCamera = [UIAlertAction
                                        actionWithTitle:@"Remove Camera"
-                                       style:UIAlertActionStyleDefault
+                                       style:UIAlertActionStyleDestructive
                                        handler:^(UIAlertAction * action)
                                        {
                                            [view dismissViewControllerAnimated:YES completion:nil];
