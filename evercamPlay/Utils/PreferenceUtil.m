@@ -11,6 +11,7 @@
 #define CAMERA_PER_ROW_KEY @"cameraPerRow"
 #define SLEEP_TIME_SECS @"sleepTime"
 #define FORCE_LANDSCAPE @"forceLandscape"
+#define SHOW_OFFLINE @"showoffline"
 
 @implementation PreferenceUtil
 
@@ -49,6 +50,19 @@
 +(void) setIsForceLandscape:(BOOL)val {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:val forKey:FORCE_LANDSCAPE];
+    [userDefaults synchronize];
+}
+
++(BOOL) isShowOfflineCameras
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults boolForKey:SHOW_OFFLINE];
+}
+
++(void) setIsShowOfflineCameras:(BOOL)val
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:val forKey:SHOW_OFFLINE];
     [userDefaults synchronize];
 }
 

@@ -36,6 +36,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfInternalHttpPort;
 @property (weak, nonatomic) IBOutlet UITextField *tfInternalRtspPort;
 
+@property (weak, nonatomic) IBOutlet UIView *testInsideView;
+
 @property (nonatomic, strong) id<AddCameraViewControllerDelegate> delegate;
 @property (nonatomic, strong) EvercamCamera *editCamera;
 

@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 evercom. All rights reserved.
 //
 
+#import "GAIDictionaryBuilder.h"
 #import "AccountsViewController.h"
 #import "AccountCell.h"
 #import "AddAccountCell.h"
@@ -23,8 +24,13 @@
 #import "BlockAlertView.h"
 #import "BlockActionSheet.h"
 #import "GlobalSettings.h"
+#import "Config.h"
 
 @interface AccountsViewController ()
+{
+    NSString *triedUsername;
+    NSString *triedPassword;
+}
 
 @property (nonatomic, strong) NSMutableArray *users;
 @property (nonatomic, strong) UITextField *txt_username;
@@ -210,17 +216,22 @@
                     [APP_DELEGATE saveContext];
                     [APP_DELEGATE setDefaultUser:user];
                     
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_sign_up
+                                                                          action:action_signup_success
+                                                                           label:label_signup_successful
+                                                                           value:nil] build]];
+                    
                     [self getAllUsers];
                     
                 } else {
                     NSLog(@"Error %li: %@", (long)error.code, error.description);
                     
-                    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Ops!" message:error.localizedDescription];
-                    
-                    [alert addButtonWithTitle:@"Ok" imageIdentifier:@"yellow" block:^{
-                        [self showAddAccountAlertWithUsername:username andPassword:password];
-                    }];
-                    [alert show];
+                    triedUsername = username;
+                    triedPassword = password;
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Ops!", nil) message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    simpleAlert.tag = 102;
+                    [simpleAlert show];
                 }
             }];
             
@@ -228,15 +239,11 @@
         else
         {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            
-            NSLog(@"Error %li: %@", (long)error.code, error.description);
-            
-            BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Ops!" message:error.localizedDescription];
-            
-            [alert addButtonWithTitle:@"Ok" imageIdentifier:@"yellow" block:^{
-                [self showAddAccountAlertWithUsername:username andPassword:password];
-            }];
-            [alert show];
+            triedUsername = username;
+            triedPassword = password;
+            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Ops!", nil) message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            simpleAlert.tag = 101;
+            [simpleAlert show];
         }
     }];
 }
@@ -250,7 +257,7 @@
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Are you sure you want to remove this user?" message:@"Removing a user will remove the user from Evercam Play but the Evercam account will still exist."];
         
-        [alert addButtonWithTitle:@"Remove" imageIdentifier:@"yellow" block:^{
+        [alert addButtonWithTitle:@"Remove" imageIdentifier:@"gray" block:^{
             if (self.users.count == 1) {
                 [APP_DELEGATE logout];
                 return;
@@ -467,6 +474,14 @@
 - (void) clickedonAddWithName:(NSString *)username withPassword:(NSString *)password
 {
     [self addAccount:username password:password];
+}
+
+#pragma mark UIAlertViewDelegate - Method
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+//    if (alertView.tag == 101 || alertView.tag == 102) {
+//        [self showAddAccountAlertWithUsername:triedUsername andPassword:triedPassword];
+//    }
 }
 
 @end

@@ -12,6 +12,7 @@
                 <outlet property="imageContainer" destination="tpS-We-Mmx" id="bDK-23-VzW"/>
                 <outlet property="imageView" destination="tgd-pj-QsE" id="GQH-Gj-Jqj"/>
                 <outlet property="scrollView" destination="ctO-FG-6av" id="sAC-7z-GcN"/>
+                <outlet property="testInsideView" destination="u7h-t4-4k8" id="7yU-lS-Jjn"/>
                 <outlet property="tfExternalHost" destination="0MQ-GE-adm" id="V5a-MJ-7rT"/>
                 <outlet property="tfExternalHttpPort" destination="4rr-iU-pc2" id="83i-PY-WJ2"/>
                 <outlet property="tfID" destination="fzP-pG-G7p" id="1y6-5P-ImK"/>
@@ -411,16 +412,16 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </scrollView>
                 <view hidden="YES" contentMode="scaleToFill" id="tpS-We-Mmx">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view alpha="0.80000001192092896" contentMode="scaleToFill" id="JOH-q1-gQ5">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="573"/>
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         </view>
                         <view contentMode="scaleToFill" id="u7h-t4-4k8">
-                            <rect key="frame" x="20" y="188" width="280" height="191"/>
+                            <rect key="frame" x="244" y="415" width="280" height="191"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="tgd-pj-QsE">
@@ -429,7 +430,7 @@
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eVD-Fs-vBi">
                                     <rect key="frame" x="0.0" y="150" width="280" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                     <state key="normal" title="OK">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

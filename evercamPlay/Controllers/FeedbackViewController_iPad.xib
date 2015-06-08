@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="btnBack" destination="zCv-s1-CCG" id="ty3-dp-40I"/>
                 <outlet property="btnMenu" destination="SAQ-un-6sG" id="UnC-QZ-aZn"/>
+                <outlet property="contentView" destination="v0L-p5-kX4" id="QXJ-7y-9Nv"/>
                 <outlet property="txt_email" destination="eRN-qj-F9p" id="0mF-zb-mX6"/>
                 <outlet property="txt_feedback" destination="GAa-NT-2MC" id="qQJ-fj-aCs"/>
                 <outlet property="txt_username" destination="j0t-lp-2l2" id="em2-Op-4rJ"/>

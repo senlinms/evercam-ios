@@ -85,10 +85,10 @@
         ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(320.0 / [PreferenceUtil getCameraPerRow], 320.0 / [PreferenceUtil getCameraPerRow] * .75);
     else
         ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(self.view.frame.size.width / [PreferenceUtil getCameraPerRow], self.view.frame.size.width / [PreferenceUtil getCameraPerRow] * .75);
-    if ([PreferenceUtil getCameraPerRow] == 3)
-    {
-        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
-    }
+//    if ([PreferenceUtil getCameraPerRow] == 3)
+//    {
+//        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
+//    }
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -183,6 +183,8 @@
         return;
     }
     
+    BOOL willShowOfflineCamera = [PreferenceUtil isShowOfflineCameras];
+    
     [[EvercamShell shell] setUserKeyPairWithApiId:[APP_DELEGATE defaultUser].apiId andApiKey:[APP_DELEGATE defaultUser].apiKey];
 
     [self showLoadingView];
@@ -192,7 +194,19 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [AsyncImageView releaseCacheMemory];
-                cameraArray = [NSMutableArray arrayWithArray:cameras];
+                if (willShowOfflineCamera == YES) {
+                    cameraArray = [[NSMutableArray alloc] initWithArray:cameras];
+                }
+                else
+                {
+                    cameraArray = [[NSMutableArray alloc] init];
+                    for (EvercamCamera *cam in cameras) {
+                        if (cam.isOnline == YES) {
+                            [cameraArray addObject:cam];
+                        }
+                    }
+                }
+
                 [self.camerasView reloadData];
             });
         }

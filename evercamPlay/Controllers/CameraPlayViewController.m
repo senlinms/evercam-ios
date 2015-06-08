@@ -196,6 +196,14 @@
     [snapshotConfirmView setHidden:NO];
 
     if (self.imageView && self.imageView.image) {
+        CGFloat width = self.confirmInsideView.frame.size.width;
+        CGFloat imgHeight = self.imageView.image.size.height*width/self.imageView.image.size.width;
+        
+        self.confirmInsideView.frame = CGRectMake(self.confirmInsideView.frame.origin.x,
+                                                  self.confirmInsideView.frame.origin.y,
+                                                  self.confirmInsideView.frame.size.width,
+                                                  imgHeight + 41.0);
+        
         imvSnapshot.image = self.imageView.image;
     } else {
         [snapshotConfirmView setHidden:YES];
@@ -332,7 +340,7 @@
     if (willShow == YES) {
         videoController.hidden = NO;
     }
-    [UIView animateWithDuration:0.30f
+    [UIView animateWithDuration:0.50f
                           delay:0.0f
                         options: UIViewAnimationOptionAllowUserInteraction
                      animations: ^{
@@ -394,7 +402,7 @@
 
 - (IBAction)playOrPause:(id)sender {
     if (isPlaying) {
-        [self.imageView setHidden:YES];
+//        [self.imageView setHidden:YES];
         [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_play.png"] forState:UIControlStateNormal];
         [self stopCamera];
     } else {
@@ -471,15 +479,14 @@
         [sheet addButtonWithTitle:@"View Details" block:^{
             [self showCameraView];
         }];
-        [sheet addButtonWithTitle:@"Remove Camera" block:^{
-            [self deleteCamera];
-        }];
-        
         [sheet addButtonWithTitle:@"Saved Images" block:^{
             [self showSavedImages];
         }];
         [sheet addButtonWithTitle:@"View Recordings" block:^{
             [self viewRecordings];
+        }];
+        [sheet addButtonWithTitle:@"Remove Camera" block:^{
+            [self deleteCamera];
         }];
         [sheet addButtonWithTitle:@"Send Feedback" block:^{
             [self sendFeedback];
@@ -554,9 +561,9 @@
                                  }];
         
         [view addAction:viewDetails];
-        [view addAction:removeCamera];
         [view addAction:savedImages];
         [view addAction:viewRecordings];
+        [view addAction:removeCamera];
         [view addAction:sendFeedback];
         [view addAction:cancel];
         

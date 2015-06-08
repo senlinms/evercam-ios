@@ -34,7 +34,7 @@
     [self.tutorialScrollView addSubview:self.tutorialView];
     
     if ([GlobalSettings sharedInstance].isPhone == YES) {
-        self.tutorialView.center = CGPointMake(480, self.tutorialScrollView.frame.size.height/2);
+        self.tutorialView.frame = CGRectMake(0, (self.tutorialScrollView.bounds.size.height-self.tutorialView.bounds.size.height)/2, self.tutorialView.bounds.size.width, self.tutorialView.frame.size.height);
         [self.tutorialScrollView setContentSize:CGSizeMake(960,self.tutorialScrollView.frame.size.height)];
     }
     else {

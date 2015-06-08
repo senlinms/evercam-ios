@@ -32,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UIView *playerView;
 @property (strong, nonatomic) AsyncImageView *imageView;
 
+@property (weak, nonatomic) IBOutlet UIView *confirmInsideView;
+
 @property (nonatomic, strong) EvercamCamera *cameraInfo;
 @property (nonatomic, strong) NSArray *cameras;
 

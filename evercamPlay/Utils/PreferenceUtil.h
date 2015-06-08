@@ -17,4 +17,6 @@
 +(BOOL) isForceLandscape;
 +(void) setIsForceLandscape:(BOOL)val;
 
++(BOOL) isShowOfflineCameras;
++(void) setIsShowOfflineCameras:(BOOL)val;
 @end

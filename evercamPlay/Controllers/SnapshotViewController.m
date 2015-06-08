@@ -122,7 +122,7 @@
     }
 }
 
-- (void)exportSavedImg
+- (IBAction)exportSavedImg
 {
     NSInteger activeIdx = self.scrollView.contentOffset.x/self.scrollView.frame.size.width;
     NSArray *snapshotFiles = [CommonUtil snapshotFiles:self.cameraId];
@@ -135,28 +135,38 @@
     UIImageWriteToSavedPhotosAlbum(snapshotImg, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
-- (void)deleteSavedImg
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSInteger activeIdx = self.scrollView.contentOffset.x/self.scrollView.frame.size.width;
-    NSArray *snapshotFiles = [CommonUtil snapshotFiles:self.cameraId];
-    if (activeIdx >= snapshotFiles.count) {
-        return;
+    if(alertView.tag == 101 && buttonIndex == 1)
+    {
+        NSInteger activeIdx = self.scrollView.contentOffset.x/self.scrollView.frame.size.width;
+        NSArray *snapshotFiles = [CommonUtil snapshotFiles:self.cameraId];
+        if (activeIdx >= snapshotFiles.count) {
+            return;
+        }
+        
+        NSURL *snapshotFileURL = [snapshotFiles objectAtIndex:activeIdx];
+        
+        NSString *filePath = [snapshotFileURL path];
+        NSError *error = nil;
+        if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] == NO) {
+            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [simpleAlert show];
+            return;
+        }
+        
+        if (error == nil) {
+            [self loadImages];
+            [self.scrollView setContentOffset:CGPointMake(0, 0)];
+        }
     }
-    
-    NSURL *snapshotFileURL = [snapshotFiles objectAtIndex:activeIdx];
-    
-    NSString *filePath = [snapshotFileURL path];
-    NSError *error = nil;
-    if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] == NO) {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [simpleAlert show];
-        return;
-    }
-    
-    if (error == nil) {
-        [self loadImages];
-        [self.scrollView setContentOffset:CGPointMake(0, 0)];
-    }
+}
+
+- (IBAction)deleteSavedImg
+{
+    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete snapshot", nil) message:@"Are you sure you want to delete this image?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
+    simpleAlert.tag = 101;
+    [simpleAlert show];
 }
 
 - (void)loadImages {

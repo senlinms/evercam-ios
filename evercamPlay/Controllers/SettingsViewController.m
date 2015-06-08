@@ -57,6 +57,15 @@
     }
 }
 
+- (IBAction)showOfflineModeChanged:(id)sender {
+    UISwitch *switchView = (UISwitch *)sender;
+    if ([switchView isOn]) {
+        [PreferenceUtil setIsShowOfflineCameras:YES];
+    } else {
+        [PreferenceUtil setIsShowOfflineCameras:NO];
+    }
+}
+
 - (IBAction)onCloseWebView:(id)sender
 {
     [UIView animateWithDuration:0.2f
@@ -84,7 +93,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0)
-        return 3;
+        return 4;
     
     return 2;
 }
@@ -150,7 +159,7 @@
             cell.detailTextLabel.textColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-        else
+        else if (indexPath.row == 2)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
             cell.textLabel.text = @"Force landscape for live view";
@@ -161,6 +170,22 @@
             [swtch addTarget:self action:@selector(landscapeModeChanged:) forControlEvents:UIControlEventValueChanged];
             
             if ([PreferenceUtil isForceLandscape]) {
+                [swtch setOn:YES];
+            } else {
+                [swtch setOn:NO];
+            }
+        }
+        else
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
+            cell.textLabel.text = @"Show offline cameras";
+            cell.textLabel.textColor = [UIColor whiteColor];
+            
+            UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(200, 11.5f, 51.f, 31.f)];
+            [cell addSubview:swtch];
+            [swtch addTarget:self action:@selector(showOfflineModeChanged:) forControlEvents:UIControlEventValueChanged];
+            
+            if ([PreferenceUtil isShowOfflineCameras]) {
                 [swtch setOn:YES];
             } else {
                 [swtch setOn:NO];

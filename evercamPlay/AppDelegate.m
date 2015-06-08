@@ -30,8 +30,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
-    
     [GlobalSettings sharedInstance].isPhone = YES;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
     {
@@ -56,6 +54,9 @@
     //[BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
     NSString *SplunkMintAPIKey = [contents valueForKey:@"SplunkMintAPIKey"];
     //[[Mint sharedInstance] initAndStartSession:SplunkMintAPIKey];
+
+    NSString *MixpanelToken = [contents valueForKey:@"MixpanelToken"];
+    [Mixpanel sharedInstanceWithToken:MixpanelToken];
     
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;

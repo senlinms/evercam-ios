@@ -39,7 +39,7 @@
 @property (strong, nonatomic) UITextField *focusedTextField;
 @property (nonatomic, strong) EvercamVendor *currentVendor;
 @property (nonatomic, strong) EvercamModel *currentModel;
-@property (nonatomic, strong) NSArray *vendorsArray;
+@property (nonatomic, strong) NSMutableArray *vendorsArray;
 @property (nonatomic, strong) NSMutableArray *vendorsNameArray;
 @property (nonatomic, strong) NSArray *modelsArray;
 @property (nonatomic, strong) NSMutableArray *modelsNameArray;
@@ -79,8 +79,8 @@
         UIColor *color = [UIColor lightTextColor];
         self.tfID.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"roof-cam" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Rooftop Camera" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfVendor.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Other" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfModel.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Unknown" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfVendor.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Unknown/Other" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfModel.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Unknown/Other" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfUsername.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfSnapshot.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/snapshot.jpg" attributes:@{NSForegroundColorAttributeName: color}];
@@ -927,7 +927,16 @@
 - (void)showImageView:(UIImage *)image {
     if (image) {
         self.imageContainer.hidden = NO;
+        CGFloat width = self.testInsideView.frame.size.width;
+        CGFloat imgHeight = image.size.height*width/image.size.width;
+        
+        self.testInsideView.frame = CGRectMake(self.testInsideView.frame.origin.x,
+                                                  self.testInsideView.frame.origin.y,
+                                                  self.testInsideView.frame.size.width,
+                                                  imgHeight + 41.0);
+        
         self.imageView.image = image;
+        
     } else {
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"", nil) message:@"The port and URL are open but we can't seem to connect. Check that the username and password are correct and the snapshot ending" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [simpleAlert show];
@@ -936,16 +945,28 @@
 
 - (void)getAllVendors {
     [[EvercamShell shell] getAllVendors:^(NSArray *vendors, NSError *error) {
-        self.vendorsArray = [vendors sortedArrayUsingComparator:^NSComparisonResult(EvercamVendor *v1, EvercamVendor *v2) {
+        NSArray *arr = [vendors sortedArrayUsingComparator:^NSComparisonResult(EvercamVendor *v1, EvercamVendor *v2) {
             return [v1.name caseInsensitiveCompare:v2.name];
         }];
 
+        self.vendorsArray = [[NSMutableArray alloc] initWithArray:arr];
+//        NSMutableDictionary *otherVendor = [[NSMutableDictionary alloc] init];
+//        NSMutableArray *emptyArr = [[NSMutableArray alloc] init];
+//        [otherVendor setObject:@"Unknown/Other" forKey:@"id"];
+//        [otherVendor setObject:emptyArr forKey:@"known_macs"];
+//        [otherVendor setObject:@"Unknown/Other" forKey:@"name"];
+//        
+//        EvercamVendor *vendor = [[EvercamVendor alloc] initWithDictionary:otherVendor];
+        
+        NSLog(@"%@",self.vendorsArray);
+        
         [self.vendorsNameArray removeAllObjects];
         for (EvercamVendor *vendor in self.vendorsArray)
         {
             [self.vendorsNameArray addObject:[vendor.name copy]];
         }
         
+        [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
         
         if (self.editCamera) {
             self.currentVendor = [self getVendorWithName:self.editCamera.vendor];
@@ -968,7 +989,6 @@
             [self.modelsNameArray removeAllObjects];
             for (EvercamModel *model in self.modelsArray)
                 [self.modelsNameArray addObject:[model.name copy]];
-
             
             if (self.editCamera) {
                 if (self.tfModel.text.length == 0) {
@@ -992,6 +1012,11 @@
 }
 
 - (EvercamVendor *)getVendorWithName:(NSString *)vendorName {
+    
+    if ([vendorName isEqualToString:@"Unknown/Other"]) {
+        return nil;
+    }
+    
     for (EvercamVendor *vendor in self.vendorsArray) {
         if ([vendor.name isEqualToString:vendorName]) {
             return vendor;
@@ -1002,6 +1027,10 @@
 }
 
 - (EvercamModel *)getModelWithName:(NSString *)modelName {
+    if ([modelName isEqualToString:@"Unknown/Other"]) {
+        return nil;
+    }
+    
     for (EvercamModel *model in self.modelsArray) {
         if ([model.name isEqualToString:modelName]) {
             return model;
@@ -1049,7 +1078,14 @@
     if (dropdown == vendorDropDown)
     {
         vendorDropDown = nil;
-        self.currentVendor = self.vendorsArray[index];
+        if (index == 0) {
+            self.currentVendor = nil;
+            self.currentModel = nil;
+            self.tfVendor.text = @"Unknown/Other";
+            self.tfModel.text = @"Unknown/Other";
+            return;
+        }
+        self.currentVendor = self.vendorsArray[index-1];
         self.tfVendor.text = self.currentVendor.name;
         
         [self getAllModels];

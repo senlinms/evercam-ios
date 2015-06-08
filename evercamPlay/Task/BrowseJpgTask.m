@@ -45,7 +45,7 @@
         
         if (stopped == YES)
         {
-            [self.imageView setImage:nil];
+//            [self.imageView setImage:nil];
             return;
         }
         

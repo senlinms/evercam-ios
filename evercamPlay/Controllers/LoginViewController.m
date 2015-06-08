@@ -173,7 +173,7 @@
 
 - (IBAction)onCreateAccount:(id)sender
 {
-    SignupViewController *vc = [[SignupViewController alloc] initWithNibName:@"SignupViewController" bundle:nil];
+    SignupViewController *vc = [[SignupViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SignupViewController" : @"SignupViewController_iPad" bundle: nil];
     NSMutableArray *vcArr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     [vcArr removeLastObject];
     [vcArr addObject:vc];
