@@ -53,7 +53,7 @@
     
     //[BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
     NSString *SplunkMintAPIKey = [contents valueForKey:@"SplunkMintAPIKey"];
-    //[[Mint sharedInstance] initAndStartSession:SplunkMintAPIKey];
+    [[Mint sharedInstance] initAndStartSession:SplunkMintAPIKey];
 
     NSString *MixpanelToken = [contents valueForKey:@"MixpanelToken"];
     [Mixpanel sharedInstanceWithToken:MixpanelToken];
@@ -61,7 +61,7 @@
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
+     [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
     
     return YES;
 }
