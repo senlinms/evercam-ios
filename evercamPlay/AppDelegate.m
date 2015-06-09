@@ -61,7 +61,7 @@
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-     [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
+    [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
     
     return YES;
 }

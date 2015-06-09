@@ -279,6 +279,7 @@
                                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                     
                                     [mixpanel track:mixpanel_event_sign_up properties:@{
+                                                                                        @"Client-Type": @"Play-iOS",                                                                                        
                                                                                         @"username": newuser.username
                                                                                         }];
                                     

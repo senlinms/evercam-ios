@@ -25,6 +25,7 @@
 #import "BlockAlertView.h"
 #import "Mixpanel.h"
 #import "GlobalSettings.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
@@ -104,6 +105,7 @@
 
 - (IBAction)imageViewClose:(id)sender {
     self.imageContainer.hidden = YES;
+    self.imageView.image = nil;
 }
 
 - (IBAction)back:(id)sender {
@@ -177,18 +179,42 @@
     
     NSString *jpgUrl = [self buildJpgUrlWithSlash:self.tfSnapshot.text];
     NSString *externalFullUrl = [self buildFullHttpUrl:self.tfExternalHost.text andPort:[self.tfExternalHttpPort.text integerValue]  andJpgUrl:jpgUrl withUsername:self.tfUsername.text andPassword:self.tfPassword.text];
-    
+
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    [manager downloadImageWithURL:[NSURL URLWithString:externalFullUrl]
-                          options:0
-                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                             // progression tracking code
-                         }
-                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                            [self showImageView:image];
-                        }];
+    [self.imageView setImageWithURLRequest:[self imageRequestWithURL:[NSURL URLWithString:externalFullUrl]]
+                     placeholderImage:nil
+                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                  [self showImageView:image];
+                              }
+                              failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                  [self showImageView:nil];
+                              }];
+    
+
+//    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+//    [manager downloadImageWithURL:[NSURL URLWithString:externalFullUrl]
+//                          options:0
+//                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                             // progression tracking code
+//                         }
+//                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                            [self showImageView:image];
+//                        }];
+}
+
+- (NSMutableURLRequest *)imageRequestWithURL:(NSURL *)url {
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.cachePolicy = NSURLRequestReloadIgnoringCacheData; //NSURLRequestUseProtocolCachePolicy
+    request.HTTPShouldHandleCookies = NO;
+    request.HTTPShouldUsePipelining = YES;
+    request.timeoutInterval = 10;
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    
+    return request;
 }
 
 - (IBAction)add:(id)sender {
@@ -418,8 +444,11 @@
 
 
 - (IBAction)selectMake:(id)sender {
-    if (self.vendorsArray == nil || self.vendorsArray.count <= 0)
+    if (self.vendorsNameArray == nil || self.vendorsNameArray.count <= 0) {
         return;
+    }
+//    if (self.vendorsArray == nil || self.vendorsArray.count <= 0)
+//        return;
     
     [self.focusedTextField resignFirstResponder];
     
@@ -801,9 +830,10 @@
             Mixpanel *mixpanel = [Mixpanel sharedInstance];
             
             [mixpanel track:mixpanel_event_create_camera properties:@{
-                                                                @"username": camera.username,
-                                                                @"cameraid" : camera.camId
-                                                                }];
+                                                                      @"Client-Type": @"Play-iOS",
+                                                                      @"username": camera.username,
+                                                                      @"cameraid" : camera.camId
+                                                                      }];
             
             if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
                 BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"Camera created successfully!"];
@@ -944,6 +974,9 @@
 }
 
 - (void)getAllVendors {
+    [self.vendorsNameArray removeAllObjects];
+    [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
+    
     [[EvercamShell shell] getAllVendors:^(NSArray *vendors, NSError *error) {
         NSArray *arr = [vendors sortedArrayUsingComparator:^NSComparisonResult(EvercamVendor *v1, EvercamVendor *v2) {
             return [v1.name caseInsensitiveCompare:v2.name];
@@ -960,13 +993,13 @@
         
         NSLog(@"%@",self.vendorsArray);
         
-        [self.vendorsNameArray removeAllObjects];
+//        [self.vendorsNameArray removeAllObjects];
         for (EvercamVendor *vendor in self.vendorsArray)
         {
             [self.vendorsNameArray addObject:[vendor.name copy]];
         }
         
-        [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
+//        [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
         
         if (self.editCamera) {
             self.currentVendor = [self getVendorWithName:self.editCamera.vendor];

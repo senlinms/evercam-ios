@@ -165,7 +165,7 @@
             cell.textLabel.text = @"Force landscape for live view";
             cell.textLabel.textColor = [UIColor whiteColor];
             
-            UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(250, 11.5f, 51.f, 31.f)];
+            UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-66 , 11.5f, 51.f, 31.f)];
             [cell addSubview:swtch];
             [swtch addTarget:self action:@selector(landscapeModeChanged:) forControlEvents:UIControlEventValueChanged];
             
@@ -181,7 +181,7 @@
             cell.textLabel.text = @"Show offline cameras";
             cell.textLabel.textColor = [UIColor whiteColor];
             
-            UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(200, 11.5f, 51.f, 31.f)];
+            UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-66, 11.5f, 51.f, 31.f)];
             [cell addSubview:swtch];
             [swtch addTarget:self action:@selector(showOfflineModeChanged:) forControlEvents:UIControlEventValueChanged];
             

@@ -43,6 +43,7 @@
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
     NSMutableArray *cameraArray;
+    CGSize cellSize;
 }
 
 // Private Methods:
@@ -81,10 +82,14 @@
     [self hideLoadingView];
     [self onRefresh:nil];
     
-    if ([GlobalSettings sharedInstance].isPhone == YES)
-        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(320.0 / [PreferenceUtil getCameraPerRow], 320.0 / [PreferenceUtil getCameraPerRow] * .75);
-    else
-        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = CGSizeMake(self.view.frame.size.width / [PreferenceUtil getCameraPerRow], self.view.frame.size.width / [PreferenceUtil getCameraPerRow] * .75);
+    if ([GlobalSettings sharedInstance].isPhone == YES) {
+        cellSize = CGSizeMake(320.0 / [PreferenceUtil getCameraPerRow], 320.0 / [PreferenceUtil getCameraPerRow] * .75);
+        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = cellSize;
+    }
+    else {
+        cellSize = CGSizeMake(self.view.frame.size.width / [PreferenceUtil getCameraPerRow], self.view.frame.size.width / [PreferenceUtil getCameraPerRow] * .75);
+        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = cellSize;
+    }
 //    if ([PreferenceUtil getCameraPerRow] == 3)
 //    {
 //        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
@@ -262,13 +267,33 @@
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
     cell.titleLabel.text = cameraInfo.name;
     
-    CGSize textSize = { 140.0, 20.0 };
-    CGSize size = [cell.titleLabel.text sizeWithFont:cell.titleLabel.font
-                                        constrainedToSize:textSize
-                                            lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize textSize = { 1400.0, 20.0 };
+    
+    CGSize size = [cell.titleLabel.text boundingRectWithSize:textSize
+                                                     options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                                  attributes:@{NSFontAttributeName:cell.titleLabel.font}
+                                                     context:nil].size;
+    
     CGRect frmOfflineImg = cell.imvOffline.frame;
-    frmOfflineImg.origin.x = size.width + 10;
-    cell.imvOffline.frame = frmOfflineImg;
+    CGFloat cellWidth = cell.frame.size.width;
+    if (cellWidth-20 < size.width) {
+        cell.titleLabel.frame = CGRectMake(cell.titleLabel.frame.origin.x,
+                                           cell.titleLabel.frame.origin.y,
+                                           cellSize.width-20,
+                                           cell.titleLabel.frame.size.height);
+        frmOfflineImg.origin.x = cell.contentView.frame.size.width-15;
+        cell.imvOffline.frame = frmOfflineImg;
+    }
+    else
+    {
+        [cell.titleLabel sizeToFit];
+        cell.titleLabel.frame = CGRectMake(cell.titleLabel.frame.origin.x,
+                                           cell.titleLabel.frame.origin.y,
+                                           size.width,
+                                           size.height);
+        frmOfflineImg.origin.x = size.width+10;
+        cell.imvOffline.frame = frmOfflineImg;
+    }
     
     [cell.thumbnailImageView setImage:nil];
 //    cell.thumbnailImageView.offlineImage = [UIImage imageNamed:@"cam_unavailable.png"];

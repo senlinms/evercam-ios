@@ -124,8 +124,9 @@
                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
                     
                     [mixpanel track:mixpanel_event_sign_in properties:@{
-                                                                  @"username": newuser.username
-                                                                  }];
+                                                                        @"Client-Type": @"Play-iOS",
+                                                                        @"username": newuser.username
+                                                                        }];
                     
                     AppUser *user = [APP_DELEGATE userWithName:newuser.username];
                     [user setDataWithEvercamUser:newuser];
