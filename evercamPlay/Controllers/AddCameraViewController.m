@@ -26,6 +26,7 @@
 #import "Mixpanel.h"
 #import "GlobalSettings.h"
 #import "UIImageView+AFNetworking.h"
+#import "AppDelegate.h"
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
@@ -828,7 +829,7 @@
                                                                    value:nil] build]];
             
             Mixpanel *mixpanel = [Mixpanel sharedInstance];
-            
+            [mixpanel identify:[[APP_DELEGATE getDefaultUser].userId stringValue]];
             [mixpanel track:mixpanel_event_create_camera properties:@{
                                                                       @"Client-Type": @"Play-iOS",
                                                                       @"username": camera.username,

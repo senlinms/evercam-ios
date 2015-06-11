@@ -22,6 +22,7 @@
 @implementation SettingsViewController
 
 - (void)viewDidLoad {
+
     [super viewDidLoad];
     
     isWebLoaded = NO;

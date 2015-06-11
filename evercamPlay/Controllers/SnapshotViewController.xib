@@ -75,7 +75,7 @@
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="167" y="225"/>
+            <point key="canvasLocation" x="201" y="281"/>
         </view>
     </objects>
     <resources>

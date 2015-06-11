@@ -61,9 +61,15 @@
         [vcArr addObject:revealController];
         [self.navigationController setViewControllers:vcArr animated:YES];
         
+        [self performSelector:@selector(showView) withObject:nil afterDelay:3];
     }
     else
         [self.view setHidden:NO];
+}
+
+- (void)showView
+{
+    [self.view setHidden:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated

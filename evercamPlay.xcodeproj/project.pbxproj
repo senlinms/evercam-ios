@@ -61,7 +61,6 @@
 		41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */; };
 		41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB7C1AD708730016ACCA /* icon_offline.png */; };
 		5D814025BA9B52C1265ECA86 /* libPods-evercamPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 241B18B5C67528E78AF3CBED /* libPods-evercamPlay.a */; };
-		C406398E1B05F93100FC5D67 /* SplunkMint-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */; };
 		C40639901B05F94F00FC5D67 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */; };
 		C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639911B05F96200FC5D67 /* WebKit.framework */; };
 		C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639931B05F96C00FC5D67 /* libz.dylib */; };
@@ -190,6 +189,13 @@
 		E369E4A81B137AC9009D2D9E /* AddAccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E369E4A71B137AC9009D2D9E /* AddAccountView.xib */; };
 		E369E4AB1B137F54009D2D9E /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = E369E4AA1B137F54009D2D9E /* GlobalSettings.m */; };
 		E369E4AF1B14EC0F009D2D9E /* btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E369E4AE1B14EC0F009D2D9E /* btn_close@2x.png */; };
+		E3CB15A91B2879C700413197 /* btn_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15A51B2879C700413197 /* btn_delete.png */; };
+		E3CB15AA1B2879C700413197 /* btn_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15A61B2879C700413197 /* btn_delete@2x.png */; };
+		E3CB15AB1B2879C700413197 /* btn_export.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15A71B2879C700413197 /* btn_export.png */; };
+		E3CB15AC1B2879C700413197 /* btn_export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15A81B2879C700413197 /* btn_export@2x.png */; };
+		E3CB15AF1B287DD900413197 /* evercam_icon_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15AD1B287DD900413197 /* evercam_icon_nav.png */; };
+		E3CB15B01B287DD900413197 /* evercam_icon_nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15AE1B287DD900413197 /* evercam_icon_nav@2x.png */; };
+		E3CCC9AF1B28B3FF00C5199A /* SplunkMint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3CCC9AE1B28B3FF00C5199A /* SplunkMint.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -276,7 +282,6 @@
 		41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		41BEFB7C1AD708730016ACCA /* icon_offline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_offline.png; sourceTree = "<group>"; };
 		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "SplunkMint-iOS.framework"; sourceTree = "<group>"; };
 		C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C40639911B05F96200FC5D67 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		C40639931B05F96C00FC5D67 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -479,6 +484,13 @@
 		E369E4AA1B137F54009D2D9E /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
 		E369E4AD1B13A737009D2D9E /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		E369E4AE1B14EC0F009D2D9E /* btn_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close@2x.png"; sourceTree = "<group>"; };
+		E3CB15A51B2879C700413197 /* btn_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete.png; sourceTree = "<group>"; };
+		E3CB15A61B2879C700413197 /* btn_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_delete@2x.png"; sourceTree = "<group>"; };
+		E3CB15A71B2879C700413197 /* btn_export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_export.png; sourceTree = "<group>"; };
+		E3CB15A81B2879C700413197 /* btn_export@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_export@2x.png"; sourceTree = "<group>"; };
+		E3CB15AD1B287DD900413197 /* evercam_icon_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercam_icon_nav.png; sourceTree = "<group>"; };
+		E3CB15AE1B287DD900413197 /* evercam_icon_nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evercam_icon_nav@2x.png"; sourceTree = "<group>"; };
+		E3CCC9AE1B28B3FF00C5199A /* SplunkMint.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SplunkMint.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -493,7 +505,6 @@
 				C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */,
 				410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */,
 				C40639901B05F94F00FC5D67 /* SystemConfiguration.framework in Frameworks */,
-				C406398E1B05F93100FC5D67 /* SplunkMint-iOS.framework in Frameworks */,
 				41208A491AD8A126009C4FC2 /* MessageUI.framework in Frameworks */,
 				41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */,
 				41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */,
@@ -507,6 +518,7 @@
 				41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */,
 				41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */,
 				410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */,
+				E3CCC9AF1B28B3FF00C5199A /* SplunkMint.framework in Frameworks */,
 				41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */,
 				41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */,
 				41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */,
@@ -613,6 +625,7 @@
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3CCC9AE1B28B3FF00C5199A /* SplunkMint.framework */,
 				E356C9D81B179E2A007BB101 /* libicucore.dylib */,
 				E30201D61B1782970006DAE8 /* SpriteKit.framework */,
 				C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */,
@@ -620,7 +633,6 @@
 				C40639931B05F96C00FC5D67 /* libz.dylib */,
 				C40639911B05F96200FC5D67 /* WebKit.framework */,
 				C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */,
-				C406398D1B05F93100FC5D67 /* SplunkMint-iOS.framework */,
 				410748841AE04DAB004D10C9 /* CoreTelephony.framework */,
 				41208A481AD8A126009C4FC2 /* MessageUI.framework */,
 				41BEFB781AD6DC180016ACCA /* QuartzCore.framework */,
@@ -680,6 +692,7 @@
 				CB1C764F1AAB144800680FE3 /* Products */,
 				83F82304D6A047012929A763 /* Pods */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
 		};
 		CB1C764F1AAB144800680FE3 /* Products */ = {
@@ -776,6 +789,12 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				E3CB15AD1B287DD900413197 /* evercam_icon_nav.png */,
+				E3CB15AE1B287DD900413197 /* evercam_icon_nav@2x.png */,
+				E3CB15A51B2879C700413197 /* btn_delete.png */,
+				E3CB15A61B2879C700413197 /* btn_delete@2x.png */,
+				E3CB15A71B2879C700413197 /* btn_export.png */,
+				E3CB15A81B2879C700413197 /* btn_export@2x.png */,
 				E30201AF1B16C82D0006DAE8 /* AlertView */,
 				E309008C1B16B96000E5B5C0 /* ActionSheet */,
 				E30900731B1646D100E5B5C0 /* play_page_feature_iPad@2x.png */,
@@ -1052,6 +1071,7 @@
 				CB1C764A1AAB144700680FE3 /* Sources */,
 				CB1C764B1AAB144700680FE3 /* Frameworks */,
 				CB1C764C1AAB144700680FE3 /* Resources */,
+				E3CB15B11B28921A00413197 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1113,6 +1133,7 @@
 				E30201CD1B16C9CF0006DAE8 /* AddAccountView_iPad.xib in Resources */,
 				E309007C1B1659DB00E5B5C0 /* CamerasViewController_iPad.xib in Resources */,
 				E30900A61B16B96000E5B5C0 /* action-red-button@2x.png in Resources */,
+				E3CB15AB1B2879C700413197 /* btn_export.png in Resources */,
 				E30201D11B16CFE20006DAE8 /* FeedbackViewController_iPad.xib in Resources */,
 				E30201D31B173B4A0006DAE8 /* AccountCell_iPad.xib in Resources */,
 				E30201BE1B16C82D0006DAE8 /* alert-black-button.png in Resources */,
@@ -1127,6 +1148,7 @@
 				E30900A31B16B96000E5B5C0 /* action-red-button-selected.png in Resources */,
 				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				CB1C76D61AAB871A00680FE3 /* play_page_feature.png in Resources */,
+				E3CB15AC1B2879C700413197 /* btn_export@2x.png in Resources */,
 				410A13B31AE230A9008CA21C /* icon_online.png in Resources */,
 				E309007E1B165C4C00E5B5C0 /* CameraViewCell_iPad.xib in Resources */,
 				411C90E71AE573D10048FF3D /* bottom_fade.png in Resources */,
@@ -1160,14 +1182,17 @@
 				CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */,
 				E369E4AF1B14EC0F009D2D9E /* btn_close@2x.png in Resources */,
 				E30201C31B16C82D0006DAE8 /* alert-green-button@2x.png in Resources */,
+				E3CB15AA1B2879C700413197 /* btn_delete@2x.png in Resources */,
 				CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */,
 				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
 				E30201C11B16C82D0006DAE8 /* alert-gray-button@2x.png in Resources */,
 				410748791ADFDBE0004D10C9 /* btn_play.png in Resources */,
 				CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */,
+				E3CB15B01B287DD900413197 /* evercam_icon_nav@2x.png in Resources */,
 				E30201AC1B16C4DD0006DAE8 /* AccountsViewController_iPad.xib in Resources */,
 				E356C9D41B17985D007BB101 /* Pods-evercamPlay.debug.xcconfig in Resources */,
 				E369E4A81B137AC9009D2D9E /* AddAccountView.xib in Resources */,
+				E3CB15A91B2879C700413197 /* btn_delete.png in Resources */,
 				E30201BF1B16C82D0006DAE8 /* alert-black-button@2x.png in Resources */,
 				E30201C51B16C82D0006DAE8 /* alert-red-button@2x.png in Resources */,
 				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
@@ -1177,6 +1202,7 @@
 				CB44E8751AAE9E7D00A78C11 /* LoginViewController.xib in Resources */,
 				E30201C01B16C82D0006DAE8 /* alert-gray-button.png in Resources */,
 				E30201CA1B16C82D0006DAE8 /* alert-yellow-button.png in Resources */,
+				E3CB15AF1B287DD900413197 /* evercam_icon_nav.png in Resources */,
 				E309009E1B16B96000E5B5C0 /* action-black-button@2x.png in Resources */,
 				CB44E8791AAE9E7D00A78C11 /* SettingsViewController.xib in Resources */,
 				E30900A11B16B96000E5B5C0 /* action-gray-button.png in Resources */,
@@ -1200,6 +1226,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E3CB15B11B28921A00413197 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name splunkmint_postbuild_dsym_upload_script.sh | head -n 1`\n/bin/sh \"${SCRIPT}\" \"32ba4ee6\" \"9e2880b783ef74ec22f3096\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CB1C764A1AAB144700680FE3 /* Sources */ = {
@@ -1373,6 +1415,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1401,7 +1444,7 @@
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8E2D2101-B838-40CB-AA20-E89EBF2DC8FB";
-				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -1415,7 +1458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Funnell (7VT4NS593D)";
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1445,7 +1488,7 @@
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8E2D2101-B838-40CB-AA20-E89EBF2DC8FB";
-				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};

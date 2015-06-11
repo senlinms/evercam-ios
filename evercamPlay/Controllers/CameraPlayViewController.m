@@ -72,7 +72,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     videoController.alpha = 0.0;
     
     self.screenName = @"Video View";

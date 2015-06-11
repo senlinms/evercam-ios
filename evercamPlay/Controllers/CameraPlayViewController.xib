@@ -131,7 +131,7 @@
                     <autoresizingMask key="autoresizingMask"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Trm-Kg-hD7">
-                    <rect key="frame" x="51" y="17" width="217" height="44"/>
+                    <rect key="frame" x="51" y="18" width="217" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -207,7 +207,7 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="156" y="152"/>
+            <point key="canvasLocation" x="174" y="216"/>
         </view>
     </objects>
     <resources>

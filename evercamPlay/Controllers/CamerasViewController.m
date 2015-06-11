@@ -59,7 +59,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    
+        
     self.navigationController.navigationBarHidden = YES;
     
     self.screenName = @"Camera Grid View";
@@ -230,7 +230,9 @@
 
 - (void)addCamera
 {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];    
+//    int *x = NULL;
+//    *x = 5;
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
                                                           action:category_add_camera
                                                            label:label_add_camera_manually
@@ -277,11 +279,12 @@
     CGRect frmOfflineImg = cell.imvOffline.frame;
     CGFloat cellWidth = cell.frame.size.width;
     if (cellWidth-20 < size.width) {
+        NSLog(@"OOOOOO %@", cell.titleLabel.text);
         cell.titleLabel.frame = CGRectMake(cell.titleLabel.frame.origin.x,
                                            cell.titleLabel.frame.origin.y,
-                                           cellSize.width-20,
+                                           cellWidth-20,
                                            cell.titleLabel.frame.size.height);
-        frmOfflineImg.origin.x = cell.contentView.frame.size.width-15;
+        frmOfflineImg.origin.x = cellWidth-15;
         cell.imvOffline.frame = frmOfflineImg;
     }
     else

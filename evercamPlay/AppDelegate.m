@@ -16,7 +16,6 @@
 #import "GlobalSettings.h"
 
 #import "Mixpanel.h"
-#define MIXPANEL_TOKEN @"YOUR_TOKEN"
 
 @interface AppDelegate ()
 
@@ -55,8 +54,10 @@
     NSString *SplunkMintAPIKey = [contents valueForKey:@"SplunkMintAPIKey"];
     [[Mint sharedInstance] initAndStartSession:SplunkMintAPIKey];
 
+
     NSString *MixpanelToken = [contents valueForKey:@"MixpanelToken"];
     [Mixpanel sharedInstanceWithToken:MixpanelToken];
+//    [Mixpanel sharedInstanceWithToken:@"0d39cf8b82905a23f20ef7f0e85c3921"];
     
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
