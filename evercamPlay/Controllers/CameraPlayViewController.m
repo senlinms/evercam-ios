@@ -583,6 +583,7 @@
 }
 
 - (void)playCamera {
+    
     if (self.imageView)
     {
         [self.imageView removeFromSuperview];

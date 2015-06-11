@@ -230,8 +230,6 @@
 
 - (void)addCamera
 {
-//    int *x = NULL;
-//    *x = 5;
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
                                                           action:category_add_camera

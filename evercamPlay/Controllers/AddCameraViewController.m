@@ -77,6 +77,9 @@
     
     [self getAllVendors];
     
+//    int *x = NULL;
+//    *x = 5;
+    
     if ([self.tfID respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor lightTextColor];
         self.tfID.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"roof-cam" attributes:@{NSForegroundColorAttributeName: color}];
