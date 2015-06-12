@@ -278,15 +278,16 @@
                                     
                                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                     
-                                    [mixpanel identify:newuser.uId];
-                                    [mixpanel.people set:@{@"First name": newuser.firstname,
-                                                           @"Last name": newuser.lastname,
-                                                           @"Email": newuser.email}];
+                                    [mixpanel identify:newuser.username];
+                                    [mixpanel.people set:@{@"$first_name": newuser.firstname,
+                                                           @"$last_name": newuser.lastname,
+                                                           @"Username": newuser.username,
+                                                           @"$email": newuser.email}];
                                     
-                                    [mixpanel identify:newuser.uId];
+                                    [mixpanel identify:newuser.username];
+                                    
                                     [mixpanel track:mixpanel_event_sign_up properties:@{
-                                                                                        @"Client-Type": @"Play-iOS",                                                                                        
-                                                                                        @"username": newuser.username
+                                                                                        @"Client-Type": @"Play-iOS"
                                                                                         }];
                                     
                                     AppUser *user = [APP_DELEGATE userWithName:newuser.username];

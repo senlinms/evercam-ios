@@ -96,10 +96,9 @@
     [APP_DELEGATE setDefaultUser:user];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel identify:[user.userId stringValue]];
+    [mixpanel identify:user.username];
     [mixpanel track:mixpanel_event_sign_in properties:@{
-                                                        @"Client-Type": @"Play-iOS",
-                                                        @"username": user.username
+                                                        @"Client-Type": @"Play-iOS"
                                                         }];
     
     [self.tableView reloadData];
@@ -220,15 +219,9 @@
                     }
                     
                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                    [mixpanel identify:newuser.uId];
-                    
-                    [mixpanel.people set:@{@"First name": newuser.firstname,
-                                           @"Last name": newuser.lastname,
-                                           @"Email": newuser.email}];
-                    [mixpanel identify:newuser.uId];
-                    [mixpanel track:mixpanel_event_sign_up properties:@{
+                    [mixpanel identify:newuser.username];
+                    [mixpanel track:mixpanel_event_sign_in properties:@{
                                                                         @"Client-Type": @"Play-iOS",
-                                                                        @"username": newuser.username
                                                                         }];
                     
                     AppUser *user = [APP_DELEGATE userWithName:newuser.username];

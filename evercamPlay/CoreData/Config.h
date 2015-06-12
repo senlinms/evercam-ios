@@ -67,7 +67,5 @@
 #define mixpanel_event_sign_in              @"Sign In"
 #define mixpanel_event_sign_up              @"Create Account"
 #define mixpanel_event_create_camera        @"Create a camera"
-#define mixpanel_event_create_shortcut      @"Create a shortcut"
-#define mixpanel_event_use_shortcut         @"Use shortcut"
 
 #endif

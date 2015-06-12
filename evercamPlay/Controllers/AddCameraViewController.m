@@ -832,11 +832,10 @@
                                                                    value:nil] build]];
             
             Mixpanel *mixpanel = [Mixpanel sharedInstance];
-            [mixpanel identify:[[APP_DELEGATE getDefaultUser].userId stringValue]];
+            [mixpanel identify:[APP_DELEGATE getDefaultUser].username];
             [mixpanel track:mixpanel_event_create_camera properties:@{
                                                                       @"Client-Type": @"Play-iOS",
-                                                                      @"username": camera.username,
-                                                                      @"cameraid" : camera.camId
+                                                                      @"Camera ID" : camera.camId
                                                                       }];
             
             if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {

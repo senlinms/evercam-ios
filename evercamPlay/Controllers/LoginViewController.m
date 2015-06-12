@@ -122,10 +122,9 @@
                 if (error == nil) {
                     
                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                    [mixpanel identify:newuser.uId];                    
+                    [mixpanel identify:newuser.username];
                     [mixpanel track:mixpanel_event_sign_in properties:@{
                                                                         @"Client-Type": @"Play-iOS",
-                                                                        @"username": newuser.username
                                                                         }];
                     
                     AppUser *user = [APP_DELEGATE userWithName:newuser.username];
