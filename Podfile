@@ -4,6 +4,6 @@
 target 'evercamPlay' do
 pod 'Mixpanel'
 pod 'AFNetworking', '~> 2.3'
-pod 'EvercamNetworking'
+pod 'Evercam'
 end
 

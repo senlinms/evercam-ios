@@ -1,0 +1,1545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		009E3B130EACBF869ACB13E9 /* MPABTestDesignerClearResponseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD6EE65CC608FC8482E1FE6 /* MPABTestDesignerClearResponseMessage.m */; };
+		00A6D00849FBA94C9CF84A63 /* MPABTestDesignerDeviceInfoResponseMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 05235B31D8120C9B6BC4F91C /* MPABTestDesignerDeviceInfoResponseMessage.h */; };
+		0134A369E4361CA3DAF2ECEB /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B6E00EA24EB4F0E8E1698F1 /* AFNetworkActivityIndicatorManager.h */; };
+		0163AB3416E99DCAECFB7D99 /* MPApplicationStateSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E60AEB185BB523D7D4D20A /* MPApplicationStateSerializer.m */; };
+		01EA9D69D8669831D78C82C8 /* MPABTestDesignerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AAE7D668F655E2E9F6809D /* MPABTestDesignerConnection.m */; };
+		03AB1C9CE795F9E54418A4F6 /* EvercamCameraBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7648B0F5FB5B8C2318DB1CE3 /* EvercamCameraBuilder.m */; };
+		04802DBFB1C30DDC7A73959F /* MPObjectSerializerContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 92F5AE052F2C1422B648BF3E /* MPObjectSerializerContext.h */; };
+		074E9268F3B980A1DC2707A2 /* MPABTestDesignerTweakRequestMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FCF82F1384077B61025E326 /* MPABTestDesignerTweakRequestMessage.h */; };
+		095C315927BF7F24D1887033 /* EvercamDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB8D62BDFAFBBB8C18FF355 /* EvercamDefaults.h */; };
+		0A14EFC7B0FBD893CB3E8174 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F1F0EBE39DB796DF31AD16 /* Foundation.framework */; };
+		0B333216115373AD818523F8 /* MPABTestDesignerSnapshotRequestMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = EDD3EE15EF6553864E86D7A3 /* MPABTestDesignerSnapshotRequestMessage.h */; };
+		0B42E738767D6C42AA58CDB4 /* MPABTestDesignerDeviceInfoResponseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 894B8AE89FB44C9673688E91 /* MPABTestDesignerDeviceInfoResponseMessage.m */; };
+		0F4D560C7FDAD4EBB4FF5BDA /* MPWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 23CA85CCDC570BF13F534026 /* MPWebSocket.h */; };
+		0F4E6DC0EC6921A809E75AE4 /* MPObjectSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = BA7B3EB1071BC14E9D82712B /* MPObjectSerializer.h */; };
+		0FE5DC08EF674A8AE00F35A9 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 699C6EAEE7A589D891D18D80 /* AFNetworkReachabilityManager.m */; };
+		10FE4DE7ECBC605E731ADC71 /* MPObjectSerializerConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8624CD26A239769215EC13F7 /* MPObjectSerializerConfig.h */; };
+		125AB7D79F28820F656E18B0 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = BD0ABCFC22050C034932335E /* AFURLRequestSerialization.h */; };
+		13FCDC1E8C32EE047700442F /* UIColor+MPColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 78A39F3009216D06E43F6AAA /* UIColor+MPColor.h */; };
+		15FC5803527EE7AB51252D46 /* MPABTestDesignerChangeResponseMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 942707C967FBE7F5F71A0E45 /* MPABTestDesignerChangeResponseMessage.h */; };
+		16743799DED66E0D29222890 /* MPEventBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1F96F58344CE8110CB9B38 /* MPEventBinding.m */; };
+		18F9D691755D9A7BEA48828E /* NSInvocation+MPHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D27412D29D96222D77421 /* NSInvocation+MPHelpers.m */; };
+		1918464AB0F11E507C8D57FA /* Pods-evercamPlay-Mixpanel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 445D528D8B198ACF870599E5 /* Pods-evercamPlay-Mixpanel-dummy.m */; };
+		19227208116C5B95DADEB13A /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6FE0C6A0ABA44EE0A4CA7A /* UIAlertView+AFNetworking.m */; };
+		1A1D92A1C8F82D876BA4FCA7 /* MPWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4591720C2A58A27A5658D684 /* MPWebSocket.m */; };
+		1DD26E163DA835205EC13360 /* MPObjectIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2384A0DD4B56D08E8C8BF076 /* MPObjectIdentityProvider.m */; };
+		1ED1BF3FB379F51FFAE7071E /* EvercamRights.h in Headers */ = {isa = PBXBuildFile; fileRef = EB4AAAB9395339C9375C5C5A /* EvercamRights.h */; };
+		1FFCE395BC4D21E1316EFD11 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4CE0FF12A03200227D88C1 /* AFHTTPRequestOperation.m */; };
+		22CF81CCE80C3AEA92DFF4C1 /* MPVariant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6431427BACF244838E2C30FC /* MPVariant.m */; };
+		248237C48CF02FB3926595D5 /* MPSwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D85BBC25F9E00C022E6ACC /* MPSwizzler.m */; };
+		262B3614182757C9030127C7 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F98071534242CE5CA2338DD /* AFURLSessionManager.m */; };
+		2717B4A3E5C59687E4AAEFA5 /* MPCATransform3DToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B622E940B8EA93D99536532A /* MPCATransform3DToNSDictionaryValueTransformer.m */; };
+		2ACC6008A9E0D4A39A9009E9 /* EvercamShell.h in Headers */ = {isa = PBXBuildFile; fileRef = AD854D689D43FBD4A0F11A43 /* EvercamShell.h */; };
+		2AE085A8D97F9B0822E98041 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF2E07D06888F65726951CD /* AFURLResponseSerialization.h */; };
+		2BECEEAD09B319C1B59EB8C9 /* AFEvercamAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C51F725A76F412FBB3E00E7 /* AFEvercamAPIClient.h */; };
+		2C30E5CB68E07379B69A8020 /* EvercamUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A920689ABE058A80F99EEEB /* EvercamUser.h */; };
+		2EDD576958C719BCD5472679 /* MPUIControlBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = D73A93ABE2F1DB4F23C837B2 /* MPUIControlBinding.h */; };
+		2FAAA10FCF3780F7FB7829F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA78345AB6A3B4197A52662E /* UIKit.framework */; };
+		2FED5F0117927E592C7DE677 /* EvercamRights.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9F660FE622C02EE851F1E /* EvercamRights.m */; };
+		308C83C9D15BBEF994A3889D /* MPEnumDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C8B7D61665662439359E71 /* MPEnumDescription.m */; };
+		32DBB50AFEBF2A0B16BAF85E /* EvercamDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDEF1D62EC56A0082609CBB /* EvercamDefaults.m */; };
+		34FBF713572B262AA339FAF9 /* MPABTestDesignerTweakResponseMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D9D8DB733725C6FB026B7E /* MPABTestDesignerTweakResponseMessage.h */; };
+		355DE546B4B3640BD4DFC5B6 /* MPDesignerEventBindingResponseMesssage.m in Sources */ = {isa = PBXBuildFile; fileRef = C9900610DD94DAE9BB666BAC /* MPDesignerEventBindingResponseMesssage.m */; };
+		36E0F124D4871CA328E82446 /* EvercamModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 83295DEE7FFD3BF1909C4A67 /* EvercamModel.h */; };
+		377BA487DC0618C4C064030F /* EvercamCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = E767B83568D5AF5A87BB0F9C /* EvercamCamera.m */; };
+		3870683BDAF5F0490F7FB3FF /* MPSurveyNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A12674590299CD80178D400 /* MPSurveyNavigationController.h */; };
+		38D568D25682C91C8054E1B3 /* MPSurveyQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E021E651E95AED1DCF949 /* MPSurveyQuestion.m */; };
+		394400915DE875DB1938DB67 /* MPLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 427501A968C260C146FF7909 /* MPLogger.h */; };
+		3BD598BE8201B44D29190A09 /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = CE3001730D99A8E329CB080E /* UIActivityIndicatorView+AFNetworking.h */; };
+		3C8726EEAB25208A35AB8FF5 /* MPTweakInline.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F4F2DB4423F2119BFBECE4 /* MPTweakInline.m */; };
+		3DE0E7202B4F2FAC5463CB8D /* Pods-evercamPlay-Evercam-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 349E403C39F79A8F8F28897D /* Pods-evercamPlay-Evercam-dummy.m */; };
+		3DF0E39F4FE11F8CF9BF273B /* EvercamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DED7B7344273DB07503365 /* EvercamModel.m */; };
+		40EEBFA734CD0D061CFF4836 /* MPTypeDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B084E72C9433F5EC71D27D0 /* MPTypeDescription.h */; };
+		410A698F5A31F0203DBAD34F /* MPCategoryHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F18FB1B408FAACA7CE22EE8 /* MPCategoryHelpers.h */; };
+		4294C251EC457651238A901A /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFA848CBA8950F6F8111EDE /* UIButton+AFNetworking.m */; };
+		43084F0E2668B24CF5C7F594 /* MPObjectIdentifierProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C78BEBF14F9BB4D4E99BD99E /* MPObjectIdentifierProvider.h */; };
+		4316F06E04DC110D4536FD08 /* NSInvocation+MPHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = ECF063EA5F507D07B1DEB00D /* NSInvocation+MPHelpers.h */; };
+		433D30D097E6D28DD386A79A /* EvercamUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77AA1B72094B76CBF7438353 /* EvercamUser.m */; };
+		43A9025EE5673FD01EBA8B82 /* MPABTestDesignerClearRequestMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 214295FB62852B236AF8F407 /* MPABTestDesignerClearRequestMessage.h */; };
+		44FF8A1FCB94B5FE04D30945 /* MPUITableViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 79DDE8791AB65D21CBDDD8EF /* MPUITableViewBinding.h */; };
+		46808336D12E693E1D04AADA /* MPUIFontToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B3531CE04F3E820CD35AA1 /* MPUIFontToNSDictionaryValueTransformer.m */; };
+		477E6F507ED458B7ACE01E77 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3820059462CE913BF6790CBF /* MobileCoreServices.framework */; };
+		4A10A38C8D7B0FB81F4A9EEE /* MPTweakInline.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DE2EB79F3D31BC9A192B17 /* MPTweakInline.h */; };
+		4C964C6305193504300FC247 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0931113E07F88B656BC8F9 /* UIRefreshControl+AFNetworking.m */; };
+		4D43D58EF666E568B7EF3C92 /* MPABTestDesignerSnapshotResponseMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 686724685D771F3CD0D8B488 /* MPABTestDesignerSnapshotResponseMessage.h */; };
+		4F587E1BC4227C8CC6FC164B /* MPUITableViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = D845C0B399AA40C857E3B3CB /* MPUITableViewBinding.m */; };
+		50E847A70EDC0912DDFD110E /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C71398D60CE1279171D25C /* UIWebView+AFNetworking.m */; };
+		52CE4ABE12047AB400DA1409 /* Mixpanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC1C60CA7E0EEBF7771444F /* Mixpanel.h */; };
+		53F20B938BB4427A2BB1C3FA /* MPABTestDesignerSnapshotResponseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F4AD4F294E4C2B50C99A8F /* MPABTestDesignerSnapshotResponseMessage.m */; };
+		55E097B5BA2620D90EE80B3A /* MPPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C82ABAD4ED83DD4C16BDC554 /* MPPropertyDescription.m */; };
+		56DE3914C489652CAE4CC016 /* MPDesignerSessionCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 98CCF24A9939966B50E069F2 /* MPDesignerSessionCollection.h */; };
+		57073FA5538D5B491BDCBBD9 /* MPCGRectToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C999B41517770CF8AE1C3944 /* MPCGRectToNSDictionaryValueTransformer.m */; };
+		575393456FA53059FD1A951B /* _MPTweakBindObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A0D1C3C7AE1F184D5AABC2 /* _MPTweakBindObserver.m */; };
+		57EAA254FFBE61ABF7E73C0E /* MPCGPointToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CD5E9BAB072B954E6D50FA /* MPCGPointToNSDictionaryValueTransformer.m */; };
+		59E757F4141A1A4EC3AE27F9 /* MPObjectSerializerContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4B370B0ED170FDB6D7F55 /* MPObjectSerializerContext.m */; };
+		5A16BE31A805CD57E15F328F /* MPABTestDesignerClearRequestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE130C443670EB5308524B9D /* MPABTestDesignerClearRequestMessage.m */; };
+		5ADCABFB222285E08D87D9D9 /* MPEnumDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 34F93B281E9420BEF6A6C5C6 /* MPEnumDescription.h */; };
+		5C4245E3D2745B7D573F92A4 /* MPTweak.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B8609CFD17E1D0A673BC77 /* MPTweak.m */; };
+		5D1D6E51F9739BA669136FD8 /* MPVariant.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7ECE5C8C902A6F8EDABC1C /* MPVariant.h */; };
+		5D223BA00C56B01347B324A9 /* MPNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E053792CCACD4A9E077611 /* MPNotificationViewController.m */; };
+		5DAADB6571138A2C44F4B880 /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51EB4EC7E494571F4E1895 /* AFHTTPSessionManager.h */; };
+		5E2C281C9F3D6D4D33AD4752 /* UIColor+MPColor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8C8FB96E25101A39C6068D /* UIColor+MPColor.m */; };
+		61C37FB7A7C304A3B91B3480 /* Pods-evercamPlay-AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB2819F075B9EFDDC88E18 /* Pods-evercamPlay-AFNetworking-dummy.m */; };
+		6214BDD81A54F92CC417E312 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6950068346224A4F2DF45D /* AFSecurityPolicy.m */; };
+		645DA3523FFE4B90F8F2CA53 /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B7AA1A556F911513A925D4A /* UIProgressView+AFNetworking.h */; };
+		647F2012D82996A75611C076 /* EvercamCameraUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A82B2E0953F4AE664A4189BB /* EvercamCameraUtil.m */; };
+		66674C493184CF3A7232C5B7 /* UIButton+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = F4A44E283167DB0115671BAB /* UIButton+AFNetworking.h */; };
+		67FB448267EE56D3E2BC6A4C /* MPApplicationStateSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9DB16A3E79EEF9092BCFF67 /* MPApplicationStateSerializer.h */; };
+		6A4B90EB8FB264FCA9E46BDB /* MPABTestDesignerChangeRequestMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 13B83F77135885C1639ED48D /* MPABTestDesignerChangeRequestMessage.h */; };
+		6CBFF6174257F5783DEB0564 /* MPAbstractABTestDesignerMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C6212746AEA3DB7AF495A /* MPAbstractABTestDesignerMessage.m */; };
+		6CC8A12E7D1572A26670CBE5 /* EvercamApiKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3EAD7EC8E49D28C4A65FAF /* EvercamApiKeyPair.m */; };
+		6DF190E16DA7DD5E0908232F /* MPObjectSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = A29D4818B2C35EDB7EB6B966 /* MPObjectSelector.h */; };
+		6F6B0FE2F84705C5197415B1 /* NSData+MPBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 869460FBCDCFF939E80CC5CC /* NSData+MPBase64.h */; };
+		70AC61E1DA1C9BA3A77152A1 /* MPABTestDesignerChangeResponseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41858B43F77EB7D49D7A17 /* MPABTestDesignerChangeResponseMessage.m */; };
+		726A694D3F205E0ADBF768C3 /* Pods-evercamPlay-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32767F9E02CF34A65FB958E8 /* Pods-evercamPlay-dummy.m */; };
+		738F047CCA6F754B24A481FA /* MPObjectIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B72341BD855F59FDA2313A7 /* MPObjectIdentityProvider.h */; };
+		770AE95AA0C6938F5F02B3F5 /* EvercamCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB680530B9A5B79C57DC574 /* EvercamCamera.h */; };
+		77881208588222A035B51E7F /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = BF039153AC39A07C16D44F23 /* UIWebView+AFNetworking.h */; };
+		7922F928514908D219188023 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = D50832C559BCD658924B82B1 /* UIImageView+AFNetworking.h */; };
+		792D03EBC721BFB142AB460E /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A8959A4F04620BEA90CA06F4 /* AFHTTPRequestOperation.h */; };
+		7A118508FC895F031F47E39A /* MPUIImageToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 397EB716A64C3672CD589A5A /* MPUIImageToNSDictionaryValueTransformer.m */; };
+		7A765364ADBC92D21C2D8850 /* MPNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = BF6EC8DA910E8368C8364A15 /* MPNotification.h */; };
+		7E5C001FD9D2E810098DF3B0 /* MPCGColorRefToNSStringValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FC2C192A12FB7579B80FC0 /* MPCGColorRefToNSStringValueTransformer.m */; };
+		800991046F813AAEBA453252 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F1F0EBE39DB796DF31AD16 /* Foundation.framework */; };
+		84305B3CB3A3FDB4D6246659 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 311BF0443509EABE92C2ECFA /* UIActivityIndicatorView+AFNetworking.m */; };
+		84A1576CD84E1ADED501176F /* MPSequenceGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6613C4C13B068C1887127FF5 /* MPSequenceGenerator.h */; };
+		84ED2A395C04D592F9A72A56 /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0A8C6C78352497207F6846 /* NSData+MPBase64.m */; };
+		8503C84F792756A09EF94E97 /* MPObjectSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F80CF91695D2D4E53BB69E /* MPObjectSerializer.m */; };
+		86C4E4260426D556AFCE8F2B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C44171DB5F582571A031D1 /* Accelerate.framework */; };
+		88FA02D3644CB6C4273A627D /* MPABTestDesignerTweakResponseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E499220202EBF0DA19502DA9 /* MPABTestDesignerTweakResponseMessage.m */; };
+		89366D4A8EA8906D9B76BAC8 /* MPUIEdgeInsetsToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C5374FD934C27E9EBF18F3 /* MPUIEdgeInsetsToNSDictionaryValueTransformer.m */; };
+		8A31F3D669EA9B434705AE84 /* MPSurveyQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9699EFCA6C2F59892CC30C3F /* MPSurveyQuestion.h */; };
+		8C310BAB6FBA6409358E828D /* MPDesignerTrackMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3925D68E7DD7649C16AC160C /* MPDesignerTrackMessage.m */; };
+		8D32C147688966E9184D4587 /* MPABTestDesignerSnapshotRequestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 727AA86344807CC5D5DA2172 /* MPABTestDesignerSnapshotRequestMessage.m */; };
+		8D522C9735ACC9E2ECD6300B /* MPUIColorToNSStringValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5B62A33831D802AAF4CD2 /* MPUIColorToNSStringValueTransformer.m */; };
+		8E92D1D9A5F938B09DA3746C /* MPSequenceGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1C9EDA07863F7AE612635 /* MPSequenceGenerator.m */; };
+		8F9F1642C50E21F5C97CF7CC /* MPABTestDesignerChangeRequestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B81D7B980B202BED5A5B9F78 /* MPABTestDesignerChangeRequestMessage.m */; };
+		8FA7B16A8251226C0A5F5A50 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F23B57A353514EAB898CB4A /* AFNetworkReachabilityManager.h */; };
+		91476E1ADA04A148B6A0A366 /* MPSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = F57821A4D22009F2DF3A056D /* MPSurvey.m */; };
+		92FD40FAA6B30DBC1D16792D /* MPNSNumberToCGFloatValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823F156CFDD2E76CFACEBD0E /* MPNSNumberToCGFloatValueTransformer.m */; };
+		931F5458A5D71D812ABFF3D8 /* UIImage+MPAverageColor.h in Headers */ = {isa = PBXBuildFile; fileRef = D8CFC5009BBFB499D1DE611D /* UIImage+MPAverageColor.h */; };
+		933CF6FAB28281A4BCD46262 /* MPClassDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4293B25F84EC96E9E8A7578B /* MPClassDescription.m */; };
+		94D78D22E9259388B30A110D /* MPAbstractABTestDesignerMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C042F8B8F63D27D2DE853E2 /* MPAbstractABTestDesignerMessage.h */; };
+		9AB093673E2420E21AD4CB36 /* MPCGAffineTransformToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 985079FF9480FD59D5539D4B /* MPCGAffineTransformToNSDictionaryValueTransformer.m */; };
+		9BB7230D3EE5A5124328A4ED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7ADD20929392C83FD2C27F /* QuartzCore.framework */; };
+		9CE152C8DEF530DD6CD0B91D /* AFHTTPRequestOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 476083825111FB8A64EA0C41 /* AFHTTPRequestOperationManager.h */; };
+		9DC39A4B06A062DF71EB4072 /* MPNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B32697893236F9B9AE8FAC0 /* MPNotification.m */; };
+		9E884F4152F54FE6092A3CD0 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 28375150B6BBA9C6AFD6A57F /* AFNetworking.h */; };
+		9F2478F341A9A67774420E53 /* MPTypeDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C303F2B826F67F0B533DBC6 /* MPTypeDescription.m */; };
+		A0781FD11369B88825916B42 /* MPPassThroughValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECEA6CC934126BE8FE1CF8F /* MPPassThroughValueTransformer.m */; };
+		A11700FFEBEFEA8A05E86A8D /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2671141C2A503846C02E879 /* Mixpanel.m */; };
+		A12950C067A9CA048F38A721 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F1F0EBE39DB796DF31AD16 /* Foundation.framework */; };
+		A3BBB188BEEE724A3333FDC7 /* MPABTestDesignerTweakRequestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7EDADBABCB209761CF65231 /* MPABTestDesignerTweakRequestMessage.m */; };
+		A455B08E63538FD22D4B4DE1 /* MPSurveyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B806C71337DA0AA97222FAB /* MPSurveyQuestionViewController.m */; };
+		A7692C06146D34968E8D25F4 /* UIImage+MPAverageColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445CBF4B3E4F7CF9A6AA3CB /* UIImage+MPAverageColor.m */; };
+		A7E158FF6220B0A4FA258C77 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C86984FF13AD177C38CB5C67 /* AFHTTPSessionManager.m */; };
+		A9A180F8E45F61C54DA079B4 /* MPABTestDesignerDeviceInfoRequestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CBCEF4D60F84F1C8C6013A /* MPABTestDesignerDeviceInfoRequestMessage.m */; };
+		ACD100B4E0CA248DD69F82D2 /* UIImage+MPImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 043688047EFAFAE857A75C3A /* UIImage+MPImageEffects.h */; };
+		ADA50F3F8565E94A4B3A5926 /* MPTweakInlineInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = B886CDBD7180CEEA484ACD1B /* MPTweakInlineInternal.h */; };
+		B05813A5E073DFB15B801BE7 /* MPEventBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D78BB3DD60C2747A6F71002 /* MPEventBinding.h */; };
+		B1DFD418701E766BD707B651 /* MPTweakStore.h in Headers */ = {isa = PBXBuildFile; fileRef = A9C76E8B557CF91D72E47FE1 /* MPTweakStore.h */; };
+		B227860C2F1FD55FA33F86E8 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C60ACFC0592BECF306AE38 /* AFNetworkActivityIndicatorManager.m */; };
+		B28DA2766E0345B359917422 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9FDE4C5D69F9AC84DF01AA /* AFURLRequestSerialization.m */; };
+		B45C833CC096483D5DD07684 /* MPABTestDesignerMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = F34E93784336A6F5C994F3A6 /* MPABTestDesignerMessage.h */; };
+		B4D14D769C91949369BC073F /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = A4BAD98BB010A21DEA4D0F3C /* UIRefreshControl+AFNetworking.h */; };
+		B53F9E68193CFAB161318048 /* MPNotificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B24971A60C92D102A270D46 /* MPNotificationViewController.h */; };
+		B57AB96FE2A0EE1139EACB9D /* MPObjectSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE84B3A6462CB7FD3631A19 /* MPObjectSelector.m */; };
+		B59CAA3DFC0B669A096F7706 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 548B7BAB100FC9B0A6717D04 /* AFURLConnectionOperation.m */; };
+		B7052732B4B5ADFF0C26AAF1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FA9D48848248C703D21943E /* Security.framework */; };
+		B8FB846E576F041989143AA2 /* MPClassDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 8062D996D2C89D006068AD87 /* MPClassDescription.h */; };
+		B9CE24A1EC7B56EEF2578E2D /* EvercamVendor.h in Headers */ = {isa = PBXBuildFile; fileRef = 31842A5A5EE67EFD0E5A2673 /* EvercamVendor.h */; };
+		BA2A694913FEDC3D1BB39F41 /* MPSurveyQuestionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DE68210580266933C8473F5 /* MPSurveyQuestionViewController.h */; };
+		C23DA35939E312408FE052F3 /* MPValueTransformers.h in Headers */ = {isa = PBXBuildFile; fileRef = 41371ABA19619E029D31E378 /* MPValueTransformers.h */; };
+		C444DAF902D2C37FE5BAC8FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC68D64E8D77C29DE031A1F /* CoreGraphics.framework */; };
+		C44A80C3C3D06D10063838FE /* EvercamVendor.m in Sources */ = {isa = PBXBuildFile; fileRef = F0C1580745CA9AF272F30470 /* EvercamVendor.m */; };
+		C559883D6716746AEE29FB6C /* MPABTestDesignerClearResponseMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 333DCAC951011A63A015A4E9 /* MPABTestDesignerClearResponseMessage.h */; };
+		C627815C9603C73C0F3A388A /* UIAlertView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = F8812F66DB07BF19E89EF19F /* UIAlertView+AFNetworking.h */; };
+		C891A259A4F39DD700A1859F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374C8469DC7B878543C073DB /* SystemConfiguration.framework */; };
+		C8E1EB615D91CCB799ACFCF7 /* MPBOOLToNSNumberValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 743971464026FEB40B684F23 /* MPBOOLToNSNumberValueTransformer.m */; };
+		CDFF98D19D3283AF5136DCEF /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F2CD18EDB47429A6F73511 /* UIImageView+AFNetworking.m */; };
+		CF10294DF0F2849B034A1050 /* MPSwizzler.h in Headers */ = {isa = PBXBuildFile; fileRef = EA010018011C80A3565C668B /* MPSwizzler.h */; };
+		CF904BF9B871302BA2A43BEB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC68D64E8D77C29DE031A1F /* CoreGraphics.framework */; };
+		D01B6F1BA30DED2088B4B76E /* MPABTestDesignerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 56193BE822F5D21801126A07 /* MPABTestDesignerConnection.h */; };
+		D1992E0BD5C4749A594C2278 /* EvercamCameraUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A73A71AF07C5B615F6F030A /* EvercamCameraUtil.h */; };
+		D2A9260FEC17D5F0063A4E7F /* AFEvercamAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED04E024061B4710943B97 /* AFEvercamAPIClient.m */; };
+		D2E1507C73F04B9C1E90A35D /* MPTweakStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 55804458267A0C6075DAF25C /* MPTweakStore.m */; };
+		D343DBE416190B865E5156F5 /* EvercamCameraBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 4961ABEADAB80A990A6DAF25 /* EvercamCameraBuilder.h */; };
+		D3751309568B6097A13E9892 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374C8469DC7B878543C073DB /* SystemConfiguration.framework */; };
+		D8CC425A6FC5B255B1EA9A4F /* MPTweak.h in Headers */ = {isa = PBXBuildFile; fileRef = 72BD1C33CD4180505A432D95 /* MPTweak.h */; };
+		DBE7E8673386DA8EBD736E45 /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = D143BC927395B7F583247141 /* AFSecurityPolicy.h */; };
+		DE71F738A32442AC9E889527 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 077D7F09863FE847ADC8943E /* AFURLSessionManager.h */; };
+		DFB27B500464D26593DF4732 /* MPABTestDesignerDeviceInfoRequestMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE61731CB6BCF46C8BADA252 /* MPABTestDesignerDeviceInfoRequestMessage.h */; };
+		DFCF79392C084468C6CD1AF1 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EFCCF2CFB2E26A16EE5A42 /* AFHTTPRequestOperationManager.m */; };
+		E13F3499B8E2237BD21C3CA7 /* MPSurvey.h in Headers */ = {isa = PBXBuildFile; fileRef = C16462AA85A512DF6B97EBF0 /* MPSurvey.h */; };
+		E340A54AC2DDC253BA9D6DE2 /* MPUIControlBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9B7057EDC8EAE8453EBF0C /* MPUIControlBinding.m */; };
+		E341E83184DB3DBF0FE35016 /* MPNSAttributedStringToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C68FE25890079813C337FE55 /* MPNSAttributedStringToNSDictionaryValueTransformer.m */; };
+		E356C99987EA386F5CA69CEA /* UIKit+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 4220C81CB2E6C40AE64B42AD /* UIKit+AFNetworking.h */; };
+		E3811C2CBB81C621EB514EC0 /* MPSurveyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F51BEDB435B5FF3CBFADBEF0 /* MPSurveyNavigationController.m */; };
+		E6088E6ED45307E1AD0CD541 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F85ED7A52416109DD1976A2 /* UIProgressView+AFNetworking.m */; };
+		E7022B7F851A30C993076109 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F1F0EBE39DB796DF31AD16 /* Foundation.framework */; };
+		EFCB9C25C42710FB8C5893F4 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = E884786F018B29200AEAAEE7 /* AFURLConnectionOperation.h */; };
+		F163EDB92B7A956618EC515B /* MPObjectSerializerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE3A76157EC436D96BB3B4 /* MPObjectSerializerConfig.m */; };
+		F27CA2569063AA001A0B1AAC /* EvercamShell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E5850258CC39245B73E928 /* EvercamShell.m */; };
+		F559842F44C8DC15FA39CED7 /* MPDesignerEventBindingRequestMesssage.m in Sources */ = {isa = PBXBuildFile; fileRef = B866E6616EA1A57E3B69F5E9 /* MPDesignerEventBindingRequestMesssage.m */; };
+		F6015CEFD3ADFC001DA63CD4 /* UIImage+MPImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D0F98908084B1B919DDE91 /* UIImage+MPImageEffects.m */; };
+		F88FF18D9384C299A2C4CC81 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F31B4644DBA1C53CD01662 /* AFURLResponseSerialization.m */; };
+		FA34CC313A3D4984A492FD6A /* MPCGSizeToNSDictionaryValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B2A238DF3C90013ED653AF /* MPCGSizeToNSDictionaryValueTransformer.m */; };
+		FA39017D99398775366DD406 /* MPPropertyDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 622860EA8E6BCD7E42EFE544 /* MPPropertyDescription.h */; };
+		FC134123C84DA37453F0BA15 /* EvercamApiKeyPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 4588BD956BF275892EA1F52A /* EvercamApiKeyPair.h */; };
+		FC18BFEE4E9B01DC9B1A96A4 /* MPDesignerEventBindingMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7939F249F3165C5EF6E33CB /* MPDesignerEventBindingMessage.h */; };
+		FD506C9CF16B5ECDC3BC65C6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E765C4D25D9097A7FB716BDE /* CoreTelephony.framework */; };
+		FDD1D43FF472D0E7BF046C63 /* _MPTweakBindObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = C14C04C8029CE9E45BCBA1DB /* _MPTweakBindObserver.h */; };
+		FE493226093EE1BD8D7D6C19 /* MPABTestDesignerDisconnectMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD05F7B042AF107F5F7607B /* MPABTestDesignerDisconnectMessage.h */; };
+		FEA2C9338C8277FE9F113A0E /* MPABTestDesignerDisconnectMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE849B42D936A9824793E1B /* MPABTestDesignerDisconnectMessage.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		420E2C1972E64151EC23205C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C96F04204FE30B17E5279F4C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 00E2014D7FBB4637470050BB;
+			remoteInfo = "Pods-evercamPlay-Evercam";
+		};
+		472249027BCB7B8F20DB1344 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C96F04204FE30B17E5279F4C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDE85E6554DE8EEC9D1FC2C7;
+			remoteInfo = "Pods-evercamPlay-Mixpanel";
+		};
+		89B51ADD0D204B411262249D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C96F04204FE30B17E5279F4C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C5C487CE6B8CC8AFF235F6D;
+			remoteInfo = "Pods-evercamPlay-AFNetworking";
+		};
+		E3F24EAF92F09B43CF9DC3AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C96F04204FE30B17E5279F4C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C5C487CE6B8CC8AFF235F6D;
+			remoteInfo = "Pods-evercamPlay-AFNetworking";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02F80CF91695D2D4E53BB69E /* MPObjectSerializer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPObjectSerializer.m; path = Mixpanel/MPObjectSerializer.m; sourceTree = "<group>"; };
+		043688047EFAFAE857A75C3A /* UIImage+MPImageEffects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+MPImageEffects.h"; path = "Mixpanel/UIImage+MPImageEffects.h"; sourceTree = "<group>"; };
+		046AC9F18EF7F82BDEC78DEB /* MPLogo@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPLogo@2x.png"; path = "Mixpanel/Media.xcassets/MPLogo.imageset/MPLogo@2x.png"; sourceTree = "<group>"; };
+		05235B31D8120C9B6BC4F91C /* MPABTestDesignerDeviceInfoResponseMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerDeviceInfoResponseMessage.h; path = Mixpanel/MPABTestDesignerDeviceInfoResponseMessage.h; sourceTree = "<group>"; };
+		06C5374FD934C27E9EBF18F3 /* MPUIEdgeInsetsToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPUIEdgeInsetsToNSDictionaryValueTransformer.m; path = Mixpanel/MPUIEdgeInsetsToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		077D7F09863FE847ADC8943E /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
+		07C44171DB5F582571A031D1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		0A9E021E651E95AED1DCF949 /* MPSurveyQuestion.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPSurveyQuestion.m; path = Mixpanel/MPSurveyQuestion.m; sourceTree = "<group>"; };
+		0B9D27412D29D96222D77421 /* NSInvocation+MPHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+MPHelpers.m"; path = "Mixpanel/NSInvocation+MPHelpers.m"; sourceTree = "<group>"; };
+		0D645E4650B9A44E5A70472C /* Pods-evercamPlay-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-evercamPlay-resources.sh"; sourceTree = "<group>"; };
+		0D78BB3DD60C2747A6F71002 /* MPEventBinding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPEventBinding.h; path = Mixpanel/MPEventBinding.h; sourceTree = "<group>"; };
+		0FED04E024061B4710943B97 /* AFEvercamAPIClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFEvercamAPIClient.m; path = Evercam/AFEvercamAPIClient.m; sourceTree = "<group>"; };
+		10AAE7D668F655E2E9F6809D /* MPABTestDesignerConnection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerConnection.m; path = Mixpanel/MPABTestDesignerConnection.m; sourceTree = "<group>"; };
+		10B2A238DF3C90013ED653AF /* MPCGSizeToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCGSizeToNSDictionaryValueTransformer.m; path = Mixpanel/MPCGSizeToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		13B83F77135885C1639ED48D /* MPABTestDesignerChangeRequestMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerChangeRequestMessage.h; path = Mixpanel/MPABTestDesignerChangeRequestMessage.h; sourceTree = "<group>"; };
+		13D0F98908084B1B919DDE91 /* UIImage+MPImageEffects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MPImageEffects.m"; path = "Mixpanel/UIImage+MPImageEffects.m"; sourceTree = "<group>"; };
+		16B8609CFD17E1D0A673BC77 /* MPTweak.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPTweak.m; path = Mixpanel/MPTweak.m; sourceTree = "<group>"; };
+		1B084E72C9433F5EC71D27D0 /* MPTypeDescription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTypeDescription.h; path = Mixpanel/MPTypeDescription.h; sourceTree = "<group>"; };
+		1B32697893236F9B9AE8FAC0 /* MPNotification.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPNotification.m; path = Mixpanel/MPNotification.m; sourceTree = "<group>"; };
+		1F23B57A353514EAB898CB4A /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		214295FB62852B236AF8F407 /* MPABTestDesignerClearRequestMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerClearRequestMessage.h; path = Mixpanel/MPABTestDesignerClearRequestMessage.h; sourceTree = "<group>"; };
+		2384A0DD4B56D08E8C8BF076 /* MPObjectIdentityProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPObjectIdentityProvider.m; path = Mixpanel/MPObjectIdentityProvider.m; sourceTree = "<group>"; };
+		23CA85CCDC570BF13F534026 /* MPWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPWebSocket.h; path = Mixpanel/MPWebSocket.h; sourceTree = "<group>"; };
+		24E5B62A33831D802AAF4CD2 /* MPUIColorToNSStringValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPUIColorToNSStringValueTransformer.m; path = Mixpanel/MPUIColorToNSStringValueTransformer.m; sourceTree = "<group>"; };
+		28375150B6BBA9C6AFD6A57F /* AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
+		283E6872E8B302A6D76B15DC /* libPods-evercamPlay-AFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-evercamPlay-AFNetworking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F6F842CB39A52C756AC18AF /* Pods-evercamPlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-evercamPlay.release.xcconfig"; sourceTree = "<group>"; };
+		2FD6EE65CC608FC8482E1FE6 /* MPABTestDesignerClearResponseMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerClearResponseMessage.m; path = Mixpanel/MPABTestDesignerClearResponseMessage.m; sourceTree = "<group>"; };
+		311BF0443509EABE92C2ECFA /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIActivityIndicatorView+AFNetworking.m"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
+		31842A5A5EE67EFD0E5A2673 /* EvercamVendor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamVendor.h; path = Evercam/EvercamVendor.h; sourceTree = "<group>"; };
+		31DE2EB79F3D31BC9A192B17 /* MPTweakInline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTweakInline.h; path = Mixpanel/MPTweakInline.h; sourceTree = "<group>"; };
+		31FC2C192A12FB7579B80FC0 /* MPCGColorRefToNSStringValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCGColorRefToNSStringValueTransformer.m; path = Mixpanel/MPCGColorRefToNSStringValueTransformer.m; sourceTree = "<group>"; };
+		32767F9E02CF34A65FB958E8 /* Pods-evercamPlay-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-evercamPlay-dummy.m"; sourceTree = "<group>"; };
+		333DCAC951011A63A015A4E9 /* MPABTestDesignerClearResponseMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerClearResponseMessage.h; path = Mixpanel/MPABTestDesignerClearResponseMessage.h; sourceTree = "<group>"; };
+		349E403C39F79A8F8F28897D /* Pods-evercamPlay-Evercam-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-evercamPlay-Evercam-dummy.m"; sourceTree = "<group>"; };
+		34F93B281E9420BEF6A6C5C6 /* MPEnumDescription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPEnumDescription.h; path = Mixpanel/MPEnumDescription.h; sourceTree = "<group>"; };
+		374C8469DC7B878543C073DB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		3820059462CE913BF6790CBF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		3925D68E7DD7649C16AC160C /* MPDesignerTrackMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPDesignerTrackMessage.m; path = Mixpanel/MPDesignerTrackMessage.m; sourceTree = "<group>"; };
+		397EB716A64C3672CD589A5A /* MPUIImageToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPUIImageToNSDictionaryValueTransformer.m; path = Mixpanel/MPUIImageToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		3B72341BD855F59FDA2313A7 /* MPObjectIdentityProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPObjectIdentityProvider.h; path = Mixpanel/MPObjectIdentityProvider.h; sourceTree = "<group>"; };
+		3D37403508A7E13672B4C697 /* MPDismissKeyboard.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPDismissKeyboard.png; path = Mixpanel/Media.xcassets/MPDismissKeyboard.imageset/MPDismissKeyboard.png; sourceTree = "<group>"; };
+		3EB680530B9A5B79C57DC574 /* EvercamCamera.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamCamera.h; path = Evercam/EvercamCamera.h; sourceTree = "<group>"; };
+		3EDE3A76157EC436D96BB3B4 /* MPObjectSerializerConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPObjectSerializerConfig.m; path = Mixpanel/MPObjectSerializerConfig.m; sourceTree = "<group>"; };
+		41371ABA19619E029D31E378 /* MPValueTransformers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPValueTransformers.h; path = Mixpanel/MPValueTransformers.h; sourceTree = "<group>"; };
+		4220C81CB2E6C40AE64B42AD /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIKit+AFNetworking.h"; path = "UIKit+AFNetworking/UIKit+AFNetworking.h"; sourceTree = "<group>"; };
+		427501A968C260C146FF7909 /* MPLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPLogger.h; path = Mixpanel/MPLogger.h; sourceTree = "<group>"; };
+		4293B25F84EC96E9E8A7578B /* MPClassDescription.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPClassDescription.m; path = Mixpanel/MPClassDescription.m; sourceTree = "<group>"; };
+		4392395BE36862B8BEC083C2 /* Pods-evercamPlay-Evercam.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-evercamPlay-Evercam.xcconfig"; sourceTree = "<group>"; };
+		4445CBF4B3E4F7CF9A6AA3CB /* UIImage+MPAverageColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MPAverageColor.m"; path = "Mixpanel/UIImage+MPAverageColor.m"; sourceTree = "<group>"; };
+		445D528D8B198ACF870599E5 /* Pods-evercamPlay-Mixpanel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-evercamPlay-Mixpanel-dummy.m"; sourceTree = "<group>"; };
+		4588BD956BF275892EA1F52A /* EvercamApiKeyPair.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamApiKeyPair.h; path = Evercam/EvercamApiKeyPair.h; sourceTree = "<group>"; };
+		4591720C2A58A27A5658D684 /* MPWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPWebSocket.m; path = Mixpanel/MPWebSocket.m; sourceTree = "<group>"; };
+		45EFCCF2CFB2E26A16EE5A42 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperationManager.m; path = AFNetworking/AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		476083825111FB8A64EA0C41 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		4961ABEADAB80A990A6DAF25 /* EvercamCameraBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamCameraBuilder.h; path = Evercam/EvercamCameraBuilder.h; sourceTree = "<group>"; };
+		4AAF66AAE01F8713CF4788E9 /* MPCloseBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPCloseBtn.png; path = Mixpanel/MPCloseBtn.png; sourceTree = "<group>"; };
+		4B6E00EA24EB4F0E8E1698F1 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h"; sourceTree = "<group>"; };
+		4BDB267ECF09A97FB5F4D3D3 /* MPCheckmark@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPCheckmark@2x.png"; path = "Mixpanel/Media.xcassets/MPCheckmark.imageset/MPCheckmark@2x.png"; sourceTree = "<group>"; };
+		4BF2E07D06888F65726951CD /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		4C41858B43F77EB7D49D7A17 /* MPABTestDesignerChangeResponseMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerChangeResponseMessage.m; path = Mixpanel/MPABTestDesignerChangeResponseMessage.m; sourceTree = "<group>"; };
+		4CB8D62BDFAFBBB8C18FF355 /* EvercamDefaults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamDefaults.h; path = Evercam/EvercamDefaults.h; sourceTree = "<group>"; };
+		4DE68210580266933C8473F5 /* MPSurveyQuestionViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPSurveyQuestionViewController.h; path = Mixpanel/MPSurveyQuestionViewController.h; sourceTree = "<group>"; };
+		548B7BAB100FC9B0A6717D04 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		55804458267A0C6075DAF25C /* MPTweakStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPTweakStore.m; path = Mixpanel/MPTweakStore.m; sourceTree = "<group>"; };
+		559AB7507F17132603EC080F /* MPDismissKeyboard@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPDismissKeyboard@2x.png"; path = "Mixpanel/Media.xcassets/MPDismissKeyboard.imageset/MPDismissKeyboard@2x.png"; sourceTree = "<group>"; };
+		56193BE822F5D21801126A07 /* MPABTestDesignerConnection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerConnection.h; path = Mixpanel/MPABTestDesignerConnection.h; sourceTree = "<group>"; };
+		57CD5E9BAB072B954E6D50FA /* MPCGPointToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCGPointToNSDictionaryValueTransformer.m; path = Mixpanel/MPCGPointToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		58E5850258CC39245B73E928 /* EvercamShell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamShell.m; path = Evercam/EvercamShell.m; sourceTree = "<group>"; };
+		59F31B4644DBA1C53CD01662 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		5B442E798DB7426394ADAA97 /* MPLogo.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPLogo.png; path = Mixpanel/Media.xcassets/MPLogo.imageset/MPLogo.png; sourceTree = "<group>"; };
+		5C303F2B826F67F0B533DBC6 /* MPTypeDescription.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPTypeDescription.m; path = Mixpanel/MPTypeDescription.m; sourceTree = "<group>"; };
+		5C51F725A76F412FBB3E00E7 /* AFEvercamAPIClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFEvercamAPIClient.h; path = Evercam/AFEvercamAPIClient.h; sourceTree = "<group>"; };
+		5CE849B42D936A9824793E1B /* MPABTestDesignerDisconnectMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerDisconnectMessage.m; path = Mixpanel/MPABTestDesignerDisconnectMessage.m; sourceTree = "<group>"; };
+		5D959E3E087F5F116EFC7210 /* libPods-evercamPlay-Evercam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-evercamPlay-Evercam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6153EE718011A3B6F93B133E /* Pods-evercamPlay-Mixpanel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-evercamPlay-Mixpanel-prefix.pch"; sourceTree = "<group>"; };
+		61C494CF96D767B94371C388 /* Pods-evercamPlay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-evercamPlay.debug.xcconfig"; sourceTree = "<group>"; };
+		622860EA8E6BCD7E42EFE544 /* MPPropertyDescription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPPropertyDescription.h; path = Mixpanel/MPPropertyDescription.h; sourceTree = "<group>"; };
+		6431427BACF244838E2C30FC /* MPVariant.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPVariant.m; path = Mixpanel/MPVariant.m; sourceTree = "<group>"; };
+		65D512CE7BB435C3EDD2B3C7 /* Pods-evercamPlay-Evercam-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-evercamPlay-Evercam-prefix.pch"; sourceTree = "<group>"; };
+		6613C4C13B068C1887127FF5 /* MPSequenceGenerator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPSequenceGenerator.h; path = Mixpanel/MPSequenceGenerator.h; sourceTree = "<group>"; };
+		67F4F2DB4423F2119BFBECE4 /* MPTweakInline.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPTweakInline.m; path = Mixpanel/MPTweakInline.m; sourceTree = "<group>"; };
+		686724685D771F3CD0D8B488 /* MPABTestDesignerSnapshotResponseMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerSnapshotResponseMessage.h; path = Mixpanel/MPABTestDesignerSnapshotResponseMessage.h; sourceTree = "<group>"; };
+		699C6EAEE7A589D891D18D80 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		6A12674590299CD80178D400 /* MPSurveyNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPSurveyNavigationController.h; path = Mixpanel/MPSurveyNavigationController.h; sourceTree = "<group>"; };
+		6B7AA1A556F911513A925D4A /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIProgressView+AFNetworking.h"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
+		6F0C6212746AEA3DB7AF495A /* MPAbstractABTestDesignerMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPAbstractABTestDesignerMessage.m; path = Mixpanel/MPAbstractABTestDesignerMessage.m; sourceTree = "<group>"; };
+		70F2CD18EDB47429A6F73511 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		727AA86344807CC5D5DA2172 /* MPABTestDesignerSnapshotRequestMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerSnapshotRequestMessage.m; path = Mixpanel/MPABTestDesignerSnapshotRequestMessage.m; sourceTree = "<group>"; };
+		72BD1C33CD4180505A432D95 /* MPTweak.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTweak.h; path = Mixpanel/MPTweak.h; sourceTree = "<group>"; };
+		743971464026FEB40B684F23 /* MPBOOLToNSNumberValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPBOOLToNSNumberValueTransformer.m; path = Mixpanel/MPBOOLToNSNumberValueTransformer.m; sourceTree = "<group>"; };
+		74C60ACFC0592BECF306AE38 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
+		75C1F1E33E05BE53667965EF /* MPCloseBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPCloseBtn@2x.png"; path = "Mixpanel/MPCloseBtn@2x.png"; sourceTree = "<group>"; };
+		7648B0F5FB5B8C2318DB1CE3 /* EvercamCameraBuilder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamCameraBuilder.m; path = Evercam/EvercamCameraBuilder.m; sourceTree = "<group>"; };
+		77AA1B72094B76CBF7438353 /* EvercamUser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamUser.m; path = Evercam/EvercamUser.m; sourceTree = "<group>"; };
+		77E055190BD3D36969EBB60B /* MPNotification.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = MPNotification.storyboard; path = Mixpanel/MPNotification.storyboard; sourceTree = "<group>"; };
+		78A39F3009216D06E43F6AAA /* UIColor+MPColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+MPColor.h"; path = "Mixpanel/UIColor+MPColor.h"; sourceTree = "<group>"; };
+		78F1F0EBE39DB796DF31AD16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		79DDE8791AB65D21CBDDD8EF /* MPUITableViewBinding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPUITableViewBinding.h; path = Mixpanel/MPUITableViewBinding.h; sourceTree = "<group>"; };
+		7A0931113E07F88B656BC8F9 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIRefreshControl+AFNetworking.m"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
+		7A5906C7B1ACEADA1A712E03 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		7A920689ABE058A80F99EEEB /* EvercamUser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamUser.h; path = Evercam/EvercamUser.h; sourceTree = "<group>"; };
+		7C042F8B8F63D27D2DE853E2 /* MPAbstractABTestDesignerMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAbstractABTestDesignerMessage.h; path = Mixpanel/MPAbstractABTestDesignerMessage.h; sourceTree = "<group>"; };
+		7D0A8C6C78352497207F6846 /* NSData+MPBase64.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+MPBase64.m"; path = "Mixpanel/NSData+MPBase64.m"; sourceTree = "<group>"; };
+		7DE84B3A6462CB7FD3631A19 /* MPObjectSelector.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPObjectSelector.m; path = Mixpanel/MPObjectSelector.m; sourceTree = "<group>"; };
+		7ECEA6CC934126BE8FE1CF8F /* MPPassThroughValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPPassThroughValueTransformer.m; path = Mixpanel/MPPassThroughValueTransformer.m; sourceTree = "<group>"; };
+		7F18FB1B408FAACA7CE22EE8 /* MPCategoryHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCategoryHelpers.h; path = Mixpanel/MPCategoryHelpers.h; sourceTree = "<group>"; };
+		7F85ED7A52416109DD1976A2 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIProgressView+AFNetworking.m"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
+		7FA9D48848248C703D21943E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		7FCF82F1384077B61025E326 /* MPABTestDesignerTweakRequestMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerTweakRequestMessage.h; path = Mixpanel/MPABTestDesignerTweakRequestMessage.h; sourceTree = "<group>"; };
+		80215FA5771C9EF75187FD82 /* Pods-evercamPlay-Mixpanel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-evercamPlay-Mixpanel.xcconfig"; sourceTree = "<group>"; };
+		8062D996D2C89D006068AD87 /* MPClassDescription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPClassDescription.h; path = Mixpanel/MPClassDescription.h; sourceTree = "<group>"; };
+		812AE4CD93751BDF21221FBC /* Pods-evercamPlay-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-evercamPlay-acknowledgements.markdown"; sourceTree = "<group>"; };
+		823F156CFDD2E76CFACEBD0E /* MPNSNumberToCGFloatValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPNSNumberToCGFloatValueTransformer.m; path = Mixpanel/MPNSNumberToCGFloatValueTransformer.m; sourceTree = "<group>"; };
+		83295DEE7FFD3BF1909C4A67 /* EvercamModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamModel.h; path = Evercam/EvercamModel.h; sourceTree = "<group>"; };
+		8624CD26A239769215EC13F7 /* MPObjectSerializerConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPObjectSerializerConfig.h; path = Mixpanel/MPObjectSerializerConfig.h; sourceTree = "<group>"; };
+		869460FBCDCFF939E80CC5CC /* NSData+MPBase64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+MPBase64.h"; path = "Mixpanel/NSData+MPBase64.h"; sourceTree = "<group>"; };
+		86E60AEB185BB523D7D4D20A /* MPApplicationStateSerializer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPApplicationStateSerializer.m; path = Mixpanel/MPApplicationStateSerializer.m; sourceTree = "<group>"; };
+		88868FEE91C6F388A0906F83 /* MPArrowLeft.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPArrowLeft.png; path = Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft.png; sourceTree = "<group>"; };
+		894B8AE89FB44C9673688E91 /* MPABTestDesignerDeviceInfoResponseMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerDeviceInfoResponseMessage.m; path = Mixpanel/MPABTestDesignerDeviceInfoResponseMessage.m; sourceTree = "<group>"; };
+		8B24971A60C92D102A270D46 /* MPNotificationViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNotificationViewController.h; path = Mixpanel/MPNotificationViewController.h; sourceTree = "<group>"; };
+		8B806C71337DA0AA97222FAB /* MPSurveyQuestionViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPSurveyQuestionViewController.m; path = Mixpanel/MPSurveyQuestionViewController.m; sourceTree = "<group>"; };
+		8EC1C60CA7E0EEBF7771444F /* Mixpanel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Mixpanel.h; path = Mixpanel/Mixpanel.h; sourceTree = "<group>"; };
+		92F5AE052F2C1422B648BF3E /* MPObjectSerializerContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPObjectSerializerContext.h; path = Mixpanel/MPObjectSerializerContext.h; sourceTree = "<group>"; };
+		942707C967FBE7F5F71A0E45 /* MPABTestDesignerChangeResponseMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerChangeResponseMessage.h; path = Mixpanel/MPABTestDesignerChangeResponseMessage.h; sourceTree = "<group>"; };
+		9699EFCA6C2F59892CC30C3F /* MPSurveyQuestion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPSurveyQuestion.h; path = Mixpanel/MPSurveyQuestion.h; sourceTree = "<group>"; };
+		985079FF9480FD59D5539D4B /* MPCGAffineTransformToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCGAffineTransformToNSDictionaryValueTransformer.m; path = Mixpanel/MPCGAffineTransformToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		98C553DC272AE5CC9B0BC058 /* libMPCategoryHelpers.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libMPCategoryHelpers.a; path = Mixpanel/libMPCategoryHelpers.a; sourceTree = "<group>"; };
+		98CCF24A9939966B50E069F2 /* MPDesignerSessionCollection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPDesignerSessionCollection.h; path = Mixpanel/MPDesignerSessionCollection.h; sourceTree = "<group>"; };
+		9A73A71AF07C5B615F6F030A /* EvercamCameraUtil.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamCameraUtil.h; path = Evercam/EvercamCameraUtil.h; sourceTree = "<group>"; };
+		9AC4B370B0ED170FDB6D7F55 /* MPObjectSerializerContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPObjectSerializerContext.m; path = Mixpanel/MPObjectSerializerContext.m; sourceTree = "<group>"; };
+		9DE9F660FE622C02EE851F1E /* EvercamRights.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamRights.m; path = Evercam/EvercamRights.m; sourceTree = "<group>"; };
+		9E9B7057EDC8EAE8453EBF0C /* MPUIControlBinding.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPUIControlBinding.m; path = Mixpanel/MPUIControlBinding.m; sourceTree = "<group>"; };
+		9F98071534242CE5CA2338DD /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
+		9F9CD17D46184DAC723B6236 /* Pods-evercamPlay-AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-evercamPlay-AFNetworking.xcconfig"; sourceTree = "<group>"; };
+		A14FF41413842653F78D0D58 /* libPods-evercamPlay-Mixpanel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-evercamPlay-Mixpanel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A29D4818B2C35EDB7EB6B966 /* MPObjectSelector.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPObjectSelector.h; path = Mixpanel/MPObjectSelector.h; sourceTree = "<group>"; };
+		A4A1C9EDA07863F7AE612635 /* MPSequenceGenerator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPSequenceGenerator.m; path = Mixpanel/MPSequenceGenerator.m; sourceTree = "<group>"; };
+		A4BAD98BB010A21DEA4D0F3C /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIRefreshControl+AFNetworking.h"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
+		A5C9F7ECCD9155074FA9C02E /* MPArrowRight@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPArrowRight@2x.png"; path = "Mixpanel/Media.xcassets/MPArrowRight.imageset/MPArrowRight@2x.png"; sourceTree = "<group>"; };
+		A6C71398D60CE1279171D25C /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		A6D9D8DB733725C6FB026B7E /* MPABTestDesignerTweakResponseMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerTweakResponseMessage.h; path = Mixpanel/MPABTestDesignerTweakResponseMessage.h; sourceTree = "<group>"; };
+		A6DB2819F075B9EFDDC88E18 /* Pods-evercamPlay-AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-evercamPlay-AFNetworking-dummy.m"; sourceTree = "<group>"; };
+		A7939F249F3165C5EF6E33CB /* MPDesignerEventBindingMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPDesignerEventBindingMessage.h; path = Mixpanel/MPDesignerEventBindingMessage.h; sourceTree = "<group>"; };
+		A82B2E0953F4AE664A4189BB /* EvercamCameraUtil.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamCameraUtil.m; path = Evercam/EvercamCameraUtil.m; sourceTree = "<group>"; };
+		A8959A4F04620BEA90CA06F4 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		A8E254CE5F6DF7EE0A634A67 /* libPods-evercamPlay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-evercamPlay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C76E8B557CF91D72E47FE1 /* MPTweakStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTweakStore.h; path = Mixpanel/MPTweakStore.h; sourceTree = "<group>"; };
+		AAD05F7B042AF107F5F7607B /* MPABTestDesignerDisconnectMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerDisconnectMessage.h; path = Mixpanel/MPABTestDesignerDisconnectMessage.h; sourceTree = "<group>"; };
+		ACC0568EE34D9287CBB49865 /* Pods-evercamPlay-Evercam-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-evercamPlay-Evercam-Private.xcconfig"; sourceTree = "<group>"; };
+		AD7ECE5C8C902A6F8EDABC1C /* MPVariant.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVariant.h; path = Mixpanel/MPVariant.h; sourceTree = "<group>"; };
+		AD854D689D43FBD4A0F11A43 /* EvercamShell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamShell.h; path = Evercam/EvercamShell.h; sourceTree = "<group>"; };
+		AE61731CB6BCF46C8BADA252 /* MPABTestDesignerDeviceInfoRequestMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerDeviceInfoRequestMessage.h; path = Mixpanel/MPABTestDesignerDeviceInfoRequestMessage.h; sourceTree = "<group>"; };
+		B3F4AD4F294E4C2B50C99A8F /* MPABTestDesignerSnapshotResponseMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerSnapshotResponseMessage.m; path = Mixpanel/MPABTestDesignerSnapshotResponseMessage.m; sourceTree = "<group>"; };
+		B622E940B8EA93D99536532A /* MPCATransform3DToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCATransform3DToNSDictionaryValueTransformer.m; path = Mixpanel/MPCATransform3DToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		B81D7B980B202BED5A5B9F78 /* MPABTestDesignerChangeRequestMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerChangeRequestMessage.m; path = Mixpanel/MPABTestDesignerChangeRequestMessage.m; sourceTree = "<group>"; };
+		B866E6616EA1A57E3B69F5E9 /* MPDesignerEventBindingRequestMesssage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPDesignerEventBindingRequestMesssage.m; path = Mixpanel/MPDesignerEventBindingRequestMesssage.m; sourceTree = "<group>"; };
+		B886CDBD7180CEEA484ACD1B /* MPTweakInlineInternal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTweakInlineInternal.h; path = Mixpanel/MPTweakInlineInternal.h; sourceTree = "<group>"; };
+		B898F5B09E3CD63D2299C8D9 /* Pods-evercamPlay-AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-evercamPlay-AFNetworking-prefix.pch"; sourceTree = "<group>"; };
+		BA6950068346224A4F2DF45D /* AFSecurityPolicy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
+		BA7B3EB1071BC14E9D82712B /* MPObjectSerializer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPObjectSerializer.h; path = Mixpanel/MPObjectSerializer.h; sourceTree = "<group>"; };
+		BBB54795E3E57107ABF891E5 /* MPCloseBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPCloseBtn.png; path = Mixpanel/Media.xcassets/MPCloseBtn.imageset/MPCloseBtn.png; sourceTree = "<group>"; };
+		BBC68D64E8D77C29DE031A1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		BD0ABCFC22050C034932335E /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		BD3EAD7EC8E49D28C4A65FAF /* EvercamApiKeyPair.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamApiKeyPair.m; path = Evercam/EvercamApiKeyPair.m; sourceTree = "<group>"; };
+		BE7ADD20929392C83FD2C27F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		BF039153AC39A07C16D44F23 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
+		BF6EC8DA910E8368C8364A15 /* MPNotification.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNotification.h; path = Mixpanel/MPNotification.h; sourceTree = "<group>"; };
+		C14C04C8029CE9E45BCBA1DB /* _MPTweakBindObserver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = _MPTweakBindObserver.h; path = Mixpanel/_MPTweakBindObserver.h; sourceTree = "<group>"; };
+		C16462AA85A512DF6B97EBF0 /* MPSurvey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPSurvey.h; path = Mixpanel/MPSurvey.h; sourceTree = "<group>"; };
+		C68FE25890079813C337FE55 /* MPNSAttributedStringToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPNSAttributedStringToNSDictionaryValueTransformer.m; path = Mixpanel/MPNSAttributedStringToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		C78BEBF14F9BB4D4E99BD99E /* MPObjectIdentifierProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPObjectIdentifierProvider.h; path = Mixpanel/MPObjectIdentifierProvider.h; sourceTree = "<group>"; };
+		C82ABAD4ED83DD4C16BDC554 /* MPPropertyDescription.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPPropertyDescription.m; path = Mixpanel/MPPropertyDescription.m; sourceTree = "<group>"; };
+		C86984FF13AD177C38CB5C67 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		C86C859D7B0C0B51CC025B71 /* MPArrowRight.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPArrowRight.png; path = Mixpanel/Media.xcassets/MPArrowRight.imageset/MPArrowRight.png; sourceTree = "<group>"; };
+		C9900610DD94DAE9BB666BAC /* MPDesignerEventBindingResponseMesssage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPDesignerEventBindingResponseMesssage.m; path = Mixpanel/MPDesignerEventBindingResponseMesssage.m; sourceTree = "<group>"; };
+		C999B41517770CF8AE1C3944 /* MPCGRectToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCGRectToNSDictionaryValueTransformer.m; path = Mixpanel/MPCGRectToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		CA0DF7716058CF65EE5753A3 /* MPArrowLeft@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPArrowLeft@2x.png"; path = "Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft@2x.png"; sourceTree = "<group>"; };
+		CC8C8FB96E25101A39C6068D /* UIColor+MPColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+MPColor.m"; path = "Mixpanel/UIColor+MPColor.m"; sourceTree = "<group>"; };
+		CDFA848CBA8950F6F8111EDE /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+AFNetworking.m"; path = "UIKit+AFNetworking/UIButton+AFNetworking.m"; sourceTree = "<group>"; };
+		CE130C443670EB5308524B9D /* MPABTestDesignerClearRequestMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerClearRequestMessage.m; path = Mixpanel/MPABTestDesignerClearRequestMessage.m; sourceTree = "<group>"; };
+		CE3001730D99A8E329CB080E /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
+		CFDEF1D62EC56A0082609CBB /* EvercamDefaults.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamDefaults.m; path = Evercam/EvercamDefaults.m; sourceTree = "<group>"; };
+		D0C8B7D61665662439359E71 /* MPEnumDescription.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPEnumDescription.m; path = Mixpanel/MPEnumDescription.m; sourceTree = "<group>"; };
+		D143BC927395B7F583247141 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
+		D50832C559BCD658924B82B1 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		D5E053792CCACD4A9E077611 /* MPNotificationViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPNotificationViewController.m; path = Mixpanel/MPNotificationViewController.m; sourceTree = "<group>"; };
+		D6B3531CE04F3E820CD35AA1 /* MPUIFontToNSDictionaryValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPUIFontToNSDictionaryValueTransformer.m; path = Mixpanel/MPUIFontToNSDictionaryValueTransformer.m; sourceTree = "<group>"; };
+		D73A93ABE2F1DB4F23C837B2 /* MPUIControlBinding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPUIControlBinding.h; path = Mixpanel/MPUIControlBinding.h; sourceTree = "<group>"; };
+		D845C0B399AA40C857E3B3CB /* MPUITableViewBinding.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPUITableViewBinding.m; path = Mixpanel/MPUITableViewBinding.m; sourceTree = "<group>"; };
+		D8CFC5009BBFB499D1DE611D /* UIImage+MPAverageColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+MPAverageColor.h"; path = "Mixpanel/UIImage+MPAverageColor.h"; sourceTree = "<group>"; };
+		DA78345AB6A3B4197A52662E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		E05ADAD37F25DAD18C6F01D0 /* Pods-evercamPlay-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-evercamPlay-acknowledgements.plist"; sourceTree = "<group>"; };
+		E1D85BBC25F9E00C022E6ACC /* MPSwizzler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPSwizzler.m; path = Mixpanel/MPSwizzler.m; sourceTree = "<group>"; };
+		E2671141C2A503846C02E879 /* Mixpanel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Mixpanel.m; path = Mixpanel/Mixpanel.m; sourceTree = "<group>"; };
+		E499220202EBF0DA19502DA9 /* MPABTestDesignerTweakResponseMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerTweakResponseMessage.m; path = Mixpanel/MPABTestDesignerTweakResponseMessage.m; sourceTree = "<group>"; };
+		E765C4D25D9097A7FB716BDE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		E767B83568D5AF5A87BB0F9C /* EvercamCamera.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamCamera.m; path = Evercam/EvercamCamera.m; sourceTree = "<group>"; };
+		E7CBCEF4D60F84F1C8C6013A /* MPABTestDesignerDeviceInfoRequestMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerDeviceInfoRequestMessage.m; path = Mixpanel/MPABTestDesignerDeviceInfoRequestMessage.m; sourceTree = "<group>"; };
+		E7EDADBABCB209761CF65231 /* MPABTestDesignerTweakRequestMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPABTestDesignerTweakRequestMessage.m; path = Mixpanel/MPABTestDesignerTweakRequestMessage.m; sourceTree = "<group>"; };
+		E884786F018B29200AEAAEE7 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		E94D2FB84519ED5BD82F8256 /* Pods-evercamPlay-Mixpanel-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-evercamPlay-Mixpanel-Private.xcconfig"; sourceTree = "<group>"; };
+		E9DB16A3E79EEF9092BCFF67 /* MPApplicationStateSerializer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPApplicationStateSerializer.h; path = Mixpanel/MPApplicationStateSerializer.h; sourceTree = "<group>"; };
+		EA010018011C80A3565C668B /* MPSwizzler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPSwizzler.h; path = Mixpanel/MPSwizzler.h; sourceTree = "<group>"; };
+		EA9FDE4C5D69F9AC84DF01AA /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		EB4AAAB9395339C9375C5C5A /* EvercamRights.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EvercamRights.h; path = Evercam/EvercamRights.h; sourceTree = "<group>"; };
+		EB51EB4EC7E494571F4E1895 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		ECF063EA5F507D07B1DEB00D /* NSInvocation+MPHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+MPHelpers.h"; path = "Mixpanel/NSInvocation+MPHelpers.h"; sourceTree = "<group>"; };
+		ED1DD0546E35452FCDDCA5A7 /* Pods-evercamPlay-AFNetworking-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-evercamPlay-AFNetworking-Private.xcconfig"; sourceTree = "<group>"; };
+		ED25680C7C683755B9A33F9E /* MPCloseBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPCloseBtn@2x.png"; path = "Mixpanel/Media.xcassets/MPCloseBtn.imageset/MPCloseBtn@2x.png"; sourceTree = "<group>"; };
+		EDD3EE15EF6553864E86D7A3 /* MPABTestDesignerSnapshotRequestMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerSnapshotRequestMessage.h; path = Mixpanel/MPABTestDesignerSnapshotRequestMessage.h; sourceTree = "<group>"; };
+		EFE4585A9D986B084D4D7E21 /* MPCheckmark.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPCheckmark.png; path = Mixpanel/Media.xcassets/MPCheckmark.imageset/MPCheckmark.png; sourceTree = "<group>"; };
+		F0C1580745CA9AF272F30470 /* EvercamVendor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamVendor.m; path = Evercam/EvercamVendor.m; sourceTree = "<group>"; };
+		F34E93784336A6F5C994F3A6 /* MPABTestDesignerMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerMessage.h; path = Mixpanel/MPABTestDesignerMessage.h; sourceTree = "<group>"; };
+		F3A0D1C3C7AE1F184D5AABC2 /* _MPTweakBindObserver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = _MPTweakBindObserver.m; path = Mixpanel/_MPTweakBindObserver.m; sourceTree = "<group>"; };
+		F4A44E283167DB0115671BAB /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+AFNetworking.h"; path = "UIKit+AFNetworking/UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		F51BEDB435B5FF3CBFADBEF0 /* MPSurveyNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPSurveyNavigationController.m; path = Mixpanel/MPSurveyNavigationController.m; sourceTree = "<group>"; };
+		F57821A4D22009F2DF3A056D /* MPSurvey.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPSurvey.m; path = Mixpanel/MPSurvey.m; sourceTree = "<group>"; };
+		F8812F66DB07BF19E89EF19F /* UIAlertView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+AFNetworking.h"; path = "UIKit+AFNetworking/UIAlertView+AFNetworking.h"; sourceTree = "<group>"; };
+		F9DED7B7344273DB07503365 /* EvercamModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EvercamModel.m; path = Evercam/EvercamModel.m; sourceTree = "<group>"; };
+		FA514EA23B06CF0B940320C7 /* Pods-evercamPlay-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-evercamPlay-environment.h"; sourceTree = "<group>"; };
+		FAC57E6CAEBFC731624EF084 /* MPSurvey.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = MPSurvey.storyboard; path = Mixpanel/MPSurvey.storyboard; sourceTree = "<group>"; };
+		FB4CE0FF12A03200227D88C1 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		FC1F96F58344CE8110CB9B38 /* MPEventBinding.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPEventBinding.m; path = Mixpanel/MPEventBinding.m; sourceTree = "<group>"; };
+		FD6FE0C6A0ABA44EE0A4CA7A /* UIAlertView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIAlertView+AFNetworking.m"; path = "UIKit+AFNetworking/UIAlertView+AFNetworking.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7012CFE18E4EDC4E870A2F09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A14EFC7B0FBD893CB3E8174 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		902C0850BD9ACB6AD9CD67EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86C4E4260426D556AFCE8F2B /* Accelerate.framework in Frameworks */,
+				C444DAF902D2C37FE5BAC8FD /* CoreGraphics.framework in Frameworks */,
+				FD506C9CF16B5ECDC3BC65C6 /* CoreTelephony.framework in Frameworks */,
+				E7022B7F851A30C993076109 /* Foundation.framework in Frameworks */,
+				9BB7230D3EE5A5124328A4ED /* QuartzCore.framework in Frameworks */,
+				D3751309568B6097A13E9892 /* SystemConfiguration.framework in Frameworks */,
+				2FAAA10FCF3780F7FB7829F9 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8F35956B54FCE6E80E1329D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A12950C067A9CA048F38A721 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF0166EB34FE8A1AF5E6D635 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF904BF9B871302BA2A43BEB /* CoreGraphics.framework in Frameworks */,
+				800991046F813AAEBA453252 /* Foundation.framework in Frameworks */,
+				477E6F507ED458B7ACE01E77 /* MobileCoreServices.framework in Frameworks */,
+				B7052732B4B5ADFF0C26AAF1 /* Security.framework in Frameworks */,
+				C891A259A4F39DD700A1859F /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		112C94F5C383868939B3B069 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				98C553DC272AE5CC9B0BC058 /* libMPCategoryHelpers.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		16573A818211E47397A8F86C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				07C44171DB5F582571A031D1 /* Accelerate.framework */,
+				BBC68D64E8D77C29DE031A1F /* CoreGraphics.framework */,
+				E765C4D25D9097A7FB716BDE /* CoreTelephony.framework */,
+				78F1F0EBE39DB796DF31AD16 /* Foundation.framework */,
+				3820059462CE913BF6790CBF /* MobileCoreServices.framework */,
+				BE7ADD20929392C83FD2C27F /* QuartzCore.framework */,
+				7FA9D48848248C703D21943E /* Security.framework */,
+				374C8469DC7B878543C073DB /* SystemConfiguration.framework */,
+				DA78345AB6A3B4197A52662E /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		2746A38F640ABB266372D8BF /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				D143BC927395B7F583247141 /* AFSecurityPolicy.h */,
+				BA6950068346224A4F2DF45D /* AFSecurityPolicy.m */,
+			);
+			name = Security;
+			sourceTree = "<group>";
+		};
+		29DF00E12D61C431838AC36D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4392395BE36862B8BEC083C2 /* Pods-evercamPlay-Evercam.xcconfig */,
+				ACC0568EE34D9287CBB49865 /* Pods-evercamPlay-Evercam-Private.xcconfig */,
+				349E403C39F79A8F8F28897D /* Pods-evercamPlay-Evercam-dummy.m */,
+				65D512CE7BB435C3EDD2B3C7 /* Pods-evercamPlay-Evercam-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-evercamPlay-Evercam";
+			sourceTree = "<group>";
+		};
+		5F960883B6180AF5B0F34C67 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B49D67CA975B039A835B21E /* Pods-evercamPlay */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		64D71953839A66024F4CB965 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				28375150B6BBA9C6AFD6A57F /* AFNetworking.h */,
+				C2AAEC0F56B1157C52BE2C6A /* NSURLConnection */,
+				C3C386728539A7955B63B645 /* NSURLSession */,
+				DD8E3CDCF16F76E6FD2B15A7 /* Reachability */,
+				2746A38F640ABB266372D8BF /* Security */,
+				F5F1E075D28B6CB92E593B2A /* Serialization */,
+				B20814482F95B8DEFD3D10AC /* Support Files */,
+				E3110041D84DAB8DADC57155 /* UIKit */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		6A93085FAF1B8CFE1817B432 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				88868FEE91C6F388A0906F83 /* MPArrowLeft.png */,
+				CA0DF7716058CF65EE5753A3 /* MPArrowLeft@2x.png */,
+				C86C859D7B0C0B51CC025B71 /* MPArrowRight.png */,
+				A5C9F7ECCD9155074FA9C02E /* MPArrowRight@2x.png */,
+				EFE4585A9D986B084D4D7E21 /* MPCheckmark.png */,
+				4BDB267ECF09A97FB5F4D3D3 /* MPCheckmark@2x.png */,
+				BBB54795E3E57107ABF891E5 /* MPCloseBtn.png */,
+				4AAF66AAE01F8713CF4788E9 /* MPCloseBtn.png */,
+				ED25680C7C683755B9A33F9E /* MPCloseBtn@2x.png */,
+				75C1F1E33E05BE53667965EF /* MPCloseBtn@2x.png */,
+				3D37403508A7E13672B4C697 /* MPDismissKeyboard.png */,
+				559AB7507F17132603EC080F /* MPDismissKeyboard@2x.png */,
+				5B442E798DB7426394ADAA97 /* MPLogo.png */,
+				046AC9F18EF7F82BDEC78DEB /* MPLogo@2x.png */,
+				77E055190BD3D36969EBB60B /* MPNotification.storyboard */,
+				FAC57E6CAEBFC731624EF084 /* MPSurvey.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7B49D67CA975B039A835B21E /* Pods-evercamPlay */ = {
+			isa = PBXGroup;
+			children = (
+				812AE4CD93751BDF21221FBC /* Pods-evercamPlay-acknowledgements.markdown */,
+				E05ADAD37F25DAD18C6F01D0 /* Pods-evercamPlay-acknowledgements.plist */,
+				32767F9E02CF34A65FB958E8 /* Pods-evercamPlay-dummy.m */,
+				FA514EA23B06CF0B940320C7 /* Pods-evercamPlay-environment.h */,
+				0D645E4650B9A44E5A70472C /* Pods-evercamPlay-resources.sh */,
+				61C494CF96D767B94371C388 /* Pods-evercamPlay.debug.xcconfig */,
+				2F6F842CB39A52C756AC18AF /* Pods-evercamPlay.release.xcconfig */,
+			);
+			name = "Pods-evercamPlay";
+			path = "Target Support Files/Pods-evercamPlay";
+			sourceTree = "<group>";
+		};
+		886DA5D1F7ACB7004BD5834F /* MPCategoryHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				112C94F5C383868939B3B069 /* Frameworks */,
+			);
+			name = MPCategoryHelpers;
+			sourceTree = "<group>";
+		};
+		8EC9A9B49B31FA2248FF4707 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A8E254CE5F6DF7EE0A634A67 /* libPods-evercamPlay.a */,
+				283E6872E8B302A6D76B15DC /* libPods-evercamPlay-AFNetworking.a */,
+				5D959E3E087F5F116EFC7210 /* libPods-evercamPlay-Evercam.a */,
+				A14FF41413842653F78D0D58 /* libPods-evercamPlay-Mixpanel.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		96FDA7C797EC483CBBDF189B /* Mixpanel */ = {
+			isa = PBXGroup;
+			children = (
+				13B83F77135885C1639ED48D /* MPABTestDesignerChangeRequestMessage.h */,
+				B81D7B980B202BED5A5B9F78 /* MPABTestDesignerChangeRequestMessage.m */,
+				942707C967FBE7F5F71A0E45 /* MPABTestDesignerChangeResponseMessage.h */,
+				4C41858B43F77EB7D49D7A17 /* MPABTestDesignerChangeResponseMessage.m */,
+				214295FB62852B236AF8F407 /* MPABTestDesignerClearRequestMessage.h */,
+				CE130C443670EB5308524B9D /* MPABTestDesignerClearRequestMessage.m */,
+				333DCAC951011A63A015A4E9 /* MPABTestDesignerClearResponseMessage.h */,
+				2FD6EE65CC608FC8482E1FE6 /* MPABTestDesignerClearResponseMessage.m */,
+				56193BE822F5D21801126A07 /* MPABTestDesignerConnection.h */,
+				10AAE7D668F655E2E9F6809D /* MPABTestDesignerConnection.m */,
+				AE61731CB6BCF46C8BADA252 /* MPABTestDesignerDeviceInfoRequestMessage.h */,
+				E7CBCEF4D60F84F1C8C6013A /* MPABTestDesignerDeviceInfoRequestMessage.m */,
+				05235B31D8120C9B6BC4F91C /* MPABTestDesignerDeviceInfoResponseMessage.h */,
+				894B8AE89FB44C9673688E91 /* MPABTestDesignerDeviceInfoResponseMessage.m */,
+				AAD05F7B042AF107F5F7607B /* MPABTestDesignerDisconnectMessage.h */,
+				5CE849B42D936A9824793E1B /* MPABTestDesignerDisconnectMessage.m */,
+				F34E93784336A6F5C994F3A6 /* MPABTestDesignerMessage.h */,
+				EDD3EE15EF6553864E86D7A3 /* MPABTestDesignerSnapshotRequestMessage.h */,
+				727AA86344807CC5D5DA2172 /* MPABTestDesignerSnapshotRequestMessage.m */,
+				686724685D771F3CD0D8B488 /* MPABTestDesignerSnapshotResponseMessage.h */,
+				B3F4AD4F294E4C2B50C99A8F /* MPABTestDesignerSnapshotResponseMessage.m */,
+				7FCF82F1384077B61025E326 /* MPABTestDesignerTweakRequestMessage.h */,
+				E7EDADBABCB209761CF65231 /* MPABTestDesignerTweakRequestMessage.m */,
+				A6D9D8DB733725C6FB026B7E /* MPABTestDesignerTweakResponseMessage.h */,
+				E499220202EBF0DA19502DA9 /* MPABTestDesignerTweakResponseMessage.m */,
+				7C042F8B8F63D27D2DE853E2 /* MPAbstractABTestDesignerMessage.h */,
+				6F0C6212746AEA3DB7AF495A /* MPAbstractABTestDesignerMessage.m */,
+				E9DB16A3E79EEF9092BCFF67 /* MPApplicationStateSerializer.h */,
+				86E60AEB185BB523D7D4D20A /* MPApplicationStateSerializer.m */,
+				743971464026FEB40B684F23 /* MPBOOLToNSNumberValueTransformer.m */,
+				B622E940B8EA93D99536532A /* MPCATransform3DToNSDictionaryValueTransformer.m */,
+				985079FF9480FD59D5539D4B /* MPCGAffineTransformToNSDictionaryValueTransformer.m */,
+				31FC2C192A12FB7579B80FC0 /* MPCGColorRefToNSStringValueTransformer.m */,
+				57CD5E9BAB072B954E6D50FA /* MPCGPointToNSDictionaryValueTransformer.m */,
+				C999B41517770CF8AE1C3944 /* MPCGRectToNSDictionaryValueTransformer.m */,
+				10B2A238DF3C90013ED653AF /* MPCGSizeToNSDictionaryValueTransformer.m */,
+				7F18FB1B408FAACA7CE22EE8 /* MPCategoryHelpers.h */,
+				8062D996D2C89D006068AD87 /* MPClassDescription.h */,
+				4293B25F84EC96E9E8A7578B /* MPClassDescription.m */,
+				A7939F249F3165C5EF6E33CB /* MPDesignerEventBindingMessage.h */,
+				B866E6616EA1A57E3B69F5E9 /* MPDesignerEventBindingRequestMesssage.m */,
+				C9900610DD94DAE9BB666BAC /* MPDesignerEventBindingResponseMesssage.m */,
+				98CCF24A9939966B50E069F2 /* MPDesignerSessionCollection.h */,
+				3925D68E7DD7649C16AC160C /* MPDesignerTrackMessage.m */,
+				34F93B281E9420BEF6A6C5C6 /* MPEnumDescription.h */,
+				D0C8B7D61665662439359E71 /* MPEnumDescription.m */,
+				0D78BB3DD60C2747A6F71002 /* MPEventBinding.h */,
+				FC1F96F58344CE8110CB9B38 /* MPEventBinding.m */,
+				427501A968C260C146FF7909 /* MPLogger.h */,
+				C68FE25890079813C337FE55 /* MPNSAttributedStringToNSDictionaryValueTransformer.m */,
+				823F156CFDD2E76CFACEBD0E /* MPNSNumberToCGFloatValueTransformer.m */,
+				BF6EC8DA910E8368C8364A15 /* MPNotification.h */,
+				1B32697893236F9B9AE8FAC0 /* MPNotification.m */,
+				8B24971A60C92D102A270D46 /* MPNotificationViewController.h */,
+				D5E053792CCACD4A9E077611 /* MPNotificationViewController.m */,
+				C78BEBF14F9BB4D4E99BD99E /* MPObjectIdentifierProvider.h */,
+				3B72341BD855F59FDA2313A7 /* MPObjectIdentityProvider.h */,
+				2384A0DD4B56D08E8C8BF076 /* MPObjectIdentityProvider.m */,
+				A29D4818B2C35EDB7EB6B966 /* MPObjectSelector.h */,
+				7DE84B3A6462CB7FD3631A19 /* MPObjectSelector.m */,
+				BA7B3EB1071BC14E9D82712B /* MPObjectSerializer.h */,
+				02F80CF91695D2D4E53BB69E /* MPObjectSerializer.m */,
+				8624CD26A239769215EC13F7 /* MPObjectSerializerConfig.h */,
+				3EDE3A76157EC436D96BB3B4 /* MPObjectSerializerConfig.m */,
+				92F5AE052F2C1422B648BF3E /* MPObjectSerializerContext.h */,
+				9AC4B370B0ED170FDB6D7F55 /* MPObjectSerializerContext.m */,
+				7ECEA6CC934126BE8FE1CF8F /* MPPassThroughValueTransformer.m */,
+				622860EA8E6BCD7E42EFE544 /* MPPropertyDescription.h */,
+				C82ABAD4ED83DD4C16BDC554 /* MPPropertyDescription.m */,
+				6613C4C13B068C1887127FF5 /* MPSequenceGenerator.h */,
+				A4A1C9EDA07863F7AE612635 /* MPSequenceGenerator.m */,
+				C16462AA85A512DF6B97EBF0 /* MPSurvey.h */,
+				F57821A4D22009F2DF3A056D /* MPSurvey.m */,
+				6A12674590299CD80178D400 /* MPSurveyNavigationController.h */,
+				F51BEDB435B5FF3CBFADBEF0 /* MPSurveyNavigationController.m */,
+				9699EFCA6C2F59892CC30C3F /* MPSurveyQuestion.h */,
+				0A9E021E651E95AED1DCF949 /* MPSurveyQuestion.m */,
+				4DE68210580266933C8473F5 /* MPSurveyQuestionViewController.h */,
+				8B806C71337DA0AA97222FAB /* MPSurveyQuestionViewController.m */,
+				EA010018011C80A3565C668B /* MPSwizzler.h */,
+				E1D85BBC25F9E00C022E6ACC /* MPSwizzler.m */,
+				72BD1C33CD4180505A432D95 /* MPTweak.h */,
+				16B8609CFD17E1D0A673BC77 /* MPTweak.m */,
+				31DE2EB79F3D31BC9A192B17 /* MPTweakInline.h */,
+				67F4F2DB4423F2119BFBECE4 /* MPTweakInline.m */,
+				B886CDBD7180CEEA484ACD1B /* MPTweakInlineInternal.h */,
+				A9C76E8B557CF91D72E47FE1 /* MPTweakStore.h */,
+				55804458267A0C6075DAF25C /* MPTweakStore.m */,
+				1B084E72C9433F5EC71D27D0 /* MPTypeDescription.h */,
+				5C303F2B826F67F0B533DBC6 /* MPTypeDescription.m */,
+				24E5B62A33831D802AAF4CD2 /* MPUIColorToNSStringValueTransformer.m */,
+				D73A93ABE2F1DB4F23C837B2 /* MPUIControlBinding.h */,
+				9E9B7057EDC8EAE8453EBF0C /* MPUIControlBinding.m */,
+				06C5374FD934C27E9EBF18F3 /* MPUIEdgeInsetsToNSDictionaryValueTransformer.m */,
+				D6B3531CE04F3E820CD35AA1 /* MPUIFontToNSDictionaryValueTransformer.m */,
+				397EB716A64C3672CD589A5A /* MPUIImageToNSDictionaryValueTransformer.m */,
+				79DDE8791AB65D21CBDDD8EF /* MPUITableViewBinding.h */,
+				D845C0B399AA40C857E3B3CB /* MPUITableViewBinding.m */,
+				41371ABA19619E029D31E378 /* MPValueTransformers.h */,
+				AD7ECE5C8C902A6F8EDABC1C /* MPVariant.h */,
+				6431427BACF244838E2C30FC /* MPVariant.m */,
+				23CA85CCDC570BF13F534026 /* MPWebSocket.h */,
+				4591720C2A58A27A5658D684 /* MPWebSocket.m */,
+				8EC1C60CA7E0EEBF7771444F /* Mixpanel.h */,
+				E2671141C2A503846C02E879 /* Mixpanel.m */,
+				869460FBCDCFF939E80CC5CC /* NSData+MPBase64.h */,
+				7D0A8C6C78352497207F6846 /* NSData+MPBase64.m */,
+				ECF063EA5F507D07B1DEB00D /* NSInvocation+MPHelpers.h */,
+				0B9D27412D29D96222D77421 /* NSInvocation+MPHelpers.m */,
+				78A39F3009216D06E43F6AAA /* UIColor+MPColor.h */,
+				CC8C8FB96E25101A39C6068D /* UIColor+MPColor.m */,
+				D8CFC5009BBFB499D1DE611D /* UIImage+MPAverageColor.h */,
+				4445CBF4B3E4F7CF9A6AA3CB /* UIImage+MPAverageColor.m */,
+				043688047EFAFAE857A75C3A /* UIImage+MPImageEffects.h */,
+				13D0F98908084B1B919DDE91 /* UIImage+MPImageEffects.m */,
+				C14C04C8029CE9E45BCBA1DB /* _MPTweakBindObserver.h */,
+				F3A0D1C3C7AE1F184D5AABC2 /* _MPTweakBindObserver.m */,
+				6A93085FAF1B8CFE1817B432 /* Resources */,
+			);
+			name = Mixpanel;
+			sourceTree = "<group>";
+		};
+		A3ED456023DCAFE4BAA0691C /* Mixpanel */ = {
+			isa = PBXGroup;
+			children = (
+				886DA5D1F7ACB7004BD5834F /* MPCategoryHelpers */,
+				96FDA7C797EC483CBBDF189B /* Mixpanel */,
+				D9B1CBB981E112C083E6E07B /* Support Files */,
+			);
+			path = Mixpanel;
+			sourceTree = "<group>";
+		};
+		A44541064FD33862CB41AE23 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				64D71953839A66024F4CB965 /* AFNetworking */,
+				B70CCC85DBE03309E87EBCAC /* Evercam */,
+				A3ED456023DCAFE4BAA0691C /* Mixpanel */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B20814482F95B8DEFD3D10AC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9F9CD17D46184DAC723B6236 /* Pods-evercamPlay-AFNetworking.xcconfig */,
+				ED1DD0546E35452FCDDCA5A7 /* Pods-evercamPlay-AFNetworking-Private.xcconfig */,
+				A6DB2819F075B9EFDDC88E18 /* Pods-evercamPlay-AFNetworking-dummy.m */,
+				B898F5B09E3CD63D2299C8D9 /* Pods-evercamPlay-AFNetworking-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-evercamPlay-AFNetworking";
+			sourceTree = "<group>";
+		};
+		B70CCC85DBE03309E87EBCAC /* Evercam */ = {
+			isa = PBXGroup;
+			children = (
+				5C51F725A76F412FBB3E00E7 /* AFEvercamAPIClient.h */,
+				0FED04E024061B4710943B97 /* AFEvercamAPIClient.m */,
+				4588BD956BF275892EA1F52A /* EvercamApiKeyPair.h */,
+				BD3EAD7EC8E49D28C4A65FAF /* EvercamApiKeyPair.m */,
+				3EB680530B9A5B79C57DC574 /* EvercamCamera.h */,
+				E767B83568D5AF5A87BB0F9C /* EvercamCamera.m */,
+				4961ABEADAB80A990A6DAF25 /* EvercamCameraBuilder.h */,
+				7648B0F5FB5B8C2318DB1CE3 /* EvercamCameraBuilder.m */,
+				9A73A71AF07C5B615F6F030A /* EvercamCameraUtil.h */,
+				A82B2E0953F4AE664A4189BB /* EvercamCameraUtil.m */,
+				4CB8D62BDFAFBBB8C18FF355 /* EvercamDefaults.h */,
+				CFDEF1D62EC56A0082609CBB /* EvercamDefaults.m */,
+				83295DEE7FFD3BF1909C4A67 /* EvercamModel.h */,
+				F9DED7B7344273DB07503365 /* EvercamModel.m */,
+				EB4AAAB9395339C9375C5C5A /* EvercamRights.h */,
+				9DE9F660FE622C02EE851F1E /* EvercamRights.m */,
+				AD854D689D43FBD4A0F11A43 /* EvercamShell.h */,
+				58E5850258CC39245B73E928 /* EvercamShell.m */,
+				7A920689ABE058A80F99EEEB /* EvercamUser.h */,
+				77AA1B72094B76CBF7438353 /* EvercamUser.m */,
+				31842A5A5EE67EFD0E5A2673 /* EvercamVendor.h */,
+				F0C1580745CA9AF272F30470 /* EvercamVendor.m */,
+				29DF00E12D61C431838AC36D /* Support Files */,
+			);
+			path = Evercam;
+			sourceTree = "<group>";
+		};
+		BECA18BAC3D069EE1CECB273 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				16573A818211E47397A8F86C /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C2AAEC0F56B1157C52BE2C6A /* NSURLConnection */ = {
+			isa = PBXGroup;
+			children = (
+				A8959A4F04620BEA90CA06F4 /* AFHTTPRequestOperation.h */,
+				FB4CE0FF12A03200227D88C1 /* AFHTTPRequestOperation.m */,
+				476083825111FB8A64EA0C41 /* AFHTTPRequestOperationManager.h */,
+				45EFCCF2CFB2E26A16EE5A42 /* AFHTTPRequestOperationManager.m */,
+				E884786F018B29200AEAAEE7 /* AFURLConnectionOperation.h */,
+				548B7BAB100FC9B0A6717D04 /* AFURLConnectionOperation.m */,
+			);
+			name = NSURLConnection;
+			sourceTree = "<group>";
+		};
+		C3C386728539A7955B63B645 /* NSURLSession */ = {
+			isa = PBXGroup;
+			children = (
+				EB51EB4EC7E494571F4E1895 /* AFHTTPSessionManager.h */,
+				C86984FF13AD177C38CB5C67 /* AFHTTPSessionManager.m */,
+				077D7F09863FE847ADC8943E /* AFURLSessionManager.h */,
+				9F98071534242CE5CA2338DD /* AFURLSessionManager.m */,
+			);
+			name = NSURLSession;
+			sourceTree = "<group>";
+		};
+		D9B1CBB981E112C083E6E07B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				80215FA5771C9EF75187FD82 /* Pods-evercamPlay-Mixpanel.xcconfig */,
+				E94D2FB84519ED5BD82F8256 /* Pods-evercamPlay-Mixpanel-Private.xcconfig */,
+				445D528D8B198ACF870599E5 /* Pods-evercamPlay-Mixpanel-dummy.m */,
+				6153EE718011A3B6F93B133E /* Pods-evercamPlay-Mixpanel-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-evercamPlay-Mixpanel";
+			sourceTree = "<group>";
+		};
+		DD8E3CDCF16F76E6FD2B15A7 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				1F23B57A353514EAB898CB4A /* AFNetworkReachabilityManager.h */,
+				699C6EAEE7A589D891D18D80 /* AFNetworkReachabilityManager.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		E3110041D84DAB8DADC57155 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				4B6E00EA24EB4F0E8E1698F1 /* AFNetworkActivityIndicatorManager.h */,
+				74C60ACFC0592BECF306AE38 /* AFNetworkActivityIndicatorManager.m */,
+				CE3001730D99A8E329CB080E /* UIActivityIndicatorView+AFNetworking.h */,
+				311BF0443509EABE92C2ECFA /* UIActivityIndicatorView+AFNetworking.m */,
+				F8812F66DB07BF19E89EF19F /* UIAlertView+AFNetworking.h */,
+				FD6FE0C6A0ABA44EE0A4CA7A /* UIAlertView+AFNetworking.m */,
+				F4A44E283167DB0115671BAB /* UIButton+AFNetworking.h */,
+				CDFA848CBA8950F6F8111EDE /* UIButton+AFNetworking.m */,
+				D50832C559BCD658924B82B1 /* UIImageView+AFNetworking.h */,
+				70F2CD18EDB47429A6F73511 /* UIImageView+AFNetworking.m */,
+				4220C81CB2E6C40AE64B42AD /* UIKit+AFNetworking.h */,
+				6B7AA1A556F911513A925D4A /* UIProgressView+AFNetworking.h */,
+				7F85ED7A52416109DD1976A2 /* UIProgressView+AFNetworking.m */,
+				A4BAD98BB010A21DEA4D0F3C /* UIRefreshControl+AFNetworking.h */,
+				7A0931113E07F88B656BC8F9 /* UIRefreshControl+AFNetworking.m */,
+				BF039153AC39A07C16D44F23 /* UIWebView+AFNetworking.h */,
+				A6C71398D60CE1279171D25C /* UIWebView+AFNetworking.m */,
+			);
+			name = UIKit;
+			sourceTree = "<group>";
+		};
+		EF11A974EAEE614E707549A6 = {
+			isa = PBXGroup;
+			children = (
+				7A5906C7B1ACEADA1A712E03 /* Podfile */,
+				BECA18BAC3D069EE1CECB273 /* Frameworks */,
+				A44541064FD33862CB41AE23 /* Pods */,
+				8EC9A9B49B31FA2248FF4707 /* Products */,
+				5F960883B6180AF5B0F34C67 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		F5F1E075D28B6CB92E593B2A /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				BD0ABCFC22050C034932335E /* AFURLRequestSerialization.h */,
+				EA9FDE4C5D69F9AC84DF01AA /* AFURLRequestSerialization.m */,
+				4BF2E07D06888F65726951CD /* AFURLResponseSerialization.h */,
+				59F31B4644DBA1C53CD01662 /* AFURLResponseSerialization.m */,
+			);
+			name = Serialization;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A0F43F13BE84E46E221E0D92 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A4B90EB8FB264FCA9E46BDB /* MPABTestDesignerChangeRequestMessage.h in Headers */,
+				15FC5803527EE7AB51252D46 /* MPABTestDesignerChangeResponseMessage.h in Headers */,
+				43A9025EE5673FD01EBA8B82 /* MPABTestDesignerClearRequestMessage.h in Headers */,
+				C559883D6716746AEE29FB6C /* MPABTestDesignerClearResponseMessage.h in Headers */,
+				D01B6F1BA30DED2088B4B76E /* MPABTestDesignerConnection.h in Headers */,
+				DFB27B500464D26593DF4732 /* MPABTestDesignerDeviceInfoRequestMessage.h in Headers */,
+				00A6D00849FBA94C9CF84A63 /* MPABTestDesignerDeviceInfoResponseMessage.h in Headers */,
+				FE493226093EE1BD8D7D6C19 /* MPABTestDesignerDisconnectMessage.h in Headers */,
+				B45C833CC096483D5DD07684 /* MPABTestDesignerMessage.h in Headers */,
+				0B333216115373AD818523F8 /* MPABTestDesignerSnapshotRequestMessage.h in Headers */,
+				4D43D58EF666E568B7EF3C92 /* MPABTestDesignerSnapshotResponseMessage.h in Headers */,
+				074E9268F3B980A1DC2707A2 /* MPABTestDesignerTweakRequestMessage.h in Headers */,
+				34FBF713572B262AA339FAF9 /* MPABTestDesignerTweakResponseMessage.h in Headers */,
+				94D78D22E9259388B30A110D /* MPAbstractABTestDesignerMessage.h in Headers */,
+				67FB448267EE56D3E2BC6A4C /* MPApplicationStateSerializer.h in Headers */,
+				410A698F5A31F0203DBAD34F /* MPCategoryHelpers.h in Headers */,
+				B8FB846E576F041989143AA2 /* MPClassDescription.h in Headers */,
+				FC18BFEE4E9B01DC9B1A96A4 /* MPDesignerEventBindingMessage.h in Headers */,
+				56DE3914C489652CAE4CC016 /* MPDesignerSessionCollection.h in Headers */,
+				5ADCABFB222285E08D87D9D9 /* MPEnumDescription.h in Headers */,
+				B05813A5E073DFB15B801BE7 /* MPEventBinding.h in Headers */,
+				394400915DE875DB1938DB67 /* MPLogger.h in Headers */,
+				7A765364ADBC92D21C2D8850 /* MPNotification.h in Headers */,
+				B53F9E68193CFAB161318048 /* MPNotificationViewController.h in Headers */,
+				43084F0E2668B24CF5C7F594 /* MPObjectIdentifierProvider.h in Headers */,
+				738F047CCA6F754B24A481FA /* MPObjectIdentityProvider.h in Headers */,
+				6DF190E16DA7DD5E0908232F /* MPObjectSelector.h in Headers */,
+				0F4E6DC0EC6921A809E75AE4 /* MPObjectSerializer.h in Headers */,
+				10FE4DE7ECBC605E731ADC71 /* MPObjectSerializerConfig.h in Headers */,
+				04802DBFB1C30DDC7A73959F /* MPObjectSerializerContext.h in Headers */,
+				FA39017D99398775366DD406 /* MPPropertyDescription.h in Headers */,
+				84A1576CD84E1ADED501176F /* MPSequenceGenerator.h in Headers */,
+				E13F3499B8E2237BD21C3CA7 /* MPSurvey.h in Headers */,
+				3870683BDAF5F0490F7FB3FF /* MPSurveyNavigationController.h in Headers */,
+				8A31F3D669EA9B434705AE84 /* MPSurveyQuestion.h in Headers */,
+				BA2A694913FEDC3D1BB39F41 /* MPSurveyQuestionViewController.h in Headers */,
+				CF10294DF0F2849B034A1050 /* MPSwizzler.h in Headers */,
+				D8CC425A6FC5B255B1EA9A4F /* MPTweak.h in Headers */,
+				4A10A38C8D7B0FB81F4A9EEE /* MPTweakInline.h in Headers */,
+				ADA50F3F8565E94A4B3A5926 /* MPTweakInlineInternal.h in Headers */,
+				B1DFD418701E766BD707B651 /* MPTweakStore.h in Headers */,
+				40EEBFA734CD0D061CFF4836 /* MPTypeDescription.h in Headers */,
+				2EDD576958C719BCD5472679 /* MPUIControlBinding.h in Headers */,
+				44FF8A1FCB94B5FE04D30945 /* MPUITableViewBinding.h in Headers */,
+				C23DA35939E312408FE052F3 /* MPValueTransformers.h in Headers */,
+				5D1D6E51F9739BA669136FD8 /* MPVariant.h in Headers */,
+				0F4D560C7FDAD4EBB4FF5BDA /* MPWebSocket.h in Headers */,
+				52CE4ABE12047AB400DA1409 /* Mixpanel.h in Headers */,
+				6F6B0FE2F84705C5197415B1 /* NSData+MPBase64.h in Headers */,
+				4316F06E04DC110D4536FD08 /* NSInvocation+MPHelpers.h in Headers */,
+				13FCDC1E8C32EE047700442F /* UIColor+MPColor.h in Headers */,
+				931F5458A5D71D812ABFF3D8 /* UIImage+MPAverageColor.h in Headers */,
+				ACD100B4E0CA248DD69F82D2 /* UIImage+MPImageEffects.h in Headers */,
+				FDD1D43FF472D0E7BF046C63 /* _MPTweakBindObserver.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5E53AFACB0CD9DED889E444 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BECEEAD09B319C1B59EB8C9 /* AFEvercamAPIClient.h in Headers */,
+				FC134123C84DA37453F0BA15 /* EvercamApiKeyPair.h in Headers */,
+				770AE95AA0C6938F5F02B3F5 /* EvercamCamera.h in Headers */,
+				D343DBE416190B865E5156F5 /* EvercamCameraBuilder.h in Headers */,
+				D1992E0BD5C4749A594C2278 /* EvercamCameraUtil.h in Headers */,
+				095C315927BF7F24D1887033 /* EvercamDefaults.h in Headers */,
+				36E0F124D4871CA328E82446 /* EvercamModel.h in Headers */,
+				1ED1BF3FB379F51FFAE7071E /* EvercamRights.h in Headers */,
+				2ACC6008A9E0D4A39A9009E9 /* EvercamShell.h in Headers */,
+				2C30E5CB68E07379B69A8020 /* EvercamUser.h in Headers */,
+				B9CE24A1EC7B56EEF2578E2D /* EvercamVendor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBA2FFEF1CCF23E21F5349D3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				792D03EBC721BFB142AB460E /* AFHTTPRequestOperation.h in Headers */,
+				9CE152C8DEF530DD6CD0B91D /* AFHTTPRequestOperationManager.h in Headers */,
+				5DAADB6571138A2C44F4B880 /* AFHTTPSessionManager.h in Headers */,
+				0134A369E4361CA3DAF2ECEB /* AFNetworkActivityIndicatorManager.h in Headers */,
+				8FA7B16A8251226C0A5F5A50 /* AFNetworkReachabilityManager.h in Headers */,
+				9E884F4152F54FE6092A3CD0 /* AFNetworking.h in Headers */,
+				DBE7E8673386DA8EBD736E45 /* AFSecurityPolicy.h in Headers */,
+				EFCB9C25C42710FB8C5893F4 /* AFURLConnectionOperation.h in Headers */,
+				125AB7D79F28820F656E18B0 /* AFURLRequestSerialization.h in Headers */,
+				2AE085A8D97F9B0822E98041 /* AFURLResponseSerialization.h in Headers */,
+				DE71F738A32442AC9E889527 /* AFURLSessionManager.h in Headers */,
+				3BD598BE8201B44D29190A09 /* UIActivityIndicatorView+AFNetworking.h in Headers */,
+				C627815C9603C73C0F3A388A /* UIAlertView+AFNetworking.h in Headers */,
+				66674C493184CF3A7232C5B7 /* UIButton+AFNetworking.h in Headers */,
+				7922F928514908D219188023 /* UIImageView+AFNetworking.h in Headers */,
+				E356C99987EA386F5CA69CEA /* UIKit+AFNetworking.h in Headers */,
+				645DA3523FFE4B90F8F2CA53 /* UIProgressView+AFNetworking.h in Headers */,
+				B4D14D769C91949369BC073F /* UIRefreshControl+AFNetworking.h in Headers */,
+				77881208588222A035B51E7F /* UIWebView+AFNetworking.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		00E2014D7FBB4637470050BB /* Pods-evercamPlay-Evercam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D96B9D1F17E0F8B29BFAEDFF /* Build configuration list for PBXNativeTarget "Pods-evercamPlay-Evercam" */;
+			buildPhases = (
+				D09E673376A503D75EBEF3D2 /* Sources */,
+				7012CFE18E4EDC4E870A2F09 /* Frameworks */,
+				D5E53AFACB0CD9DED889E444 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C0C99D2C6911090DA2F8D399 /* PBXTargetDependency */,
+			);
+			name = "Pods-evercamPlay-Evercam";
+			productName = "Pods-evercamPlay-Evercam";
+			productReference = 5D959E3E087F5F116EFC7210 /* libPods-evercamPlay-Evercam.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		3C5C487CE6B8CC8AFF235F6D /* Pods-evercamPlay-AFNetworking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F0572B604472E5A27F6E1BA /* Build configuration list for PBXNativeTarget "Pods-evercamPlay-AFNetworking" */;
+			buildPhases = (
+				E1E746B5F7CA5AECE0665D7E /* Sources */,
+				FF0166EB34FE8A1AF5E6D635 /* Frameworks */,
+				DBA2FFEF1CCF23E21F5349D3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-evercamPlay-AFNetworking";
+			productName = "Pods-evercamPlay-AFNetworking";
+			productReference = 283E6872E8B302A6D76B15DC /* libPods-evercamPlay-AFNetworking.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DDE85E6554DE8EEC9D1FC2C7 /* Pods-evercamPlay-Mixpanel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97603A4EBF9119B878B985E3 /* Build configuration list for PBXNativeTarget "Pods-evercamPlay-Mixpanel" */;
+			buildPhases = (
+				C15DC20486B455B0AF914CB0 /* Sources */,
+				902C0850BD9ACB6AD9CD67EB /* Frameworks */,
+				A0F43F13BE84E46E221E0D92 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-evercamPlay-Mixpanel";
+			productName = "Pods-evercamPlay-Mixpanel";
+			productReference = A14FF41413842653F78D0D58 /* libPods-evercamPlay-Mixpanel.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F61543BD4C61C0A79842CD42 /* Pods-evercamPlay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D92C838237EAC245AFEFC462 /* Build configuration list for PBXNativeTarget "Pods-evercamPlay" */;
+			buildPhases = (
+				26981CA1BFDBF24FCD9FD028 /* Sources */,
+				E8F35956B54FCE6E80E1329D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E30D6AACE1552AA83346204 /* PBXTargetDependency */,
+				9F28EE000F449B3957CADC4A /* PBXTargetDependency */,
+				C74322019CF23E06D666C618 /* PBXTargetDependency */,
+			);
+			name = "Pods-evercamPlay";
+			productName = "Pods-evercamPlay";
+			productReference = A8E254CE5F6DF7EE0A634A67 /* libPods-evercamPlay.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C96F04204FE30B17E5279F4C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+			};
+			buildConfigurationList = 5E494C58EAF43A163451F5F3 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EF11A974EAEE614E707549A6;
+			productRefGroup = 8EC9A9B49B31FA2248FF4707 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F61543BD4C61C0A79842CD42 /* Pods-evercamPlay */,
+				3C5C487CE6B8CC8AFF235F6D /* Pods-evercamPlay-AFNetworking */,
+				00E2014D7FBB4637470050BB /* Pods-evercamPlay-Evercam */,
+				DDE85E6554DE8EEC9D1FC2C7 /* Pods-evercamPlay-Mixpanel */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		26981CA1BFDBF24FCD9FD028 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				726A694D3F205E0ADBF768C3 /* Pods-evercamPlay-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C15DC20486B455B0AF914CB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F9F1642C50E21F5C97CF7CC /* MPABTestDesignerChangeRequestMessage.m in Sources */,
+				70AC61E1DA1C9BA3A77152A1 /* MPABTestDesignerChangeResponseMessage.m in Sources */,
+				5A16BE31A805CD57E15F328F /* MPABTestDesignerClearRequestMessage.m in Sources */,
+				009E3B130EACBF869ACB13E9 /* MPABTestDesignerClearResponseMessage.m in Sources */,
+				01EA9D69D8669831D78C82C8 /* MPABTestDesignerConnection.m in Sources */,
+				A9A180F8E45F61C54DA079B4 /* MPABTestDesignerDeviceInfoRequestMessage.m in Sources */,
+				0B42E738767D6C42AA58CDB4 /* MPABTestDesignerDeviceInfoResponseMessage.m in Sources */,
+				FEA2C9338C8277FE9F113A0E /* MPABTestDesignerDisconnectMessage.m in Sources */,
+				8D32C147688966E9184D4587 /* MPABTestDesignerSnapshotRequestMessage.m in Sources */,
+				53F20B938BB4427A2BB1C3FA /* MPABTestDesignerSnapshotResponseMessage.m in Sources */,
+				A3BBB188BEEE724A3333FDC7 /* MPABTestDesignerTweakRequestMessage.m in Sources */,
+				88FA02D3644CB6C4273A627D /* MPABTestDesignerTweakResponseMessage.m in Sources */,
+				6CBFF6174257F5783DEB0564 /* MPAbstractABTestDesignerMessage.m in Sources */,
+				0163AB3416E99DCAECFB7D99 /* MPApplicationStateSerializer.m in Sources */,
+				C8E1EB615D91CCB799ACFCF7 /* MPBOOLToNSNumberValueTransformer.m in Sources */,
+				2717B4A3E5C59687E4AAEFA5 /* MPCATransform3DToNSDictionaryValueTransformer.m in Sources */,
+				9AB093673E2420E21AD4CB36 /* MPCGAffineTransformToNSDictionaryValueTransformer.m in Sources */,
+				7E5C001FD9D2E810098DF3B0 /* MPCGColorRefToNSStringValueTransformer.m in Sources */,
+				57EAA254FFBE61ABF7E73C0E /* MPCGPointToNSDictionaryValueTransformer.m in Sources */,
+				57073FA5538D5B491BDCBBD9 /* MPCGRectToNSDictionaryValueTransformer.m in Sources */,
+				FA34CC313A3D4984A492FD6A /* MPCGSizeToNSDictionaryValueTransformer.m in Sources */,
+				933CF6FAB28281A4BCD46262 /* MPClassDescription.m in Sources */,
+				F559842F44C8DC15FA39CED7 /* MPDesignerEventBindingRequestMesssage.m in Sources */,
+				355DE546B4B3640BD4DFC5B6 /* MPDesignerEventBindingResponseMesssage.m in Sources */,
+				8C310BAB6FBA6409358E828D /* MPDesignerTrackMessage.m in Sources */,
+				308C83C9D15BBEF994A3889D /* MPEnumDescription.m in Sources */,
+				16743799DED66E0D29222890 /* MPEventBinding.m in Sources */,
+				E341E83184DB3DBF0FE35016 /* MPNSAttributedStringToNSDictionaryValueTransformer.m in Sources */,
+				92FD40FAA6B30DBC1D16792D /* MPNSNumberToCGFloatValueTransformer.m in Sources */,
+				9DC39A4B06A062DF71EB4072 /* MPNotification.m in Sources */,
+				5D223BA00C56B01347B324A9 /* MPNotificationViewController.m in Sources */,
+				1DD26E163DA835205EC13360 /* MPObjectIdentityProvider.m in Sources */,
+				B57AB96FE2A0EE1139EACB9D /* MPObjectSelector.m in Sources */,
+				8503C84F792756A09EF94E97 /* MPObjectSerializer.m in Sources */,
+				F163EDB92B7A956618EC515B /* MPObjectSerializerConfig.m in Sources */,
+				59E757F4141A1A4EC3AE27F9 /* MPObjectSerializerContext.m in Sources */,
+				A0781FD11369B88825916B42 /* MPPassThroughValueTransformer.m in Sources */,
+				55E097B5BA2620D90EE80B3A /* MPPropertyDescription.m in Sources */,
+				8E92D1D9A5F938B09DA3746C /* MPSequenceGenerator.m in Sources */,
+				91476E1ADA04A148B6A0A366 /* MPSurvey.m in Sources */,
+				E3811C2CBB81C621EB514EC0 /* MPSurveyNavigationController.m in Sources */,
+				38D568D25682C91C8054E1B3 /* MPSurveyQuestion.m in Sources */,
+				A455B08E63538FD22D4B4DE1 /* MPSurveyQuestionViewController.m in Sources */,
+				248237C48CF02FB3926595D5 /* MPSwizzler.m in Sources */,
+				5C4245E3D2745B7D573F92A4 /* MPTweak.m in Sources */,
+				3C8726EEAB25208A35AB8FF5 /* MPTweakInline.m in Sources */,
+				D2E1507C73F04B9C1E90A35D /* MPTweakStore.m in Sources */,
+				9F2478F341A9A67774420E53 /* MPTypeDescription.m in Sources */,
+				8D522C9735ACC9E2ECD6300B /* MPUIColorToNSStringValueTransformer.m in Sources */,
+				E340A54AC2DDC253BA9D6DE2 /* MPUIControlBinding.m in Sources */,
+				89366D4A8EA8906D9B76BAC8 /* MPUIEdgeInsetsToNSDictionaryValueTransformer.m in Sources */,
+				46808336D12E693E1D04AADA /* MPUIFontToNSDictionaryValueTransformer.m in Sources */,
+				7A118508FC895F031F47E39A /* MPUIImageToNSDictionaryValueTransformer.m in Sources */,
+				4F587E1BC4227C8CC6FC164B /* MPUITableViewBinding.m in Sources */,
+				22CF81CCE80C3AEA92DFF4C1 /* MPVariant.m in Sources */,
+				1A1D92A1C8F82D876BA4FCA7 /* MPWebSocket.m in Sources */,
+				A11700FFEBEFEA8A05E86A8D /* Mixpanel.m in Sources */,
+				84ED2A395C04D592F9A72A56 /* NSData+MPBase64.m in Sources */,
+				18F9D691755D9A7BEA48828E /* NSInvocation+MPHelpers.m in Sources */,
+				1918464AB0F11E507C8D57FA /* Pods-evercamPlay-Mixpanel-dummy.m in Sources */,
+				5E2C281C9F3D6D4D33AD4752 /* UIColor+MPColor.m in Sources */,
+				A7692C06146D34968E8D25F4 /* UIImage+MPAverageColor.m in Sources */,
+				F6015CEFD3ADFC001DA63CD4 /* UIImage+MPImageEffects.m in Sources */,
+				575393456FA53059FD1A951B /* _MPTweakBindObserver.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D09E673376A503D75EBEF3D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2A9260FEC17D5F0063A4E7F /* AFEvercamAPIClient.m in Sources */,
+				6CC8A12E7D1572A26670CBE5 /* EvercamApiKeyPair.m in Sources */,
+				377BA487DC0618C4C064030F /* EvercamCamera.m in Sources */,
+				03AB1C9CE795F9E54418A4F6 /* EvercamCameraBuilder.m in Sources */,
+				647F2012D82996A75611C076 /* EvercamCameraUtil.m in Sources */,
+				32DBB50AFEBF2A0B16BAF85E /* EvercamDefaults.m in Sources */,
+				3DF0E39F4FE11F8CF9BF273B /* EvercamModel.m in Sources */,
+				2FED5F0117927E592C7DE677 /* EvercamRights.m in Sources */,
+				F27CA2569063AA001A0B1AAC /* EvercamShell.m in Sources */,
+				433D30D097E6D28DD386A79A /* EvercamUser.m in Sources */,
+				C44A80C3C3D06D10063838FE /* EvercamVendor.m in Sources */,
+				3DE0E7202B4F2FAC5463CB8D /* Pods-evercamPlay-Evercam-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1E746B5F7CA5AECE0665D7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FFCE395BC4D21E1316EFD11 /* AFHTTPRequestOperation.m in Sources */,
+				DFCF79392C084468C6CD1AF1 /* AFHTTPRequestOperationManager.m in Sources */,
+				A7E158FF6220B0A4FA258C77 /* AFHTTPSessionManager.m in Sources */,
+				B227860C2F1FD55FA33F86E8 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				0FE5DC08EF674A8AE00F35A9 /* AFNetworkReachabilityManager.m in Sources */,
+				6214BDD81A54F92CC417E312 /* AFSecurityPolicy.m in Sources */,
+				B59CAA3DFC0B669A096F7706 /* AFURLConnectionOperation.m in Sources */,
+				B28DA2766E0345B359917422 /* AFURLRequestSerialization.m in Sources */,
+				F88FF18D9384C299A2C4CC81 /* AFURLResponseSerialization.m in Sources */,
+				262B3614182757C9030127C7 /* AFURLSessionManager.m in Sources */,
+				61C37FB7A7C304A3B91B3480 /* Pods-evercamPlay-AFNetworking-dummy.m in Sources */,
+				84305B3CB3A3FDB4D6246659 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				19227208116C5B95DADEB13A /* UIAlertView+AFNetworking.m in Sources */,
+				4294C251EC457651238A901A /* UIButton+AFNetworking.m in Sources */,
+				CDFF98D19D3283AF5136DCEF /* UIImageView+AFNetworking.m in Sources */,
+				E6088E6ED45307E1AD0CD541 /* UIProgressView+AFNetworking.m in Sources */,
+				4C964C6305193504300FC247 /* UIRefreshControl+AFNetworking.m in Sources */,
+				50E847A70EDC0912DDFD110E /* UIWebView+AFNetworking.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E30D6AACE1552AA83346204 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-evercamPlay-AFNetworking";
+			target = 3C5C487CE6B8CC8AFF235F6D /* Pods-evercamPlay-AFNetworking */;
+			targetProxy = E3F24EAF92F09B43CF9DC3AF /* PBXContainerItemProxy */;
+		};
+		9F28EE000F449B3957CADC4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-evercamPlay-Evercam";
+			target = 00E2014D7FBB4637470050BB /* Pods-evercamPlay-Evercam */;
+			targetProxy = 420E2C1972E64151EC23205C /* PBXContainerItemProxy */;
+		};
+		C0C99D2C6911090DA2F8D399 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-evercamPlay-AFNetworking";
+			target = 3C5C487CE6B8CC8AFF235F6D /* Pods-evercamPlay-AFNetworking */;
+			targetProxy = 89B51ADD0D204B411262249D /* PBXContainerItemProxy */;
+		};
+		C74322019CF23E06D666C618 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-evercamPlay-Mixpanel";
+			target = DDE85E6554DE8EEC9D1FC2C7 /* Pods-evercamPlay-Mixpanel */;
+			targetProxy = 472249027BCB7B8F20DB1344 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2A502BFAD48D0EAE7A474334 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ED1DD0546E35452FCDDCA5A7 /* Pods-evercamPlay-AFNetworking-Private.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-evercamPlay-AFNetworking/Pods-evercamPlay-AFNetworking-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		31A9C9869B7B82F84CFCB1FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACC0568EE34D9287CBB49865 /* Pods-evercamPlay-Evercam-Private.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-evercamPlay-Evercam/Pods-evercamPlay-Evercam-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3F56C1240BE34227226F74A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F6F842CB39A52C756AC18AF /* Pods-evercamPlay.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		527BA2177B223B68A9B62815 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACC0568EE34D9287CBB49865 /* Pods-evercamPlay-Evercam-Private.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-evercamPlay-Evercam/Pods-evercamPlay-Evercam-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		5C346E8F4A5F3CE514FDDC36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		61E202F84BF143C39748D488 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E94D2FB84519ED5BD82F8256 /* Pods-evercamPlay-Mixpanel-Private.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-evercamPlay-Mixpanel/Pods-evercamPlay-Mixpanel-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		75F45C2B349C15A03C523343 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		A901751F07CEF687908E8C46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ED1DD0546E35452FCDDCA5A7 /* Pods-evercamPlay-AFNetworking-Private.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-evercamPlay-AFNetworking/Pods-evercamPlay-AFNetworking-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B7D64FF2B0613A9EDC0FD887 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E94D2FB84519ED5BD82F8256 /* Pods-evercamPlay-Mixpanel-Private.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-evercamPlay-Mixpanel/Pods-evercamPlay-Mixpanel-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DE9FDA25E8EECB3319673F83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61C494CF96D767B94371C388 /* Pods-evercamPlay.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E494C58EAF43A163451F5F3 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75F45C2B349C15A03C523343 /* Debug */,
+				5C346E8F4A5F3CE514FDDC36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97603A4EBF9119B878B985E3 /* Build configuration list for PBXNativeTarget "Pods-evercamPlay-Mixpanel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7D64FF2B0613A9EDC0FD887 /* Debug */,
+				61E202F84BF143C39748D488 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F0572B604472E5A27F6E1BA /* Build configuration list for PBXNativeTarget "Pods-evercamPlay-AFNetworking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A502BFAD48D0EAE7A474334 /* Debug */,
+				A901751F07CEF687908E8C46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D92C838237EAC245AFEFC462 /* Build configuration list for PBXNativeTarget "Pods-evercamPlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE9FDA25E8EECB3319673F83 /* Debug */,
+				3F56C1240BE34227226F74A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D96B9D1F17E0F8B29BFAEDFF /* Build configuration list for PBXNativeTarget "Pods-evercamPlay-Evercam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31A9C9869B7B82F84CFCB1FE /* Debug */,
+				527BA2177B223B68A9B62815 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C96F04204FE30B17E5279F4C /* Project object */;
+}
