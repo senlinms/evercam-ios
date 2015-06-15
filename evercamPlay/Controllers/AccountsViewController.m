@@ -435,7 +435,7 @@
                                       }];
                 UIAlertAction* remove = [UIAlertAction
                                          actionWithTitle:@"Remove Account"
-                                         style:UIAlertActionStyleDefault
+                                         style:UIAlertActionStyleDestructive
                                          handler:^(UIAlertAction * action)
                                          {
                                              [self performSelectorOnMainThread:@selector(removeAccount:) withObject:indexPath waitUntilDone:NO];

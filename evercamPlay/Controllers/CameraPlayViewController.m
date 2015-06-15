@@ -665,7 +665,6 @@
 //    
 //    NSString *pipeline = [NSString stringWithFormat:@"rtspsrc protocols=4  location=%@ user-id=%@ user-pw=%@ latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink", self.cameraInfo.externalH264Url, self.cameraInfo.username, self.cameraInfo.password];
 //    launch->real_pipeline_string = (gchar *)[pipeline UTF8String];
-////    launch->real_pipeline_string = "rtspsrc protocols=4  location=rtsp://89.101.130.1:9021/h264/ch1/main/av_stream user-id=admin user-pw=mehcam latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink";
 //    
 //    gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
 //}
