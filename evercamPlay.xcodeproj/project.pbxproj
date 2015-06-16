@@ -66,6 +66,13 @@
 		C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639931B05F96C00FC5D67 /* libz.dylib */; };
 		C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */; };
 		C49E9F3B1B0A2BE100E58C85 /* ic_cameras.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E221AFBCE11004FFA8E /* ic_cameras.png */; };
+		C4E418CC1B305B290050872E /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E418CB1B305B290050872E /* GStreamer.framework */; };
+		C4E418D61B305F1F0050872E /* EaglUIVIew.h in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D01B305DB70050872E /* EaglUIVIew.h */; };
+		C4E418D71B305F1F0050872E /* EaglUIVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D11B305DB70050872E /* EaglUIVIew.m */; };
+		C4E418D81B305F1F0050872E /* gst-launch-remote.c in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D21B305DB70050872E /* gst-launch-remote.c */; };
+		C4E418D91B305F1F0050872E /* gst-launch-remote.h in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D31B305DB70050872E /* gst-launch-remote.h */; };
+		C4E418DA1B305F1F0050872E /* gst_ios_init.h in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D41B305DB70050872E /* gst_ios_init.h */; };
+		C4E418DB1B305F1F0050872E /* gst_ios_init.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D51B305DB70050872E /* gst_ios_init.m */; };
 		CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDAF1ABD675100420CE1 /* NIDropDown.m */; };
 		CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */; };
 		CB1C76541AAB144800680FE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C76531AAB144800680FE3 /* main.m */; };
@@ -287,6 +294,13 @@
 		C40639931B05F96C00FC5D67 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C40639951B05FBDA00FC5D67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		C4E418CB1B305B290050872E /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../Library/Frameworks/GStreamer.framework; sourceTree = "<group>"; };
+		C4E418D01B305DB70050872E /* EaglUIVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglUIVIew.h; sourceTree = "<group>"; };
+		C4E418D11B305DB70050872E /* EaglUIVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EaglUIVIew.m; sourceTree = "<group>"; };
+		C4E418D21B305DB70050872E /* gst-launch-remote.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "gst-launch-remote.c"; sourceTree = "<group>"; };
+		C4E418D31B305DB70050872E /* gst-launch-remote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gst-launch-remote.h"; sourceTree = "<group>"; };
+		C4E418D41B305DB70050872E /* gst_ios_init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gst_ios_init.h; sourceTree = "<group>"; };
+		C4E418D51B305DB70050872E /* gst_ios_init.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gst_ios_init.m; sourceTree = "<group>"; };
 		CB01CDAE1ABD675100420CE1 /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
 		CB01CDAF1ABD675100420CE1 /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
 		CB01CDB21ABDFC9F00420CE1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -474,6 +488,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4E418CC1B305B290050872E /* GStreamer.framework in Frameworks */,
 				E356C9D91B179E2A007BB101 /* libicucore.dylib in Frameworks */,
 				E30201D71B1782970006DAE8 /* SpriteKit.framework in Frameworks */,
 				C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */,
@@ -601,6 +616,7 @@
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C4E418CB1B305B290050872E /* GStreamer.framework */,
 				E3CCC9AE1B28B3FF00C5199A /* SplunkMint.framework */,
 				E356C9D81B179E2A007BB101 /* libicucore.dylib */,
 				E30201D61B1782970006DAE8 /* SpriteKit.framework */,
@@ -638,6 +654,19 @@
 				E356C9D31B17985D007BB101 /* Pods-evercamPlay.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C4E418CF1B305DB70050872E /* GStreamer */ = {
+			isa = PBXGroup;
+			children = (
+				C4E418D01B305DB70050872E /* EaglUIVIew.h */,
+				C4E418D11B305DB70050872E /* EaglUIVIew.m */,
+				C4E418D21B305DB70050872E /* gst-launch-remote.c */,
+				C4E418D31B305DB70050872E /* gst-launch-remote.h */,
+				C4E418D41B305DB70050872E /* gst_ios_init.h */,
+				C4E418D51B305DB70050872E /* gst_ios_init.m */,
+			);
+			path = GStreamer;
 			sourceTree = "<group>";
 		};
 		CB01CDAD1ABD675000420CE1 /* NIDropDown */ = {
@@ -729,6 +758,7 @@
 		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				C4E418CF1B305DB70050872E /* GStreamer */,
 				E30900811B16B78600E5B5C0 /* BlockAction */,
 				410748881AE052C8004D10C9 /* GoogleAnalytics */,
 				413BB27E1AD992890083A5DC /* Reachability */,
@@ -1202,6 +1232,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4E418D61B305F1F0050872E /* EaglUIVIew.h in Sources */,
+				C4E418D71B305F1F0050872E /* EaglUIVIew.m in Sources */,
+				C4E418D81B305F1F0050872E /* gst-launch-remote.c in Sources */,
+				C4E418D91B305F1F0050872E /* gst-launch-remote.h in Sources */,
+				C4E418DA1B305F1F0050872E /* gst_ios_init.h in Sources */,
+				C4E418DB1B305F1F0050872E /* gst_ios_init.m in Sources */,
 				CB44E8741AAE9E7D00A78C11 /* LoginViewController.m in Sources */,
 				CB318E5C1AFC3565004FFA8E /* SDWebImagePrefetcher.m in Sources */,
 				410748731ADF6F3E004D10C9 /* RecordingsViewController.m in Sources */,
@@ -1370,8 +1406,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Liuting Du (GD2KDRQNRZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Liuting Du (GD2KDRQNRZ)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1414,8 +1450,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

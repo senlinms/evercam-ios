@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AsyncImageView.h"
 #import "EvercamCamera.h"
-//#import "EaglUIView.h" //LD
+#import "EaglUIView.h"
 #import "GAI.h"
 #import "NIDropdown.h"
 
@@ -21,7 +21,7 @@
 @end
 
 @interface CameraPlayViewController : GAITrackedViewController<NIDropDownDelegate> {
-//    IBOutlet EaglUIView *video_view; //LD
+    IBOutlet EaglUIView *video_view; 
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeCode;
