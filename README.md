@@ -1,5 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/evercam/evercam-play-ios.png?label=ready&title=Ready)](https://waffle.io/evercam/evercam-play-ios)
-# Evercam Play - iOS
+# Evercam Play - iOS  [![Stories in Ready](https://badge.waffle.io/evercam/evercam-play-ios.png?label=ready&title=Ready)](https://waffle.io/evercam/evercam-play-ios)
 
 Evercam Play allows connect your own IP cameras, public webcams and any Android devices that you use as an IP camera. It connects you to Evercam dashboard so that you can see all your cameras on your desktop as well. 
 
