@@ -27,6 +27,7 @@
 #import "GlobalSettings.h"
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
+#import "CommonFunctions.h"
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
@@ -45,6 +46,7 @@
 @property (nonatomic, strong) NSMutableArray *vendorsNameArray;
 @property (nonatomic, strong) NSArray *modelsArray;
 @property (nonatomic, strong) NSMutableArray *modelsNameArray;
+@property (weak, nonatomic) IBOutlet UITextField *statusLabel;
 
 @end
 
@@ -52,7 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.statusLabel.text = @"Hello";
     self.screenName = @"Add/Edit Camera";
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -607,6 +609,7 @@
 
 #pragma mark - UITextField Delegate methods
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.statusLabel.text = @"";
     self.focusedTextField = textField;
 }
 
@@ -614,6 +617,7 @@
     [textField resignFirstResponder];
     return YES;
 }
+
 
 #pragma mark - UITapGesture Recognizer
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
@@ -1146,6 +1150,18 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+#pragma mark - Methods by Musaab
+
+- (IBAction)textFieldDidChange:(id)sender {
+    self.statusLabel.text = @"";
+}
+
+- (IBAction)textFieldDidEndEdition:(id)sender {
+    
+    //NSString* response = SendRequest(NSString* ip, NSString* port);
+}
+
 
 
 @end

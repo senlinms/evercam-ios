@@ -14,8 +14,8 @@
 #import <SplunkMint/SplunkMint.h>
 #import "EvercamShell.h"
 #import "GlobalSettings.h"
-
 #import "Mixpanel.h"
+#import "SharedManager.h"
 
 @interface AppDelegate ()
 
@@ -26,8 +26,18 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    NSString* url = @"http://tuq.in/tools/port.txt";                                // string Test
+//    NSString* url1 = @"http://192.168.1.4/projects/asset_manager/grade/get";        // jsonDict Test
+//    NSString* url2 = @"http://192.168.1.4/projects/asset_manager/grade/jsonArray2";  // jsonArray Test
+    NSDictionary *params = @{@"ip": @"5.149.169.19", @"port": @"22"};
+
+    [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseObject) {
+        NSLog(@"Status: %@", status);
+        NSLog(@"%@", responseObject);
+    }];
+    
     
     [GlobalSettings sharedInstance].isPhone = YES;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
