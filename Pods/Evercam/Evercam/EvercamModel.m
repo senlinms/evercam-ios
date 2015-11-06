@@ -17,10 +17,20 @@
         self.mId = [modelDict valueForKey:@"id"];
         self.vId = [modelDict valueForKey:@"vendor_id"];
         self.name = [modelDict valueForKey:@"name"];
+        
+        self.iconUrl = modelDict[@"images"][@"icon"];
+        self.originalUrl = modelDict[@"images"][@"original"];
+        self.thumbUrl = modelDict[@"images"][@"thumbnail"];
+        
         self.defaults = [[EvercamDefaults alloc] initWithDictionary:[modelDict valueForKey:@"defaults"]];
     }
     
     return self;
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"name: %@, icon: %@, original: %@, thumb: %@,",self.name, self.iconUrl, self.originalUrl, self.thumbUrl];
 }
 
 @end

@@ -89,14 +89,6 @@
                         <action selector="onSignIn:" destination="-1" eventType="touchUpInside" id="euw-XK-dvN"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0oR-DV-NU0">
-                    <rect key="frame" x="225" y="337" width="80" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="StoryBoard"/>
-                    <connections>
-                        <action selector="StoryBoardButton_Pressed:" destination="-1" eventType="touchUpInside" id="wfg-W8-0Ld"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedTopBarMetrics"/>

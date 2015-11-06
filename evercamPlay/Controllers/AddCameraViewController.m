@@ -27,13 +27,14 @@
 #import "GlobalSettings.h"
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
-#import "CommonFunctions.h"
+#import "SharedManager.h"
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
     NIDropDown *vendorDropDown;
     NIDropDown *modelDropDown;
     GCDAsyncSocket *asyncSocket;
+    UITextField *statusLabel;
 }
 @property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -46,7 +47,12 @@
 @property (nonatomic, strong) NSMutableArray *vendorsNameArray;
 @property (nonatomic, strong) NSArray *modelsArray;
 @property (nonatomic, strong) NSMutableArray *modelsNameArray;
-@property (weak, nonatomic) IBOutlet UITextField *statusLabel;
+@property (weak, nonatomic) IBOutlet UITextField *httpPortStatusLabel;
+@property (weak, nonatomic) IBOutlet UITextField *rtspPortStatusLabel;
+
+//--------------------------------views to hide---------------------------------
+@property (weak, nonatomic) IBOutlet UIView *snapshotView;
+
 
 @end
 
@@ -54,8 +60,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.statusLabel.text = @"Hello";
+    self.tfExternalHost.text = @"5.149.169.19";
     self.screenName = @"Add/Edit Camera";
+    self.tfVendor.text = @"Unknown/Other";
+    [self getCameraName];
+    [self populateIPTextField];
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
@@ -92,8 +101,8 @@
         self.tfPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfSnapshot.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/snapshot.jpg" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfExternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"149.5.43.10" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfExternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"External HTTP port" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfExternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"External RTSP port" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfExternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"80" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfExternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"554" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfInternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"192.168.1.122" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfInternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal HTTP port" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfInternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal RTSP port" attributes:@{NSForegroundColorAttributeName: color}];
@@ -195,6 +204,7 @@
                               }
                               failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                  NSLog(@"---- ERROR ---- %@", [error userInfo]);
                                   [self showImageView:nil];
                               }];
     
@@ -224,6 +234,8 @@
 }
 
 - (IBAction)add:(id)sender {
+//    [SharedManager getCameraName];
+//    return;
     EvercamCameraBuilder *cameraBuilder = [self buildCameraWithLocalCheck];
     if (cameraBuilder != nil) {
         if (!self.editCamera) { // create camera
@@ -609,7 +621,6 @@
 
 #pragma mark - UITextField Delegate methods
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.statusLabel.text = @"";
     self.focusedTextField = textField;
 }
 
@@ -1049,6 +1060,8 @@
             }
         }];
     }
+    
+    NSLog(@"%@",self.modelsArray);
 }
 
 - (EvercamVendor *)getVendorWithName:(NSString *)vendorName {
@@ -1112,6 +1125,9 @@
     }
 }
 
+
+
+
 #pragma mark NIDropdown delegate
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index
 {
@@ -1123,9 +1139,48 @@
             self.currentModel = nil;
             self.tfVendor.text = @"Unknown/Other";
             self.tfModel.text = @"Unknown/Other";
+            self.snapshotView.hidden = false;
             return;
         }
         self.currentVendor = self.vendorsArray[index-1];
+        NSLog(@"Current Vendor: %@", self.currentVendor);
+        self.snapshotView.hidden = true;
+
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        
+        
+        NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentVendor.logoUrl]];
+        
+        [self.logoImageView setImageWithURLRequest:request placeholderImage:nil
+             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 self.logoImageView.image = image;
+                 
+                 //-------------------------------set default model image--------------------------------------
+                 self.currentModel = self.modelsArray[0];
+                 NSLog(@"Current Model: %@", self.currentModel);
+                 
+                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                 NSURLRequest* modelRequest = [self imageRequestWithURL:[NSURL URLWithString:self.currentModel.thumbUrl]];
+                 
+                 [self.thumbImageView setImageWithURLRequest:modelRequest placeholderImage:nil
+                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                         self.thumbImageView.image = image;
+                                                     }
+                                                     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+                                                         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                         NSLog(@"---- THUMBNAIL ERROR ---- %@", [error userInfo]);
+                                                     }];
+                 //------------------------------------------------------------------------------------------
+             }
+             failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                NSLog(@"---- LOGO ERROR ---- %@", [error userInfo]);
+        }];
+        
+    
         self.tfVendor.text = self.currentVendor.name;
         
         [self getAllModels];
@@ -1134,6 +1189,22 @@
     {
         modelDropDown = nil;
         self.currentModel = self.modelsArray[index];
+        NSLog(@"Current Model: %@", self.currentModel);
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentModel.thumbUrl]];
+        
+        [self.thumbImageView setImageWithURLRequest:request placeholderImage:nil
+             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 self.thumbImageView.image = image;
+             }
+             failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 NSLog(@"---- THUMBNAIL ERROR ---- %@", [error userInfo]);
+        }];
+        
+        
         self.tfModel.text = self.currentModel.name;
         if (self.editCamera == nil) {
             self.tfUsername.text = self.currentModel.defaults.authUsername;
@@ -1142,6 +1213,8 @@
         }
     }
 }
+
+
 
 #pragma mark UIAlertViewDelegate - Method
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1154,13 +1227,218 @@
 #pragma mark - Methods by Musaab
 
 - (IBAction)textFieldDidChange:(id)sender {
-    self.statusLabel.text = @"";
+//    if (sender == self.tfExternalRtspPort) {
+//        self.rtspPortStatusLabel.text = @"";
+//    }
+//    if (sender == self.tfExternalHttpPort) {
+//        self.httpPortStatusLabel.text = @"";
+//    }
 }
 
-- (IBAction)textFieldDidEndEdition:(id)sender {
-    
-    //NSString* response = SendRequest(NSString* ip, NSString* port);
+-(BOOL)isStringEmpty:(NSString*)text {
+    if([text isEqualToString:@""]) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
 }
+
+- (IBAction)httpTextFieldDidEndEdition:(id)sender {
+    NSString* url = [SharedManager getCheckPortUrl];
+    NSString* ipAddress = self.tfExternalHost.text;
+    NSString* httpPort = self.tfExternalHttpPort.text;
+    
+    
+    if([self isStringEmpty:ipAddress])
+        return;
+    
+    
+    NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
+    [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
+        
+        if([responseDict[@"JSON"] isEqualToString:@"true"])
+        {
+            if (![self.tfExternalHttpPort.text  isEqual: @""]) {
+                self.httpPortStatusLabel.text = @"Port is open";
+                self.httpPortStatusLabel.textColor = [UIColor greenColor];
+            }
+        }
+        else
+        {
+           if (![self.tfExternalHttpPort.text  isEqual: @""]) {
+                self.httpPortStatusLabel.text = @"Port is closed";
+                self.httpPortStatusLabel.textColor = [UIColor redColor];
+            }
+        }
+        
+        if([status isEqualToString:@"error"])
+        {
+            NSLog(@"Port-Checking server down");
+        }
+        
+    }];
+    
+}
+
+
+
+- (IBAction)rtspTextFieldDidEndEdition:(id)sender {
+    NSString* url = [SharedManager getCheckPortUrl];
+    NSString* ipAddress = self.tfExternalHost.text;
+    NSString* rtspPort = self.tfExternalRtspPort.text;
+    
+   
+    if([self isStringEmpty:ipAddress])
+        return;
+        
+    
+    NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
+    [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
+        
+        if([responseDict[@"JSON"] isEqualToString:@"true"])
+        {
+            if (![self.tfExternalRtspPort.text  isEqual: @""]) {
+                self.rtspPortStatusLabel.text = @"Port is open";
+                self.rtspPortStatusLabel.textColor = [UIColor greenColor];
+            }
+        }
+        else
+        {
+            if (![self.tfExternalRtspPort.text  isEqual: @""]) {
+                self.rtspPortStatusLabel.text = @"Port is closed";
+                self.rtspPortStatusLabel.textColor = [UIColor redColor];
+            }
+        }        
+        
+        if([status isEqualToString:@"error"])
+        {
+            NSLog(@"Port-Checking server down");
+        }
+        
+    }];
+}
+
+
+//-(NSDictionary*)checkPort:(NSMutableDictionary *)params
+//{
+//    NSString* url = [SharedManager getCheckPortUrl];
+//    NSString* ipAddress = self.tfExternalHost.text;
+//    NSString* httpPort = self.tfExternalHttpPort.text;
+//    NSString* rtspPort = self.tfExternalRtspPort.text;
+//    NSMutableDictionary* dict;
+//    
+//    
+//    [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
+//        
+//        
+//        dict = [[[NSMutableDictionary alloc]initWithDictionary:responseDict] mutableCopy];
+//        
+//        
+////        if([responseDict[@"JSON"] isEqualToString:@"true"])
+////        {
+////            if ((UITextField*)sender == self.tfExternalRtspPort && ![self.tfExternalRtspPort.text  isEqual: @""]) {
+////                self.rtspPortStatusLabel.text = @"Port is open";
+////                self.rtspPortStatusLabel.textColor = [UIColor greenColor];
+////            }
+////            else if ((UITextField*)sender == self.tfExternalHttpPort && ![self.tfExternalHttpPort.text  isEqual: @""]) {
+////                self.httpPortStatusLabel.text = @"Port is open";
+////                self.httpPortStatusLabel.textColor = [UIColor greenColor];
+////            }
+////        }
+////        else
+////        {
+////            if ((UITextField*)sender == self.tfExternalRtspPort && ![self.tfExternalRtspPort.text  isEqual: @""]) {
+////                self.rtspPortStatusLabel.text = @"Port is closed";
+////                self.rtspPortStatusLabel.textColor = [UIColor redColor];
+////            }
+////            else if ((UITextField*)sender == self.tfExternalHttpPort && ![self.tfExternalHttpPort.text  isEqual: @""]) {
+////                self.httpPortStatusLabel.text = @"Port is closed";
+////                self.httpPortStatusLabel.textColor = [UIColor redColor];
+////            }
+////        }
+////        
+////        if([status isEqualToString:@"error"])
+////        {
+////            NSLog(@"Port check server down");
+////        }
+//        
+//    }];
+//return dict;
+//}
+
+
+
+
+-(void)getCameraName
+{
+    
+    [[EvercamShell shell] getAllCameras:[APP_DELEGATE defaultUser].username includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
+        //        [self hideLoadingView];
+        if (error == nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                EvercamCamera* camera = [cameras lastObject];
+                
+                self.tfName.text = [NSString stringWithFormat:@"%@ camera",camera.name];
+            });
+        }
+        else
+        {
+            NSLog(@"Error %li: %@", (long)error.code, error.localizedDescription);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                [alertView show];
+            });
+        }
+    }];
+    
+}
+
+
+- (void)populateIPTextField {
+    
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        //No internet
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        [self GetIP];
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
+}
+
+- (void)GetIP
+{
+    
+    NSString* url = [SharedManager getIPUrl];
+    
+    
+    [SharedManager get:url params:nil callback:^(NSString *status, NSMutableDictionary *responseDict) {
+        
+        self.tfExternalHost.text = responseDict[@"JSON"];
+        
+        if([status isEqualToString:@"error"])
+        {
+            NSLog(@"No any response from server");
+        }
+        
+    }];
+    
+}
+
+
 
 
 

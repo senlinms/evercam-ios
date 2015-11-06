@@ -10,6 +10,9 @@
 
 @interface SharedManager : NSObject
 
++(NSString*)getCheckPortUrl;
++(NSString*)getIPUrl;
+
 +(void)get:(NSString*)url params:(NSDictionary*)params callback:(void (^)(NSString* status, NSMutableDictionary* responseObject))callback;
 
 @end

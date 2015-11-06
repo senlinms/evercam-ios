@@ -22,14 +22,14 @@
 
 @implementation WelcomeViewController
 
-- (IBAction)StoryBoardButton_Pressed:(id)sender {
-    
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"myViewController"];
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:vc animated:YES completion:NULL];
-    
-}
+//- (IBAction)StoryBoardButton_Pressed:(id)sender {
+//    
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"myViewController"];
+//    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [self presentViewController:vc animated:YES completion:NULL];
+//    
+//}
 
 
 

@@ -28,15 +28,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    NSString* url = @"http://tuq.in/tools/port.txt";                                // string Test
 //    NSString* url1 = @"http://192.168.1.4/projects/asset_manager/grade/get";        // jsonDict Test
 //    NSString* url2 = @"http://192.168.1.4/projects/asset_manager/grade/jsonArray2";  // jsonArray Test
-    NSDictionary *params = @{@"ip": @"5.149.169.19", @"port": @"22"};
+//    NSDictionary *params = @{@"ip": @"5.149.169.19", @"port": @"22"};
 
-    [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseObject) {
-        NSLog(@"Status: %@", status);
-        NSLog(@"%@", responseObject);
-    }];
+//    NSString* url = @"http://tuq.in/tools/port.txt";                                // string Test
+//    [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseObject) {
+//        NSLog(@"Status: %@", status);
+//        NSLog(@"%@", responseObject);
+//    }];
     
     
     [GlobalSettings sharedInstance].isPhone = YES;
@@ -55,24 +55,24 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
-    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    //NSString *bugSenseAPIKey = [contents valueForKey:@"BugSenseAPIKey"];
-    NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
-    
-    //[BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
-    NSString *SplunkMintAPIKey = [contents valueForKey:@"SplunkMintAPIKey"];
-    [[Mint sharedInstance] initAndStartSession:SplunkMintAPIKey];
-
-
-    NSString *MixpanelToken = [contents valueForKey:@"MixpanelToken"];
-    [Mixpanel sharedInstanceWithToken:MixpanelToken];
-//    [Mixpanel sharedInstanceWithToken:@"0d39cf8b82905a23f20ef7f0e85c3921"];
-    
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    [GAI sharedInstance].dispatchInterval = 20;
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
+//    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
+//    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+//    //NSString *bugSenseAPIKey = [contents valueForKey:@"BugSenseAPIKey"];
+//    NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
+//    
+//    //[BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
+//    NSString *SplunkMintAPIKey = [contents valueForKey:@"SplunkMintAPIKey"];
+//    [[Mint sharedInstance] initAndStartSession:SplunkMintAPIKey];
+//
+//
+//    NSString *MixpanelToken = [contents valueForKey:@"MixpanelToken"];
+//    [Mixpanel sharedInstanceWithToken:MixpanelToken];
+////    [Mixpanel sharedInstanceWithToken:@"0d39cf8b82905a23f20ef7f0e85c3921"];
+//    
+//    [GAI sharedInstance].trackUncaughtExceptions = YES;
+//    [GAI sharedInstance].dispatchInterval = 20;
+//    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+//    [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
     
     return YES;
 }

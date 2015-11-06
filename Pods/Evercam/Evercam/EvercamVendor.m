@@ -16,9 +16,15 @@
     {
         self.vId = [vendorDict valueForKey:@"id"];
         self.name = [vendorDict valueForKey:@"name"];
+        self.logoUrl = [vendorDict valueForKey:@"logo"];
+        
     }
     
     return self;
+}
+
+-(NSString *)description {
+    return [NSString stringWithFormat:@"vid: %@, name: %@, logoUrl: %@", self.vId, self.name, self.logoUrl];
 }
 
 @end

@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) NSString *vId;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *logoUrl;
+
 
 - (id) initWithDictionary: (NSDictionary *)vendorDict;
 

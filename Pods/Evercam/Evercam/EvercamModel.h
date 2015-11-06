@@ -14,6 +14,9 @@
 @property (nonatomic, strong) NSString *mId;
 @property (nonatomic, strong) NSString *vId;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *thumbUrl;
+@property (nonatomic, strong) NSString *originalUrl;
+@property (nonatomic, strong) NSString *iconUrl;
 @property (nonatomic, strong) EvercamDefaults *defaults;
 
 - (id) initWithDictionary: (NSDictionary *)modelDict;
