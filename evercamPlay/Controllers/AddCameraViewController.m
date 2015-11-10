@@ -35,11 +35,13 @@
     NIDropDown *modelDropDown;
     GCDAsyncSocket *asyncSocket;
     UITextField *statusLabel;
+    NSString* userName;
 }
 @property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UITextField *tfRTSPURL;
 @property (strong, nonatomic) UITextField *focusedTextField;
 @property (nonatomic, strong) EvercamVendor *currentVendor;
 @property (nonatomic, strong) EvercamModel *currentModel;
@@ -52,7 +54,8 @@
 
 //--------------------------------views to hide---------------------------------
 @property (weak, nonatomic) IBOutlet UIView *snapshotView;
-
+@property (weak, nonatomic) IBOutlet UIView *rtstURLView;
+@property (weak, nonatomic) IBOutlet UIView *cameraView;
 
 @end
 
@@ -63,6 +66,7 @@
     self.tfExternalHost.text = @"5.149.169.19";
     self.screenName = @"Add/Edit Camera";
     self.tfVendor.text = @"Unknown/Other";
+    self.cameraView.hidden = true;
     [self getCameraName];
     [self populateIPTextField];
     
@@ -151,7 +155,14 @@
 }
 
 - (IBAction)test:(id)sender {
+    
+    BOOL ip = [self CheckIPAddress];    // to check either ip address is valid or not.
+    if (ip) {
+        return;
+    }
+    
     [self.focusedTextField resignFirstResponder];
+    
     if (self.tfExternalHost.text.length == 0) {
         
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"Please specify an external IP address.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -233,9 +244,15 @@
     return request;
 }
 
-- (IBAction)add:(id)sender {
+- (IBAction)add:(id)sender {                                                                    // finish and add
 //    [SharedManager getCameraName];
 //    return;
+    
+    BOOL ip = [self CheckIPAddress];
+    if (ip) {
+        return;
+    }
+    
     EvercamCameraBuilder *cameraBuilder = [self buildCameraWithLocalCheck];
     if (cameraBuilder != nil) {
         if (!self.editCamera) { // create camera
@@ -670,6 +687,7 @@
     if (self.editCamera) {
         self.titleLabel.text = @"Edit Camera";
         self.tfID.enabled = NO;
+        self.cameraView.hidden = false;
         [self.addButton setTitle:@"Save Changes" forState:UIControlStateNormal];
         
         self.tfID.text = self.editCamera.camId;
@@ -700,19 +718,15 @@
     EvercamCameraBuilder *cameraBuilder = nil;
     NSString *cameraID = self.tfID.text;
     NSString *cameraName = self.tfName.text;
-    if (cameraID.length == 0) {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify a unique ID of your camera" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [simpleAlert show];
-        
-        return nil;
-    }
     
-    if (cameraName.length == 0) {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify a friendly name of your camera" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [simpleAlert show];
-        
-        return nil;
-    }
+    // cameraID: removed functionality as per requirement
+//    if (cameraID.length == 0) {
+//        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify a unique ID of your camera" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [simpleAlert show];
+//        
+//        return nil;
+//    }
+   
     
     cameraBuilder = [[EvercamCameraBuilder alloc] initWithCameraId:cameraID andCameraName:cameraName andIsPublic:NO];
     
@@ -1127,7 +1141,6 @@
 
 
 
-
 #pragma mark NIDropdown delegate
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index
 {
@@ -1140,14 +1153,16 @@
             self.tfVendor.text = @"Unknown/Other";
             self.tfModel.text = @"Unknown/Other";
             self.snapshotView.hidden = false;
+            self.rtstURLView.hidden = false;
+            [self ClearFields];
             return;
         }
         self.currentVendor = self.vendorsArray[index-1];
         NSLog(@"Current Vendor: %@", self.currentVendor);
         self.snapshotView.hidden = true;
+        self.rtstURLView.hidden = true;
 
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];       
         
         
         NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentVendor.logoUrl]];
@@ -1249,6 +1264,9 @@
     NSString* ipAddress = self.tfExternalHost.text;
     NSString* httpPort = self.tfExternalHttpPort.text;
     
+    if([self isStringEmpty:httpPort])
+        return;
+
     
     if([self isStringEmpty:ipAddress])
         return;
@@ -1282,16 +1300,16 @@
 }
 
 
-
 - (IBAction)rtspTextFieldDidEndEdition:(id)sender {
     NSString* url = [SharedManager getCheckPortUrl];
     NSString* ipAddress = self.tfExternalHost.text;
     NSString* rtspPort = self.tfExternalRtspPort.text;
-    
    
     if([self isStringEmpty:ipAddress])
         return;
-        
+    
+    if([self isStringEmpty:rtspPort])
+        return;
     
     NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
@@ -1317,6 +1335,37 @@
         }
         
     }];
+}
+
+- (IBAction)ipTextFieldDidEndEdition:(id)sender {
+    [self CheckIPAddress];
+}
+
+- (IBAction)tfUserNameDidBeginEditing:(id)sender {
+    userName = self.tfUsername.text;
+}
+
+- (IBAction)tfUserNameDidEndEditing:(id)sender {
+    if (userName != self.tfUsername.text) {
+        self.tfPassword.text = @"";
+    }
+}
+
+-(BOOL)CheckIPAddress
+{
+    // this code is to check either user entered local/private ip-address
+    NSError *error = NULL;    
+    NSString *pattern = @"(127\.)|(10\.)|(172\.1[6-9]\.)|(172\.2[0-9]\.)|(172\.3[0-1]\.)|(192\.168\.)";
+    NSString *string = self.tfExternalHost.text;
+    NSRange range = NSMakeRange(0, string.length);
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
+    NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
+    if (matches.count>0) {
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"Please provide valid external IP address.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
+        return true;
+    }
+    return false;
 }
 
 
@@ -1419,11 +1468,19 @@
     }
 }
 
+-(void)ClearFields
+{
+    self.tfSnapshot.text = @"";
+    self.tfUsername.text = @"";
+    self.tfPassword.text = @"";
+    self.tfRTSPURL.text = @"";
+    self.tfExternalRtspPort.text = @"";
+}
+
 - (void)GetIP
 {
     
     NSString* url = [SharedManager getIPUrl];
-    
     
     [SharedManager get:url params:nil callback:^(NSString *status, NSMutableDictionary *responseDict) {
         
@@ -1437,6 +1494,8 @@
     }];
     
 }
+
+
 
 
 

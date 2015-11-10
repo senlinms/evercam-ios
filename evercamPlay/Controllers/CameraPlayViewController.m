@@ -319,7 +319,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             }];
         } else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[EvercamShell shell] deleteShareCamera:self.cameraInfo.camId andUserId:[APP_DELEGATE defaultUser].userId withBlock:^(BOOL success, NSError *error) {
+            [[EvercamShell shell] deleteShareCamera:self.cameraInfo.camId andUserId:[APP_DELEGATE defaultUser].email withBlock:^(BOOL success, NSError *error) {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 if (success) {
                     UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:NSLocalizedString(@"Camera deleted", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -488,7 +488,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
         
-        [sheet addButtonWithTitle:@"View Details" block:^{
+        [sheet addButtonWithTitle:@"Camera Settings" block:^{
             [self showCameraView];
         }];
         [sheet addButtonWithTitle:@"Saved Images" block:^{

@@ -372,4 +372,42 @@
     [[APP_DELEGATE viewController] presentViewController:cameraPlayNavVC animated:YES completion:nil];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    CustomNavigationController* cVC = [APP_DELEGATE viewController];
+
+    [cVC setHasLandscapeMode:YES];
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    
+//    NSArray *vcArr = [APP_DELEGATE viewController].viewControllers;
+    
+    UINavigationController* nvc = (UINavigationController*)[APP_DELEGATE viewController].presentedViewController;
+    
+    UIViewController* cvc = [nvc topViewController];
+    
+    
+    if([cvc isKindOfClass:[CameraPlayViewController class]])
+    {
+        CustomNavigationController* cVC = [APP_DELEGATE viewController];
+        
+        
+        [cVC setHasLandscapeMode:YES];
+        [UIViewController attemptRotationToDeviceOrientation];
+    }
+    else
+    {
+        CustomNavigationController* cVC = [APP_DELEGATE viewController];
+        [cVC setIsPortraitMode:YES];
+        [cVC setHasLandscapeMode:NO];
+        
+        NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+        [UIViewController attemptRotationToDeviceOrientation];
+    }
+    
+}
+
 @end

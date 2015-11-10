@@ -7,6 +7,8 @@
 //
 
 #import "CustomNavigationController.h"
+#import "CameraPlayViewController.h"
+#import "AppDelegate.h"
 
 @implementation CustomNavigationController
 
@@ -34,7 +36,34 @@
     }
 }
 
+
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    if (self.isPortraitMode) {
+        
+        UINavigationController* nvc = (UINavigationController*)[APP_DELEGATE viewController].presentedViewController;
+        
+        UIViewController* cvc = [nvc topViewController];
+        
+        if([cvc isKindOfClass:[CameraPlayViewController class]])
+        {
+            CustomNavigationController* cVC = [APP_DELEGATE viewController];
+            
+            [UIViewController attemptRotationToDeviceOrientation];
+            
+            return (UIInterfaceOrientation)[[UIDevice currentDevice] orientation];
+            
+        }
+        else
+        
+        return UIInterfaceOrientationPortrait;
+        
+    } else {
+        return UIInterfaceOrientationLandscapeLeft;
+    }
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation1
 {
     if (self.isPortraitMode) {
         return UIInterfaceOrientationPortrait;
