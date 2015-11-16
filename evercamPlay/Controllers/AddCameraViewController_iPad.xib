@@ -8,12 +8,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddCameraViewController">
             <connections>
                 <outlet property="cameraView" destination="Lhc-Q2-vol" id="K6b-3W-Skm"/>
+                <outlet property="credentialsView" destination="oLB-Z2-w4o" id="kr7-0p-DJe"/>
                 <outlet property="formView" destination="MJd-Nh-aJl" id="jTM-GP-UDE"/>
                 <outlet property="httpPortStatusLabel" destination="3gD-8H-gzG" id="6hY-H7-hey"/>
+                <outlet property="httpPortView" destination="ZQO-FC-aTK" id="PAy-WR-TOG"/>
                 <outlet property="imageContainer" destination="KQ7-eL-pF6" id="qiJ-q5-KOV"/>
                 <outlet property="imageView" destination="REt-de-vgf" id="3nN-7h-lM1"/>
+                <outlet property="ipAddressView" destination="Mqd-p6-5yg" id="Dwh-r2-5VM"/>
                 <outlet property="logoImageView" destination="Dox-fr-sf4" id="sZr-JO-leS"/>
+                <outlet property="nameView" destination="cr2-IR-ZKn" id="vgk-94-o05"/>
                 <outlet property="rtspPortStatusLabel" destination="fEm-vX-48a" id="5r1-OO-kqO"/>
+                <outlet property="rtspPortView" destination="pGl-Qa-Iod" id="aKZ-dc-X8l"/>
                 <outlet property="rtstURLView" destination="yg1-Ev-N0H" id="FxQ-p2-cX5"/>
                 <outlet property="scrollView" destination="JV9-yi-dj2" id="tHs-d4-7cp"/>
                 <outlet property="snapshotView" destination="K72-xQ-EXd" id="u0S-ug-Yoq"/>
@@ -237,36 +242,8 @@
                                                 </textField>
                                             </subviews>
                                         </view>
-                                        <view contentMode="scaleToFill" id="K72-xQ-EXd">
-                                            <rect key="frame" x="215" y="334" width="320" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" id="8ax-oj-eYN" userLabel="line">
-                                                    <rect key="frame" x="114" y="28" width="201" height="1"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snapshot" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n3M-a2-TPv">
-                                                    <rect key="frame" x="8" y="5" width="92" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="/snapshot.jpg" minimumFontSize="17" id="yGm-pR-MpR">
-                                                    <rect key="frame" x="114" y="0.0" width="201" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="-1" id="QLP-WQ-pyD"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                        </view>
                                         <view contentMode="scaleToFill" id="pGl-Qa-Iod">
-                                            <rect key="frame" x="215" y="375" width="320" height="30"/>
+                                            <rect key="frame" x="215" y="334" width="320" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="fzh-zN-wke" userLabel="line">
@@ -301,36 +278,8 @@
                                                 </label>
                                             </subviews>
                                         </view>
-                                        <view contentMode="scaleToFill" id="yg1-Ev-N0H">
-                                            <rect key="frame" x="218" y="413" width="315" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RTSP URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ceq-lQ-KBe">
-                                                    <rect key="frame" x="5" y="5" width="92" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" id="e9n-Wt-XkV" userLabel="line">
-                                                    <rect key="frame" x="109" y="28" width="201" height="1"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="roof-cam" minimumFontSize="17" id="9Dt-md-WVj">
-                                                    <rect key="frame" x="114" y="0.0" width="201" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="-1" id="SeU-Mj-iPP"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                        </view>
                                         <view contentMode="scaleToFill" id="oLB-Z2-w4o">
-                                            <rect key="frame" x="212" y="451" width="320" height="30"/>
+                                            <rect key="frame" x="215" y="372" width="320" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="M4H-oe-Cvs" userLabel="line">
@@ -456,6 +405,62 @@
                                             <rect key="frame" x="513" y="64" width="10" height="10"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <view contentMode="scaleToFill" id="K72-xQ-EXd">
+                                            <rect key="frame" x="215" y="410" width="320" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="8ax-oj-eYN" userLabel="line">
+                                                    <rect key="frame" x="114" y="28" width="201" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snapshot" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n3M-a2-TPv">
+                                                    <rect key="frame" x="8" y="5" width="92" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="/snapshot.jpg" minimumFontSize="17" id="yGm-pR-MpR">
+                                                    <rect key="frame" x="114" y="0.0" width="201" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="QLP-WQ-pyD"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                        </view>
+                                        <view contentMode="scaleToFill" id="yg1-Ev-N0H">
+                                            <rect key="frame" x="218" y="448" width="315" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RTSP URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ceq-lQ-KBe">
+                                                    <rect key="frame" x="5" y="5" width="92" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" id="e9n-Wt-XkV" userLabel="line">
+                                                    <rect key="frame" x="109" y="28" width="201" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="roof-cam" minimumFontSize="17" id="9Dt-md-WVj">
+                                                    <rect key="frame" x="114" y="0.0" width="201" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="SeU-Mj-iPP"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>

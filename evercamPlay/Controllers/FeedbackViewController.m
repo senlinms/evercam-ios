@@ -17,8 +17,6 @@
 @interface FeedbackViewController () <MFMailComposeViewControllerDelegate>
 {
     UITextField *activeTextField;
-    
-    __weak IBOutlet UIButton *btnBack;
 }
 @end
 
@@ -35,12 +33,6 @@
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.contentView.layer insertSublayer:gradient atIndex:0];
     
-    SWRevealViewController *revealController = [self revealViewController];
-    
-    [self.btnMenu addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
-    
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor lightTextColor];
         self.txt_username.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
@@ -56,19 +48,11 @@
         self.txt_email.text = [APP_DELEGATE defaultUser].email;
     }
     
-    if (self.cameraID) {
-        self.btnMenu.hidden = YES;
-        btnBack.hidden = NO;
-    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)back:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)BackPressed:(id)sender {

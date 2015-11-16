@@ -37,7 +37,7 @@
 #import "GlobalSettings.h"
 #import "GAIDictionaryBuilder.h"
 #import "Config.h"
-#import "MenuViewControllerCellTableViewCell.h"
+#import "MenuViewControllerCell.h"
 
 @interface MenuViewController()
 {
@@ -79,13 +79,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
-    MenuViewControllerCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    MenuViewControllerCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSInteger row = indexPath.row;
     
     if (nil == cell)
     {
-        cell = [[MenuViewControllerCellTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        cell.backgroundColor = [UIColor greenColor];
+        cell = [[MenuViewControllerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor whiteColor];
         cell.textLabel.textColor = [UIColor grayColor];
     }
@@ -114,7 +114,7 @@
     else if (row == 4)
     {
         text = @"About Evercam";
-        cell.imageView.image = [UIImage imageNamed:@"icon_light_info.png"];
+        cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
     }
 
     cell.textLabel.text = NSLocalizedString( text,nil );

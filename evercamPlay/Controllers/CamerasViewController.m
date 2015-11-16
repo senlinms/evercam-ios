@@ -67,7 +67,7 @@
     
     if (self.selectedRow) {
         NSLog(@"%li",(long)self.selectedRow);
-        [self PopVC:self.selectedRow];
+        [self PushVC:self.selectedRow];
     }
     
     
@@ -108,7 +108,7 @@
 }
 
 
--(void)PopVC:(NSInteger)row
+-(void)PushVC:(NSInteger)row
 {
     UIViewController *newFrontController = nil;
     SWRevealViewController *revealController = self.revealViewController;

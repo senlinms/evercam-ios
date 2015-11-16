@@ -17,6 +17,5 @@
 @property (nonatomic, strong) IBOutlet UITextField *txt_username;
 @property (nonatomic, strong) IBOutlet UITextField *txt_email;
 @property (nonatomic, strong) IBOutlet UITextField *txt_feedback;
-@property (nonatomic, strong) IBOutlet UIButton *btnMenu;
 
 @end

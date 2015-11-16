@@ -59,8 +59,8 @@
 		41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB781AD6DC180016ACCA /* QuartzCore.framework */; };
 		41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */; };
 		41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB7C1AD708730016ACCA /* icon_offline.png */; };
-		5859990E1BF07B6D00CDC457 /* icon_light_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 5859990D1BF07B6D00CDC457 /* icon_light_info.png */; };
-		585999111BF1B2DF00CDC457 /* MenuViewControllerCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585999101BF1B2DF00CDC457 /* MenuViewControllerCellTableViewCell.m */; };
+		585999111BF1B2DF00CDC457 /* MenuViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */; };
+		585999131BF9C53000CDC457 /* ic_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 585999121BF9C53000CDC457 /* ic_info.png */; };
 		5D814025BA9B52C1265ECA86 /* libPods-evercamPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 241B18B5C67528E78AF3CBED /* libPods-evercamPlay.a */; };
 		6C0497DF1BDE48640095956B /* CommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0497DE1BDE48640095956B /* CommonFunctions.m */; };
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
@@ -292,9 +292,9 @@
 		41BEFB781AD6DC180016ACCA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		41BEFB7C1AD708730016ACCA /* icon_offline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_offline.png; sourceTree = "<group>"; };
-		5859990D1BF07B6D00CDC457 /* icon_light_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_light_info.png; sourceTree = "<group>"; };
-		5859990F1BF1B2DF00CDC457 /* MenuViewControllerCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewControllerCellTableViewCell.h; sourceTree = "<group>"; };
-		585999101BF1B2DF00CDC457 /* MenuViewControllerCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewControllerCellTableViewCell.m; sourceTree = "<group>"; };
+		5859990F1BF1B2DF00CDC457 /* MenuViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewControllerCell.h; sourceTree = "<group>"; };
+		585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewControllerCell.m; sourceTree = "<group>"; };
+		585999121BF9C53000CDC457 /* ic_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_info.png; sourceTree = "<group>"; };
 		6C0497DE1BDE48640095956B /* CommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFunctions.m; sourceTree = "<group>"; };
 		6C0497E01BDE49B60095956B /* CommonFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonFunctions.h; sourceTree = "<group>"; };
 		6C7262B31BDDF4F300446CBE /* MainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenViewController.h; sourceTree = "<group>"; };
@@ -812,7 +812,6 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
-				5859990D1BF07B6D00CDC457 /* icon_light_info.png */,
 				6CF591FA1BF05FE20044B0F1 /* logo.png */,
 				E3CB15AD1B287DD900413197 /* evercam_icon_nav.png */,
 				E3CB15AE1B287DD900413197 /* evercam_icon_nav@2x.png */,
@@ -832,6 +831,7 @@
 				410748761ADFDBE0004D10C9 /* btn_play.png */,
 				410748771ADFDBE0004D10C9 /* btn_save.png */,
 				CB1C76941AAB871A00680FE3 /* cam_unavailable.png */,
+				585999121BF9C53000CDC457 /* ic_info.png */,
 				410A13B41AE232D5008CA21C /* dropdown.png */,
 				CB1C769F1AAB871A00680FE3 /* ic_action_new.png */,
 				CB1C76A11AAB871A00680FE3 /* ic_action_refresh.png */,
@@ -953,8 +953,8 @@
 				E30900711B16417400E5B5C0 /* LoginViewController_iPad.xib */,
 				CB44E85B1AAE9E7D00A78C11 /* MenuViewController.h */,
 				CB44E85C1AAE9E7D00A78C11 /* MenuViewController.m */,
-				5859990F1BF1B2DF00CDC457 /* MenuViewControllerCellTableViewCell.h */,
-				585999101BF1B2DF00CDC457 /* MenuViewControllerCellTableViewCell.m */,
+				5859990F1BF1B2DF00CDC457 /* MenuViewControllerCell.h */,
+				585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */,
 				CB44E85D1AAE9E7D00A78C11 /* MenuViewController.xib */,
 				CB44E85E1AAE9E7D00A78C11 /* SettingsViewController.h */,
 				CB44E85F1AAE9E7D00A78C11 /* SettingsViewController.m */,
@@ -1143,7 +1143,6 @@
 				E3CB15AB1B2879C700413197 /* btn_export.png in Resources */,
 				E30201D11B16CFE20006DAE8 /* FeedbackViewController_iPad.xib in Resources */,
 				E30201D31B173B4A0006DAE8 /* AccountCell_iPad.xib in Resources */,
-				5859990E1BF07B6D00CDC457 /* icon_light_info.png in Resources */,
 				E30201BE1B16C82D0006DAE8 /* alert-black-button.png in Resources */,
 				CB318E281AFBCE11004FFA8E /* ic_feedback.png in Resources */,
 				CB44E87D1AAE9E7D00A78C11 /* WelcomeViewController.xib in Resources */,
@@ -1180,6 +1179,7 @@
 				E30900761B1646D100E5B5C0 /* play_page_feature_iPad@2x.png in Resources */,
 				E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */,
 				6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */,
+				585999131BF9C53000CDC457 /* ic_info.png in Resources */,
 				CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */,
 				E30201C91B16C82D0006DAE8 /* alert-window@2x.png in Resources */,
 				413BB2931ADAB6900083A5DC /* AddCameraViewController.xib in Resources */,
@@ -1294,7 +1294,7 @@
 				CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */,
 				CB318E541AFC3565004FFA8E /* MKAnnotationView+WebCache.m in Sources */,
 				CB01CDB01ABD675100420CE1 /* NIDropDown.m in Sources */,
-				585999111BF1B2DF00CDC457 /* MenuViewControllerCellTableViewCell.m in Sources */,
+				585999111BF1B2DF00CDC457 /* MenuViewControllerCell.m in Sources */,
 				CB318E311AFC0875004FFA8E /* GCDAsyncUdpSocket.m in Sources */,
 				CB318E621AFC3565004FFA8E /* UIImageView+WebCache.m in Sources */,
 				41208A611AD97D44009C4FC2 /* SMTPAPI.m in Sources */,

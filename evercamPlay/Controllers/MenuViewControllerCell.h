@@ -1,5 +1,5 @@
 //
-//  MenuViewControllerCellTableViewCell.h
+//  MenuViewControllerCell.h
 //  evercamPlay
 //
 //  Created by Ahmad  Hassan on 10/11/2015.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MenuViewControllerCellTableViewCell : UITableViewCell
+@interface MenuViewControllerCell : UITableViewCell
 
 @end

@@ -21,6 +21,11 @@
 @interface AddCameraViewController : GAITrackedViewController <NIDropDownDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *nameView;
+@property (weak, nonatomic) IBOutlet UIView *ipAddressView;
+@property (weak, nonatomic) IBOutlet UIView *httpPortView;
+@property (weak, nonatomic) IBOutlet UIView *rtspPortView;
+@property (weak, nonatomic) IBOutlet UIView *credentialsView;
 @property (weak, nonatomic) IBOutlet UIView *formView;
 @property (weak, nonatomic) IBOutlet UITextField *tfID;
 @property (weak, nonatomic) IBOutlet UITextField *tfName;
