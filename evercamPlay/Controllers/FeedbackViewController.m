@@ -71,6 +71,10 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)BackPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)onSend:(id)sender
 {
     NSString *feedback = _txt_feedback.text;
@@ -92,32 +96,35 @@
     NSString *version = infoDictionary[(NSString*)@"CFBundleShortVersionString"];
     
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
-    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    NSString *username = [contents valueForKey:@"SendgridUsername"];
-    NSString *password = [contents valueForKey:@"SendgridPassword"];
-    
-    SendGrid *sendgrid = [SendGrid apiUser:username apiKey:password];
-    
-    SendGridEmail *email = [[SendGridEmail alloc] init];
-    email.to = @"play@evercam.io";
-    email.from = userEmail;
-    email.subject = @"Evercam Play Feedback - iOS";
-    email.html = [NSString stringWithFormat:@"%@ says: <br><br>%@<br><br>App Version: %@<br>Device: %@<br>iOS Version: %@<br>Network: %@",
-                  fullName,
-                  feedback,
-                  version,
-                  [UIDevice currentDevice].name,
-                  [UIDevice currentDevice].systemVersion,
-                  [NetworkUtil getNetworkString]];
-    if (self.cameraID) {
-        email.html = [email.html stringByAppendingFormat:@"<br>Camera ID: %@", self.cameraID];
+    if (plistPath != nil) {
+        
+        NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        NSString *username = [contents valueForKey:@"SendgridUsername"];
+        NSString *password = [contents valueForKey:@"SendgridPassword"];
+        
+        SendGrid *sendgrid = [SendGrid apiUser:username apiKey:password];
+        
+        SendGridEmail *email = [[SendGridEmail alloc] init];
+        email.to = @"play@evercam.io";
+        email.from = userEmail;
+        email.subject = @"Evercam Play Feedback - iOS";
+        email.html = [NSString stringWithFormat:@"%@ says: <br><br>%@<br><br>App Version: %@<br>Device: %@<br>iOS Version: %@<br>Network: %@",
+                      fullName,
+                      feedback,
+                      version,
+                      [UIDevice currentDevice].name,
+                      [UIDevice currentDevice].systemVersion,
+                      [NetworkUtil getNetworkString]];
+        if (self.cameraID) {
+            email.html = [email.html stringByAppendingFormat:@"<br>Camera ID: %@", self.cameraID];
+        }
+        
+        [sendgrid sendWithWeb:email];
+        
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"evercamPlay", nil) message:NSLocalizedString(@"Thanks for the feedback", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 101;
+        [simpleAlert show];
     }
-    
-    [sendgrid sendWithWeb:email];
-
-    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"evercamPlay", nil) message:NSLocalizedString(@"Thanks for the feedback", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    simpleAlert.tag = 101;
-    [simpleAlert show];    
 }
 
 #pragma mark UITextFieldDelegate

@@ -117,5 +117,9 @@
     
     return @"";
 }
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"Camera Name: %@", self.name];
+}
 
 @end

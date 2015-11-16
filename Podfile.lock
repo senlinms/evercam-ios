@@ -27,15 +27,18 @@ PODS:
   - Mixpanel/Mixpanel (2.8.1):
     - Mixpanel/MPCategoryHelpers
   - Mixpanel/MPCategoryHelpers (2.8.1)
+  - SplunkMint (4.4.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
   - Evercam
   - Mixpanel
+  - SplunkMint
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   Evercam: 92407528e81f2f304ed1f8a32078d06e1b216f99
   Mixpanel: 93c4825025e6380ced273ed7178496282e385077
+  SplunkMint: f2553bf411aeb196db52d37ebd7642ecf5785cbc
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.39.0

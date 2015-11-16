@@ -37,6 +37,7 @@
 #import "GlobalSettings.h"
 #import "GAIDictionaryBuilder.h"
 #import "Config.h"
+#import "MenuViewControllerCellTableViewCell.h"
 
 @interface MenuViewController()
 {
@@ -56,7 +57,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
+    self.name.text =  [APP_DELEGATE defaultUser].username;
+    self.email.text = [APP_DELEGATE defaultUser].email;
     self.rearTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
 }
@@ -68,54 +71,53 @@
     return 5;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    MenuViewControllerCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSInteger row = indexPath.row;
-
+    
     if (nil == cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.contentView.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 43, 320, 1)];
-        [separator setBackgroundColor:[UIColor colorWithRed:26.f/255.f green:30.f/255.f blue:50.f/255.f alpha:1]];
-        [cell addSubview:separator];
+        cell = [[MenuViewControllerCellTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell.backgroundColor = [UIColor greenColor];
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor grayColor];
     }
 	
     NSString *text = nil;
     if (row == 0)
     {
-        text = @"Cameras";
-        cell.imageView.image = [UIImage imageNamed:@"ic_cameras.png"];
-    }
-    else if (row == 1)
-    {
         text = @"Account";
         cell.imageView.image = [UIImage imageNamed:@"ic_accounts.png"];
     }
-    else if (row == 2)
+    else if (row == 1)
     {
         text = @"Settings";
         cell.imageView.image = [UIImage imageNamed:@"ic_settings.png"];
     }
-    else if (row == 3)
+    else if (row == 2)
     {
         text = @"Feedback";
         cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
     }
-    else if (row == 4)
+    else if (row == 3)
     {
         text = @"Sign Out";
         cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
     }
+    else if (row == 4)
+    {
+        text = @"About Evercam";
+        cell.imageView.image = [UIImage imageNamed:@"icon_light_info.png"];
+    }
 
     cell.textLabel.text = NSLocalizedString( text,nil );
-
-	
     return cell;
 }
 
@@ -128,57 +130,65 @@
     
     // selecting row
     NSInteger row = indexPath.row;
-
+    _presentedRow = row;  // <- store the presented row
     // otherwise we'll create a new frontViewController and push it with animation
 
     UIViewController *newFrontController = nil;
 
-    if (row == 0)
+    if (row == 0 || row == 1 || row == 2 || row == 4)
     {
+        row += 1;
         newFrontController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
-    }
-    else if (row == 1)
-    {
-        newFrontController = [[AccountsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AccountsViewController" : @"AccountsViewController_iPad" bundle:nil];
         
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-                                                              action:action_manage_account
-                                                               label:label_account
-                                                               value:nil] build]];
-
-    }
-    else if (row == 2)
-    {
-        newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
+        ((CamerasViewController*)newFrontController).selectedRow = row;
         
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-                                                              action:action_settings
-                                                               label:label_settings
-                                                               value:nil] build]];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+        navigationController.navigationBarHidden = YES;
+        [revealController pushFrontViewController:newFrontController animated:YES];
+        return;
     }
+//    else if (row == 1)
+//    {
+//        newFrontController = [[AccountsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AccountsViewController" : @"AccountsViewController_iPad" bundle:nil];
+//        
+//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+//                                                              action:action_manage_account
+//                                                               label:label_account
+//                                                               value:nil] build]];
+//
+//    }
+//    else if (row == 2)
+//    {
+//        newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
+//        
+//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+//                                                              action:action_settings
+//                                                               label:label_settings
+//                                                               value:nil] build]];
+//    }
+//    else if (row == 3)
+//    {
+//        newFrontController = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
+//    }
+    
     else if (row == 3)
-    {
-        newFrontController = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
-    }
-    else if (row == 4)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign out", nil) message:NSLocalizedString(@"Are you sure you want to sign out?", nil) delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
             simpleAlert.tag = 102;
-            [simpleAlert show];            
+            [simpleAlert show];
         });
         
         return;
     }
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-    navigationController.navigationBarHidden = YES;
-    [revealController pushFrontViewController:navigationController animated:YES];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+//    navigationController.navigationBarHidden = YES;
+//    [revealController pushFrontViewController:newFrontController animated:YES];
     
-    _presentedRow = row;  // <- store the presented row
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

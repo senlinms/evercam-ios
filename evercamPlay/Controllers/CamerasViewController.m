@@ -39,11 +39,15 @@
 #import "GAIDictionaryBuilder.h"
 #import "Config.h"
 #import "GlobalSettings.h"
+#import "AccountsViewController.h"
+#import "SettingsViewController.h"
+
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
     NSMutableArray *cameraArray;
     CGSize cellSize;
+    BOOL isWebLoaded;
 }
 
 // Private Methods:
@@ -58,8 +62,15 @@
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
-        
+    [super viewDidLoad];
+    isWebLoaded = NO;
+    
+    if (self.selectedRow) {
+        NSLog(@"%li",(long)self.selectedRow);
+        [self PopVC:self.selectedRow];
+    }
+    
+    
     self.navigationController.navigationBarHidden = YES;
     
     self.screenName = @"Camera Grid View";
@@ -94,6 +105,60 @@
 //    {
 //        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
 //    }
+}
+
+
+-(void)PopVC:(NSInteger)row
+{
+    UIViewController *newFrontController = nil;
+    SWRevealViewController *revealController = self.revealViewController;
+    
+    // row number reveived here with 1 increased
+    if (row == 1)
+    {
+        newFrontController = [[AccountsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AccountsViewController" : @"AccountsViewController_iPad" bundle:nil];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+                                                              action:action_manage_account
+                                                               label:label_account
+                                                               value:nil] build]];
+        
+    }
+    else if (row == 2)
+    {
+        newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+                                                              action:action_settings
+                                                               label:label_settings
+                                                               value:nil] build]];
+    }
+    else if (row == 3)
+    {
+        newFrontController = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
+    }
+    else if (row == 5)
+    {
+        [UIView animateWithDuration:0.2f
+                              delay:0.0f
+                            options: UIViewAnimationOptionAllowUserInteraction
+                         animations: ^{
+                             self.webViewContainer.alpha = 1.0;
+                         }
+                         completion: ^(BOOL finished) {
+                         }
+         ];
+        if (isWebLoaded == NO) {
+            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.evercam.io"]]];
+        }
+        
+        return;
+    }
+   
+    [self.navigationController pushViewController:newFrontController animated:YES];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -408,6 +473,50 @@
         [UIViewController attemptRotationToDeviceOrientation];
     }
     
+}
+
+- (IBAction)onCloseWebView:(id)sender
+{
+    [UIView animateWithDuration:0.2f
+                          delay:0.0f
+                        options: UIViewAnimationOptionAllowUserInteraction
+                     animations: ^{
+                         self.webViewContainer.alpha = 0.0;
+                     }
+                     completion: ^(BOOL finished) {
+                     }
+     ];
+}
+
+
+
+#pragma mark UIWebViewDelegate Method
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //    [self.activity startAnimating];
+    
+    return YES;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.activity stopAnimating];
+    isWebLoaded = YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [self.activity stopAnimating];
+    
+    //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    //    [alertView show];
+    //    return;
 }
 
 @end

@@ -490,6 +490,10 @@
     [self addAccount:username password:password];
 }
 
+- (IBAction)BackPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark UIAlertViewDelegate - Method
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

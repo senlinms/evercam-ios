@@ -19,6 +19,7 @@
 #import "Config.h"
 #import "GlobalSettings.h"
 #import "Mixpanel.h"
+#import "PreferenceUtil.h"
 
 @interface SignupViewController ()
 {
@@ -315,6 +316,8 @@
                                                                                           action:action_signup_success
                                                                                            label:label_signup_successful
                                                                                            value:nil] build]];
+                                    
+                                    [PreferenceUtil setIsShowOfflineCameras:YES];
                                     
                                     // show successful message
                                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Congratulations, you're now logged in with your Evercam account.\n\nWe've added a demo camera for you - add your own from the menu" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

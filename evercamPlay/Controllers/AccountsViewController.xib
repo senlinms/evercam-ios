@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountsViewController">
             <connections>
-                <outlet property="btnMenu" destination="iTI-Ki-o4c" id="9eh-81-t2i"/>
                 <outlet property="tableView" destination="DPf-jW-h1F" id="Fae-Bb-Ivp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -29,12 +28,15 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iTI-Ki-o4c">
-                            <rect key="frame" x="11" y="0.0" width="60" height="44"/>
+                            <rect key="frame" x="0.0" y="11" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" backgroundImage="ic_menu.png">
+                            <state key="normal" backgroundImage="back.png">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="BackPressed:" destination="-1" eventType="touchDown" id="aaq-RY-W4S"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.20392156862745098" green="0.22352941176470587" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,6 +57,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_menu.png" width="300" height="220"/>
+        <image name="back.png" width="128" height="128"/>
     </resources>
 </document>

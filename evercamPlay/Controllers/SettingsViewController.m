@@ -14,7 +14,7 @@
 
 @interface SettingsViewController ()
 {
-    BOOL isWebLoaded;
+    
 }
 
 @end
@@ -25,7 +25,6 @@
 
     [super viewDidLoad];
     
-    isWebLoaded = NO;
     self.webView.scalesPageToFit = YES;
     
     self.screenName = @"Cameras Preferences";
@@ -67,23 +66,14 @@
     }
 }
 
-- (IBAction)onCloseWebView:(id)sender
-{
-    [UIView animateWithDuration:0.2f
-                          delay:0.0f
-                        options: UIViewAnimationOptionAllowUserInteraction
-                     animations: ^{
-                         self.webViewContainer.alpha = 0.0;
-                     }
-                     completion: ^(BOOL finished) {
-                     }
-     ];
+- (IBAction)BackPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -93,10 +83,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0)
-        return 4;
-    
-    return 2;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,10 +100,8 @@
     hLabel.backgroundColor=[UIColor clearColor];
     hLabel.textColor = [UIColor lightGrayColor];  // or whatever you want
     hLabel.font = [UIFont boldSystemFontOfSize:14];
-    if (section == 0)
-        hLabel.text = @"GENERAL";
-    else
-        hLabel.text = @"ABOUT";
+    
+    hLabel.text = @"GENERAL";
     
     [headerView addSubview:hLabel];
     
@@ -130,8 +115,7 @@
     static NSString *basicCellIdentifier = @"BasicCell";
     
     UITableViewCell *cell;
-    if (indexPath.section == 0)
-    {
+
         if (indexPath.row == 0)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:subTitleCellIdentifier];
@@ -192,28 +176,7 @@
                 [swtch setOn:NO];
             }
         }
-    }
-    else
-    {
-        if (indexPath.row == 0)
-        {
-            NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
-            NSString *build = infoDictionary[(NSString*)@"CFBundleShortVersionString"];
-            
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:subTitleCellIdentifier];
-            cell.textLabel.text = @"Version";
-            cell.detailTextLabel.text = build;
-            cell.textLabel.textColor = [UIColor whiteColor];
-            cell.detailTextLabel.textColor = [UIColor whiteColor];
-        }
-        else if (indexPath.row == 1)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
-            cell.textLabel.text = @"About Evercam";
-            cell.textLabel.textColor = [UIColor whiteColor];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-    }
+
     cell.backgroundView.backgroundColor = [UIColor colorWithRed:52.f/255.f green:57.f/255.f blue:61.f/255.f alpha:1];
     cell.backgroundColor = [UIColor colorWithRed:26.f/255.f green:30.f/255.f blue:35.f/255.f alpha:1];
     cell.selectionStyle =  UITableViewCellSelectionStyleNone;
@@ -223,8 +186,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
-    {
+//    if (indexPath.section == 0)
+//    {
         if (indexPath.row == 0)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -434,23 +397,7 @@
 //            }
 
         }
-    } else if (indexPath.section == 1) {
-        if (indexPath.row == 1) {
-            
-            [UIView animateWithDuration:0.2f
-                                  delay:0.0f
-                                options: UIViewAnimationOptionAllowUserInteraction
-                             animations: ^{
-                                 self.webViewContainer.alpha = 1.0;
-                             }
-                             completion: ^(BOOL finished) {
-                             }
-            ];
-            if (isWebLoaded == NO) {
-                [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.evercam.io"]]];
-            }
-        }
-    }
+    
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -466,35 +413,6 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
-}
-
-#pragma mark UIWebViewDelegate Method
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-//    [self.activity startAnimating];
-    
-    return YES;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self.activity stopAnimating];
-    isWebLoaded = YES;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [self.activity stopAnimating];
-    
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-//    [alertView show];
-//    return;
 }
 
 

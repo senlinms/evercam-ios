@@ -71,7 +71,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.imageView.image = nil;
     videoController.alpha = 0.0;
     
     self.screenName = @"Video View";
@@ -83,11 +83,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-
+    
     if (UIDeviceOrientationIsLandscape(deviceOrientation))
     {
         self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height);
-//        self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
+        //        self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
         self.titlebar.hidden = YES;
         self.btnTitle.hidden = YES;
         self.downImgView.hidden = YES;
@@ -95,7 +95,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     else
     {
         self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-//        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
+        //        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
         self.titlebar.hidden = NO;
         self.btnTitle.hidden = NO;
         self.downImgView.hidden = NO;
@@ -108,7 +108,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
     [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
-
+    
     UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
     if (UIDeviceOrientationIsLandscape(deviceOrientation))
     {
@@ -136,7 +136,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     {
         //LandscapeView
         self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height);
-  //      self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
+        //      self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
         self.titlebar.hidden = YES;
         self.btnTitle.hidden = YES;
         self.downImgView.hidden = YES;
@@ -144,7 +144,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     else
     {
         self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-    //    self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
+        //    self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
         self.titlebar.hidden = NO;
         self.btnTitle.hidden = NO;
         self.downImgView.hidden = NO;
@@ -163,6 +163,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (launch)
     {
         gst_launch_remote_free(launch);
+        launch = nil;
     }
     
     if (timeCounter && [timeCounter isValid])
@@ -192,34 +193,34 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)showSnapshotView {
     [snapshotConfirmView setHidden:NO];
-
-       if (self.imageView == nil || self.imageView.hidden == YES) {
-                CGRect rect = [video_view bounds];
-                UIGraphicsBeginImageContext(rect.size);
-                [video_view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
-                UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                rect.origin.y = (rect.size.height - rect.size.width*media_height/media_width)/2;
-                rect.size.height = rect.size.width*media_height/media_width;
-                CGImageRef imageRef = CGImageCreateWithImageInRect([img CGImage], rect);
-                // or use the UIImage wherever you like
-               [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
-                CGImageRelease(imageRef);
-            } else {
-    if (self.imageView && self.imageView.image) {
-        CGFloat width = self.confirmInsideView.frame.size.width;
-        CGFloat imgHeight = self.imageView.image.size.height*width/self.imageView.image.size.width;
-        
-        self.confirmInsideView.frame = CGRectMake(self.confirmInsideView.frame.origin.x,
-                                                  self.confirmInsideView.frame.origin.y,
-                                                  self.confirmInsideView.frame.size.width,
-                                                  imgHeight + 41.0);
-        
-        imvSnapshot.image = self.imageView.image;
+    
+    if (self.imageView == nil || self.imageView.hidden == YES) {
+        CGRect rect = [video_view bounds];
+        UIGraphicsBeginImageContext(rect.size);
+        [video_view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        rect.origin.y = (rect.size.height - rect.size.width*media_height/media_width)/2;
+        rect.size.height = rect.size.width*media_height/media_width;
+        CGImageRef imageRef = CGImageCreateWithImageInRect([img CGImage], rect);
+        // or use the UIImage wherever you like
+        [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
+        CGImageRelease(imageRef);
     } else {
-        [snapshotConfirmView setHidden:YES];
+        if (self.imageView && self.imageView.image) {
+            CGFloat width = self.confirmInsideView.frame.size.width;
+            CGFloat imgHeight = self.imageView.image.size.height*width/self.imageView.image.size.width;
+            
+            self.confirmInsideView.frame = CGRectMake(self.confirmInsideView.frame.origin.x,
+                                                      self.confirmInsideView.frame.origin.y,
+                                                      self.confirmInsideView.frame.size.width,
+                                                      imgHeight + 41.0);
+            
+            imvSnapshot.image = self.imageView.image;
+        } else {
+            [snapshotConfirmView setHidden:YES];
+        }
     }
-            }
 }
 
 - (void)hideSnapshotView {
@@ -239,11 +240,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)sendFeedback {
     FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
     feedbackVC.cameraID = self.cameraInfo.camId;
-
+    
     CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:feedbackVC];
     navVC.isPortraitMode = YES;
     navVC.navigationBarHidden = YES;
-
+    
     [self.navigationController presentViewController:navVC animated:YES completion:nil];
 }
 
@@ -276,11 +277,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)hideVideoController {
     if (isPlaying == YES) {
         [self showVideoController:NO];
-//        videoController.hidden = YES;
+        //        videoController.hidden = YES;
     }
     else {
         [self showVideoController:YES];
-//        videoController.hidden = NO;
+        //        videoController.hidden = NO;
     }
 }
 
@@ -386,7 +387,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if(dropDown == nil) {
         CGFloat f = self.view.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
         CGFloat h = (cameraNameArray.count * DropDownCellHeight);
-
+        
         dropDown = [[NIDropDown alloc] showDropDown:sender height:(h<=f?&h: &f) textArray:cameraNameArray imageArray:arrImage direction:@"down"] ;
         dropDown.delegate = self;
     }
@@ -394,18 +395,18 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [dropDown hideDropDown:sender];
         dropDown = nil;
     }
-
+    
 }
 
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
     if (timeCounter && [timeCounter isValid])
     {
         [timeCounter invalidate];
         timeCounter = nil;
     }
-
+    
     if (browseJpgTask) {
         [browseJpgTask stop];
         browseJpgTask = nil;
@@ -414,12 +415,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (IBAction)playOrPause:(id)sender {
     if (isPlaying) {
-//        [self.imageView setHidden:YES];
+        //        [self.imageView setHidden:YES];
         [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_play.png"] forState:UIControlStateNormal];
         [self stopCamera];
     } else {
         [self showVideoController:NO];
-//        videoController.hidden = YES;
+        //        videoController.hidden = YES;
         [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_pause.png"] forState:UIControlStateNormal];
         [self playCamera];
     }
@@ -459,13 +460,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     if (videoController.hidden) {
         [self showVideoController:YES];
-//        videoController.hidden = NO;
+        //        videoController.hidden = NO;
         
         [self performSelector:@selector(hideVideoController) withObject:nil afterDelay:5];
     } else {
         if (isPlaying == YES) {
             [self showVideoController:NO];
-//            videoController.hidden = YES;
+            //            videoController.hidden = YES;
         }
     }
 }
@@ -595,13 +596,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)playCamera {
-    
+    self.imageView.image = nil;
     if (self.imageView)
     {
         [self.imageView removeFromSuperview];
         self.imageView = nil;
     }
-
+    
+    
     if (browseJpgTask)
     {
         [browseJpgTask stop];
@@ -615,12 +617,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
     
     self.lblTimeCode.hidden = YES;
-    video_view.hidden = YES;
+    
     
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
         [loadingView startAnimating];
-
+        
         if (self.cameraInfo.externalH264Url && self.cameraInfo.externalH264Url.length > 0) {
             [self createPlayer];
         } else {
@@ -641,7 +643,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if ([self.cameraInfo isOnline]) {
         if (launch)
         {
-            gst_launch_remote_free(launch);
+            gst_launch_remote_pause(launch);
         }
         
         if (timeCounter && [timeCounter isValid])
@@ -650,7 +652,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             timeCounter = nil;
         }
         self.lblTimeCode.hidden = YES;
-
+        
         if (browseJpgTask) {
             [browseJpgTask stop];
             browseJpgTask = nil;
@@ -667,16 +669,21 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     ctx.media_size_changed = media_size_changed_proxy;
     ctx.set_current_position = set_current_position_proxy;
     ctx.set_message = set_message_proxy;
-
+    
     if (launch) {
-        gst_launch_remote_free(launch);
+        gst_launch_remote_play(launch);
     }
-    launch = gst_launch_remote_new(&ctx);
+    else
+    {
+        launch = gst_launch_remote_new(&ctx);
+        NSString *pipeline = [NSString stringWithFormat:@"rtspsrc protocols=4  location=%@ user-id=%@ user-pw=%@ latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink", self.cameraInfo.externalH264Url, self.cameraInfo.username, self.cameraInfo.password];
+        launch->real_pipeline_string = (gchar *)[pipeline UTF8String];
+        
+        gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
+        
+        video_view.hidden = YES;
+    }
     
-    NSString *pipeline = [NSString stringWithFormat:@"rtspsrc protocols=4  location=%@ user-id=%@ user-pw=%@ latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink", self.cameraInfo.externalH264Url, self.cameraInfo.username, self.cameraInfo.password];
-    launch->real_pipeline_string = (gchar *)[pipeline UTF8String];
-    
-    gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
 }
 
 - (void)createBrowseView {
@@ -749,7 +756,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 -(void) setCurrentPosition:(NSInteger)position duration:(NSInteger)duration {
-
+    
 }
 
 -(void) mediaSizeChanged:(NSInteger)width height:(NSInteger)height
@@ -772,6 +779,10 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 #pragma mark NIDropdown delegate
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index {
+    if (launch) {
+        gst_launch_remote_free(launch);
+        launch = nil;
+    }
     dropDown = nil;
     self.cameraInfo = [self.cameras objectAtIndex:index];
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];

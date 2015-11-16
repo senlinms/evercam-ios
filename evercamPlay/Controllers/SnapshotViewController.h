@@ -11,5 +11,5 @@
 @interface SnapshotViewController : UIViewController<UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSString *cameraId;
-
+@property (weak, nonatomic) IBOutlet UILabel *imageNo;
 @end

@@ -32,4 +32,9 @@
 @property (nonatomic, strong) IBOutlet UIButton *btnRefresh;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, strong) IBOutlet UICollectionView *camerasView;
+@property (nonatomic) NSInteger selectedRow;
+@property (nonatomic, weak) IBOutlet UIView *webViewContainer;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activity;
+
 @end

@@ -14,7 +14,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface SnapshotViewController ()
-
+{
+    int images;
+}
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *actionBtn;
 
@@ -183,8 +185,12 @@
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     
     NSArray *snapshotFiles = [CommonUtil snapshotFiles:self.cameraId];
+    images = (int)snapshotFiles.count;
     if (snapshotFiles.count <= 0) {
         [_actionBtn setEnabled:NO];
+    }
+    else{
+        self.imageNo.text = [NSString stringWithFormat:@"1 / %d" , images];
     }
     
     for (NSInteger i = 0; i < snapshotFiles.count; i++) {
@@ -196,6 +202,12 @@
     }
     
     [self.scrollView setContentSize:CGSizeMake(snapshotFiles.count * screenSize.width, 0)];
+}
+
+-(void)scrollViewDidEndDecelerating:(nonnull UIScrollView *)scrollView
+{
+    int indexOfPage = scrollView.contentOffset.x / scrollView.frame.size.width;
+    self.imageNo.text = [NSString stringWithFormat:@"%d / %d", (indexOfPage+1) , images];
 }
 
 @end
