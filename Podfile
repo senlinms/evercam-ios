@@ -5,6 +5,5 @@ target 'evercamPlay' do
 pod 'Mixpanel'
 pod 'AFNetworking', '~> 2.3'
 pod 'Evercam'
-pod ’SplunkMint’
 end
 
