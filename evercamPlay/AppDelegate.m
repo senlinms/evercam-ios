@@ -16,6 +16,8 @@
 #import "GlobalSettings.h"
 #import "Mixpanel.h"
 #import "SharedManager.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -27,6 +29,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Fabric with:@[[Crashlytics class]]];
     
 //    NSString* url1 = @"http://192.168.1.4/projects/asset_manager/grade/get";        // jsonDict Test
 //    NSString* url2 = @"http://192.168.1.4/projects/asset_manager/grade/jsonArray2";  // jsonArray Test

@@ -63,6 +63,8 @@
 		585999131BF9C53000CDC457 /* ic_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 585999121BF9C53000CDC457 /* ic_info.png */; };
 		5D814025BA9B52C1265ECA86 /* libPods-evercamPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 241B18B5C67528E78AF3CBED /* libPods-evercamPlay.a */; };
 		6C0497DF1BDE48640095956B /* CommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0497DE1BDE48640095956B /* CommonFunctions.m */; };
+		6C06DE9A1BFB22CD003A05FE /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C06DE981BFB22CD003A05FE /* Fabric.framework */; };
+		6C06DE9B1BFB22CD003A05FE /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C06DE991BFB22CD003A05FE /* Crashlytics.framework */; };
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
 		6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF591FA1BF05FE20044B0F1 /* logo.png */; };
@@ -297,6 +299,8 @@
 		585999121BF9C53000CDC457 /* ic_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_info.png; sourceTree = "<group>"; };
 		6C0497DE1BDE48640095956B /* CommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFunctions.m; sourceTree = "<group>"; };
 		6C0497E01BDE49B60095956B /* CommonFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonFunctions.h; sourceTree = "<group>"; };
+		6C06DE981BFB22CD003A05FE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		6C06DE991BFB22CD003A05FE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		6C7262B31BDDF4F300446CBE /* MainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenViewController.h; sourceTree = "<group>"; };
 		6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenViewController.m; sourceTree = "<group>"; };
 		6CCB48281BDF4D7A00A62C28 /* SharedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedManager.h; path = evercamPlay/SharedManager.h; sourceTree = "<group>"; };
@@ -507,6 +511,8 @@
 				E30201D71B1782970006DAE8 /* SpriteKit.framework in Frameworks */,
 				C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */,
 				C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */,
+				6C06DE9A1BFB22CD003A05FE /* Fabric.framework in Frameworks */,
+				6C06DE9B1BFB22CD003A05FE /* Crashlytics.framework in Frameworks */,
 				C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */,
 				410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */,
 				C40639901B05F94F00FC5D67 /* SystemConfiguration.framework in Frameworks */,
@@ -704,6 +710,8 @@
 		CB1C76451AAB144700680FE3 = {
 			isa = PBXGroup;
 			children = (
+				6C06DE981BFB22CD003A05FE /* Fabric.framework */,
+				6C06DE991BFB22CD003A05FE /* Crashlytics.framework */,
 				6CCB48281BDF4D7A00A62C28 /* SharedManager.h */,
 				6CCB48291BDF4D7A00A62C28 /* SharedManager.m */,
 				CB44E8821AAEA03300A78C11 /* Default-568h@2x.png */,
@@ -1076,8 +1084,8 @@
 				CB1C764A1AAB144700680FE3 /* Sources */,
 				CB1C764B1AAB144700680FE3 /* Frameworks */,
 				CB1C764C1AAB144700680FE3 /* Resources */,
-				E3CB15B11B28921A00413197 /* Run Script */,
 				CBA745976210DEE5B3E0B8C4 /* Embed Pods Frameworks */,
+				6C06DE971BFB2283003A05FE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1236,6 +1244,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6C06DE971BFB2283003A05FE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 3076ee9439062b784cded123ab7344ffa3b1c872 f5e26f2d09f77ca355dc48e14133b5449a25e63a1880f3bf4905662871a15bab";
+		};
 		CBA745976210DEE5B3E0B8C4 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1250,20 +1271,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-evercamPlay/Pods-evercamPlay-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		E3CB15B11B28921A00413197 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name splunkmint_postbuild_dsym_upload_script.sh | head -n 1`\n/bin/sh \"${SCRIPT}\" \"32ba4ee6\" \"9e2880b783ef74ec22f3096\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1452,8 +1459,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: on2solutions (72P7XJXJE8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: on2solutions (72P7XJXJE8)";
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1498,8 +1507,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: on2solutions (72P7XJXJE8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: on2solutions (72P7XJXJE8)";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_POSTPROCESSING = YES;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

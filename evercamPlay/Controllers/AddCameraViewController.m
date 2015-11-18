@@ -155,6 +155,7 @@
 }
 
 - (IBAction)test:(id)sender {
+    
     if (self.tfExternalHost.text.length == 0) {
         
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"Please specify an external IP address.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -216,15 +217,14 @@
     [self.imageView setImageWithURLRequest:[self imageRequestWithURL:[NSURL URLWithString:externalFullUrl]]
                      placeholderImage:nil
                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                   [self showImageView:image];
                               }
                               failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                   NSLog(@"---- ERROR ---- %@", [error userInfo]);
                                   [self showImageView:nil];
                               }];
     
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
 //    SDWebImageManager *manager = [SDWebImageManager sharedManager];
 //    [manager downloadImageWithURL:[NSURL URLWithString:externalFullUrl]
@@ -1248,15 +1248,6 @@
 
 #pragma mark - Methods by Musaab
 
-- (IBAction)textFieldDidChange:(id)sender {
-//    if (sender == self.tfExternalRtspPort) {
-//        self.rtspPortStatusLabel.text = @"";
-//    }
-//    if (sender == self.tfExternalHttpPort) {
-//        self.httpPortStatusLabel.text = @"";
-//    }
-}
-
 -(BOOL)isStringEmpty:(NSString*)text {
     if([text isEqualToString:@""]) {
         return YES;
@@ -1266,19 +1257,26 @@
     }
 }
 
+- (IBAction)textFieldsDidChanged:(UITextField*)sender {
+    if (sender.tag == 1) {
+        self.httpPortStatusLabel.text = @"";
+    }
+    if (sender.tag == 2) {
+    self.rtspPortStatusLabel.text = @"";
+    }
+}
+
 - (IBAction)httpTextFieldDidEndEdition:(id)sender {
     NSString* url = [SharedManager getCheckPortUrl];
     NSString* ipAddress = self.tfExternalHost.text;
     NSString* httpPort = self.tfExternalHttpPort.text;
     
-    if([self isStringEmpty:httpPort])
+    if(([self isStringEmpty:httpPort]) || ([self isStringEmpty:ipAddress]))
+    {
+        self.httpPortStatusLabel.text = @"";
         return;
-
-    
-    if([self isStringEmpty:ipAddress])
-        return;
-    
-    
+    }
+ 
     NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
         
@@ -1312,11 +1310,11 @@
     NSString* ipAddress = self.tfExternalHost.text;
     NSString* rtspPort = self.tfExternalRtspPort.text;
    
-    if([self isStringEmpty:ipAddress])
+    if(([self isStringEmpty:rtspPort]) || ([self isStringEmpty:ipAddress]))
+    {
+        self.rtspPortStatusLabel.text = @"";
         return;
-    
-    if([self isStringEmpty:rtspPort])
-        return;
+    }
     
     NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
@@ -1366,7 +1364,7 @@
     }
     // this code is to check either user entered local/private ip-address, in case of local/private it will sendback true
     NSError *error = NULL;    
-    NSString *pattern = @"(127\.)|(10\.)|(172\.1[6-9]\.)|(172\.2[0-9]\.)|(172\.3[0-1]\.)|(192\.168\.)";
+    NSString *pattern = @"((127\.)|(10\.)|(172\.1[6-9]\.)|(172\.2[0-9]\.)|(172\.3[0-1]\.)|(192\.168\.))";
     NSRange range = NSMakeRange(0, string.length);
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
     NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
@@ -1379,59 +1377,26 @@
 }
 
 
--(void)getCameraName1
-{
-    [[EvercamShell shell] getAllCameras:[APP_DELEGATE defaultUser].username includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
-        //        [self hideLoadingView];
-        if (error == nil)
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                EvercamCamera* camera = [cameras lastObject];
-                
-                self.tfName.text = [NSString stringWithFormat:@"%@ camera",camera.name];
-            });
-        }
-        else
-        {
-            NSLog(@"Error %li: %@", (long)error.code, error.localizedDescription);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                [alertView show];
-            });
-        }
-    }];
-    
-}
-
 -(void)getCameraName
 {
-//    NSString* cameraName;
-    
     [[EvercamShell shell] getAllCameras:[APP_DELEGATE defaultUser].username includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
-        //        [self hideLoadingView];
         if (error == nil)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                
-                EvercamCamera* camera = [cameras firstObject];
-                NSLog(@"%@",camera);
-                
-                //NSLog(@"%@", camera.name);
-//                cameraName = camera.name;
                 
                 int count = 1;
                 
-                for (EvercamCamera *camera in cameras) {
+                for (int counter = 0; counter<cameras.count; counter++) {
                     NSString* cameraName = [NSString stringWithFormat:@"Camera %d",count];
-                    if ([camera.name  isEqual: cameraName]) {
-                        count += 1;
+                    
+                    for (EvercamCamera *camera in cameras) {
+                        if ([camera.name  isEqual: cameraName]) {
+                            count += 1;
+                            break;
+                        }
                     }
                 }
-                
                 self.tfName.text = [NSString stringWithFormat:@"Camera %d",count];
-                
             });
         }
         else
