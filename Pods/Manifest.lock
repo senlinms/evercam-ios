@@ -20,8 +20,13 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Crashlytics (3.4.0):
+    - Fabric (~> 1.6.0)
   - Evercam (1.0.1):
     - AFNetworking (~> 2.3)
+  - Fabric (1.6.0):
+    - Fabric/Base (= 1.6.0)
+  - Fabric/Base (1.6.0)
   - Mixpanel (2.8.1):
     - Mixpanel/Mixpanel (= 2.8.1)
   - Mixpanel/Mixpanel (2.8.1):
@@ -30,12 +35,16 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
+  - Crashlytics
   - Evercam
+  - Fabric
   - Mixpanel
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
   Evercam: 92407528e81f2f304ed1f8a32078d06e1b216f99
+  Fabric: d737eda3a26ac940a5430230eedb35f16b226131
   Mixpanel: 93c4825025e6380ced273ed7178496282e385077
 
 COCOAPODS: 0.39.0
