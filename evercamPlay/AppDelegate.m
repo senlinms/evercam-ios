@@ -19,6 +19,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+
 @interface AppDelegate ()
 
 @end
@@ -29,6 +30,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     [Fabric with:@[[Crashlytics class]]];
     
 //    NSString* url1 = @"http://192.168.1.4/projects/asset_manager/grade/get";        // jsonDict Test

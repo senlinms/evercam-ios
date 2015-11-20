@@ -268,7 +268,7 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="149.5.43.10" minimumFontSize="17" id="Zx9-Tu-31d">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="149.5.43.10" minimumFontSize="17" id="Zx9-Tu-31d">
                                                     <rect key="frame" x="114" y="0.0" width="201" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -276,6 +276,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="ipTextFieldDidEndEdition:" destination="-1" eventType="editingDidEnd" id="Nf8-nI-RHf"/>
+                                                        <action selector="textFieldsDidChanged:" destination="-1" eventType="editingChanged" id="Son-6X-I0S"/>
                                                         <outlet property="delegate" destination="-1" id="yTa-Eo-6o1"/>
                                                     </connections>
                                                 </textField>

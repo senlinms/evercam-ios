@@ -193,7 +193,7 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="149.5.43.10" minimumFontSize="17" id="pny-4C-cJK">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="149.5.43.10" minimumFontSize="17" id="pny-4C-cJK">
                                                     <rect key="frame" x="114" y="0.0" width="201" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -201,6 +201,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="ipTextFieldDidEndEdition:" destination="-1" eventType="editingDidEnd" id="BQk-6C-3ra"/>
+                                                        <action selector="textFieldsDidChanged:" destination="-1" eventType="editingChanged" id="Uvw-NO-9nX"/>
                                                         <outlet property="delegate" destination="-1" id="O4T-Vu-Ps6"/>
                                                     </connections>
                                                 </textField>
@@ -229,7 +230,7 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="External HTTP Port" minimumFontSize="17" id="Sxn-Px-TwP">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="External HTTP Port" minimumFontSize="17" id="Sxn-Px-TwP">
                                                     <rect key="frame" x="105" y="1" width="201" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -259,7 +260,7 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="External RTSP Port" minimumFontSize="17" id="SfA-Aa-Ydw">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="External RTSP Port" minimumFontSize="17" id="SfA-Aa-Ydw">
                                                     <rect key="frame" x="114" y="0.0" width="201" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

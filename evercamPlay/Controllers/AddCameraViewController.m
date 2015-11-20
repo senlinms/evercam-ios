@@ -1261,8 +1261,14 @@
     if (sender.tag == 1) {
         self.httpPortStatusLabel.text = @"";
     }
+    
     if (sender.tag == 2) {
     self.rtspPortStatusLabel.text = @"";
+    }
+    
+    if (sender.tag == 3) {
+        self.httpPortStatusLabel.text = @"";
+        self.rtspPortStatusLabel.text = @"";
     }
 }
 
@@ -1344,6 +1350,19 @@
 
 - (IBAction)ipTextFieldDidEndEdition:(id)sender {
     [self CheckIPAddress];
+    if (self.tfExternalRtspPort.text != nil) {
+        [self rtspTextFieldDidEndEdition:nil];
+    }
+    else{
+         self.rtspPortStatusLabel.text = @"";
+    }
+    
+    if (self.tfExternalHttpPort.text != nil) {
+        [self httpTextFieldDidEndEdition:nil];
+    }
+    else{
+        self.httpPortStatusLabel.text = @"";
+    }
 }
 
 - (IBAction)tfUserNameDidBeginEditing:(id)sender {
