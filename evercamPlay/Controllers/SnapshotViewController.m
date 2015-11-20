@@ -158,6 +158,10 @@
         }
         
         if (error == nil) {
+            if (snapshotFiles.count == 1) {
+                [self back:nil];
+                return;
+            }
             [self loadImages];
             [self.scrollView setContentOffset:CGPointMake(0, 0)];
         }
