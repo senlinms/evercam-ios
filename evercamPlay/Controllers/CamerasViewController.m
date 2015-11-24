@@ -139,7 +139,7 @@
     {
         newFrontController = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
     }
-    else if (row == 5)
+    else if (row == 4)
     {
         [UIView animateWithDuration:0.2f
                               delay:0.0f
@@ -165,6 +165,7 @@
 {
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;    
+    [self onRefresh:nil];
 }
 
 - (void)showLoadingView {
@@ -402,20 +403,22 @@
     [self showCamera:camera];
 }
 
-#pragma mark - CameraPlayViewController Delegate Method
-- (void)cameraDeleted:(EvercamCamera *)camera {
-    [cameraArray removeObject:camera];
-    [self.camerasView reloadData];
-}
-
 - (void)cameraEdited:(EvercamCamera *)camera {
     for (EvercamCamera *cam in cameraArray) {
         if ([cam.camId isEqualToString:camera.camId]) {
-            [cameraArray removeObject:cam];             [cameraArray addObject:camera];
+            [cameraArray removeObject:cam];
+            [cameraArray addObject:camera];
             [self.camerasView reloadData];
             break;
         }
     }
+}
+
+#pragma mark - CameraPlayViewController Delegate Method
+-(void)cameraDel:(EvercamCamera *)camera
+{
+    [cameraArray removeObject:camera];
+    [self.camerasView reloadData];
 }
 
 #pragma mark - Custom Functions

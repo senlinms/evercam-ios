@@ -76,11 +76,6 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 30;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 4;
@@ -90,24 +85,6 @@
 {
     return 54.0f;
 }
-
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-//    [headerView setBackgroundColor:[UIColor lightTextColor]];
-    
-    UILabel *hLabel=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 20, 30)];
-    hLabel.backgroundColor=[UIColor clearColor];
-    hLabel.textColor = [UIColor lightGrayColor];  // or whatever you want
-    hLabel.font = [UIFont boldSystemFontOfSize:14];
-    
-    hLabel.text = @"GENERAL";
-    
-    [headerView addSubview:hLabel];
-    
-    return headerView;
-}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

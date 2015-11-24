@@ -88,6 +88,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor whiteColor];
         cell.textLabel.textColor = [UIColor grayColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
     }
 	
     NSString *text = nil;
@@ -108,13 +109,19 @@
     }
     else if (row == 3)
     {
-        text = @"Sign Out";
-        cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
+        text = @"About Evercam";
+        cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
+        
+//        text = @"Sign Out";
+//        cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
     }
     else if (row == 4)
     {
-        text = @"About Evercam";
-        cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
+        text = @"Sign Out";
+        cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
+        
+//        text = @"About Evercam";
+//        cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
     }
 
     cell.textLabel.text = NSLocalizedString( text,nil );
@@ -135,7 +142,7 @@
 
     UIViewController *newFrontController = nil;
 
-    if (row == 0 || row == 1 || row == 2 || row == 4)
+    if (row == 0 || row == 1 || row == 2 || row == 3)
     {
         row += 1;
         newFrontController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
@@ -173,7 +180,7 @@
 //        newFrontController = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
 //    }
     
-    else if (row == 3)
+    else if (row == 4)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             

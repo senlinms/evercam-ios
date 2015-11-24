@@ -67,8 +67,6 @@
     self.screenName = @"Add/Edit Camera";
     self.tfVendor.text = @"Unknown/Other";
     self.cameraView.hidden = true;
-    [self getCameraName];
-    [self populateIPTextField];
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
@@ -717,6 +715,10 @@
         if (self.editCamera.internalRtspPort != 0) {
             self.tfInternalRtspPort.text = [NSString stringWithFormat:@"%d", self.editCamera.internalRtspPort];
         }
+    }
+    else{
+        [self getCameraName];
+        [self populateIPTextField];
     }
 }
 

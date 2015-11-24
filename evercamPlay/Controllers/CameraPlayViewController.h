@@ -15,8 +15,8 @@
 
 @protocol CameraPlayViewControllerDelegate <NSObject>
 
-- (void)cameraDeleted:(EvercamCamera *)camera;
 - (void)cameraEdited:(EvercamCamera *)camera;
+- (void)cameraDel:(EvercamCamera *)camera;
 
 @end
 

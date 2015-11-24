@@ -20,6 +20,8 @@
 #import "GAIDictionaryBuilder.h"
 #import "GlobalSettings.h"
 #import "Config.h"
+#import "BlockActionSheet.h"
+#import "Appdelegate.h"
 
 @interface ViewCameraViewController () <AddCameraViewControllerDelegate>
 
@@ -59,6 +61,133 @@
     addCameraVC.delegate = self;
     [self.navigationController pushViewController:addCameraVC animated:YES];
 }
+
+- (IBAction)menu:(id)sender {       // to do put remove camera here
+ 
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
+          
+            [sheet addButtonWithTitle:@"Edit Camera" block:^{
+                [self edit:self];
+            }];
+            
+            [sheet addButtonWithTitle:@"Remove Camera" block:^{
+                [self deleteCamera];
+            }];
+            [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
+            [sheet showInView:self.view];
+        }
+        else
+        {
+            UIAlertController * view=   [UIAlertController
+                                         alertControllerWithTitle:nil
+                                         message:nil
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+           
+            UIAlertAction* editCamera = [UIAlertAction
+                                          actionWithTitle:@"Edit Camera"
+                                          style:UIAlertActionStyleDefault
+                                          handler:^(UIAlertAction * action)
+                                          {
+                                              [view dismissViewControllerAnimated:YES completion:nil];
+                                              [self edit:self];
+                                              
+                                          }];
+           
+            UIAlertAction* removeCamera = [UIAlertAction
+                                           actionWithTitle:@"Remove Camera"
+                                           style:UIAlertActionStyleDestructive
+                                           handler:^(UIAlertAction * action)
+                                           {
+                                               [view dismissViewControllerAnimated:YES completion:nil];
+                                               [self deleteCamera];
+                                               
+                                           }];
+            UIAlertAction* cancel = [UIAlertAction
+                                     actionWithTitle:@"Cancel"
+                                     style:UIAlertActionStyleCancel
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [view dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+            [view addAction:editCamera];
+            [view addAction:removeCamera];
+            [view addAction:cancel];
+            
+            if ([GlobalSettings sharedInstance].isPhone)
+            {
+                [self presentViewController:view animated:YES completion:nil];
+            }
+            else
+            {
+                UIPopoverPresentationController *popPresenter = [view
+                                                                 popoverPresentationController];
+                popPresenter.sourceView = (UIView *)sender;
+                popPresenter.sourceRect = ((UIView *)sender).bounds;
+                [self presentViewController:view animated:YES completion:nil];
+            }
+        }
+    }
+
+- (void)deleteCamera {
+    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove Camera", nil) message:NSLocalizedString(@"Are you sure you want to remove this camera?", nil) delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
+    simpleAlert.tag = 102;
+    [simpleAlert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 103) {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
+            [self.delegate cameraDeleted:self.camera];
+        }
+    }
+    else if (alertView.tag == 101) {
+        [self back:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
+            [self.delegate cameraDeleted:self.camera];
+        }
+    }
+    else if(alertView.tag == 102 && buttonIndex == 1)
+    {
+        if ([self.camera.rights canDelete]) {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[EvercamShell shell] deleteCamera:self.camera.camId withBlock:^(BOOL success, NSError *error) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                if (success) {
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:NSLocalizedString(@"Camera deleted", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    simpleAlert.tag = 101;
+                    [simpleAlert show];
+                } else {
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:@"Failed to delete camera, please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [simpleAlert show];
+                    
+                    return;
+                }
+            }];
+        } else {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[EvercamShell shell] deleteShareCamera:self.camera.camId andUserId:[APP_DELEGATE defaultUser].email withBlock:^(BOOL success, NSError *error) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                if (success) {
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:NSLocalizedString(@"Camera deleted", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    simpleAlert.tag = 101;
+                    [simpleAlert show];
+                } else {
+                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:@"Failed to delete camera, please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [simpleAlert show];
+                    
+                    return;
+                }
+            }];
+        }
+    }
+}
+    
+
 
 - (void)fillCameraDetails {
     self.txtID.text = self.camera.camId;

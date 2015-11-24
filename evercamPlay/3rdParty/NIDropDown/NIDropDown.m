@@ -176,6 +176,7 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.contentView.backgroundColor = [UIColor clearColor];
     
+    tableView.separatorColor = [UIColor clearColor];
     return cell;
 }
 

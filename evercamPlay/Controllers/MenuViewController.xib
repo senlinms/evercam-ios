@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="email" destination="FY8-jH-BKx" id="4e4-0L-8E3"/>
                 <outlet property="name" destination="2KV-SL-WyY" id="XdD-he-GQ4"/>
-                <outlet property="rearTableView" destination="20" id="24"/>
+                <outlet property="rearTableView" destination="20" id="4aH-2o-OMQ"/>
                 <outlet property="view" destination="1" id="21"/>
             </connections>
         </placeholder>
@@ -29,7 +29,6 @@
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="20">
                             <rect key="frame" x="0.0" y="129" width="320" height="419"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" red="0.20392156859999999" green="0.22352941179999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="separatorColor" red="0.1647058824" green="0.18039215689999999" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

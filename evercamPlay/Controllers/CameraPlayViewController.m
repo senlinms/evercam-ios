@@ -285,64 +285,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 103) {
-        [self.navigationController popViewControllerAnimated:YES];
-        
-        if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
-            [self.delegate cameraDeleted:self.cameraInfo];
-        }
-    }
-    else if (alertView.tag == 101) {
-        [self back:nil];
-        
-        if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
-            [self.delegate cameraDeleted:self.cameraInfo];
-        }
-    }
-    else if(alertView.tag == 102 && buttonIndex == 1)
-    {
-        if ([self.cameraInfo.rights canDelete]) {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[EvercamShell shell] deleteCamera:self.cameraInfo.camId withBlock:^(BOOL success, NSError *error) {
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                if (success) {
-                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:NSLocalizedString(@"Camera deleted", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    simpleAlert.tag = 101;
-                    [simpleAlert show];
-                } else {
-                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:@"Failed to delete camera, please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    [simpleAlert show];
-                    
-                    return;
-                }
-            }];
-        } else {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[EvercamShell shell] deleteShareCamera:self.cameraInfo.camId andUserId:[APP_DELEGATE defaultUser].email withBlock:^(BOOL success, NSError *error) {
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                if (success) {
-                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:NSLocalizedString(@"Camera deleted", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    simpleAlert.tag = 103;
-                    [simpleAlert show];
-                } else {
-                    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:@"Failed to delete camera, please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    [simpleAlert show];
-                    
-                    return;
-                }
-            }];
-        }
-    }
-}
-
-- (void)deleteCamera {
-    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove Camera", nil) message:NSLocalizedString(@"Are you sure you want to remove this camera?", nil) delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
-    simpleAlert.tag = 102;
-    [simpleAlert show];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -498,9 +440,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [sheet addButtonWithTitle:@"View Recordings" block:^{
             [self viewRecordings];
         }];
-        [sheet addButtonWithTitle:@"Remove Camera" block:^{
-            [self deleteCamera];
-        }];
         [sheet addButtonWithTitle:@"Send Feedback" block:^{
             [self sendFeedback];
         }];
@@ -516,7 +455,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                      preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction* viewDetails = [UIAlertAction
-                                      actionWithTitle:@"View Details"
+                                      actionWithTitle:@"Camera Settings"
                                       style:UIAlertActionStyleDefault
                                       handler:^(UIAlertAction * action)
                                       {
@@ -524,15 +463,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                           [self showCameraView];
                                           
                                       }];
-        UIAlertAction* removeCamera = [UIAlertAction
-                                       actionWithTitle:@"Remove Camera"
-                                       style:UIAlertActionStyleDestructive
-                                       handler:^(UIAlertAction * action)
-                                       {
-                                           [view dismissViewControllerAnimated:YES completion:nil];
-                                           [self deleteCamera];
-                                           
-                                       }];
         
         UIAlertAction* savedImages = [UIAlertAction
                                       actionWithTitle:@"Saved Images"
@@ -576,7 +506,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [view addAction:viewDetails];
         [view addAction:savedImages];
         [view addAction:viewRecordings];
-        [view addAction:removeCamera];
+//        [view addAction:removeCamera];
         [view addAction:sendFeedback];
         [view addAction:cancel];
         
@@ -776,6 +706,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [self.delegate cameraEdited:camera];
     }
 }
+
+#pragma mark - CameraPlayViewController Delegate Method
+- (void)cameraDeleted:(EvercamCamera *)camera {
+    [self back:self];
+    [self.delegate cameraDel:camera];
+}
+
 
 #pragma mark NIDropdown delegate
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index {
