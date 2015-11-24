@@ -27,7 +27,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-
+@property (nonatomic, retain) IBOutlet UIView *containerView;
 @property (nonatomic, retain) IBOutlet UITableView *rearTableView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *email;

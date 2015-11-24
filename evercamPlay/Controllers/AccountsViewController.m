@@ -11,7 +11,6 @@
 #import "AccountCell.h"
 #import "AddAccountCell.h"
 #import "SWRevealViewController.h"
-#import "MenuViewController.h"
 #import "CamerasViewController.h"
 //#import "UILabel+ActionSheet.h"
 #import <QuartzCore/QuartzCore.h>

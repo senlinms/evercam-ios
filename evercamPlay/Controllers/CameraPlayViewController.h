@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *downImgView;
 @property (weak, nonatomic) IBOutlet UIView *titlebar;
+@property (weak, nonatomic) IBOutlet UIView *statusbar;
 @property (weak, nonatomic) IBOutlet UIView *playerView;
 @property (strong, nonatomic) AsyncImageView *imageView;
 

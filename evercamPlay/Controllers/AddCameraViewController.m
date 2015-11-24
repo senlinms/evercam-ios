@@ -29,6 +29,8 @@
 #import "AppDelegate.h"
 #import "SharedManager.h"
 
+#define VIEWMARGIN 40
+
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
     NIDropDown *vendorDropDown;
@@ -36,11 +38,14 @@
     GCDAsyncSocket *asyncSocket;
     UITextField *statusLabel;
     NSString* userName;
+    NSMutableArray *viewsArray;
+    NSMutableArray *minViewsArray;
 }
 @property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIButton *testButton;
 @property (weak, nonatomic) IBOutlet UITextField *tfRTSPURL;
 @property (strong, nonatomic) UITextField *focusedTextField;
 @property (nonatomic, strong) EvercamVendor *currentVendor;
@@ -68,6 +73,10 @@
     self.tfVendor.text = @"Unknown/Other";
     self.cameraView.hidden = true;
     
+    viewsArray =  [[NSMutableArray alloc] initWithObjects: self.nameView, self.ipAddressView, self.httpPortView, self.snapshotView, self.rtspPortView, self.rtstURLView, self.credentialsView, nil];
+    minViewsArray =  [[NSMutableArray alloc] initWithObjects: self.nameView, self.ipAddressView, self.httpPortView, self.rtspPortView, self.credentialsView, nil];
+    
+
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
@@ -83,7 +92,7 @@
                                             action:@selector(handleSingleTap:)];
     [self.formView addGestureRecognizer:singleFingerTap];
     
-    [self initialScreen];
+    [self initializeScreen];
     
     self.vendorsNameArray = [NSMutableArray array];
     self.modelsNameArray = [NSMutableArray array];
@@ -687,11 +696,14 @@
 }
 
 #pragma mark - Custom Functions
-- (void)initialScreen {
+- (void)initializeScreen {
     if (self.editCamera) {
         self.titleLabel.text = @"Edit Camera";
         self.tfID.enabled = NO;
         self.cameraView.hidden = false;
+        CGRect frame = self.cameraView.frame;
+        frame.origin.y += VIEWMARGIN;
+        [self reFrameViews:viewsArray initialFrame:frame];
         [self.addButton setTitle:@"Save Changes" forState:UIControlStateNormal];
         
         self.tfID.text = self.editCamera.camId;
@@ -717,6 +729,8 @@
         }
     }
     else{
+        
+        [self reFrameViews:viewsArray initialFrame:self.cameraView.frame];
         [self getCameraName];
         [self populateIPTextField];
     }
@@ -1162,10 +1176,12 @@
             self.tfModel.text = @"Unknown/Other";
             self.snapshotView.hidden = false;
             self.rtstURLView.hidden = false;
+            [self reFrameViews:viewsArray initialFrame:self.cameraView.frame];
             [self ClearFields];
             [self getCameraName];
             return;
         }
+        [self reFrameViews:minViewsArray initialFrame:self.cameraView.frame];
         self.currentVendor = self.vendorsArray[index-1];
         NSLog(@"Current Vendor: %@", self.currentVendor);
         self.snapshotView.hidden = true;
@@ -1485,13 +1501,23 @@
         }
         
     }];
-    
 }
 
 
+-(void)reFrameViews:(NSMutableArray*)Views initialFrame:(CGRect)frame
+{
+    for (int index=0; index<Views.count; index++) {
+        UIView* view =  Views[index];
+        view.frame = frame;
+        frame.origin.y += VIEWMARGIN;
+    }
+    CGRect newFrame = self.addButton.frame;
+    newFrame.origin.y = frame.origin.y + VIEWMARGIN - 10;
+    self.addButton.frame = newFrame;
 
-
-
-
+    newFrame = self.testButton.frame;
+    newFrame.origin.y = frame.origin.y + VIEWMARGIN - 10;
+    self.testButton.frame = newFrame;
+}
 
 @end

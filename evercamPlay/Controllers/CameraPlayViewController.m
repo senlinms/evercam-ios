@@ -31,6 +31,7 @@
     BOOL isPlaying;
     NIDropDown *dropDown;
     NSTimer *timeCounter;
+    NSString* currentImage;
     
     __weak IBOutlet UIButton *playOrPauseButton;
     __weak IBOutlet UIView *videoController;
@@ -71,7 +72,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.imageView.image = nil;
+   
     videoController.alpha = 0.0;
     
     self.screenName = @"Video View";
@@ -82,25 +83,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
+    //        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
     
-    if (UIDeviceOrientationIsLandscape(deviceOrientation))
-    {
-        self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height);
-        //        self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
-        self.titlebar.hidden = YES;
-        self.btnTitle.hidden = YES;
-        self.downImgView.hidden = YES;
-    }
-    else
-    {
-        self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-        //        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
-        self.titlebar.hidden = NO;
-        self.btnTitle.hidden = NO;
-        self.downImgView.hidden = NO;
-        video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
-    }
+    self.statusbar.hidden = NO;
+    self.titlebar.hidden = NO;
+    self.btnTitle.hidden = NO;
+    self.downImgView.hidden = NO;
+    video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -109,47 +99,37 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
     [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
     
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    if (UIDeviceOrientationIsLandscape(deviceOrientation))
-    {
-        //LandscapeView
-        self.titlebar.hidden = YES;
-        self.btnTitle.hidden = YES;
-        self.downImgView.hidden = YES;
-    }
-    else
-    {
-        self.titlebar.hidden = NO;
-        self.btnTitle.hidden = NO;
-        self.downImgView.hidden = NO;
-    }
+    self.statusbar.hidden = NO;
+    self.titlebar.hidden = NO;
+    self.btnTitle.hidden = NO;
+    self.downImgView.hidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self enableSleep];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    if (UIDeviceOrientationIsLandscape(deviceOrientation))
-    {
-        //LandscapeView
-        self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height);
-        //      self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
-        self.titlebar.hidden = YES;
-        self.btnTitle.hidden = YES;
-        self.downImgView.hidden = YES;
-    }
-    else
-    {
-        self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-        //    self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
-        self.titlebar.hidden = NO;
-        self.btnTitle.hidden = NO;
-        self.downImgView.hidden = NO;
-    }
-}
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+//    if (UIDeviceOrientationIsLandscape(deviceOrientation))
+//    {
+//        //LandscapeView
+//        self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height-20);
+//        //      self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
+////        self.titlebar.hidden = YES;
+////        self.btnTitle.hidden = YES;
+////        self.downImgView.hidden = YES;
+//    }
+//    else
+//    {
+//        self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
+//        //    self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
+//        self.titlebar.hidden = NO;
+//        self.btnTitle.hidden = NO;
+//        self.downImgView.hidden = NO;
+//    }
+//}
 
 - (void)disableSleep {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -408,7 +388,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     } else {
         if (isPlaying == YES) {
             [self showVideoController:NO];
-            //            videoController.hidden = YES;
+            //    videoController.hidden = YES;
         }
     }
 }
@@ -506,7 +486,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [view addAction:viewDetails];
         [view addAction:savedImages];
         [view addAction:viewRecordings];
-//        [view addAction:removeCamera];
         [view addAction:sendFeedback];
         [view addAction:cancel];
         
@@ -526,13 +505,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)playCamera {
-    self.imageView.image = nil;
     if (self.imageView)
     {
         [self.imageView removeFromSuperview];
         self.imageView = nil;
     }
-    
     
     if (browseJpgTask)
     {
@@ -547,7 +524,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
     
     self.lblTimeCode.hidden = YES;
-    
+    video_view.hidden = YES;
     
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
@@ -557,7 +534,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             [self createPlayer];
         } else {
             [self createBrowseJpgTask];
-            [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
+            //[self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
+            if (currentImage) {
+                self.imageView.image = [UIImage imageNamed:currentImage];
+            }
+            
         }
     } else {
         [loadingView stopAnimating];
@@ -567,6 +548,38 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     isPlaying = YES;
 }
 
+- (void)saveImage
+{
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.layer.opaque, 0.0);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    NSData *data=UIImagePNGRepresentation(img);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *imgName = [NSString stringWithFormat:@"CurrentScreen.jpg"];
+    NSString *strPath = [documentsDirectory stringByAppendingPathComponent:imgName];
+    
+    NSError *error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:strPath] == YES)
+    {
+        NSLog(@"file exist and I delete it");
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:strPath error:&error];
+        
+        NSLog(@"error:%@", error);
+    }
+    else{
+        [data writeToFile:strPath atomically:YES];
+        currentImage = imgName;
+    }
+}
+
 - (void)stopCamera {
     isPlaying = NO;
     
@@ -574,6 +587,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         if (launch)
         {
             gst_launch_remote_pause(launch);
+            [self saveImage];
         }
         
         if (timeCounter && [timeCounter isValid])
@@ -586,6 +600,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         if (browseJpgTask) {
             [browseJpgTask stop];
             browseJpgTask = nil;
+            [self saveImage];
         }
     } else {
         return;
@@ -611,7 +626,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
         
-        video_view.hidden = YES;
+        
     }
     
 }

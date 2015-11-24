@@ -18,7 +18,7 @@
 #import "SharedManager.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
+#import "PreferenceUtil.h"
 
 @interface AppDelegate ()
 
@@ -78,6 +78,14 @@
 //    [GAI sharedInstance].dispatchInterval = 20;
 //    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
 //    [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [PreferenceUtil setIsShowOfflineCameras:YES];
+    }
+    
     
     return YES;
 }

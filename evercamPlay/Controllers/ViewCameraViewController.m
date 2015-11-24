@@ -170,7 +170,7 @@
             }];
         } else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[EvercamShell shell] deleteShareCamera:self.camera.camId andUserId:[APP_DELEGATE defaultUser].email withBlock:^(BOOL success, NSError *error) {
+            [[EvercamShell shell] deleteShareCamera:self.camera.camId andUserEmail:[APP_DELEGATE defaultUser].email withBlock:^(BOOL success, NSError *error) {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 if (success) {
                     UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove camera", nil) message:NSLocalizedString(@"Camera deleted", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

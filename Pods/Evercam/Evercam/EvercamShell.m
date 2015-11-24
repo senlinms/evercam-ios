@@ -318,8 +318,7 @@ static EvercamShell *instance = nil;
 }
 
 // - (void)deleteShareCamera:(NSString *)cameraId andUserId:(NSNumber *)userId withBlock:(void (^)(BOOL success, NSError *error))block {
-
-- (void)deleteShareCamera:(NSString *)cameraId andUserId:(NSString *)email withBlock:(void (^)(BOOL success, NSError *error))block {
+- (void)deleteShareCamera:(NSString *)cameraId andUserEmail:(NSString *)email withBlock:(void (^)(BOOL success, NSError *error))block{
     if (keyPair) {
         NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:keyPair.apiId, @"api_id",
                                     keyPair.apiKey, @"api_key",
