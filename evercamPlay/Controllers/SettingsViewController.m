@@ -11,10 +11,12 @@
 #import "PreferenceUtil.h"
 #import "GlobalSettings.h"
 #import "BlockActionSheet.h"
+#import "AppDelegate.h"
+#import "Struts.h"
 
 @interface SettingsViewController ()
 {
-    
+    CAGradientLayer *gradient;
 }
 
 @end
@@ -30,10 +32,11 @@
     self.screenName = @"Cameras Preferences";
     
     // Do any additional setup after loading the view from its nib.
-    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient = [CAGradientLayer layer];
     gradient.frame = self.tableView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.tableView.layer insertSublayer:gradient atIndex:0];
+//    setstrutsWithMask(self.view, UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     
     SWRevealViewController *revealController = [self revealViewController];
     
@@ -43,10 +46,26 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewWillAppear:(BOOL)animated{
+    CustomNavigationController* cVC = [APP_DELEGATE viewController];
+    [cVC setHasLandscapeMode:YES];
+    [UIViewController attemptRotationToDeviceOrientation];
 }
+
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    gradient.frame = self.tableView.bounds;
+    //    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+//    if (UIInterfaceOrientationIsPortrait(orientation))
+//    {
+//        //Your portrait
+//    }
+//    else
+//    {
+//        //Your Landscape.
+//    }
+}
+
 
 - (IBAction)landscapeModeChanged:(id)sender {
     UISwitch *switchView = (UISwitch *)sender;
@@ -130,7 +149,7 @@
             UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-66 , 11.5f, 51.f, 31.f)];
             [cell addSubview:swtch];
             [swtch addTarget:self action:@selector(landscapeModeChanged:) forControlEvents:UIControlEventValueChanged];
-            
+            setstrutsWithMask(swtch, UIViewAutoresizingFlexibleLeftMargin);
             if ([PreferenceUtil isForceLandscape]) {
                 [swtch setOn:YES];
             } else {
@@ -147,6 +166,8 @@
             [cell addSubview:swtch];
             [swtch addTarget:self action:@selector(showOfflineModeChanged:) forControlEvents:UIControlEventValueChanged];
             
+            setstrutsWithMask(swtch, UIViewAutoresizingFlexibleLeftMargin);
+
             if ([PreferenceUtil isShowOfflineCameras]) {
                 [swtch setOn:YES];
             } else {

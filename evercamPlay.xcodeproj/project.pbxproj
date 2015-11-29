@@ -62,6 +62,7 @@
 		585999111BF1B2DF00CDC457 /* MenuViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */; };
 		585999131BF9C53000CDC457 /* ic_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 585999121BF9C53000CDC457 /* ic_info.png */; };
 		58F0F5D91C0467F600BC04A3 /* cam.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 58F0F5D81C0467F600BC04A3 /* cam.jpg */; };
+		58F0F6171C08799B00BC04A3 /* Struts.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F0F6161C08799B00BC04A3 /* Struts.m */; };
 		5D814025BA9B52C1265ECA86 /* libPods-evercamPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 241B18B5C67528E78AF3CBED /* libPods-evercamPlay.a */; };
 		6C0497DF1BDE48640095956B /* CommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0497DE1BDE48640095956B /* CommonFunctions.m */; };
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
@@ -297,6 +298,8 @@
 		585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewControllerCell.m; sourceTree = "<group>"; };
 		585999121BF9C53000CDC457 /* ic_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_info.png; sourceTree = "<group>"; };
 		58F0F5D81C0467F600BC04A3 /* cam.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cam.jpg; sourceTree = "<group>"; };
+		58F0F6151C08799B00BC04A3 /* Struts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Struts.h; sourceTree = "<group>"; };
+		58F0F6161C08799B00BC04A3 /* Struts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Struts.m; sourceTree = "<group>"; };
 		6C0497DE1BDE48640095956B /* CommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFunctions.m; sourceTree = "<group>"; };
 		6C0497E01BDE49B60095956B /* CommonFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonFunctions.h; sourceTree = "<group>"; };
 		6C7262B31BDDF4F300446CBE /* MainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenViewController.h; sourceTree = "<group>"; };
@@ -914,6 +917,8 @@
 		CB44E84E1AAE9E7D00A78C11 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58F0F6151C08799B00BC04A3 /* Struts.h */,
+				58F0F6161C08799B00BC04A3 /* Struts.m */,
 				CB44E84F1AAE9E7D00A78C11 /* AccountsViewController.h */,
 				CB44E8501AAE9E7D00A78C11 /* AccountsViewController.m */,
 				CB44E8511AAE9E7D00A78C11 /* AccountsViewController.xib */,
@@ -1323,6 +1328,7 @@
 				CB318E591AFC3565004FFA8E /* SDWebImageDownloader.m in Sources */,
 				CB44E8801AAE9E7D00A78C11 /* AddAccountCell.m in Sources */,
 				CB318E5D1AFC3565004FFA8E /* UIButton+WebCache.m in Sources */,
+				58F0F6171C08799B00BC04A3 /* Struts.m in Sources */,
 				CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */,
 				E369E4A61B137AB6009D2D9E /* AddAccountView.m in Sources */,
 				E309008A1B16B78600E5B5C0 /* BlockBackground.m in Sources */,

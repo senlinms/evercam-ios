@@ -30,6 +30,7 @@
 {
     NSString *triedUsername;
     NSString *triedPassword;
+    CAGradientLayer *gradient;
 }
 
 @property (nonatomic, strong) NSMutableArray *users;
@@ -56,7 +57,7 @@
         [self.tableView registerNib:[UINib nibWithNibName:@"AddAccountCell_iPad" bundle:nil] forCellReuseIdentifier:@"AddAccountCellPad"];
     }
 
-    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient = [CAGradientLayer layer];
     gradient.frame = self.tableView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.tableView.layer insertSublayer:gradient atIndex:0];
@@ -76,9 +77,25 @@
     [self getAllUsers];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewWillAppear:(BOOL)animated{
+    CustomNavigationController* cVC = [APP_DELEGATE viewController];
+    [cVC setHasLandscapeMode:YES];
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    gradient.frame = self.tableView.bounds;
+    [_addAccountView reframeSubView:self.view.center];
+    //    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    //    if (UIInterfaceOrientationIsPortrait(orientation))
+    //    {
+    //        //Your portrait
+    //    }
+    //    else
+    //    {
+    //        //Your Landscape.
+    //    }
 }
 
 - (void)getAllUsers {
@@ -122,6 +139,7 @@
     _addAccountView.passwdField.text = password;
     _addAccountView.alpha = 0.f;
     [self.view addSubview:_addAccountView];
+    [_addAccountView reframeSubView:self.view.center];
     
     [UIView animateWithDuration:0.3f
                           delay:0.0f

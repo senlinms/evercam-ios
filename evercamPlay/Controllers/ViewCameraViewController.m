@@ -232,6 +232,13 @@
             self.tvSnapshot.textColor = [UIColor lightGrayColor];
         }
         
+        if (self.camera.externalH264Url && self.camera.externalH264Url.length > 0) {
+            self.tvRTSPURL.text = self.camera.externalH264Url;
+        } else {
+            self.tvRTSPURL.text = @"Not specified";
+            self.tvRTSPURL.textColor = [UIColor lightGrayColor];
+        }
+        
         if (self.camera.externalHost && self.camera.externalHost.length > 0) {
             self.lblExternalHost.text = self.camera.externalHost;
         } else {

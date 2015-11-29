@@ -50,8 +50,8 @@
             CustomNavigationController* cVC = [APP_DELEGATE viewController];
             
             [UIViewController attemptRotationToDeviceOrientation];
-            
-            return (UIInterfaceOrientation)[[UIDevice currentDevice] orientation];
+                                    
+            return [super preferredInterfaceOrientationForPresentation];
             
         }
         else

@@ -17,6 +17,7 @@
 @interface FeedbackViewController () <MFMailComposeViewControllerDelegate>
 {
     UITextField *activeTextField;
+    CAGradientLayer *gradient;
 }
 @end
 
@@ -25,10 +26,9 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     self.screenName = @"Feedback Page";
     // Do any additional setup after loading the view from its nib.
-    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient = [CAGradientLayer layer];
     gradient.frame = self.contentView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.contentView.layer insertSublayer:gradient atIndex:0];
@@ -47,7 +47,17 @@
         self.txt_username.text = [NSString stringWithFormat:@"%@ %@", [APP_DELEGATE defaultUser].firstName, [APP_DELEGATE defaultUser].lastName];
         self.txt_email.text = [APP_DELEGATE defaultUser].email;
     }
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    CustomNavigationController* cVC = [APP_DELEGATE viewController];
+    [cVC setHasLandscapeMode:YES];
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    gradient.frame = self.contentView.bounds;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,6 +75,9 @@
     
     if ([feedback stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"evercamPlay", nil) message:NSLocalizedString(@"Please provide some feedback to send.", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        simpleAlert.tag = 101;
+        [simpleAlert show];
         return;
     }
     

@@ -12,6 +12,7 @@
 @interface AddAccountView ()
 
 @property (nonatomic, weak) IBOutlet UIView *view;
+@property (nonatomic, weak) IBOutlet UIView *grayView;
 @property (nonatomic, weak) IBOutlet UIView *editView;
 
 @end
@@ -23,7 +24,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setup];
-        
+        self.grayView.frame = frame;
         _editView.layer.cornerRadius = 4.0;
         _editView.layer.masksToBounds = YES;
         
@@ -39,6 +40,11 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShown:) name:UIKeyboardDidShowNotification object:nil];
     }
     return self;
+}
+
+-(void)reframeSubView:(CGPoint)center
+{
+    self.editView.center = center;
 }
 
 - (void)setup

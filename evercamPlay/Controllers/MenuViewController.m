@@ -59,12 +59,6 @@
 {
     [super viewDidLoad];
     portraitTableFrame = self.rearTableView.frame;
-    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
-    if ((orientation == UIInterfaceOrientationLandscapeLeft) || (orientation == UIInterfaceOrientationLandscapeRight)) {
-    
-        [self changeFrame:@"Landscape"];
-    }
-    
     self.rearTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
 }
@@ -73,38 +67,37 @@
 {
     self.name.text =  [APP_DELEGATE defaultUser].username;
     self.email.text = [APP_DELEGATE defaultUser].email;
+    [self changeFrame];
+   
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    
-    if (UIDeviceOrientationIsLandscape(deviceOrientation))
-    {
-        [self changeFrame:@"Landscape"];
-    }
-    else
-    {
-        [self changeFrame:@"Portrait"];
-    }
+    [self changeFrame];
 }
 
--(void)changeFrame:(NSString*)orientation
+-(void)changeFrame
 {
-    if ([orientation isEqualToString:@"Landscape"]) {
-        [self.view setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.height, self.view.frame.size.width)];
-        CGRect frame = self.rearTableView.frame;
-        frame.size.height = 191;
-        self.rearTableView.frame = frame;
+    if ([GlobalSettings sharedInstance].isPhone)
+    {
+        UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
         
-        frame = self.containerView.frame;
-        frame.origin.y = 0;
-        self.containerView.frame = frame;
+        if (UIDeviceOrientationIsLandscape(deviceOrientation))
+        {
+            [self.view setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.height, self.view.frame.size.width)];
+            CGRect frame = self.rearTableView.frame;
+            frame.size.height = 191;
+            self.rearTableView.frame = frame;
+            
+            frame = self.containerView.frame;
+            frame.origin.y = 0;
+            self.containerView.frame = frame;
+        }
+        else
+        {
+            self.rearTableView.frame = portraitTableFrame;
+        }
     }
-    else{
-        self.rearTableView.frame = portraitTableFrame;
-    }
-
 }
 
 #pragma marl - UITableView Data Source

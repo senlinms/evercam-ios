@@ -70,7 +70,6 @@
         [self PushVC:self.selectedRow];
     }
     
-    
     self.navigationController.navigationBarHidden = YES;
     
     self.screenName = @"Camera Grid View";
@@ -93,25 +92,48 @@
     [self hideLoadingView];
     [self onRefresh:nil];
     
-    if ([GlobalSettings sharedInstance].isPhone == YES) {
-        cellSize = CGSizeMake(320.0 / [PreferenceUtil getCameraPerRow], 320.0 / [PreferenceUtil getCameraPerRow] * .75);
-        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = cellSize;
-    }
-    else {
-        cellSize = CGSizeMake(self.view.frame.size.width / [PreferenceUtil getCameraPerRow], self.view.frame.size.width / [PreferenceUtil getCameraPerRow] * .75);
-        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = cellSize;
-    }
+    [self setCamerasPerRow];
 //    if ([PreferenceUtil getCameraPerRow] == 3)
 //    {
 //        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
 //    }
 }
 
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    //[UIView setAnimationsEnabled:NO];
+    [self setCamerasPerRow];
+    [self.view setNeedsUpdateConstraints];
+    
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    if (UIInterfaceOrientationIsPortrait(orientation))
+    {
+        //Your portrait
+    }
+    else
+    {
+        //Your Landscape.
+    }
+}
+
+
+
+-(void)setCamerasPerRow
+{
+    if ([GlobalSettings sharedInstance].isPhone == YES) {
+        cellSize = CGSizeMake(self.view.frame.size.width / [PreferenceUtil getCameraPerRow], self.view.frame.size.width  / [PreferenceUtil getCameraPerRow] * .75);
+        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = cellSize;
+    }
+    else {
+        cellSize = CGSizeMake(self.view.frame.size.width / [PreferenceUtil getCameraPerRow], self.view.frame.size.width / [PreferenceUtil getCameraPerRow] * .75);
+        ((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout).itemSize = cellSize;
+    }
+}
+
 
 -(void)PushVC:(NSInteger)row
 {
     UIViewController *newFrontController = nil;
-    SWRevealViewController *revealController = self.revealViewController;
     
     // row number reveived here with 1 increased
     if (row == 1)
@@ -164,8 +186,8 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.navigationController.navigationBarHidden = YES;    
-    [self onRefresh:nil];
+    self.navigationController.navigationBarHidden = YES;
+    [self setCamerasPerRow];
 }
 
 - (void)showLoadingView {
@@ -176,20 +198,6 @@
 - (void)hideLoadingView {
     [self.loadingIndicator stopAnimating];
     self.btnRefresh.hidden = NO;
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    
-    if (UIDeviceOrientationIsLandscape(deviceOrientation))
-    {
-
-    }
-    else
-    {
-
-    }
 }
 
 #pragma mark - Action
@@ -442,9 +450,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     CustomNavigationController* cVC = [APP_DELEGATE viewController];
-
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
+    [self setCamerasPerRow];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -489,6 +497,7 @@
                      completion: ^(BOOL finished) {
                      }
      ];
+    [self setCamerasPerRow];
 }
 
 

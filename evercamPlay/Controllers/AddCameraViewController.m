@@ -46,7 +46,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *testButton;
-@property (weak, nonatomic) IBOutlet UITextField *tfRTSPURL;
 @property (strong, nonatomic) UITextField *focusedTextField;
 @property (nonatomic, strong) EvercamVendor *currentVendor;
 @property (nonatomic, strong) EvercamModel *currentModel;
@@ -117,6 +116,7 @@
         self.tfInternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"192.168.1.122" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfInternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal HTTP port" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfInternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal RTSP port" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfRtspUrl.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/h264/ch1/mail/av_stream" attributes:@{NSForegroundColorAttributeName: color}];
     } else {
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
         // TODO: Add fall-back code to set placeholder color.
@@ -262,13 +262,13 @@
 //    return;
     
     BOOL ip = [self CheckIPAddress];
-    if (ip) {
+    if (ip) {               // provided ip is local/private ip-address so do nothing
         return;
     }
     
     EvercamCameraBuilder *cameraBuilder = [self buildCameraWithLocalCheck];
     if (cameraBuilder != nil) {
-        if (!self.editCamera) { // create camera
+        if (!self.editCamera) {     // create camera
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
             // External URL Check
@@ -763,6 +763,9 @@
     }
     if (self.tfPassword.text.length > 0) {
         cameraBuilder.cameraPassword = self.tfPassword.text;
+    }
+    if (self.tfRtspUrl.text.length > 0) {
+        cameraBuilder.h264Url = self.tfRtspUrl.text;
     }
     
     NSString *externalHost = self.tfExternalHost.text;
@@ -1281,7 +1284,7 @@
     }
     
     if (sender.tag == 2) {
-    self.rtspPortStatusLabel.text = @"";
+        self.rtspPortStatusLabel.text = @"";
     }
     
     if (sender.tag == 3) {
@@ -1477,7 +1480,7 @@
     self.tfSnapshot.text = @"";
     self.tfUsername.text = @"";
     self.tfPassword.text = @"";
-    self.tfRTSPURL.text = @"";
+    self.tfRtspUrl.text = @"";
     self.thumbImageView.image = nil;
     self.logoImageView.image = nil;
     self.tfExternalHttpPort.text = @"";
@@ -1514,7 +1517,7 @@
     CGRect newFrame = self.addButton.frame;
     newFrame.origin.y = frame.origin.y + VIEWMARGIN - 10;
     self.addButton.frame = newFrame;
-
+    
     newFrame = self.testButton.frame;
     newFrame.origin.y = frame.origin.y + VIEWMARGIN - 10;
     self.testButton.frame = newFrame;
