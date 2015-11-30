@@ -42,7 +42,6 @@
 #import "AccountsViewController.h"
 #import "SettingsViewController.h"
 
-
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
     NSMutableArray *cameraArray;

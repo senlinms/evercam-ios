@@ -1311,7 +1311,7 @@
         {
             if (![self.tfExternalHttpPort.text  isEqual: @""]) {
                 self.httpPortStatusLabel.text = @"Port is open";
-                self.httpPortStatusLabel.textColor = [UIColor greenColor];
+                self.httpPortStatusLabel.textColor = UIColorFromRGB(0x80CBC4);
             }
         }
         else
