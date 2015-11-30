@@ -60,6 +60,7 @@
     [super viewDidLoad];
     portraitTableFrame = self.rearTableView.frame;
     self.rearTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.rearTableView setContentInset:UIEdgeInsetsMake(15, 0, 0, 0)];
 
 }
 
@@ -109,7 +110,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 45;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,8 +124,8 @@
         cell = [[MenuViewControllerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor whiteColor];
-        cell.textLabel.textColor = [UIColor grayColor];
-        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        cell.textLabel.textColor = UIColorFromRGB(0x333333);
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
     }
 	
     NSString *text = nil;
@@ -147,17 +148,11 @@
     {
         text = @"About Evercam";
         cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
-        
-//        text = @"Sign Out";
-//        cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
     }
     else if (row == 4)
     {
-        text = @"Sign Out";
+        text = @"Sign out";
         cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
-        
-//        text = @"About Evercam";
-//        cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
     }
 
     cell.textLabel.text = NSLocalizedString( text,nil );
@@ -247,6 +242,5 @@
         _presentedRow = 0;
     }
 }
-
 
 @end
