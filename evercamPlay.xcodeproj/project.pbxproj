@@ -72,6 +72,7 @@
 		C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639911B05F96200FC5D67 /* WebKit.framework */; };
 		C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639931B05F96C00FC5D67 /* libz.dylib */; };
 		C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */; };
+		C48C57B91C0CBEDC00E4A6C3 /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = C48C57B81C0CBEDC00E4A6C3 /* local.plist */; };
 		C49E9F3B1B0A2BE100E58C85 /* ic_cameras.png in Resources */ = {isa = PBXBuildFile; fileRef = CB318E221AFBCE11004FFA8E /* ic_cameras.png */; };
 		C4E418CC1B305B290050872E /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E418CB1B305B290050872E /* GStreamer.framework */; };
 		C4E418D61B305F1F0050872E /* EaglUIVIew.h in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D01B305DB70050872E /* EaglUIVIew.h */; };
@@ -209,7 +210,6 @@
 		E3CB15AC1B2879C700413197 /* btn_export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15A81B2879C700413197 /* btn_export@2x.png */; };
 		E3CB15AF1B287DD900413197 /* evercam_icon_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15AD1B287DD900413197 /* evercam_icon_nav.png */; };
 		E3CB15B01B287DD900413197 /* evercam_icon_nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CB15AE1B287DD900413197 /* evercam_icon_nav@2x.png */; };
-		E3CCC9AF1B28B3FF00C5199A /* SplunkMint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3CCC9AE1B28B3FF00C5199A /* SplunkMint.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -313,6 +313,7 @@
 		C40639931B05F96C00FC5D67 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C40639951B05FBDA00FC5D67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		C48C57B81C0CBEDC00E4A6C3 /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = local.plist; path = "../../evercam-play-ios/local.plist"; sourceTree = "<group>"; };
 		C4E418CB1B305B290050872E /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../Library/Frameworks/GStreamer.framework; sourceTree = "<group>"; };
 		C4E418D01B305DB70050872E /* EaglUIVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglUIVIew.h; sourceTree = "<group>"; };
 		C4E418D11B305DB70050872E /* EaglUIVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EaglUIVIew.m; sourceTree = "<group>"; };
@@ -499,7 +500,6 @@
 		E3CB15A81B2879C700413197 /* btn_export@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_export@2x.png"; sourceTree = "<group>"; };
 		E3CB15AD1B287DD900413197 /* evercam_icon_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evercam_icon_nav.png; sourceTree = "<group>"; };
 		E3CB15AE1B287DD900413197 /* evercam_icon_nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evercam_icon_nav@2x.png"; sourceTree = "<group>"; };
-		E3CCC9AE1B28B3FF00C5199A /* SplunkMint.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SplunkMint.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -528,7 +528,6 @@
 				41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */,
 				41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */,
 				410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */,
-				E3CCC9AF1B28B3FF00C5199A /* SplunkMint.framework in Frameworks */,
 				41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */,
 				41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */,
 				41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */,
@@ -636,7 +635,6 @@
 			isa = PBXGroup;
 			children = (
 				C4E418CB1B305B290050872E /* GStreamer.framework */,
-				E3CCC9AE1B28B3FF00C5199A /* SplunkMint.framework */,
 				E356C9D81B179E2A007BB101 /* libicucore.dylib */,
 				E30201D61B1782970006DAE8 /* SpriteKit.framework */,
 				C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */,
@@ -754,6 +752,7 @@
 		CB1C76511AAB144800680FE3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C48C57B81C0CBEDC00E4A6C3 /* local.plist */,
 				CB1C76521AAB144800680FE3 /* Info.plist */,
 				CB1C76531AAB144800680FE3 /* main.m */,
 			);
@@ -1107,7 +1106,7 @@
 				TargetAttributes = {
 					CB1C764D1AAB144700680FE3 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 5V2LQ8FYYH;
+						DevelopmentTeam = WUBG25MK44;
 					};
 				};
 			};
@@ -1212,6 +1211,7 @@
 				E369E4A81B137AC9009D2D9E /* AddAccountView.xib in Resources */,
 				E3CB15A91B2879C700413197 /* btn_delete.png in Resources */,
 				E30201BF1B16C82D0006DAE8 /* alert-black-button@2x.png in Resources */,
+				C48C57B91C0CBEDC00E4A6C3 /* local.plist in Resources */,
 				E30201C51B16C82D0006DAE8 /* alert-red-button@2x.png in Resources */,
 				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,

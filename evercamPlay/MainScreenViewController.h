@@ -11,9 +11,7 @@
 
 #import "WelcomeViewController.h"
 #import "AppUser.h"
-//#import <BugSense-iOS/BugSenseController.h>
 #import "GAI.h"
-#import <SplunkMint/SplunkMint.h>
 #import "EvercamShell.h"
 #import "GlobalSettings.h"
 

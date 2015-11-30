@@ -9,9 +9,7 @@
 #import "AppDelegate.h"
 #import "WelcomeViewController.h"
 #import "AppUser.h"
-//#import <BugSense-iOS/BugSenseController.h>
 #import "GAI.h"
-#import <SplunkMint/SplunkMint.h>
 #import "EvercamShell.h"
 #import "GlobalSettings.h"
 #import "Mixpanel.h"
@@ -61,24 +59,18 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-//    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
-//    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-//    //NSString *bugSenseAPIKey = [contents valueForKey:@"BugSenseAPIKey"];
-//    NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
-//    
-//    //[BugSenseController sharedControllerWithBugSenseAPIKey:bugSenseAPIKey];
-//    NSString *SplunkMintAPIKey = [contents valueForKey:@"SplunkMintAPIKey"];
-//    [[Mint sharedInstance] initAndStartSession:SplunkMintAPIKey];
-//
-//
-//    NSString *MixpanelToken = [contents valueForKey:@"MixpanelToken"];
-//    [Mixpanel sharedInstanceWithToken:MixpanelToken];
-////    [Mixpanel sharedInstanceWithToken:@"0d39cf8b82905a23f20ef7f0e85c3921"];
-//    
-//    [GAI sharedInstance].trackUncaughtExceptions = YES;
-//    [GAI sharedInstance].dispatchInterval = 20;
-//    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-//    [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
+    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    
+    NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
+    NSString *MixpanelToken = [contents valueForKey:@"MixpanelToken"];
+
+    [Mixpanel sharedInstanceWithToken:MixpanelToken];
+    
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [GAI sharedInstance].dispatchInterval = 20;
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
     {
