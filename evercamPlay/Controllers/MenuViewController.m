@@ -66,7 +66,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-   self.appVersion.text = [NSString stringWithFormat:@"V %@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
+   self.appVersion.text = [NSString stringWithFormat:@"v%@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
     self.name.text =  [NSString stringWithFormat:@"%@ %@", ([APP_DELEGATE defaultUser].firstName), ([APP_DELEGATE defaultUser].lastName)];
     self.email.text = [APP_DELEGATE defaultUser].email;
     [self changeFrame];
