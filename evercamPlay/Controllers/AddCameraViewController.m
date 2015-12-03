@@ -1401,7 +1401,7 @@
     }
     // this code is to check either user entered local/private ip-address, in case of local/private it will sendback true
     NSError *error = NULL;    
-    NSString *pattern = @"((127\.)|(10\.)|(172\.1[6-9]\.)|(172\.2[0-9]\.)|(172\.3[0-1]\.)|(192\.168\.))";
+    NSString *pattern = @"((^127\\.)|(^10\\.)|(^172\\.1[6-9]\\.)|(^172\\.2[0-9]\\.)|(^172\\.3[0-1]\\.)|(^192\\.168\\.))";
     NSRange range = NSMakeRange(0, string.length);
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
     NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
