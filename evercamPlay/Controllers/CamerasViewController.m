@@ -452,6 +452,7 @@
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
     [self setCamerasPerRow];
+    [self onRefresh:self];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

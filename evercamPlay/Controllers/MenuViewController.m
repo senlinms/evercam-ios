@@ -66,7 +66,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.name.text =  [APP_DELEGATE defaultUser].username;
+   self.appVersion.text = [NSString stringWithFormat:@"V %@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
+    self.name.text =  [NSString stringWithFormat:@"%@ %@", ([APP_DELEGATE defaultUser].firstName), ([APP_DELEGATE defaultUser].lastName)];
     self.email.text = [APP_DELEGATE defaultUser].email;
     [self changeFrame];
    
@@ -185,31 +186,6 @@
         [revealController pushFrontViewController:newFrontController animated:YES];
         return;
     }
-//    else if (row == 1)
-//    {
-//        newFrontController = [[AccountsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AccountsViewController" : @"AccountsViewController_iPad" bundle:nil];
-//        
-//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-//                                                              action:action_manage_account
-//                                                               label:label_account
-//                                                               value:nil] build]];
-//
-//    }
-//    else if (row == 2)
-//    {
-//        newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
-//        
-//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-//                                                              action:action_settings
-//                                                               label:label_settings
-//                                                               value:nil] build]];
-//    }
-//    else if (row == 3)
-//    {
-//        newFrontController = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
-//    }
     
     else if (row == 4)
     {
@@ -222,11 +198,6 @@
         
         return;
     }
-    
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-//    navigationController.navigationBarHidden = YES;
-//    [revealController pushFrontViewController:newFrontController animated:YES];
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

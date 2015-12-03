@@ -16,7 +16,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *passwdField;
 
 @property (nonatomic, strong) id<AddAccountViewDelegate> delegate;
--(void)reframeSubView:(CGPoint)center;
+-(void)reframeSubView:(CGPoint)center andFrame:(CGRect)frame;
 @end
 
 @protocol AddAccountViewDelegate <NSObject>

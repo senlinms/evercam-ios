@@ -42,9 +42,10 @@
     return self;
 }
 
--(void)reframeSubView:(CGPoint)center
+-(void)reframeSubView:(CGPoint)center andFrame:(CGRect)frame
 {
     self.editView.center = center;
+    self.grayView.frame = frame;
 }
 
 - (void)setup
@@ -85,21 +86,21 @@
 #pragma mark - keyboard notification
 - (void)keyboardDidShown:(NSNotification*)notification
 {
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    
-    [UIView animateWithDuration:0.2f
-                          delay:0.0f
-                        options: UIViewAnimationOptionAllowUserInteraction
-                     animations: ^{
-                         [self.editView setFrame:CGRectMake(self.editView.frame.origin.x,
-                                                            self.view.frame.size.height - keyboardSize.height - self.editView.frame.size.height - 10,
-                                                            self.editView.frame.size.width,
-                                                            self.editView.frame.size.height)];
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                     }
-     ];
+//    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+//    
+//    [UIView animateWithDuration:0.2f
+//                          delay:0.0f
+//                        options: UIViewAnimationOptionAllowUserInteraction
+//                     animations: ^{
+//                         [self.editView setFrame:CGRectMake(self.editView.frame.origin.x,
+//                                                            self.view.frame.size.height - keyboardSize.height - self.editView.frame.size.height - 10,
+//                                                            self.editView.frame.size.width,
+//                                                            self.editView.frame.size.height)];
+//                     }
+//                     completion: ^(BOOL finished) {
+//                         
+//                     }
+//     ];
 }
 
 

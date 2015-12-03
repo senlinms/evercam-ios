@@ -86,7 +86,7 @@
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     gradient.frame = self.tableView.bounds;
-    [_addAccountView reframeSubView:self.view.center];
+    [_addAccountView reframeSubView:self.view.center andFrame:self.view.bounds];
     //    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     //    if (UIInterfaceOrientationIsPortrait(orientation))
     //    {
@@ -118,13 +118,7 @@
                                                         }];
     
     [self.tableView reloadData];
-    
-    // go to cameras view controller
-    SWRevealViewController *revealController = self.revealViewController;
-    CamerasViewController *newFrontController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-    navigationController.navigationBarHidden = YES;
-    [revealController pushFrontViewController:navigationController animated:YES];
+    [self BackPressed:self];
 }
 
 - (void)showAddAccountAlertWithUsername:(NSString *)username andPassword:(NSString *)password {
@@ -139,7 +133,8 @@
     _addAccountView.passwdField.text = password;
     _addAccountView.alpha = 0.f;
     [self.view addSubview:_addAccountView];
-    [_addAccountView reframeSubView:self.view.center];
+    
+    [_addAccountView reframeSubView:self.view.center andFrame:self.view.bounds];
     
     [UIView animateWithDuration:0.3f
                           delay:0.0f

@@ -31,6 +31,7 @@
 @property (nonatomic, retain) IBOutlet UITableView *rearTableView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *email;
+@property (weak, nonatomic) IBOutlet UILabel *appVersion;
 
 
 @end

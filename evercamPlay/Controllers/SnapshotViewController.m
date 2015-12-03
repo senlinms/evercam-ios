@@ -163,7 +163,12 @@
                 return;
             }
             [self loadImages];
-            [self.scrollView setContentOffset:CGPointMake(0, 0)];
+            int screenWidth = self.scrollView.frame.size.width;
+            if (activeIdx>1) {
+                int currentIndex = (int)activeIdx-1;
+                self.scrollView.contentOffset = CGPointMake(currentIndex * screenWidth, 0);
+                [self scrollViewDidEndDecelerating:self.scrollView];
+            }
         }
     }
 }
