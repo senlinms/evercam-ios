@@ -217,8 +217,12 @@
             self.lblUsername.textColor = [UIColor lightGrayColor];
         }
         
-        if (self.camera.password && self.camera.password.length > 0) {
-            self.lblPassword.text = self.camera.password;
+        if (![self.camera.password isKindOfClass:[NSNull class]])
+        {
+            if (self.camera.password.length > 0)
+            {
+                self.lblPassword.text = self.camera.password;
+            }
         } else {
             self.lblPassword.text = @"Not specified";
             self.lblPassword.textColor = [UIColor lightGrayColor];

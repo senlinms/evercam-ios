@@ -29,7 +29,7 @@
 #import "AppDelegate.h"
 #import "SharedManager.h"
 
-#define VIEWMARGIN 40
+#define VIEWMARGIN 35
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
@@ -702,14 +702,16 @@
         self.tfID.enabled = NO;
         self.cameraView.hidden = false;
         CGRect frame = self.cameraView.frame;
-        frame.origin.y += VIEWMARGIN;
         [self reFrameViews:viewsArray initialFrame:frame];
         [self.addButton setTitle:@"Save Changes" forState:UIControlStateNormal];
         
         self.tfID.text = self.editCamera.camId;
         self.tfName.text = self.editCamera.name;
         self.tfUsername.text = self.editCamera.username;
-        self.tfPassword.text = self.editCamera.password;
+        if (![self.editCamera.password isKindOfClass:[NSNull class]])
+        {
+            self.tfPassword.text = self.editCamera.password;
+        }
         self.tfSnapshot.text = [self.editCamera getJpgPath];
         self.tfExternalHost.text = self.editCamera.externalHost;
         self.tfInternalHost.text = self.editCamera.internalHost;
@@ -740,15 +742,6 @@
     EvercamCameraBuilder *cameraBuilder = nil;
     NSString *cameraID = self.tfID.text;
     NSString *cameraName = self.tfName.text;
-    
-    // cameraID: removed functionality as per requirement
-//    if (cameraID.length == 0) {
-//        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify a unique ID of your camera" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [simpleAlert show];
-//        
-//        return nil;
-//    }
-   
     
     cameraBuilder = [[EvercamCameraBuilder alloc] initWithCameraId:cameraID andCameraName:cameraName andIsPublic:NO];
     
@@ -1063,6 +1056,7 @@
             if (self.currentVendor) {
                 self.tfVendor.text = self.currentVendor.name;
                 [self getAllModels];
+                [self setCameraImage];
             }
         }
     }];
@@ -1132,7 +1126,7 @@
     return nil;
 }
 #pragma mark Socket Delegate
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
@@ -1177,6 +1171,8 @@
             self.currentModel = nil;
             self.tfVendor.text = @"Unknown/Other";
             self.tfModel.text = @"Unknown/Other";
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"cam"] ofType:@"jpg"];
+            self.thumbImageView.image = [UIImage imageWithContentsOfFile:filePath];
             self.snapshotView.hidden = false;
             self.rtstURLView.hidden = false;
             [self reFrameViews:viewsArray initialFrame:self.cameraView.frame];
@@ -1190,40 +1186,10 @@
         self.snapshotView.hidden = true;
         self.rtstURLView.hidden = true;
 
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];       
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
+        [self setCameraImage];
         
-        NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentVendor.logoUrl]];
-        
-        [self.logoImageView setImageWithURLRequest:request placeholderImage:nil
-             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                 self.logoImageView.image = image;
-                 
-                 //-------------------------------set default model image--------------------------------------
-                 self.currentModel = self.modelsArray[0];
-                 NSLog(@"Current Model: %@", self.currentModel);
-                 
-                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                 NSURLRequest* modelRequest = [self imageRequestWithURL:[NSURL URLWithString:self.currentModel.thumbUrl]];
-                 
-                 [self.thumbImageView setImageWithURLRequest:modelRequest placeholderImage:nil
-                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                         self.thumbImageView.image = image;
-                                                     }
-                                                     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                                                         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                         NSLog(@"---- THUMBNAIL ERROR ---- %@", [error userInfo]);
-                                                     }];
-                 //------------------------------------------------------------------------------------------
-             }
-             failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                NSLog(@"---- LOGO ERROR ---- %@", [error userInfo]);
-        }];
-        
-    
         self.tfVendor.text = self.currentVendor.name;
         
         [self getAllModels];
@@ -1257,7 +1223,38 @@
     }
 }
 
-
+-(void)setCameraImage
+{
+    NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentVendor.logoUrl]];
+    
+    [self.logoImageView setImageWithURLRequest:request placeholderImage:nil
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           self.logoImageView.image = image;
+                                           
+                                           //----------set default model image-------------
+                                           self.currentModel = self.modelsArray[0];
+                                           NSLog(@"Current Model: %@", self.currentModel);
+                                           
+                                           [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                           NSURLRequest* modelRequest = [self imageRequestWithURL:[NSURL URLWithString:self.currentModel.thumbUrl]];
+                                           
+                                           [self.thumbImageView setImageWithURLRequest:modelRequest placeholderImage:nil
+                                                                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                                                   self.thumbImageView.image = image;
+                                                                               }
+                                                                               failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+                                                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                                                   NSLog(@"---- THUMBNAIL ERROR ---- %@", [error userInfo]);
+                                                                               }];
+                                           //-----------------------------------------------
+                                       }
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           NSLog(@"---- LOGO ERROR ---- %@", [error userInfo]);
+                                       }];
+}
 
 #pragma mark UIAlertViewDelegate - Method
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1509,6 +1506,10 @@
 
 -(void)reFrameViews:(NSMutableArray*)Views initialFrame:(CGRect)frame
 {
+    if (self.editCamera)
+    {
+        frame.origin.y += VIEWMARGIN;
+    }
     for (int index=0; index<Views.count; index++) {
         UIView* view =  Views[index];
         view.frame = frame;

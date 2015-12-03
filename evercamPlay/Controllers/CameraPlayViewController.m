@@ -439,7 +439,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                       style:UIAlertActionStyleDefault
                                       handler:^(UIAlertAction * action)
                                       {
-                                          [view dismissViewControllerAnimated:YES completion:nil];
+//                                          [view dismissViewControllerAnimated:YES completion:nil];
                                           [self showCameraView];
                                           
                                       }];
