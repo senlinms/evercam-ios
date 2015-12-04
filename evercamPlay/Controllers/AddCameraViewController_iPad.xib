@@ -394,7 +394,7 @@
                                             <rect key="frame" x="223" y="28" width="113" height="130"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cam.jpg" id="6I0-NH-Jbq">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cam.png" id="6I0-NH-Jbq">
                                                     <rect key="frame" x="8" y="24" width="98" height="98"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -497,7 +497,7 @@
     </objects>
     <resources>
         <image name="back.png" width="128" height="128"/>
-        <image name="cam.jpg" width="128" height="128"/>
+        <image name="cam.png" width="128" height="128"/>
         <image name="dropdown.png" width="30" height="30"/>
     </resources>
 </document>

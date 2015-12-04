@@ -1085,16 +1085,16 @@
             self.currentModel = [self getModelWithName:@"Default"];
             if (self.currentModel) {
                 self.tfModel.text = self.currentModel.name;
+                [self setCameraImage];
                 if (self.editCamera == nil) {
                     self.tfUsername.text = self.currentModel.defaults.authUsername;
                     self.tfPassword.text = self.currentModel.defaults.authPassword;
                     self.tfSnapshot.text = self.currentModel.defaults.jpgURL;
                 }
             }
+            NSLog(@"%@",self.modelsArray);
         }];
     }
-    
-    NSLog(@"%@",self.modelsArray);
 }
 
 - (EvercamVendor *)getVendorWithName:(NSString *)vendorName {
@@ -1171,8 +1171,7 @@
             self.currentModel = nil;
             self.tfVendor.text = @"Unknown/Other";
             self.tfModel.text = @"Unknown/Other";
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"cam"] ofType:@"jpg"];
-            self.thumbImageView.image = [UIImage imageWithContentsOfFile:filePath];
+            self.thumbImageView.image = [UIImage imageNamed:@"cam.png"];
             self.snapshotView.hidden = false;
             self.rtstURLView.hidden = false;
             [self reFrameViews:viewsArray initialFrame:self.cameraView.frame];
@@ -1186,13 +1185,12 @@
         self.snapshotView.hidden = true;
         self.rtstURLView.hidden = true;
 
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        [self setCameraImage];
+        //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+        [self getAllModels];
         
         self.tfVendor.text = self.currentVendor.name;
         
-        [self getAllModels];
     }
     else if (dropdown == modelDropDown)
     {
@@ -1223,37 +1221,47 @@
     }
 }
 
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
+
 -(void)setCameraImage
 {
-    NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentVendor.logoUrl]];
+    //----------set vendor logo-------------
+    NSString* vendorImagePath = self.currentVendor.logoUrl;
+    NSURL *vendorImageUrl = [NSURL URLWithString:vendorImagePath];
     
-    [self.logoImageView setImageWithURLRequest:request placeholderImage:nil
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                           self.logoImageView.image = image;
-                                           
-                                           //----------set default model image-------------
-                                           self.currentModel = self.modelsArray[0];
-                                           NSLog(@"Current Model: %@", self.currentModel);
-                                           
-                                           [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                                           NSURLRequest* modelRequest = [self imageRequestWithURL:[NSURL URLWithString:self.currentModel.thumbUrl]];
-                                           
-                                           [self.thumbImageView setImageWithURLRequest:modelRequest placeholderImage:nil
-                                                                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                                                   self.thumbImageView.image = image;
-                                                                               }
-                                                                               failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                                                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                                                   NSLog(@"---- THUMBNAIL ERROR ---- %@", [error userInfo]);
-                                                                               }];
-                                           //-----------------------------------------------
-                                       }
-                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                           NSLog(@"---- LOGO ERROR ---- %@", [error userInfo]);
-                                       }];
+    [self downloadImageWithURL:vendorImageUrl completionBlock:^(BOOL succeeded, UIImage *image) {
+        if (succeeded) {
+            self.logoImageView.image = image;
+        }
+    }];
+    
+    //----------set default model image-------------
+    self.currentModel = self.modelsArray[0];
+    NSLog(@"Current Model: %@", self.currentModel);
+    
+    NSString* modelImagePath = self.currentModel.thumbUrl;
+    NSURL *modelImageUrl = [NSURL URLWithString:modelImagePath];
+    
+    [self downloadImageWithURL:modelImageUrl completionBlock:^(BOOL succeeded, UIImage *image) {
+        if (succeeded) {
+            self.thumbImageView.image = image;
+        }
+    }];
+
 }
 
 #pragma mark UIAlertViewDelegate - Method
