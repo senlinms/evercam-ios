@@ -117,6 +117,18 @@
     
     return @"";
 }
+
+- (NSString *)getRTSPUrl {
+    if (self.internalH264Url && self.internalH264Url.length > 0) {
+        return [NSURL URLWithString:self.internalH264Url].path;
+        
+    } else if (self.externalH264Url && self.externalH264Url.length > 0) {
+        return [NSURL URLWithString:self.externalH264Url].path;
+    }
+    
+    return @"";
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"Camera Name: %@", self.name];

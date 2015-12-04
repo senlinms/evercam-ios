@@ -40,5 +40,6 @@
 - (id) initWithDictionary: (NSDictionary *)cameraDict;
 - (BOOL) isHikvision;
 - (NSString *)getJpgPath;
+- (NSString *)getRTSPUrl;
 @end
 

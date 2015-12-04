@@ -61,7 +61,7 @@
 		41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB7C1AD708730016ACCA /* icon_offline.png */; };
 		585999111BF1B2DF00CDC457 /* MenuViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */; };
 		585999131BF9C53000CDC457 /* ic_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 585999121BF9C53000CDC457 /* ic_info.png */; };
-		58F0F5D91C0467F600BC04A3 /* cam.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 58F0F5D81C0467F600BC04A3 /* cam.jpg */; };
+		589204A41C11A40800B40DD0 /* cam.png in Resources */ = {isa = PBXBuildFile; fileRef = 589204A31C11A40800B40DD0 /* cam.png */; };
 		58F0F6171C08799B00BC04A3 /* Struts.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F0F6161C08799B00BC04A3 /* Struts.m */; };
 		5D814025BA9B52C1265ECA86 /* libPods-evercamPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 241B18B5C67528E78AF3CBED /* libPods-evercamPlay.a */; };
 		6C0497DF1BDE48640095956B /* CommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0497DE1BDE48640095956B /* CommonFunctions.m */; };
@@ -296,7 +296,7 @@
 		5859990F1BF1B2DF00CDC457 /* MenuViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewControllerCell.h; sourceTree = "<group>"; };
 		585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewControllerCell.m; sourceTree = "<group>"; };
 		585999121BF9C53000CDC457 /* ic_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_info.png; sourceTree = "<group>"; };
-		58F0F5D81C0467F600BC04A3 /* cam.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cam.jpg; sourceTree = "<group>"; };
+		589204A31C11A40800B40DD0 /* cam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cam.png; sourceTree = "<group>"; };
 		58F0F6151C08799B00BC04A3 /* Struts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Struts.h; sourceTree = "<group>"; };
 		58F0F6161C08799B00BC04A3 /* Struts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Struts.m; sourceTree = "<group>"; };
 		6C0497DE1BDE48640095956B /* CommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFunctions.m; sourceTree = "<group>"; };
@@ -813,7 +813,7 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
-				58F0F5D81C0467F600BC04A3 /* cam.jpg */,
+				589204A31C11A40800B40DD0 /* cam.png */,
 				6CF591FA1BF05FE20044B0F1 /* logo.png */,
 				E3CB15AD1B287DD900413197 /* evercam_icon_nav.png */,
 				E3CB15AE1B287DD900413197 /* evercam_icon_nav@2x.png */,
@@ -1142,7 +1142,7 @@
 				CB1C76D71AAB871A00680FE3 /* play_page_intro.png in Resources */,
 				CB44E86F1AAE9E7D00A78C11 /* AccountsViewController.xib in Resources */,
 				E30201CD1B16C9CF0006DAE8 /* AddAccountView_iPad.xib in Resources */,
-				58F0F5D91C0467F600BC04A3 /* cam.jpg in Resources */,
+				589204A41C11A40800B40DD0 /* cam.png in Resources */,
 				E309007C1B1659DB00E5B5C0 /* CamerasViewController_iPad.xib in Resources */,
 				E30900A61B16B96000E5B5C0 /* action-red-button@2x.png in Resources */,
 				E3CB15AB1B2879C700413197 /* btn_export.png in Resources */,

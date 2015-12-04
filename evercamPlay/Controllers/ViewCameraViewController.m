@@ -237,7 +237,7 @@
         }
         
         if (self.camera.externalH264Url && self.camera.externalH264Url.length > 0) {
-            self.tvRTSPURL.text = self.camera.externalH264Url;
+            self.tvRTSPURL.text = [self.camera getRTSPUrl];
         } else {
             self.tvRTSPURL.text = @"Not specified";
             self.tvRTSPURL.textColor = [UIColor lightGrayColor];
