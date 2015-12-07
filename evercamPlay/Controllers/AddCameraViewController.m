@@ -42,6 +42,7 @@
     NSMutableArray *minViewsArray;
 }
 @property (weak, nonatomic) IBOutlet UIView *imageContainer;
+@property (weak, nonatomic) IBOutlet UIView *logoImagesContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
@@ -1246,6 +1247,10 @@
     [self downloadImageWithURL:vendorImageUrl completionBlock:^(BOOL succeeded, UIImage *image) {
         if (succeeded) {
             self.logoImageView.image = image;
+            CGFloat desiredHeight = .18 * self.logoImagesContainer.frame.size.height;
+            CGFloat scaleFactor = image.size.height/desiredHeight;
+            CGFloat desiredWidth = image.size.width / scaleFactor;
+            self.logoImageView.frame = CGRectMake(0, 0, desiredWidth, desiredHeight);
         }
     }];
     

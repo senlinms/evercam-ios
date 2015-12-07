@@ -17,6 +17,7 @@
                 <outlet property="imageView" destination="REt-de-vgf" id="3nN-7h-lM1"/>
                 <outlet property="ipAddressView" destination="Mqd-p6-5yg" id="Dwh-r2-5VM"/>
                 <outlet property="logoImageView" destination="Dox-fr-sf4" id="sZr-JO-leS"/>
+                <outlet property="logoImagesContainer" destination="hvt-lh-Twj" id="hDc-lu-5Jd"/>
                 <outlet property="nameView" destination="cr2-IR-ZKn" id="vgk-94-o05"/>
                 <outlet property="rtspPortStatusLabel" destination="fEm-vX-48a" id="5r1-OO-kqO"/>
                 <outlet property="rtspPortView" destination="pGl-Qa-Iod" id="aKZ-dc-X8l"/>
@@ -394,12 +395,12 @@
                                             <rect key="frame" x="223" y="28" width="113" height="130"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cam.png" id="6I0-NH-Jbq">
-                                                    <rect key="frame" x="8" y="24" width="98" height="98"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Dox-fr-sf4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="99" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Dox-fr-sf4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cam.png" id="6I0-NH-Jbq">
+                                                    <rect key="frame" x="8" y="13" width="98" height="104"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
