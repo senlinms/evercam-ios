@@ -32,7 +32,7 @@
     NIDropDown *dropDown;
     NSTimer *timeCounter;
     NSString* currentImage;
-    
+    BOOL runFirstTime;
     __weak IBOutlet UIButton *playOrPauseButton;
     __weak IBOutlet UIView *videoController;
     __weak IBOutlet UIButton *saveButton;
@@ -72,13 +72,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    runFirstTime = YES;
     videoController.alpha = 0.0;
-    
     self.screenName = @"Video View";
-    
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
+    runFirstTime = NO;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -534,24 +533,25 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             [self createPlayer];
         } else {
             [self createBrowseJpgTask];
-            //[self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
-            if (currentImage) {
-                self.imageView.image = [UIImage imageNamed:currentImage];
+            if (runFirstTime) {
+                [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
             }
-            
+            else{
+                self.imageView.image = [UIImage imageWithContentsOfFile:currentImage];
+            }
         }
     } else {
         [loadingView stopAnimating];
         self.lblOffline.hidden = NO;
     }
-    
     isPlaying = YES;
 }
 
+
 - (void)saveImage
 {
-    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.layer.opaque, 0.0);
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIGraphicsBeginImageContextWithOptions(self.imageView.bounds.size, self.imageView.layer.opaque, 0.0);
+    [self.imageView.layer renderInContext:UIGraphicsGetCurrentContext()];
     
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -571,23 +571,18 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         [fileManager removeItemAtPath:strPath error:&error];
-        
-        NSLog(@"error:%@", error);
     }
-    else{
         [data writeToFile:strPath atomically:YES];
-        currentImage = imgName;
-    }
+        currentImage = strPath;
 }
 
 - (void)stopCamera {
     isPlaying = NO;
-    
+    [self saveImage];
     if ([self.cameraInfo isOnline]) {
         if (launch)
         {
             gst_launch_remote_pause(launch);
-            [self saveImage];
         }
         
         if (timeCounter && [timeCounter isValid])
@@ -600,7 +595,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         if (browseJpgTask) {
             [browseJpgTask stop];
             browseJpgTask = nil;
-            [self saveImage];
         }
     } else {
         return;
