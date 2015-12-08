@@ -31,16 +31,6 @@
     
     [Fabric with:@[[Crashlytics class]]];
     
-//    NSString* url1 = @"http://192.168.1.4/projects/asset_manager/grade/get";        // jsonDict Test
-//    NSString* url2 = @"http://192.168.1.4/projects/asset_manager/grade/jsonArray2";  // jsonArray Test
-//    NSDictionary *params = @{@"ip": @"5.149.169.19", @"port": @"22"};
-
-//    NSString* url = @"http://tuq.in/tools/port.txt";                                // string Test
-//    [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseObject) {
-//        NSLog(@"Status: %@", status);
-//        NSLog(@"%@", responseObject);
-//    }];
-    
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [GlobalSettings sharedInstance].isPhone = YES;

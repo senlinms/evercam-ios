@@ -310,8 +310,8 @@
 		6C0497E01BDE49B60095956B /* CommonFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonFunctions.h; sourceTree = "<group>"; };
 		6C7262B31BDDF4F300446CBE /* MainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenViewController.h; sourceTree = "<group>"; };
 		6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenViewController.m; sourceTree = "<group>"; };
-		6CCB48281BDF4D7A00A62C28 /* SharedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedManager.h; path = evercamPlay/SharedManager.h; sourceTree = "<group>"; };
-		6CCB48291BDF4D7A00A62C28 /* SharedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SharedManager.m; path = evercamPlay/SharedManager.m; sourceTree = "<group>"; };
+		6CCB48281BDF4D7A00A62C28 /* SharedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedManager.h; path = ../SharedManager.h; sourceTree = "<group>"; };
+		6CCB48291BDF4D7A00A62C28 /* SharedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SharedManager.m; path = ../SharedManager.m; sourceTree = "<group>"; };
 		6CF591FA1BF05FE20044B0F1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -712,8 +712,6 @@
 		CB1C76451AAB144700680FE3 = {
 			isa = PBXGroup;
 			children = (
-				6CCB48281BDF4D7A00A62C28 /* SharedManager.h */,
-				6CCB48291BDF4D7A00A62C28 /* SharedManager.m */,
 				CB44E8821AAEA03300A78C11 /* Default-568h@2x.png */,
 				41BEFB4D1AD6CE980016ACCA /* Frameworks */,
 				CB1C76501AAB144800680FE3 /* evercamPlay */,
@@ -920,6 +918,8 @@
 		CB44E84E1AAE9E7D00A78C11 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6CCB48281BDF4D7A00A62C28 /* SharedManager.h */,
+				6CCB48291BDF4D7A00A62C28 /* SharedManager.m */,
 				58F0F6151C08799B00BC04A3 /* Struts.h */,
 				58F0F6161C08799B00BC04A3 /* Struts.m */,
 				58429A621C16A9E8008D34A8 /* AboutViewController.h */,

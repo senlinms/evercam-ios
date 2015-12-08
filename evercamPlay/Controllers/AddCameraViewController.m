@@ -521,11 +521,6 @@
         vendorDropDown = nil;
     }
     
-//    SelectVendorViewController *selectVendorVC = [[SelectVendorViewController alloc] initWithNibName:@"SelectVendorViewController" bundle:nil];
-//    [selectVendorVC setDelegate:self];
-//    [selectVendorVC setSelectedVendor:self.currentVendor];
-//    [selectVendorVC setVendorsArray:self.vendorsArray];
-//    [self.navigationController pushViewController:selectVendorVC animated:YES];
 }
 
 - (IBAction)selectModel:(id)sender {
@@ -553,12 +548,6 @@
         [modelDropDown hideDropDown:sender];
         modelDropDown = nil;
     }
-    
-//    SelectModelViewController *selectModelVC = [[SelectModelViewController alloc] initWithNibName:@"SelectModelViewController" bundle:nil];
-//    [selectModelVC setDelegate:self];
-//    [selectModelVC setSelectedVendor:self.currentVendor];
-//    [selectModelVC setSelectedModel:self.currentModel];
-//    [self.navigationController pushViewController:selectModelVC animated:YES];
 }
 
 #pragma mark - UIKeyboard events
@@ -693,7 +682,9 @@
     self.currentVendor = vendor;
     self.tfVendor.text = self.currentVendor.name;
     
-    [self getAllModels];
+    [self getAllModelsWithCompletion:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - Custom Functions
@@ -1037,36 +1028,26 @@
         }];
 
         self.vendorsArray = [[NSMutableArray alloc] initWithArray:arr];
-//        NSMutableDictionary *otherVendor = [[NSMutableDictionary alloc] init];
-//        NSMutableArray *emptyArr = [[NSMutableArray alloc] init];
-//        [otherVendor setObject:@"Unknown/Other" forKey:@"id"];
-//        [otherVendor setObject:emptyArr forKey:@"known_macs"];
-//        [otherVendor setObject:@"Unknown/Other" forKey:@"name"];
-//        
-//        EvercamVendor *vendor = [[EvercamVendor alloc] initWithDictionary:otherVendor];
-        
         NSLog(@"%@",self.vendorsArray);
         
-//        [self.vendorsNameArray removeAllObjects];
         for (EvercamVendor *vendor in self.vendorsArray)
         {
             [self.vendorsNameArray addObject:[vendor.name copy]];
         }
-        
-//        [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
-        
         if (self.editCamera) {
             self.currentVendor = [self getVendorWithName:self.editCamera.vendor];
             if (self.currentVendor) {
                 self.tfVendor.text = self.currentVendor.name;
-                [self getAllModels];
-                [self setCameraImage];
+                [self getAllModelsWithCompletion:^(NSError *error) {
+                    [self setCameraImage];
+                }];
             }
         }
     }];
 }
 
-- (void)getAllModels {
+- (void)getAllModelsWithCompletion:(void (^)(NSError *error))block {
+
     self.modelsArray = nil;
     if (self.currentVendor) {
         [[EvercamShell shell] getAllModelsByVendorId:self.currentVendor.vId withBlock:^(NSArray *models, NSError *error) {
@@ -1082,6 +1063,9 @@
                 if (self.tfModel.text.length == 0) {
                     self.currentModel = [self getModelWithName:self.editCamera.model];
                     self.tfModel.text = self.currentModel.name;
+                    if (block) {
+                        block(nil);
+                    }
                     return;
                 }
             }
@@ -1097,6 +1081,9 @@
                 }
             }
             NSLog(@"%@",self.modelsArray);
+            if (block) {
+                block(nil);
+            }
         }];
     }
 }
@@ -1191,7 +1178,9 @@
 
         //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-        [self getAllModels];
+        [self getAllModelsWithCompletion:^(NSError *error) {
+            
+        }];
         
         self.tfVendor.text = self.currentVendor.name;
         
@@ -1272,7 +1261,10 @@
     }];
     
     //----------set default model image-------------
-    self.currentModel = self.modelsArray[0];
+    if (!self.editCamera) {
+        self.currentModel = self.modelsArray[0];
+    }
+    
     NSLog(@"Current Model: %@", self.currentModel);
     
     NSString* modelImagePath = self.currentModel.thumbUrl;

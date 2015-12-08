@@ -162,21 +162,6 @@
     else if (row == 4)
     {
          newFrontController = [[AboutViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AboutViewController" : @"AboutViewController_iPad" bundle:nil];
-        //--------------------------------------------------------
-//        [UIView animateWithDuration:0.2f
-//                              delay:0.0f
-//                            options: UIViewAnimationOptionAllowUserInteraction
-//                         animations: ^{
-//                             self.webViewContainer.alpha = 1.0;
-//                         }
-//                         completion: ^(BOOL finished) {
-//                         }
-//         ];
-//        if (isWebLoaded == NO) {
-//            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.evercam.io"]]];
-//        }
-//        
-//        return;
     }
    
     [self.navigationController pushViewController:newFrontController animated:YES];

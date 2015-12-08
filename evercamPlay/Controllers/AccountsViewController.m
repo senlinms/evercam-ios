@@ -87,15 +87,7 @@
 {
     gradient.frame = self.tableView.bounds;
     [_addAccountView reframeSubView:self.view.center andFrame:self.view.bounds];
-    //    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    //    if (UIInterfaceOrientationIsPortrait(orientation))
-    //    {
-    //        //Your portrait
-    //    }
-    //    else
-    //    {
-    //        //Your Landscape.
-    //    }
+    
 }
 
 - (void)getAllUsers {
@@ -153,67 +145,19 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Username required" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView show];
-        
-//        UIAlertController * alert=   [UIAlertController
-//                                      alertControllerWithTitle:@"Username required"
-//                                      message:nil
-//                                      preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction* ok = [UIAlertAction
-//                             actionWithTitle:@"OK"
-//                             style:UIAlertActionStyleDefault
-//                             handler:^(UIAlertAction * action)
-//                             {
-//                                 [alert dismissViewControllerAnimated:YES completion:nil];
-//                                 [_txt_username becomeFirstResponder];
-//                                 [self showAddAccountAlertWithUsername:username andPassword:password];
-//                             }];
-//        [alert addAction:ok];
-//        [self presentViewController:alert animated:YES completion:nil];
+
         return;
     }
     else if ([username containsString:@" "])
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Invalid username" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView show];
-        
-//        UIAlertController * alert=   [UIAlertController
-//                                      alertControllerWithTitle:@"Invalid username"
-//                                      message:nil
-//                                      preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction* ok = [UIAlertAction
-//                             actionWithTitle:@"OK"
-//                             style:UIAlertActionStyleDefault
-//                             handler:^(UIAlertAction * action)
-//                             {
-//                                 [alert dismissViewControllerAnimated:YES completion:nil];
-//                                 [_txt_username becomeFirstResponder];
-//                                 [self showAddAccountAlertWithUsername:username andPassword:password];
-//                             }];
-//        [alert addAction:ok];
-//        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     else if (password.length <= 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Password required" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView show];
-        
-//        UIAlertController * alert=   [UIAlertController
-//                                      alertControllerWithTitle:@"Password required"
-//                                      message:nil
-//                                      preferredStyle:UIAlertControllerStyleAlert];
-//        
-//        UIAlertAction* ok = [UIAlertAction
-//                             actionWithTitle:@"OK"
-//                             style:UIAlertActionStyleDefault
-//                             handler:^(UIAlertAction * action)
-//                             {
-//                                 [alert dismissViewControllerAnimated:YES completion:nil];
-//                                 [_txt_password becomeFirstResponder];
-//                                 [self showAddAccountAlertWithUsername:username andPassword:password];
-//                             }];
-//        [alert addAction:ok];
-//        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     
