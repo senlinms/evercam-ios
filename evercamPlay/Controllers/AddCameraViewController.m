@@ -1374,7 +1374,7 @@
         {
             if (![self.tfExternalRtspPort.text  isEqual: @""]) {
                 self.rtspPortStatusLabel.text = @"Port is open";
-                self.rtspPortStatusLabel.textColor = [UIColor greenColor];
+                self.rtspPortStatusLabel.textColor = UIColorFromRGB(0x80CBC4);
             }
         }
         else
