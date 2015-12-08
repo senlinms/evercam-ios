@@ -733,6 +733,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     self.cameraInfo = [self.cameras objectAtIndex:index];
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
+    runFirstTime = YES;
 }
 
 @end

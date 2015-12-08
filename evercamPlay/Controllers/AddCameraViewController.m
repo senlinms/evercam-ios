@@ -1172,12 +1172,12 @@
             self.currentModel = nil;
             self.tfVendor.text = @"Unknown/Other";
             self.tfModel.text = @"Unknown/Other";
-            self.thumbImageView.image = [UIImage imageNamed:@"cam.png"];
             self.snapshotView.hidden = false;
             self.rtstURLView.hidden = false;
             [self reFrameViews:viewsArray initialFrame:self.cameraView.frame];
             [self ClearFields];
             [self getCameraName];
+            self.thumbImageView.image = [UIImage imageNamed:@"cam.png"];
             return;
         }
         [self reFrameViews:minViewsArray initialFrame:self.cameraView.frame];
@@ -1199,16 +1199,16 @@
         self.currentModel = self.modelsArray[index];
         NSLog(@"Current Model: %@", self.currentModel);
         
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentModel.thumbUrl]];
         
         [self.thumbImageView setImageWithURLRequest:request placeholderImage:nil
              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                  self.thumbImageView.image = image;
              }
              failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                  NSLog(@"---- THUMBNAIL ERROR ---- %@", [error userInfo]);
         }];
         
@@ -1248,9 +1248,28 @@
         if (succeeded) {
             self.logoImageView.image = image;
             CGFloat desiredHeight = .18 * self.logoImagesContainer.frame.size.height;
-            CGFloat scaleFactor = image.size.height/desiredHeight;
-            CGFloat desiredWidth = image.size.width / scaleFactor;
-            self.logoImageView.frame = CGRectMake(0, 0, desiredWidth, desiredHeight);
+            CGFloat desiredWidth = .8 * self.logoImagesContainer.frame.size.width;
+            
+            CGFloat heightScaleFactor = image.size.height/desiredHeight;
+            CGFloat widthScaleFactor = image.size.width/desiredWidth;
+            
+            CGFloat imageViewWidth;
+            CGFloat imageViewHeight;
+            
+            if (widthScaleFactor > heightScaleFactor) {
+                imageViewWidth = image.size.width / widthScaleFactor;
+                imageViewHeight = image.size.height / widthScaleFactor;
+            }
+            
+            
+            else {
+                imageViewWidth = image.size.width / heightScaleFactor;
+                imageViewHeight = image.size.height / heightScaleFactor;
+            }
+            
+            
+            //CGFloat desiredWidth1 = image.size.width / scaleFactor;
+            self.logoImageView.frame = CGRectMake(0, 0, imageViewWidth, imageViewHeight);
         }
     }];
     

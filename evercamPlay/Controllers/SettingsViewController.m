@@ -143,6 +143,7 @@
         else if (indexPath.row == 2)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
+            cell.frame = CGRectMake(0, 0, tableView.frame.size.width, 54);
             cell.textLabel.text = @"Force landscape for live view";
             cell.textLabel.textColor = [UIColor whiteColor];
             
@@ -159,6 +160,7 @@
         else
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
+            cell.frame = CGRectMake(0, 0, tableView.frame.size.width, 54);
             cell.textLabel.text = @"Show offline cameras";
             cell.textLabel.textColor = [UIColor whiteColor];
             
