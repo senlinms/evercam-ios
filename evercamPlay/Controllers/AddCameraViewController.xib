@@ -29,11 +29,11 @@
                 <outlet property="tfExternalHost" destination="Zx9-Tu-31d" id="GbH-S8-vfi"/>
                 <outlet property="tfExternalHttpPort" destination="D8o-8s-Xgh" id="DGx-0z-xIA"/>
                 <outlet property="tfExternalRtspPort" destination="TfI-9L-Jr8" id="TzO-Z6-UqP"/>
+                <outlet property="tfExternalRtspUrl" destination="ZLR-Jz-qT3" id="Ct7-k7-P4Y"/>
                 <outlet property="tfID" destination="rlH-at-Lpd" id="kbA-rp-mkV"/>
                 <outlet property="tfModel" destination="DBU-vI-bUC" id="INP-oy-ShP"/>
                 <outlet property="tfName" destination="HKl-8s-5lL" id="9Vl-fm-mez"/>
                 <outlet property="tfPassword" destination="Un6-DJ-LhK" id="HjW-Hc-3lH"/>
-                <outlet property="tfRtspUrl" destination="ZLR-Jz-qT3" id="AHk-ik-mXu"/>
                 <outlet property="tfSnapshot" destination="NvX-uo-OKO" id="e6F-QP-nvc"/>
                 <outlet property="tfUsername" destination="RBV-wH-AcK" id="B1O-oD-aGD"/>
                 <outlet property="tfVendor" destination="MPd-v4-aTF" id="UPI-WG-f3W"/>

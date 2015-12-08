@@ -40,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfInternalHost;
 @property (weak, nonatomic) IBOutlet UITextField *tfInternalHttpPort;
 @property (weak, nonatomic) IBOutlet UITextField *tfInternalRtspPort;
-@property (weak, nonatomic) IBOutlet UITextField *tfRtspUrl;
+@property (weak, nonatomic) IBOutlet UITextField *tfExternalRtspUrl;
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;

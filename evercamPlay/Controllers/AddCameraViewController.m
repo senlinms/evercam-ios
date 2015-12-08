@@ -117,7 +117,7 @@
         self.tfInternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"192.168.1.122" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfInternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal HTTP port" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfInternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal RTSP port" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfRtspUrl.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/h264/ch1/mail/av_stream" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfExternalRtspUrl.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/h264/ch1/mail/av_stream" attributes:@{NSForegroundColorAttributeName: color}];
     } else {
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
         // TODO: Add fall-back code to set placeholder color.
@@ -730,6 +730,9 @@
         if (self.editCamera.internalRtspPort != 0) {
             self.tfInternalRtspPort.text = [NSString stringWithFormat:@"%d", self.editCamera.internalRtspPort];
         }
+        if (self.editCamera.externalH264Url != 0) {
+            self.tfExternalRtspUrl.text = [NSString stringWithFormat:@"%@", [self.editCamera getRTSPUrl]];
+        }
     }
     else{
         
@@ -758,8 +761,8 @@
     if (self.tfPassword.text.length > 0) {
         cameraBuilder.cameraPassword = self.tfPassword.text;
     }
-    if (self.tfRtspUrl.text.length > 0) {
-        cameraBuilder.h264Url = self.tfRtspUrl.text;
+    if (self.tfExternalRtspUrl.text.length > 0) {
+        cameraBuilder.h264Url = self.tfExternalRtspUrl.text;
     }
     
     NSString *externalHost = self.tfExternalHost.text;
@@ -1412,11 +1415,12 @@
 
 - (IBAction)tfUserNameDidBeginEditing:(id)sender {
     userName = self.tfUsername.text;
+    self.tfPassword.text = @"";
 }
 
 - (IBAction)tfUserNameDidEndEditing:(id)sender {
     if (userName != self.tfUsername.text) {
-        self.tfPassword.text = @"";
+        
     }
 }
 
@@ -1504,7 +1508,7 @@
     self.tfSnapshot.text = @"";
     self.tfUsername.text = @"";
     self.tfPassword.text = @"";
-    self.tfRtspUrl.text = @"";
+    self.tfExternalRtspUrl.text = @"";
     self.thumbImageView.image = nil;
     self.logoImageView.image = nil;
     self.tfExternalHttpPort.text = @"";
