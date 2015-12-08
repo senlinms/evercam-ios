@@ -59,6 +59,9 @@
 		41BEFB791AD6DC180016ACCA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB781AD6DC180016ACCA /* QuartzCore.framework */; };
 		41BEFB7B1AD6DC8E0016ACCA /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */; };
 		41BEFB7D1AD708730016ACCA /* icon_offline.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB7C1AD708730016ACCA /* icon_offline.png */; };
+		58429A651C16A9E8008D34A8 /* AboutViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58429A611C16A9E8008D34A8 /* AboutViewController_iPad.xib */; };
+		58429A661C16A9E8008D34A8 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58429A631C16A9E8008D34A8 /* AboutViewController.m */; };
+		58429A671C16A9E8008D34A8 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58429A641C16A9E8008D34A8 /* AboutViewController.xib */; };
 		585999111BF1B2DF00CDC457 /* MenuViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */; };
 		585999131BF9C53000CDC457 /* ic_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 585999121BF9C53000CDC457 /* ic_info.png */; };
 		589204A41C11A40800B40DD0 /* cam.png in Resources */ = {isa = PBXBuildFile; fileRef = 589204A31C11A40800B40DD0 /* cam.png */; };
@@ -293,6 +296,10 @@
 		41BEFB781AD6DC180016ACCA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		41BEFB7A1AD6DC8E0016ACCA /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		41BEFB7C1AD708730016ACCA /* icon_offline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_offline.png; sourceTree = "<group>"; };
+		58429A611C16A9E8008D34A8 /* AboutViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController_iPad.xib; sourceTree = "<group>"; };
+		58429A621C16A9E8008D34A8 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		58429A631C16A9E8008D34A8 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		58429A641C16A9E8008D34A8 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		5859990F1BF1B2DF00CDC457 /* MenuViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewControllerCell.h; sourceTree = "<group>"; };
 		585999101BF1B2DF00CDC457 /* MenuViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewControllerCell.m; sourceTree = "<group>"; };
 		585999121BF9C53000CDC457 /* ic_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_info.png; sourceTree = "<group>"; };
@@ -915,6 +922,10 @@
 			children = (
 				58F0F6151C08799B00BC04A3 /* Struts.h */,
 				58F0F6161C08799B00BC04A3 /* Struts.m */,
+				58429A621C16A9E8008D34A8 /* AboutViewController.h */,
+				58429A631C16A9E8008D34A8 /* AboutViewController.m */,
+				58429A641C16A9E8008D34A8 /* AboutViewController.xib */,
+				58429A611C16A9E8008D34A8 /* AboutViewController_iPad.xib */,
 				CB44E84F1AAE9E7D00A78C11 /* AccountsViewController.h */,
 				CB44E8501AAE9E7D00A78C11 /* AccountsViewController.m */,
 				CB44E8511AAE9E7D00A78C11 /* AccountsViewController.xib */,
@@ -1184,6 +1195,7 @@
 				E30900761B1646D100E5B5C0 /* play_page_feature_iPad@2x.png in Resources */,
 				E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */,
 				6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */,
+				58429A651C16A9E8008D34A8 /* AboutViewController_iPad.xib in Resources */,
 				585999131BF9C53000CDC457 /* ic_info.png in Resources */,
 				CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */,
 				E30201C91B16C82D0006DAE8 /* alert-window@2x.png in Resources */,
@@ -1213,6 +1225,7 @@
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
 				E30900701B163F1200E5B5C0 /* SignupViewController_iPad.xib in Resources */,
 				E30201CB1B16C82D0006DAE8 /* alert-yellow-button@2x.png in Resources */,
+				58429A671C16A9E8008D34A8 /* AboutViewController.xib in Resources */,
 				CB44E8751AAE9E7D00A78C11 /* LoginViewController.xib in Resources */,
 				E30201C01B16C82D0006DAE8 /* alert-gray-button.png in Resources */,
 				E30201CA1B16C82D0006DAE8 /* alert-yellow-button.png in Resources */,
@@ -1327,6 +1340,7 @@
 				58F0F6171C08799B00BC04A3 /* Struts.m in Sources */,
 				CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */,
 				E369E4A61B137AB6009D2D9E /* AddAccountView.m in Sources */,
+				58429A661C16A9E8008D34A8 /* AboutViewController.m in Sources */,
 				E309008A1B16B78600E5B5C0 /* BlockBackground.m in Sources */,
 				CB318E5A1AFC3565004FFA8E /* SDWebImageDownloaderOperation.m in Sources */,
 				41208A5B1AD97971009C4FC2 /* SendGrid.m in Sources */,

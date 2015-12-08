@@ -504,11 +504,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)playCamera {
-    if (self.imageView)
-    {
-        [self.imageView removeFromSuperview];
-        self.imageView = nil;
-    }
     
     if (browseJpgTask)
     {

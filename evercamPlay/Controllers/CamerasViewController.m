@@ -41,12 +41,12 @@
 #import "GlobalSettings.h"
 #import "AccountsViewController.h"
 #import "SettingsViewController.h"
+#import "AboutViewController.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
     NSMutableArray *cameraArray;
     CGSize cellSize;
-    BOOL isWebLoaded;
 }
 
 // Private Methods:
@@ -62,7 +62,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    isWebLoaded = NO;
     
     if (self.selectedRow) {
         NSLog(@"%li",(long)self.selectedRow);
@@ -162,20 +161,22 @@
     }
     else if (row == 4)
     {
-        [UIView animateWithDuration:0.2f
-                              delay:0.0f
-                            options: UIViewAnimationOptionAllowUserInteraction
-                         animations: ^{
-                             self.webViewContainer.alpha = 1.0;
-                         }
-                         completion: ^(BOOL finished) {
-                         }
-         ];
-        if (isWebLoaded == NO) {
-            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.evercam.io"]]];
-        }
-        
-        return;
+         newFrontController = [[AboutViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AboutViewController" : @"AboutViewController_iPad" bundle:nil];
+        //--------------------------------------------------------
+//        [UIView animateWithDuration:0.2f
+//                              delay:0.0f
+//                            options: UIViewAnimationOptionAllowUserInteraction
+//                         animations: ^{
+//                             self.webViewContainer.alpha = 1.0;
+//                         }
+//                         completion: ^(BOOL finished) {
+//                         }
+//         ];
+//        if (isWebLoaded == NO) {
+//            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.evercam.io"]]];
+//        }
+//        
+//        return;
     }
    
     [self.navigationController pushViewController:newFrontController animated:YES];
@@ -486,49 +487,6 @@
     
 }
 
-- (IBAction)onCloseWebView:(id)sender
-{
-    [UIView animateWithDuration:0.2f
-                          delay:0.0f
-                        options: UIViewAnimationOptionAllowUserInteraction
-                     animations: ^{
-                         self.webViewContainer.alpha = 0.0;
-                     }
-                     completion: ^(BOOL finished) {
-                     }
-     ];
-    [self setCamerasPerRow];
-}
 
-
-
-#pragma mark UIWebViewDelegate Method
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    //    [self.activity startAnimating];
-    
-    return YES;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self.activity stopAnimating];
-    isWebLoaded = YES;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [self.activity stopAnimating];
-    
-    //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    //    [alertView show];
-    //    return;
-}
 
 @end

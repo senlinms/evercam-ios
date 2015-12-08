@@ -1247,7 +1247,7 @@
     [self downloadImageWithURL:vendorImageUrl completionBlock:^(BOOL succeeded, UIImage *image) {
         if (succeeded) {
             self.logoImageView.image = image;
-            CGFloat desiredHeight = .18 * self.logoImagesContainer.frame.size.height;
+            CGFloat desiredHeight = .12 * self.logoImagesContainer.frame.size.height;
             CGFloat desiredWidth = .8 * self.logoImagesContainer.frame.size.width;
             
             CGFloat heightScaleFactor = image.size.height/desiredHeight;
@@ -1260,16 +1260,11 @@
                 imageViewWidth = image.size.width / widthScaleFactor;
                 imageViewHeight = image.size.height / widthScaleFactor;
             }
-            
-            
             else {
                 imageViewWidth = image.size.width / heightScaleFactor;
                 imageViewHeight = image.size.height / heightScaleFactor;
             }
-            
-            
-            //CGFloat desiredWidth1 = image.size.width / scaleFactor;
-            self.logoImageView.frame = CGRectMake(0, 0, imageViewWidth, imageViewHeight);
+            self.logoImageView.frame = CGRectMake(2, 2, imageViewWidth, imageViewHeight);
         }
     }];
     
@@ -1524,14 +1519,12 @@
     NSString* url = [SharedManager getIPUrl];
     
     [SharedManager get:url params:nil callback:^(NSString *status, NSMutableDictionary *responseDict) {
-        
-        self.tfExternalHost.text = responseDict[@"JSON"];
-        
         if([status isEqualToString:@"error"])
         {
             NSLog(@"No any response from server");
+            return;
         }
-        
+        self.tfExternalHost.text = responseDict[@"JSON"];
     }];
 }
 
