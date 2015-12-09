@@ -132,7 +132,7 @@
     NSString *text = nil;
     if (row == 0)
     {
-        text = @"Account";
+        text = @"Accounts";
         cell.imageView.image = [UIImage imageNamed:@"ic_accounts.png"];
     }
     else if (row == 1)
@@ -147,7 +147,7 @@
     }
     else if (row == 3)
     {
-        text = @"About Evercam";
+        text = @"About";
         cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
     }
     else if (row == 4)
