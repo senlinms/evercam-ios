@@ -21,7 +21,7 @@
 #if !defined(MIXPANEL_APP_EXTENSION)
 
 #import "MPABTestDesignerConnection.h"
-#import "MPCategoryHelpers.h"
+#import "UIView+MPHelpers.h"
 #import "MPDesignerEventBindingMessage.h"
 #import "MPDesignerSessionCollection.h"
 #import "MPEventBinding.h"
@@ -35,7 +35,7 @@
 #endif
 
 
-#define VERSION @"2.8.1"
+#define VERSION @"2.9.1"
 
 #if !defined(MIXPANEL_APP_EXTENSION)
 @interface Mixpanel () <UIAlertViewDelegate, MPSurveyNavigationControllerDelegate, MPNotificationViewControllerDelegate>
@@ -92,7 +92,7 @@
 @property (nonatomic, copy) NSString *distinctId;
 @property (nonatomic, strong) NSDictionary *automaticPeopleProperties;
 
-- (id)initWithMixpanel:(Mixpanel *)mixpanel;
+- (instancetype)initWithMixpanel:(Mixpanel *)mixpanel;
 - (void)merge:(NSDictionary *)properties;
 
 @end
@@ -106,7 +106,14 @@ static Mixpanel *sharedInstance = nil;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[super alloc] initWithToken:apiToken launchOptions:launchOptions andFlushInterval:60];
+        
+#if defined(DEBUG)
+        const NSUInteger flushInterval = 1;
+#else
+        const NSUInteger flushInterval = 60;
+#endif
+        
+        sharedInstance = [[super alloc] initWithToken:apiToken launchOptions:launchOptions andFlushInterval:flushInterval];
     });
     return sharedInstance;
 }
@@ -148,6 +155,7 @@ static Mixpanel *sharedInstance = nil;
         self.checkForVariantsOnActive = YES;
         self.checkForSurveysOnActive = YES;
         self.miniNotificationPresentationTime = 6.0;
+        self.miniNotificationBackgroundColor = nil;
 
         self.distinctId = [self defaultDistinctId];
         self.superProperties = [NSMutableDictionary dictionary];
@@ -537,6 +545,9 @@ static __unused NSString *MPURLEncode(NSString *s)
         self.eventsQueue = [NSMutableArray array];
         self.peopleQueue = [NSMutableArray array];
         self.timedEvents = [NSMutableDictionary dictionary];
+        self.shownSurveyCollections = [NSMutableSet set];
+        self.shownNotifications = [NSMutableSet set];
+        self.decideResponseCached = NO;
         [self archive];
     });
 }
@@ -586,6 +597,11 @@ static __unused NSString *MPURLEncode(NSString *s)
 
 - (void)flush
 {
+    [self flushWithCompletion:nil];
+}
+
+- (void)flushWithCompletion:(void (^)())handler
+{
     dispatch_async(self.serialQueue, ^{
         MixpanelDebug(@"%@ flush starting", self);
 
@@ -597,6 +613,11 @@ static __unused NSString *MPURLEncode(NSString *s)
 
         [self flushEvents];
         [self flushPeople];
+        
+        if (handler) {
+            [self archive];
+            dispatch_async(dispatch_get_main_queue(), handler);
+        }
 
         MixpanelDebug(@"%@ flush complete", self);
     });
@@ -641,7 +662,7 @@ static __unused NSString *MPURLEncode(NSString *s)
         NSString *response = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         if ([response intValue] == 0) {
             MixpanelError(@"%@ %@ api rejected some items", self, endpoint);
-        };
+        }
 
         [queue removeObjectsInArray:batch];
     }
@@ -1177,6 +1198,22 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
     return controller;
 }
 
++ (BOOL)canPresentFromViewController:(UIViewController *)viewController
+{
+    // This fixes the NSInternalInconsistencyException caused when we try present a
+    // survey on a viewcontroller that is itself being presented.
+    if ([viewController isBeingPresented] || [viewController isBeingDismissed]) {
+        return NO;
+    }
+
+    Class UIAlertControllerClass = NSClassFromString(@"UIAlertController");
+    if (UIAlertControllerClass && [viewController isKindOfClass:UIAlertControllerClass]) {
+        return NO;
+    }
+
+    return YES;
+}
+
 - (void)checkForDecideResponseWithCompletion:(void (^)(NSArray *surveys, NSArray *notifications, NSSet *variants, NSSet *eventBindings))completion
 {
     [self checkForDecideResponseWithCompletion:completion useCache:YES];
@@ -1285,7 +1322,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
             NSMutableSet *parsedEventBindings = [NSMutableSet set];
             if (rawEventBindings && [rawEventBindings isKindOfClass:[NSArray class]]) {
                 for (id obj in rawEventBindings) {
-                    MPEventBinding *binder = [MPEventBinding bindngWithJSONObject:obj];
+                    MPEventBinding *binder = [MPEventBinding bindingWithJSONObject:obj];
                     [binder execute];
                     if (binder) {
                         [parsedEventBindings addObject:binder];
@@ -1370,11 +1407,8 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 {
     UIViewController *presentingViewController = [Mixpanel topPresentedViewController];
 
-    // This fixes the NSInternalInconsistencyException caused when we try present a
-    // survey on a viewcontroller that is itself being presented.
-    if (![presentingViewController isBeingPresented] && ![presentingViewController isBeingDismissed]) {
-
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MPSurvey" bundle:nil];
+    if ([[self class] canPresentFromViewController:presentingViewController]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MPSurvey" bundle:[NSBundle bundleForClass:Mixpanel.class]];
         MPSurveyNavigationController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MPSurveyNavigationController"];
         controller.survey = survey;
         controller.delegate = self;
@@ -1491,6 +1525,10 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                 [self.people append:@{@"$answers": answers[i]}];
             }
         }
+        
+        dispatch_async(_serialQueue, ^{
+            [self flushPeople];
+        });
     }
 }
 
@@ -1572,6 +1610,10 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
             if (shown && ![notification.title isEqualToString:@"$ignore"]) {
                 [self markNotificationShown:notification];
             }
+
+            if (!shown) {
+                self.currentlyShowingNotification = nil;
+            }
         }
     });
 }
@@ -1580,8 +1622,8 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 {
     UIViewController *presentingViewController = [Mixpanel topPresentedViewController];
 
-    if (![presentingViewController isBeingPresented] && ![presentingViewController isBeingDismissed]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MPNotification" bundle:nil];
+    if ([[self class] canPresentFromViewController:presentingViewController]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MPNotification" bundle:[NSBundle bundleForClass:Mixpanel.class]];
         MPTakeoverNotificationViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MPNotificationViewController"];
 
         controller.backgroundImage = [presentingViewController.view mp_snapshotImage];
@@ -1601,6 +1643,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
     MPMiniNotificationViewController *controller = [[MPMiniNotificationViewController alloc] init];
     controller.notification = notification;
     controller.delegate = self;
+    controller.backgroundColor = self.miniNotificationBackgroundColor;
     self.notificationViewController = controller;
 
     [controller showWithAnimation];
@@ -1807,7 +1850,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 
 @implementation MixpanelPeople
 
-- (id)initWithMixpanel:(Mixpanel *)mixpanel
+- (instancetype)initWithMixpanel:(Mixpanel *)mixpanel
 {
     if (self = [self init]) {
         self.mixpanel = mixpanel;

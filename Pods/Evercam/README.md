@@ -2,6 +2,16 @@
 
 Objective-C wrapper around Evercam API
 
+## Help make it better
+
+The Evercam library for iOS is an open source project, we'd love to see your pull requests!  
+
+For any bugs and discussions, please use [Github Issues](https://github.com/evercam/evercam-objc/issues).
+
+The entire Evercam codebase is open source too, see details: http://www.evercam.io/open-source  
+
+Any questions or suggestions around Evercam, drop us a line: http://www.evercam.io/contact
+
 ## Install the library
 
 To install the library using CocoaPods:
