@@ -536,6 +536,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             }
         }
     } else {
+        self.imageView.image = nil;
         [loadingView stopAnimating];
         self.lblOffline.hidden = NO;
     }
