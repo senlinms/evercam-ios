@@ -1,11 +1,3 @@
-//
-//  CameraBuilder.m
-//  evercamPlay
-//
-//  Created by jw on 4/13/15.
-//  Copyright (c) 2015 evercom. All rights reserved.
-//
-
 #import "EvercamCameraBuilder.h"
 #import "EvercamShell.h"
 #import "EvercamApiKeyPair.h"
@@ -66,11 +58,11 @@
     } else {
         [dict setValue:@"0" forKey:@"is_public"];
     }
-//    if (self.isOnline) {
-//        [dict setValue:@"1" forKey:@"is_online"];
-//    } else {
-//        [dict setValue:@"0" forKey:@"is_online"];
-//    }
+    if (self.isOnline) {
+        [dict setValue:@"1" forKey:@"is_online"];
+    } else {
+        [dict setValue:@"0" forKey:@"is_online"];
+    }
     if (self.cameraUsername.length > 0) {
         [dict setValue:self.cameraUsername forKey:@"cam_username"];
     }

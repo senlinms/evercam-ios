@@ -233,17 +233,6 @@
                               }];
     
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
-//    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//    [manager downloadImageWithURL:[NSURL URLWithString:externalFullUrl]
-//                          options:0
-//                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//                             // progression tracking code
-//                         }
-//                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-//                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//                            [self showImageView:image];
-//                        }];
 }
 
 - (NSMutableURLRequest *)imageRequestWithURL:(NSURL *)url {
@@ -861,8 +850,12 @@
 }
 
 - (void)createCamera:(EvercamCameraBuilder *)cameraBuilder withStatus:(BOOL)status {
+    //Set is_online=true for all new cameras as temorary fix of https://github.com/evercam/evercam-play-android/issues/133
+    cameraBuilder.isOnline = true;
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[EvercamShell shell] createCamera:cameraBuilder withBlock:^(EvercamCamera *camera, NSError *error) {
+        
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if (error == nil) {
             camera.isOnline = status;
@@ -881,7 +874,7 @@
                                                                       }];
             
             if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"Camera created successfully!"];
+                BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"Camera created"];
                 
                 [alert addButtonWithTitle:@"OK" imageIdentifier:@"yellow" block:^{
                     [self.navigationController popViewControllerAnimated:YES];
@@ -897,7 +890,7 @@
             {                
                 UIAlertController * alert=   [UIAlertController
                                               alertControllerWithTitle: nil
-                                              message:@"Camera created successfully!"
+                                              message:@"Camera created"
                                               preferredStyle:UIAlertControllerStyleAlert];
                 
                 UIAlertAction* ok = [UIAlertAction

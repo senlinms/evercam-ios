@@ -1,11 +1,3 @@
-//
-//  EvercamCamera.m
-//  evercamPlay
-//
-//  Created by jw on 3/23/15.
-//  Copyright (c) 2015 evercom. All rights reserved.
-//
-
 #import "EvercamCamera.h"
 
 @implementation EvercamCamera
