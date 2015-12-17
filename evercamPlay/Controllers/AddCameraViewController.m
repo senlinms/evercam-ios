@@ -166,7 +166,7 @@
     
     if (self.tfExternalHost.text.length == 0) {
         
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"Please specify an external IP address.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"Please specify an external IP address.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [simpleAlert show];
         
         return;
@@ -181,7 +181,7 @@
     
     
     if (self.tfExternalHttpPort.text.length == 0) {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"Please specify either an external HTTP port.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"Please specify an external HTTP port.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [simpleAlert show];
         
         return;
@@ -214,7 +214,7 @@
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
     if (!reachable) {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"The IP address provided is not reachable at the port provided.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"The IP address provided is not reachable at the port provided.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [simpleAlert show];
     }
     
