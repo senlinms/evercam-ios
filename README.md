@@ -29,7 +29,9 @@ Evercam Play allows connect your own IP cameras, public webcams and any Android 
 
 The entire Evercam codebase is open source, see details: http://www.evercam.io/open-source
 
-If you have experience developing with iOS and IP cameras, we look forward to your pull requests!
+If you have experience developing with iOS and IP cameras, we look forward to your pull requests!  
+
+We've put up several [milestones](https://github.com/evercam/evercam-play-ios/milestones) and [here](https://docs.google.com/spreadsheets/d/1mZ521gVZUf0a42cyvkqiyfGHiNn2BqZJR__Fj7aRyyQ/edit#gid=0) is a roadmap compared with our Android app. 
 
 For any bugs and discussions, please use [Github Issues](https://github.com/evercam/evercam-play-android/issues).
 
