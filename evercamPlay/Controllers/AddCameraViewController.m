@@ -1318,8 +1318,10 @@
  
     NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
-        
-        if([responseDict[@"JSON"] isEqualToString:@"true"])
+        if([status isEqualToString:@"error"])
+        {
+            NSLog(@"Port-Checking server down");
+        }else if([responseDict[@"JSON"] isEqualToString:@"true"])
         {
             if (![self.tfExternalHttpPort.text  isEqual: @""]) {
                 self.httpPortStatusLabel.text = @"Port is open";
@@ -1333,12 +1335,6 @@
                 self.httpPortStatusLabel.textColor = [UIColor redColor];
             }
         }
-        
-        if([status isEqualToString:@"error"])
-        {
-            NSLog(@"Port-Checking server down");
-        }
-        
     }];
     
 }
@@ -1358,7 +1354,10 @@
     NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
         
-        if([responseDict[@"JSON"] isEqualToString:@"true"])
+        if([status isEqualToString:@"error"])
+        {
+            NSLog(@"Port-Checking server down");
+        }else if([responseDict[@"JSON"] isEqualToString:@"true"])
         {
             if (![self.tfExternalRtspPort.text  isEqual: @""]) {
                 self.rtspPortStatusLabel.text = @"Port is open";
@@ -1371,13 +1370,7 @@
                 self.rtspPortStatusLabel.text = @"Port is closed";
                 self.rtspPortStatusLabel.textColor = [UIColor redColor];
             }
-        }        
-        
-        if([status isEqualToString:@"error"])
-        {
-            NSLog(@"Port-Checking server down");
         }
-        
     }];
 }
 
