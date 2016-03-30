@@ -26,6 +26,8 @@
 #import "Config.h"
 #import "Mixpanel.h"
 
+#import "LoginViewController.h"
+
 @interface AccountsViewController ()
 {
     NSString *triedUsername;
@@ -85,10 +87,13 @@
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    [self.view setNeedsUpdateConstraints];
     gradient.frame = self.tableView.bounds;
     [_addAccountView reframeSubView:self.view.center andFrame:self.view.bounds];
     
 }
+
+
 
 - (void)getAllUsers {
     self.users = [APP_DELEGATE allUserList];
@@ -428,7 +433,9 @@
     }
     else
     {
-        [self showAddAccountAlertWithUsername:@"" andPassword:@""];
+        LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:vc animated:YES];
+//        [self showAddAccountAlertWithUsername:@"" andPassword:@""];
     }
 }
 

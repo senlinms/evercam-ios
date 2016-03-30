@@ -1306,22 +1306,24 @@
 }
 
 - (IBAction)httpTextFieldDidEndEdition:(id)sender {
-    NSString* url = [SharedManager getCheckPortUrl];
-    NSString* ipAddress = self.tfExternalHost.text;
+   
+    NSString* ipAddress = [self.tfExternalHost.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString* httpPort = self.tfExternalHttpPort.text;
     
-    if(([self isStringEmpty:httpPort]) || ([self isStringEmpty:ipAddress]))
+    if(isCompletelyEmpty(httpPort) || isCompletelyEmpty(ipAddress))
     {
         self.httpPortStatusLabel.text = @"";
         return;
     }
+    
+    NSString* url = [NSString stringWithFormat:@"%@arguments=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,httpPort];
  
     NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
         if([status isEqualToString:@"error"])
         {
             NSLog(@"Port-Checking server down");
-        }else if([responseDict[@"JSON"] isEqualToString:@"true"])
+        }else if([responseDict[@"JSON"] containsString:@"is open"])
         {
             if (![self.tfExternalHttpPort.text  isEqual: @""]) {
                 self.httpPortStatusLabel.text = @"Port is open";
@@ -1341,15 +1343,18 @@
 
 
 - (IBAction)rtspTextFieldDidEndEdition:(id)sender {
-    NSString* url = [SharedManager getCheckPortUrl];
-    NSString* ipAddress = self.tfExternalHost.text;
+    
+    NSString* ipAddress = [self.tfExternalHost.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString* rtspPort = self.tfExternalRtspPort.text;
    
-    if(([self isStringEmpty:rtspPort]) || ([self isStringEmpty:ipAddress]))
+    if(isCompletelyEmpty(rtspPort) || isCompletelyEmpty(ipAddress))
     {
         self.rtspPortStatusLabel.text = @"";
         return;
     }
+    
+    NSString* url = [NSString stringWithFormat:@"%@arguments=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,rtspPort];
+    
     
     NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
@@ -1357,7 +1362,7 @@
         if([status isEqualToString:@"error"])
         {
             NSLog(@"Port-Checking server down");
-        }else if([responseDict[@"JSON"] isEqualToString:@"true"])
+        }else if([responseDict[@"JSON"] containsString:@"is open"])
         {
             if (![self.tfExternalRtspPort.text  isEqual: @""]) {
                 self.rtspPortStatusLabel.text = @"Port is open";

@@ -106,7 +106,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,12 +150,13 @@
         text = @"About";
         cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
     }
+    /*
     else if (row == 4)
     {
         text = @"Sign out";
         cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
     }
-
+    */
     cell.textLabel.text = NSLocalizedString( text,nil );
     return cell;
 }

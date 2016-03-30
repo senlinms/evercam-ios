@@ -52,3 +52,15 @@
 @property (nonatomic, strong) EvercamCamera *editCamera;
 
 @end
+
+static inline BOOL isCompletelyEmpty (id text) {
+    BOOL isBlank;
+    if ([[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
+        isBlank = YES;
+    }else{
+        isBlank = NO;
+    }
+    
+    return isBlank;
+}
+
