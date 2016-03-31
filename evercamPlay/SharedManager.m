@@ -15,7 +15,6 @@
 
 +(NSString*)getCheckPortUrl
 {
-//    return @"http://tuq.in/tools/port.txt";
     return @"http://api.predator.wtf/pcheck/?";
 }
 
