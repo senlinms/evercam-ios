@@ -4,7 +4,7 @@ Evercam Play allows connect your own IP cameras, public webcams and any Android 
 
 | Name   | Evercam for iOS|
 | --- | --- |
-| Owner   | [@liutingdu](https://github.com/liutingdu)   |
+| Owner   | [@Zulqarnain-Mustafa](https://github.com/@Zulqarnain-Mustafa)   |
 | Version  | 1.0.5 |
 | Evercam API Version  | 1.0  |
 | Licence | [AGPL](https://tldrlegal.com/license/gnu-affero-general-public-license-v3-%28agpl-3.0%29) |
