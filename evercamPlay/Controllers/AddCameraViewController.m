@@ -1006,8 +1006,7 @@
         self.imageView.image = image;
         
     } else {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"", nil) message:@"The port and URL are open but we can't seem to connect. Check that the username and password are correct and the snapshot ending" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [simpleAlert show];
+        //Remove alert "The port and URL are open but" issue #40 on git
     }
 }
 
@@ -1068,9 +1067,9 @@
                 self.tfModel.text = self.currentModel.name;
                 [self setCameraImage];
                 if (self.editCamera == nil) {
-                    self.tfUsername.text = self.currentModel.defaults.authUsername;
-                    self.tfPassword.text = self.currentModel.defaults.authPassword;
-                    self.tfSnapshot.text = self.currentModel.defaults.jpgURL;
+                    self.tfUsername.text = ([self.currentModel.defaults.authUsername isKindOfClass:[NSNull class]])?@"":self.currentModel.defaults.authUsername;
+                    self.tfPassword.text = ([self.currentModel.defaults.authPassword isKindOfClass:[NSNull class]])?@"":self.currentModel.defaults.authPassword;
+                    self.tfSnapshot.text = ([self.currentModel.defaults.jpgURL isKindOfClass:[NSNull class]])?@"":self.currentModel.defaults.jpgURL;
                 }
             }
             NSLog(@"%@",self.modelsArray);
@@ -1306,20 +1305,24 @@
 }
 
 - (IBAction)httpTextFieldDidEndEdition:(id)sender {
-    NSString* url = [SharedManager getCheckPortUrl];
-    NSString* ipAddress = self.tfExternalHost.text;
+   
+    NSString* ipAddress = [self.tfExternalHost.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString* httpPort = self.tfExternalHttpPort.text;
     
-    if(([self isStringEmpty:httpPort]) || ([self isStringEmpty:ipAddress]))
+    if(isCompletelyEmpty(httpPort) || isCompletelyEmpty(ipAddress))
     {
         self.httpPortStatusLabel.text = @"";
         return;
     }
+    
+    NSString* url = [NSString stringWithFormat:@"%@arguments=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,httpPort];
  
     NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
-        
-        if([responseDict[@"JSON"] isEqualToString:@"true"])
+        if([status isEqualToString:@"error"])
+        {
+            NSLog(@"Port-Checking server down");
+        }else if([responseDict[@"JSON"] containsString:@"is open"])
         {
             if (![self.tfExternalHttpPort.text  isEqual: @""]) {
                 self.httpPortStatusLabel.text = @"Port is open";
@@ -1333,32 +1336,32 @@
                 self.httpPortStatusLabel.textColor = [UIColor redColor];
             }
         }
-        
-        if([status isEqualToString:@"error"])
-        {
-            NSLog(@"Port-Checking server down");
-        }
-        
     }];
     
 }
 
 
 - (IBAction)rtspTextFieldDidEndEdition:(id)sender {
-    NSString* url = [SharedManager getCheckPortUrl];
-    NSString* ipAddress = self.tfExternalHost.text;
+    
+    NSString* ipAddress = [self.tfExternalHost.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString* rtspPort = self.tfExternalRtspPort.text;
    
-    if(([self isStringEmpty:rtspPort]) || ([self isStringEmpty:ipAddress]))
+    if(isCompletelyEmpty(rtspPort) || isCompletelyEmpty(ipAddress))
     {
         self.rtspPortStatusLabel.text = @"";
         return;
     }
     
+    NSString* url = [NSString stringWithFormat:@"%@arguments=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,rtspPort];
+    
+    
     NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
         
-        if([responseDict[@"JSON"] isEqualToString:@"true"])
+        if([status isEqualToString:@"error"])
+        {
+            NSLog(@"Port-Checking server down");
+        }else if([responseDict[@"JSON"] containsString:@"is open"])
         {
             if (![self.tfExternalRtspPort.text  isEqual: @""]) {
                 self.rtspPortStatusLabel.text = @"Port is open";
@@ -1371,13 +1374,7 @@
                 self.rtspPortStatusLabel.text = @"Port is closed";
                 self.rtspPortStatusLabel.textColor = [UIColor redColor];
             }
-        }        
-        
-        if([status isEqualToString:@"error"])
-        {
-            NSLog(@"Port-Checking server down");
         }
-        
     }];
 }
 

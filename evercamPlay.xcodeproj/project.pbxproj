@@ -71,12 +71,11 @@
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
 		6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF591FA1BF05FE20044B0F1 /* logo.png */; };
+		ABA90E1A1CA28FA0002B235B /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABA90E191CA28FA0002B235B /* local.plist */; };
 		C40639901B05F94F00FC5D67 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */; };
 		C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639911B05F96200FC5D67 /* WebKit.framework */; };
 		C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639931B05F96C00FC5D67 /* libz.dylib */; };
 		C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */; };
-		C49D3AA01C16DEB300C3D363 /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = C49D3A9F1C16DEB300C3D363 /* local.plist */; };
-		C49D3AA11C16DEC100C3D363 /* local.plist in Frameworks */ = {isa = PBXBuildFile; fileRef = C49D3A9F1C16DEB300C3D363 /* local.plist */; };
 		C4E418CC1B305B290050872E /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E418CB1B305B290050872E /* GStreamer.framework */; };
 		C4E418D61B305F1F0050872E /* EaglUIVIew.h in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D01B305DB70050872E /* EaglUIVIew.h */; };
 		C4E418D71B305F1F0050872E /* EaglUIVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E418D11B305DB70050872E /* EaglUIVIew.m */; };
@@ -314,12 +313,12 @@
 		6CCB48291BDF4D7A00A62C28 /* SharedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SharedManager.m; path = ../SharedManager.m; sourceTree = "<group>"; };
 		6CF591FA1BF05FE20044B0F1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABA90E191CA28FA0002B235B /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
 		C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C40639911B05F96200FC5D67 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		C40639931B05F96C00FC5D67 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C40639951B05FBDA00FC5D67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		C49D3A9F1C16DEB300C3D363 /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = local.plist; path = ../local.plist; sourceTree = "<group>"; };
 		C4E418CB1B305B290050872E /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../Library/Frameworks/GStreamer.framework; sourceTree = "<group>"; };
 		C4E418D01B305DB70050872E /* EaglUIVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglUIVIew.h; sourceTree = "<group>"; };
 		C4E418D11B305DB70050872E /* EaglUIVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EaglUIVIew.m; sourceTree = "<group>"; };
@@ -513,7 +512,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C49D3AA11C16DEC100C3D363 /* local.plist in Frameworks */,
 				C4E418CC1B305B290050872E /* GStreamer.framework in Frameworks */,
 				E356C9D91B179E2A007BB101 /* libicucore.dylib in Frameworks */,
 				E30201D71B1782970006DAE8 /* SpriteKit.framework in Frameworks */,
@@ -757,7 +755,7 @@
 		CB1C76511AAB144800680FE3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C49D3A9F1C16DEB300C3D363 /* local.plist */,
+				ABA90E191CA28FA0002B235B /* local.plist */,
 				CB1C76521AAB144800680FE3 /* Info.plist */,
 				CB1C76531AAB144800680FE3 /* main.m */,
 			);
@@ -1183,7 +1181,6 @@
 				E356C9D51B17985D007BB101 /* Pods-evercamPlay.release.xcconfig in Resources */,
 				E309007A1B16510900E5B5C0 /* CameraPlayViewController_iPad.xib in Resources */,
 				CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */,
-				C49D3AA01C16DEB300C3D363 /* local.plist in Resources */,
 				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
 				413BB2B11ADBFB710083A5DC /* pull-out.png in Resources */,
 				CB44E8771AAE9E7D00A78C11 /* MenuViewController.xib in Resources */,
@@ -1223,6 +1220,7 @@
 				E3CB15A91B2879C700413197 /* btn_delete.png in Resources */,
 				E30201BF1B16C82D0006DAE8 /* alert-black-button@2x.png in Resources */,
 				E30201C51B16C82D0006DAE8 /* alert-red-button@2x.png in Resources */,
+				ABA90E1A1CA28FA0002B235B /* local.plist in Resources */,
 				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
 				E30900701B163F1200E5B5C0 /* SignupViewController_iPad.xib in Resources */,
@@ -1267,7 +1265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 3076ee9439062b784cded123ab7344ffa3b1c872 f5e26f2d09f77ca355dc48e14133b5449a25e63a1880f3bf4905662871a15bab";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3076ee9439062b784cded123ab7344ffa3b1c872 f5e26f2d09f77ca355dc48e14133b5449a25e63a1880f3bf4905662871a15bab";
 		};
 		CBA745976210DEE5B3E0B8C4 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1401,6 +1399,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Liuting Du (GD2KDRQNRZ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Liuting Du (GD2KDRQNRZ)";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1446,6 +1445,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1474,7 +1474,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
