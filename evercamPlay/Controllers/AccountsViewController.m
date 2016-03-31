@@ -435,7 +435,6 @@
     {
         LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:vc animated:YES];
-//        [self showAddAccountAlertWithUsername:@"" andPassword:@""];
     }
 }
 
