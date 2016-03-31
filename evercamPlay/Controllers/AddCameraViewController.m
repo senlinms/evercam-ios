@@ -1006,8 +1006,7 @@
         self.imageView.image = image;
         
     } else {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"", nil) message:@"The port and URL are open but we can't seem to connect. Check that the username and password are correct and the snapshot ending" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [simpleAlert show];
+        //Remove alert "The port and URL are open but" issue #40 on git
     }
 }
 
@@ -1068,9 +1067,9 @@
                 self.tfModel.text = self.currentModel.name;
                 [self setCameraImage];
                 if (self.editCamera == nil) {
-                    self.tfUsername.text = self.currentModel.defaults.authUsername;
-                    self.tfPassword.text = self.currentModel.defaults.authPassword;
-                    self.tfSnapshot.text = self.currentModel.defaults.jpgURL;
+                    self.tfUsername.text = ([self.currentModel.defaults.authUsername isKindOfClass:[NSNull class]])?@"":self.currentModel.defaults.authUsername;
+                    self.tfPassword.text = ([self.currentModel.defaults.authPassword isKindOfClass:[NSNull class]])?@"":self.currentModel.defaults.authPassword;
+                    self.tfSnapshot.text = ([self.currentModel.defaults.jpgURL isKindOfClass:[NSNull class]])?@"":self.currentModel.defaults.jpgURL;
                 }
             }
             NSLog(@"%@",self.modelsArray);
