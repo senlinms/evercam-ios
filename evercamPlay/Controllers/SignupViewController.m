@@ -144,7 +144,7 @@
     NSLocale *locale = [NSLocale currentLocale];
     NSString *countryCode = [locale objectForKey: NSLocaleCountryCode];
     NSLog(@"countryCode:%@", countryCode);
-    
+    NSRange whiteSpaceRange = [username rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
     // firstname
     if ([firstname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
@@ -181,7 +181,7 @@
         
         return;
     }
-    else if ([username containsString:@" "])
+    else if (whiteSpaceRange.location != NSNotFound)
     {
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Invalid username", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         simpleAlert.tag = 104;
