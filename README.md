@@ -31,7 +31,7 @@ The entire Evercam codebase is open source, see details: http://www.evercam.io/o
 
 If you have experience developing with iOS and IP cameras, we look forward to your pull requests!  
 
-The code should follow [the style guidelines](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html) and should be formatted using the [code format tool](https://github.com/travisjeffery/ClangFormat-Xcode).
+The code should follow [the style guidelines](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html).
 
 We've put up several [milestones](https://github.com/evercam/evercam-play-ios/milestones) and [here](https://docs.google.com/spreadsheets/d/1mZ521gVZUf0a42cyvkqiyfGHiNn2BqZJR__Fj7aRyyQ/edit#gid=0) is a roadmap compared with our Android app. 
 
