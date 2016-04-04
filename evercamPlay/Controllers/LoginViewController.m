@@ -89,6 +89,8 @@
     NSString *username = _txt_username.text;
     NSString *password = _txt_password.text;
     
+    NSRange whiteSpaceRange = [username rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
+    
     if ([username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log in", nil) message:NSLocalizedString(@"Username required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -97,7 +99,7 @@
         
         return;
     }
-    else if ([username containsString:@" "])
+    else if (whiteSpaceRange.location != NSNotFound)
     {
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log in", nil) message:NSLocalizedString(@"Invalid username", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         simpleAlert.tag = 102;
