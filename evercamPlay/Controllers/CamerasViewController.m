@@ -1,5 +1,5 @@
 /*
-
+ 
  Copyright (c) 2013 Joan Lluch <joan.lluch@sweetwilliamsl.com>
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,7 +22,7 @@
  
  Original code:
  Copyright (c) 2011, Philip Kluz (Philip.Kluz@zuui.org)
-*/
+ */
 
 #import "CamerasViewController.h"
 #import "SWRevealViewController.h"
@@ -42,6 +42,7 @@
 #import "AccountsViewController.h"
 #import "SettingsViewController.h"
 #import "AboutViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -71,7 +72,7 @@
     self.navigationController.navigationBarHidden = YES;
     
     self.screenName = @"Camera Grid View";
-	
+    
     cameraArray = [[NSMutableArray alloc] initWithCapacity:0];
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -85,16 +86,17 @@
     }
     else
         [self.camerasView registerNib:[UINib nibWithNibName:@"CameraViewCell_iPad" bundle:nil] forCellWithReuseIdentifier: @"CameraViewCellPad"];
-
+    
     
     [self hideLoadingView];
     [self onRefresh:nil];
     
     [self setCamerasPerRow];
-//    if ([PreferenceUtil getCameraPerRow] == 3)
-//    {
-//        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
-//    }
+    
+    //    if ([PreferenceUtil getCameraPerRow] == 3)
+    //    {
+    //        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
+    //    }
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -161,9 +163,9 @@
     }
     else if (row == 4)
     {
-         newFrontController = [[AboutViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AboutViewController" : @"AboutViewController_iPad" bundle:nil];
+        newFrontController = [[AboutViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AboutViewController" : @"AboutViewController_iPad" bundle:nil];
     }
-   
+    
     [self.navigationController pushViewController:newFrontController animated:YES];
     self.navigationController.navigationBarHidden = YES;
 }
@@ -190,52 +192,52 @@
 - (IBAction)onAdd: (id)sender
 {
     [self addCamera];
-//    UIAlertController * view=   [UIAlertController
-//                                 alertControllerWithTitle:nil
-//                                 message:nil
-//                                 preferredStyle:UIAlertControllerStyleActionSheet];
-//    
-//    UIAlertAction* add = [UIAlertAction
-//                         actionWithTitle:@"Add camera manually"
-//                         style:UIAlertActionStyleDefault
-//                         handler:^(UIAlertAction * action)
-//                         {
-//                             [self performSelectorOnMainThread:@selector(addCamera) withObject:nil waitUntilDone:NO];
-//                             [view dismissViewControllerAnimated:YES completion:nil];
-//                             
-//                         }];
-//    UIAlertAction* scan = [UIAlertAction
-//                             actionWithTitle:@"Scan for cameras(beta)"
-//                             style:UIAlertActionStyleDefault
-//                             handler:^(UIAlertAction * action)
-//                             {
-//                                 [self performSelectorOnMainThread:@selector(scanCamera) withObject:nil waitUntilDone:NO];
-//                                 [view dismissViewControllerAnimated:YES completion:nil];
-//                                 
-//                             }];
-//    UIAlertAction* cancel = [UIAlertAction
-//                           actionWithTitle:@"Cancel"
-//                           style:UIAlertActionStyleCancel
-//                           handler:^(UIAlertAction * action)
-//                           {
-//                               [view dismissViewControllerAnimated:YES completion:nil];
-//                               
-//                           }];
-//
-//    [view addAction:add];
-//    [view addAction:scan];
-//    [view addAction:cancel];
-//    
-//    [self presentViewController:view animated:YES completion:nil];
+    //    UIAlertController * view=   [UIAlertController
+    //                                 alertControllerWithTitle:nil
+    //                                 message:nil
+    //                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    //
+    //    UIAlertAction* add = [UIAlertAction
+    //                         actionWithTitle:@"Add camera manually"
+    //                         style:UIAlertActionStyleDefault
+    //                         handler:^(UIAlertAction * action)
+    //                         {
+    //                             [self performSelectorOnMainThread:@selector(addCamera) withObject:nil waitUntilDone:NO];
+    //                             [view dismissViewControllerAnimated:YES completion:nil];
+    //
+    //                         }];
+    //    UIAlertAction* scan = [UIAlertAction
+    //                             actionWithTitle:@"Scan for cameras(beta)"
+    //                             style:UIAlertActionStyleDefault
+    //                             handler:^(UIAlertAction * action)
+    //                             {
+    //                                 [self performSelectorOnMainThread:@selector(scanCamera) withObject:nil waitUntilDone:NO];
+    //                                 [view dismissViewControllerAnimated:YES completion:nil];
+    //
+    //                             }];
+    //    UIAlertAction* cancel = [UIAlertAction
+    //                           actionWithTitle:@"Cancel"
+    //                           style:UIAlertActionStyleCancel
+    //                           handler:^(UIAlertAction * action)
+    //                           {
+    //                               [view dismissViewControllerAnimated:YES completion:nil];
+    //
+    //                           }];
+    //
+    //    [view addAction:add];
+    //    [view addAction:scan];
+    //    [view addAction:cancel];
+    //
+    //    [self presentViewController:view animated:YES completion:nil];
 }
 
 - (IBAction)onRefresh: (id)sender
 {
-//    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
-//    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
-//    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
-//    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
-
+    //    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
+    //    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
+    //    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
+    //    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
+    
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
                                                           action:action_refresh
@@ -250,7 +252,7 @@
     BOOL willShowOfflineCamera = [PreferenceUtil isShowOfflineCameras];
     
     [[EvercamShell shell] setUserKeyPairWithApiId:[APP_DELEGATE defaultUser].apiId andApiKey:[APP_DELEGATE defaultUser].apiKey];
-
+    
     [self showLoadingView];
     [[EvercamShell shell] getAllCameras:[APP_DELEGATE defaultUser].username includeShared:YES includeThumbnail:YES withBlock:^(NSArray *cameras, NSError *error) {
         [self hideLoadingView];
@@ -270,7 +272,7 @@
                         }
                     }
                 }
-
+                
                 [self.camerasView reloadData];
             });
         }
@@ -309,9 +311,9 @@
 
 - (IBAction)pushExample:(id)sender
 {
-	UIViewController *stubController = [[UIViewController alloc] init];
-	stubController.view.backgroundColor = [UIColor whiteColor];
-	[self.navigationController pushViewController:stubController animated:YES];
+    UIViewController *stubController = [[UIViewController alloc] init];
+    stubController.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:stubController animated:YES];
 }
 #pragma mark UICollectionView
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -322,10 +324,11 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CameraViewCell *cell = (CameraViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:[GlobalSettings sharedInstance].isPhone ? @"CameraViewCell":@"CameraViewCellPad" forIndexPath:indexPath];
-    
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
-    cell.titleLabel.text = cameraInfo.name;
+    NSLog(@"Is Camera Online: %@",cameraInfo.isOnline?@"YES: ONLINE":@"NO: OFFLINE");
+    NSString *thumbnail_ImageUrl_String = [NSString stringWithFormat:@"%@/%@/thumbnail?api_id=%@&api_key=%@",THUMB_IMAGE_BASEURL,cameraInfo.camId,[APP_DELEGATE defaultUser].apiId,[APP_DELEGATE defaultUser].apiKey];
     
+    cell.titleLabel.text = cameraInfo.name;
     CGSize textSize = { 1400.0, 20.0 };
     
     CGSize size = [cell.titleLabel.text boundingRectWithSize:textSize
@@ -356,24 +359,20 @@
     }
     
     [cell.thumbnailImageView setImage:nil];
-//    cell.thumbnailImageView.offlineImage = [UIImage imageNamed:@"cam_unavailable.png"];
     cell.secondaryView.hidden = NO;
     cell.thumbnailImageView.secondaryView = cell.secondaryView;
     if (cameraInfo.isOnline) {
+    
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
         //must setup second url.
         cell.thumbnailImageView.secondURL = [NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]];
-        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:NO];
+        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     } else {
+        
         cell.greyImv.hidden = NO;
         cell.imvOffline.hidden = NO;
-        if (cameraInfo.thumbnailUrl && cameraInfo.thumbnailUrl.length > 0) {
-            [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:cameraInfo.thumbnailUrl] withSpinny:NO];
-        } else {
-            cell.secondaryView.hidden = YES;
-            [cell.thumbnailImageView displayImage:cell.thumbnailImageView.offlineImage];
-        }
+        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     }
     
     return cell;
@@ -444,7 +443,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     
-//    NSArray *vcArr = [APP_DELEGATE viewController].viewControllers;
+    //    NSArray *vcArr = [APP_DELEGATE viewController].viewControllers;
     
     UINavigationController* nvc = (UINavigationController*)[APP_DELEGATE viewController].presentedViewController;
     
