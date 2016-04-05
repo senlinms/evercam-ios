@@ -66,10 +66,16 @@
  
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
             BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-          
-            [sheet addButtonWithTitle:@"Edit Camera" block:^{
-                [self edit:self];
-            }];
+            
+            EvercamRights *right = self.camera.rights;
+            if (right.rightsString) {
+
+                if (([right.rightsString rangeOfString:@"edit"].location != NSNotFound) || ([right.rightsString rangeOfString:@"EDIT"].location != NSNotFound)) {
+                    [sheet addButtonWithTitle:@"Edit Camera" block:^{
+                        [self edit:self];
+                    }];
+                }
+            }
             
             [sheet addButtonWithTitle:@"Remove Camera" block:^{
                 [self deleteCamera];
@@ -83,6 +89,7 @@
                                          alertControllerWithTitle:nil
                                          message:nil
                                          preferredStyle:UIAlertControllerStyleActionSheet];
+            
            
             UIAlertAction* editCamera = [UIAlertAction
                                           actionWithTitle:@"Edit Camera"
@@ -110,7 +117,13 @@
                                      {
                                          [view dismissViewControllerAnimated:YES completion:nil];
                                      }];
-            [view addAction:editCamera];
+            EvercamRights *right = self.camera.rights;
+            if (right.rightsString) {
+                if ([right.rightsString containsString:@"edit"] || [right.rightsString containsString:@"EDIT"]) {
+                    [view addAction:editCamera];
+                }
+            }
+    
             [view addAction:removeCamera];
             [view addAction:cancel];
             

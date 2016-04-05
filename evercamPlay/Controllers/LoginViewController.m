@@ -84,11 +84,9 @@
 
 - (IBAction)onLogin:(id)sender
 {
-    
-    
     NSString *username = _txt_username.text;
     NSString *password = _txt_password.text;
-    
+
     NSRange whiteSpaceRange = [username rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if ([username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
