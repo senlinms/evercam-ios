@@ -1319,10 +1319,13 @@
  
     NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
+        
+        NSRange stringRange = [responseDict[@"JSON"] rangeOfString:@"is open"];
+        
         if([status isEqualToString:@"error"])
         {
             NSLog(@"Port-Checking server down");
-        }else if([responseDict[@"JSON"] containsString:@"is open"])
+        }else if(stringRange.location != NSNotFound)
         {
             if (![self.tfExternalHttpPort.text  isEqual: @""]) {
                 self.httpPortStatusLabel.text = @"Port is open";
@@ -1357,11 +1360,11 @@
     
     NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
     [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
-        
+        NSRange stringRange = [responseDict[@"JSON"] rangeOfString:@"is open"];
         if([status isEqualToString:@"error"])
         {
             NSLog(@"Port-Checking server down");
-        }else if([responseDict[@"JSON"] containsString:@"is open"])
+        }else if(stringRange.location != NSNotFound)
         {
             if (![self.tfExternalRtspPort.text  isEqual: @""]) {
                 self.rtspPortStatusLabel.text = @"Port is open";
