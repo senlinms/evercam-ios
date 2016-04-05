@@ -66,6 +66,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    
    self.appVersion.text = [NSString stringWithFormat:@"v%@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
     self.name.text =  [NSString stringWithFormat:@"%@ %@", ([APP_DELEGATE defaultUser].firstName), ([APP_DELEGATE defaultUser].lastName)];
     self.email.text = [APP_DELEGATE defaultUser].email;
@@ -181,10 +183,15 @@
         newFrontController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
         
         ((CamerasViewController*)newFrontController).selectedRow = row;
-        
+        /*
+        CustomNavigationController *cVC = [[CustomNavigationController alloc] initWithRootViewController:newFrontController];
+        [[APP_DELEGATE viewController] presentViewController:cVC animated:YES completion:nil];
+//        [revealController pushFrontViewController:cVC animated:YES];
+        */
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
         navigationController.navigationBarHidden = YES;
         [revealController pushFrontViewController:newFrontController animated:YES];
+        
         return;
     }
     

@@ -12,6 +12,7 @@
 #import "CustomNavigationController.h"
 
 #define APP_DELEGATE (AppDelegate *)[[UIApplication sharedApplication] delegate]
+#define THUMB_IMAGE_BASEURL @"https://media.evercam.io/v1/cameras"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \

@@ -11,7 +11,7 @@
 #import "ImageCache.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define SPINNY_TAG 5555   
+#define SPINNY_TAG 5555
 
 static ImageCache *imageCache = nil;
 
@@ -68,7 +68,7 @@ static ImageCache *imageCache = nil;
         data = nil;
     }
     
-//    UIView *spinnyView = [self viewWithTag:SPINNY_TAG];
+    //    UIView *spinnyView = [self viewWithTag:SPINNY_TAG];
     if (spinny != nil) {
         [spinny removeFromSuperview];
         spinny = nil;
@@ -113,7 +113,7 @@ static ImageCache *imageCache = nil;
         self.image = cachedImage;
         return;
     }else {
-	}
+    }
     
     if (hasSpinny) {
         spinny = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -125,14 +125,15 @@ static ImageCache *imageCache = nil;
         [self addSubview:spinny];
         [spinny release];
     }
-   
-    NSURLRequest *request = [NSURLRequest requestWithURL:url 
-                                             cachePolicy:NSURLRequestUseProtocolCachePolicy 
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url
+                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                          timeoutInterval:60.0];
+    
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
-- (void)connection:(NSURLConnection *)connection 
+- (void)connection:(NSURLConnection *)connection
     didReceiveData:(NSData *)incrementalData {
     if (data==nil) {
         data = [[NSMutableData alloc] initWithCapacity:2048];
@@ -144,7 +145,7 @@ static ImageCache *imageCache = nil;
     [connection release];
     connection = nil;
     
-//    UIView *spinny = [self viewWithTag:SPINNY_TAG];
+    //    UIView *spinny = [self viewWithTag:SPINNY_TAG];
     if (spinny != nil) {
         [spinny removeFromSuperview];
         spinny = nil;
@@ -193,5 +194,43 @@ static ImageCache *imageCache = nil;
         self.secondURL = nil;
     }
 }
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    if ([response isKindOfClass:[NSHTTPURLResponse class]])
+    {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+        if ([httpResponse statusCode] == 404){
+            [self handleImageWithError];
+        }
+    }
+}
+
+-(void)handleImageWithError{
+    [connection cancel];
+    [connection release];
+    connection = nil;
+    
+    if (spinny != nil) {
+        [spinny removeFromSuperview];
+        spinny = nil;
+    }
+    
+    if ([[self subviews] count] > 0) {
+        [[[self subviews] objectAtIndex:0] removeFromSuperview];
+    }
+    
+    [data release];
+    data = nil;
+    [self setImage:[UIImage imageNamed:@"cam_unavailable.png"]];
+    [imageCache insertImage:self.image withSize:[data length] forKey:urlString];
+    [self.secondaryView setHidden:YES];
+    /*
+    if (self.secondURL)
+    {
+        [self loadImageFromURL:self.secondURL withSpinny:NO];
+        self.secondURL = nil;
+    }
+    */
+}
+
 
 @end
