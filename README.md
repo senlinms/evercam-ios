@@ -1,4 +1,4 @@
-# Evercam for iOS
+# Evercam for iOS [![Dependency Status][dependency-status-image]][dependency-status-url]
 
 Evercam Play allows connect your own IP cameras, public webcams and any Android devices that you use as an IP camera. It connects you to Evercam dashboard so that you can see all your cameras on your desktop as well. 
 
@@ -41,7 +41,8 @@ For any bugs and discussions, please use [Github Issues](https://github.com/ever
 
 Any questions or sugestions, drop us a line: http://www.evercam.io/contact
 
-
+[dependency-status-url]: https://www.versioneye.com/user/projects/5703cbe7fcd19a0039f15c6b
+[dependency-status-image]: https://www.versioneye.com/user/projects/5703cbe7fcd19a0039f15c6b/badge.svg?style=flat
 
 
 
