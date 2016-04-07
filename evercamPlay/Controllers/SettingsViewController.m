@@ -119,7 +119,6 @@
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[PreferenceUtil getCameraPerRow]];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 1)
         {
@@ -138,7 +137,6 @@
             }
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 2)
         {
