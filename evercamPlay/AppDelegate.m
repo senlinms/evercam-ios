@@ -45,6 +45,7 @@
     // Override point for customization after application launch.
     WelcomeViewController *vc = [[WelcomeViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"WelcomeViewController" : @"WelcomeViewController_iPad" bundle:nil];
     self.viewController = [[CustomNavigationController alloc] initWithRootViewController:vc];
+    [self.viewController setNavigationBarHidden:YES animated:NO];
     self.viewController.isPortraitMode = true;
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
@@ -96,6 +97,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window  // iOS 6 autorotation fix
+{
+    return UIInterfaceOrientationMaskAll;
 }
 
 

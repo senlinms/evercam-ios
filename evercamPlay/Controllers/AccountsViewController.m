@@ -58,38 +58,65 @@
         [self.tableView registerNib:[UINib nibWithNibName:@"AccountCell_iPad" bundle:nil] forCellReuseIdentifier:@"AccountCellPad"];
         [self.tableView registerNib:[UINib nibWithNibName:@"AddAccountCell_iPad" bundle:nil] forCellReuseIdentifier:@"AddAccountCellPad"];
     }
-
-    gradient = [CAGradientLayer layer];
-    gradient.frame = self.tableView.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
-    [self.tableView.layer insertSublayer:gradient atIndex:0];
-
-    SWRevealViewController *revealController = [self revealViewController];
     
-    [self.btnMenu addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
-
-//    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
-//    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
-//    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
-//    
-//    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
+    self.tableView.backgroundColor = [UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0];
+    [self setFramesAccordingToOrientation];
     
     [self getAllUsers];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    CustomNavigationController* cVC = [APP_DELEGATE viewController];
-    [cVC setHasLandscapeMode:YES];
-    [UIViewController attemptRotationToDeviceOrientation];
+    [super viewWillAppear:animated];
+    
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+
+-(void)setFramesAccordingToOrientation{
+    gradient.frame = self.tableView.bounds;
+    [_addAccountView reframeSubView:self.view.center andFrame:self.view.bounds];
+}
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
+}
+
+- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations // iOS 6 autorotation fix
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+{
+    return UIInterfaceOrientationPortrait;
+}
+
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [self.view setNeedsUpdateConstraints];
     gradient.frame = self.tableView.bounds;
     [_addAccountView reframeSubView:self.view.center andFrame:self.view.bounds];
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    if (UIInterfaceOrientationIsPortrait(orientation))
+    {
+        //Your portrait
+    }
+    else
+    {
+        //Your Landscape.
+    }
     
 }
 
@@ -334,6 +361,7 @@
 }
 
 - (IBAction)BackPressed:(id)sender {
+    NSLog(@"Navigation Stack: %@",self.navigationController.viewControllers);
     [self.navigationController popViewControllerAnimated:YES];
 }
 

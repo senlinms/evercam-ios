@@ -33,10 +33,13 @@
     
     self.screenName = @"Login";
     // Do any additional setup after loading the view from its nib.
+    /*
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.view.layer insertSublayer:gradient atIndex:0];
+    */
+    self.view.backgroundColor = [UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0];
     self.contentView.contentSize = self.contentView.bounds.size;
     
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {

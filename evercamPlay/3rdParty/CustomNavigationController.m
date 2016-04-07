@@ -9,7 +9,9 @@
 #import "CustomNavigationController.h"
 #import "CameraPlayViewController.h"
 #import "AppDelegate.h"
+@interface CustomNavigationController ()
 
+@end
 @implementation CustomNavigationController
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -71,5 +73,15 @@
         return UIInterfaceOrientationLandscapeLeft;
     }
 }
+/*
 
+- (BOOL)shouldAutorotate
+{
+    return self.topViewController.shouldAutorotate;
+}
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return self.topViewController.supportedInterfaceOrientations;
+}
+*/
 @end

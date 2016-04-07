@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomNavigationController: UINavigationController
+//@interface CustomNavigationController: UINavigationController<UINavigationControllerDelegate>
 
 @property (nonatomic) BOOL isPortraitMode;
 @property (nonatomic) BOOL hasLandscapeMode;
