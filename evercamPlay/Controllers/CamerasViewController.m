@@ -44,6 +44,7 @@
 #import "AboutViewController.h"
 #import "UIImageView+WebCache.h"
 
+
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
     NSMutableArray *cameraArray;
@@ -63,11 +64,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if (self.selectedRow) {
-        NSLog(@"%li",(long)self.selectedRow);
-        [self PushVC:self.selectedRow];
-    }
     
     self.navigationController.navigationBarHidden = YES;
     
@@ -92,16 +88,27 @@
     [self onRefresh:nil];
     
     [self setCamerasPerRow];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(PushVC:) name:@"K_LOAD_SIDE_MENU_CONTROLLERS" object:nil];
     
-    //    if ([PreferenceUtil getCameraPerRow] == 3)
-    //    {
-    //        [((UICollectionViewFlowLayout *) self.camerasView.collectionViewLayout) setSectionInset:UIEdgeInsetsMake(0, 1, 0, 1)];
-    //    }
+}
+
+-(void)pushAccountsViewController{
+    AccountsViewController *aVc = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:[NSBundle mainBundle]];
+    
+    CustomNavigationController *cameraPlayNavVC = [[CustomNavigationController alloc] initWithRootViewController:aVc];
+    if ([PreferenceUtil isForceLandscape]) {
+        [cameraPlayNavVC setIsPortraitMode:NO];
+    } else {
+        [cameraPlayNavVC setIsPortraitMode:YES];
+        [cameraPlayNavVC setHasLandscapeMode:YES];
+    }
+    cameraPlayNavVC.navigationBarHidden = YES;
+    
+    [[APP_DELEGATE viewController] presentViewController:cameraPlayNavVC animated:YES completion:nil];
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    //[UIView setAnimationsEnabled:NO];
     [self setCamerasPerRow];
     [self.view setNeedsUpdateConstraints];
     
@@ -131,10 +138,11 @@
 }
 
 
--(void)PushVC:(NSInteger)row
+-(void)PushVC:(NSNotification *)Notification
 {
     UIViewController *newFrontController = nil;
-    
+    NSNumber *indexNumber   = (NSNumber *)[Notification object];
+    NSInteger row           = [indexNumber integerValue];
     // row number reveived here with 1 increased
     if (row == 1)
     {
@@ -168,6 +176,8 @@
     
     [self.navigationController pushViewController:newFrontController animated:YES];
     self.navigationController.navigationBarHidden = YES;
+    [self.revealViewController revealToggleAnimated:YES];
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -192,52 +202,10 @@
 - (IBAction)onAdd: (id)sender
 {
     [self addCamera];
-    //    UIAlertController * view=   [UIAlertController
-    //                                 alertControllerWithTitle:nil
-    //                                 message:nil
-    //                                 preferredStyle:UIAlertControllerStyleActionSheet];
-    //
-    //    UIAlertAction* add = [UIAlertAction
-    //                         actionWithTitle:@"Add camera manually"
-    //                         style:UIAlertActionStyleDefault
-    //                         handler:^(UIAlertAction * action)
-    //                         {
-    //                             [self performSelectorOnMainThread:@selector(addCamera) withObject:nil waitUntilDone:NO];
-    //                             [view dismissViewControllerAnimated:YES completion:nil];
-    //
-    //                         }];
-    //    UIAlertAction* scan = [UIAlertAction
-    //                             actionWithTitle:@"Scan for cameras(beta)"
-    //                             style:UIAlertActionStyleDefault
-    //                             handler:^(UIAlertAction * action)
-    //                             {
-    //                                 [self performSelectorOnMainThread:@selector(scanCamera) withObject:nil waitUntilDone:NO];
-    //                                 [view dismissViewControllerAnimated:YES completion:nil];
-    //
-    //                             }];
-    //    UIAlertAction* cancel = [UIAlertAction
-    //                           actionWithTitle:@"Cancel"
-    //                           style:UIAlertActionStyleCancel
-    //                           handler:^(UIAlertAction * action)
-    //                           {
-    //                               [view dismissViewControllerAnimated:YES completion:nil];
-    //
-    //                           }];
-    //
-    //    [view addAction:add];
-    //    [view addAction:scan];
-    //    [view addAction:cancel];
-    //
-    //    [self presentViewController:view animated:YES completion:nil];
 }
 
 - (IBAction)onRefresh: (id)sender
 {
-    //    [[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor whiteColor]];
-    //    UILabel * appearanceLabel = [UILabel appearanceWhenContainedIn:UIAlertController.class, nil];
-    //    [appearanceLabel setAppearanceFont:[UIFont systemFontOfSize:15.0]];
-    //    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setBackgroundColor:[UIColor darkGrayColor]];
-    
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
                                                           action:action_refresh
@@ -362,7 +330,7 @@
     cell.secondaryView.hidden = NO;
     cell.thumbnailImageView.secondaryView = cell.secondaryView;
     if (cameraInfo.isOnline) {
-    
+        
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
         //must setup second url.
@@ -415,6 +383,7 @@
 
 #pragma mark - Custom Functions
 - (void)showCamera:(EvercamCamera *)camera {
+    
     CameraPlayViewController *cameraPlayVC = [[CameraPlayViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CameraPlayViewController" : @"CameraPlayViewController_iPad" bundle:nil];
     [cameraPlayVC setDelegate:self];
     cameraPlayVC.cameraInfo = camera;
@@ -432,6 +401,30 @@
     [[APP_DELEGATE viewController] presentViewController:cameraPlayNavVC animated:YES completion:nil];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations // iOS 6 autorotation fix
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+
+
+
 -(void)viewWillAppear:(BOOL)animated{
     CustomNavigationController* cVC = [APP_DELEGATE viewController];
     [cVC setHasLandscapeMode:YES];
@@ -442,8 +435,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    
-    //    NSArray *vcArr = [APP_DELEGATE viewController].viewControllers;
     
     UINavigationController* nvc = (UINavigationController*)[APP_DELEGATE viewController].presentedViewController;
     
@@ -460,14 +451,18 @@
     }
     else
     {
-        CustomNavigationController* cVC = [APP_DELEGATE viewController];
-        [cVC setIsPortraitMode:YES];
-        [cVC setHasLandscapeMode:NO];
-        
-        NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-        [UIViewController attemptRotationToDeviceOrientation];
+        //THIS CODE WAS CREATING PROBLEM IN ROTATION,SO I WANT TO KEEP IT.(NAIN)
+        /*
+         CustomNavigationController* cVC = [APP_DELEGATE viewController];
+         [cVC setIsPortraitMode:YES];
+         [cVC setHasLandscapeMode:NO];
+         
+         NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+         [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+         [UIViewController attemptRotationToDeviceOrientation];
+         */
     }
+    
     
 }
 

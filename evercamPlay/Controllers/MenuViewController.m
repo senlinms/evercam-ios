@@ -1,6 +1,6 @@
 
 /*
-
+ 
  Copyright (c) 2013 Joan Lluch <joan.lluch@sweetwilliamsl.com>
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,7 +24,7 @@
  Original code:
  Copyright (c) 2011, Philip Kluz (Philip.Kluz@zuui.org)
  
-*/
+ */
 
 #import "MenuViewController.h"
 
@@ -38,6 +38,8 @@
 #import "GAIDictionaryBuilder.h"
 #import "Config.h"
 #import "MenuViewControllerCell.h"
+#import "PreferenceUtil.h"
+#import "AboutViewController.h"
 
 @interface MenuViewController()
 {
@@ -61,18 +63,18 @@
     portraitTableFrame = self.rearTableView.frame;
     self.rearTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.rearTableView setContentInset:UIEdgeInsetsMake(15, 0, 0, 0)];
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     
     
-   self.appVersion.text = [NSString stringWithFormat:@"v%@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
+    self.appVersion.text = [NSString stringWithFormat:@"v%@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
     self.name.text =  [NSString stringWithFormat:@"%@ %@", ([APP_DELEGATE defaultUser].firstName), ([APP_DELEGATE defaultUser].lastName)];
     self.email.text = [APP_DELEGATE defaultUser].email;
     [self changeFrame];
-   
+    
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -130,7 +132,7 @@
         cell.textLabel.textColor = UIColorFromRGB(0x333333);
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
     }
-	
+    
     NSString *text = nil;
     if (row == 0)
     {
@@ -153,12 +155,12 @@
         cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
     }
     /*
-    else if (row == 4)
-    {
-        text = @"Sign out";
-        cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
-    }
-    */
+     else if (row == 4)
+     {
+     text = @"Sign out";
+     cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
+     }
+     */
     cell.textLabel.text = NSLocalizedString( text,nil );
     return cell;
 }
@@ -174,23 +176,14 @@
     NSInteger row = indexPath.row;
     _presentedRow = row;  // <- store the presented row
     // otherwise we'll create a new frontViewController and push it with animation
-
+    
     UIViewController *newFrontController = nil;
-
+    
     if (row == 0 || row == 1 || row == 2 || row == 3)
     {
         row += 1;
-        newFrontController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
         
-        ((CamerasViewController*)newFrontController).selectedRow = row;
-        /*
-        CustomNavigationController *cVC = [[CustomNavigationController alloc] initWithRootViewController:newFrontController];
-        [[APP_DELEGATE viewController] presentViewController:cVC animated:YES completion:nil];
-//        [revealController pushFrontViewController:cVC animated:YES];
-        */
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-        navigationController.navigationBarHidden = YES;
-        [revealController pushFrontViewController:newFrontController animated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"K_LOAD_SIDE_MENU_CONTROLLERS" object:[NSNumber numberWithInteger:row]];
         
         return;
     }
