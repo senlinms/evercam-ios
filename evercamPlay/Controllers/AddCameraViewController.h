@@ -18,7 +18,7 @@
 
 @end
 
-@interface AddCameraViewController : GAITrackedViewController <NIDropDownDelegate>
+@interface AddCameraViewController : GAITrackedViewController <NIDropDownDelegate,UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *nameView;
