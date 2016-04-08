@@ -93,6 +93,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    /*
+    CustomNavigationController *custom_Nav_Controller = (CustomNavigationController *)self.navigationController;
+    if ([PreferenceUtil isForceLandscape]) {
+        custom_Nav_Controller.isPortraitMode    = NO;
+    } else {
+        custom_Nav_Controller.isPortraitMode    = YES;
+        custom_Nav_Controller.hasLandscapeMode  = YES;
+    }
+    */
     [self disableSleep];
     
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
@@ -218,13 +227,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)sendFeedback {
     FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
-    feedbackVC.cameraID = self.cameraInfo.camId;
-    
-    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:feedbackVC];
-    navVC.isPortraitMode = YES;
-    navVC.navigationBarHidden = YES;
-    
-    [self.navigationController presentViewController:navVC animated:YES completion:nil];
+    feedbackVC.isFromLiveCameraView     = YES;
+    feedbackVC.cameraID                 = self.cameraInfo.camId;
+    [self.navigationController presentViewController:feedbackVC animated:YES completion:nil];
 }
 
 - (void)showSavedImages {

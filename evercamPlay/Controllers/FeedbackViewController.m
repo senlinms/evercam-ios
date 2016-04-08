@@ -22,16 +22,19 @@
 @end
 
 @implementation FeedbackViewController
-
+@synthesize isFromLiveCameraView;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     self.screenName = @"Feedback Page";
     // Do any additional setup after loading the view from its nib.
+    
     gradient = [CAGradientLayer layer];
     gradient.frame = self.contentView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.contentView.layer insertSublayer:gradient atIndex:0];
+    
+//    self.contentView.backgroundColor = [UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0];
     
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor lightTextColor];
@@ -50,6 +53,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
     CustomNavigationController* cVC = [APP_DELEGATE viewController];
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
@@ -66,7 +71,11 @@
 }
 
 - (IBAction)BackPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (isFromLiveCameraView) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)onSend:(id)sender
