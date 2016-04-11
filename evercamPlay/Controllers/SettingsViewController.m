@@ -32,24 +32,38 @@
     self.screenName = @"Cameras Preferences";
     
     // Do any additional setup after loading the view from its nib.
+    
     gradient = [CAGradientLayer layer];
     gradient.frame = self.tableView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.tableView.layer insertSublayer:gradient atIndex:0];
-//    setstrutsWithMask(self.view, UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     
+//    setstrutsWithMask(self.view, UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    /*
     SWRevealViewController *revealController = [self revealViewController];
     
     [self.btnMenu addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
-
+    */
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     CustomNavigationController* cVC = [APP_DELEGATE viewController];
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+
+- (void)viewDidLayoutSubviews{
+    gradient.frame = self.tableView.bounds;
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation

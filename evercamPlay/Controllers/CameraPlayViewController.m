@@ -83,8 +83,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-    //        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
-    
+ 
     self.statusbar.hidden = NO;
     self.titlebar.hidden = NO;
     self.btnTitle.hidden = NO;
@@ -93,6 +92,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [self disableSleep];
     
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
@@ -107,28 +107,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)viewWillDisappear:(BOOL)animated {
     [self enableSleep];
 }
-
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-//    if (UIDeviceOrientationIsLandscape(deviceOrientation))
-//    {
-//        //LandscapeView
-//        self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height-20);
-//        //      self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
-////        self.titlebar.hidden = YES;
-////        self.btnTitle.hidden = YES;
-////        self.downImgView.hidden = YES;
-//    }
-//    else
-//    {
-//        self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-//        //    self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
-//        self.titlebar.hidden = NO;
-//        self.btnTitle.hidden = NO;
-//        self.downImgView.hidden = NO;
-//    }
-//}
 
 - (void)disableSleep {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -218,13 +196,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)sendFeedback {
     FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
-    feedbackVC.cameraID = self.cameraInfo.camId;
-    
-    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:feedbackVC];
-    navVC.isPortraitMode = YES;
-    navVC.navigationBarHidden = YES;
-    
-    [self.navigationController presentViewController:navVC animated:YES completion:nil];
+    feedbackVC.isFromLiveCameraView     = YES;
+    feedbackVC.cameraID                 = self.cameraInfo.camId;
+    [self.navigationController presentViewController:feedbackVC animated:YES completion:nil];
 }
 
 - (void)showSavedImages {

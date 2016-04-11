@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "GAI.h"
 
-@interface FeedbackViewController : GAITrackedViewController
+@interface FeedbackViewController : GAITrackedViewController{
+    BOOL isFromLiveCameraView;
+}
+
+@property (nonatomic,assign) BOOL isFromLiveCameraView;
 
 @property (nonatomic, strong) NSString *cameraID;
 
