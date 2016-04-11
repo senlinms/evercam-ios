@@ -83,8 +83,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-    //        self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
-    
+ 
     self.statusbar.hidden = NO;
     self.titlebar.hidden = NO;
     self.btnTitle.hidden = NO;
@@ -93,15 +92,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    /*
-    CustomNavigationController *custom_Nav_Controller = (CustomNavigationController *)self.navigationController;
-    if ([PreferenceUtil isForceLandscape]) {
-        custom_Nav_Controller.isPortraitMode    = NO;
-    } else {
-        custom_Nav_Controller.isPortraitMode    = YES;
-        custom_Nav_Controller.hasLandscapeMode  = YES;
-    }
-    */
+    
     [self disableSleep];
     
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
@@ -116,28 +107,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)viewWillDisappear:(BOOL)animated {
     [self enableSleep];
 }
-
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-//    if (UIDeviceOrientationIsLandscape(deviceOrientation))
-//    {
-//        //LandscapeView
-//        self.view.frame = CGRectMake(0,-20,self.view.frame.size.width, self.view.frame.size.height-20);
-//        //      self.playerView.frame = CGRectMake(0,57,self.playerView.frame.size.width, self.playerView.frame.size.height);
-////        self.titlebar.hidden = YES;
-////        self.btnTitle.hidden = YES;
-////        self.downImgView.hidden = YES;
-//    }
-//    else
-//    {
-//        self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-//        //    self.playerView.frame = CGRectMake(0,72,self.playerView.frame.size.width, self.playerView.frame.size.height);
-//        self.titlebar.hidden = NO;
-//        self.btnTitle.hidden = NO;
-//        self.downImgView.hidden = NO;
-//    }
-//}
 
 - (void)disableSleep {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];

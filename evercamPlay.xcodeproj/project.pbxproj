@@ -72,6 +72,10 @@
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
 		6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF591FA1BF05FE20044B0F1 /* logo.png */; };
 		ABA90E1A1CA28FA0002B235B /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABA90E191CA28FA0002B235B /* local.plist */; };
+		ABDAE0841CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */; };
+		ABDAE0851CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE07F1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m */; };
+		ABDAE0861CBB8749002285B7 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE0811CBB8749002285B7 /* TPKeyboardAvoidingTableView.m */; };
+		ABDAE0871CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE0831CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		C40639901B05F94F00FC5D67 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */; };
 		C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639911B05F96200FC5D67 /* WebKit.framework */; };
 		C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40639931B05F96C00FC5D67 /* libz.dylib */; };
@@ -314,6 +318,14 @@
 		6CF591FA1BF05FE20044B0F1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA90E191CA28FA0002B235B /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
+		ABDAE07C1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		ABDAE07E1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		ABDAE07F1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		ABDAE0801CBB8749002285B7 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		ABDAE0811CBB8749002285B7 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		ABDAE0821CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		ABDAE0831CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		C406398F1B05F94F00FC5D67 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C40639911B05F96200FC5D67 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		C40639931B05F96C00FC5D67 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -678,6 +690,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		ABDAE07B1CBB8749002285B7 /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				ABDAE07C1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.h */,
+				ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */,
+				ABDAE07E1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.h */,
+				ABDAE07F1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m */,
+				ABDAE0801CBB8749002285B7 /* TPKeyboardAvoidingTableView.h */,
+				ABDAE0811CBB8749002285B7 /* TPKeyboardAvoidingTableView.m */,
+				ABDAE0821CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				ABDAE0831CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		C4E418CF1B305DB70050872E /* GStreamer */ = {
 			isa = PBXGroup;
 			children = (
@@ -782,6 +809,7 @@
 		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				ABDAE07B1CBB8749002285B7 /* TPKeyboardAvoiding */,
 				C4E418CF1B305DB70050872E /* GStreamer */,
 				E30900811B16B78600E5B5C0 /* BlockAction */,
 				410748881AE052C8004D10C9 /* GoogleAnalytics */,
@@ -1297,6 +1325,7 @@
 				C4E418DB1B305F1F0050872E /* gst_ios_init.m in Sources */,
 				CB44E8741AAE9E7D00A78C11 /* LoginViewController.m in Sources */,
 				CB318E5C1AFC3565004FFA8E /* SDWebImagePrefetcher.m in Sources */,
+				ABDAE0841CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				410748731ADF6F3E004D10C9 /* RecordingsViewController.m in Sources */,
 				413BB2B51ADC10690083A5DC /* ViewCameraViewController.m in Sources */,
 				CB318E571AFC3565004FFA8E /* SDWebImageCompat.m in Sources */,
@@ -1326,6 +1355,7 @@
 				6C0497DF1BDE48640095956B /* CommonFunctions.m in Sources */,
 				41208A5D1AD97971009C4FC2 /* SendGridEmailAttachment.m in Sources */,
 				413BB2811AD992890083A5DC /* Reachability.m in Sources */,
+				ABDAE0871CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				CB44E8781AAE9E7D00A78C11 /* SettingsViewController.m in Sources */,
 				413BB2AF1ADB14640083A5DC /* CommonUtil.m in Sources */,
 				CB44E87A1AAE9E7D00A78C11 /* SignupViewController.m in Sources */,
@@ -1354,8 +1384,10 @@
 				41208A441AD8482B009C4FC2 /* PreferenceUtil.m in Sources */,
 				E369E4AB1B137F54009D2D9E /* GlobalSettings.m in Sources */,
 				413BB2841AD992DD0083A5DC /* NetworkUtil.m in Sources */,
+				ABDAE0851CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				CB44E8701AAE9E7D00A78C11 /* CamerasViewController.m in Sources */,
 				CB44E86E1AAE9E7D00A78C11 /* AccountsViewController.m in Sources */,
+				ABDAE0861CBB8749002285B7 /* TPKeyboardAvoidingTableView.m in Sources */,
 				4107487E1AE006AC004D10C9 /* SnapshotViewController.m in Sources */,
 				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
 				41208A5C1AD97971009C4FC2 /* SendGridEmail.m in Sources */,

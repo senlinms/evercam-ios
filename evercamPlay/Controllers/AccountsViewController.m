@@ -43,11 +43,16 @@
 
 @implementation AccountsViewController
 
-- (void)viewDidLoad {    
+- (void)viewDidLoad {
     self.screenName = @"Manage Accounts";
     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    gradient = [CAGradientLayer layer];
+    gradient.frame = self.tableView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
+    [self.tableView.layer insertSublayer:gradient atIndex:0];
     
     if ([GlobalSettings sharedInstance].isPhone == YES) {
         [self.tableView registerNib:[UINib nibWithNibName:@"AccountCell" bundle:nil] forCellReuseIdentifier:@"AccountCell"];
@@ -58,10 +63,6 @@
         [self.tableView registerNib:[UINib nibWithNibName:@"AccountCell_iPad" bundle:nil] forCellReuseIdentifier:@"AccountCellPad"];
         [self.tableView registerNib:[UINib nibWithNibName:@"AddAccountCell_iPad" bundle:nil] forCellReuseIdentifier:@"AddAccountCellPad"];
     }
-    
-    self.tableView.backgroundColor = [UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0];
-    [self setFramesAccordingToOrientation];
-    
     [self getAllUsers];
     
 }
@@ -74,6 +75,10 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
+}
+
+- (void)viewDidLayoutSubviews{
+     [self setFramesAccordingToOrientation];
 }
 
 -(void)setFramesAccordingToOrientation{
@@ -150,7 +155,7 @@
     NSIndexPath *indexPath = (NSIndexPath *)object;
     NSInteger index = indexPath.row;
     AppUser *user = [self.users objectAtIndex:index];
-
+    
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Are you sure you want to remove this user?" message:@"Removing a user will remove the user from Evercam Play but the Evercam account will still exist."];
         
@@ -266,7 +271,7 @@
             cell.lblName.text = user.username;
         }
         cell.lblEmail.text = user.email;
-
+        
         return cell;
     }
     else
@@ -276,7 +281,7 @@
         {
             cell = [[AddAccountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:addAccountCellIdentifier];
         }
-        cell.backgroundColor = [UIColor clearColor];        
+        cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
 }

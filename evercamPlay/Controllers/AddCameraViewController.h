@@ -10,7 +10,7 @@
 #import "EvercamCamera.h"
 #import "GAI.h"
 #import "NIDropDown.h"
-
+@class TPKeyboardAvoidingScrollView;
 @protocol AddCameraViewControllerDelegate <NSObject>
 
 - (void)cameraAdded:(EvercamCamera *)camera;
@@ -41,6 +41,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfInternalHttpPort;
 @property (weak, nonatomic) IBOutlet UITextField *tfInternalRtspPort;
 @property (weak, nonatomic) IBOutlet UITextField *tfExternalRtspUrl;
+
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *main_Scroll;
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;

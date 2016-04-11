@@ -33,9 +33,7 @@
     gradient.frame = self.contentView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.contentView.layer insertSublayer:gradient atIndex:0];
-    
-//    self.contentView.backgroundColor = [UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0];
-    
+        
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor lightTextColor];
         self.txt_username.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
@@ -58,6 +56,10 @@
     CustomNavigationController* cVC = [APP_DELEGATE viewController];
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
+}
+
+-(void)viewDidLayoutSubviews{
+    gradient.frame = self.contentView.bounds;
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
