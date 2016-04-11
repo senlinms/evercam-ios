@@ -39,6 +39,14 @@
     [self fillCameraDetails];
 }
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    CustomNavigationController* cVC = [APP_DELEGATE viewController];
+    [cVC setHasLandscapeMode:YES];
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

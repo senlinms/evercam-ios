@@ -185,17 +185,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)showCameraView {
-    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:@"ViewCameraViewController" bundle:nil];
+    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:@"ViewCameraViewController" bundle:[NSBundle mainBundle]];
     viewCameraVC.camera = self.cameraInfo;
     viewCameraVC.delegate = self;
-    CustomNavigationController *viewCamNavVC = [[CustomNavigationController alloc] initWithRootViewController:viewCameraVC];
-    viewCamNavVC.navigationBarHidden = YES;
-    viewCamNavVC.isPortraitMode = YES;
-    [self presentViewController:viewCamNavVC animated:YES completion:nil];
+    [self.navigationController presentViewController:viewCameraVC animated:YES completion:nil];
 }
 
 - (void)sendFeedback {
-    FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
+    FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:[NSBundle mainBundle]];
     feedbackVC.isFromLiveCameraView     = YES;
     feedbackVC.cameraID                 = self.cameraInfo.camId;
     [self.navigationController presentViewController:feedbackVC animated:YES completion:nil];
@@ -208,12 +205,16 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         return;
     }
-    SnapshotViewController *snapshotVC = [[SnapshotViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SnapshotViewController" : @"SnapshotViewController_iPad" bundle:nil];
+    SnapshotViewController *snapshotVC = [[SnapshotViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SnapshotViewController" : @"SnapshotViewController_iPad" bundle:[NSBundle mainBundle]];
     snapshotVC.cameraId = self.cameraInfo.camId;
+    [self.navigationController presentViewController:snapshotVC animated:YES completion:nil];
+    //KEEPING THIS  CODE FOR FUTURE REFERENCE
+    /*
     CustomNavigationController *viewCamNavVC = [[CustomNavigationController alloc] initWithRootViewController:snapshotVC];
     viewCamNavVC.navigationBarHidden = YES;
     viewCamNavVC.isPortraitMode = YES;
     [self presentViewController:viewCamNavVC animated:YES completion:nil];
+    */
 }
 
 - (void)viewRecordings {
