@@ -22,6 +22,7 @@
 #import "Config.h"
 #import "BlockActionSheet.h"
 #import "Appdelegate.h"
+#import "CameraPlayViewController.h"
 
 @interface ViewCameraViewController () <AddCameraViewControllerDelegate>
 
@@ -37,6 +38,15 @@
     self.screenName = @"View Camera Detail";
     
     [self fillCameraDetails];
+    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    CustomNavigationController* cVC = [APP_DELEGATE viewController];
+    [cVC setHasLandscapeMode:YES];
+    [UIViewController attemptRotationToDeviceOrientation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,15 +163,20 @@
     if (alertView.tag == 103) {
         [self.navigationController popViewControllerAnimated:YES];
         
-        if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
-            [self.delegate cameraDeleted:self.camera];
+        if ([self.delegate respondsToSelector:@selector(cameraDeletedSettings:)]) {
+            [self.delegate cameraDeletedSettings:self.camera];
         }
     }
     else if (alertView.tag == 101) {
-        [self back:nil];
-        
-        if ([self.delegate respondsToSelector:@selector(cameraDeleted:)]) {
-            [self.delegate cameraDeleted:self.camera];
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            CameraPlayViewController *vc = (CameraPlayViewController *)((CustomNavigationController *)self.presentingViewController).viewControllers[0];
+            vc.isCameraRemoved = YES;
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            [self back:nil];
+            if ([self.delegate respondsToSelector:@selector(cameraDeletedSettings:)]) {
+                [self.delegate cameraDeletedSettings:self.camera];
+            }
         }
     }
     else if(alertView.tag == 102 && buttonIndex == 1)

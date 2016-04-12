@@ -11,7 +11,7 @@
 #import "GAI.h"
 
 @protocol ViewCameraViewControllerDelegate <NSObject>
-- (void)cameraDeleted:(EvercamCamera *)camera;
+- (void)cameraDeletedSettings:(EvercamCamera *)camera;
 - (void)cameraEdited:(EvercamCamera *)camera;
 
 @end

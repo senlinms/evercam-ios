@@ -1,3 +1,4 @@
+
 //
 //  CameraPlayViewController.m
 //  evercamPlay
@@ -45,6 +46,7 @@
 @end
 
 @implementation CameraPlayViewController
+@synthesize isCameraRemoved;
 
 static void set_message_proxy (const gchar *message, gpointer app)
 {
@@ -91,7 +93,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (isCameraRemoved) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self disableSleep];
     
@@ -185,17 +195,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)showCameraView {
-    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:@"ViewCameraViewController" bundle:nil];
+    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:@"ViewCameraViewController" bundle:[NSBundle mainBundle]];
     viewCameraVC.camera = self.cameraInfo;
     viewCameraVC.delegate = self;
-    CustomNavigationController *viewCamNavVC = [[CustomNavigationController alloc] initWithRootViewController:viewCameraVC];
-    viewCamNavVC.navigationBarHidden = YES;
-    viewCamNavVC.isPortraitMode = YES;
-    [self presentViewController:viewCamNavVC animated:YES completion:nil];
+    [self.navigationController presentViewController:viewCameraVC animated:YES completion:nil];
 }
 
 - (void)sendFeedback {
-    FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
+    FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:[NSBundle mainBundle]];
     feedbackVC.isFromLiveCameraView     = YES;
     feedbackVC.cameraID                 = self.cameraInfo.camId;
     [self.navigationController presentViewController:feedbackVC animated:YES completion:nil];
@@ -208,12 +215,16 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         return;
     }
-    SnapshotViewController *snapshotVC = [[SnapshotViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SnapshotViewController" : @"SnapshotViewController_iPad" bundle:nil];
+    SnapshotViewController *snapshotVC = [[SnapshotViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SnapshotViewController" : @"SnapshotViewController_iPad" bundle:[NSBundle mainBundle]];
     snapshotVC.cameraId = self.cameraInfo.camId;
+    [self.navigationController presentViewController:snapshotVC animated:YES completion:nil];
+    //KEEPING THIS  CODE FOR FUTURE REFERENCE
+    /*
     CustomNavigationController *viewCamNavVC = [[CustomNavigationController alloc] initWithRootViewController:snapshotVC];
     viewCamNavVC.navigationBarHidden = YES;
     viewCamNavVC.isPortraitMode = YES;
     [self presentViewController:viewCamNavVC animated:YES completion:nil];
+    */
 }
 
 - (void)viewRecordings {
@@ -687,7 +698,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 #pragma mark - CameraPlayViewController Delegate Method
-- (void)cameraDeleted:(EvercamCamera *)camera {
+- (void)cameraDeletedSettings:(EvercamCamera *)camera {
     [self back:self];
     [self.delegate cameraDel:camera];
 }
