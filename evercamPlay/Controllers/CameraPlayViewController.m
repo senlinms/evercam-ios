@@ -1,3 +1,4 @@
+
 //
 //  CameraPlayViewController.m
 //  evercamPlay
@@ -45,6 +46,7 @@
 @end
 
 @implementation CameraPlayViewController
+@synthesize isCameraRemoved;
 
 static void set_message_proxy (const gchar *message, gpointer app)
 {
@@ -91,7 +93,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (isCameraRemoved) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self disableSleep];
     
@@ -688,7 +698,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 #pragma mark - CameraPlayViewController Delegate Method
-- (void)cameraDeleted:(EvercamCamera *)camera {
+- (void)cameraDeletedSettings:(EvercamCamera *)camera {
     [self back:self];
     [self.delegate cameraDel:camera];
 }

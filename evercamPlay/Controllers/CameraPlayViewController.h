@@ -21,8 +21,11 @@
 @end
 
 @interface CameraPlayViewController : GAITrackedViewController<NIDropDownDelegate> {
-    IBOutlet EaglUIView *video_view; 
+    IBOutlet EaglUIView *video_view;
+    BOOL isCameraRemoved;
 }
+
+@property (nonatomic,assign) BOOL isCameraRemoved;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeCode;
 @property (weak, nonatomic) IBOutlet UILabel *lblOffline;
