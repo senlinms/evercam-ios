@@ -25,6 +25,7 @@
 {
     UITextField *activeTextField;
     NIDropDown *dropDown;
+    CAGradientLayer *gradient;
 }
 
 @end
@@ -37,11 +38,11 @@
     self.screenName = @"Create Account";
     
     // Do any additional setup after loading the view from its nib.
-    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
     [self.view.layer insertSublayer:gradient atIndex:0];
-    [self.contentView setContentSize:CGSizeMake(0, 300)];
+    [self.contentView setContentSize:CGSizeMake(0, 340)];
 
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor lightTextColor];
@@ -61,6 +62,10 @@
                                             action:@selector(handleSingleTap:)];
     [self.view addGestureRecognizer:singleFingerTap];
 
+}
+
+-(void)viewDidLayoutSubviews{
+    gradient.frame = self.view.bounds;
 }
 
 - (void)didReceiveMemoryWarning {
