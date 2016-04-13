@@ -10,8 +10,11 @@
 #import "NIDropDown.h"
 #import "GAI.h"
 
-@interface SignupViewController : GAITrackedViewController <NIDropDownDelegate>
+@interface SignupViewController : GAITrackedViewController <NIDropDownDelegate>{
+    BOOL isFromAddAccountScreen;
+}
 
+@property (nonatomic,assign) BOOL isFromAddAccountScreen;
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 @property (nonatomic, strong) IBOutlet UITextField *txt_firstname;
 @property (nonatomic, strong) IBOutlet UITextField *txt_lastname;

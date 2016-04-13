@@ -20,6 +20,7 @@
 #import "Mixpanel.h"
 #import "Config.h"
 #import "ForgotPasswordViewController.h"
+#import "Intercom/intercom.h"
 
 @interface LoginViewController ()
 {
@@ -29,7 +30,7 @@
 @end
 
 @implementation LoginViewController
-
+@synthesize isFromAddAccount;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -94,7 +95,7 @@
 {
     NSString *username = _txt_username.text;
     NSString *password = _txt_password.text;
-
+    
     NSRange whiteSpaceRange = [username rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if ([username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
@@ -120,7 +121,7 @@
         [simpleAlert show];
         return;
     }
-
+    
     [_activityIndicator startAnimating];
     [[EvercamShell shell] requestEvercamAPIKeyFromEvercamUser:username Password:password WithBlock:^(EvercamApiKeyPair *userKeyPair, NSError *error) {
         if (error == nil)
@@ -128,6 +129,9 @@
             [[EvercamShell shell] getUserFromId:username withBlock:^(EvercamUser *newuser, NSError *error) {
                 [_activityIndicator stopAnimating];
                 if (error == nil) {
+                    
+                    //clear intercom at logout
+                    [Intercom reset];
                     
                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
                     [mixpanel identify:newuser.username];
@@ -140,6 +144,14 @@
                     [user setApiKeyPairWithApiKey:userKeyPair.apiKey andApiId:userKeyPair.apiId];
                     [APP_DELEGATE saveContext];
                     [APP_DELEGATE setDefaultUser:user];
+                    
+                    //Registering user with Intercom
+                    [Intercom registerUserWithUserId:newuser.username];
+                    
+                    if (isFromAddAccount) {
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        return;
+                    }
                     
                     CamerasViewController *camerasViewController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
                     MenuViewController *menuViewController = [[MenuViewController alloc] init];
@@ -154,7 +166,7 @@
                     [vcArr removeLastObject];
                     [vcArr addObject:revealController];
                     [self.navigationController setViewControllers:vcArr animated:YES];
-
+                    
                 } else {
                     NSLog(@"Error %li: %@", (long)error.code, error.description);
                     UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log in", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -186,8 +198,9 @@
 
 - (IBAction)onCreateAccount:(id)sender
 {
-    SignupViewController *vc = [[SignupViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SignupViewController" : @"SignupViewController_iPad" bundle: nil];
-    NSMutableArray *vcArr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    SignupViewController *vc    = [[SignupViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SignupViewController" : @"SignupViewController_iPad" bundle: [NSBundle mainBundle]];
+    vc.isFromAddAccountScreen   = isFromAddAccount;
+    NSMutableArray *vcArr       = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     [vcArr removeLastObject];
     [vcArr addObject:vc];
     [self.navigationController setViewControllers:vcArr animated:YES];

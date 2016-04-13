@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "GAI.h"
 
-@interface LoginViewController : GAITrackedViewController
+@interface LoginViewController : GAITrackedViewController{
+    BOOL isFromAddAccount;
+}
+
+@property (nonatomic,assign) BOOL isFromAddAccount;
+
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 @property (nonatomic, strong) IBOutlet UITextField *txt_username;
 @property (nonatomic, strong) IBOutlet UITextField *txt_password;

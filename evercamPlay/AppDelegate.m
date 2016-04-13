@@ -17,7 +17,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "PreferenceUtil.h"
-
+#import "Intercom/intercom.h"
 @interface AppDelegate ()
 
 @end
@@ -28,6 +28,8 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self integrateIntercom];
     
     [Fabric with:@[[Crashlytics class]]];
     
@@ -73,7 +75,6 @@
         [PreferenceUtil setIsShowOfflineCameras:YES];
     }
     
-    
     return YES;
 }
 
@@ -102,6 +103,16 @@
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window  // iOS 6 autorotation fix
 {
     return UIInterfaceOrientationMaskAll;
+}
+
+-(void)integrateIntercom{
+    NSString* localPlistPath    = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
+    if (localPlistPath) {
+        NSDictionary *contents  = [NSDictionary dictionaryWithContentsOfFile:localPlistPath];
+        NSString *iOSApiKey     = contents[@"IntercomiOSAPIkey"];
+        NSString *intercomAppId = contents[@"IntercomAppId"];
+        [Intercom setApiKey:iOSApiKey forAppId:intercomAppId];
+    }
 }
 
 

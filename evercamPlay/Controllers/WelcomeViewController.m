@@ -15,7 +15,7 @@
 #import "MenuViewController.h"
 #import "SWRevealViewController.h"
 #import "GlobalSettings.h"
-
+#import "Intercom/intercom.h"
 @interface WelcomeViewController ()
 
 @end
@@ -23,11 +23,11 @@
 @implementation WelcomeViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad]; 
+    [super viewDidLoad];
     
     [self.view setHidden:YES];
     
-    self.navigationController.navigationBarHidden = YES;    
+    self.navigationController.navigationBarHidden = YES;
     self.screenName = @"Welcome Page";
     // Do any additional setup after loading the view from its nib.
     self.title = @"";
@@ -46,6 +46,9 @@
     AppUser *defaultUser = [APP_DELEGATE getDefaultUser];
     if (defaultUser) {
         [APP_DELEGATE setDefaultUser:defaultUser];
+        
+        //registering user with Intercom
+        [Intercom registerUserWithUserId:defaultUser.username];
         
         CamerasViewController *camerasViewController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
         MenuViewController *menuViewController = [[MenuViewController alloc] init];
@@ -76,7 +79,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
