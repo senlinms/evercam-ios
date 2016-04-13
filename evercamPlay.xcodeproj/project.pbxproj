@@ -71,6 +71,8 @@
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
 		6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF591FA1BF05FE20044B0F1 /* logo.png */; };
+		AB242FEC1CBE41AC00C5F2F7 /* Intercom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */; };
+		AB242FED1CBE41AC00C5F2F7 /* Intercom.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */; };
 		AB6E77E21CBE1A1600DE6310 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */; };
 		AB6E77E31CBE1A1600DE6310 /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6E77E11CBE1A1500DE6310 /* ForgotPasswordViewController.xib */; };
 		AB6E77E91CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6E77E81CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib */; };
@@ -320,6 +322,8 @@
 		6CCB48291BDF4D7A00A62C28 /* SharedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SharedManager.m; path = ../SharedManager.m; sourceTree = "<group>"; };
 		6CF591FA1BF05FE20044B0F1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Intercom.framework; sourceTree = "<group>"; };
+		AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Intercom.bundle; sourceTree = "<group>"; };
 		AB6E77DF1CBE1A1500DE6310 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		AB6E77E11CBE1A1500DE6310 /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
@@ -534,6 +538,7 @@
 				C4E418CC1B305B290050872E /* GStreamer.framework in Frameworks */,
 				E356C9D91B179E2A007BB101 /* libicucore.dylib in Frameworks */,
 				E30201D71B1782970006DAE8 /* SpriteKit.framework in Frameworks */,
+				AB242FEC1CBE41AC00C5F2F7 /* Intercom.framework in Frameworks */,
 				C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */,
 				C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */,
 				C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */,
@@ -658,6 +663,8 @@
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */,
+				AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */,
 				C4E418CB1B305B290050872E /* GStreamer.framework */,
 				E356C9D81B179E2A007BB101 /* libicucore.dylib */,
 				E30201D61B1782970006DAE8 /* SpriteKit.framework */,
@@ -1241,6 +1248,7 @@
 				41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */,
 				E30900A71B16B96000E5B5C0 /* action-sheet-panel.png in Resources */,
 				E309006E1B162B7000E5B5C0 /* WelcomeViewController_iPad.xib in Resources */,
+				AB242FED1CBE41AC00C5F2F7 /* Intercom.bundle in Resources */,
 				E30201C41B16C82D0006DAE8 /* alert-red-button.png in Resources */,
 				CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */,
 				CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */,
@@ -1442,8 +1450,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1488,8 +1496,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1517,8 +1525,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1565,8 +1573,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;

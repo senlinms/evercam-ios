@@ -20,6 +20,7 @@
 #import "GlobalSettings.h"
 #import "Mixpanel.h"
 #import "PreferenceUtil.h"
+#import "Intercom/intercom.h"
 
 @interface SignupViewController ()
 {
@@ -31,7 +32,7 @@
 @end
 
 @implementation SignupViewController
-
+@synthesize isFromAddAccountScreen;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -282,6 +283,9 @@
                                 [_activityIndicator stopAnimating];
                                 if (error == nil) {
                                     
+                                    //clear intercom at logout
+                                    [Intercom reset];
+                                    
                                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                     
                                     [mixpanel identify:newuser.username];
@@ -301,6 +305,14 @@
                                     [user setApiKeyPairWithApiKey:userKeyPair.apiKey andApiId:userKeyPair.apiId];
                                     [APP_DELEGATE saveContext];
                                     [APP_DELEGATE setDefaultUser:user];
+                                    
+                                    //Registering user with Intercom
+                                    [Intercom registerUserWithUserId:newuser.username];
+                                    
+                                    if (isFromAddAccountScreen) {
+                                        [self.navigationController popToRootViewControllerAnimated:YES];
+                                        return;
+                                    }
                                     
                                     CamerasViewController *camerasViewController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
                                     MenuViewController *menuViewController = [[MenuViewController alloc] init];

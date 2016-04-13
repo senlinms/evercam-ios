@@ -27,6 +27,7 @@
 #import "Mixpanel.h"
 
 #import "LoginViewController.h"
+#import "Intercom/intercom.h"
 
 @interface AccountsViewController ()
 {
@@ -134,11 +135,16 @@
 
 - (void)useAccount: (id)object
 {
+    //clear intercom at logout
+    [Intercom reset];
     NSNumber *number = (NSNumber *)object;
     NSInteger index = [number integerValue];
     AppUser *user = [self.users objectAtIndex:index];
     
     [APP_DELEGATE setDefaultUser:user];
+    
+    //Registering user with Intercom
+    [Intercom registerUserWithUserId:user.username];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:user.username];
@@ -161,10 +167,13 @@
         
         [alert addButtonWithTitle:@"Remove" imageIdentifier:@"gray" block:^{
             if (self.users.count == 1) {
+                //clear intercom at logout
+                [Intercom reset];
                 [APP_DELEGATE logout];
                 return;
             }
-            
+            //clear intercom at logout
+            [Intercom reset];
             if ([user.username isEqualToString:[APP_DELEGATE defaultUser].username]) {
                 [APP_DELEGATE deleteUser:user];
                 [APP_DELEGATE saveContext];
@@ -175,6 +184,9 @@
             }
             
             [self getAllUsers];
+            //Registering user with Intercom
+            [Intercom registerUserWithUserId:[APP_DELEGATE defaultUser].username];
+            
         }];
         
         [alert setCancelButtonWithTitle:@"Cancel" block:nil];
@@ -201,10 +213,13 @@
                                  handler:^(UIAlertAction * action)
                                  {
                                      if (self.users.count == 1) {
+                                         //clear intercom at logout
+                                         [Intercom reset];
                                          [APP_DELEGATE logout];
                                          return;
                                      }
-                                     
+                                     //clear intercom at logout
+                                     [Intercom reset];
                                      if ([user.username isEqualToString:[APP_DELEGATE defaultUser].username]) {
                                          [APP_DELEGATE deleteUser:user];
                                          [APP_DELEGATE saveContext];
@@ -215,6 +230,9 @@
                                      }
                                      
                                      [self getAllUsers];
+                                     
+                                     //Registering user with Intercom
+                                     [Intercom registerUserWithUserId:[APP_DELEGATE defaultUser].username];
                                  }];
         
         [alert addAction:cancel];
@@ -361,6 +379,7 @@
     else
     {
         LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
+        vc.isFromAddAccount     = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
