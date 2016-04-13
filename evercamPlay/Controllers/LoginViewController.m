@@ -19,6 +19,7 @@
 #import "GlobalSettings.h"
 #import "Mixpanel.h"
 #import "Config.h"
+#import "ForgotPasswordViewController.h"
 
 @interface LoginViewController ()
 {
@@ -176,6 +177,11 @@
 - (IBAction)onBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)onForgotPassword:(id)sender {
+    ForgotPasswordViewController *fVc = [[ForgotPasswordViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ForgotPasswordViewController":@"ForgotPasswordViewController_iPad" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:fVc animated:YES];
 }
 
 - (IBAction)onCreateAccount:(id)sender
