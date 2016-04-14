@@ -3,7 +3,7 @@
 //  evercamPlay
 //
 //  Created by Vocal Matrix on 26/10/2015.
-//  Copyright © 2015 evercom. All rights reserved.
+//  Copyright © 2015 Evercam. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

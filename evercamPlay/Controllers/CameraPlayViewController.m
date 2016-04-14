@@ -1,10 +1,10 @@
 
 //
 //  CameraPlayViewController.m
-//  evercamPlay
+//  EvercamPlay
 //
 //  Created by jw on 4/9/15.
-//  Copyright (c) 2015 evercom. All rights reserved.
+//  Copyright (c) 2015 Evercam. All rights reserved.
 //
 
 #import "CameraPlayViewController.h"
@@ -404,9 +404,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [sheet addButtonWithTitle:@"View Recordings" block:^{
             [self viewRecordings];
         }];
-        [sheet addButtonWithTitle:@"Send Feedback" block:^{
-            [self sendFeedback];
-        }];
         
         [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
         [sheet showInView:self.view];
@@ -448,15 +445,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                              
                                          }];
         
-        UIAlertAction* sendFeedback = [UIAlertAction
-                                       actionWithTitle:@"Send Feedback"
-                                       style:UIAlertActionStyleDefault
-                                       handler:^(UIAlertAction * action)
-                                       {
-                                           [view dismissViewControllerAnimated:YES completion:nil];
-                                           [self sendFeedback];
-                                           
-                                       }];
         
         UIAlertAction* cancel = [UIAlertAction
                                  actionWithTitle:@"Cancel"
@@ -470,7 +458,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [view addAction:viewDetails];
         [view addAction:savedImages];
         [view addAction:viewRecordings];
-        [view addAction:sendFeedback];
         [view addAction:cancel];
         
         if ([GlobalSettings sharedInstance].isPhone)
