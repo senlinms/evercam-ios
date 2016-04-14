@@ -146,21 +146,9 @@
     }
     else if (row == 2)
     {
-        text = @"Feedback";
+        text = @"Live Support";
         cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
     }
-    else if (row == 3)
-    {
-        text = @"About";
-        cell.imageView.image = [UIImage imageNamed:@"ic_info.png"];
-    }
-    /*
-     else if (row == 4)
-     {
-     text = @"Sign out";
-     cell.imageView.image = [UIImage imageNamed:@"ic_signout.png"];
-     }
-     */
     cell.textLabel.text = NSLocalizedString( text,nil );
     return cell;
 }

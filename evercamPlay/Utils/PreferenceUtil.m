@@ -3,7 +3,7 @@
 //  evercamPlay
 //
 //  Created by jw on 4/11/15.
-//  Copyright (c) 2015 evercom. All rights reserved.
+//  Copyright (c) 2015 Evercam. All rights reserved.
 //
 
 #import "PreferenceUtil.h"

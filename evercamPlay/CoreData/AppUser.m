@@ -1,9 +1,9 @@
 //
 //  AppUser.m
-//  evercamPlay
+//  EvercamPlay
 //
 //  Created by jw on 4/10/15.
-//  Copyright (c) 2015 evercom. All rights reserved.
+//  Copyright (c) 2015 Evercam. All rights reserved.
 //
 
 #import "AppUser.h"

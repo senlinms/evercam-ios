@@ -43,6 +43,7 @@
 #import "SettingsViewController.h"
 #import "AboutViewController.h"
 #import "UIImageView+WebCache.h"
+#import "Intercom/intercom.h"
 
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
@@ -167,11 +168,8 @@
     }
     else if (row == 3)
     {
-        newFrontController = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:nil];
-    }
-    else if (row == 4)
-    {
-        newFrontController = [[AboutViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AboutViewController" : @"AboutViewController_iPad" bundle:nil];
+        [Intercom presentConversationList];
+        return;
     }
     
     [self.navigationController pushViewController:newFrontController animated:YES];

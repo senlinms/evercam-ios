@@ -3,7 +3,7 @@
 //  evercamPlay
 //
 //  Created by NainAwan on 13/04/2016.
-//  Copyright © 2016 evercom. All rights reserved.
+//  Copyright © 2016 Evercam. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
