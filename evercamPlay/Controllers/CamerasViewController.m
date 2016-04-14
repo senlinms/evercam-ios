@@ -35,7 +35,6 @@
 #import "PreferenceUtil.h"
 #import "CustomNavigationController.h"
 #import "AddCameraViewController.h"
-#import "FeedbackViewController.h"
 #import "GAIDictionaryBuilder.h"
 #import "Config.h"
 #import "GlobalSettings.h"

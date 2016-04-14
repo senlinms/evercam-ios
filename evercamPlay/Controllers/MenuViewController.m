@@ -32,7 +32,6 @@
 #import "CamerasViewController.h"
 #import "AccountsViewController.h"
 #import "SettingsViewController.h"
-#import "FeedbackViewController.h"
 #import "AppDelegate.h"
 #import "GlobalSettings.h"
 #import "GAIDictionaryBuilder.h"

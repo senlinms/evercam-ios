@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GAI.h"
 
-@interface RecordingsViewController : GAITrackedViewController
+@interface RecordingsViewController : GAITrackedViewController <UIWebViewDelegate, UIScrollViewDelegate>{
+    
+}
 
 @property (nonatomic, strong) NSString *cameraId;
 
