@@ -32,11 +32,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *downImgView;
 @property (weak, nonatomic) IBOutlet UIView *titlebar;
-@property (weak, nonatomic) IBOutlet UIView *statusbar;
 @property (weak, nonatomic) IBOutlet UIView *playerView;
 @property (strong, nonatomic) AsyncImageView *imageView;
 
 @property (weak, nonatomic) IBOutlet UIView *confirmInsideView;
+@property (weak, nonatomic) IBOutlet UIButton *hiddenDropDownBtn;
 
 @property (nonatomic, strong) EvercamCamera *cameraInfo;
 @property (nonatomic, strong) NSArray *cameras;

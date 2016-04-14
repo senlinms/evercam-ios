@@ -41,6 +41,7 @@
     __weak IBOutlet UIView *snapshotConfirmView;
     __weak IBOutlet UIImageView *imvSnapshot;
     __weak IBOutlet UIActivityIndicatorView *loadingView;
+    
 }
 
 @end
@@ -74,6 +75,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setTitleBarAccordingToOrientation];
     runFirstTime = YES;
     videoController.alpha = 0.0;
     self.screenName = @"Video View";
@@ -82,14 +84,57 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     runFirstTime = NO;
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+}
+
+-(void)setTitleBarAccordingToOrientation{
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
+        
+        [self setNavigationBarAnimation:NO isPortrait:YES];
+        
+    } else {
+        
+        [self setNavigationBarAnimation:YES isPortrait:NO];
+    }
+}
+
+-(void)setNavigationBarAnimation:(BOOL)isHide isPortrait:(BOOL)agree{
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:agree?isHide:YES];
+
+        self.titlebar.backgroundColor       = agree?[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:1.0f]:[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:0.3f];
+        
+        if (isHide) {
+            self.titlebar.frame             = CGRectMake(self.titlebar.frame.origin.x, -64, self.titlebar.frame.size.width, self.titlebar.frame.size.height);
+            if (dropDown)
+            {
+                [dropDown hideDropDown:self.btnTitle];
+                dropDown = nil;
+            }
+        }else{
+            self.titlebar.frame             = CGRectMake(self.titlebar.frame.origin.x, 0, self.titlebar.frame.size.width, self.titlebar.frame.size.height);
+        }
+        
+        self.hiddenDropDownBtn.hidden       = isHide;
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    [self setTitleBarAccordingToOrientation];
+    
     self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
- 
-    self.statusbar.hidden = NO;
-    self.titlebar.hidden = NO;
-    self.btnTitle.hidden = NO;
-    self.downImgView.hidden = NO;
+    
+    //    self.statusbar.hidden = NO;
+    //    self.titlebar.hidden = NO;
+    //    self.btnTitle.hidden = NO;
+    //    self.downImgView.hidden = NO;
     video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
 }
 
@@ -107,14 +152,17 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
     [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
-    
+    /*
     self.statusbar.hidden = NO;
-    self.titlebar.hidden = NO;
+    //    self.titlebar.hidden = NO;
     self.btnTitle.hidden = NO;
     self.downImgView.hidden = NO;
+    */
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self enableSleep];
 }
 
@@ -220,11 +268,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self.navigationController presentViewController:snapshotVC animated:YES completion:nil];
     //KEEPING THIS  CODE FOR FUTURE REFERENCE
     /*
-    CustomNavigationController *viewCamNavVC = [[CustomNavigationController alloc] initWithRootViewController:snapshotVC];
-    viewCamNavVC.navigationBarHidden = YES;
-    viewCamNavVC.isPortraitMode = YES;
-    [self presentViewController:viewCamNavVC animated:YES completion:nil];
-    */
+     CustomNavigationController *viewCamNavVC = [[CustomNavigationController alloc] initWithRootViewController:snapshotVC];
+     viewCamNavVC.navigationBarHidden = YES;
+     viewCamNavVC.isPortraitMode = YES;
+     [self presentViewController:viewCamNavVC animated:YES completion:nil];
+     */
 }
 
 - (void)viewRecordings {
@@ -294,7 +342,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         CGFloat f = self.view.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
         CGFloat h = (cameraNameArray.count * DropDownCellHeight);
         
-        dropDown = [[NIDropDown alloc] showDropDown:sender height:(h<=f?&h: &f) textArray:cameraNameArray imageArray:arrImage direction:@"down"] ;
+        dropDown = [[NIDropDown alloc] showDropDown:self.hiddenDropDownBtn height:(h<=f?&h: &f) textArray:cameraNameArray imageArray:arrImage direction:@"down"] ;
         dropDown.delegate = self;
     }
     else {
@@ -336,17 +384,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (UIDeviceOrientationIsLandscape(deviceOrientation))
     {
         //LandscapeView
-        if (self.titlebar.hidden)
+        if (self.titlebar.frame.origin.y == -64)
         {
-            self.titlebar.hidden = NO;
-            self.btnTitle.hidden = NO;
-            self.downImgView.hidden = NO;
+            [self setNavigationBarAnimation:NO isPortrait:NO];
         }
         else
         {
-            self.titlebar.hidden = YES;
-            self.btnTitle.hidden = YES;
-            self.downImgView.hidden = YES;
+            [self setNavigationBarAnimation:YES isPortrait:NO];
         }
     }
     
@@ -420,7 +464,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                       style:UIAlertActionStyleDefault
                                       handler:^(UIAlertAction * action)
                                       {
-//                                          [view dismissViewControllerAnimated:YES completion:nil];
+                                          //                                          [view dismissViewControllerAnimated:YES completion:nil];
                                           [self showCameraView];
                                           
                                       }];
@@ -540,8 +584,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         NSFileManager *fileManager = [NSFileManager defaultManager];
         [fileManager removeItemAtPath:strPath error:&error];
     }
-        [data writeToFile:strPath atomically:YES];
-        currentImage = strPath;
+    [data writeToFile:strPath atomically:YES];
+    currentImage = strPath;
 }
 
 - (void)stopCamera {
