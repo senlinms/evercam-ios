@@ -81,6 +81,8 @@
     }else if ([animationDirection isEqualToString:@"down"]) {
         self.frame = CGRectMake(btn.origin.x, btn.origin.y+btn.size.height, btn.size.width, 0);
     }
+    NSLog(@"Frame: %@",NSStringFromCGRect(self.frame));
+    
     gradient.frame = CGRectMake(0,0, btn.size.width, 0);
     table.frame = CGRectMake(0, 0, btn.size.width, 0);
     [UIView commitAnimations];
@@ -111,6 +113,7 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -182,9 +185,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self hideDropDown:btnSender];
-    
-    //UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];
-    //[btnSender setTitle:c.textLabel.text forState:UIControlStateNormal];
     
     for (UIView *subview in btnSender.subviews) {
         if ([subview isKindOfClass:[UIImageView class]]) {
