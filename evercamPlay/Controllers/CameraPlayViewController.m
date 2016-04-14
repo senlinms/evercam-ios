@@ -17,7 +17,6 @@
 #import "MBProgressHUD.h"
 #import "BrowseJpgTask.h"
 #import "RecordingsViewController.h"
-#import "FeedbackViewController.h"
 #import "SnapshotViewController.h"
 #import "CommonUtil.h"
 #import "BlockActionSheet.h"
@@ -249,13 +248,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self.navigationController presentViewController:viewCameraVC animated:YES completion:nil];
 }
 
-- (void)sendFeedback {
-    FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"FeedbackViewController" : @"FeedbackViewController_iPad" bundle:[NSBundle mainBundle]];
-    feedbackVC.isFromLiveCameraView     = YES;
-    feedbackVC.cameraID                 = self.cameraInfo.camId;
-    [self.navigationController presentViewController:feedbackVC animated:YES completion:nil];
-}
-
 - (void)showSavedImages {
     if ([CommonUtil snapshotFiles:self.cameraInfo.camId].count == 0) {
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"No snapshot saved for this camera." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -445,7 +437,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [sheet addButtonWithTitle:@"Saved Images" block:^{
             [self showSavedImages];
         }];
-        [sheet addButtonWithTitle:@"View Recordings" block:^{
+        [sheet addButtonWithTitle:@"Cloud Recordings" block:^{
             [self viewRecordings];
         }];
         
@@ -480,7 +472,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                       }];
         
         UIAlertAction* viewRecordings = [UIAlertAction
-                                         actionWithTitle:@"View Recordings"
+                                         actionWithTitle:@"Cloud Recordings"
                                          style:UIAlertActionStyleDefault
                                          handler:^(UIAlertAction * action)
                                          {

@@ -21,8 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.loadingView startAnimating];
+    self.webView.hidden             = YES;
     [self loadRecordingWidget];
-    self.screenName = @"Recordings";
+    self.screenName                 = @"Cloud Recordings";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,17 +45,60 @@
     [self.webView loadHTMLString:customHtml baseURL:nil];
 }
 
-#pragma mark - UIWebView Delegate Methods
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+#pragma UIWEBVIEW DELEGATES
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    NSRange stringRange = [[[request URL] absoluteString] rangeOfString:@"data:image/jpeg;base64,"];
+    if(stringRange.location != NSNotFound){
+        NSString *imageString = [[[request URL] absoluteString] stringByReplacingOccurrencesOfString:@"data:image/jpeg;base64," withString:@""];
+        UIImage *image = [self decodeBase64ToImage:imageString];
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        return NO;
+    }
+    return YES;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView{
     [self.loadingView startAnimating];
+    self.webView.userInteractionEnabled = NO;
+    
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [self.loadingView stopAnimating];
+    self.webView.hidden = NO;
+    self.webView.userInteractionEnabled = YES;
+    webView.scrollView.delegate = self; // set delegate method of UISrollView
+    webView.scrollView.maximumZoomScale = 20; // set as you want.
+    webView.scrollView.minimumZoomScale = 1; // set as you want.
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+    [self.loadingView stopAnimating];
+    self.webView.userInteractionEnabled = YES;
+    
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.loadingView stopAnimating];
+- (UIImage *)decodeBase64ToImage:(NSString *)strEncodeData {
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return [UIImage imageWithData:data];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.loadingView stopAnimating];
+- (void) image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo{
+    if (error)
+    {
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
+        return;
+    }
+    else
+    {
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Export Image", nil) message:@"The image has exported to your photo album successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [simpleAlert show];
+    }
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale
+{
+    self.webView.scrollView.maximumZoomScale = 20; // set similar to previous.
 }
 
 @end
