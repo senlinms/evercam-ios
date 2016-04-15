@@ -199,7 +199,8 @@ static ImageCache *imageCache = nil;
     {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
         if ([httpResponse statusCode] == 404){
-            [self handleImageWithError];
+            //MAY BE NEED LATER SO KEEPING IT
+//            [self handleImageWithError];
         }
     }
 }
