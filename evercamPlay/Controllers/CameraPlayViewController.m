@@ -104,7 +104,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         [[UIApplication sharedApplication] setStatusBarHidden:agree?isHide:YES];
 
-        self.titlebar.backgroundColor       = agree?[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:1.0f]:[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:0.3f];
+        self.titlebar.backgroundColor       = agree?[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:1.0f]:[UIColor clearColor];
         
         if (isHide) {
             self.titlebar.frame             = CGRectMake(self.titlebar.frame.origin.x, -64, self.titlebar.frame.size.width, self.titlebar.frame.size.height);
