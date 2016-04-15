@@ -76,6 +76,9 @@
 		AB6E77E21CBE1A1600DE6310 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */; };
 		AB6E77E31CBE1A1600DE6310 /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6E77E11CBE1A1500DE6310 /* ForgotPasswordViewController.xib */; };
 		AB6E77E91CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6E77E81CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib */; };
+		AB8097161CC0C742002F5FF9 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097131CC0C742002F5FF9 /* nav.png */; };
+		AB8097171CC0C742002F5FF9 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097141CC0C742002F5FF9 /* nav@2x.png */; };
+		AB8097181CC0C742002F5FF9 /* nav@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097151CC0C742002F5FF9 /* nav@3x.png */; };
 		ABA90E1A1CA28FA0002B235B /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABA90E191CA28FA0002B235B /* local.plist */; };
 		ABDAE0841CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */; };
 		ABDAE0851CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE07F1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m */; };
@@ -328,6 +331,9 @@
 		AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		AB6E77E11CBE1A1500DE6310 /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
 		AB6E77E81CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotPasswordViewController_iPad.xib; sourceTree = "<group>"; };
+		AB8097131CC0C742002F5FF9 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
+		AB8097141CC0C742002F5FF9 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
+		AB8097151CC0C742002F5FF9 /* nav@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@3x.png"; sourceTree = "<group>"; };
 		ABA90E191CA28FA0002B235B /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
 		ABDAE07C1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
 		ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
@@ -861,6 +867,9 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				AB8097131CC0C742002F5FF9 /* nav.png */,
+				AB8097141CC0C742002F5FF9 /* nav@2x.png */,
+				AB8097151CC0C742002F5FF9 /* nav@3x.png */,
 				589204A31C11A40800B40DD0 /* cam.png */,
 				6CF591FA1BF05FE20044B0F1 /* logo.png */,
 				E3CB15AD1B287DD900413197 /* evercam_icon_nav.png */,
@@ -1196,6 +1205,7 @@
 				413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */,
 				CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */,
 				4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */,
+				AB8097171CC0C742002F5FF9 /* nav@2x.png in Resources */,
 				CB1C76D71AAB871A00680FE3 /* play_page_intro.png in Resources */,
 				CB44E86F1AAE9E7D00A78C11 /* AccountsViewController.xib in Resources */,
 				E30201CD1B16C9CF0006DAE8 /* AddAccountView_iPad.xib in Resources */,
@@ -1237,6 +1247,7 @@
 				E30201D51B173B760006DAE8 /* AddAccountCell_iPad.xib in Resources */,
 				E30201C61B16C82D0006DAE8 /* alert-window-landscape.png in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
+				AB8097161CC0C742002F5FF9 /* nav.png in Resources */,
 				E30900761B1646D100E5B5C0 /* play_page_feature_iPad@2x.png in Resources */,
 				E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */,
 				6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */,
@@ -1279,6 +1290,7 @@
 				E30201C01B16C82D0006DAE8 /* alert-gray-button.png in Resources */,
 				E30201CA1B16C82D0006DAE8 /* alert-yellow-button.png in Resources */,
 				E3CB15AF1B287DD900413197 /* evercam_icon_nav.png in Resources */,
+				AB8097181CC0C742002F5FF9 /* nav@3x.png in Resources */,
 				E309009E1B16B96000E5B5C0 /* action-black-button@2x.png in Resources */,
 				CB44E8791AAE9E7D00A78C11 /* SettingsViewController.xib in Resources */,
 				E30900A11B16B96000E5B5C0 /* action-gray-button.png in Resources */,
