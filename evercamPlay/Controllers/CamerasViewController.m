@@ -331,7 +331,7 @@
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
         //must setup second url.
-        cell.thumbnailImageView.secondURL = [NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]];
+//        cell.thumbnailImageView.secondURL = [NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]];
         [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     } else {
         

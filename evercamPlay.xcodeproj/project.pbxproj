@@ -79,6 +79,7 @@
 		AB8097161CC0C742002F5FF9 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097131CC0C742002F5FF9 /* nav.png */; };
 		AB8097171CC0C742002F5FF9 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097141CC0C742002F5FF9 /* nav@2x.png */; };
 		AB8097181CC0C742002F5FF9 /* nav@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097151CC0C742002F5FF9 /* nav@3x.png */; };
+		AB80971B1CC0EABA002F5FF9 /* EvercamTestSnapShot.m in Sources */ = {isa = PBXBuildFile; fileRef = AB80971A1CC0EABA002F5FF9 /* EvercamTestSnapShot.m */; };
 		ABA90E1A1CA28FA0002B235B /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABA90E191CA28FA0002B235B /* local.plist */; };
 		ABDAE0841CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */; };
 		ABDAE0851CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE07F1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m */; };
@@ -334,6 +335,8 @@
 		AB8097131CC0C742002F5FF9 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		AB8097141CC0C742002F5FF9 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		AB8097151CC0C742002F5FF9 /* nav@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@3x.png"; sourceTree = "<group>"; };
+		AB8097191CC0EABA002F5FF9 /* EvercamTestSnapShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamTestSnapShot.h; sourceTree = "<group>"; };
+		AB80971A1CC0EABA002F5FF9 /* EvercamTestSnapShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamTestSnapShot.m; sourceTree = "<group>"; };
 		ABA90E191CA28FA0002B235B /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
 		ABDAE07C1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
 		ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
@@ -1041,6 +1044,8 @@
 				AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */,
 				AB6E77E11CBE1A1500DE6310 /* ForgotPasswordViewController.xib */,
 				AB6E77E81CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib */,
+				AB8097191CC0EABA002F5FF9 /* EvercamTestSnapShot.h */,
+				AB80971A1CC0EABA002F5FF9 /* EvercamTestSnapShot.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1380,6 +1385,7 @@
 				CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */,
 				E30900881B16B78600E5B5C0 /* BlockActionSheet.m in Sources */,
 				CB318E5B1AFC3565004FFA8E /* SDWebImageManager.m in Sources */,
+				AB80971B1CC0EABA002F5FF9 /* EvercamTestSnapShot.m in Sources */,
 				41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */,
 				CB44E87C1AAE9E7D00A78C11 /* WelcomeViewController.m in Sources */,
 				CB318E551AFC3565004FFA8E /* NSData+ImageContentType.m in Sources */,

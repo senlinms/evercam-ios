@@ -53,6 +53,10 @@
 @property (nonatomic, strong) id<AddCameraViewControllerDelegate> delegate;
 @property (nonatomic, strong) EvercamCamera *editCamera;
 
+@property (weak, nonatomic) IBOutlet UIView *success_Message_View;
+@property (weak, nonatomic) IBOutlet UIImageView *test_SnapShot_ImageView;
+- (IBAction)remove_Message_View:(id)sender;
+
 @end
 
 static inline BOOL isCompletelyEmpty (id text) {
