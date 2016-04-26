@@ -1,0 +1,1 @@
+../../../PhoenixClient/Pod/Classes/PhxChannel_Private.h

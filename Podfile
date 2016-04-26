@@ -7,5 +7,6 @@ pod 'AFNetworking', '~> 2.3'
 pod 'Evercam'
 pod 'Fabric'
 pod 'Crashlytics'
+pod ‘PhoenixClient’
 end
 

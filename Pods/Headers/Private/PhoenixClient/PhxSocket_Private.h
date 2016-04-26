@@ -1,0 +1,1 @@
+../../../PhoenixClient/Pod/Classes/PhxSocket_Private.h
