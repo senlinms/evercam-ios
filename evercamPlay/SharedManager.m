@@ -15,7 +15,7 @@
 
 +(NSString*)getCheckPortUrl
 {
-    return @"http://api.predator.wtf/pcheck/?";
+    return @"https://media.evercam.io/v1/cameras/port-check?";
 }
 
 +(NSString*)getIPUrl
