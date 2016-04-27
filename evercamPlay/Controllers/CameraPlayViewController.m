@@ -531,7 +531,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         } else {
             self.lblTimeCode.hidden = NO;
             self.lblTimeCode.text   = @"";
-            NSLog(@"KnownTimeZone: %@",[NSTimeZone knownTimeZoneNames]);
             [self createBrowseView];
             [self phoenixConnect];
             
@@ -570,31 +569,30 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 -(void)setDateLabel:(id)message{
-    self.lblTimeCode.text = [self getDateFromUnixFormat:[message[@"timestamp"] stringValue]];
+    self.lblTimeCode.text           = [self getDateFromUnixFormat:[message[@"timestamp"] stringValue]];
 }
 
 - (NSString *) getDateFromUnixFormat:(NSString *)unixFormat
 {
-    NSTimeInterval _interval = [unixFormat doubleValue];
+    NSTimeInterval serverTime       = [unixFormat doubleValue];
     
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+    NSDate *serverDate              = [NSDate dateWithTimeIntervalSince1970:serverTime];
     
-//    daylightSavingTimeOffsetForDate
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
     
+    NSTimeZone *cameraTimeZone      = [NSTimeZone timeZoneWithName:self.cameraInfo.timezone];
+
+    NSTimeInterval timeDifference   = [cameraTimeZone daylightSavingTimeOffsetForDate:serverDate];
     
-//    [dateFormatter setLocale:[NSLocale currentLocale]];
-    //Europe/Dublin
+    NSDate *correctDate             = [serverDate dateByAddingTimeInterval:timeDifference];
     
-    NSTimeZone *gmt =[NSTimeZone timeZoneWithName:@"Europe/Dublin"];
-//    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    NSTimeInterval _t = [gmt daylightSavingTimeOffsetForDate:date];
-    [dateFormatter setTimeZone:gmt];
     [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
-//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    //NSDate *date = [dateFormatter dateFromString:publicationDate];
-    NSString *dte=[dateFormatter stringFromDate:date];
-    return dte;
+    
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+
+    NSString *dateString            = [dateFormatter stringFromDate:correctDate];
+    
+    return dateString;
     
 }
 
