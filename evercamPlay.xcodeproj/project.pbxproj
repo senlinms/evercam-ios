@@ -72,6 +72,7 @@
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
 		6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF591FA1BF05FE20044B0F1 /* logo.png */; };
 		77A680DE1CCF715E002E12AB /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77A680DD1CCF715E002E12AB /* local.plist */; };
+		77C08AB61CD0AE21005F9427 /* RecordingsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C08AB51CD0AE21005F9427 /* RecordingsViewController_iPad.xib */; };
 		AB242FEC1CBE41AC00C5F2F7 /* Intercom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */; };
 		AB242FED1CBE41AC00C5F2F7 /* Intercom.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */; };
 		AB6E77E21CBE1A1600DE6310 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */; };
@@ -326,6 +327,7 @@
 		6CCB48291BDF4D7A00A62C28 /* SharedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SharedManager.m; path = ../SharedManager.m; sourceTree = "<group>"; };
 		6CF591FA1BF05FE20044B0F1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		77A680DD1CCF715E002E12AB /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
+		77C08AB51CD0AE21005F9427 /* RecordingsViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordingsViewController_iPad.xib; sourceTree = "<group>"; };
 		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Intercom.framework; sourceTree = "<group>"; };
 		AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Intercom.bundle; sourceTree = "<group>"; };
@@ -992,6 +994,7 @@
 				410748701ADF6F3E004D10C9 /* RecordingsViewController.h */,
 				410748711ADF6F3E004D10C9 /* RecordingsViewController.m */,
 				410748721ADF6F3E004D10C9 /* RecordingsViewController.xib */,
+				77C08AB51CD0AE21005F9427 /* RecordingsViewController_iPad.xib */,
 				413BB2B21ADC10690083A5DC /* ViewCameraViewController.h */,
 				413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */,
 				413BB2B41ADC10690083A5DC /* ViewCameraViewController.xib */,
@@ -1258,6 +1261,7 @@
 				E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */,
 				6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */,
 				58429A651C16A9E8008D34A8 /* AboutViewController_iPad.xib in Resources */,
+				77C08AB61CD0AE21005F9427 /* RecordingsViewController_iPad.xib in Resources */,
 				585999131BF9C53000CDC457 /* ic_info.png in Resources */,
 				CB1C76CB1AAB871A00680FE3 /* ic_add_person.png in Resources */,
 				E30201C91B16C82D0006DAE8 /* alert-window@2x.png in Resources */,
@@ -1491,7 +1495,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "c369b465-185d-411a-bf08-fd7e769e38d1";
+				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 			};
@@ -1530,7 +1534,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "c369b465-185d-411a-bf08-fd7e769e38d1";
+				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				VALIDATE_PRODUCT = YES;
@@ -1543,8 +1547,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1577,7 +1581,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c369b465-185d-411a-bf08-fd7e769e38d1";
+				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1591,8 +1595,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1626,7 +1630,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c369b465-185d-411a-bf08-fd7e769e38d1";
+				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";

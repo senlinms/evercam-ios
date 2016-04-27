@@ -49,6 +49,9 @@
     
     CAGradientLayer *gradient;
     
+    NSTimer *httpPortCheckTimer;
+    NSTimer *rtspPortCheckTimer;
+    
 }
 @property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIView *logoImagesContainer;
@@ -1123,31 +1126,44 @@
 - (IBAction)textFieldsDidChanged:(UITextField*)sender {
     if (sender.tag == 1) {
         self.httpPortStatusLabel.text = @"";
-        [self checkHttpPort];
+        [self httpPortCheckTimerStarter];
     }
     
     if (sender.tag == 2) {
         self.rtspPortStatusLabel.text = @"";
-        [self checkRtstPort];
+        [self rtspPortCheckTimerStarter];
     }
     
     if (sender.tag == 3) {
         self.httpPortStatusLabel.text = @"";
         self.rtspPortStatusLabel.text = @"";
-        [self checkHttpPort];
-        [self checkRtstPort];
+        [self httpPortCheckTimerStarter];
+        [self rtspPortCheckTimerStarter];
     }
+}
+-(void)httpPortCheckTimerStarter{
+    if (httpPortCheckTimer) {
+        [httpPortCheckTimer invalidate];
+        httpPortCheckTimer = nil;
+    }
+    httpPortCheckTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(checkHttpPort) userInfo:nil repeats:NO];
+}
+
+-(void)rtspPortCheckTimerStarter{
+    if (rtspPortCheckTimer) {
+        [rtspPortCheckTimer invalidate];
+        rtspPortCheckTimer = nil;
+    }
+    rtspPortCheckTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(checkRtstPort) userInfo:nil repeats:NO];
 }
 
 - (IBAction)httpTextFieldDidEndEdition:(id)sender {
-    
-    [self checkHttpPort];
+    [self httpPortCheckTimerStarter];
 }
 
 
 - (IBAction)rtspTextFieldDidEndEdition:(id)sender {
-    
-    [self checkRtstPort];
+    [self rtspPortCheckTimerStarter];
 }
 
 -(void)checkRtstPort{
@@ -1160,12 +1176,12 @@
         return;
     }
     
-    NSString* url = [NSString stringWithFormat:@"%@arguments=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,rtspPort];
+    NSString* url = [NSString stringWithFormat:@"%@address=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,rtspPort];
     
     
-    NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
+//    NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
     
-    [self checkPortWithUrl:url withParameters:params withTextField:self.tfExternalRtspPort withLabel:self.rtspPortStatusLabel];
+    [self checkPortWithUrl:url withParameters:nil withTextField:self.tfExternalRtspPort withLabel:self.rtspPortStatusLabel];
 }
 
 -(void)checkHttpPort{
@@ -1178,33 +1194,43 @@
         return;
     }
     
-    NSString* url = [NSString stringWithFormat:@"%@arguments=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,httpPort];
+    NSString* url = [NSString stringWithFormat:@"%@address=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,httpPort];
     
-    NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
+//    NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
     
-    [self checkPortWithUrl:url withParameters:params withTextField:self.tfExternalHttpPort withLabel:self.httpPortStatusLabel];
+    [self checkPortWithUrl:url withParameters:nil withTextField:self.tfExternalHttpPort withLabel:self.httpPortStatusLabel];
 }
 
 
 -(void)checkPortWithUrl:(NSString *)url withParameters:(NSDictionary *)params withTextField:(UITextField *)textField withLabel:(UILabel *)label{
-    [SharedManager get:url params:params callback:^(NSString *status, NSMutableDictionary *responseDict) {
-        NSRange stringRange = [responseDict[@"JSON"] rangeOfString:@"is open"];
+    [SharedManager get:url params:nil callback:^(NSString *status, NSMutableDictionary *responseDict) {
         if([status isEqualToString:@"error"])
         {
             NSLog(@"Port-Checking server down");
             
-        }else if(stringRange.location != NSNotFound)
-        {
-            if (![textField.text  isEqual: @""]) {
-                label.text = @"Port is open";
-                label.textColor = UIColorFromRGB(0x80CBC4);
-            }
-        }
-        else
-        {
-            if (![textField.text  isEqual: @""]) {
-                label.text = @"Port is closed";
-                label.textColor = [UIColor redColor];
+        }else{
+            NSArray *array = responseDict[@"JSON"];
+            if (array.count > 0) {
+                NSDictionary *response_Obj = array[0];
+                if([response_Obj[@"open"] boolValue])
+                {
+                    if (![textField.text  isEqual: @""]) {
+                        label.text = @"Port is open";
+                        label.textColor = UIColorFromRGB(0x80CBC4);
+                    }
+                }
+                else
+                {
+                    if (![textField.text  isEqual: @""]) {
+                        label.text = @"Port is closed";
+                        label.textColor = [UIColor redColor];
+                    }
+                }
+            }else{
+                if (![textField.text  isEqual: @""]) {
+                    label.text = @"Port is closed";
+                    label.textColor = [UIColor redColor];
+                }
             }
         }
     }];
