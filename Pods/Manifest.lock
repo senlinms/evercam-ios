@@ -25,9 +25,12 @@ PODS:
   - Evercam (1.0.7):
     - AFNetworking (~> 2.3)
   - Fabric (1.6.7)
-  - Mixpanel (2.9.6):
-    - Mixpanel/Mixpanel (= 2.9.6)
-  - Mixpanel/Mixpanel (2.9.6)
+  - Mixpanel (2.9.7):
+    - Mixpanel/Mixpanel (= 2.9.7)
+  - Mixpanel/Mixpanel (2.9.7)
+  - PhoenixClient (1.1.0):
+    - SocketRocket (= 0.4.2)
+  - SocketRocket (0.4.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
@@ -35,12 +38,15 @@ DEPENDENCIES:
   - Evercam
   - Fabric
   - Mixpanel
+  - PhoenixClient
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Evercam: 1452c9b3aac27e7c900fb3eaed9a238806d9123b
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  Mixpanel: 048a9f2512ac1bb8bfdecf719da024873f50a9c2
+  Mixpanel: 511b829df757acc1c15d54e50342e85e6023d64d
+  PhoenixClient: bb4b343dc16df49ad168c7833a06b0953f991df3
+  SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
 
 COCOAPODS: 0.39.0

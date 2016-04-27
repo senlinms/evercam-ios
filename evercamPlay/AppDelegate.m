@@ -42,7 +42,7 @@
     }
     
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
-
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     WelcomeViewController *vc = [[WelcomeViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"WelcomeViewController" : @"WelcomeViewController_iPad" bundle:nil];
@@ -53,7 +53,7 @@
     [self.window makeKeyAndVisible];
     
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
-    if (plistPath) {  
+    if (plistPath) {
         NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
         
         NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
@@ -94,6 +94,21 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]){ // iOS 8 (User notifications)
+        [application registerUserNotificationSettings:
+         [UIUserNotificationSettings settingsForTypes:
+          (UIUserNotificationTypeBadge |
+           UIUserNotificationTypeSound |
+           UIUserNotificationTypeAlert)
+                                           categories:nil]];
+        [application registerForRemoteNotifications];
+    } else { // iOS 7 (Remote notifications)
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationType)
+         (UIRemoteNotificationTypeBadge |
+          UIRemoteNotificationTypeSound |
+          UIRemoteNotificationTypeAlert)];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -104,6 +119,13 @@
 {
     return UIInterfaceOrientationMaskAll;
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"Device Token: %@",deviceToken);
+    [Intercom setDeviceToken:deviceToken];
+}
+
+
 
 -(void)integrateIntercom{
     NSString* localPlistPath    = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];

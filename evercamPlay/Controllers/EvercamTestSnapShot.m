@@ -39,8 +39,8 @@
                 UIImage *test_Snap_Image;
                 if(stringRange.location != NSNotFound){
                     NSString *imageString = [responseDictionary[@"data"] stringByReplacingOccurrencesOfString:@"data:image/jpeg;base64," withString:@""];
-                NSData *data = [[NSData alloc]initWithBase64EncodedString:imageString options:NSDataBase64DecodingIgnoreUnknownCharacters];
-                test_Snap_Image = [UIImage imageWithData:data];
+                    NSData *data = [[NSData alloc]initWithBase64EncodedString:imageString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                    test_Snap_Image = [UIImage imageWithData:data];
                 }
                 if (block) {
                     block(test_Snap_Image,@"Success",nil);
@@ -56,7 +56,7 @@
             }
         }
     });
-
+    
     
 }
 @end

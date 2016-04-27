@@ -21,6 +21,7 @@
 #import "CommonUtil.h"
 #import "BlockActionSheet.h"
 #import "GlobalSettings.h"
+#import <PhoenixClient/PhoenixClient.h>
 
 @interface CameraPlayViewController () <ViewCameraViewControllerDelegate> {
     GstLaunchRemote *launch;
@@ -42,6 +43,9 @@
     __weak IBOutlet UIActivityIndicatorView *loadingView;
     
 }
+
+@property (nonatomic, retain) PhxSocket *socket;
+@property (nonatomic, retain) PhxChannel *channel;
 
 @end
 
@@ -75,16 +79,18 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitleBarAccordingToOrientation];
-    runFirstTime = YES;
-    videoController.alpha = 0.0;
-    self.screenName = @"Video View";
+    runFirstTime            = YES;
+    videoController.alpha   = 0.0;
+    self.screenName         = @"Video View";
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
-    [self playCamera];
-    runFirstTime = NO;
+    
+    runFirstTime            = NO;
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+    [self.channel leave];
+    [self.socket disconnect];
 }
 
 -(void)setTitleBarAccordingToOrientation{
@@ -103,7 +109,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
         
         [[UIApplication sharedApplication] setStatusBarHidden:agree?isHide:YES];
-
+        
         self.titlebar.backgroundColor       = agree?[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:1.0f]:[UIColor clearColor];
         
         if (isHide) {
@@ -130,10 +136,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
     
-    //    self.statusbar.hidden = NO;
-    //    self.titlebar.hidden = NO;
-    //    self.btnTitle.hidden = NO;
-    //    self.downImgView.hidden = NO;
     video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
 }
 
@@ -146,17 +148,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self playCamera];
     [self disableSleep];
     
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
     [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
-    /*
-    self.statusbar.hidden = NO;
-    //    self.titlebar.hidden = NO;
-    self.btnTitle.hidden = NO;
-    self.downImgView.hidden = NO;
-    */
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -268,7 +264,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)viewRecordings {
-    RecordingsViewController *recordingsVC = [[RecordingsViewController alloc] initWithNibName:@"RecordingsViewController" bundle:nil];
+    RecordingsViewController *recordingsVC = [[RecordingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"RecordingsViewController":@"RecordingsViewController_iPad" bundle:[NSBundle mainBundle]];
     recordingsVC.cameraId = self.cameraInfo.camId;
     CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:recordingsVC];
     navVC.isPortraitMode = YES;
@@ -361,12 +357,10 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (IBAction)playOrPause:(id)sender {
     if (isPlaying) {
-        //        [self.imageView setHidden:YES];
         [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_play.png"] forState:UIControlStateNormal];
         [self stopCamera];
     } else {
         [self showVideoController:NO];
-        //        videoController.hidden = YES;
         [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_pause.png"] forState:UIControlStateNormal];
         [self playCamera];
     }
@@ -535,13 +529,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         if (self.cameraInfo.externalH264Url && self.cameraInfo.externalH264Url.length > 0) {
             [self createPlayer];
         } else {
-            [self createBrowseJpgTask];
-            if (runFirstTime) {
-                [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
-            }
-            else{
-                self.imageView.image = [UIImage imageWithContentsOfFile:currentImage];
-            }
+            self.lblTimeCode.hidden = NO;
+            self.lblTimeCode.text   = @"";
+            [self createBrowseView];
+            [self phoenixConnect];
+            
         }
     } else {
         self.imageView.image = nil;
@@ -551,6 +543,58 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     isPlaying = YES;
 }
 
+- (void)phoenixConnect {
+    if (self.socket != nil && [self.socket isConnected]) {
+        return;
+    }
+    self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
+    
+    [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+    
+    self.channel = [[PhxChannel alloc] initWithSocket:self.socket topic:[NSString stringWithFormat:@"cameras:%@",self.cameraInfo.camId] params:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+    
+    [self.channel onEvent:@"snapshot-taken" callback:^(id message, id ref) {
+        [loadingView stopAnimating];
+        UIImage *jpgImage =  [self decodeBase64ToImage:message[@"image"]];
+        self.imageView.image = jpgImage;
+        [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:YES];
+    }];
+    [self.channel join];
+    
+}
+
+- (UIImage *)decodeBase64ToImage:(NSString *)strEncodeData {
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return [UIImage imageWithData:data];
+}
+
+-(void)setDateLabel:(id)message{
+    self.lblTimeCode.text           = [self getDateFromUnixFormat:[message[@"timestamp"] stringValue]];
+}
+
+- (NSString *) getDateFromUnixFormat:(NSString *)unixFormat
+{
+    NSTimeInterval serverTime       = [unixFormat doubleValue];
+    
+    NSDate *serverDate              = [NSDate dateWithTimeIntervalSince1970:serverTime];
+    
+    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+    
+    NSTimeZone *cameraTimeZone      = [NSTimeZone timeZoneWithName:self.cameraInfo.timezone];
+
+    NSTimeInterval timeDifference   = [cameraTimeZone daylightSavingTimeOffsetForDate:serverDate];
+    
+    NSDate *correctDate             = [serverDate dateByAddingTimeInterval:timeDifference];
+    
+    [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+    
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+
+    NSString *dateString            = [dateFormatter stringFromDate:correctDate];
+    
+    return dateString;
+    
+}
 
 - (void)saveImage
 {
@@ -595,11 +639,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             timeCounter = nil;
         }
         self.lblTimeCode.hidden = YES;
-        
-        if (browseJpgTask) {
-            [browseJpgTask stop];
-            browseJpgTask = nil;
-        }
+        [self.channel leave];
+        [self.socket disconnect];
     } else {
         return;
     }
@@ -607,11 +648,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)createPlayer {
     GstLaunchRemoteAppContext ctx;
-    ctx.app = (__bridge gpointer)(self);
-    ctx.initialized = initialized_proxy;
-    ctx.media_size_changed = media_size_changed_proxy;
-    ctx.set_current_position = set_current_position_proxy;
-    ctx.set_message = set_message_proxy;
+    ctx.app                     = (__bridge gpointer)(self);
+    ctx.initialized             = initialized_proxy;
+    ctx.media_size_changed      = media_size_changed_proxy;
+    ctx.set_current_position    = set_current_position_proxy;
+    ctx.set_message             = set_message_proxy;
     
     if (launch) {
         gst_launch_remote_play(launch);
@@ -734,6 +775,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         launch = nil;
     }
     dropDown = nil;
+    [self.channel leave];
+    [self.socket disconnect];
+    
     self.cameraInfo = [self.cameras objectAtIndex:index];
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
