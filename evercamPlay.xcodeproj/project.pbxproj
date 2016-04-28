@@ -81,7 +81,6 @@
 		AB8097161CC0C742002F5FF9 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097131CC0C742002F5FF9 /* nav.png */; };
 		AB8097171CC0C742002F5FF9 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097141CC0C742002F5FF9 /* nav@2x.png */; };
 		AB8097181CC0C742002F5FF9 /* nav@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8097151CC0C742002F5FF9 /* nav@3x.png */; };
-		AB80971B1CC0EABA002F5FF9 /* EvercamTestSnapShot.m in Sources */ = {isa = PBXBuildFile; fileRef = AB80971A1CC0EABA002F5FF9 /* EvercamTestSnapShot.m */; };
 		ABDAE0841CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */; };
 		ABDAE0851CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE07F1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.m */; };
 		ABDAE0861CBB8749002285B7 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDAE0811CBB8749002285B7 /* TPKeyboardAvoidingTableView.m */; };
@@ -338,8 +337,6 @@
 		AB8097131CC0C742002F5FF9 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		AB8097141CC0C742002F5FF9 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		AB8097151CC0C742002F5FF9 /* nav@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@3x.png"; sourceTree = "<group>"; };
-		AB8097191CC0EABA002F5FF9 /* EvercamTestSnapShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamTestSnapShot.h; sourceTree = "<group>"; };
-		AB80971A1CC0EABA002F5FF9 /* EvercamTestSnapShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamTestSnapShot.m; sourceTree = "<group>"; };
 		ABDAE07C1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
 		ABDAE07D1CBB8749002285B7 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
 		ABDAE07E1CBB8749002285B7 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
@@ -1047,8 +1044,6 @@
 				AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */,
 				AB6E77E11CBE1A1500DE6310 /* ForgotPasswordViewController.xib */,
 				AB6E77E81CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib */,
-				AB8097191CC0EABA002F5FF9 /* EvercamTestSnapShot.h */,
-				AB80971A1CC0EABA002F5FF9 /* EvercamTestSnapShot.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1389,7 +1384,6 @@
 				CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */,
 				E30900881B16B78600E5B5C0 /* BlockActionSheet.m in Sources */,
 				CB318E5B1AFC3565004FFA8E /* SDWebImageManager.m in Sources */,
-				AB80971B1CC0EABA002F5FF9 /* EvercamTestSnapShot.m in Sources */,
 				41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */,
 				CB44E87C1AAE9E7D00A78C11 /* WelcomeViewController.m in Sources */,
 				CB318E551AFC3565004FFA8E /* NSData+ImageContentType.m in Sources */,
@@ -1472,8 +1466,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1495,7 +1489,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
+				PROVISIONING_PROFILE = "2a133580-e3a3-4618-9591-8805b533c474";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 			};
@@ -1518,8 +1512,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1534,7 +1528,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
+				PROVISIONING_PROFILE = "2a133580-e3a3-4618-9591-8805b533c474";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				VALIDATE_PRODUCT = YES;
@@ -1547,10 +1541,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1581,7 +1575,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
+				PROVISIONING_PROFILE = "2a133580-e3a3-4618-9591-8805b533c474";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1595,8 +1589,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1630,7 +1624,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
+				PROVISIONING_PROFILE = "2a133580-e3a3-4618-9591-8805b533c474";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";

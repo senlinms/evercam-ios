@@ -38,7 +38,7 @@
 
 - (void)loadRecordingWidget {
     EvercamApiKeyPair *keyPair = [EvercamShell shell].keyPair;
-    NSString *customHtml = [NSString stringWithFormat:@"<html><body style='margin:0;padding:0;'><div evercam=\"snapshot-navigator\"></div><script type=\"text/javascript\" src=\"https://dashboard.evercam.io/snapshot.navigator.js?camera=%@&private=false&api_id=%@&api_key=%@\"></script></body></html>",
+    NSString *customHtml = [NSString stringWithFormat:@"<html><body style='margin:0;padding:0;'><div evercam=\"snapshot-navigator\"></div><script type=\"text/javascript\" src=\"https://dash.evercam.io/snapshot.navigator.js?camera=%@&private=false&api_id=%@&api_key=%@\"></script></body></html>",
                             self.cameraId,
                             keyPair.apiId,
                             keyPair.apiKey];

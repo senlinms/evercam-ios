@@ -30,7 +30,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [self integrateIntercom];
-    
+    [Crashlytics startWithAPIKey:@"3076ee9439062b784cded123ab7344ffa3b1c872"];
     [Fabric with:@[[Crashlytics class]]];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];

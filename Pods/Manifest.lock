@@ -22,12 +22,12 @@ PODS:
     - AFNetworking/NSURLSession
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
-  - Evercam (1.0.7):
+  - Evercam (1.0.8):
     - AFNetworking (~> 2.3)
   - Fabric (1.6.7)
-  - Mixpanel (2.9.7):
-    - Mixpanel/Mixpanel (= 2.9.7)
-  - Mixpanel/Mixpanel (2.9.7)
+  - Mixpanel (2.9.8):
+    - Mixpanel/Mixpanel (= 2.9.8)
+  - Mixpanel/Mixpanel (2.9.8)
   - PhoenixClient (1.1.0):
     - SocketRocket (= 0.4.2)
   - SocketRocket (0.4.2)
@@ -43,9 +43,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
-  Evercam: 1452c9b3aac27e7c900fb3eaed9a238806d9123b
+  Evercam: da4b0c8adf08ee1837647b28b371cc97e419b279
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  Mixpanel: 511b829df757acc1c15d54e50342e85e6023d64d
+  Mixpanel: 39c8e140d74d914e460ea3b4c770434fcd29c8a0
   PhoenixClient: bb4b343dc16df49ad168c7833a06b0953f991df3
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
 
