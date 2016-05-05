@@ -218,10 +218,10 @@
 
 
 - (void)fillCameraDetails {
-    self.txtID.text = self.camera.camId;
-    self.lblName.text = self.camera.name;
-    self.lblOwner.text = self.camera.owner;
-    self.lblTimezone.text = self.camera.timezone;
+    self.txtID.text             = self.camera.camId;
+    self.lblName.text           = self.camera.name;
+    self.lblOwner.text          = self.camera.owner;
+    self.lblTimezone.text       = self.camera.timezone;
     if (self.camera.vendor && self.camera.vendor.length > 0) {
         self.lblVendor.text = self.camera.vendor;
     } else {
