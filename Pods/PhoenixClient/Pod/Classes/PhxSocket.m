@@ -240,7 +240,7 @@ static NSTimeInterval reconnectInterval = 5;
 }
 
 - (void)onConnMessage:(NSString*)rawMessage {
-    NSLog(@"PhxSocket Message:%@",(NSString*)rawMessage);
+//    NSLog(@"PhxSocket Message:%@",(NSString*)rawMessage);
     NSData *data = [rawMessage dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
     id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];

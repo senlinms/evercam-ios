@@ -56,13 +56,13 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     __weak IBOutlet UIActivityIndicatorView *loadingView;
     
     NSTimer *liveViewSwitchTimer;
+    BOOL isPlayerStarted;
     
 }
 
 @property (nonatomic, retain) PhxSocket *socket;
 @property (nonatomic, retain) PhxChannel *channel;
 
-@property (strong, nonatomic) MPMoviePlayerController *streamPlayer;
 @end
 
 @implementation CameraPlayViewController
@@ -110,6 +110,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self removeLiveViewObservers];
     [self.channel leave];
     [self.socket disconnect];
+    self.channel = nil;
+    self.socket = nil;
 }
 
 -(void)setTitleBarAccordingToOrientation{
@@ -129,7 +131,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         [[UIApplication sharedApplication] setStatusBarHidden:agree?isHide:YES];
         
-        [self.streamPlayer.view setFrame:self.streamingView.bounds];
+//        [playerLayerView setFrame:self.playerLayerView.bounds];
+//        [self.streamPlayer.view setFrame:self.streamingView.bounds];
         
         self.titlebar.backgroundColor       = agree?[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:1.0f]:[UIColor clearColor];
         
@@ -191,21 +194,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)dealloc {
-    if (launch)
-    {
-        gst_launch_remote_free(launch);
-        launch = nil;
-    }
     
     if (timeCounter && [timeCounter isValid])
     {
         [timeCounter invalidate];
         timeCounter = nil;
-    }
-    
-    if (browseJpgTask) {
-        [browseJpgTask stop];
-        browseJpgTask = nil;
     }
 }
 
@@ -213,22 +206,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     BOOL isDir;
     NSURL *documentsDirectory = [APP_DELEGATE applicationDocumentsDirectory];
     NSURL *snapshotDir = [documentsDirectory URLByAppendingPathComponent:self.cameraInfo.camId];
+    NSLog(@"SnapShot Path: %@",snapshotDir);
     if (![[NSFileManager defaultManager] fileExistsAtPath:snapshotDir.path isDirectory:&isDir]) {
         [[NSFileManager defaultManager] createDirectoryAtURL:snapshotDir withIntermediateDirectories:YES attributes:nil error:nil];
     }
     NSURL *snapshotFileURL = [snapshotDir URLByAppendingPathComponent:[CommonUtil uuidString]];
-    
+    NSLog(@"snapshotFileURL: %@",snapshotFileURL);
     NSData *imgData = UIImageJPEGRepresentation(imvSnapshot.image, 1);
+    NSLog(@"imgData: %lu",(unsigned long)[imgData length]);
     [imgData writeToURL:snapshotFileURL atomically:YES];
-}
-
-- (UIImage *) imageWithView:(UIView *)view
-{
-    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0f);
-    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
-    UIImage * snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return snapshotImage;
 }
 
 - (void)showSnapshotView {
@@ -237,40 +223,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (self.imageView == nil || self.imageView.hidden == YES) {
         
         CVPixelBufferRef buffer = [self.output copyPixelBufferForItemTime:playerItem.currentTime itemTimeForDisplay:nil];
-        //    [CIImage imageWithCVPixelBuffer:buffer];
-        UIImage *snapImg = [[UIImage alloc] initWithCIImage:[CIImage imageWithCVPixelBuffer:buffer]];
-        
-//        UIImage *imgae = [self imageWithView:self.view];
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CGImageRef cgiimage = [context createCGImage:[CIImage imageWithCVPixelBuffer:buffer] fromRect:[CIImage imageWithCVPixelBuffer:buffer].extent];
+        UIImage *snapImg = [UIImage imageWithCGImage:cgiimage];
+        CGImageRelease(cgiimage);
+//        UIImage *snapImg = [[UIImage alloc] initWithCIImage:[CIImage imageWithCVPixelBuffer:buffer]];
         imvSnapshot.image = snapImg;
-        
-        /*
-         CGRect rect = [self.streamingView bounds];
-         UIGraphicsBeginImageContext(rect.size);
-         CGContextRef context = UIGraphicsGetCurrentContext();
-         [self.streamingView.layer renderInContext:context];
-         UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
-         UIGraphicsEndImageContext();
-         */
-        /*
-         CGRect rect = [self.streamingView bounds];
-         UIGraphicsBeginImageContext(rect.size);
-         
-         if ([self.streamingView drawViewHierarchyInRect:rect afterScreenUpdates:YES]) {
-         NSLog(@"Hierarchy drawn");
-         }
-         [self.streamingView drawViewHierarchyInRect:rect afterScreenUpdates:YES];
-         UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-         UIGraphicsEndImageContext();
-         NSLog(@"streamingVideoSize: %@",NSStringFromCGSize(self.streamPlayer.naturalSize));
-         rect.origin.y = (rect.size.height - rect.size.width*self.streamPlayer.naturalSize.height/self.streamPlayer.naturalSize.width)/2;
-         //        rect.origin.y = (rect.size.height - rect.size.width*media_height/media_width)/2;
-         rect.size.height = rect.size.width*self.streamPlayer.naturalSize.height/self.streamPlayer.naturalSize.width;
-         CGImageRef imageRef = CGImageCreateWithImageInRect([img CGImage], rect);
-         // or use the UIImage wherever you like
-         [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
-         CGImageRelease(imageRef);
-         */
-        //        imvSnapshot.image = thumbnail;
+
     } else {
         if (self.imageView && self.imageView.image) {
             CGFloat width = self.confirmInsideView.frame.size.width;
@@ -332,11 +291,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)hideVideoController {
     if (isPlaying == YES) {
         [self showVideoController:NO];
-        //        videoController.hidden = YES;
     }
     else {
         [self showVideoController:YES];
-        //        videoController.hidden = NO;
     }
 }
 
@@ -404,11 +361,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [timeCounter invalidate];
         timeCounter = nil;
     }
-    
-    if (browseJpgTask) {
-        [browseJpgTask stop];
-        browseJpgTask = nil;
-    }
 }
 
 - (IBAction)playOrPause:(id)sender {
@@ -474,8 +426,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (IBAction)snapshotSave:(id)sender {
-    [self hideSnapshotView];
     [self takeSnapshot];
+    [self hideSnapshotView];
 }
 
 - (IBAction)action:(id)sender {
@@ -577,25 +529,25 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
         [loadingView startAnimating];
+        if (self.imageView)
+        {
+            [self.imageView removeFromSuperview];
+            self.imageView = nil;
+        }
         
         if (self.cameraInfo.hlsUrl && self.cameraInfo.hlsUrl.length > 0) {
+            isPlayerStarted = NO;
             NSURL *newMovieURL = [NSURL URLWithString:self.cameraInfo.hlsUrl];
-            if ([newMovieURL scheme])	/* Sanity check on the URL. */
+            if ([newMovieURL scheme])
             {
-                /*
-                 Create an asset for inspection of a resource referenced by a given URL.
-                 Load the values for the asset keys "tracks", "playable".
-                 */
                 AVURLAsset *asset = [AVURLAsset URLAssetWithURL:newMovieURL options:nil];
                 
                 NSArray *requestedKeys = [NSArray arrayWithObjects:kTracksKey, kPlayableKey, nil];
-                
-                /* Tells the asset to load the values of any of the specified keys that are not already loaded. */
+
                 [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
                  ^{
                      dispatch_async( dispatch_get_main_queue(),
                                     ^{
-                                        /* IMPORTANT: Must dispatch to main queue in order to operate on the AVPlayer and AVPlayerItem. */
                                         [self prepareToPlayAsset:asset withKeys:requestedKeys];
                                     });
                  }];
@@ -623,21 +575,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 #pragma mark Player Notifications
 
-/* Called when the player item has played to its end time. */
 - (void) playerItemDidReachEnd:(NSNotification*) aNotification
 {
     [loadingView stopAnimating];
-    /* Hide the 'Pause' button, show the 'Play' button in the slider control */
-    
-    
-    /* After the movie has played to its end time, seek back to time zero
-     to play it again */
-    
 }
 - (void) failedToPlayToEndTime:(NSNotification*) aNotification{
     NSLog(@"Failed To Play To end Time");
 }
-/* Cancels the previously registered time observer. */
+
 -(void)removePlayerTimeObserver
 {
     if (timeObserver)
@@ -659,7 +604,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys
 {
-    /* Make sure that the value of each key has loaded successfully. */
     for (NSString *thisKey in requestedKeys)
     {
         NSError *error = nil;
@@ -669,14 +613,10 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             [self assetFailedToPrepareForPlayback:error];
             return;
         }
-        /* If you are also implementing the use of -[AVAsset cancelLoading], add your code here to bail
-         out properly in the case of cancellation. */
     }
     
-    /* Use the AVAsset playable property to detect whether the asset can be played. */
     if (!asset.playable)
     {
-        /* Generate an error describing the failure. */
         NSString *localizedDescription = NSLocalizedString(@"Item cannot be played", @"Item cannot be played description");
         NSString *localizedFailureReason = NSLocalizedString(@"The assets tracks were loaded, but could not be made playable.", @"Item cannot be played failure reason");
         NSDictionary *errorDict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -684,21 +624,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                    localizedFailureReason, NSLocalizedFailureReasonErrorKey,
                                    nil];
         NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"StitchedStreamPlayer" code:0 userInfo:errorDict];
-        
-        /* Display the error to the user. */
+
         [self assetFailedToPrepareForPlayback:assetCannotBePlayedError];
         
         return;
     }
-    
-    /* At this point we're ready to set up for playback of the asset. */
-    
-    
-    /* Stop observing our prior AVPlayerItem, if we have one. */
+
     if (self.playerItem)
     {
-        /* Remove existing player item key value observers and notifications. */
-        
         [self.playerItem removeObserver:self forKeyPath:kStatusKey];
         [self.playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
         [self.playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
@@ -707,15 +640,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                                         name:AVPlayerItemDidPlayToEndTimeNotification
                                                       object:self.playerItem];
     }
-    
-    /* Create a new instance of AVPlayerItem from the now successfully loaded AVAsset. */
+
     NSDictionary* settings = @{ (id)kCVPixelBufferPixelFormatTypeKey : [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] };
+    
     self.output = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:settings];
+    
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
 //    [self.playerItem addOutput:self.output];
-    
-    
-    /* Observe the player item "status" key to determine when it is ready to play. */
+
     [self.playerItem addObserver:self
                       forKeyPath:kStatusKey
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -723,9 +655,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self.playerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
     [self.playerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
     
-    
-    /* When the player item has played to its end time we'll toggle
-     the movie controller Pause button to be the Play button */
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
@@ -735,45 +664,29 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                                  name:AVPlayerItemPlaybackStalledNotification
                                                object:self.playerItem];
     
-    
-    
-    
-    /* Create new player, if we don't already have one. */
     if (![self player])
     {
-        /* Get a new AVPlayer initialized to play the specified player item. */
         [self setPlayer:[AVPlayer playerWithPlayerItem:self.playerItem]];
-        
-        /* Observe the AVPlayer "currentItem" property to find out when any
-         AVPlayer replaceCurrentItemWithPlayerItem: replacement will/did
-         occur.*/
+
         [self.player addObserver:self
                       forKeyPath:kCurrentItemKey
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                          context:MyStreamingMovieViewControllerCurrentItemObservationContext];
         
-        /* A 'currentItem.timedMetadata' property observer to parse the media stream timed metadata. */
         [self.player addObserver:self
                       forKeyPath:kTimedMetadataKey
                          options:0
                          context:MyStreamingMovieViewControllerTimedMetadataObserverContext];
         
-        /* Observe the AVPlayer "rate" property to update the scrubber control. */
         [self.player addObserver:self
                       forKeyPath:kRateKey
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                          context:MyStreamingMovieViewControllerRateObservationContext];
     }
     
-    /* Make our new AVPlayerItem the AVPlayer's current item. */
     if (self.player.currentItem != self.playerItem)
     {
-        /* Replace the player item with a new player item. The item replacement occurs
-         asynchronously; observe the currentItem property to find out when the
-         replacement will/did occur*/
         [[self player] replaceCurrentItemWithPlayerItem:self.playerItem];
-        
-        
     }
     
     
@@ -794,11 +707,10 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (object == self.playerItem && [path isEqualToString:@"playbackBufferEmpty"])
     {
         if (self.playerItem.playbackBufferEmpty) {
-            //Your code here
             NSLog(@"playbackBufferEmpty");
             [loadingView startAnimating];
             liveViewSwitchTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(switchToJpgView) userInfo:nil repeats:NO];
-//            return;
+            return;
         }
     }
     
@@ -807,36 +719,27 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         if (self.player.currentItem.playbackLikelyToKeepUp == NO &&
             CMTIME_COMPARE_INLINE(self.player.currentTime, >, kCMTimeZero) &&
             CMTIME_COMPARE_INLINE(self.player.currentTime, !=, self.player.currentItem.duration)) {
-            
-            // if so, post the playerHanging notification
             NSLog(@"Player Hanging");
-            [self.playerItem removeOutput:self.output];
-//            return;
+//            [self.playerItem removeOutput:self.output];
+            return;
         }
         if (self.playerItem.playbackLikelyToKeepUp == YES)
         {
-            //Your code here
             NSLog(@"playbackLikelyToKeepUp");
             if (liveViewSwitchTimer) {
                 [liveViewSwitchTimer invalidate];
                 liveViewSwitchTimer = nil;
             }
-            [loadingView stopAnimating];
-            [self.playerItem addOutput:self.output];
-            [player play];
-//            return;
+            return;
         }
     }
-    /* AVPlayerItem "status" property value observer. */
     if (context == MyStreamingMovieViewControllerPlayerItemStatusObserverContext)
     {
-        
-        
+        NSLog(@"MyStreamingMovieViewControllerPlayerItemStatusObserverContext");
+        NSLog(@"Change: %@",change);
         AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
         switch (status)
         {
-                /* Indicates that the status of the player is not yet known because
-                 it has not tried to load new media resources for playback */
             case AVPlayerStatusUnknown:
             {
                 NSLog(@"AVPlayerStatusUnknown");
@@ -846,23 +749,20 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                 
             case AVPlayerStatusReadyToPlay:
             {
-                /* Once the AVPlayerItem becomes ready to play, i.e.
-                 [playerItem status] == AVPlayerItemStatusReadyToPlay,
-                 its duration can be fetched from the item. */
-                NSLog(@"AVPlayerStatusUnknown");
+                NSLog(@"AVPlayerStatusReadyToPlay");
                 playerLayerView.playerLayer.hidden = NO;
-                
-                
-                
-                /* Show the movie slider control since the movie is now ready to play. */
-                
-                
-                
+
                 playerLayerView.playerLayer.backgroundColor = [[UIColor blackColor] CGColor];
-                
-                /* Set the AVPlayerLayer on the view to allow the AVPlayer object to display
-                 its content. */
+
                 [playerLayerView.playerLayer setPlayer:player];
+                [loadingView stopAnimating];
+                if (!isPlayerStarted) {
+                    NSLog(@"START PLAYING");
+                    isPlayerStarted = YES;
+                    [self.playerItem addOutput:self.output];
+                    [player play];
+                }
+                
             }
                 break;
                 
@@ -874,39 +774,34 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                 break;
         }
     }
-    /* AVPlayer "rate" property value observer. */
+
     else if (context == MyStreamingMovieViewControllerRateObservationContext)
     {
         
     }
-    /* AVPlayer "currentItem" property observer.
-     Called when the AVPlayer replaceCurrentItemWithPlayerItem:
-     replacement will/did occur. */
+
     else if (context == MyStreamingMovieViewControllerCurrentItemObservationContext)
     {
+        NSLog(@"MyStreamingMovieViewControllerCurrentItemObservationContext");
         AVPlayerItem *newPlayerItem = [change objectForKey:NSKeyValueChangeNewKey];
-        
-        /* New player item null? */
+
         if (newPlayerItem == (id)[NSNull null])
         {
             
         }
-        else /* Replacement of player currentItem has occurred */
+        else
         {
-            /* Set the AVPlayer for which the player layer displays visual output. */
             [playerLayerView.playerLayer setPlayer:self.player];
             
-            /* Specifies that the player should preserve the video’s aspect ratio and
-             fit the video within the layer’s bounds. */
             [playerLayerView setVideoFillMode:AVLayerVideoGravityResizeAspect];
             
             
         }
     }
-    /* Observe the AVPlayer "currentItem.timedMetadata" property to parse the media stream
-     timed metadata. */
+
     else if (context == MyStreamingMovieViewControllerTimedMetadataObserverContext)
     {
+        NSLog(@"MyStreamingMovieViewControllerTimedMetadataObserverContext");
         NSArray* array = [[player currentItem] timedMetadata];
         for (AVMetadataItem *metadataItem in array)
         {
@@ -923,6 +818,31 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 
 - (void)phoenixConnect {
+    
+    dispatch_queue_t myQueue = dispatch_queue_create("Phoenix Queue",NULL);
+    dispatch_async(myQueue, ^{
+        // Perform long running process
+        if (self.socket != nil && [self.socket isConnected]) {
+            return;
+        }
+        self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
+        
+        [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+        
+        self.channel = [[PhxChannel alloc] initWithSocket:self.socket topic:[NSString stringWithFormat:@"cameras:%@",self.cameraInfo.camId] params:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+        [self.channel onEvent:@"snapshot-taken" callback:^(id message, id ref) {
+            [loadingView stopAnimating];
+            UIImage *jpgImage =  [self decodeBase64ToImage:message[@"image"]];
+            self.imageView.image = jpgImage;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Update the UI
+                [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:NO];
+            });
+            
+        }];
+        [self.channel join];
+    });
+    /*
     if (self.socket != nil && [self.socket isConnected]) {
         return;
     }
@@ -939,7 +859,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:YES];
     }];
     [self.channel join];
-    
+    */
 }
 
 - (UIImage *)decodeBase64ToImage:(NSString *)strEncodeData {
@@ -1020,30 +940,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     } else {
         return;
     }
-}
-
-- (void)createPlayer {
-    GstLaunchRemoteAppContext ctx;
-    ctx.app                     = (__bridge gpointer)(self);
-    ctx.initialized             = initialized_proxy;
-    ctx.media_size_changed      = media_size_changed_proxy;
-    ctx.set_current_position    = set_current_position_proxy;
-    ctx.set_message             = set_message_proxy;
-    
-    if (launch) {
-        gst_launch_remote_play(launch);
-    }
-    else
-    {
-        launch = gst_launch_remote_new(&ctx);
-        NSString *pipeline = [NSString stringWithFormat:@"rtspsrc protocols=4  location=%@ user-id=%@ user-pw=%@ latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink", self.cameraInfo.externalH264Url, self.cameraInfo.username, self.cameraInfo.password];
-        launch->real_pipeline_string = (gchar *)[pipeline UTF8String];
-        
-        gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
-        
-        
-    }
-    
 }
 
 - (void)createBrowseView {
@@ -1147,13 +1043,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 #pragma mark NIDropdown delegate
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index {
     
-   
     [self removeLiveViewObservers];
-
     
     dropDown = nil;
     [self.channel leave];
     [self.socket disconnect];
+    self.channel = nil;
+    self.socket = nil;
     
     self.cameraInfo = [self.cameras objectAtIndex:index];
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
@@ -1162,8 +1058,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 -(void)removeLiveViewObservers{
+    
     [self.player pause];
+    
     [self removePlayerTimeObserver];
+    
     [self.playerItem removeObserver:self forKeyPath:kStatusKey];
     [self.playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
     [self.playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
@@ -1176,6 +1075,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self.player removeObserver:self forKeyPath:kRateKey];
     
     self.player = nil;
+    
     self.playerItem = nil;
 }
 
