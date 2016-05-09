@@ -56,6 +56,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     __weak IBOutlet UIActivityIndicatorView *loadingView;
     
     NSTimer *liveViewSwitchTimer;
+    NSTimer *liveViewDateStringUpdater;
     BOOL isPlayerStarted;
     
 }
@@ -206,14 +207,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     BOOL isDir;
     NSURL *documentsDirectory = [APP_DELEGATE applicationDocumentsDirectory];
     NSURL *snapshotDir = [documentsDirectory URLByAppendingPathComponent:self.cameraInfo.camId];
-    NSLog(@"SnapShot Path: %@",snapshotDir);
     if (![[NSFileManager defaultManager] fileExistsAtPath:snapshotDir.path isDirectory:&isDir]) {
         [[NSFileManager defaultManager] createDirectoryAtURL:snapshotDir withIntermediateDirectories:YES attributes:nil error:nil];
     }
     NSURL *snapshotFileURL = [snapshotDir URLByAppendingPathComponent:[CommonUtil uuidString]];
-    NSLog(@"snapshotFileURL: %@",snapshotFileURL);
     NSData *imgData = UIImageJPEGRepresentation(imvSnapshot.image, 1);
-    NSLog(@"imgData: %lu",(unsigned long)[imgData length]);
     [imgData writeToURL:snapshotFileURL atomically:YES];
 }
 
@@ -646,7 +644,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     self.output = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:settings];
     
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-//    [self.playerItem addOutput:self.output];
 
     [self.playerItem addObserver:self
                       forKeyPath:kStatusKey
@@ -695,6 +692,10 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self removeLiveViewObservers];
     [loadingView stopAnimating];
     self.playerLayerView.hidden = YES;
+    if (liveViewDateStringUpdater) {
+        [liveViewDateStringUpdater invalidate];
+        liveViewDateStringUpdater = nil;
+    }
     [self setUpJPGView];
 }
 
@@ -720,7 +721,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             CMTIME_COMPARE_INLINE(self.player.currentTime, >, kCMTimeZero) &&
             CMTIME_COMPARE_INLINE(self.player.currentTime, !=, self.player.currentItem.duration)) {
             NSLog(@"Player Hanging");
-//            [self.playerItem removeOutput:self.output];
             return;
         }
         if (self.playerItem.playbackLikelyToKeepUp == YES)
@@ -735,8 +735,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
     if (context == MyStreamingMovieViewControllerPlayerItemStatusObserverContext)
     {
-        NSLog(@"MyStreamingMovieViewControllerPlayerItemStatusObserverContext");
-        NSLog(@"Change: %@",change);
         AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
         switch (status)
         {
@@ -744,6 +742,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             {
                 NSLog(@"AVPlayerStatusUnknown");
                 [self removePlayerTimeObserver];
+                [loadingView startAnimating];
+                liveViewSwitchTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(switchToJpgView) userInfo:nil repeats:NO];
             }
                 break;
                 
@@ -755,6 +755,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                 playerLayerView.playerLayer.backgroundColor = [[UIColor blackColor] CGColor];
 
                 [playerLayerView.playerLayer setPlayer:player];
+                if (liveViewDateStringUpdater) {
+                    [liveViewDateStringUpdater invalidate];
+                    liveViewDateStringUpdater   = nil;
+                }
+                liveViewDateStringUpdater = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(setDateLabelForHLS) userInfo:nil repeats:YES];
                 [loadingView stopAnimating];
                 if (!isPlayerStarted) {
                     NSLog(@"START PLAYING");
@@ -782,7 +787,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
     else if (context == MyStreamingMovieViewControllerCurrentItemObservationContext)
     {
-        NSLog(@"MyStreamingMovieViewControllerCurrentItemObservationContext");
         AVPlayerItem *newPlayerItem = [change objectForKey:NSKeyValueChangeNewKey];
 
         if (newPlayerItem == (id)[NSNull null])
@@ -801,7 +805,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
     else if (context == MyStreamingMovieViewControllerTimedMetadataObserverContext)
     {
-        NSLog(@"MyStreamingMovieViewControllerTimedMetadataObserverContext");
         NSArray* array = [[player currentItem] timedMetadata];
         for (AVMetadataItem *metadataItem in array)
         {
@@ -871,6 +874,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     self.lblTimeCode.text           = [self getDateFromUnixFormat:[message[@"timestamp"] stringValue]];
 }
 
+-(void) setDateLabelForHLS{
+    self.lblTimeCode.hidden         = NO;
+    self.lblTimeCode.text           = [self getCameraTimeStringForHLS:[self getUTCDateString]];
+}
+
 - (NSString *) getDateFromUnixFormat:(NSString *)unixFormat
 {
     NSTimeInterval serverTime       = [unixFormat doubleValue];
@@ -895,6 +903,34 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
 }
 
+- (NSString *) getUTCDateString{
+    NSDateFormatter *dateformatter      = [[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+    
+    NSTimeZone *timeZone_UTC            = [NSTimeZone timeZoneWithName:@"UTC"];
+    
+    [dateformatter setTimeZone:timeZone_UTC];
+    
+    NSString *utcDateString             = [dateformatter stringFromDate:[NSDate date]];
+    
+    return utcDateString;
+}
+
+- (NSString *) getCameraTimeStringForHLS:(NSString *)utcDateString{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+    
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:self.cameraInfo.timezone]];
+    
+    //[formatter dateFromString:dateAsString]
+    
+    NSString *hlsCameraDateString  = [dateFormatter stringFromDate:[dateFormatter dateFromString:utcDateString]];
+    
+    return hlsCameraDateString;
+}
 - (void)saveImage
 {
     UIGraphicsBeginImageContextWithOptions(self.imageView.bounds.size, self.imageView.layer.opaque, 0.0);
@@ -1058,6 +1094,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 -(void)removeLiveViewObservers{
+    
+    if (liveViewDateStringUpdater) {
+        [liveViewDateStringUpdater invalidate];
+        liveViewDateStringUpdater = nil;
+    }
     
     [self.player pause];
     
