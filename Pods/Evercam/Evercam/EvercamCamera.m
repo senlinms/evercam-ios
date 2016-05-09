@@ -6,6 +6,7 @@
     self= [super init];
     if (self)
     {
+        
         self.camId = [cameraDict valueForKey:@"id"];
         self.name = [cameraDict valueForKey:@"name"];
         self.owner = [cameraDict valueForKey:@"owner"];
@@ -44,7 +45,6 @@
             NSDictionary *rtspDict = [externalDict valueForKey:@"rtsp"];
             if (rtspDict) {
                 NSString *externalH264Url = [rtspDict valueForKey:@"h264"];
-//                self.externalH264Url = [self replaceUrl:externalH264Url withCredential:@"rtsp://"];
                 self.externalH264Url = externalH264Url;
                 if ([rtspDict valueForKey:@"port"] && [rtspDict valueForKey:@"port"] != [NSNull null]) {
                     self.externalRtspPort = [[rtspDict valueForKey:@"port"] intValue];
@@ -72,13 +72,14 @@
             NSDictionary *rtspDict = [internalDict valueForKey:@"rtsp"];
             if (rtspDict) {
                 NSString *internalH264Url = [rtspDict valueForKey:@"h264"];
-//                self.internalH264Url = [self replaceUrl:internalH264Url withCredential:@"rtsp://"];
                 self.internalH264Url = internalH264Url;
                 if ([rtspDict valueForKey:@"port"] && [rtspDict valueForKey:@"port"] != [NSNull null]) {
                     self.internalRtspPort = [[rtspDict valueForKey:@"port"] intValue];
                 }
             }
         }
+        self.hlsUrl     = cameraDict[@"proxy_url"][@"hls"];
+        self.rtmpUrl    = cameraDict[@"proxy_url"][@"rtmp"];
         
     }
     

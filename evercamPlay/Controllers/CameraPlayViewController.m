@@ -22,6 +22,19 @@
 #import "BlockActionSheet.h"
 #import "GlobalSettings.h"
 #import <PhoenixClient/PhoenixClient.h>
+#import <MediaPlayer/MediaPlayer.h>
+
+static void *MyStreamingMovieViewControllerTimedMetadataObserverContext = &MyStreamingMovieViewControllerTimedMetadataObserverContext;
+static void *MyStreamingMovieViewControllerRateObservationContext = &MyStreamingMovieViewControllerRateObservationContext;
+static void *MyStreamingMovieViewControllerCurrentItemObservationContext = &MyStreamingMovieViewControllerCurrentItemObservationContext;
+static void *MyStreamingMovieViewControllerPlayerItemStatusObserverContext = &MyStreamingMovieViewControllerPlayerItemStatusObserverContext;
+
+NSString *kTracksKey		= @"tracks";
+NSString *kStatusKey		= @"status";
+NSString *kRateKey			= @"rate";
+NSString *kPlayableKey		= @"playable";
+NSString *kCurrentItemKey	= @"currentItem";
+NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 
 @interface CameraPlayViewController () <ViewCameraViewControllerDelegate> {
     GstLaunchRemote *launch;
@@ -42,6 +55,10 @@
     __weak IBOutlet UIImageView *imvSnapshot;
     __weak IBOutlet UIActivityIndicatorView *loadingView;
     
+    NSTimer *liveViewSwitchTimer;
+    NSTimer *liveViewDateStringUpdater;
+    BOOL isPlayerStarted;
+    
 }
 
 @property (nonatomic, retain) PhxSocket *socket;
@@ -51,6 +68,8 @@
 
 @implementation CameraPlayViewController
 @synthesize isCameraRemoved;
+@synthesize playerLayerView;
+@synthesize player, playerItem;
 
 static void set_message_proxy (const gchar *message, gpointer app)
 {
@@ -89,8 +108,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+    [self removeLiveViewObservers];
     [self.channel leave];
     [self.socket disconnect];
+    self.channel = nil;
+    self.socket = nil;
 }
 
 -(void)setTitleBarAccordingToOrientation{
@@ -109,6 +131,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
         
         [[UIApplication sharedApplication] setStatusBarHidden:agree?isHide:YES];
+        
+//        [playerLayerView setFrame:self.playerLayerView.bounds];
+//        [self.streamPlayer.view setFrame:self.streamingView.bounds];
         
         self.titlebar.backgroundColor       = agree?[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:1.0f]:[UIColor clearColor];
         
@@ -170,21 +195,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)dealloc {
-    if (launch)
-    {
-        gst_launch_remote_free(launch);
-        launch = nil;
-    }
     
     if (timeCounter && [timeCounter isValid])
     {
         [timeCounter invalidate];
         timeCounter = nil;
-    }
-    
-    if (browseJpgTask) {
-        [browseJpgTask stop];
-        browseJpgTask = nil;
     }
 }
 
@@ -196,7 +211,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [[NSFileManager defaultManager] createDirectoryAtURL:snapshotDir withIntermediateDirectories:YES attributes:nil error:nil];
     }
     NSURL *snapshotFileURL = [snapshotDir URLByAppendingPathComponent:[CommonUtil uuidString]];
-    
     NSData *imgData = UIImageJPEGRepresentation(imvSnapshot.image, 1);
     [imgData writeToURL:snapshotFileURL atomically:YES];
 }
@@ -205,17 +219,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [snapshotConfirmView setHidden:NO];
     
     if (self.imageView == nil || self.imageView.hidden == YES) {
-        CGRect rect = [video_view bounds];
-        UIGraphicsBeginImageContext(rect.size);
-        [video_view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
-        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        rect.origin.y = (rect.size.height - rect.size.width*media_height/media_width)/2;
-        rect.size.height = rect.size.width*media_height/media_width;
-        CGImageRef imageRef = CGImageCreateWithImageInRect([img CGImage], rect);
-        // or use the UIImage wherever you like
-        [imvSnapshot setImage:[UIImage imageWithCGImage:imageRef]];
-        CGImageRelease(imageRef);
+        
+        CVPixelBufferRef buffer = [self.output copyPixelBufferForItemTime:playerItem.currentTime itemTimeForDisplay:nil];
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CGImageRef cgiimage = [context createCGImage:[CIImage imageWithCVPixelBuffer:buffer] fromRect:[CIImage imageWithCVPixelBuffer:buffer].extent];
+        UIImage *snapImg = [UIImage imageWithCGImage:cgiimage];
+        CGImageRelease(cgiimage);
+//        UIImage *snapImg = [[UIImage alloc] initWithCIImage:[CIImage imageWithCVPixelBuffer:buffer]];
+        imvSnapshot.image = snapImg;
+
     } else {
         if (self.imageView && self.imageView.image) {
             CGFloat width = self.confirmInsideView.frame.size.width;
@@ -277,17 +289,16 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)hideVideoController {
     if (isPlaying == YES) {
         [self showVideoController:NO];
-        //        videoController.hidden = YES;
     }
     else {
         [self showVideoController:YES];
-        //        videoController.hidden = NO;
     }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
 - (void)showVideoController:(BOOL)willShow
@@ -348,11 +359,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [timeCounter invalidate];
         timeCounter = nil;
     }
-    
-    if (browseJpgTask) {
-        [browseJpgTask stop];
-        browseJpgTask = nil;
-    }
 }
 
 - (IBAction)playOrPause:(id)sender {
@@ -366,8 +372,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     }
 }
 - (IBAction)handleSingleTap:(id)sender {
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    if (UIDeviceOrientationIsLandscape(deviceOrientation))
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    //    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    if (UIDeviceOrientationIsLandscape(orientation))
     {
         //LandscapeView
         if (self.titlebar.frame.origin.y == -64)
@@ -417,8 +424,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (IBAction)snapshotSave:(id)sender {
-    [self hideSnapshotView];
     [self takeSnapshot];
+    [self hideSnapshotView];
 }
 
 - (IBAction)action:(id)sender {
@@ -507,33 +514,47 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)playCamera {
     
-    if (browseJpgTask)
-    {
-        [browseJpgTask stop];
-        browseJpgTask = nil;
-    }
-    
     if (timeCounter && [timeCounter isValid])
     {
         [timeCounter invalidate];
         timeCounter = nil;
     }
     
-    self.lblTimeCode.hidden = YES;
-    video_view.hidden = YES;
+    self.lblTimeCode.hidden     = YES;
+    video_view.hidden           = YES;
+    self.playerLayerView.hidden = YES;
     
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
         [loadingView startAnimating];
+        if (self.imageView)
+        {
+            [self.imageView removeFromSuperview];
+            self.imageView = nil;
+        }
         
-        if (self.cameraInfo.externalH264Url && self.cameraInfo.externalH264Url.length > 0) {
-            [self createPlayer];
-        } else {
-            self.lblTimeCode.hidden = NO;
-            self.lblTimeCode.text   = @"";
-            [self createBrowseView];
-            [self phoenixConnect];
+        if (self.cameraInfo.hlsUrl && self.cameraInfo.hlsUrl.length > 0) {
+            isPlayerStarted = NO;
+            NSURL *newMovieURL = [NSURL URLWithString:self.cameraInfo.hlsUrl];
+            if ([newMovieURL scheme])
+            {
+                AVURLAsset *asset = [AVURLAsset URLAssetWithURL:newMovieURL options:nil];
+                
+                NSArray *requestedKeys = [NSArray arrayWithObjects:kTracksKey, kPlayableKey, nil];
+
+                [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
+                 ^{
+                     dispatch_async( dispatch_get_main_queue(),
+                                    ^{
+                                        [self prepareToPlayAsset:asset withKeys:requestedKeys];
+                                    });
+                 }];
+            }
             
+            self.playerLayerView.hidden = NO;
+            
+        } else {
+            [self setUpJPGView];            
         }
     } else {
         self.imageView.image = nil;
@@ -543,7 +564,288 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     isPlaying = YES;
 }
 
+-(void)setUpJPGView{
+    self.lblTimeCode.hidden = NO;
+    self.lblTimeCode.text   = @"";
+    [self createBrowseView];
+    [self phoenixConnect];
+}
+
+#pragma mark Player Notifications
+
+- (void) playerItemDidReachEnd:(NSNotification*) aNotification
+{
+    [loadingView stopAnimating];
+}
+- (void) failedToPlayToEndTime:(NSNotification*) aNotification{
+    NSLog(@"Failed To Play To end Time");
+}
+
+-(void)removePlayerTimeObserver
+{
+    if (timeObserver)
+    {
+        [player removeTimeObserver:timeObserver];
+        timeObserver = nil;
+    }
+}
+
+
+-(void)assetFailedToPrepareForPlayback:(NSError *)error
+{
+    [self removeLiveViewObservers];
+    [loadingView startAnimating];
+    self.playerLayerView.hidden = YES;
+    [self setUpJPGView];
+}
+
+
+- (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys
+{
+    for (NSString *thisKey in requestedKeys)
+    {
+        NSError *error = nil;
+        AVKeyValueStatus keyStatus = [asset statusOfValueForKey:thisKey error:&error];
+        if (keyStatus == AVKeyValueStatusFailed)
+        {
+            [self assetFailedToPrepareForPlayback:error];
+            return;
+        }
+    }
+    
+    if (!asset.playable)
+    {
+        NSString *localizedDescription = NSLocalizedString(@"Item cannot be played", @"Item cannot be played description");
+        NSString *localizedFailureReason = NSLocalizedString(@"The assets tracks were loaded, but could not be made playable.", @"Item cannot be played failure reason");
+        NSDictionary *errorDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   localizedDescription, NSLocalizedDescriptionKey,
+                                   localizedFailureReason, NSLocalizedFailureReasonErrorKey,
+                                   nil];
+        NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"StitchedStreamPlayer" code:0 userInfo:errorDict];
+
+        [self assetFailedToPrepareForPlayback:assetCannotBePlayedError];
+        
+        return;
+    }
+
+    if (self.playerItem)
+    {
+        [self.playerItem removeObserver:self forKeyPath:kStatusKey];
+        [self.playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+        [self.playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:AVPlayerItemDidPlayToEndTimeNotification
+                                                      object:self.playerItem];
+    }
+
+    NSDictionary* settings = @{ (id)kCVPixelBufferPixelFormatTypeKey : [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] };
+    
+    self.output = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:settings];
+    
+    self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+
+    [self.playerItem addObserver:self
+                      forKeyPath:kStatusKey
+                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                         context:MyStreamingMovieViewControllerPlayerItemStatusObserverContext];
+    [self.playerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
+    [self.playerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:self.playerItem];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(failedToPlayToEndTime:)
+                                                 name:AVPlayerItemPlaybackStalledNotification
+                                               object:self.playerItem];
+    
+    if (![self player])
+    {
+        [self setPlayer:[AVPlayer playerWithPlayerItem:self.playerItem]];
+
+        [self.player addObserver:self
+                      forKeyPath:kCurrentItemKey
+                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                         context:MyStreamingMovieViewControllerCurrentItemObservationContext];
+        
+        [self.player addObserver:self
+                      forKeyPath:kTimedMetadataKey
+                         options:0
+                         context:MyStreamingMovieViewControllerTimedMetadataObserverContext];
+        
+        [self.player addObserver:self
+                      forKeyPath:kRateKey
+                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                         context:MyStreamingMovieViewControllerRateObservationContext];
+    }
+    
+    if (self.player.currentItem != self.playerItem)
+    {
+        [[self player] replaceCurrentItemWithPlayerItem:self.playerItem];
+    }
+    
+    
+}
+-(void)switchToJpgView{
+    [self removeLiveViewObservers];
+    [loadingView stopAnimating];
+    self.playerLayerView.hidden = YES;
+    if (liveViewDateStringUpdater) {
+        [liveViewDateStringUpdater invalidate];
+        liveViewDateStringUpdater = nil;
+    }
+    [self setUpJPGView];
+}
+
+- (void)observeValueForKeyPath:(NSString*) path
+                      ofObject:(id)object
+                        change:(NSDictionary*)change
+                       context:(void*)context
+{
+    
+    if (object == self.playerItem && [path isEqualToString:@"playbackBufferEmpty"])
+    {
+        if (self.playerItem.playbackBufferEmpty) {
+            NSLog(@"playbackBufferEmpty");
+            [loadingView startAnimating];
+            liveViewSwitchTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(switchToJpgView) userInfo:nil repeats:NO];
+            return;
+        }
+    }
+    
+    else if (object == self.playerItem && [path isEqualToString:@"playbackLikelyToKeepUp"])
+    {
+        if (self.player.currentItem.playbackLikelyToKeepUp == NO &&
+            CMTIME_COMPARE_INLINE(self.player.currentTime, >, kCMTimeZero) &&
+            CMTIME_COMPARE_INLINE(self.player.currentTime, !=, self.player.currentItem.duration)) {
+            NSLog(@"Player Hanging");
+            return;
+        }
+        if (self.playerItem.playbackLikelyToKeepUp == YES)
+        {
+            NSLog(@"playbackLikelyToKeepUp");
+            if (liveViewSwitchTimer) {
+                [liveViewSwitchTimer invalidate];
+                liveViewSwitchTimer = nil;
+            }
+            return;
+        }
+    }
+    if (context == MyStreamingMovieViewControllerPlayerItemStatusObserverContext)
+    {
+        AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        switch (status)
+        {
+            case AVPlayerStatusUnknown:
+            {
+                NSLog(@"AVPlayerStatusUnknown");
+                [self removePlayerTimeObserver];
+                [loadingView startAnimating];
+                liveViewSwitchTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(switchToJpgView) userInfo:nil repeats:NO];
+            }
+                break;
+                
+            case AVPlayerStatusReadyToPlay:
+            {
+                NSLog(@"AVPlayerStatusReadyToPlay");
+                playerLayerView.playerLayer.hidden = NO;
+
+                playerLayerView.playerLayer.backgroundColor = [[UIColor blackColor] CGColor];
+
+                [playerLayerView.playerLayer setPlayer:player];
+                if (liveViewDateStringUpdater) {
+                    [liveViewDateStringUpdater invalidate];
+                    liveViewDateStringUpdater   = nil;
+                }
+                liveViewDateStringUpdater = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(setDateLabelForHLS) userInfo:nil repeats:YES];
+                [loadingView stopAnimating];
+                if (!isPlayerStarted) {
+                    NSLog(@"START PLAYING");
+                    isPlayerStarted = YES;
+                    [self.playerItem addOutput:self.output];
+                    [player play];
+                }
+                
+            }
+                break;
+                
+            case AVPlayerStatusFailed:
+            {
+                AVPlayerItem *thePlayerItem = (AVPlayerItem *)object;
+                [self assetFailedToPrepareForPlayback:thePlayerItem.error];
+            }
+                break;
+        }
+    }
+
+    else if (context == MyStreamingMovieViewControllerRateObservationContext)
+    {
+        
+    }
+
+    else if (context == MyStreamingMovieViewControllerCurrentItemObservationContext)
+    {
+        AVPlayerItem *newPlayerItem = [change objectForKey:NSKeyValueChangeNewKey];
+
+        if (newPlayerItem == (id)[NSNull null])
+        {
+            
+        }
+        else
+        {
+            [playerLayerView.playerLayer setPlayer:self.player];
+            
+            [playerLayerView setVideoFillMode:AVLayerVideoGravityResizeAspect];
+            
+            
+        }
+    }
+
+    else if (context == MyStreamingMovieViewControllerTimedMetadataObserverContext)
+    {
+        NSArray* array = [[player currentItem] timedMetadata];
+        for (AVMetadataItem *metadataItem in array)
+        {
+            //            [self handleTimedMetadata:metadataItem];
+        }
+    }
+    else
+    {
+        //		[super observeValueForKeyPath:path ofObject:object change:change context:context];
+    }
+    
+    return;
+}
+
+
 - (void)phoenixConnect {
+    
+    dispatch_queue_t myQueue = dispatch_queue_create("Phoenix Queue",NULL);
+    dispatch_async(myQueue, ^{
+        // Perform long running process
+        if (self.socket != nil && [self.socket isConnected]) {
+            return;
+        }
+        self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
+        
+        [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+        
+        self.channel = [[PhxChannel alloc] initWithSocket:self.socket topic:[NSString stringWithFormat:@"cameras:%@",self.cameraInfo.camId] params:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+        [self.channel onEvent:@"snapshot-taken" callback:^(id message, id ref) {
+            [loadingView stopAnimating];
+            UIImage *jpgImage =  [self decodeBase64ToImage:message[@"image"]];
+            self.imageView.image = jpgImage;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Update the UI
+                [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:NO];
+            });
+            
+        }];
+        [self.channel join];
+    });
+    /*
     if (self.socket != nil && [self.socket isConnected]) {
         return;
     }
@@ -560,7 +862,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:YES];
     }];
     [self.channel join];
-    
+    */
 }
 
 - (UIImage *)decodeBase64ToImage:(NSString *)strEncodeData {
@@ -572,6 +874,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     self.lblTimeCode.text           = [self getDateFromUnixFormat:[message[@"timestamp"] stringValue]];
 }
 
+-(void) setDateLabelForHLS{
+    self.lblTimeCode.hidden         = NO;
+    self.lblTimeCode.text           = [self getCameraTimeStringForHLS:[self getUTCDateString]];
+}
+
 - (NSString *) getDateFromUnixFormat:(NSString *)unixFormat
 {
     NSTimeInterval serverTime       = [unixFormat doubleValue];
@@ -581,7 +888,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
     
     NSTimeZone *cameraTimeZone      = [NSTimeZone timeZoneWithName:self.cameraInfo.timezone];
-
+    
     NSTimeInterval timeDifference   = [cameraTimeZone daylightSavingTimeOffsetForDate:serverDate];
     
     NSDate *correctDate             = [serverDate dateByAddingTimeInterval:timeDifference];
@@ -589,13 +896,41 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
     
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-
+    
     NSString *dateString            = [dateFormatter stringFromDate:correctDate];
     
     return dateString;
     
 }
 
+- (NSString *) getUTCDateString{
+    NSDateFormatter *dateformatter      = [[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+    
+    NSTimeZone *timeZone_UTC            = [NSTimeZone timeZoneWithName:@"UTC"];
+    
+    [dateformatter setTimeZone:timeZone_UTC];
+    
+    NSString *utcDateString             = [dateformatter stringFromDate:[NSDate date]];
+    
+    return utcDateString;
+}
+
+- (NSString *) getCameraTimeStringForHLS:(NSString *)utcDateString{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+    
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:self.cameraInfo.timezone]];
+    
+    //[formatter dateFromString:dateAsString]
+    
+    NSString *hlsCameraDateString  = [dateFormatter stringFromDate:[dateFormatter dateFromString:utcDateString]];
+    
+    return hlsCameraDateString;
+}
 - (void)saveImage
 {
     UIGraphicsBeginImageContextWithOptions(self.imageView.bounds.size, self.imageView.layer.opaque, 0.0);
@@ -628,11 +963,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     isPlaying = NO;
     [self saveImage];
     if ([self.cameraInfo isOnline]) {
-        if (launch)
-        {
-            gst_launch_remote_pause(launch);
-        }
-        
+        [self removeLiveViewObservers];
+    
         if (timeCounter && [timeCounter isValid])
         {
             [timeCounter invalidate];
@@ -644,30 +976,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     } else {
         return;
     }
-}
-
-- (void)createPlayer {
-    GstLaunchRemoteAppContext ctx;
-    ctx.app                     = (__bridge gpointer)(self);
-    ctx.initialized             = initialized_proxy;
-    ctx.media_size_changed      = media_size_changed_proxy;
-    ctx.set_current_position    = set_current_position_proxy;
-    ctx.set_message             = set_message_proxy;
-    
-    if (launch) {
-        gst_launch_remote_play(launch);
-    }
-    else
-    {
-        launch = gst_launch_remote_new(&ctx);
-        NSString *pipeline = [NSString stringWithFormat:@"rtspsrc protocols=4  location=%@ user-id=%@ user-pw=%@ latency=0 drop-on-latency=1 ! decodebin ! videoconvert ! autovideosink", self.cameraInfo.externalH264Url, self.cameraInfo.username, self.cameraInfo.password];
-        launch->real_pipeline_string = (gchar *)[pipeline UTF8String];
-        
-        gst_launch_remote_set_window_handle(launch, (guintptr) (id) video_view);
-        
-        
-    }
-    
 }
 
 - (void)createBrowseView {
@@ -770,18 +1078,46 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 #pragma mark NIDropdown delegate
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index {
-    if (launch) {
-        gst_launch_remote_free(launch);
-        launch = nil;
-    }
+    
+    [self removeLiveViewObservers];
+    
     dropDown = nil;
     [self.channel leave];
     [self.socket disconnect];
+    self.channel = nil;
+    self.socket = nil;
     
     self.cameraInfo = [self.cameras objectAtIndex:index];
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
     runFirstTime = YES;
+}
+
+-(void)removeLiveViewObservers{
+    
+    if (liveViewDateStringUpdater) {
+        [liveViewDateStringUpdater invalidate];
+        liveViewDateStringUpdater = nil;
+    }
+    
+    [self.player pause];
+    
+    [self removePlayerTimeObserver];
+    
+    [self.playerItem removeObserver:self forKeyPath:kStatusKey];
+    [self.playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+    [self.playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AVPlayerItemDidPlayToEndTimeNotification
+                                                  object:self.playerItem];
+
+    [self.player removeObserver:self forKeyPath:kCurrentItemKey];
+    [self.player removeObserver:self forKeyPath:kTimedMetadataKey];
+    [self.player removeObserver:self forKeyPath:kRateKey];
+    
+    self.player = nil;
+    
+    self.playerItem = nil;
 }
 
 @end

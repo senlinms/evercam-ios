@@ -29,6 +29,9 @@
 
 @property (nonatomic, assign) BOOL isOnline;
 
+@property (nonatomic, strong) NSString *hlsUrl;
+@property (nonatomic, strong) NSString *rtmpUrl;
+
 - (id) initWithDictionary: (NSDictionary *)cameraDict;
 - (BOOL) isHikvision;
 - (NSString *)getJpgPath;

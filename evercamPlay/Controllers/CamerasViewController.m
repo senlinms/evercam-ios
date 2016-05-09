@@ -43,7 +43,8 @@
 #import "AboutViewController.h"
 #import "UIImageView+WebCache.h"
 #import "Intercom/intercom.h"
-
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -290,7 +291,7 @@
 {
     CameraViewCell *cell = (CameraViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:[GlobalSettings sharedInstance].isPhone ? @"CameraViewCell":@"CameraViewCellPad" forIndexPath:indexPath];
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
-    NSLog(@"Is Camera Online: %@",cameraInfo.isOnline?@"YES: ONLINE":@"NO: OFFLINE");
+//    NSLog(@"Is Camera Online: %@",cameraInfo.isOnline?@"YES: ONLINE":@"NO: OFFLINE");
     NSString *thumbnail_ImageUrl_String = [NSString stringWithFormat:@"%@/%@/thumbnail?api_id=%@&api_key=%@",THUMB_IMAGE_BASEURL,cameraInfo.camId,[APP_DELEGATE defaultUser].apiId,[APP_DELEGATE defaultUser].apiKey];
     
     cell.titleLabel.text = cameraInfo.name;
