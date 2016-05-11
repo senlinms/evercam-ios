@@ -22,4 +22,5 @@
 - (IBAction)camera_StatusChange_Action:(id)sender;
 
 - (IBAction)backAction:(id)sender;
+- (IBAction)NewShareAction:(id)sender;
 @end

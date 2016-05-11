@@ -88,4 +88,14 @@
                            alpha:1.0f];
 }
 
+
+-(NSString *)getCameraRights:(NSString *)rights{
+    NSString *userRights = @"";
+    if ([rights rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        userRights = @"Full Rights";
+    }else{
+        userRights = @"Read Only";
+    }
+    return userRights;
+}
 @end

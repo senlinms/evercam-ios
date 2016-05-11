@@ -12,5 +12,8 @@
 
 +(void)getCameraShareDetails:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
 
++(void)updateUserRights:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
+
++(void)deleteCameraShare:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 
 @end

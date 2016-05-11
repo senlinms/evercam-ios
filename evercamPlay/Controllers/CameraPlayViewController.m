@@ -251,9 +251,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)showShareView{
-    ShareViewController *sVc    = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:[NSBundle mainBundle]];
+    ShareViewController *sVc    = [[ShareViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ShareViewController":@"ShareViewController_iPad" bundle:[NSBundle mainBundle]];
     sVc.camera_Object           = self.cameraInfo;
-    [self.navigationController presentViewController:sVc animated:YES completion:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:sVc];
+    nav.navigationBar.hidden    = YES;
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)showCameraView {

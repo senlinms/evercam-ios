@@ -43,6 +43,9 @@
                             <rect key="frame" x="279" y="26" width="35" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="ic_add_user_padding.png"/>
+                            <connections>
+                                <action selector="NewShareAction:" destination="-1" eventType="touchUpInside" id="j1C-MI-Gjd"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.20392156859999999" green="0.22352941179999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>

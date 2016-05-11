@@ -28,7 +28,7 @@
 -(UIColor *)colorWithHexString:(NSString *)stringToConvert;
 - (NSString *)encodeToBase64String:(UIImage *)image;
 //________________________________________
-
+-(NSString *)getCameraRights:(NSString *)rights;
 
 @end
 

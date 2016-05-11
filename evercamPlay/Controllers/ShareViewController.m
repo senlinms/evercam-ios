@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "EvercamUtility.h"
 #import "GlobalSettings.h"
+#import "ShareSettingViewController.h"
+#import "NewShareViewController.h"
 @interface ShareViewController (){
     NSMutableArray *shareArray;
 }
@@ -94,7 +96,7 @@
     NSDictionary *dict = shareArray[indexPath.row];
     cell.name_Label.text    = dict[@"fullname"];
     cell.email_Label.text   = dict[@"email"];
-    cell.rights_Label.text  = (indexPath.row == 0)?@"Owner":[self getCameraRights:dict[@"rights"]];
+    cell.rights_Label.text  = (indexPath.row == 0)?@"Owner":[AppUtility getCameraRights:dict[@"rights"]];
     
     return cell;
 }
@@ -103,6 +105,10 @@
     
     if (indexPath.row == 0) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }else{
+        ShareSettingViewController *sSVC = [[ShareSettingViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ShareSettingViewController":@"ShareSettingViewController_iPad" bundle:[NSBundle mainBundle]];
+        sSVC.userDictionary = shareArray[indexPath.row];
+        [self.navigationController pushViewController:sSVC animated:YES];
     }
     
 }
@@ -123,13 +129,10 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(NSString *)getCameraRights:(NSString *)rights{
-    NSString *userRights = @"";
-    if ([rights rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
-        userRights = @"Full Rights";
-    }else{
-        userRights = @"Read Only";
-    }
-    return userRights;
+- (IBAction)NewShareAction:(id)sender {
+    NewShareViewController *sSVC = [[NewShareViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"NewShareViewController":@"ShareSettingViewController_iPad" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:sSVC animated:YES];
 }
+
+
 @end
