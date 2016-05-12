@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EvercamCamera.h"
-@interface ShareViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface ShareViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     
 }
 @property (nonatomic,strong) EvercamCamera  *camera_Object;

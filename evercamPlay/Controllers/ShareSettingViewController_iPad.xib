@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareSettingViewController">
             <connections>
                 <outlet property="loadingActivityIndicator" destination="O0T-03-CAm" id="66b-yL-92h"/>
+                <outlet property="navigationBar_Label" destination="AyC-ha-h4I" id="GQb-hU-TDK"/>
+                <outlet property="resendBtn" destination="Gmt-qQ-D30" id="6X1-8z-two"/>
                 <outlet property="settingTableView" destination="gUz-ri-ubp" id="rd1-Y2-32R"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kdF-NO-WAY"/>
             </connections>
@@ -18,8 +20,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="gUz-ri-ubp">
-                    <rect key="frame" x="0.0" y="65" width="768" height="959"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <rect key="frame" x="0.0" y="65" width="768" height="211"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="INY-Hu-2DA"/>
@@ -66,6 +68,17 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="color" red="0.29411764709999999" green="0.29411764709999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                 </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Gmt-qQ-D30">
+                    <rect key="frame" x="126" y="301" width="516" height="43"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.84313725490000002" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="RESEND">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="resendShareRequest:" destination="-1" eventType="touchUpInside" id="OHI-bw-Crt"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="418" y="307"/>

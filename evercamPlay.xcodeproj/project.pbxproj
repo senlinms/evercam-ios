@@ -83,6 +83,8 @@
 		77CF39F91CE1B1BC0064D915 /* ic_fontawsome_users.png in Resources */ = {isa = PBXBuildFile; fileRef = 77CF39F81CE1B1BC0064D915 /* ic_fontawsome_users.png */; };
 		77CF39FD1CE1BC540064D915 /* ShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CF39FB1CE1BC540064D915 /* ShareCell.m */; };
 		77CF39FE1CE1BC540064D915 /* ShareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CF39FC1CE1BC540064D915 /* ShareCell.xib */; };
+		77D14FBC1CE4666900228734 /* NewShareViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D14FBB1CE4666900228734 /* NewShareViewController_iPad.xib */; };
+		77D14FBF1CE4731D00228734 /* EvercamSingleCameraDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D14FBE1CE4731C00228734 /* EvercamSingleCameraDetails.m */; };
 		77E754CE1CE21E9000667511 /* ShareCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E754CD1CE21E9000667511 /* ShareCell_iPad.xib */; };
 		77EEF9921CE35504009A3BC0 /* ShareSettingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */; };
 		77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF9941CE35619009A3BC0 /* NewShareViewController.m */; };
@@ -359,6 +361,9 @@
 		77CF39FA1CE1BC540064D915 /* ShareCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareCell.h; sourceTree = "<group>"; };
 		77CF39FB1CE1BC540064D915 /* ShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareCell.m; sourceTree = "<group>"; };
 		77CF39FC1CE1BC540064D915 /* ShareCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCell.xib; sourceTree = "<group>"; };
+		77D14FBB1CE4666900228734 /* NewShareViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewShareViewController_iPad.xib; sourceTree = "<group>"; };
+		77D14FBD1CE4731C00228734 /* EvercamSingleCameraDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamSingleCameraDetails.h; sourceTree = "<group>"; };
+		77D14FBE1CE4731C00228734 /* EvercamSingleCameraDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamSingleCameraDetails.m; sourceTree = "<group>"; };
 		77E754CD1CE21E9000667511 /* ShareCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCell_iPad.xib; sourceTree = "<group>"; };
 		77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareSettingViewController_iPad.xib; sourceTree = "<group>"; };
 		77EEF9931CE35619009A3BC0 /* NewShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewShareViewController.h; sourceTree = "<group>"; };
@@ -675,6 +680,8 @@
 				413BB2AE1ADB14640083A5DC /* CommonUtil.m */,
 				77F7A00D1CE1E76900E4F5DE /* EvercamShare.h */,
 				77F7A00E1CE1E76900E4F5DE /* EvercamShare.m */,
+				77D14FBD1CE4731C00228734 /* EvercamSingleCameraDetails.h */,
+				77D14FBE1CE4731C00228734 /* EvercamSingleCameraDetails.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1113,6 +1120,7 @@
 				77EEF9931CE35619009A3BC0 /* NewShareViewController.h */,
 				77EEF9941CE35619009A3BC0 /* NewShareViewController.m */,
 				77EEF9951CE35619009A3BC0 /* NewShareViewController.xib */,
+				77D14FBB1CE4666900228734 /* NewShareViewController_iPad.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1278,6 +1286,7 @@
 				E356C9DB1B17B1D6007BB101 /* SnapshotViewController_iPad.xib in Resources */,
 				E30900781B1646D100E5B5C0 /* play_page_next_iPad@2x.png in Resources */,
 				E30900A41B16B96000E5B5C0 /* action-red-button-selected@2x.png in Resources */,
+				77D14FBC1CE4666900228734 /* NewShareViewController_iPad.xib in Resources */,
 				77E754CE1CE21E9000667511 /* ShareCell_iPad.xib in Resources */,
 				E30900A81B16B96000E5B5C0 /* action-sheet-panel@2x.png in Resources */,
 				413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */,
@@ -1470,6 +1479,7 @@
 				CB318E621AFC3565004FFA8E /* UIImageView+WebCache.m in Sources */,
 				41208A611AD97D44009C4FC2 /* SMTPAPI.m in Sources */,
 				CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */,
+				77D14FBF1CE4731D00228734 /* EvercamSingleCameraDetails.m in Sources */,
 				E30900881B16B78600E5B5C0 /* BlockActionSheet.m in Sources */,
 				CB318E5B1AFC3565004FFA8E /* SDWebImageManager.m in Sources */,
 				41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */,
