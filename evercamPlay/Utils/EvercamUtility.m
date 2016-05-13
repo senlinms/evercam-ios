@@ -17,7 +17,7 @@
 @end
 
 @implementation EvercamUtility
-
+@synthesize isFullyDismiss;
 +(EvercamUtility *)sharedLRUtility
 {
     static EvercamUtility *sharedInstance = nil;

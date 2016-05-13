@@ -11,6 +11,8 @@
 @interface ShareViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     
 }
+
+
 @property (nonatomic,strong) EvercamCamera  *camera_Object;
 
 @property (weak, nonatomic) IBOutlet UIView *cam_status_View;
@@ -18,8 +20,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *camera_Status_Label;
 @property (weak, nonatomic) IBOutlet UILabel *camera_Status_MainLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loading_ActivityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *transferBtn;
+@property (weak, nonatomic) IBOutlet UIButton *addShareBtn;
 
 - (IBAction)camera_StatusChange_Action:(id)sender;
+- (IBAction)transferOwnerAction:(id)sender;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)NewShareAction:(id)sender;

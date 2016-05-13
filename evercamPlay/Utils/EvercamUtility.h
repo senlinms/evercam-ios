@@ -20,7 +20,10 @@
 #define IS_IPHONE_6_PLUS (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)736) < DBL_EPSILON)
 
 @interface EvercamUtility : NSObject{
+    BOOL isFullyDismiss;
 }
+
+@property (nonatomic,assign) BOOL isFullyDismiss;
 
 +(EvercamUtility *)sharedLRUtility;
 -(void)displayAlertWithTitle:(NSString *)title AndMessage:(NSString *)msg;

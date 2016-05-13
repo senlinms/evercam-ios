@@ -7,10 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
             <connections>
+                <outlet property="addShareBtn" destination="hZ6-vY-6oa" id="z5X-pM-qzk"/>
                 <outlet property="cam_status_View" destination="vQ2-fI-ecv" id="3Xi-Ti-vBK"/>
                 <outlet property="camera_Status_Label" destination="rSv-3F-DIe" id="DgQ-Mu-W4i"/>
                 <outlet property="camera_Status_MainLabel" destination="h39-pW-lhv" id="TJR-fv-UCF"/>
                 <outlet property="loading_ActivityIndicator" destination="rtt-XQ-ABL" id="HNX-gz-D7A"/>
+                <outlet property="transferBtn" destination="kcD-yn-9iG" id="bS3-wt-DAX"/>
                 <outlet property="usersTableView" destination="uEc-hW-K4J" id="C5i-9c-mpe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -45,6 +47,14 @@
                             <state key="normal" image="ic_add_user_padding.png"/>
                             <connections>
                                 <action selector="NewShareAction:" destination="-1" eventType="touchUpInside" id="j1C-MI-Gjd"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kcD-yn-9iG">
+                            <rect key="frame" x="279" y="26" width="35" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="ic_Transfer_icon.png"/>
+                            <connections>
+                                <action selector="transferOwnerAction:" destination="-1" eventType="touchUpInside" id="FT2-hD-qLT"/>
                             </connections>
                         </button>
                     </subviews>
@@ -109,6 +119,7 @@
     </objects>
     <resources>
         <image name="back.png" width="10" height="17"/>
+        <image name="ic_Transfer_icon.png" width="40" height="40"/>
         <image name="ic_add_user_padding.png" width="50" height="50"/>
         <image name="ic_fontawsome_users.png" width="50" height="50"/>
     </resources>

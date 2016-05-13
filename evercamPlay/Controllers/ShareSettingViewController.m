@@ -10,6 +10,7 @@
 #import "EvercamUtility.h"
 #import "AppDelegate.h"
 #import "EvercamShare.h"
+#import "ShareViewController.h"
 @interface ShareSettingViewController (){
     NSArray *optionsArray;
     NSIndexPath *checkedIndexPath;
@@ -62,7 +63,7 @@
 }
 
 - (IBAction)save_Settings:(id)sender {
-     [self.loadingActivityIndicator startAnimating];
+//     [self.loadingActivityIndicator startAnimating];
     if (isUserRights) {
         NSString *newRights = nil;
         if (checkedIndexPath.row == 0) {
@@ -127,7 +128,7 @@
 }
 
 -(void)setCameraRightsForUser:(NSString *)newRights{
-
+    [self.loadingActivityIndicator startAnimating];
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"camera_id"],@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSNumber numberWithBool:isPendingUser],@"isPending",[NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"email"],@"email",newRights,@"rights", nil],@"Post_Param", nil];
     
     [EvercamShare updateUserRights:param_Dictionary withBlock:^(id details, NSError *error) {
@@ -142,10 +143,16 @@
 }
 
 -(void)blockAccessOfUser{
-    NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"camera_id"],@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",userDictionary[@"email"],@"user_Email", nil];
+    [self.loadingActivityIndicator startAnimating];
+    NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"camera_id"],@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",userDictionary[@"email"],@"user_Email",[NSNumber numberWithBool:isPendingUser],@"isPending", nil];
     [EvercamShare deleteCameraShare:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.loadingActivityIndicator stopAnimating];
+            AppUser *user = [APP_DELEGATE defaultUser];
+            if ([user.email isEqualToString:userDictionary[@"email"]]) {
+                //back to live view
+                AppUtility.isFullyDismiss  = YES;
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             [self.loadingActivityIndicator stopAnimating];
@@ -185,6 +192,17 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    AppUser *user = [APP_DELEGATE defaultUser];
+    if ([user.email isEqualToString:userDictionary[@"email"]] && isUserRights) {
+        UITableViewCell* cellCheck = [tableView
+                                      cellForRowAtIndexPath:indexPath];
+        if (indexPath.row != 2 && ![cellCheck.textLabel.text isEqualToString:rightsString]) {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            [AppUtility displayAlertWithTitle:@"Sorry!" AndMessage:@"You can not change your own rights."];
+            return;
+        }
+    }
+    
     if (indexPath != checkedIndexPath) {
         UITableViewCell* uncheckCell = [tableView
                                         cellForRowAtIndexPath:checkedIndexPath];

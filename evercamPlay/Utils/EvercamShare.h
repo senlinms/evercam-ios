@@ -22,5 +22,5 @@
 +(void)changeCameraStatus:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 
 +(void)getCameraPendingRequest:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
-
++(void)transferCameraOwner:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 @end

@@ -15,14 +15,17 @@
 #import "GlobalSettings.h"
 #import "ShareSettingViewController.h"
 #import "NewShareViewController.h"
+#import "ActionSheetPicker.h"
 @interface ShareViewController (){
     NSMutableArray *shareArray;
+    NSArray *transferArray;
 }
 
 @end
 
 @implementation ShareViewController
 @synthesize camera_Object;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,8 +40,13 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    shareArray = [NSMutableArray new];
-    [self getcameraDetails];
+    if (AppUtility.isFullyDismiss) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        shareArray = [NSMutableArray new];
+        [self getcameraDetails];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +55,7 @@
 }
 
 -(void)getcameraDetails{
+    [shareArray removeAllObjects];
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:camera_Object.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
     [self.loading_ActivityIndicator startAnimating];
     [EvercamSingleCameraDetails getCameraDetails:param_Dictionary withBlock:^(id details, NSError *error) {
@@ -67,6 +76,16 @@
         if (!error) {
             NSDictionary *shareDetailDict = (NSDictionary *)details;
             [shareArray addObjectsFromArray:shareDetailDict[@"shares"]];
+            AppUser *user = [APP_DELEGATE defaultUser];
+            NSLog(@"Current User email: %@",user.email);
+            if ([shareDetailDict[@"owner"][@"email"] isEqualToString:user.email]) {
+                self.transferBtn.hidden = NO;
+                self.addShareBtn.frame = CGRectMake(self.transferBtn.frame.origin.x - self.addShareBtn.frame.size.width, self.addShareBtn.frame.origin.y, self.addShareBtn.frame.size.width, self.addShareBtn.frame.size.height);
+                transferArray = shareDetailDict[@"shares"];
+            }else{
+                self.transferBtn.hidden = YES;
+                self.addShareBtn.frame = CGRectMake(self.transferBtn.frame.origin.x, self.addShareBtn.frame.origin.y, self.addShareBtn.frame.size.width, self.addShareBtn.frame.size.height);
+            }
             [shareArray insertObject:shareDetailDict[@"owner"] atIndex:0];
             [self getPendingRequest:param_Dictionary];
         }else{
@@ -110,7 +129,27 @@
 
 #pragma UIALERTVIEW DELEGATE
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (alertView.tag == 5607) {
+        if (buttonIndex == 1) {
+            [ActionSheetStringPicker showPickerWithTitle:@"Select a new owner" rows:[transferArray valueForKey:@"fullname"] initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:camera_Object.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSDictionary dictionaryWithObjectsAndKeys:(NSDictionary *)transferArray[selectedIndex][@"email"],@"user_id", nil],@"Post_Param", nil];
+                [self.loading_ActivityIndicator startAnimating];
+                [EvercamShare transferCameraOwner:param_Dictionary withBlock:^(id details, NSError *error) {
+                    if (!error) {
+                        [self.loading_ActivityIndicator stopAnimating];
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }else{
+                        [self showErrorMessage];
+                    }
+                }];
+            } cancelBlock:^(ActionSheetStringPicker *picker) {
+                
+            } origin:self.view];
+        }
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 /*
@@ -171,6 +210,12 @@
         sSVC.cameraId       = camera_Object.camId;
         [self.navigationController pushViewController:sSVC animated:YES];
     }];
+}
+
+- (IBAction)transferOwnerAction:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Transfer Camera Ownership" message:@"Transfer ownership to a user who you are already sharing the camera with.\n Once you Transfer, you may lose all rights to the camera and associated artifacts." delegate:self cancelButtonTitle:@"CANCEL" otherButtonTitles:@"TRANSFER", nil];
+    alert.tag = 5607;
+    [alert show];
 }
 
 - (IBAction)backAction:(id)sender {

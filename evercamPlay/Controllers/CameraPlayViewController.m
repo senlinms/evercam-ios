@@ -24,6 +24,7 @@
 #import <PhoenixClient/PhoenixClient.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "ShareViewController.h"
+#import "EvercamUtility.h"
 
 static void *MyStreamingMovieViewControllerTimedMetadataObserverContext = &MyStreamingMovieViewControllerTimedMetadataObserverContext;
 static void *MyStreamingMovieViewControllerRateObservationContext = &MyStreamingMovieViewControllerRateObservationContext;
@@ -170,15 +171,21 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (isCameraRemoved) {
         [self dismissViewControllerAnimated:NO completion:nil];
     }
+    if (AppUtility.isFullyDismiss) {
+        AppUtility.isFullyDismiss = NO;
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
     [self playCamera];
     [self disableSleep];
-    
+        
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
     [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -454,12 +461,19 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             
             break;
         case 2:{
-            [self viewRecordings];
+            if (actionSheet.tag == 5608) {
+                [self showSavedImages];
+            }else{
+                [self viewRecordings];
+            }
+            
         }
             
             break;
         case 3:{
-            
+            if (actionSheet.tag == 5608) {
+                [self viewRecordings];
+            }
         }
             
             break;
@@ -475,6 +489,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         UIActionSheet *sheet;
         if ([self.cameraInfo.rights.rightsString rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
             sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera Settings",@"Share",@"Saved Images",@"Cloud Recordings", nil];
+            sheet.tag = 5608;
         }else{
             sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera Settings",@"Saved Images",@"Cloud Recordings", nil];
         }
