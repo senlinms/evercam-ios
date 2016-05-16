@@ -39,7 +39,8 @@
 #import "MenuViewControllerCell.h"
 #import "PreferenceUtil.h"
 #import "AboutViewController.h"
-
+#import "Struts.h"
+#import "GravatarServiceFactory.h"
 @interface MenuViewController()
 {
     NSInteger _presentedRow;
@@ -72,8 +73,25 @@
     self.appVersion.text = [NSString stringWithFormat:@"v%@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
     self.name.text =  [NSString stringWithFormat:@"%@ %@", ([APP_DELEGATE defaultUser].firstName), ([APP_DELEGATE defaultUser].lastName)];
     self.email.text = [APP_DELEGATE defaultUser].email;
+    [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:@"" size:72 delegate:self];
     [self changeFrame];
+    if ([PreferenceUtil isShowOfflineCameras]) {
+        [self.cameraOffOn_Switch setOn:YES];
+    } else {
+        [self.cameraOffOn_Switch setOn:NO];
+    }
     
+}
+
+-(void)gravatarServiceDone:(id<GravatarService>)gravatarService
+                 withImage:(UIImage *)image{
+    NSLog(@"gravatarServiceDone");
+    self.profileImage.image = image;
+}
+
+-(void)gravatarService:(id<GravatarService>)gravatarService
+      didFailWithError:(NSError *)error{
+    NSLog(@"gravatarService");
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -123,7 +141,7 @@
     MenuViewControllerCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSInteger row = indexPath.row;
     
-    if (nil == cell)
+    if (cell == nil)
     {
         cell = [[MenuViewControllerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
@@ -199,6 +217,15 @@
         
         [APP_DELEGATE logout];
         _presentedRow = 0;
+    }
+}
+
+- (IBAction)showOfflineModeChanged:(id)sender {
+    UISwitch *switchView = (UISwitch *)sender;
+    if ([switchView isOn]) {
+        [PreferenceUtil setIsShowOfflineCameras:YES];
+    } else {
+        [PreferenceUtil setIsShowOfflineCameras:NO];
     }
 }
 

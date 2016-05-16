@@ -71,6 +71,9 @@
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
 		6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF591FA1BF05FE20044B0F1 /* logo.png */; };
+		77079D791CE9C6D90073EE16 /* gpoview.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 77079D781CE9C6D90073EE16 /* gpoview.mp4 */; };
+		77079D821CE9ECCD0073EE16 /* GravatarUIImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77079D811CE9ECCD0073EE16 /* GravatarUIImageFactory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77079D881CE9ECD80073EE16 /* GravatarServiceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77079D861CE9ECD80073EE16 /* GravatarServiceFactory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		770C9E5C1CDA0978003BC4E1 /* MyPlayerLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 770C9E5B1CDA0978003BC4E1 /* MyPlayerLayerView.m */; };
 		770C9E5E1CDA0A8F003BC4E1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */; };
 		7732ED981CD735C000EC9C6B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7732ED971CD735C000EC9C6B /* MediaPlayer.framework */; };
@@ -348,6 +351,13 @@
 		6CCB48281BDF4D7A00A62C28 /* SharedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedManager.h; path = ../SharedManager.h; sourceTree = "<group>"; };
 		6CCB48291BDF4D7A00A62C28 /* SharedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SharedManager.m; path = ../SharedManager.m; sourceTree = "<group>"; };
 		6CF591FA1BF05FE20044B0F1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		77079D781CE9C6D90073EE16 /* gpoview.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = gpoview.mp4; sourceTree = "<group>"; };
+		77079D811CE9ECCD0073EE16 /* GravatarUIImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravatarUIImageFactory.m; sourceTree = "<group>"; };
+		77079D831CE9ECD80073EE16 /* GravatarService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarService.h; sourceTree = "<group>"; };
+		77079D841CE9ECD80073EE16 /* GravatarServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarServiceDelegate.h; sourceTree = "<group>"; };
+		77079D851CE9ECD80073EE16 /* GravatarServiceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarServiceFactory.h; sourceTree = "<group>"; };
+		77079D861CE9ECD80073EE16 /* GravatarServiceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravatarServiceFactory.m; sourceTree = "<group>"; };
+		77079D871CE9ECD80073EE16 /* GravatarUIImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarUIImageFactory.h; sourceTree = "<group>"; };
 		770C9E5A1CDA0978003BC4E1 /* MyPlayerLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlayerLayerView.h; sourceTree = "<group>"; };
 		770C9E5B1CDA0978003BC4E1 /* MyPlayerLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlayerLayerView.m; sourceTree = "<group>"; };
 		770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -767,6 +777,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		77079D801CE9EC880073EE16 /* GravatorLib */ = {
+			isa = PBXGroup;
+			children = (
+				77079D831CE9ECD80073EE16 /* GravatarService.h */,
+				77079D841CE9ECD80073EE16 /* GravatarServiceDelegate.h */,
+				77079D851CE9ECD80073EE16 /* GravatarServiceFactory.h */,
+				77079D861CE9ECD80073EE16 /* GravatarServiceFactory.m */,
+				77079D871CE9ECD80073EE16 /* GravatarUIImageFactory.h */,
+				77079D811CE9ECCD0073EE16 /* GravatarUIImageFactory.m */,
+			);
+			name = GravatorLib;
+			sourceTree = "<group>";
+		};
 		83F82304D6A047012929A763 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -895,6 +918,7 @@
 		CB1C76771AAB7DE900680FE3 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				77079D801CE9EC880073EE16 /* GravatorLib */,
 				ABDAE07B1CBB8749002285B7 /* TPKeyboardAvoiding */,
 				C4E418CF1B305DB70050872E /* GStreamer */,
 				E30900811B16B78600E5B5C0 /* BlockAction */,
@@ -925,6 +949,7 @@
 		CB1C76881AAB871A00680FE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77079D781CE9C6D90073EE16 /* gpoview.mp4 */,
 				CB1C76891AAB871A00680FE3 /* image */,
 			);
 			path = Resources;
@@ -1383,6 +1408,7 @@
 				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
 				E30900701B163F1200E5B5C0 /* SignupViewController_iPad.xib in Resources */,
+				77079D791CE9C6D90073EE16 /* gpoview.mp4 in Resources */,
 				E30201CB1B16C82D0006DAE8 /* alert-yellow-button@2x.png in Resources */,
 				58429A671C16A9E8008D34A8 /* AboutViewController.xib in Resources */,
 				77CF39F71CE1B0A70064D915 /* ic_add_user_padding.png in Resources */,
@@ -1458,6 +1484,7 @@
 				C4E418D71B305F1F0050872E /* EaglUIVIew.m in Sources */,
 				C4E418D81B305F1F0050872E /* gst-launch-remote.c in Sources */,
 				C4E418D91B305F1F0050872E /* gst-launch-remote.h in Sources */,
+				77079D881CE9ECD80073EE16 /* GravatarServiceFactory.m in Sources */,
 				77F7A00F1CE1E76900E4F5DE /* EvercamShare.m in Sources */,
 				C4E418DA1B305F1F0050872E /* gst_ios_init.h in Sources */,
 				C4E418DB1B305F1F0050872E /* gst_ios_init.m in Sources */,
@@ -1515,6 +1542,7 @@
 				58F0F6171C08799B00BC04A3 /* Struts.m in Sources */,
 				CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */,
 				E369E4A61B137AB6009D2D9E /* AddAccountView.m in Sources */,
+				77079D821CE9ECCD0073EE16 /* GravatarUIImageFactory.m in Sources */,
 				58429A661C16A9E8008D34A8 /* AboutViewController.m in Sources */,
 				E309008A1B16B78600E5B5C0 /* BlockBackground.m in Sources */,
 				CB318E5A1AFC3565004FFA8E /* SDWebImageDownloaderOperation.m in Sources */,
@@ -1597,7 +1625,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
+				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 			};
@@ -1636,7 +1664,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
+				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				VALIDATE_PRODUCT = YES;
@@ -1683,7 +1711,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
+				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1732,7 +1760,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f02bee9c-c6b8-4cd4-9a6c-e74b5dbfa53b";
+				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";

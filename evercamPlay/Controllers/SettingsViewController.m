@@ -27,16 +27,17 @@
 
     [super viewDidLoad];
     
-    self.webView.scalesPageToFit = YES;
     
     self.screenName = @"Cameras Preferences";
     
     // Do any additional setup after loading the view from its nib.
-    
+    self.settingTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    /*
     gradient = [CAGradientLayer layer];
-    gradient.frame = self.tableView.bounds;
+    gradient.frame = self.settingTableView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
-    [self.tableView.layer insertSublayer:gradient atIndex:0];
+    */
+//    [self.settingTableView.layer insertSublayer:gradient atIndex:0];
     
 //    setstrutsWithMask(self.view, UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     /*
@@ -51,6 +52,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.versionLabel.text = [NSString stringWithFormat:@"v%@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
     CustomNavigationController* cVC = [APP_DELEGATE viewController];
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
@@ -63,12 +65,12 @@
 }
 
 - (void)viewDidLayoutSubviews{
-    gradient.frame = self.tableView.bounds;
+//    gradient.frame = self.settingTableView.bounds;
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    gradient.frame = self.tableView.bounds;
+//    gradient.frame = self.settingTableView.bounds;
     //    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
 //    if (UIInterfaceOrientationIsPortrait(orientation))
 //    {
@@ -130,8 +132,8 @@
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:subTitleCellIdentifier];
             cell.textLabel.text = @"Cameras per row";
-            cell.textLabel.textColor = [UIColor whiteColor];
-            cell.detailTextLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor blackColor];
+            cell.detailTextLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[PreferenceUtil getCameraPerRow]];
         }
         else if (indexPath.row == 1)
@@ -149,15 +151,15 @@
             } else if (sleepTimerSecs == 30) {
                 cell.detailTextLabel.text = @"After 30 seconds of inactivity";
             }
-            cell.textLabel.textColor = [UIColor whiteColor];
-            cell.detailTextLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor blackColor];
+            cell.detailTextLabel.textColor = [UIColor blackColor];
         }
         else if (indexPath.row == 2)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
             cell.frame = CGRectMake(0, 0, tableView.frame.size.width, 54);
             cell.textLabel.text = @"Force landscape for live view";
-            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor blackColor];
             
             UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-66 , 11.5f, 51.f, 31.f)];
             [cell addSubview:swtch];
@@ -174,7 +176,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:basicCellIdentifier];
             cell.frame = CGRectMake(0, 0, tableView.frame.size.width, 54);
             cell.textLabel.text = @"Show offline cameras";
-            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor blackColor];
             
             UISwitch *swtch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-66, 11.5f, 51.f, 31.f)];
             [cell addSubview:swtch];
@@ -189,8 +191,8 @@
             }
         }
 
-    cell.backgroundView.backgroundColor = [UIColor colorWithRed:52.f/255.f green:57.f/255.f blue:61.f/255.f alpha:1];
-    cell.backgroundColor = [UIColor colorWithRed:26.f/255.f green:30.f/255.f blue:35.f/255.f alpha:1];
+//    cell.backgroundView.backgroundColor = [UIColor colorWithRed:52.f/255.f green:57.f/255.f blue:61.f/255.f alpha:1];
+//    cell.backgroundColor = [UIColor colorWithRed:26.f/255.f green:30.f/255.f blue:35.f/255.f alpha:1];
     cell.selectionStyle =  UITableViewCellSelectionStyleNone;
 
     return cell;
@@ -209,15 +211,15 @@
                     
                     [sheet addButtonWithTitle:@"1" block:^{
                         [PreferenceUtil setCameraPerRow:1];
-                        [self.tableView reloadData];
+                        [self.settingTableView reloadData];
                     }];
                     [sheet addButtonWithTitle:@"2" block:^{
                         [PreferenceUtil setCameraPerRow:2];
-                        [self.tableView reloadData];
+                        [self.settingTableView reloadData];
                     }];
                     [sheet addButtonWithTitle:@"3" block:^{
                         [PreferenceUtil setCameraPerRow:3];
-                        [self.tableView reloadData];
+                        [self.settingTableView reloadData];
                     }];
                     
                     [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
@@ -238,7 +240,7 @@
                                               //Do some thing here
                                               [view dismissViewControllerAnimated:YES completion:nil];
                                               [PreferenceUtil setCameraPerRow:1];
-                                              [self.tableView reloadData];
+                                              [self.settingTableView reloadData];
                                           }];
                     UIAlertAction* two = [UIAlertAction
                                           actionWithTitle:@"2"
@@ -247,7 +249,7 @@
                                           {
                                               [view dismissViewControllerAnimated:YES completion:nil];
                                               [PreferenceUtil setCameraPerRow:2];
-                                              [self.tableView reloadData];
+                                              [self.settingTableView reloadData];
                                               
                                           }];
                     UIAlertAction* three = [UIAlertAction
@@ -257,7 +259,7 @@
                                             {
                                                 [view dismissViewControllerAnimated:YES completion:nil];
                                                 [PreferenceUtil setCameraPerRow:3];
-                                                [self.tableView reloadData];
+                                                [self.settingTableView reloadData];
                                                 
                                             }];
                     UIAlertAction* cancel = [UIAlertAction
@@ -283,8 +285,8 @@
                     {
                         UIPopoverPresentationController *popPresenter = [view
                                                                          popoverPresentationController];
-                        popPresenter.sourceView = [self.tableView cellForRowAtIndexPath:indexPath];
-                        popPresenter.sourceRect = [self.tableView cellForRowAtIndexPath:indexPath].bounds;
+                        popPresenter.sourceView = [self.settingTableView cellForRowAtIndexPath:indexPath];
+                        popPresenter.sourceRect = [self.settingTableView cellForRowAtIndexPath:indexPath].bounds;
                         [self presentViewController:view animated:YES completion:nil];
                     }
                 }
@@ -299,23 +301,23 @@
                     
                     [sheet addButtonWithTitle:@"Sleep" block:^{
                         [PreferenceUtil setSleepTimerSecs:30];
-                        [self.tableView reloadData];
+                        [self.settingTableView reloadData];
                     }];
                     [sheet addButtonWithTitle:@"30 seconds" block:^{
                         [PreferenceUtil setSleepTimerSecs:30];
-                        [self.tableView reloadData];
+                        [self.settingTableView reloadData];
                     }];
                     [sheet addButtonWithTitle:@"1 minute" block:^{
                         [PreferenceUtil setSleepTimerSecs:60];
-                        [self.tableView reloadData];
+                        [self.settingTableView reloadData];
                     }];
                     [sheet addButtonWithTitle:@"5 minute" block:^{
                         [PreferenceUtil setSleepTimerSecs:5 * 60];
-                        [self.tableView reloadData];
+                        [self.settingTableView reloadData];
                     }];
                     [sheet addButtonWithTitle:@"Never" block:^{
                         [PreferenceUtil setSleepTimerSecs:0];
-                        [self.tableView reloadData];
+                        [self.settingTableView reloadData];
                     }];
                     
                     [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
@@ -336,7 +338,7 @@
                                                   //Do some thing here
                                                   [view dismissViewControllerAnimated:YES completion:nil];
                                                   [PreferenceUtil setSleepTimerSecs:30];
-                                                  [self.tableView reloadData];
+                                                  [self.settingTableView reloadData];
                                               }];
                     UIAlertAction* onemin = [UIAlertAction
                                              actionWithTitle:@"1 minute"
@@ -345,7 +347,7 @@
                                              {
                                                  [view dismissViewControllerAnimated:YES completion:nil];
                                                  [PreferenceUtil setSleepTimerSecs:60];
-                                                 [self.tableView reloadData];
+                                                 [self.settingTableView reloadData];
                                              }];
                     UIAlertAction* fivemin = [UIAlertAction
                                               actionWithTitle:@"5 minute"
@@ -354,7 +356,7 @@
                                               {
                                                   [view dismissViewControllerAnimated:YES completion:nil];
                                                   [PreferenceUtil setSleepTimerSecs:5 * 60];
-                                                  [self.tableView reloadData];
+                                                  [self.settingTableView reloadData];
                                               }];
                     UIAlertAction* never = [UIAlertAction
                                             actionWithTitle:@"Never"
@@ -363,7 +365,7 @@
                                             {
                                                 [view dismissViewControllerAnimated:YES completion:nil];
                                                 [PreferenceUtil setSleepTimerSecs:0];
-                                                [self.tableView reloadData];
+                                                [self.settingTableView reloadData];
                                                 
                                             }];
                     UIAlertAction* cancel = [UIAlertAction
@@ -390,8 +392,8 @@
                     {
                         UIPopoverPresentationController *popPresenter = [view
                                                                          popoverPresentationController];
-                        popPresenter.sourceView = [self.tableView cellForRowAtIndexPath:indexPath];
-                        popPresenter.sourceRect = [self.tableView cellForRowAtIndexPath:indexPath].bounds;
+                        popPresenter.sourceView = [self.settingTableView cellForRowAtIndexPath:indexPath];
+                        popPresenter.sourceRect = [self.settingTableView cellForRowAtIndexPath:indexPath].bounds;
                         [self presentViewController:view animated:YES completion:nil];
                     }
                 }

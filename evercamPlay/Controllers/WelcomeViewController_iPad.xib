@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14E46" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeViewController">
             <connections>
                 <outlet property="pageControl" destination="bNL-Tw-STE" id="LwW-GU-uqR"/>
+                <outlet property="playerContainerView" destination="gyC-Tp-vXH" id="8L8-Uu-EkW"/>
                 <outlet property="tutorialScrollView" destination="9q9-bU-HXJ" id="dcM-qX-BXL"/>
                 <outlet property="tutorialView" destination="rgx-VG-ziQ" id="VJ3-LK-PyH"/>
                 <outlet property="view" destination="Bdu-b9-a34" id="cqF-AP-0z8"/>
@@ -72,7 +73,7 @@
                         <action selector="onSignIn:" destination="-1" eventType="touchUpInside" id="2jX-nO-vcM"/>
                     </connections>
                 </button>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="9q9-bU-HXJ">
+                <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="9q9-bU-HXJ">
                     <rect key="frame" x="0.0" y="73" width="768" height="849"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
@@ -91,6 +92,11 @@
                         <outlet property="delegate" destination="-1" id="gfp-ih-I0H"/>
                     </connections>
                 </scrollView>
+                <view contentMode="scaleToFill" id="gyC-Tp-vXH">
+                    <rect key="frame" x="0.0" y="73" width="768" height="849"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedTopBarMetrics"/>
