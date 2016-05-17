@@ -11,6 +11,8 @@
 #import "AppDelegate.h"
 #import "EvercamShare.h"
 #import "ShareViewController.h"
+#import "GlobalSettings.h"
+#import <QuartzCore/QuartzCore.h>
 @interface ShareSettingViewController (){
     NSArray *optionsArray;
     NSIndexPath *checkedIndexPath;
@@ -29,15 +31,27 @@
         optionsArray            = [NSArray arrayWithObjects:@"Full Rights",@"Read Only",@"No Access", nil];
         rightsString            = [AppUtility getCameraRights:userDictionary[@"rights"]];
         self.resendBtn.hidden   = isPendingUser?NO:YES;
+        self.rights_View.hidden = NO;
+        self.settingTableView.hidden    = YES;
+        self.nameLabel.text     = isPendingUser?userDictionary[@"email"]:userDictionary[@"fullname"];
+        self.emailLabel.text    = isPendingUser?@"...pending":userDictionary[@"email"];
+        [GravatarServiceFactory requestUIImageByEmail:userDictionary[@"email"] defaultImage:gravatarServerImageMysteryMan size:96 delegate:self];
     }else{
         optionsArray = [NSArray arrayWithObjects:@"Public on the web",@"Anyone with the link",@"Only specific users", nil];
         self.resendBtn.hidden   = YES;
+        self.rights_View.hidden = YES;
         self.navigationBar_Label.text = @"";
+        self.settingTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        self.settingTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
+        self.settingTableView.layer.cornerRadius = 10.0;
+        self.settingTableView.layer.borderWidth     = 1.0;
+        self.settingTableView.layer.borderColor     = ((UIColor *)[AppUtility colorWithHexString:@"428bca"]).CGColor;
     }
 
     [optionsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj == rightsString) {
             checkedIndexPath = [NSIndexPath indexPathForItem:idx inSection:0];
+            [self.rights_Segment setSelectedSegmentIndex:checkedIndexPath.row];
             [self.settingTableView reloadData];
         }
     }];
@@ -59,13 +73,46 @@
 */
 
 - (IBAction)backAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([GlobalSettings sharedInstance].isPhone) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        if (!isUserRights) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"K_ISIPAD_DEVICE" object:nil];
+        }
+    }
 }
 
 - (IBAction)save_Settings:(id)sender {
 //     [self.loadingActivityIndicator startAnimating];
     if (isUserRights) {
+        AppUser *user = [APP_DELEGATE defaultUser];
+        if ([user.email isEqualToString:userDictionary[@"email"]]) {
+            NSString *segment_String = [self.rights_Segment titleForSegmentAtIndex:self.rights_Segment.selectedSegmentIndex];
+
+            if (self.rights_Segment.selectedSegmentIndex != 2 && ![segment_String isEqualToString:rightsString]) {
+                [AppUtility displayAlertWithTitle:@"Sorry!" AndMessage:@"You can not change your own rights. You can remove yourself from this share."];
+                return;
+            }
+        }
         NSString *newRights = nil;
+        if (self.rights_Segment.selectedSegmentIndex == 0) {
+            //Full Rights
+            newRights = @"Snapshot,View,Edit,List";
+            [self setCameraRightsForUser:newRights];
+        }else if (self.rights_Segment.selectedSegmentIndex == 1){
+            //Read Only
+            newRights = @"Snapshot,List";
+            [self setCameraRightsForUser:newRights];
+        }else{
+            //No Access
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Are you sure you want to remove this share?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
+            [alert show];
+        }
+        
+        /*
         if (checkedIndexPath.row == 0) {
             //Full Rights
             newRights = @"Snapshot,View,Edit,List";
@@ -79,6 +126,7 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Are you sure you want to remove this share?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
             [alert show];
         }
+        */
     }else{
         NSString *choosenOption = optionsArray[checkedIndexPath.row];
         if ([choosenOption isEqualToString:@"Public on the web"]) {
@@ -134,7 +182,12 @@
     [EvercamShare updateUserRights:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.loadingActivityIndicator stopAnimating];
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([GlobalSettings sharedInstance].isPhone) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"K_ISIPAD_DEVICE" object:nil];
+            }
         }else{
             [self.loadingActivityIndicator stopAnimating];
             [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
@@ -153,7 +206,12 @@
                 //back to live view
                 AppUtility.isFullyDismiss  = YES;
             }
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([GlobalSettings sharedInstance].isPhone) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"K_ISIPAD_DEVICE" object:nil];
+            }
         }else{
             [self.loadingActivityIndicator stopAnimating];
             [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
@@ -182,6 +240,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell.textLabel.textColor = [AppUtility colorWithHexString:@"4B4B4B"];
+        cell.textLabel.font     = [UIFont fontWithName:@"Avenir-Medium" size:16.0];
+
     }
     cell.textLabel.text = optionsArray[indexPath.row];
     if (checkedIndexPath.row == indexPath.row) {
@@ -216,5 +277,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+-(void)gravatarServiceDone:(id<GravatarService>)gravatarService
+                 withImage:(UIImage *)image{
+    self.gravator_ImageView.image = image;
+}
+
+-(void)gravatarService:(id<GravatarService>)gravatarService
+      didFailWithError:(NSError *)error{
+    
+}
 
 @end

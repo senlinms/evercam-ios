@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *rights_Label;
 @property (weak, nonatomic) IBOutlet UILabel *email_Label;
 
+
 @end

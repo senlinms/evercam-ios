@@ -10,6 +10,7 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "EvercamUtility.h"
 #import "EvercamShare.h"
+#import "GlobalSettings.h"
 @interface NewShareViewController (){
     NSString *rights;
 }
@@ -42,7 +43,15 @@
 */
 
 - (IBAction)backAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([GlobalSettings sharedInstance].isPhone) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"K_ISIPAD_DEVICE" object:nil];
+        
+    }
+    
 }
 
 - (IBAction)sendRequest:(id)sender {
@@ -97,7 +106,14 @@
 
 #pragma UIALERTVIEW DELEGATE
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([GlobalSettings sharedInstance].isPhone) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"K_ISIPAD_DEVICE" object:nil];
+        
+    }
 }
 
 

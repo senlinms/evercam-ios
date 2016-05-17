@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ShareSettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
+#import "GravatarServiceFactory.h"
+@interface ShareSettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,GravatarServiceDelegate>{
     NSDictionary *userDictionary;
     BOOL isUserRights;
     BOOL isPendingUser;
@@ -24,6 +24,11 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivityIndicator;
 @property (weak, nonatomic) IBOutlet UIButton *resendBtn;
 @property (weak, nonatomic) IBOutlet UILabel *navigationBar_Label;
+@property (weak, nonatomic) IBOutlet UIImageView *gravator_ImageView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *rights_Segment;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+@property (weak, nonatomic) IBOutlet UIView *rights_View;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)save_Settings:(id)sender;

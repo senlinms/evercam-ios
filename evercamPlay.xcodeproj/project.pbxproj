@@ -74,8 +74,14 @@
 		77079D791CE9C6D90073EE16 /* gpoview.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 77079D781CE9C6D90073EE16 /* gpoview.mp4 */; };
 		77079D821CE9ECCD0073EE16 /* GravatarUIImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77079D811CE9ECCD0073EE16 /* GravatarUIImageFactory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77079D881CE9ECD80073EE16 /* GravatarServiceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77079D861CE9ECD80073EE16 /* GravatarServiceFactory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		77079D8B1CEA05280073EE16 /* circleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 77079D891CEA05280073EE16 /* circleImage.png */; };
+		77079D8C1CEA05280073EE16 /* circleImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77079D8A1CEA05280073EE16 /* circleImage@2x.png */; };
 		770C9E5C1CDA0978003BC4E1 /* MyPlayerLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 770C9E5B1CDA0978003BC4E1 /* MyPlayerLayerView.m */; };
 		770C9E5E1CDA0A8F003BC4E1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */; };
+		77294E2C1CEAF6F800A5B7D4 /* circleImage_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 77294E2A1CEAF6F800A5B7D4 /* circleImage_White.png */; };
+		77294E2D1CEAF6F800A5B7D4 /* circleImage_White@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77294E2B1CEAF6F800A5B7D4 /* circleImage_White@2x.png */; };
+		77294E301CEAFFE300A5B7D4 /* gradientSideImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 77294E2E1CEAFFE300A5B7D4 /* gradientSideImg.png */; };
+		77294E311CEAFFE300A5B7D4 /* gradientSideImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77294E2F1CEAFFE300A5B7D4 /* gradientSideImg@2x.png */; };
 		7732ED981CD735C000EC9C6B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7732ED971CD735C000EC9C6B /* MediaPlayer.framework */; };
 		77359D5C1CE5B135000574C5 /* ic_Transfer_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 77359D5A1CE5B135000574C5 /* ic_Transfer_icon.png */; };
 		77359D5D1CE5B135000574C5 /* ic_Transfer_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77359D5B1CE5B135000574C5 /* ic_Transfer_icon@2x.png */; };
@@ -358,9 +364,15 @@
 		77079D851CE9ECD80073EE16 /* GravatarServiceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarServiceFactory.h; sourceTree = "<group>"; };
 		77079D861CE9ECD80073EE16 /* GravatarServiceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravatarServiceFactory.m; sourceTree = "<group>"; };
 		77079D871CE9ECD80073EE16 /* GravatarUIImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarUIImageFactory.h; sourceTree = "<group>"; };
+		77079D891CEA05280073EE16 /* circleImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleImage.png; sourceTree = "<group>"; };
+		77079D8A1CEA05280073EE16 /* circleImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleImage@2x.png"; sourceTree = "<group>"; };
 		770C9E5A1CDA0978003BC4E1 /* MyPlayerLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlayerLayerView.h; sourceTree = "<group>"; };
 		770C9E5B1CDA0978003BC4E1 /* MyPlayerLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlayerLayerView.m; sourceTree = "<group>"; };
 		770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		77294E2A1CEAF6F800A5B7D4 /* circleImage_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleImage_White.png; sourceTree = "<group>"; };
+		77294E2B1CEAF6F800A5B7D4 /* circleImage_White@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleImage_White@2x.png"; sourceTree = "<group>"; };
+		77294E2E1CEAFFE300A5B7D4 /* gradientSideImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradientSideImg.png; sourceTree = "<group>"; };
+		77294E2F1CEAFFE300A5B7D4 /* gradientSideImg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradientSideImg@2x.png"; sourceTree = "<group>"; };
 		7732ED971CD735C000EC9C6B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		77359D5A1CE5B135000574C5 /* ic_Transfer_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_Transfer_icon.png; sourceTree = "<group>"; };
 		77359D5B1CE5B135000574C5 /* ic_Transfer_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_Transfer_icon@2x.png"; sourceTree = "<group>"; };
@@ -958,6 +970,12 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				77294E2E1CEAFFE300A5B7D4 /* gradientSideImg.png */,
+				77294E2F1CEAFFE300A5B7D4 /* gradientSideImg@2x.png */,
+				77294E2A1CEAF6F800A5B7D4 /* circleImage_White.png */,
+				77294E2B1CEAF6F800A5B7D4 /* circleImage_White@2x.png */,
+				77079D891CEA05280073EE16 /* circleImage.png */,
+				77079D8A1CEA05280073EE16 /* circleImage@2x.png */,
 				77359D5A1CE5B135000574C5 /* ic_Transfer_icon.png */,
 				77359D5B1CE5B135000574C5 /* ic_Transfer_icon@2x.png */,
 				77EEF9981CE356CB009A3BC0 /* ic_send_padding.png */,
@@ -1362,6 +1380,7 @@
 				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
 				413BB2B11ADBFB710083A5DC /* pull-out.png in Resources */,
 				CB44E8771AAE9E7D00A78C11 /* MenuViewController.xib in Resources */,
+				77079D8C1CEA05280073EE16 /* circleImage@2x.png in Resources */,
 				E30900A51B16B96000E5B5C0 /* action-red-button.png in Resources */,
 				CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */,
 				E30201CF1B16CE290006DAE8 /* SettingsViewController_iPad.xib in Resources */,
@@ -1371,9 +1390,11 @@
 				77CF39FE1CE1BC540064D915 /* ShareCell.xib in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
 				AB8097161CC0C742002F5FF9 /* nav.png in Resources */,
+				77294E311CEAFFE300A5B7D4 /* gradientSideImg@2x.png in Resources */,
 				E30900761B1646D100E5B5C0 /* play_page_feature_iPad@2x.png in Resources */,
 				E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */,
 				6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */,
+				77294E2C1CEAF6F800A5B7D4 /* circleImage_White.png in Resources */,
 				58429A651C16A9E8008D34A8 /* AboutViewController_iPad.xib in Resources */,
 				77C08AB61CD0AE21005F9427 /* RecordingsViewController_iPad.xib in Resources */,
 				585999131BF9C53000CDC457 /* ic_info.png in Resources */,
@@ -1399,6 +1420,7 @@
 				CB1C76BC1AAB871A00680FE3 /* cam_unavailable.png in Resources */,
 				E3CB15B01B287DD900413197 /* evercam_icon_nav@2x.png in Resources */,
 				E30201AC1B16C4DD0006DAE8 /* AccountsViewController_iPad.xib in Resources */,
+				77079D8B1CEA05280073EE16 /* circleImage.png in Resources */,
 				E356C9D41B17985D007BB101 /* Pods-evercamPlay.debug.xcconfig in Resources */,
 				E369E4A81B137AC9009D2D9E /* AddAccountView.xib in Resources */,
 				E3CB15A91B2879C700413197 /* btn_delete.png in Resources */,
@@ -1407,7 +1429,9 @@
 				E30201C51B16C82D0006DAE8 /* alert-red-button@2x.png in Resources */,
 				410A13B51AE232D5008CA21C /* dropdown.png in Resources */,
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
+				77294E301CEAFFE300A5B7D4 /* gradientSideImg.png in Resources */,
 				E30900701B163F1200E5B5C0 /* SignupViewController_iPad.xib in Resources */,
+				77294E2D1CEAF6F800A5B7D4 /* circleImage_White@2x.png in Resources */,
 				77079D791CE9C6D90073EE16 /* gpoview.mp4 in Resources */,
 				E30201CB1B16C82D0006DAE8 /* alert-yellow-button@2x.png in Resources */,
 				58429A671C16A9E8008D34A8 /* AboutViewController.xib in Resources */,

@@ -31,6 +31,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.usersTableView registerNib:[UINib nibWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ShareCell":@"ShareCell_iPad" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Cell"];
+    if (![GlobalSettings sharedInstance].isPhone) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getcameraDetails) name:@"K_ISIPAD_DEVICE" object:nil];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -55,6 +58,10 @@
 }
 
 -(void)getcameraDetails{
+    if (AppUtility.isFullyDismiss) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
     [shareArray removeAllObjects];
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:camera_Object.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
     [self.loading_ActivityIndicator startAnimating];
@@ -144,7 +151,7 @@
                 }];
             } cancelBlock:^(ActionSheetStringPicker *picker) {
                 
-            } origin:self.view];
+            } origin:self.transferBtn];
         }
     }else{
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -178,7 +185,9 @@
     cell.name_Label.text    = (dict[@"fullname"])?dict[@"fullname"]:dict[@"email"];
     cell.email_Label.text   = (dict[@"fullname"])?dict[@"email"]:@"...pending";
     cell.rights_Label.text  = (indexPath.row == 0)?@"Owner":[AppUtility getCameraRights:dict[@"rights"]];
-    
+    UIView *selectionColor = [[UIView alloc] init];
+    selectionColor.backgroundColor = [AppUtility colorWithHexString:@"f5f5f5"];
+    cell.selectedBackgroundView = selectionColor;
     return cell;
 }
 
@@ -188,17 +197,20 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }else{
         ShareSettingViewController *sSVC = [[ShareSettingViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ShareSettingViewController":@"ShareSettingViewController_iPad" bundle:[NSBundle mainBundle]];
+        if (![GlobalSettings sharedInstance].isPhone) {
+           sSVC.modalPresentationStyle = UIModalPresentationFormSheet;
+        }
         sSVC.userDictionary = shareArray[indexPath.row];
         sSVC.isUserRights   = YES;
         sSVC.isPendingUser  = (sSVC.userDictionary[@"fullname"])?NO:YES;
-        [self.navigationController pushViewController:sSVC animated:YES];
+        ([GlobalSettings sharedInstance].isPhone)? [self.navigationController pushViewController:sSVC animated:YES]:[self presentViewController:sSVC animated:YES completion:NULL];
     }
     
 }
 
 - (IBAction)camera_StatusChange_Action:(id)sender {
     [UIView animateWithDuration:0.5 animations:^{
-        self.cam_status_View.backgroundColor = [AppUtility colorWithHexString:@"d9d9d9"];
+        self.cam_status_View.backgroundColor = [AppUtility colorWithHexString:@"f5f5f5"];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.5 animations:^{
            self.cam_status_View.backgroundColor = [UIColor whiteColor]; 
@@ -224,9 +236,12 @@
 
 - (IBAction)NewShareAction:(id)sender {
     NewShareViewController *sSVC    = [[NewShareViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"NewShareViewController":@"NewShareViewController_iPad" bundle:[NSBundle mainBundle]];
+    if (![GlobalSettings sharedInstance].isPhone) {
+        sSVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
     sSVC.cameraId                   = camera_Object.camId;
-    [self.navigationController pushViewController:sSVC animated:YES];
+    ([GlobalSettings sharedInstance].isPhone)? [self.navigationController pushViewController:sSVC animated:YES]:[self presentViewController:sSVC animated:YES completion:NULL];
+//    [self.navigationController pushViewController:sSVC animated:YES];
 }
-
 
 @end

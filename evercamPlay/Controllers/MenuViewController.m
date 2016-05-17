@@ -73,7 +73,8 @@
     self.appVersion.text = [NSString stringWithFormat:@"v%@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
     self.name.text =  [NSString stringWithFormat:@"%@ %@", ([APP_DELEGATE defaultUser].firstName), ([APP_DELEGATE defaultUser].lastName)];
     self.email.text = [APP_DELEGATE defaultUser].email;
-    [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:@"" size:72 delegate:self];
+    [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:gravatarServerImageMysteryMan size:72 delegate:self];
+    
     [self changeFrame];
     if ([PreferenceUtil isShowOfflineCameras]) {
         [self.cameraOffOn_Switch setOn:YES];
