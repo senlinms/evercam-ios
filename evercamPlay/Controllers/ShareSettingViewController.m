@@ -12,6 +12,7 @@
 #import "EvercamShare.h"
 #import "ShareViewController.h"
 #import "GlobalSettings.h"
+#import "TPKeyboardAvoidingScrollView.h"
 #import <QuartzCore/QuartzCore.h>
 @interface ShareSettingViewController (){
     NSArray *optionsArray;
@@ -36,10 +37,16 @@
         self.nameLabel.text     = isPendingUser?userDictionary[@"email"]:userDictionary[@"fullname"];
         self.emailLabel.text    = isPendingUser?@"...pending":userDictionary[@"email"];
         [GravatarServiceFactory requestUIImageByEmail:userDictionary[@"email"] defaultImage:gravatarServerImageMysteryMan size:96 delegate:self];
+        if ([GlobalSettings sharedInstance].isPhone) {
+            [self.iPhone_ScrollView contentSizeToFit];
+        }
     }else{
         optionsArray = [NSArray arrayWithObjects:@"Public on the web",@"Anyone with the link",@"Only specific users", nil];
         self.resendBtn.hidden   = YES;
         self.rights_View.hidden = YES;
+        if ([GlobalSettings sharedInstance].isPhone) {
+            self.iPhone_ScrollView.hidden = YES;
+        }
         self.navigationBar_Label.text = @"";
         self.settingTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         self.settingTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -241,8 +248,15 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         cell.textLabel.textColor = [AppUtility colorWithHexString:@"4B4B4B"];
-        cell.textLabel.font     = [UIFont fontWithName:@"Avenir-Medium" size:16.0];
-
+        cell.textLabel.font     = [UIFont fontWithName:@"Arial" size:16.0];
+        if (indexPath.row != 2) {
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0.0, cell.frame.size.height-1, cell.frame.size.width, 1)];
+            lineView.backgroundColor = [AppUtility colorWithHexString:@"428bca"];
+            lineView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin |
+            UIViewAutoresizingFlexibleLeftMargin |
+            UIViewAutoresizingFlexibleWidth;
+            [cell addSubview:lineView];
+        }
     }
     cell.textLabel.text = optionsArray[indexPath.row];
     if (checkedIndexPath.row == indexPath.row) {

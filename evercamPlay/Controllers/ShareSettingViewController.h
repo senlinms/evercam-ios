@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GravatarServiceFactory.h"
+@class TPKeyboardAvoidingScrollView;
 @interface ShareSettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,GravatarServiceDelegate>{
     NSDictionary *userDictionary;
     BOOL isUserRights;
@@ -29,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UIView *rights_View;
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *iPhone_ScrollView;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)save_Settings:(id)sender;

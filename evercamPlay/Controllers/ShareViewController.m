@@ -63,6 +63,7 @@
         return;
     }
     [shareArray removeAllObjects];
+    self.view.userInteractionEnabled = NO;
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:camera_Object.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
     [self.loading_ActivityIndicator startAnimating];
     [EvercamSingleCameraDetails getCameraDetails:param_Dictionary withBlock:^(id details, NSError *error) {
@@ -73,6 +74,7 @@
             [self setCameraStatusValues];
             [self getCameraUsers:param_Dictionary];
         }else{
+            self.view.userInteractionEnabled = YES;
             [self showErrorMessage];
         }
     }];
@@ -96,6 +98,7 @@
             [shareArray insertObject:shareDetailDict[@"owner"] atIndex:0];
             [self getPendingRequest:param_Dictionary];
         }else{
+            self.view.userInteractionEnabled = YES;
             [self showErrorMessage];
         }
     }];
@@ -106,10 +109,12 @@
     [EvercamShare getCameraPendingRequest:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.loading_ActivityIndicator stopAnimating];
+            self.view.userInteractionEnabled = YES;
             NSDictionary *shareDetailDict = (NSDictionary *)details;
             [shareArray addObjectsFromArray:shareDetailDict[@"share_requests"]];
             [self.usersTableView reloadData];
         }else{
+            self.view.userInteractionEnabled = YES;
             [self showErrorMessage];
         }
     }];
