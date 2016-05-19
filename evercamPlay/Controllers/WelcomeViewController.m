@@ -83,7 +83,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self playIntroVideo];
+    AppUser *defaultUser = [APP_DELEGATE getDefaultUser];
+    if (!defaultUser) {
+        [self playIntroVideo];
+    }
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
