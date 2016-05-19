@@ -93,7 +93,6 @@
 		77CF39FD1CE1BC540064D915 /* ShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CF39FB1CE1BC540064D915 /* ShareCell.m */; };
 		77CF39FE1CE1BC540064D915 /* ShareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CF39FC1CE1BC540064D915 /* ShareCell.xib */; };
 		77D14FBC1CE4666900228734 /* NewShareViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D14FBB1CE4666900228734 /* NewShareViewController_iPad.xib */; };
-		77D14FBF1CE4731D00228734 /* EvercamSingleCameraDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D14FBE1CE4731C00228734 /* EvercamSingleCameraDetails.m */; };
 		77E754CE1CE21E9000667511 /* ShareCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E754CD1CE21E9000667511 /* ShareCell_iPad.xib */; };
 		77EEF9921CE35504009A3BC0 /* ShareSettingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */; };
 		77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF9941CE35619009A3BC0 /* NewShareViewController.m */; };
@@ -102,7 +101,6 @@
 		77F33DCE1CE0B99C00461117 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F33DCC1CE0B99C00461117 /* ShareViewController.m */; };
 		77F33DCF1CE0B99C00461117 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F33DCD1CE0B99C00461117 /* ShareViewController.xib */; };
 		77F7A00C1CE1E0CD00E4F5DE /* EvercamUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7A00B1CE1E0CD00E4F5DE /* EvercamUtility.m */; };
-		77F7A00F1CE1E76900E4F5DE /* EvercamShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7A00E1CE1E76900E4F5DE /* EvercamShare.m */; };
 		AB242FEC1CBE41AC00C5F2F7 /* Intercom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */; };
 		AB242FED1CBE41AC00C5F2F7 /* Intercom.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */; };
 		AB6E77E21CBE1A1600DE6310 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */; };
@@ -384,8 +382,6 @@
 		77CF39FB1CE1BC540064D915 /* ShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareCell.m; sourceTree = "<group>"; };
 		77CF39FC1CE1BC540064D915 /* ShareCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCell.xib; sourceTree = "<group>"; };
 		77D14FBB1CE4666900228734 /* NewShareViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewShareViewController_iPad.xib; sourceTree = "<group>"; };
-		77D14FBD1CE4731C00228734 /* EvercamSingleCameraDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamSingleCameraDetails.h; sourceTree = "<group>"; };
-		77D14FBE1CE4731C00228734 /* EvercamSingleCameraDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamSingleCameraDetails.m; sourceTree = "<group>"; };
 		77E754CD1CE21E9000667511 /* ShareCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCell_iPad.xib; sourceTree = "<group>"; };
 		77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareSettingViewController_iPad.xib; sourceTree = "<group>"; };
 		77EEF9931CE35619009A3BC0 /* NewShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewShareViewController.h; sourceTree = "<group>"; };
@@ -397,8 +393,6 @@
 		77F33DCD1CE0B99C00461117 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		77F7A00A1CE1E0CD00E4F5DE /* EvercamUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamUtility.h; sourceTree = "<group>"; };
 		77F7A00B1CE1E0CD00E4F5DE /* EvercamUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUtility.m; sourceTree = "<group>"; };
-		77F7A00D1CE1E76900E4F5DE /* EvercamShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamShare.h; sourceTree = "<group>"; };
-		77F7A00E1CE1E76900E4F5DE /* EvercamShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamShare.m; sourceTree = "<group>"; };
 		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Intercom.framework; sourceTree = "<group>"; };
 		AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Intercom.bundle; sourceTree = "<group>"; };
@@ -700,10 +694,6 @@
 				413BB2831AD992DD0083A5DC /* NetworkUtil.m */,
 				413BB2AD1ADB14640083A5DC /* CommonUtil.h */,
 				413BB2AE1ADB14640083A5DC /* CommonUtil.m */,
-				77F7A00D1CE1E76900E4F5DE /* EvercamShare.h */,
-				77F7A00E1CE1E76900E4F5DE /* EvercamShare.m */,
-				77D14FBD1CE4731C00228734 /* EvercamSingleCameraDetails.h */,
-				77D14FBE1CE4731C00228734 /* EvercamSingleCameraDetails.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1501,7 +1491,6 @@
 				C4E418D81B305F1F0050872E /* gst-launch-remote.c in Sources */,
 				C4E418D91B305F1F0050872E /* gst-launch-remote.h in Sources */,
 				77079D881CE9ECD80073EE16 /* GravatarServiceFactory.m in Sources */,
-				77F7A00F1CE1E76900E4F5DE /* EvercamShare.m in Sources */,
 				C4E418DA1B305F1F0050872E /* gst_ios_init.h in Sources */,
 				C4E418DB1B305F1F0050872E /* gst_ios_init.m in Sources */,
 				CB44E8741AAE9E7D00A78C11 /* LoginViewController.m in Sources */,
@@ -1530,7 +1519,6 @@
 				CB318E621AFC3565004FFA8E /* UIImageView+WebCache.m in Sources */,
 				41208A611AD97D44009C4FC2 /* SMTPAPI.m in Sources */,
 				CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */,
-				77D14FBF1CE4731D00228734 /* EvercamSingleCameraDetails.m in Sources */,
 				E30900881B16B78600E5B5C0 /* BlockActionSheet.m in Sources */,
 				CB318E5B1AFC3565004FFA8E /* SDWebImageManager.m in Sources */,
 				41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */,

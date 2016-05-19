@@ -80,6 +80,8 @@
         }
         self.hlsUrl     = cameraDict[@"proxy_url"][@"hls"];
         self.rtmpUrl    = cameraDict[@"proxy_url"][@"rtmp"];
+        self.is_Public          = [cameraDict[@"is_public"] boolValue];
+        self.is_Discoverable    = [cameraDict[@"discoverable"] boolValue];
         
     }
     
