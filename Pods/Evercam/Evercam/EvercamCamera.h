@@ -31,6 +31,8 @@
 
 @property (nonatomic, strong) NSString *hlsUrl;
 @property (nonatomic, strong) NSString *rtmpUrl;
+@property (nonatomic,assign)  BOOL is_Public;
+@property (nonatomic,assign)  BOOL is_Discoverable;
 
 - (id) initWithDictionary: (NSDictionary *)cameraDict;
 - (BOOL) isHikvision;

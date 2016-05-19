@@ -23,6 +23,8 @@
 #import "GlobalSettings.h"
 #import <PhoenixClient/PhoenixClient.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "ShareViewController.h"
+#import "EvercamUtility.h"
 
 static void *MyStreamingMovieViewControllerTimedMetadataObserverContext = &MyStreamingMovieViewControllerTimedMetadataObserverContext;
 static void *MyStreamingMovieViewControllerRateObservationContext = &MyStreamingMovieViewControllerRateObservationContext;
@@ -132,8 +134,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         [[UIApplication sharedApplication] setStatusBarHidden:agree?isHide:YES];
         
-//        [playerLayerView setFrame:self.playerLayerView.bounds];
-//        [self.streamPlayer.view setFrame:self.streamingView.bounds];
+        //        [playerLayerView setFrame:self.playerLayerView.bounds];
+        //        [self.streamPlayer.view setFrame:self.streamingView.bounds];
         
         self.titlebar.backgroundColor       = agree?[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:1.0f]:[UIColor clearColor];
         
@@ -169,15 +171,21 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (isCameraRemoved) {
         [self dismissViewControllerAnimated:NO completion:nil];
     }
+    if (AppUtility.isFullyDismiss) {
+        AppUtility.isFullyDismiss = NO;
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
     [self playCamera];
     [self disableSleep];
-    
+        
     long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
     [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -225,9 +233,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         CGImageRef cgiimage = [context createCGImage:[CIImage imageWithCVPixelBuffer:buffer] fromRect:[CIImage imageWithCVPixelBuffer:buffer].extent];
         UIImage *snapImg = [UIImage imageWithCGImage:cgiimage];
         CGImageRelease(cgiimage);
-//        UIImage *snapImg = [[UIImage alloc] initWithCIImage:[CIImage imageWithCVPixelBuffer:buffer]];
+        //        UIImage *snapImg = [[UIImage alloc] initWithCIImage:[CIImage imageWithCVPixelBuffer:buffer]];
         imvSnapshot.image = snapImg;
-
+        
     } else {
         if (self.imageView && self.imageView.image) {
             CGFloat width = self.confirmInsideView.frame.size.width;
@@ -247,6 +255,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)hideSnapshotView {
     [snapshotConfirmView setHidden:YES];
+}
+
+- (void)showShareView{
+    ShareViewController *sVc    = [[ShareViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ShareViewController":@"ShareViewController_iPad" bundle:[NSBundle mainBundle]];
+    sVc.camera_Object           = self.cameraInfo;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:sVc];
+    nav.navigationBar.hidden    = YES;
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)showCameraView {
@@ -427,89 +443,218 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self takeSnapshot];
     [self hideSnapshotView];
 }
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"button Index: %ld",(long)buttonIndex);
+    switch (buttonIndex) {
+        case 0:{
+            [self showCameraView];
+        }
+            
+            break;
+        case 1:{
+            if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Share"]) {
+                [self showShareView];
+            }else{
+             [self showSavedImages];   
+            }
+        }
+            
+            break;
+        case 2:{
+            if (actionSheet.tag == 5608) {
+                [self showSavedImages];
+            }else{
+                [self viewRecordings];
+            }
+            
+        }
+            
+            break;
+        case 3:{
+            if (actionSheet.tag == 5608) {
+                [self viewRecordings];
+            }
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
+}
 
 - (IBAction)action:(id)sender {
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-        
-        [sheet addButtonWithTitle:@"Camera Settings" block:^{
-            [self showCameraView];
-        }];
-        [sheet addButtonWithTitle:@"Saved Images" block:^{
-            [self showSavedImages];
-        }];
-        [sheet addButtonWithTitle:@"Cloud Recordings" block:^{
-            [self viewRecordings];
-        }];
-        
-        [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
+    if ([GlobalSettings sharedInstance].isPhone)
+    {
+        UIActionSheet *sheet;
+        if ([self.cameraInfo.rights.rightsString rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+            sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera Settings",@"Share",@"Saved Images",@"Cloud Recordings", nil];
+            sheet.tag = 5608;
+        }else{
+            sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera Settings",@"Saved Images",@"Cloud Recordings", nil];
+        }
         [sheet showInView:self.view];
     }
     else
     {
-        UIAlertController * view=   [UIAlertController
-                                     alertControllerWithTitle:nil
-                                     message:nil
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        UIAlertAction* viewDetails = [UIAlertAction
-                                      actionWithTitle:@"Camera Settings"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          //                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          [self showCameraView];
-                                          
-                                      }];
-        
-        UIAlertAction* savedImages = [UIAlertAction
-                                      actionWithTitle:@"Saved Images"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          [self showSavedImages];
-                                          [view dismissViewControllerAnimated:YES completion:nil];
-                                          
-                                      }];
-        
-        UIAlertAction* viewRecordings = [UIAlertAction
-                                         actionWithTitle:@"Cloud Recordings"
-                                         style:UIAlertActionStyleDefault
-                                         handler:^(UIAlertAction * action)
-                                         {
-                                             [view dismissViewControllerAnimated:YES completion:nil];
-                                             [self viewRecordings];
-                                             
-                                         }];
-        
-        
-        UIAlertAction* cancel = [UIAlertAction
-                                 actionWithTitle:@"Cancel"
-                                 style:UIAlertActionStyleCancel
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [view dismissViewControllerAnimated:YES completion:nil];
-                                     
-                                 }];
-        
-        [view addAction:viewDetails];
-        [view addAction:savedImages];
-        [view addAction:viewRecordings];
-        [view addAction:cancel];
-        
-        if ([GlobalSettings sharedInstance].isPhone)
-        {
-            [self presentViewController:view animated:YES completion:nil];
-        }
-        else
-        {
-            UIPopoverPresentationController *popPresenter = [view
-                                                             popoverPresentationController];
-            popPresenter.sourceView = (UIView *)sender;
-            popPresenter.sourceRect = ((UIView *)sender).bounds;
-            [self presentViewController:view animated:YES completion:nil];
-        }
+        [self presentPopOverForiPad:sender];
     }
+
+    /*
+     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
+     
+     [sheet addButtonWithTitle:@"Camera Settings" block:^{
+     [self showCameraView];
+     }];
+     [sheet addButtonWithTitle:@"Saved Images" block:^{
+     [self showSavedImages];
+     }];
+     [sheet addButtonWithTitle:@"Cloud Recordings" block:^{
+     [self viewRecordings];
+     }];
+     
+     [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
+     [sheet showInView:self.view];
+     }
+     else
+     {
+     UIAlertController * view=   [UIAlertController
+     alertControllerWithTitle:nil
+     message:nil
+     preferredStyle:UIAlertControllerStyleActionSheet];
+     
+     UIAlertAction* viewDetails = [UIAlertAction
+     actionWithTitle:@"Camera Settings"
+     style:UIAlertActionStyleDefault
+     handler:^(UIAlertAction * action)
+     {
+     //                                          [view dismissViewControllerAnimated:YES completion:nil];
+     [self showCameraView];
+     
+     }];
+     
+     UIAlertAction* savedImages = [UIAlertAction
+     actionWithTitle:@"Saved Images"
+     style:UIAlertActionStyleDefault
+     handler:^(UIAlertAction * action)
+     {
+     [self showSavedImages];
+     [view dismissViewControllerAnimated:YES completion:nil];
+     
+     }];
+     
+     UIAlertAction* viewRecordings = [UIAlertAction
+     actionWithTitle:@"Cloud Recordings"
+     style:UIAlertActionStyleDefault
+     handler:^(UIAlertAction * action)
+     {
+     [view dismissViewControllerAnimated:YES completion:nil];
+     [self viewRecordings];
+     
+     }];
+     
+     
+     UIAlertAction* cancel = [UIAlertAction
+     actionWithTitle:@"Cancel"
+     style:UIAlertActionStyleCancel
+     handler:^(UIAlertAction * action)
+     {
+     [view dismissViewControllerAnimated:YES completion:nil];
+     
+     }];
+     
+     [view addAction:viewDetails];
+     [view addAction:savedImages];
+     [view addAction:viewRecordings];
+     [view addAction:cancel];
+     
+     if ([GlobalSettings sharedInstance].isPhone)
+     {
+     [self presentViewController:view animated:YES completion:nil];
+     }
+     else
+     {
+     UIPopoverPresentationController *popPresenter = [view
+     popoverPresentationController];
+     popPresenter.sourceView = (UIView *)sender;
+     popPresenter.sourceRect = ((UIView *)sender).bounds;
+     [self presentViewController:view animated:YES completion:nil];
+     }
+     }
+     */
+}
+
+-(void)presentPopOverForiPad:(id)sender{
+    UIAlertController * popOverView=   [UIAlertController
+                                 alertControllerWithTitle:nil
+                                 message:nil
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* viewDetails = [UIAlertAction
+                                  actionWithTitle:@"Camera Settings"
+                                  style:UIAlertActionStyleDefault
+                                  handler:^(UIAlertAction * action)
+                                  {
+                                      //                                          [view dismissViewControllerAnimated:YES completion:nil];
+                                      [self showCameraView];
+                                      
+                                  }];
+    
+    UIAlertAction* savedImages = [UIAlertAction
+                                  actionWithTitle:@"Saved Images"
+                                  style:UIAlertActionStyleDefault
+                                  handler:^(UIAlertAction * action)
+                                  {
+                                      [self showSavedImages];
+                                      [popOverView dismissViewControllerAnimated:YES completion:nil];
+                                      
+                                  }];
+    
+    UIAlertAction* viewRecordings = [UIAlertAction
+                                     actionWithTitle:@"Cloud Recordings"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [popOverView dismissViewControllerAnimated:YES completion:nil];
+                                         [self viewRecordings];
+                                         
+                                     }];
+    
+    
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleCancel
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [popOverView dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    [popOverView addAction:viewDetails];
+    if ([self.cameraInfo.rights.rightsString rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        UIAlertAction* shareView = [UIAlertAction
+                                    actionWithTitle:@"Share"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action)
+                                    {
+                                        [self showShareView];
+                                        
+                                    }];
+        [popOverView addAction:shareView];
+    }
+    [popOverView addAction:savedImages];
+    [popOverView addAction:viewRecordings];
+    [popOverView addAction:cancel];
+    
+    
+    UIPopoverPresentationController *popPresenter = [popOverView
+                                                         popoverPresentationController];
+    popPresenter.sourceView = (UIView *)sender;
+    popPresenter.sourceRect = ((UIView *)sender).bounds;
+    [self presentViewController:popOverView animated:YES completion:nil];
+    
+
 }
 
 - (void)playCamera {
@@ -541,7 +686,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                 AVURLAsset *asset = [AVURLAsset URLAssetWithURL:newMovieURL options:nil];
                 
                 NSArray *requestedKeys = [NSArray arrayWithObjects:kTracksKey, kPlayableKey, nil];
-
+                
                 [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
                  ^{
                      dispatch_async( dispatch_get_main_queue(),
@@ -554,7 +699,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             self.playerLayerView.hidden = NO;
             
         } else {
-            [self setUpJPGView];            
+            [self setUpJPGView];
         }
     } else {
         self.imageView.image = nil;
@@ -621,13 +766,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                    localizedDescription, NSLocalizedDescriptionKey,
                                    localizedFailureReason, NSLocalizedFailureReasonErrorKey,
                                    nil];
-        NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"StitchedStreamPlayer" code:0 userInfo:errorDict];
-
+        NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"api.evercam.io" code:0 userInfo:errorDict];
+        
         [self assetFailedToPrepareForPlayback:assetCannotBePlayedError];
         
         return;
     }
-
+    
     if (self.playerItem)
     {
         [self.playerItem removeObserver:self forKeyPath:kStatusKey];
@@ -638,13 +783,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                                                         name:AVPlayerItemDidPlayToEndTimeNotification
                                                       object:self.playerItem];
     }
-
+    
     NSDictionary* settings = @{ (id)kCVPixelBufferPixelFormatTypeKey : [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] };
     
     self.output = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:settings];
     
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-
+    
     [self.playerItem addObserver:self
                       forKeyPath:kStatusKey
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -664,7 +809,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (![self player])
     {
         [self setPlayer:[AVPlayer playerWithPlayerItem:self.playerItem]];
-
+        
         [self.player addObserver:self
                       forKeyPath:kCurrentItemKey
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -751,9 +896,9 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             {
                 NSLog(@"AVPlayerStatusReadyToPlay");
                 playerLayerView.playerLayer.hidden = NO;
-
+                
                 playerLayerView.playerLayer.backgroundColor = [[UIColor blackColor] CGColor];
-
+                
                 [playerLayerView.playerLayer setPlayer:player];
                 if (liveViewDateStringUpdater) {
                     [liveViewDateStringUpdater invalidate];
@@ -779,16 +924,16 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
                 break;
         }
     }
-
+    
     else if (context == MyStreamingMovieViewControllerRateObservationContext)
     {
         
     }
-
+    
     else if (context == MyStreamingMovieViewControllerCurrentItemObservationContext)
     {
         AVPlayerItem *newPlayerItem = [change objectForKey:NSKeyValueChangeNewKey];
-
+        
         if (newPlayerItem == (id)[NSNull null])
         {
             
@@ -802,7 +947,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             
         }
     }
-
+    
     else if (context == MyStreamingMovieViewControllerTimedMetadataObserverContext)
     {
         NSArray* array = [[player currentItem] timedMetadata];
@@ -846,23 +991,23 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [self.channel join];
     });
     /*
-    if (self.socket != nil && [self.socket isConnected]) {
-        return;
-    }
-    self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
-    
-    [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
-    
-    self.channel = [[PhxChannel alloc] initWithSocket:self.socket topic:[NSString stringWithFormat:@"cameras:%@",self.cameraInfo.camId] params:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
-    
-    [self.channel onEvent:@"snapshot-taken" callback:^(id message, id ref) {
-        [loadingView stopAnimating];
-        UIImage *jpgImage =  [self decodeBase64ToImage:message[@"image"]];
-        self.imageView.image = jpgImage;
-        [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:YES];
-    }];
-    [self.channel join];
-    */
+     if (self.socket != nil && [self.socket isConnected]) {
+     return;
+     }
+     self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
+     
+     [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+     
+     self.channel = [[PhxChannel alloc] initWithSocket:self.socket topic:[NSString stringWithFormat:@"cameras:%@",self.cameraInfo.camId] params:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+     
+     [self.channel onEvent:@"snapshot-taken" callback:^(id message, id ref) {
+     [loadingView stopAnimating];
+     UIImage *jpgImage =  [self decodeBase64ToImage:message[@"image"]];
+     self.imageView.image = jpgImage;
+     [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:YES];
+     }];
+     [self.channel join];
+     */
 }
 
 - (UIImage *)decodeBase64ToImage:(NSString *)strEncodeData {
@@ -964,7 +1109,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [self saveImage];
     if ([self.cameraInfo isOnline]) {
         [self removeLiveViewObservers];
-    
+        
         if (timeCounter && [timeCounter isValid])
         {
             [timeCounter invalidate];
@@ -1110,7 +1255,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:self.playerItem];
-
+    
     [self.player removeObserver:self forKeyPath:kCurrentItemKey];
     [self.player removeObserver:self forKeyPath:kTimedMetadataKey];
     [self.player removeObserver:self forKeyPath:kRateKey];

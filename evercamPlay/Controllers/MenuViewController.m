@@ -39,7 +39,9 @@
 #import "MenuViewControllerCell.h"
 #import "PreferenceUtil.h"
 #import "AboutViewController.h"
-
+#import "Struts.h"
+#import "GravatarServiceFactory.h"
+#import "CamerasViewController.h"
 @interface MenuViewController()
 {
     NSInteger _presentedRow;
@@ -61,7 +63,13 @@
     [super viewDidLoad];
     portraitTableFrame = self.rearTableView.frame;
     self.rearTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.rearTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.rearTableView setContentInset:UIEdgeInsetsMake(15, 0, 0, 0)];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    UINavigationController *navigation = (UINavigationController *)revealController.frontViewController;
+    
+    NSLog(@"%@",revealController.frontViewController);
     
 }
 
@@ -72,8 +80,26 @@
     self.appVersion.text = [NSString stringWithFormat:@"v%@", ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"])];
     self.name.text =  [NSString stringWithFormat:@"%@ %@", ([APP_DELEGATE defaultUser].firstName), ([APP_DELEGATE defaultUser].lastName)];
     self.email.text = [APP_DELEGATE defaultUser].email;
-    [self changeFrame];
+    [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:gravatarServerImageMysteryMan size:72 delegate:self];
     
+    [self changeFrame];
+    if ([PreferenceUtil isShowOfflineCameras]) {
+        [self.cameraOffOn_Switch setOn:YES];
+    } else {
+        [self.cameraOffOn_Switch setOn:NO];
+    }
+    
+}
+
+-(void)gravatarServiceDone:(id<GravatarService>)gravatarService
+                 withImage:(UIImage *)image{
+    NSLog(@"gravatarServiceDone");
+    self.profileImage.image = image;
+}
+
+-(void)gravatarService:(id<GravatarService>)gravatarService
+      didFailWithError:(NSError *)error{
+    NSLog(@"gravatarService");
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -109,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,7 +149,7 @@
     MenuViewControllerCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSInteger row = indexPath.row;
     
-    if (nil == cell)
+    if (cell == nil)
     {
         cell = [[MenuViewControllerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
@@ -200,6 +226,20 @@
         [APP_DELEGATE logout];
         _presentedRow = 0;
     }
+}
+
+- (IBAction)showOfflineModeChanged:(id)sender {
+    NSLog(@"Navigation: %@",self.navigationController.viewControllers);
+    UISwitch *switchView = (UISwitch *)sender;
+    if ([switchView isOn]) {
+        [PreferenceUtil setIsShowOfflineCameras:YES];
+    } else {
+        [PreferenceUtil setIsShowOfflineCameras:NO];
+    }
+    SWRevealViewController *revealController = [self revealViewController];
+    UINavigationController *navigation = (UINavigationController *)revealController.frontViewController;
+    CamerasViewController *cVC = (CamerasViewController *)navigation.viewControllers[0];
+    [cVC onRefresh:cVC];
 }
 
 @end

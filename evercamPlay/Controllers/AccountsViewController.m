@@ -378,7 +378,7 @@
     }
     else
     {
-        LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
+        LoginViewController *vc = [[LoginViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"LoginViewController":@"LoginViewController_iPad" bundle:[NSBundle mainBundle]];
         vc.isFromAddAccount     = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

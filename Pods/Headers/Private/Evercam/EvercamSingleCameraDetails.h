@@ -1,0 +1,1 @@
+../../../Evercam/Evercam/EvercamSingleCameraDetails.h

@@ -23,7 +23,7 @@
 
 @end
 
-@interface CameraPlayViewController : GAITrackedViewController<NIDropDownDelegate> {
+@interface CameraPlayViewController : GAITrackedViewController<NIDropDownDelegate,UIActionSheetDelegate> {
     IBOutlet EaglUIView *video_view;
     BOOL isCameraRemoved;
     AVPlayer *player;

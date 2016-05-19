@@ -16,7 +16,10 @@
 #import "SWRevealViewController.h"
 #import "GlobalSettings.h"
 #import "Intercom/intercom.h"
-@interface WelcomeViewController ()
+
+@interface WelcomeViewController (){
+    MPMoviePlayerController *playercontroller;
+}
 
 @end
 
@@ -26,13 +29,14 @@
     [super viewDidLoad];
     
     [self.view setHidden:YES];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playIntroVideo) name:UIApplicationDidBecomeActiveNotification object:nil];
+
     self.navigationController.navigationBarHidden = YES;
     self.screenName = @"Welcome Page";
     // Do any additional setup after loading the view from its nib.
     self.title = @"";
-    [self.tutorialScrollView addSubview:self.tutorialView];
-    
+//    [self.tutorialScrollView addSubview:self.tutorialView];
+    /*
     if ([GlobalSettings sharedInstance].isPhone == YES) {
         self.tutorialView.frame = CGRectMake(0, (self.tutorialScrollView.bounds.size.height-self.tutorialView.bounds.size.height)/2, self.tutorialView.bounds.size.width, self.tutorialView.frame.size.height);
         [self.tutorialScrollView setContentSize:CGSizeMake(960,self.tutorialScrollView.frame.size.height)];
@@ -41,7 +45,7 @@
         self.tutorialView.frame = CGRectMake(0, 0, self.tutorialView.frame.size.width, self.tutorialView.frame.size.height);
         [self.tutorialScrollView setContentSize:CGSizeMake(self.view.frame.size.width * 3, 0)];
     }
-    
+    */
     
     AppUser *defaultUser = [APP_DELEGATE getDefaultUser];
     if (defaultUser) {
@@ -79,13 +83,62 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    AppUser *defaultUser = [APP_DELEGATE getDefaultUser];
+    if (!defaultUser) {
+        [self playIntroVideo];
+    }
     
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:playercontroller];
+    [playercontroller stop];
+    playercontroller = nil;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//Movie Playing
+-(void)playIntroVideo{
+    
+    if (!playercontroller) {
+        NSLog(@"Player instance intialized.");
+        NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"gpoview" ofType:@"mp4"]];
+        playercontroller = [[MPMoviePlayerController alloc] initWithContentURL:url];
+        playercontroller.controlStyle = MPMovieControlStyleNone;
+        playercontroller.scalingMode = MPMovieScalingModeFill;
+        //Set to parent bounds
+        [playercontroller.view setFrame:self.playerContainerView.bounds];
+        [self.playerContainerView addSubview:playercontroller.view];
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:playercontroller];
+    [playercontroller play];
+    
+}
+
+- (void)videoPlayDidFinish:(NSNotification*)notification
+{
+    MPMoviePlayerController *player = [notification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+    if (notification.object == player) {
+        NSLog(@"%@",notification.userInfo);
+        NSInteger reason = [[notification.userInfo objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] integerValue];
+        if (reason == MPMovieFinishReasonPlaybackEnded) {
+            [self performSelector:@selector(playIntroVideo) withObject:nil afterDelay:0.5];
+        }
+    }
+}
+
 
 - (IBAction)onSignIn:(id)sender
 {
