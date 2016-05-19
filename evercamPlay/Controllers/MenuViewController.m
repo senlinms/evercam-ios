@@ -41,6 +41,7 @@
 #import "AboutViewController.h"
 #import "Struts.h"
 #import "GravatarServiceFactory.h"
+#import "CamerasViewController.h"
 @interface MenuViewController()
 {
     NSInteger _presentedRow;
@@ -62,7 +63,13 @@
     [super viewDidLoad];
     portraitTableFrame = self.rearTableView.frame;
     self.rearTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.rearTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.rearTableView setContentInset:UIEdgeInsetsMake(15, 0, 0, 0)];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    UINavigationController *navigation = (UINavigationController *)revealController.frontViewController;
+    
+    NSLog(@"%@",revealController.frontViewController);
     
 }
 
@@ -128,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -222,12 +229,17 @@
 }
 
 - (IBAction)showOfflineModeChanged:(id)sender {
+    NSLog(@"Navigation: %@",self.navigationController.viewControllers);
     UISwitch *switchView = (UISwitch *)sender;
     if ([switchView isOn]) {
         [PreferenceUtil setIsShowOfflineCameras:YES];
     } else {
         [PreferenceUtil setIsShowOfflineCameras:NO];
     }
+    SWRevealViewController *revealController = [self revealViewController];
+    UINavigationController *navigation = (UINavigationController *)revealController.frontViewController;
+    CamerasViewController *cVC = (CamerasViewController *)navigation.viewControllers[0];
+    [cVC onRefresh:cVC];
 }
 
 @end

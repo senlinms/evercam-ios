@@ -27,7 +27,12 @@
 #import <UIKit/UIKit.h>
 #import "GAI.h"
 
-@interface CamerasViewController : GAITrackedViewController  <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CamerasViewController : GAITrackedViewController  <UICollectionViewDataSource, UICollectionViewDelegate>{
+    
+}
+
+- (IBAction)onRefresh: (id)sender;
+
 @property (nonatomic, strong) IBOutlet UIButton *btnMenu;
 @property (nonatomic, strong) IBOutlet UIButton *btnRefresh;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
