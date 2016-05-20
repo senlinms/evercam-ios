@@ -29,7 +29,11 @@
     [super viewDidLoad];
     
     [self.view setHidden:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playIntroVideo) name:UIApplicationDidBecomeActiveNotification object:nil];
+    AppUser *loginUser = [APP_DELEGATE getDefaultUser];
+    if (!loginUser) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playIntroVideo) name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
+
 
     self.navigationController.navigationBarHidden = YES;
     self.screenName = @"Welcome Page";
