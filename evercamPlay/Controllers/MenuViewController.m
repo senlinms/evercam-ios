@@ -135,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -163,13 +163,17 @@
     {
         text = @"Accounts";
         cell.imageView.image = [UIImage imageNamed:@"ic_accounts.png"];
+    }else if (row == 1)
+    {
+        text = @"Public cameras";
+        cell.imageView.image = [UIImage imageNamed:@"ic_compass.png"];
     }
-    else if (row == 1)
+    else if (row == 2)
     {
         text = @"Settings";
         cell.imageView.image = [UIImage imageNamed:@"ic_settings.png"];
     }
-    else if (row == 2)
+    else if (row == 3)
     {
         text = @"Live Support";
         cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
