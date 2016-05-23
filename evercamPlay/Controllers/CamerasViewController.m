@@ -248,7 +248,8 @@
                         }
                     }
                 }
-                
+                [[SDImageCache sharedImageCache] clearMemory];
+                [[SDImageCache sharedImageCache] clearDisk];
                 [self.camerasView reloadData];
             });
         }
@@ -341,14 +342,14 @@
         
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
-        //must setup second url.
-//        cell.thumbnailImageView.secondURL = [NSURL URLWithString:[[EvercamShell shell] getSnapshotLink:cameraInfo.camId]];
-        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
+        [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String] placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]];
+//        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     } else {
         
         cell.greyImv.hidden = NO;
         cell.imvOffline.hidden = NO;
-        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
+        [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String] placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]];
+//        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     }
     
     return cell;
