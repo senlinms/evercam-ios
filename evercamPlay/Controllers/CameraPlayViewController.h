@@ -54,4 +54,16 @@
 
 @property (nonatomic, strong) id<CameraPlayViewControllerDelegate> delegate;
 
+//PTZ controls
+- (IBAction)ptz_Controls_Action:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *ptc_Control_View;
+@property (weak, nonatomic) IBOutlet UIButton *presetBtn;
+@property (weak, nonatomic) IBOutlet UIButton *homeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *upBtn;
+@property (weak, nonatomic) IBOutlet UIButton *downBtn;
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
+@property (weak, nonatomic) IBOutlet UIButton *zoomOutBtn;
+@property (weak, nonatomic) IBOutlet UIButton *zoomInBtn;
 @end

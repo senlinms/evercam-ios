@@ -14,21 +14,30 @@
             <connections>
                 <outlet property="btnTitle" destination="Trm-Kg-hD7" id="uVR-kv-9HW"/>
                 <outlet property="confirmInsideView" destination="4lE-27-uyN" id="nUm-HR-Gm5"/>
+                <outlet property="downBtn" destination="029-8M-ntB" id="Uvh-K5-FHO"/>
                 <outlet property="downImgView" destination="OyF-4z-dfh" id="5WB-dw-wNN"/>
                 <outlet property="hiddenDropDownBtn" destination="v2K-Sv-Zct" id="y7m-bg-T5Q"/>
+                <outlet property="homeBtn" destination="Uru-rV-gV3" id="c5d-rf-Azq"/>
                 <outlet property="imvSnapshot" destination="odw-TZ-9Nd" id="8CW-MF-OI4"/>
                 <outlet property="lblOffline" destination="wrC-9a-tm3" id="ggv-Du-AWj"/>
                 <outlet property="lblTimeCode" destination="m48-Yg-pyN" id="V3U-8d-FAb"/>
+                <outlet property="leftBtn" destination="iaZ-AB-PeI" id="CDg-ER-2b4"/>
                 <outlet property="loadingView" destination="fbV-26-bT6" id="7mP-94-3T1"/>
                 <outlet property="playOrPauseButton" destination="QCn-Zg-5jB" id="f9x-cm-Y1p"/>
                 <outlet property="playerLayerView" destination="E6H-65-YeT" id="V9s-3k-JOx"/>
                 <outlet property="playerView" destination="1os-7d-u4m" id="B4x-Bw-rr0"/>
+                <outlet property="presetBtn" destination="r5W-Y7-t8d" id="DBz-jJ-5b5"/>
+                <outlet property="ptc_Control_View" destination="utB-FH-RPt" id="ZEE-1s-C7G"/>
+                <outlet property="rightBtn" destination="y8M-KE-bg9" id="qRr-th-mgC"/>
                 <outlet property="saveButton" destination="K90-Gg-nvb" id="xir-HM-of1"/>
                 <outlet property="snapshotConfirmView" destination="sAt-iX-JVI" id="Qm1-62-WzL"/>
                 <outlet property="titlebar" destination="koy-DP-9bP" id="QZP-al-Gw6"/>
+                <outlet property="upBtn" destination="cIm-FK-Yqx" id="in3-2s-Abd"/>
                 <outlet property="videoController" destination="Mqv-BR-Rvo" id="j04-Dq-3O9"/>
                 <outlet property="video_view" destination="5kf-bi-y9q" id="T2R-Hr-vk7"/>
                 <outlet property="view" destination="mfI-8j-t75" id="seG-kJ-bSC"/>
+                <outlet property="zoomInBtn" destination="wqd-yd-ELp" id="zD3-pW-D6n"/>
+                <outlet property="zoomOutBtn" destination="73R-nh-6CL" id="oLQ-Fg-OuI"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -97,8 +106,79 @@
                                 </button>
                             </subviews>
                         </view>
+                        <view hidden="YES" contentMode="scaleToFill" id="utB-FH-RPt">
+                            <rect key="frame" x="0.0" y="421" width="320" height="123"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <subviews>
+                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r5W-Y7-t8d">
+                                    <rect key="frame" x="37" y="43" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_presets.png"/>
+                                    <connections>
+                                        <action selector="ptz_Controls_Action:" destination="-1" eventType="touchUpInside" id="Spj-hy-ePV"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uru-rV-gV3">
+                                    <rect key="frame" x="140" y="43" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_home.png"/>
+                                    <connections>
+                                        <action selector="ptz_Controls_Action:" destination="-1" eventType="touchUpInside" id="XiD-KU-zBX"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cIm-FK-Yqx">
+                                    <rect key="frame" x="140" y="0.0" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_arrow_up.png"/>
+                                    <connections>
+                                        <action selector="ptz_Controls_Action:" destination="-1" eventType="touchUpInside" id="GWf-in-PiD"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="029-8M-ntB">
+                                    <rect key="frame" x="140" y="86" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <state key="normal" image="ic_arrow_down.png"/>
+                                    <connections>
+                                        <action selector="ptz_Controls_Action:" destination="-1" eventType="touchUpInside" id="r7x-cO-EIX"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iaZ-AB-PeI">
+                                    <rect key="frame" x="97" y="43" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_arrow_left.png"/>
+                                    <connections>
+                                        <action selector="ptz_Controls_Action:" destination="-1" eventType="touchUpInside" id="ysm-KM-kCQ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y8M-KE-bg9">
+                                    <rect key="frame" x="183" y="43" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_arrow_right.png"/>
+                                    <connections>
+                                        <action selector="ptz_Controls_Action:" destination="-1" eventType="touchUpInside" id="t5v-wm-3hw"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="73R-nh-6CL">
+                                    <rect key="frame" x="238" y="71" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_zoom_out.png"/>
+                                    <connections>
+                                        <action selector="ptz_Controls_Action:" destination="-1" eventType="touchUpInside" id="IEt-41-wgE"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wqd-yd-ELp">
+                                    <rect key="frame" x="238" y="14" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_add.png"/>
+                                    <connections>
+                                        <action selector="ptz_Controls_Action:" destination="-1" eventType="touchUpInside" id="2H0-uj-9Bb"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m48-Yg-pyN">
-                            <rect key="frame" x="74" y="526" width="173" height="21"/>
+                            <rect key="frame" x="74" y="536" width="173" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -224,7 +304,7 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="174" y="216"/>
+            <point key="canvasLocation" x="-53" y="188"/>
         </view>
     </objects>
     <resources>
@@ -232,6 +312,14 @@
         <image name="btn_pause.png" width="150" height="150"/>
         <image name="btn_save.png" width="150" height="150"/>
         <image name="dropdown.png" width="30" height="30"/>
+        <image name="ic_add.png" width="96" height="96"/>
+        <image name="ic_arrow_down.png" width="64" height="64"/>
+        <image name="ic_arrow_left.png" width="64" height="64"/>
+        <image name="ic_arrow_right.png" width="64" height="64"/>
+        <image name="ic_arrow_up.png" width="64" height="64"/>
+        <image name="ic_home.png" width="64" height="64"/>
+        <image name="ic_presets.png" width="64" height="64"/>
+        <image name="ic_zoom_out.png" width="64" height="64"/>
         <image name="nav.png" width="1" height="44"/>
         <image name="pull-out.png" width="80" height="100"/>
     </resources>
