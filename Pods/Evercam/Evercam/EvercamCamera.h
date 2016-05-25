@@ -31,6 +31,7 @@
 
 @property (nonatomic, strong) NSString *hlsUrl;
 @property (nonatomic, strong) NSString *rtmpUrl;
+@property (nonatomic, strong) NSString *model_id;
 @property (nonatomic,assign)  BOOL is_Public;
 @property (nonatomic,assign)  BOOL is_Discoverable;
 

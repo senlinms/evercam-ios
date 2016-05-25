@@ -246,7 +246,6 @@
     }
     sSVC.cameraId                   = camera_Object.camId;
     ([GlobalSettings sharedInstance].isPhone)? [self.navigationController pushViewController:sSVC animated:YES]:[self presentViewController:sSVC animated:YES completion:NULL];
-//    [self.navigationController pushViewController:sSVC animated:YES];
 }
 
 @end

@@ -25,6 +25,9 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "ShareViewController.h"
 #import "EvercamUtility.h"
+#import "EvercamPtzControls.h"
+#import "EvercamCameraModelInfo.h"
+#import "PresetListViewController.h"
 
 static void *MyStreamingMovieViewControllerTimedMetadataObserverContext = &MyStreamingMovieViewControllerTimedMetadataObserverContext;
 static void *MyStreamingMovieViewControllerRateObservationContext = &MyStreamingMovieViewControllerRateObservationContext;
@@ -99,13 +102,18 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitleBarAccordingToOrientation];
+//    [self setTitleBarAccordingToOrientation];
     runFirstTime            = YES;
     videoController.alpha   = 0.0;
     self.screenName         = @"Video View";
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     
     runFirstTime            = NO;
+    
+    UITapGestureRecognizer *ptzViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    ptzViewTap.numberOfTouchesRequired = 1;
+    [self.ptc_Control_View addGestureRecognizer:ptzViewTap];
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -134,8 +142,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         [[UIApplication sharedApplication] setStatusBarHidden:agree?isHide:YES];
         
-        //        [playerLayerView setFrame:self.playerLayerView.bounds];
-        //        [self.streamPlayer.view setFrame:self.streamingView.bounds];
+        [self setPtzControlButtons];
         
         self.titlebar.backgroundColor       = agree?[UIColor colorWithRed:52.0f/255.0f green:57.0/255.0f blue:61.0/255.0f alpha:1.0f]:[UIColor clearColor];
         
@@ -166,6 +173,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     video_view.frame = CGRectMake(0, 0, self.playerView.frame.size.width,self.playerView.frame.size.height);
 }
 
+-(void)setPtzControlButtons{
+    self.presetBtn.frame = CGRectMake(self.homeBtn.frame.origin.x-70-self.presetBtn.frame.size.width, self.presetBtn.frame.origin.y, self.presetBtn.frame.size.width, self.presetBtn.frame.size.height);
+    self.leftBtn.frame = CGRectMake(self.homeBtn.frame.origin.x-10-self.leftBtn.frame.size.width, self.leftBtn.frame.origin.y, self.leftBtn.frame.size.width, self.leftBtn.frame.size.height);
+    self.rightBtn.frame = CGRectMake(self.homeBtn.frame.origin.x+self.homeBtn.frame.size.width+10, self.rightBtn.frame.origin.y, self.rightBtn.frame.size.width, self.rightBtn.frame.size.height);
+    self.zoomInBtn.frame = CGRectMake(self.homeBtn.frame.origin.x+self.homeBtn.frame.size.width+70, self.zoomInBtn.frame.origin.y, self.zoomInBtn.frame.size.width, self.zoomInBtn.frame.size.height);
+    self.zoomOutBtn.frame = CGRectMake(self.homeBtn.frame.origin.x+self.homeBtn.frame.size.width+70, self.zoomOutBtn.frame.origin.y, self.zoomOutBtn.frame.size.width, self.zoomOutBtn.frame.size.height);
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if (isCameraRemoved) {
@@ -179,7 +194,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    [self getCameraModelInformation];
+    [self setTitleBarAccordingToOrientation];
     [self playCamera];
     [self disableSleep];
         
@@ -209,6 +225,26 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         [timeCounter invalidate];
         timeCounter = nil;
     }
+}
+
+-(void)getCameraModelInformation{
+    NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.cameraInfo.model_id,@"model_id",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
+    [EvercamCameraModelInfo getCameraModelInformation:param_Dictionary withBlock:^(id details, NSError *error) {
+        if (!error) {
+            NSArray *modelDetailsArray  = details[@"models"];
+            NSDictionary *modelInfo     = modelDetailsArray[0];
+            
+            if ([modelInfo[@"ptz"] boolValue] && [self.cameraInfo.rights.rightsString rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                //show PTZ control here
+                self.ptc_Control_View.hidden = NO;
+            }else{
+                self.ptc_Control_View.hidden = YES;
+            }
+        }else{
+            //failed to get camera model info hide PTZ controls
+            self.ptc_Control_View.hidden = YES;
+        }
+    }];
 }
 
 - (void)takeSnapshot {
@@ -260,9 +296,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 - (void)showShareView{
     ShareViewController *sVc    = [[ShareViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ShareViewController":@"ShareViewController_iPad" bundle:[NSBundle mainBundle]];
     sVc.camera_Object           = self.cameraInfo;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:sVc];
-    nav.navigationBar.hidden    = YES;
-    [self.navigationController presentViewController:nav animated:YES completion:nil];
+    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:sVc];
+    navVC.isPortraitMode        = YES;
+    [navVC setHasLandscapeMode:YES];
+    navVC.navigationBarHidden   = YES;
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:sVc];
+//    nav.navigationBar.hidden    = YES;
+    [self.navigationController presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void)showCameraView {
@@ -499,90 +539,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     {
         [self presentPopOverForiPad:sender];
     }
-
-    /*
-     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-     
-     [sheet addButtonWithTitle:@"Camera Settings" block:^{
-     [self showCameraView];
-     }];
-     [sheet addButtonWithTitle:@"Saved Images" block:^{
-     [self showSavedImages];
-     }];
-     [sheet addButtonWithTitle:@"Cloud Recordings" block:^{
-     [self viewRecordings];
-     }];
-     
-     [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
-     [sheet showInView:self.view];
-     }
-     else
-     {
-     UIAlertController * view=   [UIAlertController
-     alertControllerWithTitle:nil
-     message:nil
-     preferredStyle:UIAlertControllerStyleActionSheet];
-     
-     UIAlertAction* viewDetails = [UIAlertAction
-     actionWithTitle:@"Camera Settings"
-     style:UIAlertActionStyleDefault
-     handler:^(UIAlertAction * action)
-     {
-     //                                          [view dismissViewControllerAnimated:YES completion:nil];
-     [self showCameraView];
-     
-     }];
-     
-     UIAlertAction* savedImages = [UIAlertAction
-     actionWithTitle:@"Saved Images"
-     style:UIAlertActionStyleDefault
-     handler:^(UIAlertAction * action)
-     {
-     [self showSavedImages];
-     [view dismissViewControllerAnimated:YES completion:nil];
-     
-     }];
-     
-     UIAlertAction* viewRecordings = [UIAlertAction
-     actionWithTitle:@"Cloud Recordings"
-     style:UIAlertActionStyleDefault
-     handler:^(UIAlertAction * action)
-     {
-     [view dismissViewControllerAnimated:YES completion:nil];
-     [self viewRecordings];
-     
-     }];
-     
-     
-     UIAlertAction* cancel = [UIAlertAction
-     actionWithTitle:@"Cancel"
-     style:UIAlertActionStyleCancel
-     handler:^(UIAlertAction * action)
-     {
-     [view dismissViewControllerAnimated:YES completion:nil];
-     
-     }];
-     
-     [view addAction:viewDetails];
-     [view addAction:savedImages];
-     [view addAction:viewRecordings];
-     [view addAction:cancel];
-     
-     if ([GlobalSettings sharedInstance].isPhone)
-     {
-     [self presentViewController:view animated:YES completion:nil];
-     }
-     else
-     {
-     UIPopoverPresentationController *popPresenter = [view
-     popoverPresentationController];
-     popPresenter.sourceView = (UIView *)sender;
-     popPresenter.sourceRect = ((UIView *)sender).bounds;
-     [self presentViewController:view animated:YES completion:nil];
-     }
-     }
-     */
 }
 
 -(void)presentPopOverForiPad:(id)sender{
@@ -1224,6 +1180,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 #pragma mark NIDropdown delegate
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index {
     
+    
+    
     [self removeLiveViewObservers];
     
     dropDown = nil;
@@ -1234,6 +1192,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     self.cameraInfo = [self.cameras objectAtIndex:index];
     [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
+    self.ptc_Control_View.hidden = YES;
+    [self getCameraModelInformation];
     [self playCamera];
     runFirstTime = YES;
 }
@@ -1265,4 +1225,66 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     self.playerItem = nil;
 }
 
+- (IBAction)ptz_Controls_Action:(id)sender {
+    
+    UIButton *btn = (UIButton *)sender;
+    
+    if (btn.tag == 0) {
+        //home
+        [self setCameraToHome];
+    }else if (btn.tag == 1){
+        //up
+        [self setCameraDirection:@"up=4"];
+    }else if (btn.tag == 2){
+        //down
+        [self setCameraDirection:@"down=4"];
+    }else if (btn.tag == 3){
+        //left
+        [self setCameraDirection:@"left=4"];
+    }else if (btn.tag == 4){
+        //right
+        [self setCameraDirection:@"right=4"];
+    }else if (btn.tag == 5){
+        //preset
+        PresetListViewController *sVc    = [[PresetListViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"PresetListViewController":@"PresetListViewController_iPad" bundle:[NSBundle mainBundle]];
+        sVc.cameraID           = self.cameraInfo.camId;
+        CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:sVc];
+        navVC.isPortraitMode        = YES;
+        [navVC setHasLandscapeMode:YES];
+        navVC.navigationBarHidden   = YES;
+        [self.navigationController presentViewController:navVC animated:YES completion:nil];
+    }else if (btn.tag == 6){
+        //zoom in
+        [self setCameraDirection:@"zoom=1"];
+    }else if (btn.tag == 7){
+        //zoom out
+        [self setCameraDirection:@"zoom=-1"];
+    }
+}
+
+-(void)setCameraToHome{
+
+    NSDictionary * param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.cameraInfo.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
+    
+    [EvercamPtzControls ptz_Home:param_Dictionary withBlock:^(id details, NSError *error) {
+        if (!error) {
+            NSLog(@"Successfully set to Home");
+        }else{
+            NSLog(@"Error setting to home");
+        }
+    }];
+    
+}
+
+-(void)setCameraDirection:(NSString *)direction{
+    NSDictionary * param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.cameraInfo.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",direction,@"camera_Direction", nil];
+    
+    [EvercamPtzControls set_CameraDirection:param_Dictionary withBlock:^(id details, NSError *error) {
+        if (!error) {
+            NSLog(@"Successfully set the direction");
+        }else{
+            NSLog(@"Error setting the direction");
+        }
+    }];
+}
 @end
