@@ -23,4 +23,7 @@
 
 //set camera direction to the selected preset
 +(void)setPreset:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
+
+//create new preset
++(void)createPreset:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 @end

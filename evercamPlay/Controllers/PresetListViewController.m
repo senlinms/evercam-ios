@@ -8,7 +8,10 @@
 
 #import "PresetListViewController.h"
 #import "AppDelegate.h"
+#import "GlobalSettings.h"
 #import "EvercamPtzControls.h"
+#import "AddPresetViewController.h"
+#import "EvercamUtility.h"
 
 @interface PresetListViewController (){
     
@@ -22,6 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if (![GlobalSettings sharedInstance].isPhone) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPresetsList) name:@"K_LOAD_PRESET" object:nil];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -119,11 +125,18 @@
         }else{
             [self.activityIndicator stopAnimating];
             self.view.userInteractionEnabled = YES;
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
             NSLog(@"Error setting the Preset");
         }
     }];
 }
 
 - (IBAction)addPreset:(id)sender {
+    AddPresetViewController *aVC = [[AddPresetViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"AddPresetViewController":@"AddPresetViewController_iPad" bundle:[NSBundle mainBundle]];
+    if (![GlobalSettings sharedInstance].isPhone) {
+        aVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    aVC.cameraId = cameraID;
+    ([GlobalSettings sharedInstance].isPhone)? [self.navigationController pushViewController:aVC animated:YES]:[self presentViewController:aVC animated:YES completion:NULL];
 }
 @end

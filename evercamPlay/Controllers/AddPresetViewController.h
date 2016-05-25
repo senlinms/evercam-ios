@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddPresetViewController : UIViewController
+@interface AddPresetViewController : UIViewController<UITextFieldDelegate>{
+    NSString *cameraId;
+}
+@property (nonatomic,strong) NSString *cameraId;
+
+- (IBAction)backAction:(id)sender;
+- (IBAction)addPreset:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 
 @end

@@ -112,6 +112,7 @@
 		77CF39FD1CE1BC540064D915 /* ShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CF39FB1CE1BC540064D915 /* ShareCell.m */; };
 		77CF39FE1CE1BC540064D915 /* ShareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CF39FC1CE1BC540064D915 /* ShareCell.xib */; };
 		77D14FBC1CE4666900228734 /* NewShareViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D14FBB1CE4666900228734 /* NewShareViewController_iPad.xib */; };
+		77E5ACFA1CF58112002DD002 /* AddPresetViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E5ACF91CF58112002DD002 /* AddPresetViewController_iPad.xib */; };
 		77E754CE1CE21E9000667511 /* ShareCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E754CD1CE21E9000667511 /* ShareCell_iPad.xib */; };
 		77E791DF1CF30BDD0084CF18 /* ic_GridPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E791DC1CF30BDC0084CF18 /* ic_GridPlaceholder.png */; };
 		77E791E01CF30BDD0084CF18 /* ic_GridPlaceholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E791DD1CF30BDC0084CF18 /* ic_GridPlaceholder@2x.png */; };
@@ -430,6 +431,7 @@
 		77CF39FB1CE1BC540064D915 /* ShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareCell.m; sourceTree = "<group>"; };
 		77CF39FC1CE1BC540064D915 /* ShareCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCell.xib; sourceTree = "<group>"; };
 		77D14FBB1CE4666900228734 /* NewShareViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewShareViewController_iPad.xib; sourceTree = "<group>"; };
+		77E5ACF91CF58112002DD002 /* AddPresetViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPresetViewController_iPad.xib; sourceTree = "<group>"; };
 		77E754CD1CE21E9000667511 /* ShareCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCell_iPad.xib; sourceTree = "<group>"; };
 		77E791DC1CF30BDC0084CF18 /* ic_GridPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_GridPlaceholder.png; sourceTree = "<group>"; };
 		77E791DD1CF30BDC0084CF18 /* ic_GridPlaceholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_GridPlaceholder@2x.png"; sourceTree = "<group>"; };
@@ -1230,6 +1232,7 @@
 				7779AF091CF493040036A0F5 /* AddPresetViewController.h */,
 				7779AF0A1CF493040036A0F5 /* AddPresetViewController.m */,
 				7779AF0B1CF493040036A0F5 /* AddPresetViewController.xib */,
+				77E5ACF91CF58112002DD002 /* AddPresetViewController_iPad.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1401,6 +1404,7 @@
 				77E754CE1CE21E9000667511 /* ShareCell_iPad.xib in Resources */,
 				E30900A81B16B96000E5B5C0 /* action-sheet-panel@2x.png in Resources */,
 				77E791E01CF30BDD0084CF18 /* ic_GridPlaceholder@2x.png in Resources */,
+				77E5ACFA1CF58112002DD002 /* AddPresetViewController_iPad.xib in Resources */,
 				413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */,
 				CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */,
 				4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */,
