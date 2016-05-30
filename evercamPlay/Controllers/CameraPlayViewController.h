@@ -23,7 +23,7 @@
 
 @end
 
-@interface CameraPlayViewController : GAITrackedViewController<NIDropDownDelegate,UIActionSheetDelegate> {
+@interface CameraPlayViewController : GAITrackedViewController<NIDropDownDelegate,UIActionSheetDelegate,UIScrollViewDelegate> {
     IBOutlet EaglUIView *video_view;
     BOOL isCameraRemoved;
     AVPlayer *player;
@@ -52,8 +52,11 @@
 @property (nonatomic, strong) EvercamCamera         *cameraInfo;
 @property (nonatomic, strong) NSArray               *cameras;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *liveViewScroll;
 @property (nonatomic, strong) id<CameraPlayViewControllerDelegate> delegate;
 
+@property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer *pinchGesture_outlet;
+- (IBAction)pinchGestureAction:(id)sender;
 //PTZ controls
 - (IBAction)ptz_Controls_Action:(id)sender;
 

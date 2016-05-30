@@ -214,6 +214,10 @@
 
 - (IBAction)onRefresh: (id)sender
 {
+    [self refreshGridView:YES];
+}
+
+-(void)refreshGridView:(BOOL)isReloadImages{
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
                                                           action:action_refresh
@@ -248,8 +252,10 @@
                         }
                     }
                 }
-                [[SDImageCache sharedImageCache] clearMemory];
-                [[SDImageCache sharedImageCache] clearDisk];
+                if (isReloadImages) {
+                    [[SDImageCache sharedImageCache] clearMemory];
+                    [[SDImageCache sharedImageCache] clearDisk];
+                }
                 [self.camerasView reloadData];
             });
         }
@@ -439,7 +445,8 @@
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
     [self setCamerasPerRow];
-    [self onRefresh:self];
+    [self refreshGridView:NO];
+//    [self onRefresh:self];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
