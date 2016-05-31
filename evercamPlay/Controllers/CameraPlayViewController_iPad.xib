@@ -22,7 +22,9 @@
                 <outlet property="lblOffline" destination="0OB-RN-Sn7" id="Her-6R-i1j"/>
                 <outlet property="lblTimeCode" destination="m8v-HL-RuD" id="Uly-Xa-9Qe"/>
                 <outlet property="leftBtn" destination="M8w-fl-Shh" id="Tej-70-aYr"/>
+                <outlet property="liveViewScroll" destination="0yN-ZH-1mG" id="U3D-bz-wHp"/>
                 <outlet property="loadingView" destination="Im9-gb-Jb8" id="Trf-HM-qlA"/>
+                <outlet property="pinchGesture_outlet" destination="f3l-cw-3Dm" id="U3t-S1-6S1"/>
                 <outlet property="playOrPauseButton" destination="twl-Nw-NkC" id="Evx-oV-CM8"/>
                 <outlet property="playerLayerView" destination="Tbd-Ar-QNz" id="7J6-KM-rge"/>
                 <outlet property="playerView" destination="WLe-ZG-20x" id="6kD-lf-blC"/>
@@ -48,18 +50,6 @@
                     <rect key="frame" x="0.0" y="20" width="768" height="1024"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="Tbd-Ar-QNz" customClass="MyPlayerLayerView">
-                            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera is offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0OB-RN-Sn7">
-                            <rect key="frame" x="315" y="476" width="138" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C5e-w7-Cst">
                             <rect key="frame" x="0.0" y="72" width="768" height="972"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -70,6 +60,30 @@
                                 <action selector="handleSingleTap:" destination="-1" eventType="touchUpInside" id="E8e-9u-OgU"/>
                             </connections>
                         </button>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0yN-ZH-1mG">
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" id="Tbd-Ar-QNz" customClass="MyPlayerLayerView">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="f3l-cw-3Dm" appends="YES" id="wIE-7D-aTt"/>
+                                    </connections>
+                                </view>
+                            </subviews>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="PBo-4l-pqF"/>
+                            </connections>
+                        </scrollView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera is offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0OB-RN-Sn7">
+                            <rect key="frame" x="315" y="476" width="138" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="Im9-gb-Jb8">
                             <rect key="frame" x="366" y="483" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -300,6 +314,12 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="174" y="450"/>
         </view>
+        <pinchGestureRecognizer id="f3l-cw-3Dm">
+            <connections>
+                <action selector="pinchGestureAction:" destination="-1" id="ls7-rM-LwS"/>
+                <outlet property="delegate" destination="-1" id="rwo-cd-1ui"/>
+            </connections>
+        </pinchGestureRecognizer>
     </objects>
     <resources>
         <image name="back.png" width="10" height="17"/>

@@ -13,8 +13,6 @@
 		410748781ADFDBE0004D10C9 /* btn_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 410748751ADFDBE0004D10C9 /* btn_pause.png */; };
 		410748791ADFDBE0004D10C9 /* btn_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 410748761ADFDBE0004D10C9 /* btn_play.png */; };
 		4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 410748771ADFDBE0004D10C9 /* btn_save.png */; };
-		4107487E1AE006AC004D10C9 /* SnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4107487C1AE006AC004D10C9 /* SnapshotViewController.m */; };
-		4107487F1AE006AC004D10C9 /* SnapshotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */; };
 		410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748841AE04DAB004D10C9 /* CoreTelephony.framework */; };
 		410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */; };
 		410A13B31AE230A9008CA21C /* icon_online.png in Resources */ = {isa = PBXBuildFile; fileRef = 410A13B21AE230A9008CA21C /* icon_online.png */; };
@@ -125,6 +123,8 @@
 		77E791EE1CF337230084CF18 /* ic_presets.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E791EC1CF337230084CF18 /* ic_presets.png */; };
 		77E791EF1CF337230084CF18 /* ic_home.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E791ED1CF337230084CF18 /* ic_home.png */; };
 		77E791F11CF337720084CF18 /* ic_zoom_out.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E791F01CF337720084CF18 /* ic_zoom_out.png */; };
+		77E96B631CFDAD150044B4E0 /* SnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */; };
+		77E96B641CFDAD150044B4E0 /* SnapshotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */; };
 		77EEF9921CE35504009A3BC0 /* ShareSettingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */; };
 		77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF9941CE35619009A3BC0 /* NewShareViewController.m */; };
 		77EEF9971CE35619009A3BC0 /* NewShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9951CE35619009A3BC0 /* NewShareViewController.xib */; };
@@ -289,9 +289,6 @@
 		410748751ADFDBE0004D10C9 /* btn_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_pause.png; sourceTree = "<group>"; };
 		410748761ADFDBE0004D10C9 /* btn_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_play.png; sourceTree = "<group>"; };
 		410748771ADFDBE0004D10C9 /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
-		4107487B1AE006AC004D10C9 /* SnapshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotViewController.h; sourceTree = "<group>"; };
-		4107487C1AE006AC004D10C9 /* SnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotViewController.m; sourceTree = "<group>"; };
-		4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController.xib; sourceTree = "<group>"; };
 		410748841AE04DAB004D10C9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		410748891AE052C8004D10C9 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		4107488A1AE052C8004D10C9 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -444,6 +441,9 @@
 		77E791EC1CF337230084CF18 /* ic_presets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_presets.png; sourceTree = "<group>"; };
 		77E791ED1CF337230084CF18 /* ic_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home.png; sourceTree = "<group>"; };
 		77E791F01CF337720084CF18 /* ic_zoom_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_zoom_out.png; sourceTree = "<group>"; };
+		77E96B601CFDAD150044B4E0 /* SnapshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotViewController.h; sourceTree = "<group>"; };
+		77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotViewController.m; sourceTree = "<group>"; };
+		77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController.xib; sourceTree = "<group>"; };
 		77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareSettingViewController_iPad.xib; sourceTree = "<group>"; };
 		77EEF9931CE35619009A3BC0 /* NewShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewShareViewController.h; sourceTree = "<group>"; };
 		77EEF9941CE35619009A3BC0 /* NewShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewShareViewController.m; sourceTree = "<group>"; };
@@ -1174,9 +1174,9 @@
 				41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */,
 				41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */,
 				E30900791B16510900E5B5C0 /* CameraPlayViewController_iPad.xib */,
-				4107487B1AE006AC004D10C9 /* SnapshotViewController.h */,
-				4107487C1AE006AC004D10C9 /* SnapshotViewController.m */,
-				4107487D1AE006AC004D10C9 /* SnapshotViewController.xib */,
+				77E96B601CFDAD150044B4E0 /* SnapshotViewController.h */,
+				77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */,
+				77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */,
 				E356C9DA1B17B1D6007BB101 /* SnapshotViewController_iPad.xib */,
 				CB44E8551AAE9E7D00A78C11 /* FeedbackViewController.h */,
 				CB44E8561AAE9E7D00A78C11 /* FeedbackViewController.m */,
@@ -1510,6 +1510,7 @@
 				CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */,
 				E30900701B163F1200E5B5C0 /* SignupViewController_iPad.xib in Resources */,
 				77294E2D1CEAF6F800A5B7D4 /* circleImage_White@2x.png in Resources */,
+				77E96B641CFDAD150044B4E0 /* SnapshotViewController.xib in Resources */,
 				77079D791CE9C6D90073EE16 /* gpoview.mp4 in Resources */,
 				E30201CB1B16C82D0006DAE8 /* alert-yellow-button@2x.png in Resources */,
 				58429A671C16A9E8008D34A8 /* AboutViewController.xib in Resources */,
@@ -1530,7 +1531,6 @@
 				CB44E8791AAE9E7D00A78C11 /* SettingsViewController.xib in Resources */,
 				E30900A11B16B96000E5B5C0 /* action-gray-button.png in Resources */,
 				E309009F1B16B96000E5B5C0 /* action-gray-button-selected.png in Resources */,
-				4107487F1AE006AC004D10C9 /* SnapshotViewController.xib in Resources */,
 				CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */,
 				E30900801B16A2C000E5B5C0 /* AddCameraViewController_iPad.xib in Resources */,
 				CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */,
@@ -1647,6 +1647,7 @@
 				CB44E8801AAE9E7D00A78C11 /* AddAccountCell.m in Sources */,
 				CB318E5D1AFC3565004FFA8E /* UIButton+WebCache.m in Sources */,
 				58F0F6171C08799B00BC04A3 /* Struts.m in Sources */,
+				77E96B631CFDAD150044B4E0 /* SnapshotViewController.m in Sources */,
 				CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */,
 				E369E4A61B137AB6009D2D9E /* AddAccountView.m in Sources */,
 				77079D821CE9ECCD0073EE16 /* GravatarUIImageFactory.m in Sources */,
@@ -1669,7 +1670,6 @@
 				CB44E86E1AAE9E7D00A78C11 /* AccountsViewController.m in Sources */,
 				770C9E5C1CDA0978003BC4E1 /* MyPlayerLayerView.m in Sources */,
 				ABDAE0861CBB8749002285B7 /* TPKeyboardAvoidingTableView.m in Sources */,
-				4107487E1AE006AC004D10C9 /* SnapshotViewController.m in Sources */,
 				7779AF0C1CF493040036A0F5 /* AddPresetViewController.m in Sources */,
 				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
 				41208A5C1AD97971009C4FC2 /* SendGridEmail.m in Sources */,

@@ -64,6 +64,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     NSTimer *liveViewDateStringUpdater;
     BOOL isPlayerStarted;
     
+    UITapGestureRecognizer *ptzViewTap;
 }
 
 @property (nonatomic, retain) PhxSocket *socket;
@@ -76,6 +77,8 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 @synthesize playerLayerView;
 @synthesize player, playerItem;
 
+
+/*
 static void set_message_proxy (const gchar *message, gpointer app)
 {
     CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
@@ -99,7 +102,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
     [self mediaSizeChanged:width height:height];
 }
-
+*/
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self setTitleBarAccordingToOrientation];
@@ -110,10 +113,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     runFirstTime            = NO;
     
-    UITapGestureRecognizer *ptzViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    ptzViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     ptzViewTap.numberOfTouchesRequired = 1;
     [self.ptc_Control_View addGestureRecognizer:ptzViewTap];
+    [self.playerLayerView addGestureRecognizer:ptzViewTap];
     
+    self.liveViewScroll.minimumZoomScale=1;
+    self.liveViewScroll.maximumZoomScale=5;
+    self.liveViewScroll.delegate=self;
+//    self.liveViewScroll.decelerationRate = UIScrollViewDecelerationRateFast;
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -130,10 +138,11 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
         
         [self setNavigationBarAnimation:NO isPortrait:YES];
-        
+
     } else {
         
         [self setNavigationBarAnimation:YES isPortrait:NO];
+        
     }
 }
 
@@ -166,6 +175,15 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    if (self.playerLayerView.hidden) {
+        self.liveViewScroll.contentSize = CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height);
+    }else{
+        self.liveViewScroll.contentSize = CGSizeMake(self.playerLayerView.frame.size.width, self.playerLayerView.frame.size.height);
+    }
+    CGFloat newContentOffsetX = (self.liveViewScroll.contentSize.width - self.liveViewScroll.frame.size.width) / 2;
+    CGFloat newContentOffsetY = (self.liveViewScroll.contentSize.height - self.liveViewScroll.frame.size.height) / 2;
+    self.liveViewScroll.contentOffset = CGPointMake(newContentOffsetX, newContentOffsetY);
+    
     [self setTitleBarAccordingToOrientation];
     
     self.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
@@ -628,6 +646,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
         [loadingView startAnimating];
+        
         if (self.imageView)
         {
             [self.imageView removeFromSuperview];
@@ -653,6 +672,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             }
             
             self.playerLayerView.hidden = NO;
+            [self.liveViewScroll setContentSize:CGSizeMake(self.playerLayerView.frame.size.width, self.playerLayerView.frame.size.height)];
             
         } else {
             [self setUpJPGView];
@@ -1088,8 +1108,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     self.imageView = [[AsyncImageView alloc] initWithFrame:CGRectMake(0, 0, self.playerView.frame.size.width, self.playerView.frame.size.height)];
     self.imageView.autoresizingMask= UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.playerView addSubview:self.imageView];
-    [self.playerView sendSubviewToBack:self.imageView];
+    self.imageView.userInteractionEnabled = YES;
+    [self.liveViewScroll addSubview:self.imageView];
+    [self.liveViewScroll sendSubviewToBack:self.imageView];
+    [self.imageView addGestureRecognizer:self.pinchGesture_outlet];
+    [self.imageView addGestureRecognizer:ptzViewTap];
+    [self.liveViewScroll setContentSize:CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height)];
+//    [self.playerView addSubview:self.imageView];
+//    [self.playerView sendSubviewToBack:self.imageView];
 }
 
 - (void)createBrowseJpgTask {
@@ -1128,7 +1154,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
     });
 }
-
+/*
 -(void) setMessage:(NSString *)message {
     NSLog(@"setMessage:%@", message);
     if ([message hasPrefix:@"State changed to PLAYING"]) {
@@ -1147,7 +1173,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         });
     }
 }
-
+*/
 -(void) setCurrentPosition:(NSInteger)position duration:(NSInteger)duration {
     
 }
@@ -1287,4 +1313,93 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         }
     }];
 }
+
+
+- (IBAction)pinchGestureAction:(id)sender {
+    if ([loadingView isAnimating]) {
+        return;
+    }
+    UIPinchGestureRecognizer *recognizer = (UIPinchGestureRecognizer *)sender;
+    CGFloat currentScale = recognizer.view.frame.size.width / recognizer.view.bounds.size.width;
+    CGFloat newScale = currentScale * recognizer.scale;
+    if (newScale <= 1) {
+//        NSLog(@"scale is 1 or less");
+        newScale = 1;
+    }
+    if (newScale >= 5) {
+        newScale = 5;
+    }
+    
+    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[recognizer locationInView:recognizer.view]];
+    
+    [self.liveViewScroll zoomToRect:zoomRect animated:YES];
+    
+    if (zoomRect.size.width == self.view.frame.size.width || zoomRect.size.height == self.view.frame.size.height) {
+        if (self.playerLayerView.hidden){
+            self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.x,self.view.frame.size.width, self.view.frame.size.height);
+            self.liveViewScroll.contentSize = CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height);
+        }else{
+            self.playerLayerView.frame = CGRectMake(self.playerLayerView.frame.origin.x, self.playerLayerView.frame.origin.x,self.view.frame.size.width, self.view.frame.size.height);
+            self.liveViewScroll.contentSize = CGSizeMake(self.playerLayerView.frame.size.width, self.playerLayerView.frame.size.height);
+        }
+
+        CGFloat newContentOffsetX = (self.liveViewScroll.contentSize.width - self.liveViewScroll.frame.size.width) / 2;
+        CGFloat newContentOffsetY = (self.liveViewScroll.contentSize.height - self.liveViewScroll.frame.size.height) / 2;
+        self.liveViewScroll.contentOffset = CGPointMake(newContentOffsetX, newContentOffsetY);
+    }
+    
+}
+- (void)scrollViewDidZoom:(UIScrollView *)aScrollView {
+  
+        CGFloat offsetX = (self.liveViewScroll.bounds.size.width > self.liveViewScroll.contentSize.width)?
+        (self.liveViewScroll.bounds.size.width - self.liveViewScroll.contentSize.width) * 0.5 : 0.0;
+        CGFloat offsetY = (self.liveViewScroll.bounds.size.height > self.liveViewScroll.contentSize.height)?
+        (self.liveViewScroll.bounds.size.height - self.liveViewScroll.contentSize.height) * 0.5 : 0.0;
+        if (self.playerLayerView.hidden) {
+            
+            if (self.imageView.frame.size.width < self.view.frame.size.width || self.imageView.frame.size.height < self.view.frame.size.height) {
+                self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+            }else{
+                self.imageView.center = CGPointMake(self.liveViewScroll.contentSize.width * 0.5 + offsetX,
+                                                    self.liveViewScroll.contentSize.height * 0.5 + offsetY);
+            }
+        }else{
+            
+            if (self.playerLayerView.frame.size.width < self.view.frame.size.width ) {
+                self.playerLayerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+            }else{
+                self.playerLayerView.center = CGPointMake(self.liveViewScroll.contentSize.width * 0.5 + offsetX,
+                                                          self.liveViewScroll.contentSize.height * 0.5 + offsetY);
+            }
+        }
+}
+
+-(UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    if (self.playerLayerView.hidden) {
+        return self.imageView;
+    }else{
+        return self.playerLayerView;
+    }
+    return nil;
+}
+
+- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
+    
+    CGRect zoomRect;
+    
+    // the zoom rect is in the content view's coordinates.
+    //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
+    //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
+    zoomRect.size.height = [self.liveViewScroll frame].size.height / scale;
+    zoomRect.size.width  = [self.liveViewScroll frame].size.width  / scale;
+    
+    // choose an origin so as to get the right center.
+    zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
+    zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
+    
+    return zoomRect;
+}
+
+
 @end

@@ -22,9 +22,11 @@
                 <outlet property="lblOffline" destination="wrC-9a-tm3" id="ggv-Du-AWj"/>
                 <outlet property="lblTimeCode" destination="m48-Yg-pyN" id="V3U-8d-FAb"/>
                 <outlet property="leftBtn" destination="iaZ-AB-PeI" id="CDg-ER-2b4"/>
+                <outlet property="liveViewScroll" destination="1Wy-xv-6ew" id="c8h-5Z-Iog"/>
                 <outlet property="loadingView" destination="fbV-26-bT6" id="7mP-94-3T1"/>
+                <outlet property="pinchGesture_outlet" destination="mFN-Ha-lKk" id="W6g-HG-cxA"/>
                 <outlet property="playOrPauseButton" destination="QCn-Zg-5jB" id="f9x-cm-Y1p"/>
-                <outlet property="playerLayerView" destination="E6H-65-YeT" id="V9s-3k-JOx"/>
+                <outlet property="playerLayerView" destination="v7W-LO-o9w" id="3AG-Vu-gbY"/>
                 <outlet property="playerView" destination="1os-7d-u4m" id="B4x-Bw-rr0"/>
                 <outlet property="presetBtn" destination="r5W-Y7-t8d" id="DBz-jJ-5b5"/>
                 <outlet property="ptc_Control_View" destination="utB-FH-RPt" id="ZEE-1s-C7G"/>
@@ -49,23 +51,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="5kf-bi-y9q" userLabel="Video" customClass="EaglUIView">
-                            <rect key="frame" x="0.0" y="52" width="320" height="496"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" id="E6H-65-YeT" customClass="MyPlayerLayerView">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera is offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wrC-9a-tm3">
-                            <rect key="frame" x="91" y="260" width="138" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.86274509803921573" green="0.29803921568627451" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Uwf-4K-GA4">
                             <rect key="frame" x="0.0" y="72" width="320" height="516"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,6 +61,36 @@
                                 <action selector="handleSingleTap:" destination="-1" eventType="touchUpInside" id="t1W-RJ-HCk"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" id="5kf-bi-y9q" userLabel="Video" customClass="EaglUIView">
+                            <rect key="frame" x="0.0" y="52" width="320" height="496"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1Wy-xv-6ew">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" id="v7W-LO-o9w" customClass="MyPlayerLayerView">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="mFN-Ha-lKk" appends="YES" id="CXc-7S-Wuc"/>
+                                    </connections>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="EK5-xk-XGr"/>
+                            </connections>
+                        </scrollView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera is offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wrC-9a-tm3">
+                            <rect key="frame" x="91" y="260" width="138" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.86274509803921573" green="0.29803921568627451" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="fbV-26-bT6">
                             <rect key="frame" x="142" y="260" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -306,6 +321,12 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="-53" y="188"/>
         </view>
+        <pinchGestureRecognizer id="mFN-Ha-lKk">
+            <connections>
+                <action selector="pinchGestureAction:" destination="-1" id="Eay-Zf-5H1"/>
+                <outlet property="delegate" destination="-1" id="DfP-dB-TbL"/>
+            </connections>
+        </pinchGestureRecognizer>
     </objects>
     <resources>
         <image name="back.png" width="10" height="17"/>
