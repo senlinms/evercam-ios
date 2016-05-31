@@ -77,6 +77,8 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 @synthesize playerLayerView;
 @synthesize player, playerItem;
 
+
+/*
 static void set_message_proxy (const gchar *message, gpointer app)
 {
     CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
@@ -100,7 +102,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
     [self mediaSizeChanged:width height:height];
 }
-
+*/
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self setTitleBarAccordingToOrientation];
@@ -1152,7 +1154,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
     });
 }
-
+/*
 -(void) setMessage:(NSString *)message {
     NSLog(@"setMessage:%@", message);
     if ([message hasPrefix:@"State changed to PLAYING"]) {
@@ -1171,7 +1173,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         });
     }
 }
-
+*/
 -(void) setCurrentPosition:(NSInteger)position duration:(NSInteger)duration {
     
 }
@@ -1314,12 +1316,14 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 
 - (IBAction)pinchGestureAction:(id)sender {
-    
+    if ([loadingView isAnimating]) {
+        return;
+    }
     UIPinchGestureRecognizer *recognizer = (UIPinchGestureRecognizer *)sender;
     CGFloat currentScale = recognizer.view.frame.size.width / recognizer.view.bounds.size.width;
     CGFloat newScale = currentScale * recognizer.scale;
     if (newScale <= 1) {
-        NSLog(@"scale is 1 or less");
+//        NSLog(@"scale is 1 or less");
         newScale = 1;
     }
     if (newScale >= 5) {
