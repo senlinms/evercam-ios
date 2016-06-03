@@ -7,7 +7,7 @@
 //
 
 #import "EvercamPtzControls.h"
-
+#import "EvercamConstant.h"
 @implementation EvercamPtzControls
 
 

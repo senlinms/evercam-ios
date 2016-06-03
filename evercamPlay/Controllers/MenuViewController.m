@@ -165,15 +165,19 @@
         cell.imageView.image = [UIImage imageNamed:@"ic_accounts.png"];
     }else if (row == 1)
     {
+        text = @"Scan for cameras";
+        cell.imageView.image = [UIImage imageNamed:@"ic_search.png"];
+    }else if (row == 2)
+    {
         text = @"Public cameras";
         cell.imageView.image = [UIImage imageNamed:@"ic_compass.png"];
     }
-    else if (row == 2)
+    else if (row == 3)
     {
         text = @"Settings";
         cell.imageView.image = [UIImage imageNamed:@"ic_settings.png"];
     }
-    else if (row == 3)
+    else if (row == 4)
     {
         text = @"Live Support";
         cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
