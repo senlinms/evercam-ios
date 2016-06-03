@@ -30,8 +30,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblModel;
 @property (weak, nonatomic) IBOutlet UILabel *lblUsername;
 @property (weak, nonatomic) IBOutlet UILabel *lblPassword;
-@property (weak, nonatomic) IBOutlet UILabel *tvSnapshot;
-@property (weak, nonatomic) IBOutlet UILabel *tvRTSPURL;
+@property (weak, nonatomic) IBOutlet UITextView *tvSnapshot;
+@property (weak, nonatomic) IBOutlet UITextView *tvRTSPURL;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalHost;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalHTTPPort;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalRTSPPort;
@@ -39,7 +39,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblInternalHTTPPort;
 @property (weak, nonatomic) IBOutlet UILabel *lblInternalRTSPPort;
 
-@property (weak, nonatomic) IBOutlet UIView *editContainerView;
+//@property (weak, nonatomic) IBOutlet UIView *editContainerView;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *editableParamsContainers;
 
 @property (nonatomic, strong) id<ViewCameraViewControllerDelegate> delegate;
 
