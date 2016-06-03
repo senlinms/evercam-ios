@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (weak, nonatomic) IBOutlet UILabel *txtID;
+@property (weak, nonatomic) IBOutlet UITextView *txtID;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblOwner;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimezone;
@@ -30,8 +30,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblModel;
 @property (weak, nonatomic) IBOutlet UILabel *lblUsername;
 @property (weak, nonatomic) IBOutlet UILabel *lblPassword;
-@property (weak, nonatomic) IBOutlet UILabel *tvSnapshot;
-@property (weak, nonatomic) IBOutlet UILabel *tvRTSPURL;
+@property (weak, nonatomic) IBOutlet UITextView *tvSnapshot;
+@property (weak, nonatomic) IBOutlet UITextView *tvRTSPURL;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalHost;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalHTTPPort;
 @property (weak, nonatomic) IBOutlet UILabel *lblExternalRTSPPort;
