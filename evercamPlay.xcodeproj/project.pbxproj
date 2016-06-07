@@ -39,7 +39,6 @@
 		413BB2AF1ADB14640083A5DC /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2AE1ADB14640083A5DC /* CommonUtil.m */; };
 		413BB2B11ADBFB710083A5DC /* pull-out.png in Resources */ = {isa = PBXBuildFile; fileRef = 413BB2B01ADBFB710083A5DC /* pull-out.png */; };
 		413BB2B51ADC10690083A5DC /* ViewCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */; };
-		413BB2B61ADC10690083A5DC /* ViewCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413BB2B41ADC10690083A5DC /* ViewCameraViewController.xib */; };
 		41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */; };
 		41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */; };
 		41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BEFB491AD6CE7F0016ACCA /* VideoToolbox.framework */; };
@@ -126,6 +125,8 @@
 		77E96B631CFDAD150044B4E0 /* SnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */; };
 		77E96B641CFDAD150044B4E0 /* SnapshotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */; };
 		77EEC69E1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */; };
+		77EEC6A71D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEC6A51D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib */; };
+		77EEC6A81D06E4AC005EF2FA /* ViewCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEC6A61D06E4AC005EF2FA /* ViewCameraViewController.xib */; };
 		77EEF9921CE35504009A3BC0 /* ShareSettingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */; };
 		77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF9941CE35619009A3BC0 /* NewShareViewController.m */; };
 		77EEF9971CE35619009A3BC0 /* NewShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9951CE35619009A3BC0 /* NewShareViewController.xib */; };
@@ -359,7 +360,6 @@
 		413BB2B01ADBFB710083A5DC /* pull-out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull-out.png"; sourceTree = "<group>"; };
 		413BB2B21ADC10690083A5DC /* ViewCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCameraViewController.h; sourceTree = "<group>"; };
 		413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewCameraViewController.m; sourceTree = "<group>"; };
-		413BB2B41ADC10690083A5DC /* ViewCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController.xib; sourceTree = "<group>"; };
 		41BEFB3F1AD609A10016ACCA /* CameraPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraPlayViewController.h; sourceTree = "<group>"; };
 		41BEFB401AD609A10016ACCA /* CameraPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraPlayViewController.m; sourceTree = "<group>"; };
 		41BEFB411AD609A10016ACCA /* CameraPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraPlayViewController.xib; sourceTree = "<group>"; };
@@ -463,6 +463,8 @@
 		77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotViewController.m; sourceTree = "<group>"; };
 		77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController.xib; sourceTree = "<group>"; };
 		77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportCameraViewController_iPad.xib; sourceTree = "<group>"; };
+		77EEC6A51D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController_iPad.xib; sourceTree = "<group>"; };
+		77EEC6A61D06E4AC005EF2FA /* ViewCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController.xib; sourceTree = "<group>"; };
 		77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareSettingViewController_iPad.xib; sourceTree = "<group>"; };
 		77EEF9931CE35619009A3BC0 /* NewShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewShareViewController.h; sourceTree = "<group>"; };
 		77EEF9941CE35619009A3BC0 /* NewShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewShareViewController.m; sourceTree = "<group>"; };
@@ -1233,7 +1235,8 @@
 				77C08AB51CD0AE21005F9427 /* RecordingsViewController_iPad.xib */,
 				413BB2B21ADC10690083A5DC /* ViewCameraViewController.h */,
 				413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */,
-				413BB2B41ADC10690083A5DC /* ViewCameraViewController.xib */,
+				77EEC6A51D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib */,
+				77EEC6A61D06E4AC005EF2FA /* ViewCameraViewController.xib */,
 				413BB28F1ADAB6900083A5DC /* AddCameraViewController.h */,
 				413BB2901ADAB6900083A5DC /* AddCameraViewController.m */,
 				413BB2911ADAB6900083A5DC /* AddCameraViewController.xib */,
@@ -1583,6 +1586,7 @@
 				776647121CEEFD280076B9CE /* ic_settings@3x.png in Resources */,
 				CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */,
 				E369E4AF1B14EC0F009D2D9E /* btn_close@2x.png in Resources */,
+				77EEC6A71D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib in Resources */,
 				77F305E31D00429000FB4293 /* AllDevicesCell.xib in Resources */,
 				E30201C31B16C82D0006DAE8 /* alert-green-button@2x.png in Resources */,
 				E3CB15AA1B2879C700413197 /* btn_delete@2x.png in Resources */,
@@ -1591,6 +1595,7 @@
 				77F161821CEF0E1100634612 /* ic_accounts@3x.png in Resources */,
 				CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */,
 				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
+				77EEC6A81D06E4AC005EF2FA /* ViewCameraViewController.xib in Resources */,
 				E30201C11B16C82D0006DAE8 /* alert-gray-button@2x.png in Resources */,
 				77359D5C1CE5B135000574C5 /* ic_Transfer_icon.png in Resources */,
 				410748791ADFDBE0004D10C9 /* btn_play.png in Resources */,
@@ -1642,7 +1647,6 @@
 				7779AF0D1CF493040036A0F5 /* AddPresetViewController.xib in Resources */,
 				E30900721B16417400E5B5C0 /* LoginViewController_iPad.xib in Resources */,
 				413BB2A31ADAE0A50083A5DC /* SelectModelViewController.xib in Resources */,
-				413BB2B61ADC10690083A5DC /* ViewCameraViewController.xib in Resources */,
 				E309009D1B16B96000E5B5C0 /* action-black-button.png in Resources */,
 				411C90EB1AE6A1250048FF3D /* back.png in Resources */,
 				E30900A01B16B96000E5B5C0 /* action-gray-button-selected@2x.png in Resources */,

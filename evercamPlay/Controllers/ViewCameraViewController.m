@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Evercam. All rights reserved.
 //
 
-#import "ViewCameraViewController.H"
+#import "ViewCameraViewController.h"
 #import "SelectVendorViewController.h"
 #import "SelectModelViewController.h"
 #import "AddCameraViewController.h"
@@ -36,17 +36,20 @@
     [super viewDidLoad];
     
     self.screenName = @"View Camera Detail";
-    
     [self fillCameraDetails];
-    
 }
-
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     CustomNavigationController* cVC = [APP_DELEGATE viewController];
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.tvSnapshot flashScrollIndicators];
+    [self.tvRTSPURL flashScrollIndicators];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,7 +67,7 @@
                                                           action:category_add_camera
                                                            label:label_add_camera_manually
                                                            value:nil] build]];
-
+    
     
     AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:nil];
     addCameraVC.editCamera = self.camera;
@@ -73,84 +76,84 @@
 }
 
 - (IBAction)menu:(id)sender {       // to do put remove camera here
- 
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-            BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+        BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
+        
+        EvercamRights *right = self.camera.rights;
+        if (right.rightsString) {
             
-            EvercamRights *right = self.camera.rights;
-            if (right.rightsString) {
-
-                if (([right.rightsString rangeOfString:@"edit"].location != NSNotFound) || ([right.rightsString rangeOfString:@"EDIT"].location != NSNotFound)) {
-                    [sheet addButtonWithTitle:@"Edit Camera" block:^{
-                        [self edit:self];
-                    }];
-                }
+            if (([right.rightsString rangeOfString:@"edit"].location != NSNotFound) || ([right.rightsString rangeOfString:@"EDIT"].location != NSNotFound)) {
+                [sheet addButtonWithTitle:@"Edit Camera" block:^{
+                    [self edit:self];
+                }];
             }
-            
-            [sheet addButtonWithTitle:@"Remove Camera" block:^{
-                [self deleteCamera];
-            }];
-            [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
-            [sheet showInView:self.view];
         }
-        else
-        {
-            UIAlertController * view=   [UIAlertController
-                                         alertControllerWithTitle:nil
-                                         message:nil
-                                         preferredStyle:UIAlertControllerStyleActionSheet];
-            
-           
-            UIAlertAction* editCamera = [UIAlertAction
-                                          actionWithTitle:@"Edit Camera"
-                                          style:UIAlertActionStyleDefault
-                                          handler:^(UIAlertAction * action)
-                                          {
-                                              [view dismissViewControllerAnimated:YES completion:nil];
-                                              [self edit:self];
-                                              
-                                          }];
-           
-            UIAlertAction* removeCamera = [UIAlertAction
-                                           actionWithTitle:@"Remove Camera"
-                                           style:UIAlertActionStyleDestructive
-                                           handler:^(UIAlertAction * action)
-                                           {
-                                               [view dismissViewControllerAnimated:YES completion:nil];
-                                               [self deleteCamera];
-                                               
-                                           }];
-            UIAlertAction* cancel = [UIAlertAction
-                                     actionWithTitle:@"Cancel"
-                                     style:UIAlertActionStyleCancel
+        
+        [sheet addButtonWithTitle:@"Remove Camera" block:^{
+            [self deleteCamera];
+        }];
+        [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
+        [sheet showInView:self.view];
+    }
+    else
+    {
+        UIAlertController * view=   [UIAlertController
+                                     alertControllerWithTitle:nil
+                                     message:nil
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        
+        UIAlertAction* editCamera = [UIAlertAction
+                                     actionWithTitle:@"Edit Camera"
+                                     style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action)
                                      {
                                          [view dismissViewControllerAnimated:YES completion:nil];
+                                         [self edit:self];
+                                         
                                      }];
-            EvercamRights *right = self.camera.rights;
-            if (right.rightsString) {
-                if ([right.rightsString containsString:@"edit"] || [right.rightsString containsString:@"EDIT"]) {
-                    [view addAction:editCamera];
-                }
-            }
-    
-            [view addAction:removeCamera];
-            [view addAction:cancel];
-            
-            if ([GlobalSettings sharedInstance].isPhone)
-            {
-                [self presentViewController:view animated:YES completion:nil];
-            }
-            else
-            {
-                UIPopoverPresentationController *popPresenter = [view
-                                                                 popoverPresentationController];
-                popPresenter.sourceView = (UIView *)sender;
-                popPresenter.sourceRect = ((UIView *)sender).bounds;
-                [self presentViewController:view animated:YES completion:nil];
+        
+        UIAlertAction* removeCamera = [UIAlertAction
+                                       actionWithTitle:@"Remove Camera"
+                                       style:UIAlertActionStyleDestructive
+                                       handler:^(UIAlertAction * action)
+                                       {
+                                           [view dismissViewControllerAnimated:YES completion:nil];
+                                           [self deleteCamera];
+                                           
+                                       }];
+        UIAlertAction* cancel = [UIAlertAction
+                                 actionWithTitle:@"Cancel"
+                                 style:UIAlertActionStyleCancel
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [view dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+        EvercamRights *right = self.camera.rights;
+        if (right.rightsString) {
+            if ([right.rightsString containsString:@"edit"] || [right.rightsString containsString:@"EDIT"]) {
+                [view addAction:editCamera];
             }
         }
+        
+        [view addAction:removeCamera];
+        [view addAction:cancel];
+        
+        if ([GlobalSettings sharedInstance].isPhone)
+        {
+            [self presentViewController:view animated:YES completion:nil];
+        }
+        else
+        {
+            UIPopoverPresentationController *popPresenter = [view
+                                                             popoverPresentationController];
+            popPresenter.sourceView = (UIView *)sender;
+            popPresenter.sourceRect = ((UIView *)sender).bounds;
+            [self presentViewController:view animated:YES completion:nil];
+        }
     }
+}
 
 - (void)deleteCamera {
     UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove Camera", nil) message:NSLocalizedString(@"Are you sure you want to remove this camera?", nil) delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
@@ -214,7 +217,7 @@
         }
     }
 }
-    
+
 
 
 - (void)fillCameraDetails {
@@ -316,7 +319,10 @@
         }
         
     } else {
-        self.editContainerView.hidden = YES;
+        
+        for (UIView *viewToHide in self.editableParamsContainers) {
+            viewToHide.hidden = YES;
+        }
     }
 }
 
