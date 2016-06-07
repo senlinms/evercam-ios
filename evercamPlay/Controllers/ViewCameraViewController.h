@@ -39,7 +39,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblInternalHTTPPort;
 @property (weak, nonatomic) IBOutlet UILabel *lblInternalRTSPPort;
 
-
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *editableParamsContainers;
 
 @property (nonatomic, strong) id<ViewCameraViewControllerDelegate> delegate;

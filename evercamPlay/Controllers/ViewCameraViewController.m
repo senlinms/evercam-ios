@@ -319,7 +319,6 @@
         }
         
     } else {
-        
         for (UIView *viewToHide in self.editableParamsContainers) {
             viewToHide.hidden = YES;
         }
