@@ -23,7 +23,7 @@
         if ([cameraDict valueForKey:@"is_online"] != [NSNull null]) {
             self.isOnline = [[cameraDict valueForKey:@"is_online"] boolValue];
         }
-        self.thumbnailUrl = [cameraDict valueForKey:@"thumbnail_url"];
+        
 
         self.externalH264Url = @"";
         self.externalJpgUrl = @"";

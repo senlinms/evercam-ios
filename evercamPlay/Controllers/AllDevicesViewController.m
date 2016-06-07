@@ -10,6 +10,7 @@
 #import "AllDevicesCell.h"
 #import "GlobalSettings.h"
 #import "Device.h"
+#import "ReportCameraViewController.h"
 @interface AllDevicesViewController ()
 
 @end
@@ -61,11 +62,14 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(void)reportACamera:(UIButton *)button{
     Device *device              = [self.devicesArray objectAtIndex:button.tag-100];
+    ReportCameraViewController *aVC = [[ReportCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ReportCameraViewController":@"ReportCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+    
+    [self.navigationController pushViewController:aVC animated:YES];
 }
 
 - (IBAction)backAction:(id)sender {

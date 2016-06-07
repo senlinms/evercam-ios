@@ -142,6 +142,7 @@
     [self.scanning_activityindicator startAnimating];
     [EvercamCameraVendor getVendorName:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
+            NSLog(@"Server Response: %@",details);
             NSDictionary *camDict = details;
             NSArray *vendorArray = camDict[@"vendors"];
             if (vendorArray.count > 0) {

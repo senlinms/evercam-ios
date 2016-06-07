@@ -82,7 +82,7 @@
     self.email.text = [APP_DELEGATE defaultUser].email;
     [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:gravatarServerImageMysteryMan size:72 delegate:self];
     
-    [self changeFrame];
+//    [self changeFrame];
     if ([PreferenceUtil isShowOfflineCameras]) {
         [self.cameraOffOn_Switch setOn:YES];
     } else {
@@ -104,7 +104,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [self changeFrame];
+//    [self changeFrame];
 }
 
 -(void)changeFrame
@@ -135,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -200,7 +200,7 @@
     
     UIViewController *newFrontController = nil;
     
-    if (row == 0 || row == 1 || row == 2 || row == 3)
+    if (row == 0 || row == 1 || row == 2 || row == 3 || row == 4)
     {
         row += 1;
         

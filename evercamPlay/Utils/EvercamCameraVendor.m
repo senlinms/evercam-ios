@@ -10,7 +10,7 @@
 #import "EvercamConstant.h"
 
 @implementation EvercamCameraVendor
-//https://api.evercam.io/v1/vendors?mac=54%3Ae6%3Afc%3Aa2%3A1f%3A79&api_id=70d83794&api_key=83c01ab2282f5ca357d08b878805fa85
+
 +(void)getVendorName:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block{
     NSString *mac_Address  = parameterDictionary[@"mac_address"];
     NSString *api_id    = parameterDictionary[@"api_id"];
