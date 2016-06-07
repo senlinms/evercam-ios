@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Evercam. All rights reserved.
 //
 
-#import "ViewCameraViewController.H"
+#import "ViewCameraViewController.h"
 #import "SelectVendorViewController.h"
 #import "SelectModelViewController.h"
 #import "AddCameraViewController.h"
@@ -36,17 +36,20 @@
     [super viewDidLoad];
     
     self.screenName = @"View Camera Detail";
-    
     [self fillCameraDetails];
-    
 }
-
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     CustomNavigationController* cVC = [APP_DELEGATE viewController];
     [cVC setHasLandscapeMode:YES];
     [UIViewController attemptRotationToDeviceOrientation];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.tvSnapshot flashScrollIndicators];
+    [self.tvRTSPURL flashScrollIndicators];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -316,7 +319,10 @@
         }
         
     } else {
-        self.editContainerView.hidden = YES;
+//        self.editContainerView.hidden = YES;
+        for (UIView *viewToHide in self.editableParamsContainers) {
+            viewToHide.hidden = YES;
+        }
     }
 }
 
