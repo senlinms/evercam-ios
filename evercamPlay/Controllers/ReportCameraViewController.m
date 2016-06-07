@@ -70,7 +70,11 @@
 */
 
 - (IBAction)backAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([GlobalSettings sharedInstance].isPhone) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 - (IBAction)reportModel:(id)sender {
     if (isCompletelyEmpty(self.modelTextField.text)) {
@@ -109,6 +113,10 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([GlobalSettings sharedInstance].isPhone) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 @end

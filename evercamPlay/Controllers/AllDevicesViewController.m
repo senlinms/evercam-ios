@@ -48,6 +48,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    tableView.backgroundColor  = [UIColor clearColor];
     AllDevicesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[AllDevicesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
@@ -66,10 +67,12 @@
 }
 
 -(void)reportACamera:(UIButton *)button{
-    Device *device              = [self.devicesArray objectAtIndex:button.tag-100];
-    ReportCameraViewController *aVC = [[ReportCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ReportCameraViewController":@"ReportCameraViewController_iPad" bundle:[NSBundle mainBundle]];
     
-    [self.navigationController pushViewController:aVC animated:YES];
+    ReportCameraViewController *aVC = [[ReportCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ReportCameraViewController":@"ReportCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+    if (![GlobalSettings sharedInstance].isPhone) {
+        aVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    ([GlobalSettings sharedInstance].isPhone)? [self.navigationController pushViewController:aVC animated:YES]:[self presentViewController:aVC animated:YES completion:NULL];
 }
 
 - (IBAction)backAction:(id)sender {

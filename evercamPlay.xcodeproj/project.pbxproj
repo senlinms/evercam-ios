@@ -125,6 +125,7 @@
 		77E791F11CF337720084CF18 /* ic_zoom_out.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E791F01CF337720084CF18 /* ic_zoom_out.png */; };
 		77E96B631CFDAD150044B4E0 /* SnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */; };
 		77E96B641CFDAD150044B4E0 /* SnapshotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */; };
+		77EEC69E1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */; };
 		77EEF9921CE35504009A3BC0 /* ShareSettingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */; };
 		77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF9941CE35619009A3BC0 /* NewShareViewController.m */; };
 		77EEF9971CE35619009A3BC0 /* NewShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9951CE35619009A3BC0 /* NewShareViewController.xib */; };
@@ -461,6 +462,7 @@
 		77E96B601CFDAD150044B4E0 /* SnapshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotViewController.h; sourceTree = "<group>"; };
 		77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotViewController.m; sourceTree = "<group>"; };
 		77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController.xib; sourceTree = "<group>"; };
+		77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportCameraViewController_iPad.xib; sourceTree = "<group>"; };
 		77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareSettingViewController_iPad.xib; sourceTree = "<group>"; };
 		77EEF9931CE35619009A3BC0 /* NewShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewShareViewController.h; sourceTree = "<group>"; };
 		77EEF9941CE35619009A3BC0 /* NewShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewShareViewController.m; sourceTree = "<group>"; };
@@ -1314,6 +1316,7 @@
 				77356BB31D055120009EBA90 /* ReportCameraViewController.h */,
 				77356BB41D055120009EBA90 /* ReportCameraViewController.m */,
 				77356BB51D055120009EBA90 /* ReportCameraViewController.xib */,
+				77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1523,6 +1526,7 @@
 				CBDFA5601AE92806007CC199 /* ic_menu.png in Resources */,
 				E30900A31B16B96000E5B5C0 /* action-red-button-selected.png in Resources */,
 				77F305E51D0044A300FB4293 /* AllDevicesCell_iPad.xib in Resources */,
+				77EEC69E1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib in Resources */,
 				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				7735198E1D00632600A41044 /* AllDevicesViewController_iPad.xib in Resources */,
 				77F9DCA61CFEE11A000EA6A9 /* ic_search@2x.png in Resources */,
