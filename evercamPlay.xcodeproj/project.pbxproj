@@ -82,6 +82,8 @@
 		77356BB71D055120009EBA90 /* ReportCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77356BB51D055120009EBA90 /* ReportCameraViewController.xib */; };
 		77359D5C1CE5B135000574C5 /* ic_Transfer_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 77359D5A1CE5B135000574C5 /* ic_Transfer_icon.png */; };
 		77359D5D1CE5B135000574C5 /* ic_Transfer_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77359D5B1CE5B135000574C5 /* ic_Transfer_icon@2x.png */; };
+		7736DBE91D07E7E400376E40 /* ViewCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7736DBE71D07E7E400376E40 /* ViewCameraViewController_iPad.xib */; };
+		7736DBEA1D07E7E400376E40 /* ViewCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7736DBE81D07E7E400376E40 /* ViewCameraViewController.xib */; };
 		774EF1131CE3063700D97805 /* ShareViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774EF1121CE3063700D97805 /* ShareViewController_iPad.xib */; };
 		774EF1171CE30A7400D97805 /* ShareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774EF1151CE30A7400D97805 /* ShareSettingViewController.m */; };
 		774EF1181CE30A7400D97805 /* ShareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774EF1161CE30A7400D97805 /* ShareSettingViewController.xib */; };
@@ -124,11 +126,7 @@
 		77E791F11CF337720084CF18 /* ic_zoom_out.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E791F01CF337720084CF18 /* ic_zoom_out.png */; };
 		77E96B631CFDAD150044B4E0 /* SnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */; };
 		77E96B641CFDAD150044B4E0 /* SnapshotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */; };
-
 		77EEC69E1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */; };
-		77EEC6A71D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEC6A51D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib */; };
-		77EEC6A81D06E4AC005EF2FA /* ViewCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEC6A61D06E4AC005EF2FA /* ViewCameraViewController.xib */; };
-
 		77EEF9921CE35504009A3BC0 /* ShareSettingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */; };
 		77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF9941CE35619009A3BC0 /* NewShareViewController.m */; };
 		77EEF9971CE35619009A3BC0 /* NewShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9951CE35619009A3BC0 /* NewShareViewController.xib */; };
@@ -416,6 +414,8 @@
 		77356BB51D055120009EBA90 /* ReportCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportCameraViewController.xib; sourceTree = "<group>"; };
 		77359D5A1CE5B135000574C5 /* ic_Transfer_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_Transfer_icon.png; sourceTree = "<group>"; };
 		77359D5B1CE5B135000574C5 /* ic_Transfer_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_Transfer_icon@2x.png"; sourceTree = "<group>"; };
+		7736DBE71D07E7E400376E40 /* ViewCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController_iPad.xib; sourceTree = "<group>"; };
+		7736DBE81D07E7E400376E40 /* ViewCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController.xib; sourceTree = "<group>"; };
 		774EF1121CE3063700D97805 /* ShareViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController_iPad.xib; sourceTree = "<group>"; };
 		774EF1141CE30A7300D97805 /* ShareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSettingViewController.h; sourceTree = "<group>"; };
 		774EF1151CE30A7400D97805 /* ShareSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSettingViewController.m; sourceTree = "<group>"; };
@@ -464,11 +464,7 @@
 		77E96B601CFDAD150044B4E0 /* SnapshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotViewController.h; sourceTree = "<group>"; };
 		77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotViewController.m; sourceTree = "<group>"; };
 		77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController.xib; sourceTree = "<group>"; };
-
 		77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportCameraViewController_iPad.xib; sourceTree = "<group>"; };
-		77EEC6A51D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController_iPad.xib; sourceTree = "<group>"; };
-		77EEC6A61D06E4AC005EF2FA /* ViewCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController.xib; sourceTree = "<group>"; };
-
 		77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareSettingViewController_iPad.xib; sourceTree = "<group>"; };
 		77EEF9931CE35619009A3BC0 /* NewShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewShareViewController.h; sourceTree = "<group>"; };
 		77EEF9941CE35619009A3BC0 /* NewShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewShareViewController.m; sourceTree = "<group>"; };
@@ -1239,10 +1235,8 @@
 				77C08AB51CD0AE21005F9427 /* RecordingsViewController_iPad.xib */,
 				413BB2B21ADC10690083A5DC /* ViewCameraViewController.h */,
 				413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */,
-
-				77EEC6A51D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib */,
-				77EEC6A61D06E4AC005EF2FA /* ViewCameraViewController.xib */,
-
+				7736DBE71D07E7E400376E40 /* ViewCameraViewController_iPad.xib */,
+				7736DBE81D07E7E400376E40 /* ViewCameraViewController.xib */,
 				413BB28F1ADAB6900083A5DC /* AddCameraViewController.h */,
 				413BB2901ADAB6900083A5DC /* AddCameraViewController.m */,
 				413BB2911ADAB6900083A5DC /* AddCameraViewController.xib */,
@@ -1496,7 +1490,6 @@
 			files = (
 				7779AF081CF483FA0036A0F5 /* PresetListViewController_iPad.xib in Resources */,
 				77A680DE1CCF715E002E12AB /* local.plist in Resources */,
-				77EEC6A21D06E364005EF2FA /* ViewCameraViewController.xib in Resources */,
 				77F161801CEF0E1100634612 /* ic_accounts.png in Resources */,
 				E30900A21B16B96000E5B5C0 /* action-gray-button@2x.png in Resources */,
 				E356C9DB1B17B1D6007BB101 /* SnapshotViewController_iPad.xib in Resources */,
@@ -1569,7 +1562,6 @@
 				77E791DF1CF30BDD0084CF18 /* ic_GridPlaceholder.png in Resources */,
 				E30201C61B16C82D0006DAE8 /* alert-window-landscape.png in Resources */,
 				77CF39FE1CE1BC540064D915 /* ShareCell.xib in Resources */,
-				77EEC6A41D06E382005EF2FA /* ViewCameraViewController_iPad.xib in Resources */,
 				776647031CEEF1CB0076B9CE /* ic_compass.png in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
 				AB8097161CC0C742002F5FF9 /* nav.png in Resources */,
@@ -1594,7 +1586,7 @@
 				776647121CEEFD280076B9CE /* ic_settings@3x.png in Resources */,
 				CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */,
 				E369E4AF1B14EC0F009D2D9E /* btn_close@2x.png in Resources */,
-				77EEC6A71D06E4AC005EF2FA /* ViewCameraViewController_iPad.xib in Resources */,
+				7736DBE91D07E7E400376E40 /* ViewCameraViewController_iPad.xib in Resources */,
 				77F305E31D00429000FB4293 /* AllDevicesCell.xib in Resources */,
 				E30201C31B16C82D0006DAE8 /* alert-green-button@2x.png in Resources */,
 				E3CB15AA1B2879C700413197 /* btn_delete@2x.png in Resources */,
@@ -1603,7 +1595,7 @@
 				77F161821CEF0E1100634612 /* ic_accounts@3x.png in Resources */,
 				CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */,
 				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
-				77EEC6A81D06E4AC005EF2FA /* ViewCameraViewController.xib in Resources */,
+				7736DBEA1D07E7E400376E40 /* ViewCameraViewController.xib in Resources */,
 				E30201C11B16C82D0006DAE8 /* alert-gray-button@2x.png in Resources */,
 				77359D5C1CE5B135000574C5 /* ic_Transfer_icon.png in Resources */,
 				410748791ADFDBE0004D10C9 /* btn_play.png in Resources */,

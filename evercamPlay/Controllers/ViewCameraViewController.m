@@ -319,6 +319,7 @@
         }
         
     } else {
+        //        self.editContainerView.hidden = YES;
         for (UIView *viewToHide in self.editableParamsContainers) {
             viewToHide.hidden = YES;
         }
