@@ -47,6 +47,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import "PublicCamerasViewController.h"
 #import "CameraScanViewController.h"
+#import "VendorAndModelViewController.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -279,9 +280,12 @@
                                                           action:category_add_camera
                                                            label:label_add_camera_manually
                                                            value:nil] build]];
-    
+    /*
     AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:nil];
     [addCameraVC setDelegate:self];
+    [self.navigationController pushViewController:addCameraVC animated:YES];
+    */
+    VendorAndModelViewController *addCameraVC = [[VendorAndModelViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"VendorAndModelViewController" : @"VendorAndModelViewController_iPad" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:addCameraVC animated:YES];
 }
 
