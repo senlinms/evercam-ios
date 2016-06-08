@@ -82,7 +82,7 @@
     self.email.text = [APP_DELEGATE defaultUser].email;
     [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:gravatarServerImageMysteryMan size:72 delegate:self];
     
-    [self changeFrame];
+//    [self changeFrame];
     if ([PreferenceUtil isShowOfflineCameras]) {
         [self.cameraOffOn_Switch setOn:YES];
     } else {
@@ -104,7 +104,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [self changeFrame];
+//    [self changeFrame];
 }
 
 -(void)changeFrame
@@ -135,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -165,15 +165,19 @@
         cell.imageView.image = [UIImage imageNamed:@"ic_accounts.png"];
     }else if (row == 1)
     {
+        text = @"Scan for cameras";
+        cell.imageView.image = [UIImage imageNamed:@"ic_search.png"];
+    }else if (row == 2)
+    {
         text = @"Public cameras";
         cell.imageView.image = [UIImage imageNamed:@"ic_compass.png"];
     }
-    else if (row == 2)
+    else if (row == 3)
     {
         text = @"Settings";
         cell.imageView.image = [UIImage imageNamed:@"ic_settings.png"];
     }
-    else if (row == 3)
+    else if (row == 4)
     {
         text = @"Live Support";
         cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
@@ -196,7 +200,7 @@
     
     UIViewController *newFrontController = nil;
     
-    if (row == 0 || row == 1 || row == 2 || row == 3)
+    if (row == 0 || row == 1 || row == 2 || row == 3 || row == 4)
     {
         row += 1;
         

@@ -324,7 +324,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 - (void)showCameraView {
-    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"ViewCameraViewController" : @"ViewCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ViewCameraViewController":@"ViewCameraViewController_iPad" bundle:[NSBundle mainBundle]];
     viewCameraVC.camera = self.cameraInfo;
     viewCameraVC.delegate = self;
     [self.navigationController presentViewController:viewCameraVC animated:YES completion:nil];

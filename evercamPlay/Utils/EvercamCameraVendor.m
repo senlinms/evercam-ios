@@ -1,23 +1,24 @@
 //
-//  EvercamCameraModelInfo.m
+//  EvercamCameraVendor.m
 //  evercamPlay
 //
-//  Created by Zulqarnain on 5/24/16.
+//  Created by Zulqarnain on 6/1/16.
 //  Copyright © 2016 evercom. All rights reserved.
 //
 
-#import "EvercamCameraModelInfo.h"
+#import "EvercamCameraVendor.h"
+#import "EvercamConstant.h"
 
-@implementation EvercamCameraModelInfo
+@implementation EvercamCameraVendor
 
-+(void)getCameraModelInformation:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block{
-    NSString *modelId  = parameterDictionary[@"model_id"];
++(void)getVendorName:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block{
+    NSString *mac_Address  = parameterDictionary[@"mac_address"];
     NSString *api_id    = parameterDictionary[@"api_id"];
     NSString *api_key   = parameterDictionary[@"api_Key"];
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        NSString *jsonUrlString = [NSString stringWithFormat:@"%@models/%@?api_id=%@&api_key=%@",KBASEURL,modelId,api_id,api_key];
+        NSString *jsonUrlString = [NSString stringWithFormat:@"%@vendors?mac=%@&api_id=%@&api_key=%@",KBASEURL,mac_Address,api_id,api_key];
         NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -46,4 +47,5 @@
         }
     });
 }
+
 @end

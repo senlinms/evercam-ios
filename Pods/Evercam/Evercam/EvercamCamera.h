@@ -12,7 +12,7 @@
 @property (nonatomic, strong) NSString* vendor;
 @property (nonatomic, strong) NSString* model;
 @property (nonatomic, strong) NSString* macAddress;
-@property (nonatomic, strong) NSString *thumbnailUrl;
+
 
 @property (nonatomic, strong) NSString *externalJpgUrl;
 @property (nonatomic, strong) NSString *externalH264Url;

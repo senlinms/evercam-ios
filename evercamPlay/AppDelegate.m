@@ -18,6 +18,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import "PreferenceUtil.h"
 #import "Intercom/intercom.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
 @interface AppDelegate ()
 
 @end
@@ -28,7 +29,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+        
     [self integrateIntercom];
     [Crashlytics startWithAPIKey:@"3076ee9439062b784cded123ab7344ffa3b1c872"];
     [Fabric with:@[[Crashlytics class]]];

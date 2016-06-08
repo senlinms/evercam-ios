@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController">
             <connections>
-                <outlet property="appVersion" destination="CPB-Hi-Is4" id="8XK-FD-wwH"/>
                 <outlet property="cameraOffOn_Switch" destination="fnF-58-qhr" id="SYU-AW-Jbi"/>
                 <outlet property="containerView" destination="BNW-ZG-xLz" id="oYQ-ul-3c0"/>
                 <outlet property="email" destination="FY8-jH-BKx" id="4e4-0L-8E3"/>
@@ -29,12 +28,8 @@
                 </view>
                 <view contentMode="scaleToFill" id="BNW-ZG-xLz">
                     <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="vlR-22-EcK">
-                            <rect key="frame" x="13" y="16" width="150" height="23"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="20">
                             <rect key="frame" x="0.0" y="186" width="320" height="362"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,13 +53,6 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0.3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CPB-Hi-Is4">
-                            <rect key="frame" x="171" y="23" width="55" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
-                            <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" id="J89-bO-7zw">
@@ -108,6 +96,5 @@
     <resources>
         <image name="circleImage.png" width="60" height="60"/>
         <image name="ic_person.png" width="100" height="100"/>
-        <image name="logo.png" width="300" height="43"/>
     </resources>
 </document>

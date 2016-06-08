@@ -46,6 +46,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "PublicCamerasViewController.h"
+#import "CameraScanViewController.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -158,15 +159,14 @@
         
     }else if (row == 2)
     {
+        newFrontController = [[CameraScanViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CameraScanViewController" : @"CameraScanViewController_iPad" bundle:[NSBundle mainBundle]];
+        
+    }else if (row == 3)
+    {
         newFrontController = [[PublicCamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"PublicCamerasViewController" : @"PublicCamerasViewController_iPad" bundle:[NSBundle mainBundle]];
         
-//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-//                                                              action:action_settings
-//                                                               label:label_settings
-//                                                               value:nil] build]];
     }
-    else if (row == 3)
+    else if (row == 4)
     {
         newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
         
@@ -176,7 +176,7 @@
                                                                label:label_settings
                                                                value:nil] build]];
     }
-    else if (row == 4)
+    else if (row == 5)
     {
         [Intercom presentConversationList];
         return;

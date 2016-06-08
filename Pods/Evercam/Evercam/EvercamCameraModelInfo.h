@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#define KBASEURL @"https://api.evercam.io/v1/"
+
 @interface EvercamCameraModelInfo : NSObject
 
 //Get camera model details

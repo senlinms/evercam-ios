@@ -7,7 +7,8 @@ pod 'AFNetworking', '~> 2.3'
 pod 'Evercam'
 pod 'Fabric'
 pod 'Crashlytics'
-pod ‘PhoenixClient’
+pod 'PhoenixClient'
 pod 'ActionSheetPicker-3.0'
+pod 'Unirest'
 end
 
