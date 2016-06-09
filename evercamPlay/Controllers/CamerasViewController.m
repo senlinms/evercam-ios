@@ -286,7 +286,11 @@
     [self.navigationController pushViewController:addCameraVC animated:YES];
     */
     VendorAndModelViewController *addCameraVC = [[VendorAndModelViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"VendorAndModelViewController" : @"VendorAndModelViewController_iPad" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:addCameraVC animated:YES];
+    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:addCameraVC];
+    navVC.isPortraitMode        = YES;
+    [navVC setHasLandscapeMode:YES];
+    navVC.navigationBarHidden   = YES;
+    [self.navigationController presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void)scanCamera

@@ -76,6 +76,8 @@
 		770C9E5E1CDA0A8F003BC4E1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */; };
 		77294E2C1CEAF6F800A5B7D4 /* circleImage_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 77294E2A1CEAF6F800A5B7D4 /* circleImage_White.png */; };
 		77294E2D1CEAF6F800A5B7D4 /* circleImage_White@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77294E2B1CEAF6F800A5B7D4 /* circleImage_White@2x.png */; };
+		772EA57B1D0940D30005DB98 /* ConnectCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772EA5791D0940D30005DB98 /* ConnectCameraViewController.m */; };
+		772EA57C1D0940D30005DB98 /* ConnectCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772EA57A1D0940D30005DB98 /* ConnectCameraViewController.xib */; };
 		7732ED981CD735C000EC9C6B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7732ED971CD735C000EC9C6B /* MediaPlayer.framework */; };
 		7735198E1D00632600A41044 /* AllDevicesViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7735198D1D00632600A41044 /* AllDevicesViewController_iPad.xib */; };
 		77356BB61D055120009EBA90 /* ReportCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356BB41D055120009EBA90 /* ReportCameraViewController.m */; };
@@ -159,6 +161,8 @@
 		77F9DCBE1CFEF2F7000EA6A9 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F9DCB91CFEF2F6000EA6A9 /* SimplePing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77F9DCBF1CFEF2F7000EA6A9 /* SimplePingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F9DCBB1CFEF2F6000EA6A9 /* SimplePingHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77F9DCC21CFEF9BC000EA6A9 /* EvercamCameraVendor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F9DCC11CFEF9BC000EA6A9 /* EvercamCameraVendor.m */; };
+		77FB34261D094F1200B3D4C9 /* buttonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FB34241D094F1200B3D4C9 /* buttonBg.png */; };
+		77FB34271D094F1200B3D4C9 /* buttonBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FB34251D094F1200B3D4C9 /* buttonBg@2x.png */; };
 		AB242FEC1CBE41AC00C5F2F7 /* Intercom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */; };
 		AB242FED1CBE41AC00C5F2F7 /* Intercom.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */; };
 		AB6E77E21CBE1A1600DE6310 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */; };
@@ -410,6 +414,9 @@
 		770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		77294E2A1CEAF6F800A5B7D4 /* circleImage_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleImage_White.png; sourceTree = "<group>"; };
 		77294E2B1CEAF6F800A5B7D4 /* circleImage_White@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleImage_White@2x.png"; sourceTree = "<group>"; };
+		772EA5781D0940D30005DB98 /* ConnectCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectCameraViewController.h; sourceTree = "<group>"; };
+		772EA5791D0940D30005DB98 /* ConnectCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectCameraViewController.m; sourceTree = "<group>"; };
+		772EA57A1D0940D30005DB98 /* ConnectCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectCameraViewController.xib; sourceTree = "<group>"; };
 		7732ED971CD735C000EC9C6B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		7735198D1D00632600A41044 /* AllDevicesViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllDevicesViewController_iPad.xib; sourceTree = "<group>"; };
 		77356BB31D055120009EBA90 /* ReportCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportCameraViewController.h; sourceTree = "<group>"; };
@@ -518,6 +525,8 @@
 		77F9DCBB1CFEF2F6000EA6A9 /* SimplePingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePingHelper.m; sourceTree = "<group>"; };
 		77F9DCC01CFEF9BC000EA6A9 /* EvercamCameraVendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraVendor.h; sourceTree = "<group>"; };
 		77F9DCC11CFEF9BC000EA6A9 /* EvercamCameraVendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraVendor.m; sourceTree = "<group>"; };
+		77FB34241D094F1200B3D4C9 /* buttonBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonBg.png; sourceTree = "<group>"; };
+		77FB34251D094F1200B3D4C9 /* buttonBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBg@2x.png"; sourceTree = "<group>"; };
 		A58069580246AB75973B9260 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Intercom.framework; sourceTree = "<group>"; };
 		AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Intercom.bundle; sourceTree = "<group>"; };
@@ -1092,6 +1101,8 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				77FB34241D094F1200B3D4C9 /* buttonBg.png */,
+				77FB34251D094F1200B3D4C9 /* buttonBg@2x.png */,
 				77E74E641D08223600EC336D /* grey_DropDown.png */,
 				77F9DCA21CFEE119000EA6A9 /* ic_search.png */,
 				77F9DCA31CFEE119000EA6A9 /* ic_search@2x.png */,
@@ -1331,6 +1342,9 @@
 				77E74E5F1D0818D500EC336D /* VendorAndModelViewController.h */,
 				77E74E601D0818D500EC336D /* VendorAndModelViewController.m */,
 				77E74E611D0818D500EC336D /* VendorAndModelViewController.xib */,
+				772EA5781D0940D30005DB98 /* ConnectCameraViewController.h */,
+				772EA5791D0940D30005DB98 /* ConnectCameraViewController.m */,
+				772EA57A1D0940D30005DB98 /* ConnectCameraViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1506,6 +1520,7 @@
 				E30900A41B16B96000E5B5C0 /* action-red-button-selected@2x.png in Resources */,
 				77D14FBC1CE4666900228734 /* NewShareViewController_iPad.xib in Resources */,
 				776647101CEEFD280076B9CE /* ic_settings.png in Resources */,
+				77FB34271D094F1200B3D4C9 /* buttonBg@2x.png in Resources */,
 				77E754CE1CE21E9000667511 /* ShareCell_iPad.xib in Resources */,
 				E30900A81B16B96000E5B5C0 /* action-sheet-panel@2x.png in Resources */,
 				77E791E01CF30BDD0084CF18 /* ic_GridPlaceholder@2x.png in Resources */,
@@ -1571,6 +1586,7 @@
 				776647161CEEFE940076B9CE /* ic_feedback.png in Resources */,
 				77E791E11CF30BDD0084CF18 /* ic_GridPlaceholder@3x.png in Resources */,
 				77E791DF1CF30BDD0084CF18 /* ic_GridPlaceholder.png in Resources */,
+				77FB34261D094F1200B3D4C9 /* buttonBg.png in Resources */,
 				E30201C61B16C82D0006DAE8 /* alert-window-landscape.png in Resources */,
 				77CF39FE1CE1BC540064D915 /* ShareCell.xib in Resources */,
 				776647031CEEF1CB0076B9CE /* ic_compass.png in Resources */,
@@ -1605,6 +1621,7 @@
 				AB6E77E91CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib in Resources */,
 				77F9DCB11CFEE663000EA6A9 /* CameraScanCell.xib in Resources */,
 				77F161821CEF0E1100634612 /* ic_accounts@3x.png in Resources */,
+				772EA57C1D0940D30005DB98 /* ConnectCameraViewController.xib in Resources */,
 				CB1C765D1AAB144800680FE3 /* Main.storyboard in Resources */,
 				CB1C76D21AAB871A00680FE3 /* evercam_icon.png in Resources */,
 				7736DBEA1D07E7E400376E40 /* ViewCameraViewController.xib in Resources */,
@@ -1801,6 +1818,7 @@
 				ABDAE0861CBB8749002285B7 /* TPKeyboardAvoidingTableView.m in Sources */,
 				7779AF0C1CF493040036A0F5 /* AddPresetViewController.m in Sources */,
 				77F9DCBC1CFEF2F7000EA6A9 /* Device.m in Sources */,
+				772EA57B1D0940D30005DB98 /* ConnectCameraViewController.m in Sources */,
 				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
 				41208A5C1AD97971009C4FC2 /* SendGridEmail.m in Sources */,
 				41208A4F1AD8DCAA009C4FC2 /* CustomNavigationController.m in Sources */,

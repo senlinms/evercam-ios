@@ -7,12 +7,17 @@
 //
 
 #import "VendorAndModelViewController.h"
+#import "ReportCameraViewController.h"
+#import "ConnectCameraViewController.h"
 #import "EvercamCamera.h"
 #import "EvercamShell.h"
 #import "EvercamVendor.h"
 #import "EvercamModel.h"
 #import "ActionSheetPicker.h"
 #import "UIImageView+WebCache.h"
+#import "EvercamUtility.h"
+#import "GlobalSettings.h"
+#import "TPKeyboardAvoidingScrollView.h"
 @interface VendorAndModelViewController (){
     NSMutableArray *vendorsNameArray;
     NSMutableArray *vendorsObjectArray;
@@ -28,6 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self getAllVendors];
+    [self.contentScrollView contentSizeToFit];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +41,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    [self.contentScrollView contentSizeToFit];
+}
 /*
 #pragma mark - Navigation
 
@@ -54,7 +64,13 @@
     [[EvercamShell shell] getAllVendors:^(NSArray *vendors, NSError *error) {
         if (!error) {
             vendorsObjectArray  = [vendors mutableCopy];
+            //Sort evercamvendor object array by name
+            NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+            vendorsObjectArray=[[vendorsObjectArray sortedArrayUsingDescriptors:@[sort]] mutableCopy];
+            
             vendorsNameArray    = [[vendors valueForKey:@"name"] mutableCopy];
+            //Sort vendor name Array
+            vendorsNameArray = [[vendorsNameArray sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] mutableCopy];
             [vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
             [self.loading_ActivityIndicator stopAnimating];
             self.view.userInteractionEnabled = YES;
@@ -71,9 +87,15 @@
     [[EvercamShell shell] getAllModelsByVendorId:vendorId withBlock:^(NSArray *models, NSError *error) {
         if (!error) {
             modelsObjectArray = [models mutableCopy];
+            //Sort evercammodel object array by name
+            NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+            modelsObjectArray=[[modelsObjectArray sortedArrayUsingDescriptors:@[sort]] mutableCopy];
             NSArray *filteredArray = [modelsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name == %@)",@"Default"]];
             EvercamModel *cameraModel = filteredArray[0];
+            self.modelBtn.enabled = FALSE;
             [self.modelBtn setTitle:cameraModel.name forState:UIControlStateNormal];
+            [self.modelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            self.modelBtn.enabled = TRUE;
             [self.cameraImage sd_setImageWithURL:[NSURL URLWithString:cameraModel.thumbUrl] placeholderImage:[UIImage imageNamed:@"cam.png"]];
             [self.loading_ActivityIndicator stopAnimating];
             self.view.userInteractionEnabled = YES;
@@ -97,6 +119,8 @@
                 self.cameraImage.image      = [UIImage imageNamed:@"cam.png"];
                 self.vendorImageView.image  = nil;
                 self.modelBtn.enabled       = NO;
+                [self.modelBtn setTitle:@"Unknown/Other" forState:UIControlStateNormal];
+                [self.modelBtn setTitleColor:[AppUtility colorWithHexString:@"B9B9B9"] forState:UIControlStateNormal];
             }else{
                 EvercamVendor *cameraVendor = vendorsObjectArray[selectedIndex-1];
                 [self.loading_ActivityIndicator startAnimating];
@@ -114,7 +138,8 @@
 - (IBAction)modelAction:(id)sender {
     if (modelsObjectArray.count > 0) {
         [ActionSheetStringPicker showPickerWithTitle:@"Models" rows:[modelsObjectArray valueForKey:@"name"] initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-            
+            EvercamModel *selectedCameraModel = modelsObjectArray[selectedIndex];
+            [self.cameraImage sd_setImageWithURL:[NSURL URLWithString:selectedCameraModel.thumbUrl] placeholderImage:[UIImage imageNamed:@"cam.png"]];
         } cancelBlock:^(ActionSheetStringPicker *picker) {
             
         } origin:sender];
@@ -123,5 +148,23 @@
 
 - (IBAction)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)reportModel:(id)sender {
+    ReportCameraViewController *aVC = [[ReportCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ReportCameraViewController":@"ReportCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+    if (![GlobalSettings sharedInstance].isPhone) {
+        aVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    ([GlobalSettings sharedInstance].isPhone)? [self.navigationController pushViewController:aVC animated:YES]:[self presentViewController:aVC animated:YES completion:NULL];
+}
+
+- (IBAction)connectCamera:(id)sender {
+    if ([self.vendorBtn.titleLabel.text isEqualToString:@"Unknown/Other"]) {
+        ConnectCameraViewController *aVC = [[ConnectCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ConnectCameraViewController":@"ConnectCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:aVC animated:YES];
+    }else{
+        
+    }
+
 }
 @end
