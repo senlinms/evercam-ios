@@ -1,12 +1,12 @@
 //
-//  ConnectCameraViewController.m
+//  UnknownConnectCameraViewController.m
 //  evercamPlay
 //
-//  Created by Zulqarnain on 6/9/16.
+//  Created by Zulqarnain on 6/16/16.
 //  Copyright © 2016 evercom. All rights reserved.
 //
 
-#import "ConnectCameraViewController.h"
+#import "UnknownConnectCameraViewController.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "CameraNameViewController.h"
 #import "Intercom/intercom.h"
@@ -18,24 +18,23 @@
 #import "MBProgressHUD.h"
 #import "getgateway.h"
 #import <arpa/inet.h>
-@interface ConnectCameraViewController (){
+@interface UnknownConnectCameraViewController (){
     NSTimer *httpPortCheckTimer;
     NSTimer *rtspPortCheckTimer;
 }
 
 @end
 
-@implementation ConnectCameraViewController
-@synthesize selected_cameraModel,selected_cameraVendor;
+@implementation UnknownConnectCameraViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.textField_scrollView contentSizeToFit];
-    self.vendorLabel.text = [NSString stringWithFormat:@"%@ - %@",selected_cameraVendor.name,selected_cameraModel.name];
+    self.vendorLabel.text = @"Unknown";
     self.ipAddress_textField.text =  @"5.149.169.19";
     [self checkHttpPort];
     [self checkRtstPort];
-//    [self getGatewayIP];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,14 +47,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 -(void)checkRtstPort{
     NSString* ipAddress = [self.ipAddress_textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -138,9 +137,9 @@
 }
 
 - (IBAction)nextStepBtn:(id)sender {
-    NSMutableDictionary *param_Dictionary;
-    param_Dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.selected_cameraVendor.vId,@"vendor",self.selected_cameraModel.mId,@"model",self.ipAddress_textField.text,@"external_host",self.http_TextField.text,@"external_http_port",self.selected_cameraModel.defaults.jpgURL,@"jpg_url",[NSNumber numberWithBool:NO],@"is_public",[NSNumber numberWithBool:YES],@"is_online",(isCompletelyEmpty(self.rtsp_TextField.text))?nil:self.rtsp_TextField.text,@"external_rtsp_port",(isCompletelyEmpty(self.username_TextField.text))?nil:self.username_TextField.text,@"cam_username",(isCompletelyEmpty(self.password_TextField.text))?nil:self.password_TextField.text,@"cam_password", nil];
-   
+    
+    NSMutableDictionary *param_Dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ipAddress_textField.text,@"external_host",self.http_TextField.text,@"external_http_port",self.snapshotPathTextField.text,@"jpg_url",[NSNumber numberWithBool:NO],@"is_public",[NSNumber numberWithBool:YES],@"is_online",(isCompletelyEmpty(self.rtsp_TextField.text))?nil:self.rtsp_TextField.text,@"external_rtsp_port",(isCompletelyEmpty(self.username_TextField.text))?nil:self.username_TextField.text,@"cam_username",(isCompletelyEmpty(self.password_TextField.text))?nil:self.password_TextField.text,@"cam_password", nil];
+    
     
     CameraNameViewController *aVC = [[CameraNameViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"CameraNameViewController":@"CameraNameViewController_iPad" bundle:[NSBundle mainBundle]];
     aVC.postDictionary              = param_Dictionary;
@@ -162,6 +161,12 @@
         return;
     }
     
+    if(isCompletelyEmpty(self.snapshotPathTextField.text))
+    {
+        [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Please specify a snapshot path."];
+        return;
+    }
+    
     BOOL ip = [self CheckIPAddress];    // to check either ip address is valid or not.
     if (ip) {
         return;
@@ -172,17 +177,15 @@
     [self.rtsp_TextField resignFirstResponder];
     [self.username_TextField resignFirstResponder];
     [self.password_TextField resignFirstResponder];
+    [self.snapshotPathTextField resignFirstResponder];
+    [self.rtspPathTextField resignFirstResponder];
     
     if ([self.httpPortLabel.text isEqualToString:@"Port is closed"]) {
         [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"The IP address provided is not reachable at the port provided."];
         return;
     }
     
-    
-    NSString *jpg_Url = (self.selected_cameraModel.defaults.jpgURL == NULL)?@"":self.selected_cameraModel.defaults.jpgURL;
-    NSString *vendorId = (self.selected_cameraVendor.vId == NULL)?@"":self.selected_cameraVendor.vId;
-    
-    NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",jpg_Url,@"jpg_url",self.username_TextField.text,@"cam_username",self.password_TextField.text,@"cam_password",vendorId,@"vendor_id", nil];
+    NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",self.snapshotPathTextField.text,@"jpg_url",self.username_TextField.text,@"cam_username",self.password_TextField.text,@"cam_password", nil];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [EvercamTestSnapShot testSnapShot:postDictionary withBlock:^(UIImage *snapeImage, NSString *statusMessage, NSError *error) {
         if (error) {
@@ -316,5 +319,6 @@
     }
     return false;
 }
+
 
 @end

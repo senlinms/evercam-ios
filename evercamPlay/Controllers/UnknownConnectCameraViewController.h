@@ -1,23 +1,16 @@
 //
-//  ConnectCameraViewController.h
+//  UnknownConnectCameraViewController.h
 //  evercamPlay
 //
-//  Created by Zulqarnain on 6/9/16.
+//  Created by Zulqarnain on 6/16/16.
 //  Copyright © 2016 evercom. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "EvercamCamera.h"
-#import "EvercamShell.h"
-#import "EvercamVendor.h"
-#import "EvercamModel.h"
 @class TPKeyboardAvoidingScrollView;
-@interface ConnectCameraViewController : UIViewController<UITextFieldDelegate>{
-    EvercamModel *selected_cameraModel;
-    EvercamVendor *selected_cameraVendor;
+@interface UnknownConnectCameraViewController : UIViewController{
+    
 }
-@property (nonatomic, strong) EvercamModel *selected_cameraModel;
-@property (nonatomic, strong) EvercamVendor *selected_cameraVendor;
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *textField_scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *vendorLabel;
@@ -37,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *snapShotImageView;
 - (IBAction)nextStepBtn:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *textFieldGuideLabel;
+@property (weak, nonatomic) IBOutlet UITextField *snapshotPathTextField;
+@property (weak, nonatomic) IBOutlet UITextField *rtspPathTextField;
 
 - (IBAction)checkSnapShot:(id)sender;
 - (IBAction)liveSupport:(id)sender;
@@ -45,4 +40,5 @@
 - (IBAction)blackTransparentViewTapped:(id)sender;
 
 - (IBAction)textFieldsTextChanged:(id)sender;
+
 @end

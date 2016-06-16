@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="authenticationSwitch" destination="Htc-jw-0nz" id="Ho9-Ck-1bM"/>
                 <outlet property="authenticationView" destination="P93-3s-t2J" id="yRW-pV-dcF"/>
+                <outlet property="blackTransparentView" destination="UOx-cB-enV" id="9G1-9k-Xmq"/>
                 <outlet property="httpPortLabel" destination="4hq-4C-H0a" id="yUj-tu-JCi"/>
                 <outlet property="http_TextField" destination="63P-w3-uK3" id="AHT-Yu-alT"/>
                 <outlet property="ipAddress_textField" destination="OEr-N1-71Q" id="NFm-jD-zex"/>
@@ -17,6 +18,9 @@
                 <outlet property="rtspPortLabel" destination="xfK-fH-dEh" id="vX2-5r-3zQ"/>
                 <outlet property="rtsp_TextField" destination="ugj-QQ-7nT" id="RqE-QC-wIU"/>
                 <outlet property="snapShotBtn" destination="uMl-RX-osI" id="qyx-om-5oX"/>
+                <outlet property="snapShotImageView" destination="PmW-Dn-dzT" id="bg9-DQ-dSE"/>
+                <outlet property="snapShotView" destination="VDN-kb-Uzt" id="Gdo-A6-0Gv"/>
+                <outlet property="textFieldGuideLabel" destination="Clo-rD-b3V" id="QFc-XQ-VRb"/>
                 <outlet property="textField_scrollView" destination="Dvi-Bp-AXm" id="rP8-px-GQY"/>
                 <outlet property="username_TextField" destination="4UE-pO-afg" id="ajP-LA-9hw"/>
                 <outlet property="vendorLabel" destination="FpO-uC-QsH" id="hjS-ir-Hj1"/>
@@ -62,9 +66,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your camera details then we will try connecting to your comera." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Clo-rD-b3V">
-                            <rect key="frame" x="8" y="55" width="304" height="42"/>
+                            <rect key="frame" x="8" y="51" width="304" height="51"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -92,12 +96,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="OEr-N1-71Q">
+                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="OEr-N1-71Q">
                             <rect key="frame" x="33" y="142" width="246" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
+                                <action selector="textFieldsTextChanged:" destination="-1" eventType="editingChanged" id="kYY-vN-5t0"/>
                                 <outlet property="delegate" destination="-1" id="CZw-Dw-PZx"/>
                             </connections>
                         </textField>
@@ -113,12 +118,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="80" textAlignment="natural" minimumFontSize="17" id="63P-w3-uK3">
+                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="80" textAlignment="natural" minimumFontSize="17" id="63P-w3-uK3">
                             <rect key="frame" x="33" y="205" width="163" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <connections>
+                                <action selector="textFieldsTextChanged:" destination="-1" eventType="editingChanged" id="9H8-Bt-QaU"/>
                                 <outlet property="delegate" destination="-1" id="7JE-hb-UaJ"/>
                             </connections>
                         </textField>
@@ -141,12 +147,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="554" textAlignment="natural" minimumFontSize="17" id="ugj-QQ-7nT">
+                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="554" textAlignment="natural" minimumFontSize="17" id="ugj-QQ-7nT">
                             <rect key="frame" x="33" y="268" width="163" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <connections>
+                                <action selector="textFieldsTextChanged:" destination="-1" eventType="editingChanged" id="tGO-Lx-GxB"/>
                                 <outlet property="delegate" destination="-1" id="kn3-U6-JLW"/>
                             </connections>
                         </textField>
@@ -161,7 +168,7 @@
                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="4UE-pO-afg">
+                                <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="4UE-pO-afg">
                                     <rect key="frame" x="2" y="25" width="127" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -194,7 +201,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="gwr-va-A7z">
+                                <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="gwr-va-A7z">
                                     <rect key="frame" x="150" y="25" width="127" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -248,11 +255,48 @@
                         <outlet property="delegate" destination="-1" id="0ol-OZ-OUd"/>
                     </connections>
                 </scrollView>
+                <view hidden="YES" alpha="0.5" contentMode="scaleToFill" id="UOx-cB-enV">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="4wT-Zr-w7o" appends="YES" id="tWe-Kl-aVT"/>
+                    </connections>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" id="VDN-kb-Uzt">
+                    <rect key="frame" x="23" y="114" width="273" height="253"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PmW-Dn-dzT">
+                            <rect key="frame" x="1" y="1" width="271" height="181"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CqJ-27-w0d">
+                            <rect key="frame" x="8" y="215" width="257" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.25490196079999999" green="0.54901960780000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                            <state key="normal" title="NEXT STEP: NAME YOUR CAMERA">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="nextStepBtn:" destination="-1" eventType="touchUpInside" id="d5w-F8-vvT"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="358" y="-74"/>
+            <point key="canvasLocation" x="352" y="-184"/>
         </view>
+        <tapGestureRecognizer id="4wT-Zr-w7o">
+            <connections>
+                <action selector="blackTransparentViewTapped:" destination="-1" id="OUR-dp-rUd"/>
+                <outlet property="delegate" destination="-1" id="mCR-Yj-x1j"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="back.png" width="10" height="17"/>

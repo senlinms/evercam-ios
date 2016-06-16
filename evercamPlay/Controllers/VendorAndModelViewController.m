@@ -18,10 +18,13 @@
 #import "EvercamUtility.h"
 #import "GlobalSettings.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "UnknownConnectCameraViewController.h"
 @interface VendorAndModelViewController (){
     NSMutableArray *vendorsNameArray;
     NSMutableArray *vendorsObjectArray;
     NSMutableArray *modelsObjectArray;
+    EvercamModel *cameraModel;
+    EvercamVendor *cameraVendor;
     
 }
 
@@ -34,6 +37,14 @@
     // Do any additional setup after loading the view from its nib.
     [self getAllVendors];
     [self.contentScrollView contentSizeToFit];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (AppUtility.isFullyDismiss) {
+        AppUtility.isFullyDismiss = NO;
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,7 +102,7 @@
             NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
             modelsObjectArray=[[modelsObjectArray sortedArrayUsingDescriptors:@[sort]] mutableCopy];
             NSArray *filteredArray = [modelsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name == %@)",@"Default"]];
-            EvercamModel *cameraModel = filteredArray[0];
+            cameraModel = filteredArray[0];
             self.modelBtn.enabled = FALSE;
             [self.modelBtn setTitle:cameraModel.name forState:UIControlStateNormal];
             [self.modelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -122,7 +133,7 @@
                 [self.modelBtn setTitle:@"Unknown/Other" forState:UIControlStateNormal];
                 [self.modelBtn setTitleColor:[AppUtility colorWithHexString:@"B9B9B9"] forState:UIControlStateNormal];
             }else{
-                EvercamVendor *cameraVendor = vendorsObjectArray[selectedIndex-1];
+                cameraVendor = vendorsObjectArray[selectedIndex-1];
                 [self.loading_ActivityIndicator startAnimating];
                 self.view.userInteractionEnabled = NO;
                 [self getCameraModel:cameraVendor.vId];
@@ -138,8 +149,12 @@
 - (IBAction)modelAction:(id)sender {
     if (modelsObjectArray.count > 0) {
         [ActionSheetStringPicker showPickerWithTitle:@"Models" rows:[modelsObjectArray valueForKey:@"name"] initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-            EvercamModel *selectedCameraModel = modelsObjectArray[selectedIndex];
-            [self.cameraImage sd_setImageWithURL:[NSURL URLWithString:selectedCameraModel.thumbUrl] placeholderImage:[UIImage imageNamed:@"cam.png"]];
+            cameraModel = modelsObjectArray[selectedIndex];
+            self.modelBtn.enabled = FALSE;
+            [self.modelBtn setTitle:cameraModel.name forState:UIControlStateNormal];
+            [self.modelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            self.modelBtn.enabled = TRUE;
+            [self.cameraImage sd_setImageWithURL:[NSURL URLWithString:cameraModel.thumbUrl] placeholderImage:[UIImage imageNamed:@"cam.png"]];
         } cancelBlock:^(ActionSheetStringPicker *picker) {
             
         } origin:sender];
@@ -147,7 +162,7 @@
 }
 
 - (IBAction)backAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)reportModel:(id)sender {
@@ -160,10 +175,13 @@
 
 - (IBAction)connectCamera:(id)sender {
     if ([self.vendorBtn.titleLabel.text isEqualToString:@"Unknown/Other"]) {
-        ConnectCameraViewController *aVC = [[ConnectCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ConnectCameraViewController":@"ConnectCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+        UnknownConnectCameraViewController *aVC = [[UnknownConnectCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"UnknownConnectCameraViewController":@"UnknownConnectCameraViewController_iPad" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:aVC animated:YES];
     }else{
-        
+        ConnectCameraViewController *aVC = [[ConnectCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ConnectCameraViewController":@"ConnectCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+        aVC.selected_cameraModel    = cameraModel;
+        aVC.selected_cameraVendor   = cameraVendor;
+        [self.navigationController pushViewController:aVC animated:YES];
     }
 
 }
