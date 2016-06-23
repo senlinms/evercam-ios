@@ -14,6 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "Device.h"
 #import "AllDevicesViewController.h"
+#import "VendorAndModelViewController.h"
 
 #include <sys/param.h>
 #include <sys/file.h>
@@ -120,6 +121,7 @@
     if (cell == nil) {
         cell = [[CameraScanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
+    cell.backgroundColor        = [UIColor clearColor];
     Device *device              = [self.connctedDevices objectAtIndex:indexPath.row];
     cell.camera_Name_Lbl.text   = device.name;
     cell.ip_Address_Lbl.text    = device.address;
@@ -128,7 +130,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    Device *device              = [self.connctedDevices objectAtIndex:indexPath.row];
+    [self goToVendorScreen:device.vendorId];
 }
 
 
@@ -148,7 +151,8 @@
             if (vendorArray.count > 0) {
                 NSDictionary *dict  = vendorArray[0];
                 Device *device      = [[Device alloc] init];
-                device.name         = dict[@"id"];
+                device.name         = dict[@"name"];
+                device.vendorId     = dict[@"id"];
                 device.address      = address;
                 device.mac_Address  = complete_Mac_Address;
                 device.image_url    = [NSString stringWithFormat:@"https://evercam-public-assets.s3.amazonaws.com/%@/%@_default/thumbnail.jpg",dict[@"id"],dict[@"id"]];
@@ -193,6 +197,22 @@
     [self.scanning_activityindicator stopAnimating];
     self.camera_Table.userInteractionEnabled = YES;
     self.otherDevicesBtn.enabled = YES;
+    if (self.connctedDevices.count > 0) {
+        
+        [self hideandShowTable:NO withButton:YES withLabel:YES];
+        
+    }else{
+        
+        [self hideandShowTable:YES withButton:NO withLabel:NO];
+        
+        self.otherDevicesBtn.frame = CGRectMake(self.otherDevicesBtn.frame.origin.x, self.addCameraBtn.frame.origin.y + self.addCameraBtn.frame.size.height + 20, self.otherDevicesBtn.frame.size.width, self.otherDevicesBtn.frame.size.height);
+    }
+}
+
+-(void)hideandShowTable:(BOOL)isTblShow withButton:(BOOL)isBthShow withLabel:(BOOL)isLblShow{
+    self.cautionLabel.hidden = isLblShow;
+    self.addCameraBtn.hidden = isBthShow;
+    self.camera_Table.hidden = isTblShow;
 }
 
 
@@ -271,6 +291,20 @@
     } else {
         return mAddr;
     }
+}
+
+- (IBAction)addCamera:(id)sender {
+    [self goToVendorScreen:nil];
+}
+
+-(void)goToVendorScreen:(NSString *)vendorId{
+    VendorAndModelViewController *addCameraVC = [[VendorAndModelViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"VendorAndModelViewController" : @"VendorAndModelViewController_iPad" bundle:[NSBundle mainBundle]];
+    addCameraVC.vendorIdentifier = vendorId;
+    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:addCameraVC];
+    navVC.isPortraitMode        = YES;
+    [navVC setHasLandscapeMode:YES];
+    navVC.navigationBarHidden   = YES;
+    [self.navigationController presentViewController:navVC animated:YES completion:nil];
 }
 
 @end

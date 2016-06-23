@@ -31,7 +31,7 @@
 @end
 
 @implementation VendorAndModelViewController
-
+@synthesize vendorIdentifier;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -78,6 +78,16 @@
             //Sort evercamvendor object array by name
             NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
             vendorsObjectArray=[[vendorsObjectArray sortedArrayUsingDescriptors:@[sort]] mutableCopy];
+            
+            if (vendorIdentifier) {
+                NSArray *filteredArray = [vendorsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(vId == %@)",vendorIdentifier]];
+                if (filteredArray.count > 0) {
+                    cameraVendor = filteredArray[0];
+                    [self getCameraModel:cameraVendor.vId];
+                    [self.vendorImageView sd_setImageWithURL:[NSURL URLWithString:cameraVendor.logoUrl] placeholderImage:[UIImage imageNamed:@""]];
+                    [self.vendorBtn setTitle:cameraVendor.name forState:UIControlStateNormal];
+                }
+            }
             
             vendorsNameArray    = [[vendors valueForKey:@"name"] mutableCopy];
             //Sort vendor name Array

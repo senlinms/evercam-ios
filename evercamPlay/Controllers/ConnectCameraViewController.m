@@ -101,7 +101,7 @@
                 {
                     if (![textField.text  isEqual: @""]) {
                         label.text = @"Port is open";
-                        label.textColor = UIColorFromRGB(0x80CBC4);
+                        label.textColor = UIColorFromRGB(0x418CC8);
                     }
                 }
                 else

@@ -16,5 +16,8 @@
 - (IBAction)scan_Other_Devices:(id)sender;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *scanning_activityindicator;
 @property (weak, nonatomic) IBOutlet UIButton *otherDevicesBtn;
+@property (weak, nonatomic) IBOutlet UILabel *cautionLabel;
+- (IBAction)addCamera:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *addCameraBtn;
 
 @end

@@ -30,6 +30,11 @@
 #import "SharedManager.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "EvercamTestSnapShot.h"
+#import "ActionSheetPicker.h"
+#import "UIImageView+WebCache.h"
+#import "EvercamUtility.h"
+#import "EvercamCreateCamera.h"
+
 
 #define VIEWMARGIN 35
 
@@ -38,6 +43,7 @@
     NIDropDown *vendorDropDown;
     NIDropDown *modelDropDown;
     GCDAsyncSocket *asyncSocket;
+    
     UITextField *statusLabel;
     NSString* userName;
     NSMutableArray *viewsArray;
@@ -47,10 +53,11 @@
     __block EvercamCamera   *camera_PatchMethod_Instance;
     __block EvercamCamera   *camera_CreateCameraMethod_Instance;
     
-    CAGradientLayer *gradient;
     
     NSTimer *httpPortCheckTimer;
     NSTimer *rtspPortCheckTimer;
+    
+    NSMutableArray *modelsObjectArray;
     
 }
 @property (weak, nonatomic) IBOutlet UIView *imageContainer;
@@ -89,23 +96,22 @@
     viewsArray      =  [[NSMutableArray alloc] initWithObjects: self.nameView, self.ipAddressView, self.httpPortView, self.snapshotView, self.rtspPortView, self.rtstURLView, self.credentialsView, nil];
     minViewsArray   =  [[NSMutableArray alloc] initWithObjects: self.nameView, self.ipAddressView, self.httpPortView, self.rtspPortView, self.credentialsView, nil];
     
-    
-    gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
-    [self.view.layer insertSublayer:gradient atIndex:0];
-    
+    [self getAllVendors];
+    [self setTextFieldsPlaceHolder];
+    self.tfExternalHttpPort.text = @"80";
+    self.tfExternalRtspPort.text = @"554";
     [self initializeScreen];
     
     self.vendorsNameArray = [NSMutableArray array];
     self.modelsNameArray = [NSMutableArray array];
     
-    [self getAllVendors];
-    [self setTextFieldsPlaceHolder];
-    self.tfExternalHttpPort.text = @"80";
-    self.tfExternalRtspPort.text = @"554";
+    
     [self checkHttpPort];
     [self checkRtstPort];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,14 +120,14 @@
 }
 
 -(void)viewDidLayoutSubviews{
-    gradient.frame = self.view.bounds;
+    
 }
 
 -(void)setTextFieldsPlaceHolder{
     if ([self.tfID respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor lightTextColor];
+        UIColor *color = [UIColor blackColor];
         self.tfID.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"roof-cam" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Rooftop Camera" attributes:@{NSForegroundColorAttributeName: color}];
+        self.tfName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Name" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfVendor.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Unknown/Other" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfModel.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Unknown/Other" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfUsername.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
@@ -130,9 +136,6 @@
         self.tfExternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"149.5.43.10" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfExternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"80" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfExternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"554" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfInternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"192.168.1.122" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfInternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal HTTP port" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfInternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Internal RTSP port" attributes:@{NSForegroundColorAttributeName: color}];
         self.tfExternalRtspUrl.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/h264/ch1/mail/av_stream" attributes:@{NSForegroundColorAttributeName: color}];
     } else {
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
@@ -158,10 +161,7 @@
             self.tfSnapshot.text.length > 0 ||
             self.tfExternalHost.text.length > 0 ||
             self.tfExternalHttpPort.text.length > 0 ||
-            self.tfExternalRtspPort.text.length > 0 ||
-            self.tfInternalHost.text.length > 0 ||
-            self.tfInternalHttpPort.text.length > 0 ||
-            self.tfInternalRtspPort.text.length > 0) {
+            self.tfExternalRtspPort.text.length > 0) {
             
             UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"You'll lose everything you typed in. Are you sure you want to quit?", nil) delegate:self cancelButtonTitle:@"No" otherButtonTitles:NSLocalizedString(@"Yes",nil), nil];
             simpleAlert.tag = 101;
@@ -182,6 +182,7 @@
     if ([self.httpPortStatusLabel.text isEqualToString:@""]) {
         [self checkHttpPort];
     }
+    [self checkHttpPort];
     NSString* ipAddress = [self.tfExternalHost.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString* httpPort = self.tfExternalHttpPort.text;
     if(isCompletelyEmpty(ipAddress))
@@ -200,8 +201,13 @@
     
     [self.focusedTextField resignFirstResponder];
     
-    NSString *jpg_Url = (self.currentModel.defaults.jpgURL == NULL)?@"":self.currentModel.defaults.jpgURL;
-    NSString *vendorId = (self.currentVendor.vId == NULL)?@"":self.currentVendor.vId;
+    NSString *jpg_Url = (!self.currentModel)?self.tfSnapshot.text:self.currentModel.defaults.jpgURL;
+    NSString *vendorId = (!self.currentVendor)?@"":self.currentVendor.vId;
+    
+    if ([self.httpPortStatusLabel.text isEqualToString:@"Port is closed"]) {
+        [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"The IP address provided is not reachable at the port provided."];
+        return;
+    }
     
     NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",jpg_Url,@"jpg_url",self.tfUsername.text,@"cam_username",self.tfPassword.text,@"cam_password",vendorId,@"vendor_id", nil];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -213,6 +219,7 @@
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             if ([statusMessage isEqualToString:@"Success"]) {
                 self.success_Message_View.hidden    = NO;
+                self.blackTransparentView.hidden    = NO;
                 self.test_SnapShot_ImageView.image  = snapeImage;
             }else{
                 
@@ -268,13 +275,56 @@
 }
 
 
-- (IBAction)add:(id)sender {                                                                    // finish and add
+- (IBAction)add:(id)sender {
     
     BOOL ip = [self CheckIPAddress];
     if (ip) {               // provided ip is local/private ip-address so do nothing
         return;
     }
     
+    if (isCompletelyEmpty(self.tfName.text)) {
+        [AppUtility displayAlertWithTitle:@"Alert!" AndMessage:@"Please specify a friendly name for your camera."];
+        return;
+    }
+    
+    if (isCompletelyEmpty(self.tfExternalHost.text)) {
+        [AppUtility displayAlertWithTitle:@"Alert!" AndMessage:@"Please specify IP address or URL."];
+        return;
+    }
+    
+    if (isCompletelyEmpty(self.tfExternalHttpPort.text)) {
+        [AppUtility displayAlertWithTitle:@"Alert!" AndMessage:@"Please specify HTTP port."];
+        return;
+    }
+    
+    
+    NSDictionary *param_Dictionary;
+    if (self.currentVendor) {
+        param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.tfID.text,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSDictionary dictionaryWithObjectsAndKeys:self.currentVendor.vId,@"vendor",self.currentModel.mId,@"model",self.tfExternalHost.text,@"external_host",self.tfExternalHttpPort.text,@"external_http_port",self.currentModel.defaults.jpgURL,@"jpg_url",(isCompletelyEmpty(self.tfExternalRtspPort.text))?nil:self.tfExternalRtspPort.text,@"external_rtsp_port",self.tfName.text,@"name",(isCompletelyEmpty(self.tfUsername.text))?@"":self.tfUsername.text,@"cam_username",(isCompletelyEmpty(self.tfPassword.text))?@"":self.tfPassword.text,@"cam_password", nil],@"Post_Param", nil];
+    }else{
+        param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.tfID.text,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSDictionary dictionaryWithObjectsAndKeys:self.tfExternalHost.text,@"external_host",self.tfExternalHttpPort.text,@"external_http_port",self.tfSnapshot.text,@"jpg_url",(isCompletelyEmpty(self.tfExternalRtspPort.text))?@"":self.tfExternalRtspPort.text,@"external_rtsp_port",(isCompletelyEmpty(self.tfExternalRtspUrl.text))?@"":self.tfExternalRtspUrl.text,@"mjpg_url",self.tfName.text,@"name",(isCompletelyEmpty(self.tfUsername.text))?@"":self.tfUsername.text,@"cam_username",(isCompletelyEmpty(self.tfPassword.text))?@"":self.tfPassword.text,@"cam_password", nil],@"Post_Param", nil];
+    }
+    
+    
+    
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [EvercamCreateCamera EditCamera:param_Dictionary withBlock:^(id details, NSError *error) {
+        if (!error) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            NSArray *cameraObjectArray = details[@"cameras"];
+            camera_PatchMethod_Instance = [[EvercamCamera alloc] initWithDictionary:cameraObjectArray[0]];
+            UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"" message:@"Settings updated successfully!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            alert.tag           = 57;
+            [alert show];
+            
+        }else{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
+        }
+    }];
+    
+    return;
     cameraBuilder_AddMethod_Instance = [self buildCameraWithLocalCheck];
     if (cameraBuilder_AddMethod_Instance != nil) {
         if (!self.editCamera) {     // create camera
@@ -400,62 +450,129 @@
 }
 
 
+-(void)getCameraModel:(NSString *)vendorId{
+    [modelsObjectArray removeAllObjects];
+    [[EvercamShell shell] getAllModelsByVendorId:vendorId withBlock:^(NSArray *models, NSError *error) {
+        if (!error) {
+            
+            modelsObjectArray = [models mutableCopy];
+            //Sort evercammodel object array by name
+            NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+            modelsObjectArray=[[modelsObjectArray sortedArrayUsingDescriptors:@[sort]] mutableCopy];
+            
+            
+            self.currentModel = [self getModelWithName:self.editCamera.model];
+            self.tfModel.text = self.currentModel.name;
+            
+            [self.thumbImageView sd_setImageWithURL:[NSURL URLWithString:self.currentModel.thumbUrl] placeholderImage:[UIImage imageNamed:@"cam.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (self.currentVendor == nil) {
+                    self.thumbImageView.image = [UIImage imageNamed:@"cam.png"];
+                }
+            }];
+            self.view.userInteractionEnabled = YES;
+            
+        }else{
+            self.view.userInteractionEnabled = YES;
+        }
+    }];
+    
+}
+
+-(void)getCameraModelForSelectedVendor:(NSString *)vendorId{
+    [modelsObjectArray removeAllObjects];
+    [[EvercamShell shell] getAllModelsByVendorId:vendorId withBlock:^(NSArray *models, NSError *error) {
+        if (!error) {
+            
+            modelsObjectArray = [models mutableCopy];
+            //Sort evercammodel object array by name
+            NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+            modelsObjectArray=[[modelsObjectArray sortedArrayUsingDescriptors:@[sort]] mutableCopy];
+            NSArray *filteredArray = [modelsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name == %@)",@"Default"]];
+            
+            self.currentModel = filteredArray[0];
+            
+            self.tfModel.text = self.currentModel.name;
+
+            [self.thumbImageView sd_setImageWithURL:[NSURL URLWithString:self.currentModel.thumbUrl] placeholderImage:[UIImage imageNamed:@"cam.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (self.currentVendor == nil) {
+                    self.thumbImageView.image = [UIImage imageNamed:@"cam.png"];
+                }
+            }];
+            self.view.userInteractionEnabled = YES;
+            
+        }else{
+            self.view.userInteractionEnabled = YES;
+        }
+    }];
+}
+
 - (IBAction)selectMake:(id)sender {
     if (self.vendorsNameArray == nil || self.vendorsNameArray.count <= 0) {
         return;
     }
-    //    if (self.vendorsArray == nil || self.vendorsArray.count <= 0)
-    //        return;
     
     [self.focusedTextField resignFirstResponder];
     
-    NSArray * arrImage = [[NSArray alloc] init];
-    
-    if (modelDropDown)
-    {
-        [modelDropDown hideDropDown:(UIButton*)self.tfModel];
-        modelDropDown = nil;
-    }
-    
-    if(vendorDropDown == nil) {
-        CGFloat f = self.scrollView.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
-        CGFloat h = (self.vendorsNameArray.count * DropDownCellHeight);
+    [ActionSheetStringPicker showPickerWithTitle:@"Vendors" rows:self.vendorsNameArray initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, NSString *selectedValue) {
         
-        vendorDropDown = [[NIDropDown alloc] showDropDown:sender height:(h<=f?&h: &f) textArray:self.vendorsNameArray imageArray:arrImage direction:@"down"] ;
-        vendorDropDown.delegate = self;
-    }
-    else {
-        [vendorDropDown hideDropDown:sender];
-        vendorDropDown = nil;
-    }
+        if ([selectedValue isEqualToString:@"Unknown/Other"] || [selectedValue isEqualToString:@"Other"]) {
+            self.currentVendor          = nil;
+            self.currentModel           = nil;
+            self.tfVendor.text          = selectedValue;
+            self.tfModel.text           = selectedValue;
+            self.snapshotView.hidden    = false;
+            self.rtstURLView.hidden     = false;
+            [self reFrameViews:viewsArray initialFrame:self.cameraView.frame];
+            //            [self ClearFields];
+            //            [self getCameraName];
+            self.thumbImageView.image   = [UIImage imageNamed:@"cam.png"];
+            self.logoImageView.image    = nil;
+            [self.tfModel setTextColor:[AppUtility colorWithHexString:@"B9B9B9"]];
+            self.modelBtn.enabled = NO;
+            
+        }else{
+            [self reFrameViews:minViewsArray initialFrame:self.cameraView.frame];
+            self.currentVendor = self.vendorsArray[selectedIndex-1];
+            self.snapshotView.hidden = true;
+            self.rtstURLView.hidden = true;
+            self.modelBtn.enabled = YES;
+            [self getCameraModelForSelectedVendor:self.currentVendor.vId];
+            [self.tfModel setTextColor:[UIColor blackColor]];
+            [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:self.currentVendor.logoUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (self.currentVendor == nil) {
+                    self.logoImageView.image = nil;
+                }
+            }];
+            self.tfVendor.text = self.currentVendor.name;
+        }
+    } cancelBlock:^(ActionSheetStringPicker *picker) {
+        
+    } origin:sender];
     
 }
 
 - (IBAction)selectModel:(id)sender {
-    if (self.modelsArray == nil || self.modelsArray.count <= 0)
+    
+    if (modelsObjectArray == nil || modelsObjectArray.count <= 0) {
         return;
+    }
     
     [self.focusedTextField resignFirstResponder];
     
-    NSArray * arrImage = [[NSArray alloc] init];
-    
-    if (vendorDropDown)
-    {
-        [vendorDropDown hideDropDown:(UIButton*)self.tfVendor];
-        vendorDropDown = nil;
-    }
-    
-    if(modelDropDown == nil) {
-        CGFloat f = self.scrollView.frame.size.height - ((UIButton*)sender).frame.origin.y - ((UIButton*)sender).frame.size.height;
-        CGFloat h = (self.modelsNameArray.count * DropDownCellHeight);
+    [ActionSheetStringPicker showPickerWithTitle:@"Models" rows:[modelsObjectArray valueForKey:@"name"] initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, NSString *selectedValue) {
         
-        modelDropDown = [[NIDropDown alloc] showDropDown:sender height:(h<=f?&h: &f) textArray:self.modelsNameArray imageArray:arrImage direction:@"down"] ;
-        modelDropDown.delegate = self;
-    }
-    else {
-        [modelDropDown hideDropDown:sender];
-        modelDropDown = nil;
-    }
+        self.currentModel = modelsObjectArray[selectedIndex];
+        
+        [self.thumbImageView sd_setImageWithURL:[NSURL URLWithString:self.currentModel.thumbUrl] placeholderImage:[UIImage imageNamed:@"cam.png"]];
+        
+        self.tfModel.text       = self.currentModel.name;
+        self.tfUsername.text    = self.currentModel.defaults.authUsername;
+        self.tfPassword.text    = self.currentModel.defaults.authPassword;
+        
+    } cancelBlock:^(ActionSheetStringPicker *picker) {
+        
+    } origin:sender];
+    
 }
 
 
@@ -509,13 +626,14 @@
 
 #pragma mark - Custom Functions
 - (void)initializeScreen {
+    
     if (self.editCamera) {
         self.titleLabel.text    = @"Edit Camera";
         self.tfID.enabled       = NO;
         self.cameraView.hidden  = false;
         CGRect frame            = self.cameraView.frame;
-        [self reFrameViews:viewsArray initialFrame:frame];
-        [self.addButton setTitle:@"Save Changes" forState:UIControlStateNormal];
+        
+        [self.addButton setTitle:@"SAVE CHANGES" forState:UIControlStateNormal];
         
         self.tfID.text          = self.editCamera.camId;
         self.tfName.text        = self.editCamera.name;
@@ -526,23 +644,27 @@
         }
         self.tfSnapshot.text        = [self.editCamera getJpgPath];
         self.tfExternalHost.text    = self.editCamera.externalHost;
-        self.tfInternalHost.text    = self.editCamera.internalHost;
-
+        
         if (self.editCamera.externalHttpPort != 0) {
             self.tfExternalHttpPort.text = [NSString stringWithFormat:@"%d", self.editCamera.externalHttpPort];
         }
         if (self.editCamera.externalRtspPort != 0) {
             self.tfExternalRtspPort.text = [NSString stringWithFormat:@"%d", self.editCamera.externalRtspPort];
         }
-        if (self.editCamera.internalHttpPort != 0) {
-            self.tfInternalHttpPort.text = [NSString stringWithFormat:@"%d", self.editCamera.internalHttpPort];
-        }
-        if (self.editCamera.internalRtspPort != 0) {
-            self.tfInternalRtspPort.text = [NSString stringWithFormat:@"%d", self.editCamera.internalRtspPort];
-        }
+        
         if (self.editCamera.externalH264Url != 0) {
             self.tfExternalRtspUrl.text = [NSString stringWithFormat:@"%@", [self.editCamera getRTSPUrl]];
         }
+        
+        if ([self.editCamera.vendor isEqualToString:@"Other"]) {
+            [self reFrameViews:viewsArray initialFrame:frame];
+        }else{
+            self.rtstURLView.hidden = YES;
+            self.snapshotView.hidden = YES;
+            [self reFrameViews:minViewsArray initialFrame:frame];
+        }
+        
+        
     }
     else{
         
@@ -565,54 +687,28 @@
     if (self.currentModel) {
         cameraBuilder.model = self.currentModel.mId;
     }
-    if (self.tfUsername.text.length > 0) {
-        cameraBuilder.cameraUsername = self.tfUsername.text;
-    }
-    if (self.tfPassword.text.length > 0) {
-        cameraBuilder.cameraPassword = self.tfPassword.text;
-    }
+    //    if (self.tfUsername.text.length > 0) {
+    //        cameraBuilder.cameraUsername = self.tfUsername.text;
+    //    }
+    cameraBuilder.cameraUsername = self.tfUsername.text;
+    cameraBuilder.cameraPassword = self.tfPassword.text;
+    //    if (self.tfPassword.text.length > 0) {
+    //        cameraBuilder.cameraPassword = self.tfPassword.text;
+    //    }
     if (self.tfExternalRtspUrl.text.length > 0) {
         cameraBuilder.h264Url = self.tfExternalRtspUrl.text;
     }
     
     NSString *externalHost = self.tfExternalHost.text;
-    NSString *internalHost = self.tfInternalHost.text;
-    if (externalHost.length == 0 && internalHost.length == 0) {
+    
+    if (externalHost.length == 0) {
         
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an internal or external IP address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [simpleAlert show];
         
         return nil;
     }
-    if (internalHost.length > 0) {
-        cameraBuilder.internalHost = internalHost;
-        
-        NSString *internalHttp = self.tfInternalHttpPort.text;
-        if (internalHttp.length > 0) {
-            NSInteger internalHttpPort = [internalHttp integerValue];
-            if (internalHttpPort != 0) {
-                cameraBuilder.internalHttpPort = internalHttpPort;
-            } else {
-                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an internal HTTP port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [simpleAlert show];
-                
-                return nil;
-            }
-        }
-        
-        NSString *internalRtsp = self.tfInternalRtspPort.text;
-        if (internalRtsp.length > 0) {
-            NSInteger internalRtspPort = [internalRtsp integerValue];
-            if (internalRtspPort != 0) {
-                cameraBuilder.internalRtspPort = internalRtspPort;
-            } else {
-                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an internal RTSP port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [simpleAlert show];
-                
-                return nil;
-            }
-        }
-    }
+    
     if (externalHost.length > 0) {
         cameraBuilder.externalHost = externalHost;
         
@@ -648,6 +744,8 @@
         cameraBuilder.jpgUrl = jpgUrl;
     }
     
+    cameraBuilder.isOnline = YES;
+    
     return cameraBuilder;
 }
 
@@ -680,7 +778,7 @@
 }
 
 - (void)createCamera:(EvercamCameraBuilder *)cameraBuilder withStatus:(BOOL)status {
-    //Set is_online=true for all new cameras as temorary fix of https://github.com/evercam/evercam-play-android/issues/133
+    
     cameraBuilder.isOnline = true;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -754,6 +852,7 @@
 }
 
 - (void)patchCamera:(EvercamCameraBuilder *)cameraBuilder {
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[EvercamShell shell] patchCamera:cameraBuilder withBlock:^(EvercamCamera *camera, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -826,33 +925,81 @@
     }
 }
 
+
 - (void)getAllVendors {
+    
+    self.view.userInteractionEnabled = NO;
     [self.vendorsNameArray removeAllObjects];
-    [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
+    [self.vendorsArray removeAllObjects];
     
     [[EvercamShell shell] getAllVendors:^(NSArray *vendors, NSError *error) {
-        NSArray *arr = [vendors sortedArrayUsingComparator:^NSComparisonResult(EvercamVendor *v1, EvercamVendor *v2) {
-            return [v1.name caseInsensitiveCompare:v2.name];
-        }];
-        
-        self.vendorsArray = [[NSMutableArray alloc] initWithArray:arr];
-        NSLog(@"%@",self.vendorsArray);
-        
-        for (EvercamVendor *vendor in self.vendorsArray)
-        {
-            [self.vendorsNameArray addObject:[vendor.name copy]];
-        }
-        if (self.editCamera) {
+        if (!error) {
+            self.vendorsArray  = [vendors mutableCopy];
+            //            Sort evercamvendor object array by name
+            NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+            self.vendorsArray   = [[self.vendorsArray sortedArrayUsingDescriptors:@[sort]] mutableCopy];
+            
+            self.vendorsNameArray    = [[vendors valueForKey:@"name"] mutableCopy];
+            //Sort vendor name Array
+            self.vendorsNameArray = [[self.vendorsNameArray sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] mutableCopy];
+            [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
+            self.view.userInteractionEnabled = YES;
+            
             self.currentVendor = [self getVendorWithName:self.editCamera.vendor];
-            if (self.currentVendor) {
+            if (![self.currentVendor.name isEqualToString:@"Other"]) {
                 self.tfVendor.text = self.currentVendor.name;
-                [self getAllModelsWithCompletion:^(NSError *error) {
-                    [self setCameraImage];
+                [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:self.currentVendor.logoUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if (self.currentVendor == nil) {
+                        self.logoImageView.image = nil;
+                    }
                 }];
+                [self getCameraModel:self.currentVendor.vId];
+                self.modelBtn.enabled = YES;
+            }else{
+                NSLog(@"CAMERA VENDOR AND MODEL UNKNOWN.");
+                self.tfVendor.text = self.editCamera.vendor;
+                self.tfModel.text  = self.editCamera.model;
+                [self.tfModel setTextColor:[AppUtility colorWithHexString:@"B9B9B9"]];
+                self.modelBtn.enabled = NO;
+                
             }
+            
+        }else{
+            NSLog(@"VENDOR SERVICE ERROR: %@",error.description);
+            
+            self.view.userInteractionEnabled = YES;
         }
     }];
 }
+/*
+ - (void)getAllVendors {
+ [self.vendorsNameArray removeAllObjects];
+ [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
+ 
+ [[EvercamShell shell] getAllVendors:^(NSArray *vendors, NSError *error) {
+ NSArray *arr = [vendors sortedArrayUsingComparator:^NSComparisonResult(EvercamVendor *v1, EvercamVendor *v2) {
+ return [v1.name caseInsensitiveCompare:v2.name];
+ }];
+ 
+ self.vendorsArray = [[NSMutableArray alloc] initWithArray:arr];
+ NSLog(@"%@",self.vendorsArray);
+ 
+ for (EvercamVendor *vendor in self.vendorsArray)
+ {
+ [self.vendorsNameArray addObject:[vendor.name copy]];
+ }
+ if (self.editCamera) {
+ self.currentVendor = [self getVendorWithName:self.editCamera.vendor];
+ if (self.currentVendor) {
+ self.tfVendor.text = self.currentVendor.name;
+ [self getAllModelsWithCompletion:^(NSError *error) {
+ [self setCameraImage];
+ }];
+ }
+ }
+ }];
+ }
+ */
 
 - (void)getAllModelsWithCompletion:(void (^)(NSError *error))block {
     
@@ -915,13 +1062,11 @@
     if ([modelName isEqualToString:@"Unknown/Other"]) {
         return nil;
     }
-    
-    for (EvercamModel *model in self.modelsArray) {
-        if ([model.name isEqualToString:modelName]) {
-            return model;
-        }
+    NSArray *array = [modelsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name == %@)",modelName]];
+    if (array.count > 0) {
+        EvercamModel *model = array[0];
+        return model;
     }
-    
     return nil;
 }
 #pragma mark Socket Delegate
@@ -980,11 +1125,8 @@
         }
         [self reFrameViews:minViewsArray initialFrame:self.cameraView.frame];
         self.currentVendor = self.vendorsArray[index-1];
-        NSLog(@"Current Vendor: %@", self.currentVendor);
         self.snapshotView.hidden = true;
         self.rtstURLView.hidden = true;
-        
-        //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
         [self getAllModelsWithCompletion:^(NSError *error) {
             
@@ -997,9 +1139,9 @@
     {
         modelDropDown = nil;
         self.currentModel = self.modelsArray[index];
-        NSLog(@"Current Model: %@", self.currentModel);
         
-        //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        
         NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentModel.thumbUrl]];
         
         [self.thumbImageView setImageWithURLRequest:request placeholderImage:nil
@@ -1179,7 +1321,7 @@
     NSString* url = [NSString stringWithFormat:@"%@address=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,rtspPort];
     
     
-//    NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
+    //    NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
     
     [self checkPortWithUrl:url withParameters:nil withTextField:self.tfExternalRtspPort withLabel:self.rtspPortStatusLabel];
 }
@@ -1196,7 +1338,7 @@
     
     NSString* url = [NSString stringWithFormat:@"%@address=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,httpPort];
     
-//    NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
+    //    NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
     
     [self checkPortWithUrl:url withParameters:nil withTextField:self.tfExternalHttpPort withLabel:self.httpPortStatusLabel];
 }
@@ -1376,25 +1518,62 @@
 
 -(void)reFrameViews:(NSMutableArray*)Views initialFrame:(CGRect)frame
 {
+    NSInteger viewMargin = ([GlobalSettings sharedInstance].isPhone)?35:60;
+    NSLog(@"view Margin: %ld",(long)viewMargin);
     if (self.editCamera)
     {
-        frame.origin.y += VIEWMARGIN;
+        frame.origin.y += viewMargin;
     }
     for (int index=0; index<Views.count; index++) {
         UIView* view =  Views[index];
         view.frame = frame;
-        frame.origin.y += VIEWMARGIN;
+        frame.origin.y += viewMargin;
     }
     CGRect newFrame = self.addButton.frame;
-    newFrame.origin.y = frame.origin.y + VIEWMARGIN - 10;
+    newFrame.origin.y = frame.origin.y + viewMargin - 10;
     self.addButton.frame = newFrame;
     
     newFrame = self.testButton.frame;
-    newFrame.origin.y = frame.origin.y + VIEWMARGIN - 10;
+    newFrame.origin.y = frame.origin.y + viewMargin - 10;
     self.testButton.frame = newFrame;
 }
 
 - (IBAction)remove_Message_View:(id)sender {
     self.success_Message_View.hidden = YES;
+    self.blackTransparentView.hidden = YES;
+}
+
+- (IBAction)questionMarkAction:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    NSLog(@"Button: %ld",btn.tag);
+    switch (btn.tag) {
+        case 101:{
+            [AppUtility displayAlertWithTitle:@"External IP / URL" AndMessage:@"Put the public URL or IP address of your camera. \n You will need to have setup port forwarding for your camera."];
+        }
+            break;
+        case 102:{
+            [AppUtility displayAlertWithTitle:@"External HTTP Port" AndMessage:@"The HTTP port should be a 2 - 5 digit number. \n The default external port is 80."];
+        }
+            break;
+        case 103:{
+            [AppUtility displayAlertWithTitle:@"Snapshot URL" AndMessage:@"If you know your camera Vendor and Model we can work this out for you. \n You can also enter it manually for your camera."];
+        }
+            break;
+        case 104:{
+            [AppUtility displayAlertWithTitle:@"External RTSP Port" AndMessage:@"The RTSP port should be a 2 - 5 digit number. \n The default external port is 554."];
+        }
+            break;
+        case 105:{
+            [AppUtility displayAlertWithTitle:@"Stream URL" AndMessage:@"If you know your Camera Vendor and Model we can work this out for you. \n You can also enter it manually for your camera."];
+        }
+            break;
+
+
+
+
+            
+        default:
+            break;
+    }
 }
 @end

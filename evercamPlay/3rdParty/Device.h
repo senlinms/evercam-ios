@@ -10,6 +10,7 @@
 
 @interface Device : NSObject
 
+@property NSString *vendorId;
 @property NSString *name;
 @property NSString *address;
 @property NSString *mac_Address;
