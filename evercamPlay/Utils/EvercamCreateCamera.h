@@ -12,4 +12,6 @@
 
 +(void)createCamera:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 
++(void)EditCamera:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
+
 @end

@@ -16,7 +16,7 @@
 
 @end
 
-@interface ViewCameraViewController : GAITrackedViewController
+@interface ViewCameraViewController : GAITrackedViewController <UIActionSheetDelegate>
 
 @property (nonatomic, strong) EvercamCamera *camera;
 

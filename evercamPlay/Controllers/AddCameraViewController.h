@@ -37,12 +37,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfExternalHost;
 @property (weak, nonatomic) IBOutlet UITextField *tfExternalHttpPort;
 @property (weak, nonatomic) IBOutlet UITextField *tfExternalRtspPort;
-@property (weak, nonatomic) IBOutlet UITextField *tfInternalHost;
-@property (weak, nonatomic) IBOutlet UITextField *tfInternalHttpPort;
-@property (weak, nonatomic) IBOutlet UITextField *tfInternalRtspPort;
 @property (weak, nonatomic) IBOutlet UITextField *tfExternalRtspUrl;
+@property (weak, nonatomic) IBOutlet UIButton *modelBtn;
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *main_Scroll;
+@property (weak, nonatomic) IBOutlet UIView *blackTransparentView;
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
@@ -52,13 +51,15 @@
 
 @property (nonatomic, strong) id<AddCameraViewControllerDelegate> delegate;
 @property (nonatomic, strong) EvercamCamera *editCamera;
+@property (weak, nonatomic) IBOutlet UIButton *vendorBtn;
 
 @property (weak, nonatomic) IBOutlet UIView *success_Message_View;
 @property (weak, nonatomic) IBOutlet UIImageView *test_SnapShot_ImageView;
 - (IBAction)remove_Message_View:(id)sender;
+- (IBAction)questionMarkAction:(id)sender;
 
 @end
-
+/*
 static inline BOOL isCompletelyEmpty (id text) {
     BOOL isBlank;
     if ([[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
@@ -69,4 +70,4 @@ static inline BOOL isCompletelyEmpty (id text) {
     
     return isBlank;
 }
-
+*/

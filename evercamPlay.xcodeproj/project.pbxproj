@@ -74,6 +74,9 @@
 		77079D8C1CEA05280073EE16 /* circleImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77079D8A1CEA05280073EE16 /* circleImage@2x.png */; };
 		770C9E5C1CDA0978003BC4E1 /* MyPlayerLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 770C9E5B1CDA0978003BC4E1 /* MyPlayerLayerView.m */; };
 		770C9E5E1CDA0A8F003BC4E1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */; };
+		771F5C6A1D1BB07700621EA1 /* question_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 771F5C671D1BB07700621EA1 /* question_icon@2x.png */; };
+		771F5C6B1D1BB07700621EA1 /* question_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 771F5C681D1BB07700621EA1 /* question_icon.png */; };
+		771F5C6C1D1BB07700621EA1 /* question_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 771F5C691D1BB07700621EA1 /* question_icon@3x.png */; };
 		77294E2C1CEAF6F800A5B7D4 /* circleImage_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 77294E2A1CEAF6F800A5B7D4 /* circleImage_White.png */; };
 		77294E2D1CEAF6F800A5B7D4 /* circleImage_White@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77294E2B1CEAF6F800A5B7D4 /* circleImage_White@2x.png */; };
 		772EA57B1D0940D30005DB98 /* ConnectCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772EA5791D0940D30005DB98 /* ConnectCameraViewController.m */; };
@@ -145,6 +148,9 @@
 		77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF9941CE35619009A3BC0 /* NewShareViewController.m */; };
 		77EEF9971CE35619009A3BC0 /* NewShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9951CE35619009A3BC0 /* NewShareViewController.xib */; };
 		77EEF9991CE356CB009A3BC0 /* ic_send_padding.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9981CE356CB009A3BC0 /* ic_send_padding.png */; };
+		77F0DCF61D17DC120008F5DF /* ic_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F0DCF31D17DC110008F5DF /* ic_edit.png */; };
+		77F0DCF71D17DC120008F5DF /* ic_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F0DCF41D17DC120008F5DF /* ic_edit@2x.png */; };
+		77F0DCF81D17DC120008F5DF /* ic_edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F0DCF51D17DC120008F5DF /* ic_edit@3x.png */; };
 		77F161801CEF0E1100634612 /* ic_accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F1617D1CEF0E1100634612 /* ic_accounts.png */; };
 		77F161811CEF0E1100634612 /* ic_accounts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F1617E1CEF0E1100634612 /* ic_accounts@2x.png */; };
 		77F161821CEF0E1100634612 /* ic_accounts@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F1617F1CEF0E1100634612 /* ic_accounts@3x.png */; };
@@ -422,6 +428,9 @@
 		770C9E5A1CDA0978003BC4E1 /* MyPlayerLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlayerLayerView.h; sourceTree = "<group>"; };
 		770C9E5B1CDA0978003BC4E1 /* MyPlayerLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlayerLayerView.m; sourceTree = "<group>"; };
 		770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		771F5C671D1BB07700621EA1 /* question_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question_icon@2x.png"; sourceTree = "<group>"; };
+		771F5C681D1BB07700621EA1 /* question_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question_icon.png; sourceTree = "<group>"; };
+		771F5C691D1BB07700621EA1 /* question_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question_icon@3x.png"; sourceTree = "<group>"; };
 		77294E2A1CEAF6F800A5B7D4 /* circleImage_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleImage_White.png; sourceTree = "<group>"; };
 		77294E2B1CEAF6F800A5B7D4 /* circleImage_White@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleImage_White@2x.png"; sourceTree = "<group>"; };
 		772EA5781D0940D30005DB98 /* ConnectCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectCameraViewController.h; sourceTree = "<group>"; };
@@ -510,6 +519,9 @@
 		77EFA4381D0007E3004D8B3A /* if_ether.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_ether.h; sourceTree = "<group>"; };
 		77EFA43D1D001863004D8B3A /* if_arp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_arp.h; sourceTree = "<group>"; };
 		77EFA43E1D0018AB004D8B3A /* if_dl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_dl.h; sourceTree = "<group>"; };
+		77F0DCF31D17DC110008F5DF /* ic_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_edit.png; sourceTree = "<group>"; };
+		77F0DCF41D17DC120008F5DF /* ic_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_edit@2x.png"; sourceTree = "<group>"; };
+		77F0DCF51D17DC120008F5DF /* ic_edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_edit@3x.png"; sourceTree = "<group>"; };
 		77F1617D1CEF0E1100634612 /* ic_accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_accounts.png; sourceTree = "<group>"; };
 		77F1617E1CEF0E1100634612 /* ic_accounts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_accounts@2x.png"; sourceTree = "<group>"; };
 		77F1617F1CEF0E1100634612 /* ic_accounts@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_accounts@3x.png"; sourceTree = "<group>"; };
@@ -1129,6 +1141,12 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				771F5C671D1BB07700621EA1 /* question_icon@2x.png */,
+				771F5C681D1BB07700621EA1 /* question_icon.png */,
+				771F5C691D1BB07700621EA1 /* question_icon@3x.png */,
+				77F0DCF31D17DC110008F5DF /* ic_edit.png */,
+				77F0DCF41D17DC120008F5DF /* ic_edit@2x.png */,
+				77F0DCF51D17DC120008F5DF /* ic_edit@3x.png */,
 				77FB34241D094F1200B3D4C9 /* buttonBg.png */,
 				77FB34251D094F1200B3D4C9 /* buttonBg@2x.png */,
 				77E74E641D08223600EC336D /* grey_DropDown.png */,
@@ -1593,6 +1611,7 @@
 				CBDFA5601AE92806007CC199 /* ic_menu.png in Resources */,
 				E30900A31B16B96000E5B5C0 /* action-red-button-selected.png in Resources */,
 				77F305E51D0044A300FB4293 /* AllDevicesCell_iPad.xib in Resources */,
+				77F0DCF81D17DC120008F5DF /* ic_edit@3x.png in Resources */,
 				77EEC69E1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib in Resources */,
 				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				7735198E1D00632600A41044 /* AllDevicesViewController_iPad.xib in Resources */,
@@ -1619,6 +1638,7 @@
 				CB44E8771AAE9E7D00A78C11 /* MenuViewController.xib in Resources */,
 				77079D8C1CEA05280073EE16 /* circleImage@2x.png in Resources */,
 				E30900A51B16B96000E5B5C0 /* action-red-button.png in Resources */,
+				771F5C6A1D1BB07700621EA1 /* question_icon@2x.png in Resources */,
 				CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */,
 				E30201CF1B16CE290006DAE8 /* SettingsViewController_iPad.xib in Resources */,
 				410748741ADF6F3F004D10C9 /* RecordingsViewController.xib in Resources */,
@@ -1629,6 +1649,7 @@
 				77FB34261D094F1200B3D4C9 /* buttonBg.png in Resources */,
 				E30201C61B16C82D0006DAE8 /* alert-window-landscape.png in Resources */,
 				77CF39FE1CE1BC540064D915 /* ShareCell.xib in Resources */,
+				77F0DCF61D17DC120008F5DF /* ic_edit.png in Resources */,
 				776647031CEEF1CB0076B9CE /* ic_compass.png in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
 				AB8097161CC0C742002F5FF9 /* nav.png in Resources */,
@@ -1698,6 +1719,7 @@
 				7779AF061CF470A80036A0F5 /* PresetListViewController.xib in Resources */,
 				CB44E8751AAE9E7D00A78C11 /* LoginViewController.xib in Resources */,
 				77F9DCAC1CFEE251000EA6A9 /* CameraScanViewController.xib in Resources */,
+				77F0DCF71D17DC120008F5DF /* ic_edit@2x.png in Resources */,
 				77CF39F91CE1B1BC0064D915 /* ic_fontawsome_users.png in Resources */,
 				77F305D71D00345900FB4293 /* CameraScanViewController_iPad.xib in Resources */,
 				77EEF9921CE35504009A3BC0 /* ShareSettingViewController_iPad.xib in Resources */,
@@ -1711,6 +1733,7 @@
 				AB8097181CC0C742002F5FF9 /* nav@3x.png in Resources */,
 				E309009E1B16B96000E5B5C0 /* action-black-button@2x.png in Resources */,
 				CB44E8791AAE9E7D00A78C11 /* SettingsViewController.xib in Resources */,
+				771F5C6C1D1BB07700621EA1 /* question_icon@3x.png in Resources */,
 				E30900A11B16B96000E5B5C0 /* action-gray-button.png in Resources */,
 				E309009F1B16B96000E5B5C0 /* action-gray-button-selected.png in Resources */,
 				7736DBEC1D07F63500376E40 /* local.plist in Resources */,
@@ -1719,6 +1742,7 @@
 				CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */,
 				E30201C81B16C82D0006DAE8 /* alert-window.png in Resources */,
 				7779AF0D1CF493040036A0F5 /* AddPresetViewController.xib in Resources */,
+				771F5C6B1D1BB07700621EA1 /* question_icon.png in Resources */,
 				E30900721B16417400E5B5C0 /* LoginViewController_iPad.xib in Resources */,
 				413BB2A31ADAE0A50083A5DC /* SelectModelViewController.xib in Resources */,
 				E309009D1B16B96000E5B5C0 /* action-black-button.png in Resources */,

@@ -69,15 +69,53 @@
                                                            value:nil] build]];
     
     
-    AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:nil];
+    AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:[NSBundle mainBundle]];
     addCameraVC.editCamera = self.camera;
     addCameraVC.delegate = self;
     [self.navigationController pushViewController:addCameraVC animated:YES];
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"button Index: %ld",(long)buttonIndex);
+    switch (buttonIndex) {
+        case 0:{
+            if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Edit Camera"]) {
+                [self edit:self];
+            }else{
+                [self deleteCamera];
+            }
+        }
+            
+            break;
+        case 1:{
+            [self deleteCamera];
+        }
+        default:
+            break;
+    }
+}
+
+
+
 - (IBAction)menu:(id)sender {       // to do put remove camera here
     
+    if ([GlobalSettings sharedInstance].isPhone)
+    {
+    UIActionSheet *sheet;
+    if ([self.camera.rights.rightsString rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Edit Camera",@"Remove Camera", nil];
+        sheet.tag = 5608;
+    }else{
+        sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Remove Camera", nil];
+    }
+    [sheet showInView:self.view];
+    }else{
+        //IPad
+        [self presentActionSheetForIpad:sender];
+    }
+    return;
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+        /*
         BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
         
         EvercamRights *right = self.camera.rights;
@@ -95,6 +133,7 @@
         }];
         [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
         [sheet showInView:self.view];
+        */
     }
     else
     {
@@ -139,7 +178,12 @@
         
         [view addAction:removeCamera];
         [view addAction:cancel];
-        
+        UIPopoverPresentationController *popPresenter = [view
+                                                         popoverPresentationController];
+        popPresenter.sourceView = (UIView *)sender;
+        popPresenter.sourceRect = ((UIView *)sender).bounds;
+        [self presentViewController:view animated:YES completion:nil];
+        /*
         if ([GlobalSettings sharedInstance].isPhone)
         {
             [self presentViewController:view animated:YES completion:nil];
@@ -152,7 +196,57 @@
             popPresenter.sourceRect = ((UIView *)sender).bounds;
             [self presentViewController:view animated:YES completion:nil];
         }
+        */
     }
+}
+
+-(void)presentActionSheetForIpad:(id)sender{
+    UIAlertController * view=   [UIAlertController
+                                 alertControllerWithTitle:nil
+                                 message:nil
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    
+    UIAlertAction* editCamera = [UIAlertAction
+                                 actionWithTitle:@"Edit Camera"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [view dismissViewControllerAnimated:YES completion:nil];
+                                     [self edit:self];
+                                     
+                                 }];
+    
+    UIAlertAction* removeCamera = [UIAlertAction
+                                   actionWithTitle:@"Remove Camera"
+                                   style:UIAlertActionStyleDestructive
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [view dismissViewControllerAnimated:YES completion:nil];
+                                       [self deleteCamera];
+                                       
+                                   }];
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleCancel
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [view dismissViewControllerAnimated:YES completion:nil];
+                             }];
+    EvercamRights *right = self.camera.rights;
+    if (right.rightsString) {
+        if ([right.rightsString containsString:@"edit"] || [right.rightsString containsString:@"EDIT"]) {
+            [view addAction:editCamera];
+        }
+    }
+    
+    [view addAction:removeCamera];
+    [view addAction:cancel];
+    UIPopoverPresentationController *popPresenter = [view
+                                                     popoverPresentationController];
+    popPresenter.sourceView = (UIView *)sender;
+    popPresenter.sourceRect = ((UIView *)sender).bounds;
+    [self presentViewController:view animated:YES completion:nil];
 }
 
 - (void)deleteCamera {
@@ -253,6 +347,9 @@
             if (self.camera.password.length > 0)
             {
                 self.lblPassword.text = self.camera.password;
+            }else{
+                self.lblPassword.text = @"Not specified";
+                self.lblPassword.textColor = [UIColor lightGrayColor];
             }
         } else {
             self.lblPassword.text = @"Not specified";

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 @class TPKeyboardAvoidingScrollView;
 @interface VendorAndModelViewController : UIViewController{
-    
+    NSString *vendorIdentifier;
 }
+@property (nonatomic,strong) NSString *vendorIdentifier;
 @property (weak, nonatomic) IBOutlet UIButton *modelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *vendorBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraImage;

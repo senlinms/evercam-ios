@@ -318,8 +318,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     navVC.isPortraitMode        = YES;
     [navVC setHasLandscapeMode:YES];
     navVC.navigationBarHidden   = YES;
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:sVc];
-//    nav.navigationBar.hidden    = YES;
     [self.navigationController presentViewController:navVC animated:YES completion:nil];
 }
 
@@ -327,7 +325,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ViewCameraViewController":@"ViewCameraViewController_iPad" bundle:[NSBundle mainBundle]];
     viewCameraVC.camera = self.cameraInfo;
     viewCameraVC.delegate = self;
-    [self.navigationController presentViewController:viewCameraVC animated:YES completion:nil];
+    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:viewCameraVC];
+    navVC.isPortraitMode        = YES;
+    [navVC setHasLandscapeMode:YES];
+    navVC.navigationBarHidden   = YES;
+    [self.navigationController presentViewController:navVC animated:YES completion:nil];
+//    [self.navigationController presentViewController:viewCameraVC animated:YES completion:nil];
 }
 
 - (void)showSavedImages {
@@ -1154,26 +1157,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
     });
 }
-/*
--(void) setMessage:(NSString *)message {
-    NSLog(@"setMessage:%@", message);
-    if ([message hasPrefix:@"State changed to PLAYING"]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            video_view.hidden = NO;
-            self.lblTimeCode.hidden = NO;
-        });
-    }
-    if ([message hasPrefix:@"Error received from element"] ||
-        [message hasPrefix:@"Failed to set pipeline to PLAYING"])
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [loadingView startAnimating];
-            [self createBrowseJpgTask];
-            [self.imageView loadImageFromURL:[NSURL URLWithString:self.cameraInfo.thumbnailUrl] withSpinny:NO];
-        });
-    }
-}
-*/
+
 -(void) setCurrentPosition:(NSInteger)position duration:(NSInteger)duration {
     
 }
@@ -1190,6 +1174,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 #pragma mark - ViewCameraViewController Delegate Method
 - (void)cameraEdited:(EvercamCamera *)camera {
     self.cameraInfo = camera;
+    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
     if ([self.delegate respondsToSelector:@selector(cameraEdited:)]) {
         [self.delegate cameraEdited:camera];

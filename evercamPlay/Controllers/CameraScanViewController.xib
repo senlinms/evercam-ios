@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraScanViewController">
             <connections>
+                <outlet property="addCameraBtn" destination="e7h-6i-d5G" id="2bf-bU-HKz"/>
                 <outlet property="camera_Table" destination="Ncw-yo-4mC" id="WGG-fQ-O8d"/>
+                <outlet property="cautionLabel" destination="RlH-xL-WPA" id="h1R-I6-ghN"/>
                 <outlet property="otherDevicesBtn" destination="uZC-Rq-MJy" id="8iD-bL-rQX"/>
                 <outlet property="scanning_activityindicator" destination="p8n-GV-BxH" id="2iY-03-b5H"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -49,15 +51,33 @@
                         <outlet property="delegate" destination="-1" id="9TP-y9-diV"/>
                     </connections>
                 </tableView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No cameras were found in your local network." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RlH-xL-WPA">
+                    <rect key="frame" x="8" y="218" width="304" height="42"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uZC-Rq-MJy">
                     <rect key="frame" x="38" y="445" width="245" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
                     <state key="normal" title="SHOW OTHER DEVICES">
                         <color key="titleColor" red="0.25882352941176467" green="0.54509803921568623" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="scan_Other_Devices:" destination="-1" eventType="touchUpInside" id="unU-BO-BBM"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e7h-6i-d5G">
+                    <rect key="frame" x="37" y="266" width="245" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
+                    <state key="normal" title="ADD CAMERA MANUALLY">
+                        <color key="titleColor" red="0.25882352939999997" green="0.5450980392" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="addCamera:" destination="-1" eventType="touchUpInside" id="wlf-GO-64b"/>
                     </connections>
                 </button>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="p8n-GV-BxH">

@@ -53,6 +53,7 @@
     if (cell == nil) {
         cell = [[AllDevicesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
+    cell.backgroundColor        = [UIColor clearColor];
     Device *device              = [self.devicesArray objectAtIndex:indexPath.row];
     cell.ipAddress_Lbl.text     = device.address;
     cell.macAddress_Lbl.text    = device.mac_Address;
