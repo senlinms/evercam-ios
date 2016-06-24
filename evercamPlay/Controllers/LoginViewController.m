@@ -25,7 +25,7 @@
 @interface LoginViewController ()
 {
     UITextField *activeTextField;
-    CAGradientLayer *gradient;
+    
 }
 @end
 
@@ -37,15 +37,10 @@
     self.screenName = @"Login";
     // Do any additional setup after loading the view from its nib.
     
-    gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
-    [self.view.layer insertSublayer:gradient atIndex:0];
-    
     self.contentView.contentSize = self.contentView.bounds.size;
     
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor lightTextColor];
+        UIColor *color = [UIColor lightGrayColor];
         self.txt_username.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email/Username" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_password.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
     } else {
@@ -88,7 +83,7 @@
 }
 
 -(void)viewDidLayoutSubviews{
-    gradient.frame = self.view.bounds;
+    
 }
 
 - (IBAction)onLogin:(id)sender

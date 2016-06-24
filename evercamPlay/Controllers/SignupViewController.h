@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NIDropDown.h"
 #import "GAI.h"
 @class TPKeyboardAvoidingScrollView;
-@interface SignupViewController : GAITrackedViewController <NIDropDownDelegate>{
+@interface SignupViewController : GAITrackedViewController{
     BOOL isFromAddAccountScreen;
 }
 
