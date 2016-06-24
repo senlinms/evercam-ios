@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "NIDropDown.h"
 #import "GAI.h"
-
+@class TPKeyboardAvoidingScrollView;
 @interface SignupViewController : GAITrackedViewController <NIDropDownDelegate>{
     BOOL isFromAddAccountScreen;
 }
 
 @property (nonatomic,assign) BOOL isFromAddAccountScreen;
-@property (nonatomic, retain) IBOutlet UIScrollView *contentView;
+@property (nonatomic, retain) IBOutlet TPKeyboardAvoidingScrollView *contentView;
 @property (nonatomic, strong) IBOutlet UITextField *txt_firstname;
 @property (nonatomic, strong) IBOutlet UITextField *txt_lastname;
 @property (nonatomic, strong) IBOutlet UIButton *btn_country;

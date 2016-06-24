@@ -21,12 +21,12 @@
 #import "Mixpanel.h"
 #import "PreferenceUtil.h"
 #import "Intercom/intercom.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 @interface SignupViewController ()
 {
     UITextField *activeTextField;
     NIDropDown *dropDown;
-    CAGradientLayer *gradient;
 }
 
 @end
@@ -39,14 +39,11 @@
     self.screenName = @"Create Account";
     
     // Do any additional setup after loading the view from its nib.
-    gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
-    [self.view.layer insertSublayer:gradient atIndex:0];
-    [self.contentView setContentSize:CGSizeMake(0, 340)];
+    [self.contentView contentSizeToFit];
+//    [self.contentView setContentSize:CGSizeMake(0, 340)];
 
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor lightTextColor];
+        UIColor *color = [UIColor lightGrayColor];
         self.txt_firstname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"First name" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_lastname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Last name" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_username.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
@@ -66,8 +63,13 @@
 }
 
 -(void)viewDidLayoutSubviews{
-    gradient.frame = self.view.bounds;
+    
 }
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    [self.contentView contentSizeToFit];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -77,14 +79,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onKeyboardShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onKeyboardHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(onKeyboardShow:)
+//                                                 name:UIKeyboardWillShowNotification
+//                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(onKeyboardHide:)
+//                                                 name:UIKeyboardWillHideNotification
+//                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -407,6 +409,7 @@
     activeTextField = textField;
 }
 
+/*
 #pragma mark - UIKeyboard events
 // Called when UIKeyboardWillShowNotification is sent
 - (void)onKeyboardShow:(NSNotification*)notification
@@ -435,11 +438,11 @@
     _contentView.contentInset = newContentInsets;
     _contentView.scrollIndicatorInsets = newContentInsets;
     
-    /*
+ 
      * Depending on visual layout, _focusedControl should either be the input field (UITextField,..) or another element
      * that should be visible, e.g. a purchase button below an amount text field
      * it makes sense to set _focusedControl in delegates like -textFieldShouldBeginEditing: if you have multiple input fields
-     */
+     
     if (activeTextField) {
         CGRect controlFrameInScrollView = [_contentView convertRect:activeTextField.bounds fromView:activeTextField]; // if the control is a deep in the hierarchy below the scroll view, this will calculate the frame as if it were a direct subview
         controlFrameInScrollView = CGRectInset(controlFrameInScrollView, 0, -10); // replace 10 with any nice visual offset between control and keyboard or control and top of the scroll view.
@@ -494,6 +497,8 @@
     
     [UIView commitAnimations];
 }
+
+*/
 
 #pragma mark NIDropdown delegate
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index
