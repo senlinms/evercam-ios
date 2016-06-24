@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "EvercamCamera.h"
 #import "GAI.h"
-#import "NIDropDown.h"
 @class TPKeyboardAvoidingScrollView;
 @protocol AddCameraViewControllerDelegate <NSObject>
 
@@ -18,7 +17,7 @@
 
 @end
 
-@interface AddCameraViewController : GAITrackedViewController <NIDropDownDelegate,UIAlertViewDelegate>
+@interface AddCameraViewController : GAITrackedViewController <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *nameView;
