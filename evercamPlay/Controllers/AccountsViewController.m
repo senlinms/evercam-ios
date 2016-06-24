@@ -33,7 +33,7 @@
 {
     NSString *triedUsername;
     NSString *triedPassword;
-    CAGradientLayer *gradient;
+    
 }
 
 @property (nonatomic, strong) NSMutableArray *users;
@@ -49,11 +49,6 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    gradient = [CAGradientLayer layer];
-    gradient.frame = self.tableView.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
-    [self.tableView.layer insertSublayer:gradient atIndex:0];
     
     if ([GlobalSettings sharedInstance].isPhone == YES) {
         [self.tableView registerNib:[UINib nibWithNibName:@"AccountCell" bundle:nil] forCellReuseIdentifier:@"AccountCell"];
@@ -83,7 +78,7 @@
 }
 
 -(void)setFramesAccordingToOrientation{
-    gradient.frame = self.tableView.bounds;
+    
     [_addAccountView reframeSubView:self.view.center andFrame:self.view.bounds];
 }
 
@@ -112,7 +107,7 @@
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [self.view setNeedsUpdateConstraints];
-    gradient.frame = self.tableView.bounds;
+    
     [_addAccountView reframeSubView:self.view.center andFrame:self.view.bounds];
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     if (UIInterfaceOrientationIsPortrait(orientation))
