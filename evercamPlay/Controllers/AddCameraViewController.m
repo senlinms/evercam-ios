@@ -18,7 +18,6 @@
 #import "CommonUtil.h"
 #import "Reachability.h"
 #import "NetworkUtil.h"
-#import "GCDAsyncSocket.h"
 #import "SDWebImageManager.h"
 #import "GAIDictionaryBuilder.h"
 #import "Config.h"
@@ -40,10 +39,6 @@
 
 @interface AddCameraViewController () <SelectVendorViewControllerDelegate, SelectModelViewControllerDelegate>
 {
-    NIDropDown *vendorDropDown;
-    NIDropDown *modelDropDown;
-    GCDAsyncSocket *asyncSocket;
-    
     UITextField *statusLabel;
     NSString* userName;
     NSMutableArray *viewsArray;
@@ -143,11 +138,6 @@
     }
 }
 
-- (IBAction)imageViewClose:(id)sender {
-    self.imageContainer.hidden = YES;
-    self.imageView.image = nil;
-}
-
 - (IBAction)back:(id)sender {
     if (self.editCamera) {
         [self.navigationController popViewControllerAnimated:YES];
@@ -210,7 +200,9 @@
     }
     
     NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",jpg_Url,@"jpg_url",self.tfUsername.text,@"cam_username",self.tfPassword.text,@"cam_password",vendorId,@"vendor_id", nil];
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [EvercamTestSnapShot testSnapShot:postDictionary withBlock:^(UIImage *snapeImage, NSString *statusMessage, NSError *error) {
         if (error) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -231,48 +223,6 @@
     }];
 }
 
--(void)ShowMessageBoxWithMessage:(NSString*)message
-{
-    UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [simpleAlert show];
-}
-
-- (void)isPortReachableDone:(BOOL)reachable {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    
-    if (!reachable) {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"The IP address provided is not reachable at the port provided.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [simpleAlert show];
-    }
-    
-    NSString *jpgUrl = [self buildJpgUrlWithSlash:self.tfSnapshot.text];
-    NSString *externalFullUrl = [self buildFullHttpUrl:self.tfExternalHost.text andPort:[self.tfExternalHttpPort.text integerValue]  andJpgUrl:jpgUrl withUsername:self.tfUsername.text andPassword:self.tfPassword.text];
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.imageView setImageWithURLRequest:[self imageRequestWithURL:[NSURL URLWithString:externalFullUrl]]
-                          placeholderImage:nil
-                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                       [self showImageView:image];
-                                   }
-                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                                       NSLog(@"---- ERROR ---- %@", [error userInfo]);
-                                       [self showImageView:nil];
-                                   }];
-    
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-}
-
-- (NSMutableURLRequest *)imageRequestWithURL:(NSURL *)url {
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.cachePolicy = NSURLRequestReloadIgnoringCacheData; //NSURLRequestUseProtocolCachePolicy
-    request.HTTPShouldHandleCookies = NO;
-    request.HTTPShouldUsePipelining = YES;
-    request.timeoutInterval = 10;
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-    
-    return request;
-}
 
 
 - (IBAction)add:(id)sender {
@@ -323,130 +273,6 @@
             [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
         }
     }];
-    
-    return;
-    cameraBuilder_AddMethod_Instance = [self buildCameraWithLocalCheck];
-    if (cameraBuilder_AddMethod_Instance != nil) {
-        if (!self.editCamera) {     // create camera
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            
-            // External URL Check
-            NSString *externalHost  = cameraBuilder_AddMethod_Instance.externalHost;
-            NSString *username      = cameraBuilder_AddMethod_Instance.cameraUsername;
-            NSString *password      = cameraBuilder_AddMethod_Instance.cameraPassword;
-            NSString *jpgUrlString  = [self buildJpgUrlWithSlash:cameraBuilder_AddMethod_Instance.jpgUrl];
-            
-            if (externalHost && externalHost.length > 0) {
-                // External URL Check
-                NSString *externalFullUrl = [self buildFullHttpUrl:externalHost andPort:cameraBuilder_AddMethod_Instance.externalHttpPort andJpgUrl:jpgUrlString withUsername:username andPassword:password];
-                SDWebImageManager *manager = [SDWebImageManager sharedManager];
-                [manager downloadImageWithURL:[NSURL URLWithString:externalFullUrl]
-                                      options:0
-                                     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                         // progression tracking code
-                                     }
-                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                        if (image) {
-                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                [self createCamera:cameraBuilder_AddMethod_Instance withStatus:YES];
-                                            });
-                                        }
-                                        else
-                                        {
-                                            // Internal URL Check
-                                            NSString *internalHost  = cameraBuilder_AddMethod_Instance.internalHost;
-                                            NSString *username      = cameraBuilder_AddMethod_Instance.cameraUsername;
-                                            NSString *password      = cameraBuilder_AddMethod_Instance.cameraPassword;
-                                            NSString *jpgUrlString  = [self buildJpgUrlWithSlash:cameraBuilder_AddMethod_Instance.jpgUrl];
-                                            
-                                            if (internalHost && internalHost.length > 0) {
-                                                NSString *internalFullUrl = [self buildFullHttpUrl:internalHost andPort:cameraBuilder_AddMethod_Instance.externalHttpPort andJpgUrl:jpgUrlString withUsername:username andPassword:password];
-                                                
-                                                SDWebImageManager *manager = [SDWebImageManager sharedManager];
-                                                [manager downloadImageWithURL:[NSURL URLWithString:internalFullUrl]
-                                                                      options:0
-                                                                     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                                                         // progression tracking code
-                                                                     }
-                                                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                                                        if (image) {
-                                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                                                [self createCamera:cameraBuilder_AddMethod_Instance withStatus:YES];
-                                                                            });
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                                                [self showWarningAlert:cameraBuilder_AddMethod_Instance with:sender];
-                                                                            });
-                                                                        }
-                                                                    }];
-                                            }
-                                            else
-                                            {
-                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                [self showWarningAlert:cameraBuilder_AddMethod_Instance with:sender];
-                                            }
-                                        }
-                                    }];
-            }
-            else
-            {
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                [self showWarningAlert:cameraBuilder_AddMethod_Instance with:sender];
-            }
-        } else { // patch camera
-            [self patchCamera:cameraBuilder_AddMethod_Instance];
-        }
-    }
-}
-
--(void)showWarningAlert:(EvercamCameraBuilder *)cameraBuilder_Local with:(id)sender{
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"We can't connect to your camera, are you sure want to add it?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        alert.tag = 56;
-        [alert show];
-    }else{
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Warning"
-                                      message:@"We can't connect to your camera, are you sure want to add it?"
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* no = [UIAlertAction
-                             actionWithTitle:@"No"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
-        UIAlertAction* yes = [UIAlertAction
-                              actionWithTitle:@"Yes"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction * action)
-                              {
-                                  [alert dismissViewControllerAnimated:YES completion:nil];
-                                  [self createCamera:cameraBuilder_Local withStatus:NO];
-                              }];
-        
-        [alert addAction:no];
-        [alert addAction:yes];
-        if ([GlobalSettings sharedInstance].isPhone)
-        {
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-        else
-        {
-            UIPopoverPresentationController *popPresenter = [alert
-                                                             popoverPresentationController];
-            popPresenter.sourceView = (UIView *)sender;
-            popPresenter.sourceRect = ((UIView *)sender).bounds;
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    }
 }
 
 
@@ -589,18 +415,8 @@
 
 #pragma mark - UITapGesture Recognizer
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    [self.focusedTextField resignFirstResponder];
-    if (modelDropDown)
-    {
-        [modelDropDown hideDropDown:(UIButton*)self.tfModel];
-        modelDropDown = nil;
-    }
-    if (vendorDropDown)
-    {
-        [vendorDropDown hideDropDown:(UIButton*)self.tfVendor];
-        vendorDropDown = nil;
-    }
     
+    [self.focusedTextField resignFirstResponder];
 }
 
 #pragma mark - SelectModelViewController Delegate Method
@@ -663,8 +479,6 @@
             self.snapshotView.hidden = YES;
             [self reFrameViews:minViewsArray initialFrame:frame];
         }
-        
-        
     }
     else{
         
@@ -673,258 +487,6 @@
         [self populateIPTextField];
     }
 }
-
-- (EvercamCameraBuilder *)buildCameraWithLocalCheck {
-    EvercamCameraBuilder *cameraBuilder = nil;
-    NSString *cameraID = self.tfID.text;
-    NSString *cameraName = self.tfName.text;
-    
-    cameraBuilder = [[EvercamCameraBuilder alloc] initWithCameraId:cameraID andCameraName:cameraName andIsPublic:NO];
-    
-    if (self.currentVendor) {
-        cameraBuilder.vendor = self.currentVendor.vId;
-    }
-    if (self.currentModel) {
-        cameraBuilder.model = self.currentModel.mId;
-    }
-    //    if (self.tfUsername.text.length > 0) {
-    //        cameraBuilder.cameraUsername = self.tfUsername.text;
-    //    }
-    cameraBuilder.cameraUsername = self.tfUsername.text;
-    cameraBuilder.cameraPassword = self.tfPassword.text;
-    //    if (self.tfPassword.text.length > 0) {
-    //        cameraBuilder.cameraPassword = self.tfPassword.text;
-    //    }
-    if (self.tfExternalRtspUrl.text.length > 0) {
-        cameraBuilder.h264Url = self.tfExternalRtspUrl.text;
-    }
-    
-    NSString *externalHost = self.tfExternalHost.text;
-    
-    if (externalHost.length == 0) {
-        
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an internal or external IP address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [simpleAlert show];
-        
-        return nil;
-    }
-    
-    if (externalHost.length > 0) {
-        cameraBuilder.externalHost = externalHost;
-        
-        NSString *externalHttp = self.tfExternalHttpPort.text;
-        if (externalHttp.length > 0) {
-            NSInteger externalHttpPort = [externalHttp integerValue];
-            if (externalHttpPort != 0) {
-                cameraBuilder.externalHttpPort = externalHttpPort;
-            } else {
-                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an external HTTP port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [simpleAlert show];
-                
-                return nil;
-            }
-        }
-        
-        NSString *externalRtsp = self.tfExternalRtspPort.text;
-        if (externalRtsp.length > 0) {
-            NSInteger externalRtspPort = [externalRtsp integerValue];
-            if (externalRtspPort != 0) {
-                cameraBuilder.externalRtspPort = externalRtspPort;
-            } else {
-                UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:@"Please specify either an external RTSP port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [simpleAlert show];
-                
-                return nil;
-            }
-        }
-    }
-    
-    NSString *jpgUrl = [self buildJpgUrlWithSlash:self.tfSnapshot.text];
-    if (jpgUrl.length > 0) {
-        cameraBuilder.jpgUrl = jpgUrl;
-    }
-    
-    cameraBuilder.isOnline = YES;
-    
-    return cameraBuilder;
-}
-
-- (NSString *)buildJpgUrlWithSlash:(NSString *)originalJpgUrl {
-    NSString *jpgUrl = @"";
-    if (originalJpgUrl != nil && originalJpgUrl.length > 0) {
-        if (![originalJpgUrl hasPrefix:@"/"]) {
-            jpgUrl = [NSString stringWithFormat:@"/%@", originalJpgUrl];
-        } else {
-            jpgUrl = originalJpgUrl;
-        }
-    }
-    
-    return jpgUrl;
-}
-
-- (NSString *)buildFullHttpUrl:(NSString *)host andPort:(NSInteger)port andJpgUrl:(NSString *)jpgUrl withUsername:(NSString *)username andPassword:(NSString *)password
-{
-    if (port == 0) {
-        if (username.length == 0) {
-            return [NSString stringWithFormat:@"http://%@:80%@", host, jpgUrl];
-        }
-        return [NSString stringWithFormat:@"http://%@:%@@%@:80%@", username, password, host, jpgUrl];
-    } else {
-        if (username.length == 0) {
-            return [NSString stringWithFormat:@"http://%@:%ld%@", host, (long)port, jpgUrl];
-        }
-        return [NSString stringWithFormat:@"http://%@:%@@%@:%ld%@", username, password, host, (long)port, jpgUrl];
-    }
-}
-
-- (void)createCamera:(EvercamCameraBuilder *)cameraBuilder withStatus:(BOOL)status {
-    
-    cameraBuilder.isOnline = true;
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[EvercamShell shell] createCamera:cameraBuilder withBlock:^(EvercamCamera *camera, NSError *error) {
-        
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if (error == nil) {
-            
-            camera.isOnline = status;
-            
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_add_camera
-                                                                  action:action_addcamera_success_manual
-                                                                   label:label_addcamera_successful_manual
-                                                                   value:nil] build]];
-            
-            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-            [mixpanel identify:[APP_DELEGATE getDefaultUser].username];
-            [mixpanel track:mixpanel_event_create_camera properties:@{
-                                                                      @"Client-Type": @"Play-iOS",
-                                                                      @"Camera ID" : camera.camId
-                                                                      }];
-            camera_CreateCameraMethod_Instance = camera;
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"" message:@"Camera created" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                alert.tag           = 58;
-                [alert show];
-            }
-            else
-            {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Camera created"
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                         [self.navigationController popViewControllerAnimated:YES];
-                                         
-                                         if ([self.delegate respondsToSelector:@selector(cameraAdded:)]) {
-                                             [self.delegate cameraAdded:camera];
-                                         }
-                                     }];
-                [alert addAction:ok];
-                
-                if ([GlobalSettings sharedInstance].isPhone)
-                {
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
-                else
-                {
-                    UIPopoverPresentationController *popPresenter = [alert
-                                                                     popoverPresentationController];
-                    popPresenter.sourceView = self.view;
-                    popPresenter.sourceRect = self.view.bounds;
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
-            }
-        } else {
-            
-            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [simpleAlert show];
-            
-            return;
-        }
-    }];
-}
-
-- (void)patchCamera:(EvercamCameraBuilder *)cameraBuilder {
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[EvercamShell shell] patchCamera:cameraBuilder withBlock:^(EvercamCamera *camera, NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if (error == nil) {
-            camera_PatchMethod_Instance = camera;
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"" message:@"Settings updated successfully!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                alert.tag           = 57;
-                [alert show];
-            }
-            else
-            {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle: nil
-                                              message:@"Settings updated successfully!"
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"OK"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [alert dismissViewControllerAnimated:YES completion:nil];
-                                         [self.navigationController popViewControllerAnimated:YES];
-                                         
-                                         if ([self.delegate respondsToSelector:@selector(cameraEdited:)]) {
-                                             [self.delegate cameraEdited:camera];
-                                         }
-                                     }];
-                [alert addAction:ok];
-                
-                if ([GlobalSettings sharedInstance].isPhone)
-                {
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
-                else
-                {
-                    UIPopoverPresentationController *popPresenter = [alert
-                                                                     popoverPresentationController];
-                    popPresenter.sourceView = self.view;
-                    popPresenter.sourceRect = self.view.bounds;
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
-            }
-        } else {
-            
-            UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [simpleAlert show];
-            
-            return;
-        }
-    }];
-}
-
-- (void)showImageView:(UIImage *)image {
-    if (image) {
-        self.imageContainer.hidden = NO;
-        CGFloat width = self.testInsideView.frame.size.width;
-        CGFloat imgHeight = image.size.height*width/image.size.width;
-        
-        self.testInsideView.frame = CGRectMake(self.testInsideView.frame.origin.x,
-                                               self.testInsideView.frame.origin.y,
-                                               self.testInsideView.frame.size.width,
-                                               imgHeight + 41.0);
-        
-        self.imageView.image = image;
-        
-    } else {
-        //Remove alert "The port and URL are open but" issue #40 on git
-    }
-}
-
 
 - (void)getAllVendors {
     
@@ -971,35 +533,6 @@
         }
     }];
 }
-/*
- - (void)getAllVendors {
- [self.vendorsNameArray removeAllObjects];
- [self.vendorsNameArray insertObject:@"Unknown/Other" atIndex:0];
- 
- [[EvercamShell shell] getAllVendors:^(NSArray *vendors, NSError *error) {
- NSArray *arr = [vendors sortedArrayUsingComparator:^NSComparisonResult(EvercamVendor *v1, EvercamVendor *v2) {
- return [v1.name caseInsensitiveCompare:v2.name];
- }];
- 
- self.vendorsArray = [[NSMutableArray alloc] initWithArray:arr];
- NSLog(@"%@",self.vendorsArray);
- 
- for (EvercamVendor *vendor in self.vendorsArray)
- {
- [self.vendorsNameArray addObject:[vendor.name copy]];
- }
- if (self.editCamera) {
- self.currentVendor = [self getVendorWithName:self.editCamera.vendor];
- if (self.currentVendor) {
- self.tfVendor.text = self.currentVendor.name;
- [self getAllModelsWithCompletion:^(NSError *error) {
- [self setCameraImage];
- }];
- }
- }
- }];
- }
- */
 
 - (void)getAllModelsWithCompletion:(void (^)(NSError *error))block {
     
@@ -1068,100 +601,6 @@
         return model;
     }
     return nil;
-}
-#pragma mark Socket Delegate
-////////////////////////////////////////////////////////////////////////////////////////
-
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
-{
-    NSLog(@"socket:%p didConnectToHost:%@ port:%hu", sock, host, port);
-    [self isPortReachableDone:TRUE];
-}
-
-- (void)socketDidSecure:(GCDAsyncSocket *)sock
-{
-    NSLog(@"socketDidSecure:%p", sock);
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
-{
-    NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
-{
-    NSLog(@"socketDidSecure:%p", sock);
-}
-
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
-{
-    NSLog(@"socketDidDisconnect:%p withError: %@", sock, err);
-    if (err != nil)
-    {
-        [self isPortReachableDone:FALSE];
-    }
-}
-
-
-
-#pragma mark NIDropdown delegate
-- (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index
-{
-    if (dropdown == vendorDropDown)
-    {
-        vendorDropDown = nil;
-        if (index == 0) {
-            self.currentVendor = nil;
-            self.currentModel = nil;
-            self.tfVendor.text = @"Unknown/Other";
-            self.tfModel.text = @"Unknown/Other";
-            self.snapshotView.hidden = false;
-            self.rtstURLView.hidden = false;
-            [self reFrameViews:viewsArray initialFrame:self.cameraView.frame];
-            [self ClearFields];
-            [self getCameraName];
-            self.thumbImageView.image = [UIImage imageNamed:@"cam.png"];
-            return;
-        }
-        [self reFrameViews:minViewsArray initialFrame:self.cameraView.frame];
-        self.currentVendor = self.vendorsArray[index-1];
-        self.snapshotView.hidden = true;
-        self.rtstURLView.hidden = true;
-        
-        [self getAllModelsWithCompletion:^(NSError *error) {
-            
-        }];
-        
-        self.tfVendor.text = self.currentVendor.name;
-        
-    }
-    else if (dropdown == modelDropDown)
-    {
-        modelDropDown = nil;
-        self.currentModel = self.modelsArray[index];
-        
-        
-        
-        NSURLRequest* request = [self imageRequestWithURL:[NSURL URLWithString:self.currentModel.thumbUrl]];
-        
-        [self.thumbImageView setImageWithURLRequest:request placeholderImage:nil
-                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                self.thumbImageView.image = image;
-                                            }
-                                            failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                                                //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                NSLog(@"---- THUMBNAIL ERROR ---- %@", [error userInfo]);
-                                            }];
-        
-        
-        self.tfModel.text = self.currentModel.name;
-        if (self.editCamera == nil) {
-            self.tfUsername.text = self.currentModel.defaults.authUsername;
-            self.tfPassword.text = self.currentModel.defaults.authPassword;
-            self.tfSnapshot.text = self.currentModel.defaults.jpgURL;
-        }
-    }
 }
 
 - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
@@ -1236,8 +675,6 @@
         [self.navigationController popViewControllerAnimated:YES];
         
     }else if (alertView.tag == 56 && buttonIndex == 1){
-        
-        [self createCamera:cameraBuilder_AddMethod_Instance withStatus:NO];
         
     }else if (alertView.tag == 57 && buttonIndex == 0){
         
@@ -1320,9 +757,6 @@
     
     NSString* url = [NSString stringWithFormat:@"%@address=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,rtspPort];
     
-    
-    //    NSDictionary *params = @{@"ip": ipAddress, @"port": rtspPort};
-    
     [self checkPortWithUrl:url withParameters:nil withTextField:self.tfExternalRtspPort withLabel:self.rtspPortStatusLabel];
 }
 
@@ -1337,9 +771,7 @@
     }
     
     NSString* url = [NSString stringWithFormat:@"%@address=%@&port=%@",[SharedManager getCheckPortUrl],ipAddress,httpPort];
-    
-    //    NSDictionary *params = @{@"ip": ipAddress, @"port": httpPort};
-    
+
     [self checkPortWithUrl:url withParameters:nil withTextField:self.tfExternalHttpPort withLabel:self.httpPortStatusLabel];
 }
 
@@ -1545,7 +977,7 @@
 
 - (IBAction)questionMarkAction:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    NSLog(@"Button: %ld",btn.tag);
+    
     switch (btn.tag) {
         case 101:{
             [AppUtility displayAlertWithTitle:@"External IP / URL" AndMessage:@"Put the public URL or IP address of your camera. \n You will need to have setup port forwarding for your camera."];
@@ -1568,10 +1000,6 @@
         }
             break;
 
-
-
-
-            
         default:
             break;
     }
