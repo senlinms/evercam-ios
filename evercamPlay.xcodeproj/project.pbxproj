@@ -118,7 +118,6 @@
 		7779AF0D1CF493040036A0F5 /* AddPresetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7779AF0B1CF493040036A0F5 /* AddPresetViewController.xib */; };
 		777B3D7E1D0EAB9600BCB0AE /* CameraNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777B3D7C1D0EAB9600BCB0AE /* CameraNameViewController.m */; };
 		777B3D7F1D0EAB9600BCB0AE /* CameraNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 777B3D7D1D0EAB9600BCB0AE /* CameraNameViewController.xib */; };
-		777B3D821D0EC6B400BCB0AE /* EvercamCreateCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 777B3D811D0EC6B400BCB0AE /* EvercamCreateCamera.m */; };
 		77B4988E1D129C91003FC91C /* VendorAndModelViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B4988D1D129C91003FC91C /* VendorAndModelViewController_iPad.xib */; };
 		77B498901D129F75003FC91C /* ConnectCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B4988F1D129F75003FC91C /* ConnectCameraViewController_iPad.xib */; };
 		77B498921D12ACE7003FC91C /* CameraNameViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B498911D12ACE7003FC91C /* CameraNameViewController_iPad.xib */; };
@@ -181,7 +180,6 @@
 		77F9DCBD1CFEF2F7000EA6A9 /* ScanLAN.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F9DCB71CFEF2F6000EA6A9 /* ScanLAN.m */; };
 		77F9DCBE1CFEF2F7000EA6A9 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F9DCB91CFEF2F6000EA6A9 /* SimplePing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77F9DCBF1CFEF2F7000EA6A9 /* SimplePingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F9DCBB1CFEF2F6000EA6A9 /* SimplePingHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		77F9DCC21CFEF9BC000EA6A9 /* EvercamCameraVendor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F9DCC11CFEF9BC000EA6A9 /* EvercamCameraVendor.m */; };
 		77FB34261D094F1200B3D4C9 /* buttonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FB34241D094F1200B3D4C9 /* buttonBg.png */; };
 		77FB34271D094F1200B3D4C9 /* buttonBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FB34251D094F1200B3D4C9 /* buttonBg@2x.png */; };
 		77FB342B1D09879600B3D4C9 /* getgateway.c in Sources */ = {isa = PBXBuildFile; fileRef = 77FB34291D09879600B3D4C9 /* getgateway.c */; };
@@ -485,8 +483,6 @@
 		777B3D7B1D0EAB9600BCB0AE /* CameraNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraNameViewController.h; sourceTree = "<group>"; };
 		777B3D7C1D0EAB9600BCB0AE /* CameraNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraNameViewController.m; sourceTree = "<group>"; };
 		777B3D7D1D0EAB9600BCB0AE /* CameraNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraNameViewController.xib; sourceTree = "<group>"; };
-		777B3D801D0EC6B400BCB0AE /* EvercamCreateCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCreateCamera.h; sourceTree = "<group>"; };
-		777B3D811D0EC6B400BCB0AE /* EvercamCreateCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCreateCamera.m; sourceTree = "<group>"; };
 		77B4988D1D129C91003FC91C /* VendorAndModelViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VendorAndModelViewController_iPad.xib; sourceTree = "<group>"; };
 		77B4988F1D129F75003FC91C /* ConnectCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectCameraViewController_iPad.xib; sourceTree = "<group>"; };
 		77B498911D12ACE7003FC91C /* CameraNameViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraNameViewController_iPad.xib; sourceTree = "<group>"; };
@@ -569,8 +565,6 @@
 		77F9DCB91CFEF2F6000EA6A9 /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
 		77F9DCBA1CFEF2F6000EA6A9 /* SimplePingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePingHelper.h; sourceTree = "<group>"; };
 		77F9DCBB1CFEF2F6000EA6A9 /* SimplePingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePingHelper.m; sourceTree = "<group>"; };
-		77F9DCC01CFEF9BC000EA6A9 /* EvercamCameraVendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraVendor.h; sourceTree = "<group>"; };
-		77F9DCC11CFEF9BC000EA6A9 /* EvercamCameraVendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraVendor.m; sourceTree = "<group>"; };
 		77FB34241D094F1200B3D4C9 /* buttonBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonBg.png; sourceTree = "<group>"; };
 		77FB34251D094F1200B3D4C9 /* buttonBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBg@2x.png"; sourceTree = "<group>"; };
 		77FB34291D09879600B3D4C9 /* getgateway.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getgateway.c; sourceTree = "<group>"; };
@@ -864,10 +858,6 @@
 				413BB2831AD992DD0083A5DC /* NetworkUtil.m */,
 				413BB2AD1ADB14640083A5DC /* CommonUtil.h */,
 				413BB2AE1ADB14640083A5DC /* CommonUtil.m */,
-				77F9DCC01CFEF9BC000EA6A9 /* EvercamCameraVendor.h */,
-				77F9DCC11CFEF9BC000EA6A9 /* EvercamCameraVendor.m */,
-				777B3D801D0EC6B400BCB0AE /* EvercamCreateCamera.h */,
-				777B3D811D0EC6B400BCB0AE /* EvercamCreateCamera.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1890,7 +1880,6 @@
 				E369E4A61B137AB6009D2D9E /* AddAccountView.m in Sources */,
 				77079D821CE9ECCD0073EE16 /* GravatarUIImageFactory.m in Sources */,
 				77E74E621D0818D500EC336D /* VendorAndModelViewController.m in Sources */,
-				77F9DCC21CFEF9BC000EA6A9 /* EvercamCameraVendor.m in Sources */,
 				58429A661C16A9E8008D34A8 /* AboutViewController.m in Sources */,
 				E309008A1B16B78600E5B5C0 /* BlockBackground.m in Sources */,
 				CB318E5A1AFC3565004FFA8E /* SDWebImageDownloaderOperation.m in Sources */,
@@ -1918,7 +1907,6 @@
 				41208A5C1AD97971009C4FC2 /* SendGridEmail.m in Sources */,
 				41208A4F1AD8DCAA009C4FC2 /* CustomNavigationController.m in Sources */,
 				CB318E631AFC3565004FFA8E /* UIView+WebCacheOperation.m in Sources */,
-				777B3D821D0EC6B400BCB0AE /* EvercamCreateCamera.m in Sources */,
 				CB44E8721AAE9E7D00A78C11 /* FeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1954,10 +1942,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1973,11 +1961,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
+				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 			};
@@ -2000,8 +1988,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2013,10 +2001,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
+				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				VALIDATE_PRODUCT = YES;
@@ -2029,10 +2017,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2063,7 +2051,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
+				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2077,8 +2065,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -2112,7 +2100,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
+				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";

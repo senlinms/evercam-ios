@@ -33,7 +33,6 @@
         NSError *error              = nil;
         NSData *responseData        = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         if (!error) {
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
             if ([response statusCode] == 201){
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
                 if (block) {
