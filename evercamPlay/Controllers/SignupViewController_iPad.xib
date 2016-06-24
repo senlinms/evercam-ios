@@ -28,7 +28,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" id="mrZ-WV-7GU">
-                            <rect key="frame" x="313" y="45" width="250" height="50"/>
+                            <rect key="frame" x="313" y="20" width="250" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -38,19 +38,19 @@
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" id="8Yg-wB-KbQ" userLabel="line1">
-                            <rect key="frame" x="313" y="100" width="250" height="1"/>
+                            <rect key="frame" x="313" y="75" width="250" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nrP-eG-tKd">
-                            <rect key="frame" x="204" y="124" width="90" height="50"/>
+                            <rect key="frame" x="204" y="99" width="90" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="18"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last name" minimumFontSize="17" id="49T-lP-663">
-                            <rect key="frame" x="313" y="124" width="250" height="50"/>
+                            <rect key="frame" x="313" y="99" width="250" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -60,19 +60,19 @@
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" id="8No-K8-zoR" userLabel="line1">
-                            <rect key="frame" x="313" y="179" width="250" height="1"/>
+                            <rect key="frame" x="313" y="154" width="250" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gh6-bF-9xh">
-                            <rect key="frame" x="204" y="203" width="90" height="50"/>
+                            <rect key="frame" x="204" y="178" width="90" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="18"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" id="2Qz-Q5-srH">
-                            <rect key="frame" x="313" y="203" width="250" height="50"/>
+                            <rect key="frame" x="313" y="178" width="250" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -82,19 +82,19 @@
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" id="AgS-aQ-CgX" userLabel="line1">
-                            <rect key="frame" x="313" y="258" width="250" height="1"/>
+                            <rect key="frame" x="313" y="233" width="250" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Az5-Gt-QH1">
-                            <rect key="frame" x="204" y="282" width="90" height="50"/>
+                            <rect key="frame" x="204" y="257" width="90" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="18"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" id="AQo-8S-BCH">
-                            <rect key="frame" x="313" y="282" width="250" height="50"/>
+                            <rect key="frame" x="313" y="257" width="250" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -104,19 +104,19 @@
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" id="UtS-bI-kYQ" userLabel="line1">
-                            <rect key="frame" x="313" y="337" width="250" height="1"/>
+                            <rect key="frame" x="313" y="312" width="250" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5fy-sn-H1J">
-                            <rect key="frame" x="204" y="361" width="90" height="50"/>
+                            <rect key="frame" x="204" y="336" width="90" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="18"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="AXS-8l-DpF">
-                            <rect key="frame" x="313" y="361" width="250" height="50"/>
+                            <rect key="frame" x="313" y="336" width="250" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -126,12 +126,12 @@
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" id="0WY-VK-byl" userLabel="line1">
-                            <rect key="frame" x="313" y="416" width="250" height="1"/>
+                            <rect key="frame" x="313" y="391" width="250" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" id="ZiF-hn-YXH">
-                            <rect key="frame" x="313" y="439" width="250" height="50"/>
+                            <rect key="frame" x="313" y="414" width="250" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -141,12 +141,12 @@
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" id="YAo-Yi-s62" userLabel="line1">
-                            <rect key="frame" x="313" y="494" width="250" height="1"/>
+                            <rect key="frame" x="313" y="469" width="250" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wuY-CI-Iog">
-                            <rect key="frame" x="204" y="535" width="359" height="50"/>
+                            <rect key="frame" x="204" y="510" width="359" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.25490196079999999" green="0.54901960780000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="25"/>
@@ -159,7 +159,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cV2-Qr-dix">
-                            <rect key="frame" x="204" y="45" width="90" height="50"/>
+                            <rect key="frame" x="204" y="20" width="90" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="18"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>

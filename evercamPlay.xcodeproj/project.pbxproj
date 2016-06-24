@@ -90,6 +90,9 @@
 		7736DBE91D07E7E400376E40 /* ViewCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7736DBE71D07E7E400376E40 /* ViewCameraViewController_iPad.xib */; };
 		7736DBEA1D07E7E400376E40 /* ViewCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7736DBE81D07E7E400376E40 /* ViewCameraViewController.xib */; };
 		7736DBEC1D07F63500376E40 /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7736DBEB1D07F63500376E40 /* local.plist */; };
+		77423E511D1D211E00462283 /* ic_logo_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 77423E501D1D211D00462283 /* ic_logo_iPad.png */; };
+		77423E541D1D22A500462283 /* ic_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 77423E521D1D22A500462283 /* ic_logo.png */; };
+		77423E551D1D22A500462283 /* ic_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77423E531D1D22A500462283 /* ic_logo@2x.png */; };
 		774EF1131CE3063700D97805 /* ShareViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774EF1121CE3063700D97805 /* ShareViewController_iPad.xib */; };
 		774EF1171CE30A7400D97805 /* ShareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774EF1151CE30A7400D97805 /* ShareSettingViewController.m */; };
 		774EF1181CE30A7400D97805 /* ShareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774EF1161CE30A7400D97805 /* ShareSettingViewController.xib */; };
@@ -446,6 +449,9 @@
 		7736DBE71D07E7E400376E40 /* ViewCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController_iPad.xib; sourceTree = "<group>"; };
 		7736DBE81D07E7E400376E40 /* ViewCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController.xib; sourceTree = "<group>"; };
 		7736DBEB1D07F63500376E40 /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
+		77423E501D1D211D00462283 /* ic_logo_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_logo_iPad.png; sourceTree = "<group>"; };
+		77423E521D1D22A500462283 /* ic_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_logo.png; sourceTree = "<group>"; };
+		77423E531D1D22A500462283 /* ic_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_logo@2x.png"; sourceTree = "<group>"; };
 		774EF1121CE3063700D97805 /* ShareViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController_iPad.xib; sourceTree = "<group>"; };
 		774EF1141CE30A7300D97805 /* ShareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSettingViewController.h; sourceTree = "<group>"; };
 		774EF1151CE30A7400D97805 /* ShareSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSettingViewController.m; sourceTree = "<group>"; };
@@ -1141,6 +1147,9 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				77423E521D1D22A500462283 /* ic_logo.png */,
+				77423E531D1D22A500462283 /* ic_logo@2x.png */,
+				77423E501D1D211D00462283 /* ic_logo_iPad.png */,
 				771F5C671D1BB07700621EA1 /* question_icon@2x.png */,
 				771F5C681D1BB07700621EA1 /* question_icon.png */,
 				771F5C691D1BB07700621EA1 /* question_icon@3x.png */,
@@ -1579,6 +1588,7 @@
 				77FB34271D094F1200B3D4C9 /* buttonBg@2x.png in Resources */,
 				77E754CE1CE21E9000667511 /* ShareCell_iPad.xib in Resources */,
 				E30900A81B16B96000E5B5C0 /* action-sheet-panel@2x.png in Resources */,
+				77423E541D1D22A500462283 /* ic_logo.png in Resources */,
 				77E791E01CF30BDD0084CF18 /* ic_GridPlaceholder@2x.png in Resources */,
 				77E5ACFA1CF58112002DD002 /* AddPresetViewController_iPad.xib in Resources */,
 				413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */,
@@ -1612,6 +1622,7 @@
 				E30900A31B16B96000E5B5C0 /* action-red-button-selected.png in Resources */,
 				77F305E51D0044A300FB4293 /* AllDevicesCell_iPad.xib in Resources */,
 				77F0DCF81D17DC120008F5DF /* ic_edit@3x.png in Resources */,
+				77423E551D1D22A500462283 /* ic_logo@2x.png in Resources */,
 				77EEC69E1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib in Resources */,
 				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				7735198E1D00632600A41044 /* AllDevicesViewController_iPad.xib in Resources */,
@@ -1748,6 +1759,7 @@
 				E309009D1B16B96000E5B5C0 /* action-black-button.png in Resources */,
 				411C90EB1AE6A1250048FF3D /* back.png in Resources */,
 				E30900A01B16B96000E5B5C0 /* action-gray-button-selected@2x.png in Resources */,
+				77423E511D1D211E00462283 /* ic_logo_iPad.png in Resources */,
 				77F305D91D00358E00FB4293 /* CameraScanCell_iPad.xib in Resources */,
 				E309009B1B16B96000E5B5C0 /* action-black-button-selected.png in Resources */,
 				774EF1181CE30A7400D97805 /* ShareSettingViewController.xib in Resources */,
