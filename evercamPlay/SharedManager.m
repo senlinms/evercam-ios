@@ -7,7 +7,7 @@
 //
 
 #import "SharedManager.h"
-#import "AFHTTPRequestOperationManager.h"
+#import "AFNetworking.h"
 #import "EvercamShell.h"
 #import "AppDelegate.h"
 
@@ -25,11 +25,11 @@
 
 +(void)get:(NSString*)url params:(NSDictionary*)params callback:(void (^)(NSString* status, NSMutableDictionary* responseObject))callback
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [manager GET:url parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
         NSMutableDictionary* dict = [NSMutableDictionary new];
         
         NSError* error = nil;
@@ -53,9 +53,7 @@
         }
         
         callback(@"success", dict);
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSMutableDictionary* dict = [NSMutableDictionary new];
         [dict setObject:[error userInfo] forKey:@"JSON"];

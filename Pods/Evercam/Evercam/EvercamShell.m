@@ -15,8 +15,7 @@
 #import "EvercamCameraBuilder.h"
 #import "EvercamCameraUtil.h"
 #import "AFEvercamAPIClient.h"
-
-#import "UIAlertView+AFNetworking.h"
+#import "AFNetworking.h"
 
 static EvercamShell *instance = nil;
 
