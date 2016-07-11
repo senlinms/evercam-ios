@@ -24,9 +24,6 @@
 		41208A441AD8482B009C4FC2 /* PreferenceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A431AD8482B009C4FC2 /* PreferenceUtil.m */; };
 		41208A491AD8A126009C4FC2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41208A481AD8A126009C4FC2 /* MessageUI.framework */; };
 		41208A4F1AD8DCAA009C4FC2 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A4E1AD8DCAA009C4FC2 /* CustomNavigationController.m */; };
-		41208A5B1AD97971009C4FC2 /* SendGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A561AD97970009C4FC2 /* SendGrid.m */; };
-		41208A5C1AD97971009C4FC2 /* SendGridEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A581AD97970009C4FC2 /* SendGridEmail.m */; };
-		41208A5D1AD97971009C4FC2 /* SendGridEmailAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A5A1AD97970009C4FC2 /* SendGridEmailAttachment.m */; };
 		41208A611AD97D44009C4FC2 /* SMTPAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 41208A601AD97D44009C4FC2 /* SMTPAPI.m */; };
 		413BB2811AD992890083A5DC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2801AD992890083A5DC /* Reachability.m */; };
 		413BB2841AD992DD0083A5DC /* NetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BB2831AD992DD0083A5DC /* NetworkUtil.m */; };
@@ -243,8 +240,6 @@
 		CB44E86F1AAE9E7D00A78C11 /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB44E8511AAE9E7D00A78C11 /* AccountsViewController.xib */; };
 		CB44E8701AAE9E7D00A78C11 /* CamerasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8531AAE9E7D00A78C11 /* CamerasViewController.m */; };
 		CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB44E8541AAE9E7D00A78C11 /* CamerasViewController.xib */; };
-		CB44E8721AAE9E7D00A78C11 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8561AAE9E7D00A78C11 /* FeedbackViewController.m */; };
-		CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB44E8571AAE9E7D00A78C11 /* FeedbackViewController.xib */; };
 		CB44E8741AAE9E7D00A78C11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E8591AAE9E7D00A78C11 /* LoginViewController.m */; };
 		CB44E8751AAE9E7D00A78C11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB44E85A1AAE9E7D00A78C11 /* LoginViewController.xib */; };
 		CB44E8761AAE9E7D00A78C11 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E85C1AAE9E7D00A78C11 /* MenuViewController.m */; };
@@ -283,7 +278,6 @@
 		E30201CB1B16C82D0006DAE8 /* alert-yellow-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E30201BD1B16C82D0006DAE8 /* alert-yellow-button@2x.png */; };
 		E30201CD1B16C9CF0006DAE8 /* AddAccountView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201CC1B16C9CF0006DAE8 /* AddAccountView_iPad.xib */; };
 		E30201CF1B16CE290006DAE8 /* SettingsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201CE1B16CE290006DAE8 /* SettingsViewController_iPad.xib */; };
-		E30201D11B16CFE20006DAE8 /* FeedbackViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201D01B16CFE10006DAE8 /* FeedbackViewController_iPad.xib */; };
 		E30201D31B173B4A0006DAE8 /* AccountCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201D21B173B4A0006DAE8 /* AccountCell_iPad.xib */; };
 		E30201D51B173B760006DAE8 /* AddAccountCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30201D41B173B760006DAE8 /* AddAccountCell_iPad.xib */; };
 		E30201D71B1782970006DAE8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E30201D61B1782970006DAE8 /* SpriteKit.framework */; };
@@ -361,12 +355,6 @@
 		41208A481AD8A126009C4FC2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		41208A4D1AD8DCAA009C4FC2 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		41208A4E1AD8DCAA009C4FC2 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
-		41208A551AD97970009C4FC2 /* SendGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendGrid.h; sourceTree = "<group>"; };
-		41208A561AD97970009C4FC2 /* SendGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendGrid.m; sourceTree = "<group>"; };
-		41208A571AD97970009C4FC2 /* SendGridEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendGridEmail.h; sourceTree = "<group>"; };
-		41208A581AD97970009C4FC2 /* SendGridEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendGridEmail.m; sourceTree = "<group>"; };
-		41208A591AD97970009C4FC2 /* SendGridEmailAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendGridEmailAttachment.h; sourceTree = "<group>"; };
-		41208A5A1AD97970009C4FC2 /* SendGridEmailAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendGridEmailAttachment.m; sourceTree = "<group>"; };
 		41208A5F1AD97D44009C4FC2 /* SMTPAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTPAPI.h; sourceTree = "<group>"; };
 		41208A601AD97D44009C4FC2 /* SMTPAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTPAPI.m; sourceTree = "<group>"; };
 		413BB27F1AD992890083A5DC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -665,9 +653,6 @@
 		CB44E8521AAE9E7D00A78C11 /* CamerasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CamerasViewController.h; sourceTree = "<group>"; };
 		CB44E8531AAE9E7D00A78C11 /* CamerasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CamerasViewController.m; sourceTree = "<group>"; };
 		CB44E8541AAE9E7D00A78C11 /* CamerasViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CamerasViewController.xib; sourceTree = "<group>"; };
-		CB44E8551AAE9E7D00A78C11 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
-		CB44E8561AAE9E7D00A78C11 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
-		CB44E8571AAE9E7D00A78C11 /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
 		CB44E8581AAE9E7D00A78C11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CB44E8591AAE9E7D00A78C11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CB44E85A1AAE9E7D00A78C11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -717,7 +702,6 @@
 		E30201BD1B16C82D0006DAE8 /* alert-yellow-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-yellow-button@2x.png"; sourceTree = "<group>"; };
 		E30201CC1B16C9CF0006DAE8 /* AddAccountView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountView_iPad.xib; sourceTree = "<group>"; };
 		E30201CE1B16CE290006DAE8 /* SettingsViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController_iPad.xib; sourceTree = "<group>"; };
-		E30201D01B16CFE10006DAE8 /* FeedbackViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController_iPad.xib; sourceTree = "<group>"; };
 		E30201D21B173B4A0006DAE8 /* AccountCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountCell_iPad.xib; sourceTree = "<group>"; };
 		E30201D41B173B760006DAE8 /* AddAccountCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountCell_iPad.xib; sourceTree = "<group>"; };
 		E30201D61B1782970006DAE8 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -869,19 +853,6 @@
 				41208A4E1AD8DCAA009C4FC2 /* CustomNavigationController.m */,
 			);
 			name = CustomNavigationController;
-			sourceTree = "<group>";
-		};
-		41208A541AD97970009C4FC2 /* SendGrid */ = {
-			isa = PBXGroup;
-			children = (
-				41208A551AD97970009C4FC2 /* SendGrid.h */,
-				41208A561AD97970009C4FC2 /* SendGrid.m */,
-				41208A571AD97970009C4FC2 /* SendGridEmail.h */,
-				41208A581AD97970009C4FC2 /* SendGridEmail.m */,
-				41208A591AD97970009C4FC2 /* SendGridEmailAttachment.h */,
-				41208A5A1AD97970009C4FC2 /* SendGridEmailAttachment.m */,
-			);
-			path = SendGrid;
 			sourceTree = "<group>";
 		};
 		41208A5E1AD97D44009C4FC2 /* SMTPAPI */ = {
@@ -1110,7 +1081,6 @@
 				410748881AE052C8004D10C9 /* GoogleAnalytics */,
 				413BB27E1AD992890083A5DC /* Reachability */,
 				41208A5E1AD97D44009C4FC2 /* SMTPAPI */,
-				41208A541AD97970009C4FC2 /* SendGrid */,
 				41208A4C1AD8DC59009C4FC2 /* CustomNavigationController */,
 				CB318E2B1AFC0875004FFA8E /* GCD */,
 				CB840D141ACAF36D00F289A9 /* AsyncImageView */,
@@ -1328,10 +1298,6 @@
 				77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */,
 				77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */,
 				E356C9DA1B17B1D6007BB101 /* SnapshotViewController_iPad.xib */,
-				CB44E8551AAE9E7D00A78C11 /* FeedbackViewController.h */,
-				CB44E8561AAE9E7D00A78C11 /* FeedbackViewController.m */,
-				CB44E8571AAE9E7D00A78C11 /* FeedbackViewController.xib */,
-				E30201D01B16CFE10006DAE8 /* FeedbackViewController_iPad.xib */,
 				CB44E8581AAE9E7D00A78C11 /* LoginViewController.h */,
 				CB44E8591AAE9E7D00A78C11 /* LoginViewController.m */,
 				CB44E85A1AAE9E7D00A78C11 /* LoginViewController.xib */,
@@ -1606,7 +1572,6 @@
 				E30900A61B16B96000E5B5C0 /* action-red-button@2x.png in Resources */,
 				E3CB15AB1B2879C700413197 /* btn_export.png in Resources */,
 				77359D5D1CE5B135000574C5 /* ic_Transfer_icon@2x.png in Resources */,
-				E30201D11B16CFE20006DAE8 /* FeedbackViewController_iPad.xib in Resources */,
 				E30201D31B173B4A0006DAE8 /* AccountCell_iPad.xib in Resources */,
 				77E791E31CF336380084CF18 /* ic_add.png in Resources */,
 				E30201BE1B16C82D0006DAE8 /* alert-black-button.png in Resources */,
@@ -1624,7 +1589,6 @@
 				77F0DCF81D17DC120008F5DF /* ic_edit@3x.png in Resources */,
 				77423E551D1D22A500462283 /* ic_logo@2x.png in Resources */,
 				77EEC69E1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib in Resources */,
-				CB44E8731AAE9E7D00A78C11 /* FeedbackViewController.xib in Resources */,
 				7735198E1D00632600A41044 /* AllDevicesViewController_iPad.xib in Resources */,
 				77F9DCA61CFEE11A000EA6A9 /* ic_search@2x.png in Resources */,
 				77E791E91CF3367C0084CF18 /* ic_arrow_left.png in Resources */,
@@ -1857,7 +1821,6 @@
 				CB840D1B1ACAF36D00F289A9 /* AsyncImageView.m in Sources */,
 				CB318E301AFC0875004FFA8E /* GCDAsyncSocket.m in Sources */,
 				AB6E77E21CBE1A1600DE6310 /* ForgotPasswordViewController.m in Sources */,
-				41208A5D1AD97971009C4FC2 /* SendGridEmailAttachment.m in Sources */,
 				413BB2811AD992890083A5DC /* Reachability.m in Sources */,
 				ABDAE0871CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				CB44E8781AAE9E7D00A78C11 /* SettingsViewController.m in Sources */,
@@ -1883,7 +1846,6 @@
 				58429A661C16A9E8008D34A8 /* AboutViewController.m in Sources */,
 				E309008A1B16B78600E5B5C0 /* BlockBackground.m in Sources */,
 				CB318E5A1AFC3565004FFA8E /* SDWebImageDownloaderOperation.m in Sources */,
-				41208A5B1AD97971009C4FC2 /* SendGrid.m in Sources */,
 				CB44E8761AAE9E7D00A78C11 /* MenuViewController.m in Sources */,
 				CB318E561AFC3565004FFA8E /* SDImageCache.m in Sources */,
 				CB1C76541AAB144800680FE3 /* main.m in Sources */,
@@ -1904,10 +1866,8 @@
 				77F9DCBC1CFEF2F7000EA6A9 /* Device.m in Sources */,
 				772EA57B1D0940D30005DB98 /* ConnectCameraViewController.m in Sources */,
 				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
-				41208A5C1AD97971009C4FC2 /* SendGridEmail.m in Sources */,
 				41208A4F1AD8DCAA009C4FC2 /* CustomNavigationController.m in Sources */,
 				CB318E631AFC3565004FFA8E /* UIView+WebCacheOperation.m in Sources */,
-				CB44E8721AAE9E7D00A78C11 /* FeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1942,10 +1902,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1965,7 +1925,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
+				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 			};
@@ -1988,8 +1948,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2004,7 +1964,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
+				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				VALIDATE_PRODUCT = YES;
@@ -2017,10 +1977,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2051,7 +2011,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
+				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2065,8 +2025,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -2100,7 +2060,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
+				PROVISIONING_PROFILE = "e786bc1e-11fd-4424-96f0-455c9b961fa5";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";

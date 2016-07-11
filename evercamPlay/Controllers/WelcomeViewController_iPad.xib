@@ -107,15 +107,15 @@
             <rect key="frame" x="0.0" y="0.0" width="2304" height="850"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_page_intro_iPad.png" id="XG6-D4-4mD">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XG6-D4-4mD">
                     <rect key="frame" x="0.0" y="0.0" width="768" height="850"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_page_next_iPad.png" id="V5N-Gf-fBk">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="V5N-Gf-fBk">
                     <rect key="frame" x="768" y="0.0" width="768" height="850"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_page_feature_iPad.png" id="wio-IU-09P">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wio-IU-09P">
                     <rect key="frame" x="1536" y="0.0" width="768" height="850"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -127,8 +127,5 @@
     </objects>
     <resources>
         <image name="evercam_icon.png" width="192" height="192"/>
-        <image name="play_page_feature_iPad.png" width="768" height="850"/>
-        <image name="play_page_intro_iPad.png" width="850" height="850"/>
-        <image name="play_page_next_iPad.png" width="768" height="850"/>
     </resources>
 </document>

@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="cameras_WebView" destination="Kc1-QM-pje" id="e3K-YF-TDR"/>
                 <outlet property="loading_ActivityIndicator" destination="M4y-iS-XSw" id="sFc-Pf-u3b"/>
+                <outlet property="view" destination="iN0-l3-epB" id="oRD-eU-Rnx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -17,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <webView contentMode="scaleToFill" id="Kc1-QM-pje">
-                    <rect key="frame" x="0.0" y="65" width="768" height="959"/>
+                    <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                     <connections>
@@ -32,6 +33,9 @@
                             <rect key="frame" x="0.0" y="26" width="35" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="back.png"/>
+                            <connections>
+                                <action selector="back_Action:" destination="-1" eventType="touchUpInside" id="iSn-es-z7c"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Cameras" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zoR-Kl-Wxj">
                             <rect key="frame" x="64" y="20" width="639" height="44"/>
