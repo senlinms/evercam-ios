@@ -5,8 +5,8 @@ Evercam Play allows connect your own IP cameras, public webcams and any Android 
 | Name   | Evercam for iOS|
 | --- | --- |
 | Owner   | [@Zulqarnain-Mustafa](https://github.com/Zulqarnain-Mustafa)   |
-| Version  | 1.0.5 |
-| Evercam API Version  | 1.0  |
+| Version  | 1.1.1 |
+| Evercam API Version  | 1.1.3  |
 | Licence | [AGPL](https://tldrlegal.com/license/gnu-affero-general-public-license-v3-%28agpl-3.0%29) |
 
 ## Features
@@ -20,10 +20,9 @@ Evercam Play allows connect your own IP cameras, public webcams and any Android 
 ## Build
 1. Checkout from Git  
    ```git clone https://github.com/evercam/evercam-play-ios.git```
-2. Install [GStreamer 1.6.1 for iOS](http://gstreamer.freedesktop.org/data/pkg/ios/1.6.1/)
-3. Install dependencies using Cocoapods:  
+2. Install dependencies using Cocoapods:  
    ```pod install```
-4. Open Xcode workspace(.xcworkspace) file in Xcode and build it
+3. Open Xcode workspace(.xcworkspace) file in Xcode and build it
     
 ## Help make it better
 
