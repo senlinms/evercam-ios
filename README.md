@@ -40,7 +40,7 @@ For any bugs and discussions, please use [Github Issues](https://github.com/ever
 
 Any questions or sugestions, drop us a line: http://www.evercam.io/contact
 
-[dependency-status-url]: https://www.versioneye.com/user/projects/5703cbe7fcd19a0039f15c6b
+[dependency-status-url]: https://www.versioneye.com/user/projects/577a5619816e3d004a284ba1
 [dependency-status-image]: https://www.versioneye.com/user/projects/5703cbe7fcd19a0039f15c6b/badge.svg?style=flat
 
 
