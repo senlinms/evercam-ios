@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EvercamCamera.h"
+#import "Intercom/intercom.h"
 #import "GAI.h"
 @class TPKeyboardAvoidingScrollView;
 @protocol AddCameraViewControllerDelegate <NSObject>
@@ -56,17 +57,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *test_SnapShot_ImageView;
 - (IBAction)remove_Message_View:(id)sender;
 - (IBAction)questionMarkAction:(id)sender;
+- (IBAction)open_LiveSupport:(id)sender;
 
 @end
-/*
-static inline BOOL isCompletelyEmpty (id text) {
-    BOOL isBlank;
-    if ([[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
-        isBlank = YES;
-    }else{
-        isBlank = NO;
-    }
-    
-    return isBlank;
-}
-*/

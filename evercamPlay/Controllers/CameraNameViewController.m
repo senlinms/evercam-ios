@@ -11,6 +11,8 @@
 #import "MBProgressHUD.h"
 #import "EvercamCreateCamera.h"
 #import "AppDelegate.h"
+#import "Config.h"
+#import "GAIDictionaryBuilder.h"
 @interface CameraNameViewController ()
 
 @end
@@ -51,6 +53,11 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [EvercamCreateCamera createCamera:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_add_camera
+                                                                  action:action_addcamera_success_manual
+                                                                   label:label_addcamera_successful
+                                                                   value:nil] build]];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             AppUtility.isFullyDismiss = YES;
             [self.navigationController popToRootViewControllerAnimated:YES];
