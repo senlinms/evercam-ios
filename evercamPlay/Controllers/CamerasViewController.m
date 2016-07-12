@@ -356,12 +356,22 @@
         
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
+        /*
+        [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String]
+                     placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]
+                              options:SDWebImageRefreshCached];
+        */
         [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String] placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]];
 //        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     } else {
         
         cell.greyImv.hidden = NO;
         cell.imvOffline.hidden = NO;
+        /*
+        [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String]
+                                   placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]
+                                            options:SDWebImageRefreshCached];
+        */
         [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String] placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]];
 //        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     }

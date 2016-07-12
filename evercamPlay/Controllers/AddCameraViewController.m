@@ -1004,4 +1004,8 @@
             break;
     }
 }
+
+- (IBAction)open_LiveSupport:(id)sender {
+    [Intercom presentConversationList];
+}
 @end
