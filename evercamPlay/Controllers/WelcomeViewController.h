@@ -19,5 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *playerContainerView;
 - (IBAction)onSignIn:(id)sender;
 - (IBAction)onSignUp:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *accountBtn;
+@property (weak, nonatomic) IBOutlet UIButton *signInbtn;
 
 @end

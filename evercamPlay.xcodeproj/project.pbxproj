@@ -64,7 +64,6 @@
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
 		6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF591FA1BF05FE20044B0F1 /* logo.png */; };
-		77079D791CE9C6D90073EE16 /* gpoview.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 77079D781CE9C6D90073EE16 /* gpoview.mp4 */; };
 		77079D821CE9ECCD0073EE16 /* GravatarUIImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77079D811CE9ECCD0073EE16 /* GravatarUIImageFactory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77079D881CE9ECD80073EE16 /* GravatarServiceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77079D861CE9ECD80073EE16 /* GravatarServiceFactory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77079D8B1CEA05280073EE16 /* circleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 77079D891CEA05280073EE16 /* circleImage.png */; };
@@ -146,6 +145,7 @@
 		77E96B631CFDAD150044B4E0 /* SnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */; };
 		77E96B641CFDAD150044B4E0 /* SnapshotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */; };
 		77EEC69E1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */; };
+		77EEF5FF1D378F4F00AB3EDC /* gpoview.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF5FE1D378F4E00AB3EDC /* gpoview.mp4 */; };
 		77EEF9921CE35504009A3BC0 /* ShareSettingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */; };
 		77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF9941CE35619009A3BC0 /* NewShareViewController.m */; };
 		77EEF9971CE35619009A3BC0 /* NewShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EEF9951CE35619009A3BC0 /* NewShareViewController.xib */; };
@@ -407,7 +407,6 @@
 		6CCB48281BDF4D7A00A62C28 /* SharedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedManager.h; path = ../SharedManager.h; sourceTree = "<group>"; };
 		6CCB48291BDF4D7A00A62C28 /* SharedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SharedManager.m; path = ../SharedManager.m; sourceTree = "<group>"; };
 		6CF591FA1BF05FE20044B0F1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		77079D781CE9C6D90073EE16 /* gpoview.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = gpoview.mp4; sourceTree = "<group>"; };
 		77079D811CE9ECCD0073EE16 /* GravatarUIImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravatarUIImageFactory.m; sourceTree = "<group>"; };
 		77079D831CE9ECD80073EE16 /* GravatarService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarService.h; sourceTree = "<group>"; };
 		77079D841CE9ECD80073EE16 /* GravatarServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarServiceDelegate.h; sourceTree = "<group>"; };
@@ -505,6 +504,7 @@
 		77E96B611CFDAD150044B4E0 /* SnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotViewController.m; sourceTree = "<group>"; };
 		77E96B621CFDAD150044B4E0 /* SnapshotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnapshotViewController.xib; sourceTree = "<group>"; };
 		77EEC69D1D06D57D005EF2FA /* ReportCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportCameraViewController_iPad.xib; sourceTree = "<group>"; };
+		77EEF5FE1D378F4E00AB3EDC /* gpoview.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = gpoview.mp4; sourceTree = "<group>"; };
 		77EEF9911CE35504009A3BC0 /* ShareSettingViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareSettingViewController_iPad.xib; sourceTree = "<group>"; };
 		77EEF9931CE35619009A3BC0 /* NewShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewShareViewController.h; sourceTree = "<group>"; };
 		77EEF9941CE35619009A3BC0 /* NewShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewShareViewController.m; sourceTree = "<group>"; };
@@ -1101,7 +1101,7 @@
 		CB1C76881AAB871A00680FE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				77079D781CE9C6D90073EE16 /* gpoview.mp4 */,
+				77EEF5FE1D378F4E00AB3EDC /* gpoview.mp4 */,
 				CB1C76891AAB871A00680FE3 /* image */,
 			);
 			path = Resources;
@@ -1625,6 +1625,7 @@
 				776647031CEEF1CB0076B9CE /* ic_compass.png in Resources */,
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
 				AB8097161CC0C742002F5FF9 /* nav.png in Resources */,
+				77EEF5FF1D378F4F00AB3EDC /* gpoview.mp4 in Resources */,
 				E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */,
 				6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */,
 				77294E2C1CEAF6F800A5B7D4 /* circleImage_White.png in Resources */,
@@ -1685,7 +1686,6 @@
 				77423E611D1D443C00462283 /* ic_person_grey.png in Resources */,
 				77294E2D1CEAF6F800A5B7D4 /* circleImage_White@2x.png in Resources */,
 				77E96B641CFDAD150044B4E0 /* SnapshotViewController.xib in Resources */,
-				77079D791CE9C6D90073EE16 /* gpoview.mp4 in Resources */,
 				E30201CB1B16C82D0006DAE8 /* alert-yellow-button@2x.png in Resources */,
 				58429A671C16A9E8008D34A8 /* AboutViewController.xib in Resources */,
 				77CF39F71CE1B0A70064D915 /* ic_add_user_padding.png in Resources */,
