@@ -117,6 +117,8 @@
         return;
     }
     
+    [self.txt_username resignFirstResponder];
+    [self.txt_password resignFirstResponder];
     [_activityIndicator startAnimating];
     [[EvercamShell shell] requestEvercamAPIKeyFromEvercamUser:username Password:password WithBlock:^(EvercamApiKeyPair *userKeyPair, NSError *error) {
         if (error == nil)

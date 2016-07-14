@@ -254,7 +254,6 @@
 		CB44E87F1AAE9E7D00A78C11 /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB44E86A1AAE9E7D00A78C11 /* AccountCell.xib */; };
 		CB44E8801AAE9E7D00A78C11 /* AddAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB44E86C1AAE9E7D00A78C11 /* AddAccountCell.m */; };
 		CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB44E86D1AAE9E7D00A78C11 /* AddAccountCell.xib */; };
-		CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB44E8821AAEA03300A78C11 /* Default-568h@2x.png */; };
 		CB840D1B1ACAF36D00F289A9 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D161ACAF36D00F289A9 /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB840D1C1ACAF36D00F289A9 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D181ACAF36D00F289A9 /* ImageCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CB840D1A1ACAF36D00F289A9 /* ImageCacheObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -674,7 +673,6 @@
 		CB44E86B1AAE9E7D00A78C11 /* AddAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountCell.h; sourceTree = "<group>"; };
 		CB44E86C1AAE9E7D00A78C11 /* AddAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountCell.m; sourceTree = "<group>"; };
 		CB44E86D1AAE9E7D00A78C11 /* AddAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountCell.xib; sourceTree = "<group>"; };
-		CB44E8821AAEA03300A78C11 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CB840D151ACAF36D00F289A9 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		CB840D161ACAF36D00F289A9 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		CB840D171ACAF36D00F289A9 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
@@ -1003,7 +1001,6 @@
 		CB1C76451AAB144700680FE3 = {
 			isa = PBXGroup;
 			children = (
-				CB44E8821AAEA03300A78C11 /* Default-568h@2x.png */,
 				41BEFB4D1AD6CE980016ACCA /* Frameworks */,
 				CB1C76501AAB144800680FE3 /* evercamPlay */,
 				CB1C766A1AAB144900680FE3 /* evercamPlayTests */,
@@ -1650,7 +1647,6 @@
 				E30201C41B16C82D0006DAE8 /* alert-red-button.png in Resources */,
 				CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */,
 				776647121CEEFD280076B9CE /* ic_settings@3x.png in Resources */,
-				CB44E8831AAEA03300A78C11 /* Default-568h@2x.png in Resources */,
 				E369E4AF1B14EC0F009D2D9E /* btn_close@2x.png in Resources */,
 				7736DBE91D07E7E400376E40 /* ViewCameraViewController_iPad.xib in Resources */,
 				77F305E31D00429000FB4293 /* AllDevicesCell.xib in Resources */,
@@ -1977,6 +1973,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
@@ -2025,6 +2022,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
