@@ -39,17 +39,8 @@
     self.screenName = @"Welcome Page";
     // Do any additional setup after loading the view from its nib.
     self.title = @"";
-//    [self.tutorialScrollView addSubview:self.tutorialView];
-    /*
-    if ([GlobalSettings sharedInstance].isPhone == YES) {
-        self.tutorialView.frame = CGRectMake(0, (self.tutorialScrollView.bounds.size.height-self.tutorialView.bounds.size.height)/2, self.tutorialView.bounds.size.width, self.tutorialView.frame.size.height);
-        [self.tutorialScrollView setContentSize:CGSizeMake(960,self.tutorialScrollView.frame.size.height)];
-    }
-    else {
-        self.tutorialView.frame = CGRectMake(0, 0, self.tutorialView.frame.size.width, self.tutorialView.frame.size.height);
-        [self.tutorialScrollView setContentSize:CGSizeMake(self.view.frame.size.width * 3, 0)];
-    }
-    */
+    self.signInbtn.layer.cornerRadius   = 1.0;
+    self.accountBtn.layer.cornerRadius  = 1.0;
     
     AppUser *defaultUser = [APP_DELEGATE getDefaultUser];
     if (defaultUser) {
@@ -117,7 +108,7 @@
         NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"gpoview" ofType:@"mp4"]];
         playercontroller = [[MPMoviePlayerController alloc] initWithContentURL:url];
         playercontroller.controlStyle = MPMovieControlStyleNone;
-        playercontroller.scalingMode = MPMovieScalingModeFill;
+        playercontroller.scalingMode = MPMovieScalingModeAspectFill;
         //Set to parent bounds
         [playercontroller.view setFrame:self.playerContainerView.bounds];
         [self.playerContainerView addSubview:playercontroller.view];

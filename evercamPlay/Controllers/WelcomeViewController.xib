@@ -7,10 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeViewController">
             <connections>
-                <outlet property="pageControl" destination="qSu-56-iYZ" id="Nxs-V2-oXg"/>
+                <outlet property="accountBtn" destination="pkh-tl-ckv" id="tjl-RD-nhh"/>
                 <outlet property="playerContainerView" destination="ML3-rn-GEa" id="7B1-Ix-yNS"/>
-                <outlet property="tutorialScrollView" destination="YeL-a5-Apf" id="ZtC-MO-jj1"/>
-                <outlet property="tutorialView" destination="MFj-TS-e0r" id="YA4-Sz-eIv"/>
+                <outlet property="signInbtn" destination="G9C-ou-T20" id="h4T-2Y-Lsa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,114 +18,42 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="gYg-kr-GD9" userLabel="statusbar">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.20392156859999999" green="0.22352941179999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" id="ML3-rn-GEa">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pkh-tl-ckv">
-                    <rect key="frame" x="0.0" y="430" width="320" height="50"/>
+                    <rect key="frame" x="20" y="424" width="115" height="35"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                     <state key="normal" title="Create Account">
-                        <color key="titleColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.25490196079999999" green="0.54901960780000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onSignUp:" destination="-1" eventType="touchUpInside" id="O4W-JS-WQr"/>
                     </connections>
                 </button>
-                <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="YeL-a5-Apf">
-                    <rect key="frame" x="0.0" y="72" width="320" height="307"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="WvX-Hq-x56"/>
-                    </connections>
-                </scrollView>
-                <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="qSu-56-iYZ">
-                    <rect key="frame" x="0.0" y="333" width="320" height="37"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="tintColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="currentPageIndicatorTintColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="changePage:" destination="-1" eventType="valueChanged" id="i2U-3X-8jK"/>
-                    </connections>
-                </pageControl>
-                <view contentMode="scaleToFill" id="83d-mO-1P1" userLabel="titlebar">
-                    <rect key="frame" x="0.0" y="20" width="320" height="52"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evercam" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zun-W8-W7S">
-                            <rect key="frame" x="130" y="11" width="97" height="22"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <view contentMode="scaleToFill" id="9Jz-Dw-KEN" userLabel="line">
-                            <rect key="frame" x="0.0" y="51" width="320" height="1"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.86274509803921573" green="0.29803921568627451" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
-                        </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="evercam_icon.png" id="bch-yi-y6L">
-                            <rect key="frame" x="101" y="7" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.20392156862745098" green="0.22352941176470587" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="G9C-ou-T20">
-                    <rect key="frame" x="0.0" y="379" width="320" height="50"/>
+                    <rect key="frame" x="186" y="424" width="115" height="35"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Sign in with Evercam">
-                        <color key="titleColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.25490196078431371" green="0.5490196078431373" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                    <state key="normal" title="Sign In">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onSignIn:" destination="-1" eventType="touchUpInside" id="euw-XK-dvN"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" id="ML3-rn-GEa">
-                    <rect key="frame" x="0.0" y="71" width="320" height="307"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedTopBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="383" y="319"/>
         </view>
-        <view contentMode="scaleToFill" id="MFj-TS-e0r">
-            <rect key="frame" x="0.0" y="0.0" width="960" height="320"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_page_intro.png" id="dgY-1c-C4v">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_page_next.png" id="ADv-RT-cqA">
-                    <rect key="frame" x="320" y="0.0" width="320" height="320"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_page_feature.png" id="kie-yw-72o">
-                    <rect key="frame" x="640" y="0.0" width="320" height="320"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1259" y="324"/>
-        </view>
     </objects>
-    <resources>
-        <image name="evercam_icon.png" width="192" height="192"/>
-        <image name="play_page_feature.png" width="700" height="700"/>
-        <image name="play_page_intro.png" width="700" height="700"/>
-        <image name="play_page_next.png" width="700" height="700"/>
-    </resources>
 </document>
