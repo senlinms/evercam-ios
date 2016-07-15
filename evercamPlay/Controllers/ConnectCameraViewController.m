@@ -32,10 +32,10 @@
     // Do any additional setup after loading the view from its nib.
     [self.textField_scrollView contentSizeToFit];
     self.vendorLabel.text = [NSString stringWithFormat:@"%@ - %@",selected_cameraVendor.name,selected_cameraModel.name];
-    self.ipAddress_textField.text =  @"5.149.169.19";
+    [self getLocalIpAddress];
     [self checkHttpPort];
     [self checkRtstPort];
-//    [self getGatewayIP];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +56,40 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)getLocalIpAddress{
+    __block NSString *ipAddress = @"";
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSString *jsonUrlString = @"http://bot.whatismyipaddress.com/";
+        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        NSHTTPURLResponse *response = nil;
+        NSError *error              = nil;
+        NSData *responseData        = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if (!error) {
+            ipAddress = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];;
+            self.ipAddress_textField.text = [self isValidIPAddress:ipAddress]?ipAddress:@"";
+        }else{
+            self.ipAddress_textField.text = ipAddress;
+        }
+    });
+}
+
+- (BOOL)isValidIPAddress:(NSString *)ipString
+{
+    const char *utf8 = [ipString UTF8String];
+    int success;
+    
+    struct in_addr dst;
+    success = inet_pton(AF_INET, utf8, &dst);
+    if (success != 1) {
+        struct in6_addr dst6;
+        success = inet_pton(AF_INET6, utf8, &dst6);
+    }
+    
+    return success == 1;
+}
 
 -(void)checkRtstPort{
     NSString* ipAddress = [self.ipAddress_textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -121,21 +155,6 @@
     }];
 }
 
-
-- (NSString *)getGatewayIP {
-    NSString *ipString = nil;
-    struct in_addr gatewayaddr;
-    int r = getdefaultgateway(&(gatewayaddr.s_addr));
-    if(r >= 0) {
-        ipString = [NSString stringWithFormat: @"%s",inet_ntoa(gatewayaddr)];
-        NSLog(@"default gateway : %@", ipString );
-    } else {
-        NSLog(@"getdefaultgateway() failed");
-    }
-    
-    return ipString;
-    
-}
 
 - (IBAction)nextStepBtn:(id)sender {
     NSMutableDictionary *param_Dictionary;
