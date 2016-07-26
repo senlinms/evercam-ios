@@ -11,5 +11,7 @@
 #import <Foundation/Foundation.h>
 #endif
 @interface EvercamTestSnapShot : NSObject
-+(void)testSnapShot:(NSDictionary *)parameterDictionary withBlock:(void (^) (UIImage *snapeImage,NSString *statusMessage,NSError *error))block;
+
+-(void)testSnapShot:(NSDictionary *)parameterDictionary withBlock:(void (^) (UIImage *snapeImage,NSString *statusMessage,NSError *error))block;
+
 @end

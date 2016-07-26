@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define KBASEURL @"https://api.evercam.io/v1/"
-
 @interface EvercamSingleCameraDetails : NSObject
 
-+(void)getCameraDetails:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
+-(void)getCameraDetails:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
 
 @end

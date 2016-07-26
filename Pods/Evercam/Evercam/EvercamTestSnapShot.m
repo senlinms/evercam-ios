@@ -7,26 +7,24 @@
 //
 
 #import "EvercamTestSnapShot.h"
+#import "EvercamApiUtility.h"
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #endif
 @implementation EvercamTestSnapShot
 
-+(void)testSnapShot:(NSDictionary *)parameterDictionary withBlock:(void (^) (UIImage *snapeImage,NSString *statusMessage,NSError *error))block{
+-(void)testSnapShot:(NSDictionary *)parameterDictionary withBlock:(void (^) (UIImage *snapeImage,NSString *statusMessage,NSError *error))block{
     
     NSData *putData         = [NSJSONSerialization dataWithJSONObject:parameterDictionary options:kNilOptions error:nil];
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
-        NSString *jsonUrlString = @"https://media.evercam.io/v1/cameras/test";
-        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSString *jsonUrlString = [NSString stringWithFormat:@"%@cameras/test",KBASEURL];
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"POST"];
         
-        [request setHTTPMethod: @"POST"];
         [request setHTTPBody:putData];
         
         NSHTTPURLResponse *response = nil;
@@ -46,9 +44,11 @@
                     block(test_Snap_Image,@"Success",nil);
                 }
             }else{
-                if (block) {
-                    block(nil,@"Failed",nil);
-                }
+                [APIUtility createErrorFromApi:responseData withStatusCode:[response statusCode] withBlock:^(NSError *error) {
+                    if (block) {
+                        block(nil,nil,error);
+                    }
+                }];
             }
         }else{
             if (block) {

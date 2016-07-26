@@ -39,7 +39,7 @@
     self.email= evercamUser.email;
     self.firstName = evercamUser.firstname;
     self.lastName = evercamUser.lastname;
-    self.country = evercamUser.country;
+    self.country = ([evercamUser.country isKindOfClass:[NSNull class]])?@"":evercamUser.country;
 }
 
 - (void) setApiKeyPairWithApiKey:(NSString *)apiKey andApiId:(NSString *)apiId {

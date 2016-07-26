@@ -66,7 +66,8 @@
     self.view.userInteractionEnabled = NO;
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:camera_Object.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
     [self.loading_ActivityIndicator startAnimating];
-    [EvercamSingleCameraDetails getCameraDetails:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamSingleCameraDetails *api_single_Obj = [EvercamSingleCameraDetails new];
+    [api_single_Obj getCameraDetails:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             NSDictionary *camDict = details;
             NSArray *cameraObjectArray = camDict[@"cameras"];
@@ -75,13 +76,16 @@
             [self getCameraUsers:param_Dictionary];
         }else{
             self.view.userInteractionEnabled = YES;
-            [self showErrorMessage];
+            [self.loading_ActivityIndicator stopAnimating];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
         }
     }];
 }
 
 -(void)getCameraUsers:(NSDictionary *)param_Dictionary{
-    [EvercamShare getCameraShareDetails:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamShare *api_share_Obj = [EvercamShare new];
+    [api_share_Obj getCameraShareDetails:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             NSDictionary *shareDetailDict = (NSDictionary *)details;
             [shareArray addObjectsFromArray:shareDetailDict[@"shares"]];
@@ -99,14 +103,17 @@
             [self getPendingRequest:param_Dictionary];
         }else{
             self.view.userInteractionEnabled = YES;
-            [self showErrorMessage];
+            [self.loading_ActivityIndicator stopAnimating];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
         }
     }];
 }
 
 
 -(void)getPendingRequest:(NSDictionary *)param_Dictionary{
-    [EvercamShare getCameraPendingRequest:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamShare *api_pending_Obj = [EvercamShare new];
+    [api_pending_Obj getCameraPendingRequest:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.loading_ActivityIndicator stopAnimating];
             self.view.userInteractionEnabled = YES;
@@ -115,7 +122,9 @@
             [self.usersTableView reloadData];
         }else{
             self.view.userInteractionEnabled = YES;
-            [self showErrorMessage];
+            [self.loading_ActivityIndicator stopAnimating];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
         }
     }];
 }
@@ -146,12 +155,14 @@
             [ActionSheetStringPicker showPickerWithTitle:@"Select a new owner" rows:[transferArray valueForKey:@"fullname"] initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
                 NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:camera_Object.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSDictionary dictionaryWithObjectsAndKeys:(NSDictionary *)transferArray[selectedIndex][@"email"],@"user_id", nil],@"Post_Param", nil];
                 [self.loading_ActivityIndicator startAnimating];
-                [EvercamShare transferCameraOwner:param_Dictionary withBlock:^(id details, NSError *error) {
+                EvercamShare *api_owner_Obj = [EvercamShare new];
+                [api_owner_Obj transferCameraOwner:param_Dictionary withBlock:^(id details, NSError *error) {
                     if (!error) {
                         [self.loading_ActivityIndicator stopAnimating];
                         [self dismissViewControllerAnimated:YES completion:nil];
                     }else{
-                        [self showErrorMessage];
+                        [self.loading_ActivityIndicator stopAnimating];
+                        [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
                     }
                 }];
             } cancelBlock:^(ActionSheetStringPicker *picker) {

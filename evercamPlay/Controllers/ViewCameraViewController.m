@@ -378,8 +378,10 @@
             self.lblExternalHost.textColor = [UIColor lightGrayColor];
         }
         
-        if (self.camera.internalHost && self.camera.internalHost.length > 0) {
-            self.lblInternalHost.text = self.camera.internalHost;
+        if (![self.camera.internalHost isKindOfClass:[NSNull class]]) {
+            if (self.camera.internalHost.length > 0) {
+                 self.lblInternalHost.text = self.camera.internalHost;
+            }
         } else {
             self.lblInternalHost.text = @"Not specified";
             self.lblInternalHost.textColor = [UIColor lightGrayColor];
