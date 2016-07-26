@@ -58,7 +58,9 @@
     
     [self.activityIndicator startAnimating];
     
-    [EvercamPtzControls getPresetList:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamPtzControls *ptz_Object = [EvercamPtzControls new];
+    
+    [ptz_Object getPresetList:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.activityIndicator stopAnimating];
             presetArray = details[@"Presets"];
@@ -76,15 +78,10 @@
             self.caution_Label.hidden       = YES;
             self.preset_TableView.hidden    = YES;
             self.view.userInteractionEnabled = YES;
-            [self showErrorMessage];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
         }
     }];
 
-}
-
--(void)showErrorMessage{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Something went wrong. Please try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    [alert show];
 }
 
 - (IBAction)back_Action:(id)sender {
@@ -115,8 +112,8 @@
     NSDictionary *presetDictionary  = presetArray[indexPath.row];
     
     NSDictionary * param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:cameraID,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",presetDictionary[@"token"],@"token", nil];
-    
-    [EvercamPtzControls setPreset:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamPtzControls *ptz_Object = [EvercamPtzControls new];
+    [ptz_Object setPreset:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             NSLog(@"Successfully set the Preset");
             [self.activityIndicator stopAnimating];
@@ -125,7 +122,7 @@
         }else{
             [self.activityIndicator stopAnimating];
             self.view.userInteractionEnabled = YES;
-            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
             NSLog(@"Error setting the Preset");
         }
     }];

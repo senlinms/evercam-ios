@@ -262,7 +262,6 @@
         }
         else
         {
-            NSLog(@"Error %li: %@", (long)error.code, error.localizedDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];

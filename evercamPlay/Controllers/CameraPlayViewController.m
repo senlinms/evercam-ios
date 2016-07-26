@@ -247,7 +247,8 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 -(void)getCameraModelInformation{
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.cameraInfo.model_id,@"model_id",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
-    [EvercamCameraModelInfo getCameraModelInformation:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamCameraModelInfo *api_cam_Object = [EvercamCameraModelInfo new];
+    [api_cam_Object getCameraModelInformation:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             NSArray *modelDetailsArray  = details[@"models"];
             NSDictionary *modelInfo     = modelDetailsArray[0];
@@ -263,6 +264,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
             self.ptc_Control_View.hidden = YES;
         }
     }];
+    
 }
 
 - (void)takeSnapshot {
@@ -1276,12 +1278,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 -(void)setCameraToHome{
 
     NSDictionary * param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.cameraInfo.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
-    
-    [EvercamPtzControls ptz_Home:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamPtzControls *ptz_Object = [EvercamPtzControls new];
+    [ptz_Object ptz_Home:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             NSLog(@"Successfully set to Home");
         }else{
-            NSLog(@"Error setting to home");
+            NSLog(@"Error setting to home: %@",error.localizedDescription);
         }
     }];
     
@@ -1289,12 +1291,12 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 
 -(void)setCameraDirection:(NSString *)direction{
     NSDictionary * param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.cameraInfo.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",direction,@"camera_Direction", nil];
-    
-    [EvercamPtzControls set_CameraDirection:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamPtzControls *ptz_Object = [EvercamPtzControls new];
+    [ptz_Object set_CameraDirection:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             NSLog(@"Successfully set the direction");
         }else{
-            NSLog(@"Error setting the direction");
+            NSLog(@"Error: %@",error.localizedDescription);
         }
     }];
 }

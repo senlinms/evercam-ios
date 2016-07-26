@@ -55,8 +55,8 @@
     NSString *trimmedString = [self.nameField.text stringByTrimmingCharactersInSet:
                                [NSCharacterSet whitespaceCharacterSet]];
     NSDictionary * param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:cameraId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[trimmedString stringByReplacingOccurrencesOfString:@" " withString:@"-"],@"name", nil];
-    
-    [EvercamPtzControls createPreset:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamPtzControls *ptz_Object = [EvercamPtzControls new];
+    [ptz_Object createPreset:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             self.view.userInteractionEnabled = YES;
             [self.activityIndicator stopAnimating];
@@ -71,7 +71,7 @@
         }else{
             self.view.userInteractionEnabled = YES;
             [self.activityIndicator stopAnimating];
-            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
         }
     }];
 }

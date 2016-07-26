@@ -7,10 +7,10 @@
 //
 
 #import "EvercamShare.h"
-
+#import "EvercamApiUtility.h"
 @implementation EvercamShare
 
-+(void)getCameraShareDetails:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block{
+-(void)getCameraShareDetails:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block{
     
     NSString *cameraId  = parameterDictionary[@"camId"];
     NSString *api_id    = parameterDictionary[@"api_id"];
@@ -20,11 +20,8 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
         NSString *jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@/shares?api_id=%@&api_key=%@",KBASEURL,cameraId,api_id,api_key];
-        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPMethod: @"GET"];
+        NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"GET"];
         
         NSHTTPURLResponse *response = nil;
         NSError *error              = nil;
@@ -36,10 +33,11 @@
                     block(responseDictionary,nil);
                 }
             }else{
-                NSError *customError = [NSError errorWithDomain:@"api.evercam.io" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Error detail unavailable",@"Error_Description", nil]];
-                if (block) {
-                    block(nil,customError);
-                }
+                [APIUtility createErrorFromApi:responseData withStatusCode:[response statusCode] withBlock:^(NSError *error) {
+                    if (block) {
+                        block(nil,error);
+                    }
+                }];
             }
         }else{
             if (block) {
@@ -49,7 +47,7 @@
     });
 }
 
-+(void)updateUserRights:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block{
+-(void)updateUserRights:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block{
     
     NSString *cameraId              = parameterDictionary[@"camId"];
     NSString *api_id                = parameterDictionary[@"api_id"];
@@ -67,12 +65,9 @@
         }else{
             jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@/shares?api_id=%@&api_key=%@",KBASEURL,cameraId,api_id,api_key];
         }
-
-        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPMethod: @"PATCH"];
+        NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"PATCH"];
+        
         [request setHTTPBody:putData];
         
         NSHTTPURLResponse *response = nil;
@@ -85,10 +80,11 @@
                     block(responseDictionary,nil);
                 }
             }else{
-                NSError *customError = [NSError errorWithDomain:@"api.evercam.io" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Error detail unavailable",@"Error_Description", nil]];
-                if (block) {
-                    block(nil,customError);
-                }
+                [APIUtility createErrorFromApi:responseData withStatusCode:[response statusCode] withBlock:^(NSError *error) {
+                    if (block) {
+                        block(nil,error);
+                    }
+                }];
             }
         }else{
             if (block) {
@@ -98,7 +94,7 @@
     });
 }
 
-+(void)New_Resend_CameraShare:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
+-(void)New_Resend_CameraShare:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
     NSString *cameraId              = parameterDictionary[@"camId"];
     NSString *api_id                = parameterDictionary[@"api_id"];
     NSString *api_key               = parameterDictionary[@"api_Key"];
@@ -116,34 +112,27 @@
         }else{
             jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@/shares?api_id=%@&api_key=%@",KBASEURL,cameraId,api_id,api_key];
         }
-
-        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPMethod: @"POST"];
+        NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"POST"];
+        
         [request setHTTPBody:putData];
         
         NSHTTPURLResponse *response = nil;
         NSError *error              = nil;
         NSData *responseData        = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         if (!error) {
-            if ([response statusCode] == 201){
+            if ([response statusCode] == 201 || [response statusCode] == 200){
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
                 if (block) {
                     block(responseDictionary,nil);
                 }
-            }else if ([response statusCode] == 409){
-                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
-                NSError *customError = [NSError errorWithDomain:@"api.evercam.io" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:responseDictionary[@"message"],@"Error_Server", nil]];
-                if (block) {
-                    block(nil,customError);
-                }
-            }else{
-                NSError *customError = [NSError errorWithDomain:@"api.evercam.io" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Error detail unavailable",@"Error_Description", nil]];
-                if (block) {
-                    block(nil,customError);
-                }
+            }else {
+                
+                [APIUtility createErrorFromApi:responseData withStatusCode:[response statusCode] withBlock:^(NSError *error) {
+                    if (block) {
+                        block(nil,error);
+                    }
+                }];
             }
         }else{
             if (block) {
@@ -154,7 +143,7 @@
 }
 
 
-+(void)deleteCameraShare:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
+-(void)deleteCameraShare:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
     
     NSString *cameraId      = parameterDictionary[@"camId"];
     NSString *api_id        = parameterDictionary[@"api_id"];
@@ -171,12 +160,8 @@
         }else{
             jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@/shares?email=%@&api_id=%@&api_key=%@",KBASEURL,cameraId,userEmail,api_id,api_key];
         }
-
-        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPMethod: @"DELETE"];
+        NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"DELETE"];
         
         NSHTTPURLResponse *response = nil;
         NSError *error              = nil;
@@ -188,10 +173,11 @@
                     block(responseDictionary,nil);
                 }
             }else{
-                NSError *customError = [NSError errorWithDomain:@"api.evercam.io" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Error detail unavailable",@"Error_Description", nil]];
-                if (block) {
-                    block(nil,customError);
-                }
+                [APIUtility createErrorFromApi:responseData withStatusCode:[response statusCode] withBlock:^(NSError *error) {
+                    if (block) {
+                        block(nil,error);
+                    }
+                }];
             }
         }else{
             if (block) {
@@ -201,7 +187,7 @@
     });
 }
 
-+(void)changeCameraStatus:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
+-(void)changeCameraStatus:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
     
     NSString *cameraId              = parameterDictionary[@"camId"];
     NSString *api_id                = parameterDictionary[@"api_id"];
@@ -214,11 +200,9 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
         NSString *jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@?api_id=%@&api_key=%@",KBASEURL,cameraId,api_id,api_key];
-        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPMethod: @"PATCH"];
+        NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"PATCH"];
+        
         [request setHTTPBody:putData];
         
         NSHTTPURLResponse *response = nil;
@@ -231,10 +215,11 @@
                     block(responseDictionary,nil);
                 }
             }else{
-                NSError *customError = [NSError errorWithDomain:@"api.evercam.io" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Error detail unavailable",@"Error_Description", nil]];
-                if (block) {
-                    block(nil,customError);
-                }
+                [APIUtility createErrorFromApi:responseData withStatusCode:[response statusCode] withBlock:^(NSError *error) {
+                    if (block) {
+                        block(nil,error);
+                    }
+                }];
             }
         }else{
             if (block) {
@@ -244,20 +229,17 @@
     });
 }
 
-+(void)getCameraPendingRequest:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
+-(void)getCameraPendingRequest:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
     NSString *cameraId  = parameterDictionary[@"camId"];
     NSString *api_id    = parameterDictionary[@"api_id"];
     NSString *api_key   = parameterDictionary[@"api_Key"];
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-
-        NSString *jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@/shares/requests?status=PENDING&api_id=%@&api_key=%@",KBASEURL,cameraId,api_id,api_key];
-        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPMethod: @"GET"];
+        NSString *jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@/shares/requests?status=PENDING&api_id=%@&api_key=%@",KBASEURL,cameraId,api_id,api_key];
+        
+        NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"GET"];
         
         NSHTTPURLResponse *response = nil;
         NSError *error              = nil;
@@ -269,10 +251,11 @@
                     block(responseDictionary,nil);
                 }
             }else{
-                NSError *customError = [NSError errorWithDomain:@"api.evercam.io" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Error detail unavailable",@"Error_Description", nil]];
-                if (block) {
-                    block(nil,customError);
-                }
+                [APIUtility createErrorFromApi:responseData withStatusCode:[response statusCode] withBlock:^(NSError *error) {
+                    if (block) {
+                        block(nil,error);
+                    }
+                }];
             }
         }else{
             if (block) {
@@ -282,7 +265,7 @@
     });
 }
 
-+(void)transferCameraOwner:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
+-(void)transferCameraOwner:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block{
     NSString *cameraId              = parameterDictionary[@"camId"];
     NSString *api_id                = parameterDictionary[@"api_id"];
     NSString *api_key               = parameterDictionary[@"api_Key"];
@@ -293,11 +276,8 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         NSString *jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@?api_id=%@&api_key=%@",KBASEURL,cameraId,api_id,api_key];
-        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"PUT"];
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPMethod: @"PUT"];
         [request setHTTPBody:putData];
         
         NSHTTPURLResponse *response = nil;
@@ -310,10 +290,11 @@
                     block(responseDictionary,nil);
                 }
             }else{
-                NSError *customError = [NSError errorWithDomain:@"api.evercam.io" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Error detail unavailable",@"Error_Description", nil]];
-                if (block) {
-                    block(nil,customError);
-                }
+                [APIUtility createErrorFromApi:responseData withStatusCode:[response statusCode] withBlock:^(NSError *error) {
+                    if (block) {
+                        block(nil,error);
+                    }
+                }];
             }
         }else{
             if (block) {

@@ -143,7 +143,8 @@
     NSLog(@"MAC ADDRESS: %@",complete_Mac_Address);
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:complete_Mac_Address,@"mac_address",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
     [self.scanning_activityindicator startAnimating];
-    [EvercamCameraVendor getVendorName:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamCameraVendor *api_vendor_Obj = [EvercamCameraVendor new];
+    [api_vendor_Obj getVendorName:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             NSLog(@"Server Response: %@",details);
             NSDictionary *camDict = details;

@@ -11,5 +11,5 @@
 @interface EvercamCameraModelInfo : NSObject
 
 //Get camera model details
-+(void)getCameraModelInformation:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
+-(void)getCameraModelInformation:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
 @end
