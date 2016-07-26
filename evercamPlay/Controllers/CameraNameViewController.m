@@ -51,7 +51,8 @@
     
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",postDictionary,@"Post_Param", nil];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [EvercamCreateCamera createCamera:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamCreateCamera *api_create_Obj = [EvercamCreateCamera new];
+    [api_create_Obj createCamera:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_add_camera
@@ -63,12 +64,7 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            if (error.userInfo[@"Error_Server"]) {
-                [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.userInfo[@"Error_Server"]];
-            }else{
-                [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
-            }
-            
+             [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
         }
     }];
     

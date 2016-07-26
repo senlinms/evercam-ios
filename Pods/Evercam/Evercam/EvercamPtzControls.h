@@ -12,18 +12,18 @@
 
 
 //set camera to Home
-+(void)ptz_Home:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
+-(void)ptz_Home:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 
 
 //set camera Directions
-+(void)set_CameraDirection:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
+-(void)set_CameraDirection:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 
 //get Preset list
-+(void)getPresetList:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
+-(void)getPresetList:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
 
 //set camera direction to the selected preset
-+(void)setPreset:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
+-(void)setPreset:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 
 //create new preset
-+(void)createPreset:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
+-(void)createPreset:(NSDictionary *)parameterDictionary withBlock:(void(^)(id details,NSError *error))block;
 @end

@@ -88,7 +88,7 @@
 #pragma mark Validation 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {
-    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    BOOL stricterFilter = NO;
     NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
     NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
@@ -105,10 +105,11 @@
     NSString *username = _txt_username.text;
     NSString *password = _txt_password.text;
     NSString *repassword = _txt_confirmPassword.text;
-    
+    /*
     NSLocale *locale = [NSLocale currentLocale];
     NSString *countryCode = [locale objectForKey: NSLocaleCountryCode];
     NSLog(@"countryCode:%@", countryCode);
+    */
     NSRange whiteSpaceRange = [username rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
     // firstname
     if ([firstname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
@@ -166,9 +167,10 @@
     {
         user.username = username;
     }
+    /*
     // country
     user.country = countryCode;
-    
+    */
     // email
     if ([email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0)
     {
@@ -192,9 +194,10 @@
     }
     
     // Password 
-    if (password.length <= 0)
+    if (password.length <= 0 || password.length < 6)
     {
-        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Password required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        NSString *message = (password.length <= 0)?@"Password required":@"Password should be at least 6 character(s).";
+        UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(message, nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         simpleAlert.tag = 108;
         [simpleAlert show];
         

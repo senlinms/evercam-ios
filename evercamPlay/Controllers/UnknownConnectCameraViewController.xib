@@ -153,7 +153,7 @@
                                 <outlet property="delegate" destination="-1" id="VM0-hg-bha"/>
                             </connections>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Port is closed" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JGN-yR-1ot">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JGN-yR-1ot">
                             <rect key="frame" x="72" y="205" width="81" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
@@ -172,12 +172,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="554" textAlignment="natural" minimumFontSize="17" id="T7Y-09-4LN">
+                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="554" textAlignment="natural" minimumFontSize="17" id="T7Y-09-4LN">
                             <rect key="frame" x="8" y="268" width="63" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <connections>
+                                <action selector="textFieldsTextChanged:" destination="-1" eventType="editingChanged" id="lnx-bg-j7K"/>
                                 <outlet property="delegate" destination="-1" id="ziO-u8-izL"/>
                             </connections>
                         </textField>
@@ -290,9 +291,9 @@
                                 <outlet property="delegate" destination="-1" id="keI-54-q2M"/>
                             </connections>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Port is closed" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UEi-ui-MDl">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UEi-ui-MDl">
                             <rect key="frame" x="72" y="268" width="81" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="textColor" red="0.74901960779999999" green="0.1019607843" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>

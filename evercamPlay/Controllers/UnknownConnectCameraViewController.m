@@ -32,7 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     [self.textField_scrollView contentSizeToFit];
     self.vendorLabel.text = @"Unknown";
-    self.ipAddress_textField.text =  @"5.149.169.19";
+    [self getLocalIpAddress];
     [self checkHttpPort];
     [self checkRtstPort];
 }
@@ -55,6 +55,41 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+-(void)getLocalIpAddress{
+    __block NSString *ipAddress = @"";
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSString *jsonUrlString = @"http://bot.whatismyipaddress.com/";
+        NSURL *url = [NSURL URLWithString:[jsonUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        NSHTTPURLResponse *response = nil;
+        NSError *error              = nil;
+        NSData *responseData        = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if (!error) {
+            ipAddress = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];;
+            self.ipAddress_textField.text = [self isValidIPAddress:ipAddress]?ipAddress:@"";
+        }else{
+            self.ipAddress_textField.text = ipAddress;
+        }
+    });
+}
+
+- (BOOL)isValidIPAddress:(NSString *)ipString
+{
+    const char *utf8 = [ipString UTF8String];
+    int success;
+    
+    struct in_addr dst;
+    success = inet_pton(AF_INET, utf8, &dst);
+    if (success != 1) {
+        struct in6_addr dst6;
+        success = inet_pton(AF_INET6, utf8, &dst6);
+    }
+    
+    return success == 1;
+}
+
 
 -(void)checkRtstPort{
     NSString* ipAddress = [self.ipAddress_textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -138,7 +173,8 @@
 
 - (IBAction)nextStepBtn:(id)sender {
     
-    NSMutableDictionary *param_Dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ipAddress_textField.text,@"external_host",self.http_TextField.text,@"external_http_port",self.snapshotPathTextField.text,@"jpg_url",[NSNumber numberWithBool:NO],@"is_public",[NSNumber numberWithBool:YES],@"is_online",(isCompletelyEmpty(self.rtsp_TextField.text))?nil:self.rtsp_TextField.text,@"external_rtsp_port",(isCompletelyEmpty(self.username_TextField.text))?nil:self.username_TextField.text,@"cam_username",(isCompletelyEmpty(self.password_TextField.text))?nil:self.password_TextField.text,@"cam_password", nil];
+//    NSMutableDictionary *param_Dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ipAddress_textField.text,@"external_host",self.http_TextField.text,@"external_http_port",self.snapshotPathTextField.text,@"jpg_url",[NSNumber numberWithBool:NO],@"is_public",[NSNumber numberWithBool:YES],@"is_online",(isCompletelyEmpty(self.rtsp_TextField.text))?nil:self.rtsp_TextField.text,@"external_rtsp_port",(isCompletelyEmpty(self.username_TextField.text))?nil:self.username_TextField.text,@"cam_username",(isCompletelyEmpty(self.password_TextField.text))?nil:self.password_TextField.text,@"cam_password", nil];
+    NSMutableDictionary *param_Dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ipAddress_textField.text,@"external_host",self.http_TextField.text,@"external_http_port",self.snapshotPathTextField.text,@"jpg_url",[NSNumber numberWithBool:YES],@"is_online",(isCompletelyEmpty(self.rtsp_TextField.text))?nil:self.rtsp_TextField.text,@"external_rtsp_port",(isCompletelyEmpty(self.username_TextField.text))?nil:self.username_TextField.text,@"cam_username",(isCompletelyEmpty(self.password_TextField.text))?nil:self.password_TextField.text,@"cam_password", nil];
     
     
     CameraNameViewController *aVC = [[CameraNameViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"CameraNameViewController":@"CameraNameViewController_iPad" bundle:[NSBundle mainBundle]];
@@ -187,10 +223,12 @@
     
     NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",self.snapshotPathTextField.text,@"jpg_url",self.username_TextField.text,@"cam_username",self.password_TextField.text,@"cam_password", nil];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [EvercamTestSnapShot testSnapShot:postDictionary withBlock:^(UIImage *snapeImage, NSString *statusMessage, NSError *error) {
+    EvercamTestSnapShot *api_snap_Obj = [EvercamTestSnapShot new];
+    [api_snap_Obj testSnapShot:postDictionary withBlock:^(UIImage *snapeImage, NSString *statusMessage, NSError *error) {
         if (error) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"The port is open but we can't seem to connect. Check that the camera model and credentials are correct."];
+//            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"The port is open but we can't seem to connect. Check that the camera model and credentials are correct."];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
         }else{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             if ([statusMessage isEqualToString:@"Success"]) {
@@ -198,7 +236,8 @@
                 self.snapShotView.hidden            = NO;
                 self.snapShotImageView.image        = snapeImage;
             }else{
-                [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"The port is open but we can't seem to connect. Check that the camera model and credentials are correct."];
+//                [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"The port is open but we can't seem to connect. Check that the camera model and credentials are correct."];
+                [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
             }
             
         }

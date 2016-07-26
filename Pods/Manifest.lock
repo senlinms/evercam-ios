@@ -17,7 +17,7 @@ PODS:
     - AFNetworking/NSURLSession
   - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
-  - Evercam (1.1.3):
+  - Evercam (1.1.5):
     - AFNetworking (~> 3.0)
   - Fabric (1.6.7)
   - Mixpanel (2.9.9):
@@ -41,7 +41,7 @@ SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
-  Evercam: 8dcbcc5939770cc64464d501dddc5cd77c0cdf90
+  Evercam: de2eb05b9671d2489b6b4dbff7550e6bc4f0f97a
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Mixpanel: 818d1940c2d9402453b349545022a86968097f57
   PhoenixClient: bb4b343dc16df49ad168c7833a06b0953f991df3

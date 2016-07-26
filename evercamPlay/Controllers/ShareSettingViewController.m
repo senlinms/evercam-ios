@@ -107,11 +107,11 @@
         NSString *newRights = nil;
         if (self.rights_Segment.selectedSegmentIndex == 0) {
             //Full Rights
-            newRights = @"Snapshot,View,Edit,List";
+            newRights = @"snapshot,view,edit,list";
             [self setCameraRightsForUser:newRights];
         }else if (self.rights_Segment.selectedSegmentIndex == 1){
             //Read Only
-            newRights = @"Snapshot,List";
+            newRights = @"snapshot,list";
             [self setCameraRightsForUser:newRights];
         }else{
             //No Access
@@ -119,21 +119,6 @@
             [alert show];
         }
         
-        /*
-        if (checkedIndexPath.row == 0) {
-            //Full Rights
-            newRights = @"Snapshot,View,Edit,List";
-            [self setCameraRightsForUser:newRights];
-        }else if (checkedIndexPath.row == 1){
-            //Read Only
-            newRights = @"Snapshot,List";
-            [self setCameraRightsForUser:newRights];
-        }else{
-            //No Access
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Are you sure you want to remove this share?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
-            [alert show];
-        }
-        */
     }else{
         NSString *choosenOption = optionsArray[checkedIndexPath.row];
         if ([choosenOption isEqualToString:@"Public on the web"]) {
@@ -150,7 +135,8 @@
 - (IBAction)resendShareRequest:(id)sender {
     [self.loadingActivityIndicator startAnimating];
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"camera_id"],@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSNumber numberWithBool:isPendingUser],@"isPending",[NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"email"],@"email", nil],@"Post_Param", nil];
-    [EvercamShare New_Resend_CameraShare:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamShare *api_share_Obj = [EvercamShare new];
+    [api_share_Obj New_Resend_CameraShare:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.loadingActivityIndicator stopAnimating];
             UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"Success!" message:details[@"message"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -158,26 +144,22 @@
             [alert show];
         }else{
             [self.loadingActivityIndicator stopAnimating];
-            if (error.userInfo[@"Error_Server"]) {
-                [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.userInfo[@"Error_Server"]];
-            }else{
-                [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
-            }
-            
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
         }
     }];
 }
 
 -(void)setCameraStatus_isDiscoverable:(BOOL)isDiscoverable with_IsPublic:(BOOL)isPublic{
     [self.loadingActivityIndicator startAnimating];
-    NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:cameraId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:isPublic],@"is_public",[NSNumber numberWithBool:isDiscoverable],@"discoverable", nil],@"Post_Param", nil];
-    [EvercamShare changeCameraStatus:param_Dictionary withBlock:^(id details, NSError *error) {
+    NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:cameraId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSDictionary dictionaryWithObjectsAndKeys:isPublic?@"true":@"false",@"is_public",isDiscoverable?@"true":@"false",@"discoverable", nil],@"Post_Param", nil];
+    EvercamShare *api_status_Obj = [EvercamShare new];
+    [api_status_Obj changeCameraStatus:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.loadingActivityIndicator stopAnimating];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             [self.loadingActivityIndicator stopAnimating];
-            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
         }
     }];
 }
@@ -185,8 +167,8 @@
 -(void)setCameraRightsForUser:(NSString *)newRights{
     [self.loadingActivityIndicator startAnimating];
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"camera_id"],@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",[NSNumber numberWithBool:isPendingUser],@"isPending",[NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"email"],@"email",newRights,@"rights", nil],@"Post_Param", nil];
-    
-    [EvercamShare updateUserRights:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamShare *api_share_Obj = [EvercamShare new];
+    [api_share_Obj updateUserRights:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.loadingActivityIndicator stopAnimating];
             if ([GlobalSettings sharedInstance].isPhone) {
@@ -197,7 +179,7 @@
             }
         }else{
             [self.loadingActivityIndicator stopAnimating];
-            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
         }
     }];
 }
@@ -205,7 +187,8 @@
 -(void)blockAccessOfUser{
     [self.loadingActivityIndicator startAnimating];
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userDictionary[@"camera_id"],@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key",userDictionary[@"email"],@"user_Email",[NSNumber numberWithBool:isPendingUser],@"isPending", nil];
-    [EvercamShare deleteCameraShare:param_Dictionary withBlock:^(id details, NSError *error) {
+    EvercamShare *api_share_Obj = [EvercamShare new];
+    [api_share_Obj deleteCameraShare:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
             [self.loadingActivityIndicator stopAnimating];
             AppUser *user = [APP_DELEGATE defaultUser];
@@ -221,7 +204,7 @@
             }
         }else{
             [self.loadingActivityIndicator stopAnimating];
-            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Something went wrong. Please try again."];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
         }
     }];
 }

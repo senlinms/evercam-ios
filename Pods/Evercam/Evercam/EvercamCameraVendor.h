@@ -11,6 +11,6 @@
 @interface EvercamCameraVendor : NSObject
 
 //pass Mac Address of device and get details
-+(void)getVendorName:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
+-(void)getVendorName:(NSDictionary *)parameterDictionary withBlock:(void (^)(id details,NSError *error))block;
 
 @end
