@@ -113,91 +113,6 @@
         //IPad
         [self presentActionSheetForIpad:sender];
     }
-    return;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        /*
-        BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-        
-        EvercamRights *right = self.camera.rights;
-        if (right.rightsString) {
-            
-            if (([right.rightsString rangeOfString:@"edit"].location != NSNotFound) || ([right.rightsString rangeOfString:@"EDIT"].location != NSNotFound)) {
-                [sheet addButtonWithTitle:@"Edit Camera" block:^{
-                    [self edit:self];
-                }];
-            }
-        }
-        
-        [sheet addButtonWithTitle:@"Remove Camera" block:^{
-            [self deleteCamera];
-        }];
-        [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
-        [sheet showInView:self.view];
-        */
-    }
-    else
-    {
-        UIAlertController * view=   [UIAlertController
-                                     alertControllerWithTitle:nil
-                                     message:nil
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        
-        UIAlertAction* editCamera = [UIAlertAction
-                                     actionWithTitle:@"Edit Camera"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         [view dismissViewControllerAnimated:YES completion:nil];
-                                         [self edit:self];
-                                         
-                                     }];
-        
-        UIAlertAction* removeCamera = [UIAlertAction
-                                       actionWithTitle:@"Remove Camera"
-                                       style:UIAlertActionStyleDestructive
-                                       handler:^(UIAlertAction * action)
-                                       {
-                                           [view dismissViewControllerAnimated:YES completion:nil];
-                                           [self deleteCamera];
-                                           
-                                       }];
-        UIAlertAction* cancel = [UIAlertAction
-                                 actionWithTitle:@"Cancel"
-                                 style:UIAlertActionStyleCancel
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [view dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-        EvercamRights *right = self.camera.rights;
-        if (right.rightsString) {
-            if ([right.rightsString containsString:@"edit"] || [right.rightsString containsString:@"EDIT"]) {
-                [view addAction:editCamera];
-            }
-        }
-        
-        [view addAction:removeCamera];
-        [view addAction:cancel];
-        UIPopoverPresentationController *popPresenter = [view
-                                                         popoverPresentationController];
-        popPresenter.sourceView = (UIView *)sender;
-        popPresenter.sourceRect = ((UIView *)sender).bounds;
-        [self presentViewController:view animated:YES completion:nil];
-        /*
-        if ([GlobalSettings sharedInstance].isPhone)
-        {
-            [self presentViewController:view animated:YES completion:nil];
-        }
-        else
-        {
-            UIPopoverPresentationController *popPresenter = [view
-                                                             popoverPresentationController];
-            popPresenter.sourceView = (UIView *)sender;
-            popPresenter.sourceRect = ((UIView *)sender).bounds;
-            [self presentViewController:view animated:YES completion:nil];
-        }
-        */
-    }
 }
 
 -(void)presentActionSheetForIpad:(id)sender{
@@ -315,46 +230,21 @@
 
 
 - (void)fillCameraDetails {
+    
     self.txtID.text             = self.camera.camId;
     self.lblName.text           = self.camera.name;
     self.lblOwner.text          = self.camera.owner;
     self.lblTimezone.text       = self.camera.timezone;
-    if (self.camera.vendor && self.camera.vendor.length > 0) {
-        self.lblVendor.text = self.camera.vendor;
-    } else {
-        self.lblVendor.text = @"Not specified";
-        self.lblVendor.textColor = [UIColor lightGrayColor];
-    }
-    if (self.camera.model && self.camera.model.length > 0) {
-        self.lblModel.text = self.camera.model;
-    } else {
-        self.lblModel.text = @"Not specified";
-        self.lblModel.textColor = [UIColor lightGrayColor];
-    }
+    
+    [self setLabelValues:self.lblVendor withValue:self.camera.vendor];
+    [self setLabelValues:self.lblModel withValue:self.camera.model];
     
     if ([self.camera.rights canEdit]) {
+        
         [self.scrollView setContentSize:CGSizeMake(0, 625)];
         
-        if (self.camera.username && self.camera.username.length > 0) {
-            self.lblUsername.text = self.camera.username;
-        } else {
-            self.lblUsername.text = @"Not specified";
-            self.lblUsername.textColor = [UIColor lightGrayColor];
-        }
-        
-        if (![self.camera.password isKindOfClass:[NSNull class]])
-        {
-            if (self.camera.password.length > 0)
-            {
-                self.lblPassword.text = self.camera.password;
-            }else{
-                self.lblPassword.text = @"Not specified";
-                self.lblPassword.textColor = [UIColor lightGrayColor];
-            }
-        } else {
-            self.lblPassword.text = @"Not specified";
-            self.lblPassword.textColor = [UIColor lightGrayColor];
-        }
+        [self setLabelValues:self.lblUsername withValue:self.camera.username];
+        [self setLabelValues:self.lblPassword withValue:self.camera.password];
         
         NSString *jpgPath = [self.camera getJpgPath];
         if (jpgPath && jpgPath.length > 0) {
@@ -371,58 +261,60 @@
             self.tvRTSPURL.textColor = [UIColor lightGrayColor];
         }
         
-        if (self.camera.externalHost && self.camera.externalHost.length > 0) {
-            self.lblExternalHost.text = self.camera.externalHost;
-        } else {
-            self.lblExternalHost.text = @"Not specified";
-            self.lblExternalHost.textColor = [UIColor lightGrayColor];
-        }
-        
-        if (![self.camera.internalHost isKindOfClass:[NSNull class]]) {
-            if (self.camera.internalHost.length > 0) {
-                 self.lblInternalHost.text = self.camera.internalHost;
-            }
-        } else {
-            self.lblInternalHost.text = @"Not specified";
-            self.lblInternalHost.textColor = [UIColor lightGrayColor];
-        }
+        [self setLabelValues:self.lblExternalHost withValue:self.camera.externalHost];
+        [self setLabelValues:self.lblInternalHost withValue:self.camera.internalHost];
         
         NSInteger externalHttpPort = self.camera.externalHttpPort;
         NSInteger externalRtspPort = self.camera.externalRtspPort;
         NSInteger internalHttpPort = self.camera.internalHttpPort;
         NSInteger internalRtspPort = self.camera.internalRtspPort;
         
-        if (externalHttpPort != 0) {
-            self.lblExternalHTTPPort.text = [NSString stringWithFormat:@"%ld", (long)externalHttpPort];
-        } else {
-            self.lblExternalHTTPPort.text = @"Not specified";
-            self.lblExternalHTTPPort.textColor = [UIColor lightGrayColor];
-        }
-        if (externalRtspPort != 0) {
-            self.lblExternalRTSPPort.text = [NSString stringWithFormat:@"%ld", (long)externalRtspPort];
-        } else {
-            self.lblExternalRTSPPort.text = @"Not specified";
-            self.lblExternalRTSPPort.textColor = [UIColor lightGrayColor];
-        }
-        if (internalHttpPort != 0) {
-            self.lblInternalHTTPPort.text = [NSString stringWithFormat:@"%ld", (long)internalHttpPort];
-        } else {
-            self.lblInternalHTTPPort.text = @"Not specified";
-            self.lblInternalHTTPPort.textColor = [UIColor lightGrayColor];
-        }
-        if (internalRtspPort != 0) {
-            self.lblInternalRTSPPort.text = [NSString stringWithFormat:@"%ld", (long)internalRtspPort];
-        } else {
-            self.lblInternalRTSPPort.text = @"Not specified";
-            self.lblInternalRTSPPort.textColor = [UIColor lightGrayColor];
-        }
-        
+        [self setPortLabels:self.lblExternalHTTPPort withValue:externalHttpPort];
+        [self setPortLabels:self.lblExternalRTSPPort withValue:externalRtspPort];
+        [self setPortLabels:self.lblInternalHTTPPort withValue:internalHttpPort];
+        [self setPortLabels:self.lblInternalRTSPPort withValue:internalRtspPort];
+
     } else {
-        //        self.editContainerView.hidden = YES;
+        
         for (UIView *viewToHide in self.editableParamsContainers) {
             viewToHide.hidden = YES;
         }
+        
     }
+}
+
+-(void)setPortLabels:(UILabel *)label withValue:(NSInteger)value{
+    if (value != 0) {
+        label.text = [NSString stringWithFormat:@"%ld", (long)value];
+    } else {
+        label.text = @"Not specified";
+        label.textColor = [UIColor lightGrayColor];
+    }
+}
+
+-(void)setLabelValues:(UILabel *)label withValue:(NSString *)value{
+    if ([self isValueNull:value]) {
+        label.text = @"Not specified";
+        label.textColor = [UIColor lightGrayColor];
+    }else{
+        if (value && value.length > 0) {
+            label.text = value;
+        } else {
+            label.text = @"Not specified";
+            label.textColor = [UIColor lightGrayColor];
+        }
+    }
+}
+
+-(BOOL)isValueNull:(NSString *)value{
+    
+    BOOL isNull = NO;
+    
+    if ([value isKindOfClass:[NSNull class]]) {
+        isNull = YES;
+    }
+    
+    return isNull;
 }
 
 #pragma mark - AddCameraViewController Delegate Method
