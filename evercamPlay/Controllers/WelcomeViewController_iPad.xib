@@ -10,7 +10,6 @@
                 <outlet property="pageControl" destination="bNL-Tw-STE" id="LwW-GU-uqR"/>
                 <outlet property="playerContainerView" destination="gyC-Tp-vXH" id="8L8-Uu-EkW"/>
                 <outlet property="tutorialScrollView" destination="9q9-bU-HXJ" id="dcM-qX-BXL"/>
-                <outlet property="tutorialView" destination="rgx-VG-ziQ" id="VJ3-LK-PyH"/>
                 <outlet property="view" destination="Bdu-b9-a34" id="cqF-AP-0z8"/>
             </connections>
         </placeholder>
@@ -102,27 +101,6 @@
             <nil key="simulatedTopBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="304" y="597"/>
-        </view>
-        <view contentMode="scaleToFill" id="rgx-VG-ziQ">
-            <rect key="frame" x="0.0" y="0.0" width="2304" height="850"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XG6-D4-4mD">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="850"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="V5N-Gf-fBk">
-                    <rect key="frame" x="768" y="0.0" width="768" height="850"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wio-IU-09P">
-                    <rect key="frame" x="1536" y="0.0" width="768" height="850"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1971" y="574"/>
         </view>
     </objects>
     <resources>
