@@ -7,21 +7,16 @@
 //
 
 #import "GAIDictionaryBuilder.h"
+#import "AppDelegate.h"
 #import "AccountsViewController.h"
+#import "CamerasViewController.h"
 #import "AccountCell.h"
 #import "AddAccountCell.h"
 #import "SWRevealViewController.h"
-#import "CamerasViewController.h"
-//#import "UILabel+ActionSheet.h"
 #import <QuartzCore/QuartzCore.h>
-//#import "UIAlertController+NoBorderText.h"
-#import "AppDelegate.h"
 #import "EvercamShell.h"
 #import "EvercamUser.h"
 #import "EvercamApiKeyPair.h"
-#import "MBProgressHUD.h"
-#import "BlockAlertView.h"
-#import "BlockActionSheet.h"
 #import "GlobalSettings.h"
 #import "Config.h"
 #import "Mixpanel.h"
@@ -33,6 +28,8 @@
 {
     NSString *triedUsername;
     NSString *triedPassword;
+    
+    NSIndexPath *selectedIndexPath;
     
 }
 
@@ -74,7 +71,7 @@
 }
 
 - (void)viewDidLayoutSubviews{
-     [self setFramesAccordingToOrientation];
+    [self setFramesAccordingToOrientation];
 }
 
 -(void)setFramesAccordingToOrientation{
@@ -153,99 +150,10 @@
 
 - (void)removeAccount: (id)object
 {
-    NSIndexPath *indexPath = (NSIndexPath *)object;
-    NSInteger index = indexPath.row;
-    AppUser *user = [self.users objectAtIndex:index];
     
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Are you sure you want to remove this user?" message:@"Removing a user will remove the user from Evercam Play but the Evercam account will still exist."];
-        
-        [alert addButtonWithTitle:@"Remove" imageIdentifier:@"gray" block:^{
-            if (self.users.count == 1) {
-                //clear intercom at logout
-                [Intercom reset];
-                [APP_DELEGATE logout];
-                return;
-            }
-            //clear intercom at logout
-            [Intercom reset];
-            if ([user.username isEqualToString:[APP_DELEGATE defaultUser].username]) {
-                [APP_DELEGATE deleteUser:user];
-                [APP_DELEGATE saveContext];
-                [APP_DELEGATE setDefaultUser:[[APP_DELEGATE allUserList] objectAtIndex:0]];
-            } else {
-                [APP_DELEGATE deleteUser:user];
-                [APP_DELEGATE saveContext];
-            }
-            
-            [self getAllUsers];
-            //Registering user with Intercom
-            [Intercom registerUserWithUserId:[APP_DELEGATE defaultUser].username];
-            
-        }];
-        
-        [alert setCancelButtonWithTitle:@"Cancel" block:nil];
-        
-        [alert show];
-    }
-    else
-    {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Are you sure you want to remove this user?"
-                                      message:@"Removing a user will remove the user from Evercam Play but the Evercam account will still exist."
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* cancel = [UIAlertAction
-                                 actionWithTitle:@"Cancel"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-        UIAlertAction* remove = [UIAlertAction
-                                 actionWithTitle:@"Remove"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     if (self.users.count == 1) {
-                                         //clear intercom at logout
-                                         [Intercom reset];
-                                         [APP_DELEGATE logout];
-                                         return;
-                                     }
-                                     //clear intercom at logout
-                                     [Intercom reset];
-                                     if ([user.username isEqualToString:[APP_DELEGATE defaultUser].username]) {
-                                         [APP_DELEGATE deleteUser:user];
-                                         [APP_DELEGATE saveContext];
-                                         [APP_DELEGATE setDefaultUser:[[APP_DELEGATE allUserList] objectAtIndex:0]];
-                                     } else {
-                                         [APP_DELEGATE deleteUser:user];
-                                         [APP_DELEGATE saveContext];
-                                     }
-                                     
-                                     [self getAllUsers];
-                                     
-                                     //Registering user with Intercom
-                                     [Intercom registerUserWithUserId:[APP_DELEGATE defaultUser].username];
-                                 }];
-        
-        [alert addAction:cancel];
-        [alert addAction:remove];
-        
-        if ([GlobalSettings sharedInstance].isPhone)
-        {
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-        else
-        {
-            UIPopoverPresentationController *popPresenter = [alert
-                                                             popoverPresentationController];
-            popPresenter.sourceView = [self.tableView cellForRowAtIndexPath:indexPath];
-            popPresenter.sourceRect = [self.tableView cellForRowAtIndexPath:indexPath].bounds;
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to remove this user?" message:@"Removing a user will remove the user from Evercam but the Evercam account will still exist." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
+    [alert show];
+    
 }
 
 #pragma mark UITableViewDelegate
@@ -304,71 +212,19 @@
     if (indexPath.row < self.users.count)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1)
-            {
-                BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-                
-                [sheet addButtonWithTitle:@"Use Account" block:^{
-                    [self performSelectorOnMainThread:@selector(useAccount:) withObject:[NSNumber numberWithInteger:indexPath.row] waitUntilDone:NO];
-                }];
-                [sheet addButtonWithTitle:@"Remove Account" block:^{
-                    [self performSelectorOnMainThread:@selector(removeAccount:) withObject:indexPath waitUntilDone:NO];
-                }];
-                
-                [sheet setCancelButtonWithTitle:@"Cancel" block:nil];
+            
+            selectedIndexPath = indexPath;
+            
+            if ([GlobalSettings sharedInstance].isPhone){
+                //iPhone Case
+                UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use Account",@"Remove Account", nil];
                 [sheet showInView:self.view];
+                
+            }else{
+                //iPad Case
+                [self showIpadActionSheet];
             }
-            else
-            {
-                UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle:nil
-                                              message:nil
-                                              preferredStyle:UIAlertControllerStyleActionSheet];
-                
-                UIAlertAction* use = [UIAlertAction
-                                      actionWithTitle:@"Use Account"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          [self performSelectorOnMainThread:@selector(useAccount:) withObject:[NSNumber numberWithInteger:indexPath.row] waitUntilDone:NO];
-                                          [alert dismissViewControllerAnimated:YES completion:nil];
-                                          
-                                      }];
-                UIAlertAction* remove = [UIAlertAction
-                                         actionWithTitle:@"Remove Account"
-                                         style:UIAlertActionStyleDestructive
-                                         handler:^(UIAlertAction * action)
-                                         {
-                                             [self performSelectorOnMainThread:@selector(removeAccount:) withObject:indexPath waitUntilDone:NO];
-                                             [alert dismissViewControllerAnimated:YES completion:nil];
-                                             
-                                         }];
-                UIAlertAction* cancel = [UIAlertAction
-                                         actionWithTitle:@"Cancel"
-                                         style:UIAlertActionStyleCancel
-                                         handler:^(UIAlertAction * action)
-                                         {
-                                             [alert dismissViewControllerAnimated:YES completion:nil];
-                                             
-                                         }];
-                
-                [alert addAction:use];
-                [alert addAction:remove];
-                [alert addAction:cancel];
-                
-                if ([GlobalSettings sharedInstance].isPhone)
-                {
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
-                else
-                {
-                    UIPopoverPresentationController *popPresenter = [alert
-                                                                     popoverPresentationController];
-                    popPresenter.sourceView = [self.tableView cellForRowAtIndexPath:indexPath];
-                    popPresenter.sourceRect = [self.tableView cellForRowAtIndexPath:indexPath].bounds;
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
-            }
+            
         });
     }
     else
@@ -379,9 +235,97 @@
     }
 }
 
+-(void)showIpadActionSheet{
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:nil
+                                  message:nil
+                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* use = [UIAlertAction
+                          actionWithTitle:@"Use Account"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction * action)
+                          {
+                              [self performSelectorOnMainThread:@selector(useAccount:) withObject:[NSNumber numberWithInteger:selectedIndexPath.row] waitUntilDone:NO];
+                              [alert dismissViewControllerAnimated:YES completion:nil];
+                              
+                          }];
+    UIAlertAction* remove = [UIAlertAction
+                             actionWithTitle:@"Remove Account"
+                             style:UIAlertActionStyleDestructive
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [self performSelectorOnMainThread:@selector(removeAccount:) withObject:selectedIndexPath waitUntilDone:NO];
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleCancel
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    [alert addAction:use];
+    [alert addAction:remove];
+    [alert addAction:cancel];
+    
+    UIPopoverPresentationController *popPresenter = [alert
+                                                     popoverPresentationController];
+    popPresenter.sourceView = [self.tableView cellForRowAtIndexPath:selectedIndexPath];
+    popPresenter.sourceRect = [self.tableView cellForRowAtIndexPath:selectedIndexPath].bounds;
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 - (IBAction)BackPressed:(id)sender {
     NSLog(@"Navigation Stack: %@",self.navigationController.viewControllers);
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        [self performSelectorOnMainThread:@selector(useAccount:) withObject:[NSNumber numberWithInteger:selectedIndexPath.row] waitUntilDone:NO];
+        
+    }else if (buttonIndex == 1){
+        
+        [self performSelectorOnMainThread:@selector(removeAccount:) withObject:selectedIndexPath waitUntilDone:NO];
+        
+    }else{
+        //Cancel Tapped
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (buttonIndex == 1) {
+        
+        AppUser *user = [self.users objectAtIndex:selectedIndexPath.row];
+        if (self.users.count == 1) {
+            //clear intercom at logout
+            [Intercom reset];
+            [APP_DELEGATE logout];
+            return;
+        }
+        //clear intercom at logout
+        [Intercom reset];
+        if ([user.username isEqualToString:[APP_DELEGATE defaultUser].username]) {
+            [APP_DELEGATE deleteUser:user];
+            [APP_DELEGATE saveContext];
+            [APP_DELEGATE setDefaultUser:[[APP_DELEGATE allUserList] objectAtIndex:0]];
+        } else {
+            [APP_DELEGATE deleteUser:user];
+            [APP_DELEGATE saveContext];
+        }
+        
+        [self getAllUsers];
+        //Registering user with Intercom
+        [Intercom registerUserWithUserId:[APP_DELEGATE defaultUser].username];
+    }
 }
 
 @end

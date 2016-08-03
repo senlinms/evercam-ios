@@ -10,7 +10,7 @@
 #import "GAI.h"
 #import "AddAccountView.h"
 
-@interface AccountsViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, AddAccountViewDelegate>
+@interface AccountsViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, AddAccountViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) AddAccountView *addAccountView;
 
