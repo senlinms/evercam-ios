@@ -139,8 +139,8 @@
     if (!camera_Object.is_Public && !camera_Object.is_Discoverable) {
         self.camera_Status_Label.text       = @"Is Public: [No] & Discoverable: [No]";
         self.camera_Status_MainLabel.text   = @"Only specific users";
-    }else if (!camera_Object.is_Public && camera_Object.is_Discoverable){
-        self.camera_Status_Label.text       = @"Is Public: [No] & Discoverable: [Yes]";
+    }else if (camera_Object.is_Public && !camera_Object.is_Discoverable){
+        self.camera_Status_Label.text       = @"Is Public: [Yes] & Discoverable: [No]";
         self.camera_Status_MainLabel.text   = @"Anyone with the link";
     }else if (camera_Object.is_Public && camera_Object.is_Discoverable){
         self.camera_Status_Label.text       = @"Is Public: [Yes] & Discoverable: [Yes]";

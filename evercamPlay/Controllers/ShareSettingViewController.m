@@ -124,7 +124,7 @@
         if ([choosenOption isEqualToString:@"Public on the web"]) {
             [self setCameraStatus_isDiscoverable:YES with_IsPublic:YES];
         }else if ([choosenOption isEqualToString:@"Anyone with the link"]){
-            [self setCameraStatus_isDiscoverable:YES with_IsPublic:NO];
+            [self setCameraStatus_isDiscoverable:NO with_IsPublic:YES];
         }else{
             //Only specific users
             [self setCameraStatus_isDiscoverable:NO with_IsPublic:NO];
