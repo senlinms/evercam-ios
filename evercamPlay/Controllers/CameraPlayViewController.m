@@ -660,7 +660,13 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         
         if (self.cameraInfo.hlsUrl && self.cameraInfo.hlsUrl.length > 0) {
             isPlayerStarted = NO;
-            NSURL *newMovieURL = [NSURL URLWithString:self.cameraInfo.hlsUrl];
+            NSURL *newMovieURL;
+            if (self.cameraInfo.rtmpUrl && self.cameraInfo.rtmpUrl.length > 0) {
+                newMovieURL = [NSURL URLWithString:self.cameraInfo.rtmpUrl];
+            }else{
+                newMovieURL = [NSURL URLWithString:self.cameraInfo.hlsUrl];
+            }
+            
             if ([newMovieURL scheme])
             {
                 AVURLAsset *asset = [AVURLAsset URLAssetWithURL:newMovieURL options:nil];
