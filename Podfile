@@ -3,11 +3,11 @@
 
 target 'evercamPlay' do
 pod 'Mixpanel'
-pod 'Evercam'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'PhoenixClient'
 pod 'ActionSheetPicker-3.0'
+pod 'AFNetworking', '~> 3.0'
 pod 'Unirest'
 end
 

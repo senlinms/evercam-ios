@@ -15,11 +15,9 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Crashlytics (3.7.2):
+  - Crashlytics (3.7.3):
     - Fabric (~> 1.6.3)
-  - Evercam (1.1.5):
-    - AFNetworking (~> 3.0)
-  - Fabric (1.6.7)
+  - Fabric (1.6.8)
   - Mixpanel (2.9.9):
     - Mixpanel/Mixpanel (= 2.9.9)
   - Mixpanel/Mixpanel (2.9.9)
@@ -30,8 +28,8 @@ PODS:
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
+  - AFNetworking (~> 3.0)
   - Crashlytics
-  - Evercam
   - Fabric
   - Mixpanel
   - PhoenixClient
@@ -40,9 +38,8 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
-  Evercam: de2eb05b9671d2489b6b4dbff7550e6bc4f0f97a
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   Mixpanel: 818d1940c2d9402453b349545022a86968097f57
   PhoenixClient: bb4b343dc16df49ad168c7833a06b0953f991df3
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad

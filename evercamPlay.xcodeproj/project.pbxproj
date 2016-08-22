@@ -165,6 +165,25 @@
 		77F305E51D0044A300FB4293 /* AllDevicesCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F305E41D0044A300FB4293 /* AllDevicesCell_iPad.xib */; };
 		77F33DCE1CE0B99C00461117 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F33DCC1CE0B99C00461117 /* ShareViewController.m */; };
 		77F33DCF1CE0B99C00461117 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F33DCD1CE0B99C00461117 /* ShareViewController.xib */; };
+		77F722A31D6AFFF700B8B173 /* AFEvercamAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7227E1D6AFFF700B8B173 /* AFEvercamAPIClient.m */; };
+		77F722A41D6AFFF700B8B173 /* EvercamApiKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722801D6AFFF700B8B173 /* EvercamApiKeyPair.m */; };
+		77F722A51D6AFFF700B8B173 /* EvercamApiUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722821D6AFFF700B8B173 /* EvercamApiUtility.m */; };
+		77F722A61D6AFFF700B8B173 /* EvercamCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722841D6AFFF700B8B173 /* EvercamCamera.m */; };
+		77F722A71D6AFFF700B8B173 /* EvercamCameraBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722861D6AFFF700B8B173 /* EvercamCameraBuilder.m */; };
+		77F722A81D6AFFF700B8B173 /* EvercamCameraModelInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722881D6AFFF700B8B173 /* EvercamCameraModelInfo.m */; };
+		77F722A91D6AFFF700B8B173 /* EvercamCameraUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7228A1D6AFFF700B8B173 /* EvercamCameraUtil.m */; };
+		77F722AA1D6AFFF700B8B173 /* EvercamCameraVendor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7228C1D6AFFF700B8B173 /* EvercamCameraVendor.m */; };
+		77F722AB1D6AFFF700B8B173 /* EvercamCreateCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7228E1D6AFFF700B8B173 /* EvercamCreateCamera.m */; };
+		77F722AC1D6AFFF700B8B173 /* EvercamDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722901D6AFFF700B8B173 /* EvercamDefaults.m */; };
+		77F722AD1D6AFFF700B8B173 /* EvercamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722921D6AFFF700B8B173 /* EvercamModel.m */; };
+		77F722AE1D6AFFF700B8B173 /* EvercamPtzControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722941D6AFFF700B8B173 /* EvercamPtzControls.m */; };
+		77F722AF1D6AFFF700B8B173 /* EvercamRights.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722961D6AFFF700B8B173 /* EvercamRights.m */; };
+		77F722B01D6AFFF700B8B173 /* EvercamShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722981D6AFFF700B8B173 /* EvercamShare.m */; };
+		77F722B11D6AFFF700B8B173 /* EvercamShell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7229A1D6AFFF700B8B173 /* EvercamShell.m */; };
+		77F722B21D6AFFF700B8B173 /* EvercamSingleCameraDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7229C1D6AFFF700B8B173 /* EvercamSingleCameraDetails.m */; };
+		77F722B31D6AFFF700B8B173 /* EvercamTestSnapShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7229E1D6AFFF700B8B173 /* EvercamTestSnapShot.m */; };
+		77F722B41D6AFFF700B8B173 /* EvercamUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722A01D6AFFF700B8B173 /* EvercamUser.m */; };
+		77F722B51D6AFFF700B8B173 /* EvercamVendor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722A21D6AFFF700B8B173 /* EvercamVendor.m */; };
 		77F7A00C1CE1E0CD00E4F5DE /* EvercamUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7A00B1CE1E0CD00E4F5DE /* EvercamUtility.m */; };
 		77F9DCA51CFEE11A000EA6A9 /* ic_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F9DCA21CFEE119000EA6A9 /* ic_search.png */; };
 		77F9DCA61CFEE11A000EA6A9 /* ic_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F9DCA31CFEE119000EA6A9 /* ic_search@2x.png */; };
@@ -532,6 +551,44 @@
 		77F33DCB1CE0B99C00461117 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		77F33DCC1CE0B99C00461117 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		77F33DCD1CE0B99C00461117 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
+		77F7227D1D6AFFF700B8B173 /* AFEvercamAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEvercamAPIClient.h; sourceTree = "<group>"; };
+		77F7227E1D6AFFF700B8B173 /* AFEvercamAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEvercamAPIClient.m; sourceTree = "<group>"; };
+		77F7227F1D6AFFF700B8B173 /* EvercamApiKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamApiKeyPair.h; sourceTree = "<group>"; };
+		77F722801D6AFFF700B8B173 /* EvercamApiKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamApiKeyPair.m; sourceTree = "<group>"; };
+		77F722811D6AFFF700B8B173 /* EvercamApiUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamApiUtility.h; sourceTree = "<group>"; };
+		77F722821D6AFFF700B8B173 /* EvercamApiUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamApiUtility.m; sourceTree = "<group>"; };
+		77F722831D6AFFF700B8B173 /* EvercamCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCamera.h; sourceTree = "<group>"; };
+		77F722841D6AFFF700B8B173 /* EvercamCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCamera.m; sourceTree = "<group>"; };
+		77F722851D6AFFF700B8B173 /* EvercamCameraBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraBuilder.h; sourceTree = "<group>"; };
+		77F722861D6AFFF700B8B173 /* EvercamCameraBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraBuilder.m; sourceTree = "<group>"; };
+		77F722871D6AFFF700B8B173 /* EvercamCameraModelInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraModelInfo.h; sourceTree = "<group>"; };
+		77F722881D6AFFF700B8B173 /* EvercamCameraModelInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraModelInfo.m; sourceTree = "<group>"; };
+		77F722891D6AFFF700B8B173 /* EvercamCameraUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraUtil.h; sourceTree = "<group>"; };
+		77F7228A1D6AFFF700B8B173 /* EvercamCameraUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraUtil.m; sourceTree = "<group>"; };
+		77F7228B1D6AFFF700B8B173 /* EvercamCameraVendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCameraVendor.h; sourceTree = "<group>"; };
+		77F7228C1D6AFFF700B8B173 /* EvercamCameraVendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCameraVendor.m; sourceTree = "<group>"; };
+		77F7228D1D6AFFF700B8B173 /* EvercamCreateCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamCreateCamera.h; sourceTree = "<group>"; };
+		77F7228E1D6AFFF700B8B173 /* EvercamCreateCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamCreateCamera.m; sourceTree = "<group>"; };
+		77F7228F1D6AFFF700B8B173 /* EvercamDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamDefaults.h; sourceTree = "<group>"; };
+		77F722901D6AFFF700B8B173 /* EvercamDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamDefaults.m; sourceTree = "<group>"; };
+		77F722911D6AFFF700B8B173 /* EvercamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamModel.h; sourceTree = "<group>"; };
+		77F722921D6AFFF700B8B173 /* EvercamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamModel.m; sourceTree = "<group>"; };
+		77F722931D6AFFF700B8B173 /* EvercamPtzControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamPtzControls.h; sourceTree = "<group>"; };
+		77F722941D6AFFF700B8B173 /* EvercamPtzControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamPtzControls.m; sourceTree = "<group>"; };
+		77F722951D6AFFF700B8B173 /* EvercamRights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamRights.h; sourceTree = "<group>"; };
+		77F722961D6AFFF700B8B173 /* EvercamRights.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamRights.m; sourceTree = "<group>"; };
+		77F722971D6AFFF700B8B173 /* EvercamShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamShare.h; sourceTree = "<group>"; };
+		77F722981D6AFFF700B8B173 /* EvercamShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamShare.m; sourceTree = "<group>"; };
+		77F722991D6AFFF700B8B173 /* EvercamShell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamShell.h; sourceTree = "<group>"; };
+		77F7229A1D6AFFF700B8B173 /* EvercamShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamShell.m; sourceTree = "<group>"; };
+		77F7229B1D6AFFF700B8B173 /* EvercamSingleCameraDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamSingleCameraDetails.h; sourceTree = "<group>"; };
+		77F7229C1D6AFFF700B8B173 /* EvercamSingleCameraDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamSingleCameraDetails.m; sourceTree = "<group>"; };
+		77F7229D1D6AFFF700B8B173 /* EvercamTestSnapShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamTestSnapShot.h; sourceTree = "<group>"; };
+		77F7229E1D6AFFF700B8B173 /* EvercamTestSnapShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamTestSnapShot.m; sourceTree = "<group>"; };
+		77F7229F1D6AFFF700B8B173 /* EvercamUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamUser.h; sourceTree = "<group>"; };
+		77F722A01D6AFFF700B8B173 /* EvercamUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUser.m; sourceTree = "<group>"; };
+		77F722A11D6AFFF700B8B173 /* EvercamVendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamVendor.h; sourceTree = "<group>"; };
+		77F722A21D6AFFF700B8B173 /* EvercamVendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamVendor.m; sourceTree = "<group>"; };
 		77F7A00A1CE1E0CD00E4F5DE /* EvercamUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamUtility.h; sourceTree = "<group>"; };
 		77F7A00B1CE1E0CD00E4F5DE /* EvercamUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvercamUtility.m; sourceTree = "<group>"; };
 		77F9DCA21CFEE119000EA6A9 /* ic_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_search.png; sourceTree = "<group>"; };
@@ -590,7 +647,7 @@
 		CB01CDAF1ABD675100420CE1 /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
 		CB01CDB21ABDFC9F00420CE1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		CB01CDB31ABDFC9F00420CE1 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		CB1C764E1AAB144800680FE3 /* evercamPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evercamPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB1C764E1AAB144800680FE3 /* Evercam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evercam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1C76521AAB144800680FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB1C76531AAB144800680FE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB1C76551AAB144800680FE3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -921,6 +978,51 @@
 			name = GravatorLib;
 			sourceTree = "<group>";
 		};
+		77F7227C1D6AFFDF00B8B173 /* EvercamAPI */ = {
+			isa = PBXGroup;
+			children = (
+				77F7227D1D6AFFF700B8B173 /* AFEvercamAPIClient.h */,
+				77F7227E1D6AFFF700B8B173 /* AFEvercamAPIClient.m */,
+				77F7227F1D6AFFF700B8B173 /* EvercamApiKeyPair.h */,
+				77F722801D6AFFF700B8B173 /* EvercamApiKeyPair.m */,
+				77F722811D6AFFF700B8B173 /* EvercamApiUtility.h */,
+				77F722821D6AFFF700B8B173 /* EvercamApiUtility.m */,
+				77F722831D6AFFF700B8B173 /* EvercamCamera.h */,
+				77F722841D6AFFF700B8B173 /* EvercamCamera.m */,
+				77F722851D6AFFF700B8B173 /* EvercamCameraBuilder.h */,
+				77F722861D6AFFF700B8B173 /* EvercamCameraBuilder.m */,
+				77F722871D6AFFF700B8B173 /* EvercamCameraModelInfo.h */,
+				77F722881D6AFFF700B8B173 /* EvercamCameraModelInfo.m */,
+				77F722891D6AFFF700B8B173 /* EvercamCameraUtil.h */,
+				77F7228A1D6AFFF700B8B173 /* EvercamCameraUtil.m */,
+				77F7228B1D6AFFF700B8B173 /* EvercamCameraVendor.h */,
+				77F7228C1D6AFFF700B8B173 /* EvercamCameraVendor.m */,
+				77F7228D1D6AFFF700B8B173 /* EvercamCreateCamera.h */,
+				77F7228E1D6AFFF700B8B173 /* EvercamCreateCamera.m */,
+				77F7228F1D6AFFF700B8B173 /* EvercamDefaults.h */,
+				77F722901D6AFFF700B8B173 /* EvercamDefaults.m */,
+				77F722911D6AFFF700B8B173 /* EvercamModel.h */,
+				77F722921D6AFFF700B8B173 /* EvercamModel.m */,
+				77F722931D6AFFF700B8B173 /* EvercamPtzControls.h */,
+				77F722941D6AFFF700B8B173 /* EvercamPtzControls.m */,
+				77F722951D6AFFF700B8B173 /* EvercamRights.h */,
+				77F722961D6AFFF700B8B173 /* EvercamRights.m */,
+				77F722971D6AFFF700B8B173 /* EvercamShare.h */,
+				77F722981D6AFFF700B8B173 /* EvercamShare.m */,
+				77F722991D6AFFF700B8B173 /* EvercamShell.h */,
+				77F7229A1D6AFFF700B8B173 /* EvercamShell.m */,
+				77F7229B1D6AFFF700B8B173 /* EvercamSingleCameraDetails.h */,
+				77F7229C1D6AFFF700B8B173 /* EvercamSingleCameraDetails.m */,
+				77F7229D1D6AFFF700B8B173 /* EvercamTestSnapShot.h */,
+				77F7229E1D6AFFF700B8B173 /* EvercamTestSnapShot.m */,
+				77F7229F1D6AFFF700B8B173 /* EvercamUser.h */,
+				77F722A01D6AFFF700B8B173 /* EvercamUser.m */,
+				77F722A11D6AFFF700B8B173 /* EvercamVendor.h */,
+				77F722A21D6AFFF700B8B173 /* EvercamVendor.m */,
+			);
+			name = EvercamAPI;
+			sourceTree = "<group>";
+		};
 		77F9DCB21CFEF2D8000EA6A9 /* LanScan */ = {
 			isa = PBXGroup;
 			children = (
@@ -1013,7 +1115,7 @@
 		CB1C764F1AAB144800680FE3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CB1C764E1AAB144800680FE3 /* evercamPlay.app */,
+				CB1C764E1AAB144800680FE3 /* Evercam.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1021,6 +1123,7 @@
 		CB1C76501AAB144800680FE3 /* evercamPlay */ = {
 			isa = PBXGroup;
 			children = (
+				77F7227C1D6AFFDF00B8B173 /* EvercamAPI */,
 				CB1C76771AAB7DE900680FE3 /* 3rdParty */,
 				CB44E84E1AAE9E7D00A78C11 /* Controllers */,
 				CB44E8671AAE9E7D00A78C11 /* View */,
@@ -1499,7 +1602,7 @@
 			);
 			name = evercamPlay;
 			productName = evercamPlay;
-			productReference = CB1C764E1AAB144800680FE3 /* evercamPlay.app */;
+			productReference = CB1C764E1AAB144800680FE3 /* Evercam.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1771,6 +1874,7 @@
 				C4E418D81B305F1F0050872E /* gst-launch-remote.c in Sources */,
 				C4E418D91B305F1F0050872E /* gst-launch-remote.h in Sources */,
 				77079D881CE9ECD80073EE16 /* GravatarServiceFactory.m in Sources */,
+				77F722A91D6AFFF700B8B173 /* EvercamCameraUtil.m in Sources */,
 				77F9DCBF1CFEF2F7000EA6A9 /* SimplePingHelper.m in Sources */,
 				C4E418DA1B305F1F0050872E /* gst_ios_init.h in Sources */,
 				C4E418DB1B305F1F0050872E /* gst_ios_init.m in Sources */,
@@ -1780,12 +1884,14 @@
 				410748731ADF6F3E004D10C9 /* RecordingsViewController.m in Sources */,
 				774EF1171CE30A7400D97805 /* ShareSettingViewController.m in Sources */,
 				77F9DCBD1CFEF2F7000EA6A9 /* ScanLAN.m in Sources */,
+				77F722A71D6AFFF700B8B173 /* EvercamCameraBuilder.m in Sources */,
 				413BB2B51ADC10690083A5DC /* ViewCameraViewController.m in Sources */,
 				7779AF051CF470A80036A0F5 /* PresetListViewController.m in Sources */,
 				CB318E571AFC3565004FFA8E /* SDWebImageCompat.m in Sources */,
 				77356BB61D055120009EBA90 /* ReportCameraViewController.m in Sources */,
 				413BB2921ADAB6900083A5DC /* AddCameraViewController.m in Sources */,
 				413BB2A21ADAE0A40083A5DC /* SelectModelViewController.m in Sources */,
+				77F722A61D6AFFF700B8B173 /* EvercamCamera.m in Sources */,
 				413BB29A1ADAD13D0083A5DC /* SelectVendorViewController.m in Sources */,
 				776647091CEEF4430076B9CE /* PublicCamerasViewController.m in Sources */,
 				6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */,
@@ -1796,6 +1902,7 @@
 				77EEF9961CE35619009A3BC0 /* NewShareViewController.m in Sources */,
 				CB318E5E1AFC3565004FFA8E /* UIImage+GIF.m in Sources */,
 				77FB342B1D09879600B3D4C9 /* getgateway.c in Sources */,
+				77F722AF1D6AFFF700B8B173 /* EvercamRights.m in Sources */,
 				CB840D211ACAF38900F289A9 /* CameraViewCell.m in Sources */,
 				CB840D1D1ACAF36D00F289A9 /* ImageCacheObject.m in Sources */,
 				CB318E541AFC3565004FFA8E /* MKAnnotationView+WebCache.m in Sources */,
@@ -1804,15 +1911,20 @@
 				585999111BF1B2DF00CDC457 /* MenuViewControllerCell.m in Sources */,
 				CB318E311AFC0875004FFA8E /* GCDAsyncUdpSocket.m in Sources */,
 				CB318E621AFC3565004FFA8E /* UIImageView+WebCache.m in Sources */,
+				77F722B41D6AFFF700B8B173 /* EvercamUser.m in Sources */,
 				77F305E21D00429000FB4293 /* AllDevicesCell.m in Sources */,
 				41208A611AD97D44009C4FC2 /* SMTPAPI.m in Sources */,
 				777B3D7E1D0EAB9600BCB0AE /* CameraNameViewController.m in Sources */,
 				CB01CDB41ABDFC9F00420CE1 /* MBProgressHUD.m in Sources */,
 				E30900881B16B78600E5B5C0 /* BlockActionSheet.m in Sources */,
+				77F722B01D6AFFF700B8B173 /* EvercamShare.m in Sources */,
 				CB318E5B1AFC3565004FFA8E /* SDWebImageManager.m in Sources */,
 				41BEFB421AD609A10016ACCA /* CameraPlayViewController.m in Sources */,
+				77F722AD1D6AFFF700B8B173 /* EvercamModel.m in Sources */,
 				CB44E87C1AAE9E7D00A78C11 /* WelcomeViewController.m in Sources */,
+				77F722B31D6AFFF700B8B173 /* EvercamTestSnapShot.m in Sources */,
 				77F9DCBE1CFEF2F7000EA6A9 /* SimplePing.m in Sources */,
+				77F722A31D6AFFF700B8B173 /* AFEvercamAPIClient.m in Sources */,
 				CB318E551AFC3565004FFA8E /* NSData+ImageContentType.m in Sources */,
 				CB840D1B1ACAF36D00F289A9 /* AsyncImageView.m in Sources */,
 				CB318E301AFC0875004FFA8E /* GCDAsyncSocket.m in Sources */,
@@ -1821,12 +1933,18 @@
 				ABDAE0871CBB8749002285B7 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				CB44E8781AAE9E7D00A78C11 /* SettingsViewController.m in Sources */,
 				413BB2AF1ADB14640083A5DC /* CommonUtil.m in Sources */,
+				77F722A41D6AFFF700B8B173 /* EvercamApiKeyPair.m in Sources */,
 				CB44E87A1AAE9E7D00A78C11 /* SignupViewController.m in Sources */,
+				77F722B51D6AFFF700B8B173 /* EvercamVendor.m in Sources */,
+				77F722A81D6AFFF700B8B173 /* EvercamCameraModelInfo.m in Sources */,
+				77F722B21D6AFFF700B8B173 /* EvercamSingleCameraDetails.m in Sources */,
+				77F722A51D6AFFF700B8B173 /* EvercamApiUtility.m in Sources */,
 				6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */,
 				CB318E5F1AFC3565004FFA8E /* UIImage+MultiFormat.m in Sources */,
 				41208A351AD7244A009C4FC2 /* AppUser.xcdatamodeld in Sources */,
 				E30900891B16B78600E5B5C0 /* BlockAlertView.m in Sources */,
 				77F7A00C1CE1E0CD00E4F5DE /* EvercamUtility.m in Sources */,
+				77F722AB1D6AFFF700B8B173 /* EvercamCreateCamera.m in Sources */,
 				77F305DD1D003FA300FB4293 /* AllDevicesViewController.m in Sources */,
 				410747EF1ADC6D45004D10C9 /* BrowseJpgTask.m in Sources */,
 				CB318E591AFC3565004FFA8E /* SDWebImageDownloader.m in Sources */,
@@ -1834,6 +1952,7 @@
 				CB44E8801AAE9E7D00A78C11 /* AddAccountCell.m in Sources */,
 				CB318E5D1AFC3565004FFA8E /* UIButton+WebCache.m in Sources */,
 				58F0F6171C08799B00BC04A3 /* Struts.m in Sources */,
+				77F722B11D6AFFF700B8B173 /* EvercamShell.m in Sources */,
 				77E96B631CFDAD150044B4E0 /* SnapshotViewController.m in Sources */,
 				CB1C76571AAB144800680FE3 /* AppDelegate.m in Sources */,
 				E369E4A61B137AB6009D2D9E /* AddAccountView.m in Sources */,
@@ -1847,9 +1966,11 @@
 				CB1C76541AAB144800680FE3 /* main.m in Sources */,
 				77F9DCB01CFEE663000EA6A9 /* CameraScanCell.m in Sources */,
 				CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */,
+				77F722AA1D6AFFF700B8B173 /* EvercamCameraVendor.m in Sources */,
 				CB318E601AFC3565004FFA8E /* UIImage+WebP.m in Sources */,
 				CB318E611AFC3565004FFA8E /* UIImageView+HighlightedWebCache.m in Sources */,
 				CB840D1C1ACAF36D00F289A9 /* ImageCache.m in Sources */,
+				77F722AE1D6AFFF700B8B173 /* EvercamPtzControls.m in Sources */,
 				41208A441AD8482B009C4FC2 /* PreferenceUtil.m in Sources */,
 				E369E4AB1B137F54009D2D9E /* GlobalSettings.m in Sources */,
 				413BB2841AD992DD0083A5DC /* NetworkUtil.m in Sources */,
@@ -1860,6 +1981,7 @@
 				ABDAE0861CBB8749002285B7 /* TPKeyboardAvoidingTableView.m in Sources */,
 				7779AF0C1CF493040036A0F5 /* AddPresetViewController.m in Sources */,
 				77F9DCBC1CFEF2F7000EA6A9 /* Device.m in Sources */,
+				77F722AC1D6AFFF700B8B173 /* EvercamDefaults.m in Sources */,
 				772EA57B1D0940D30005DB98 /* ConnectCameraViewController.m in Sources */,
 				41208A3C1AD725CC009C4FC2 /* AppUser.m in Sources */,
 				41208A4F1AD8DCAA009C4FC2 /* CustomNavigationController.m in Sources */,
@@ -1901,7 +2023,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1921,6 +2043,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Evercam;
 				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
@@ -1960,6 +2083,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Evercam;
 				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
@@ -1977,7 +2101,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Camba.tv Limited (WUBG25MK44)";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2007,7 +2131,7 @@
 					"-liconv",
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Evercam;
 				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2057,7 +2181,7 @@
 					"-liconv",
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Evercam;
 				PROVISIONING_PROFILE = "2bee24a1-043b-4aa2-a6bc-031d3d7d5c95";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
