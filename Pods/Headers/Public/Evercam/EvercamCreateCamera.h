@@ -1,1 +1,0 @@
-../../../Evercam/Evercam/EvercamCreateCamera.h
