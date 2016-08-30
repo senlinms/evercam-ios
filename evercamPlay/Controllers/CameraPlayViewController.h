@@ -55,6 +55,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *liveViewScroll;
 @property (nonatomic, strong) id<CameraPlayViewControllerDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UIButton *refreshBtn;
 @property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer *pinchGesture_outlet;
 - (IBAction)pinchGestureAction:(id)sender;
 //PTZ controls
@@ -69,4 +70,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UIButton *zoomOutBtn;
 @property (weak, nonatomic) IBOutlet UIButton *zoomInBtn;
+- (IBAction)refreshAction:(id)sender;
 @end

@@ -30,6 +30,7 @@
                 <outlet property="playerView" destination="WLe-ZG-20x" id="6kD-lf-blC"/>
                 <outlet property="presetBtn" destination="ciq-n8-daz" id="iqi-J6-4yh"/>
                 <outlet property="ptc_Control_View" destination="Klj-mG-HCB" id="KV8-dv-Fal"/>
+                <outlet property="refreshBtn" destination="vVt-Om-ANc" id="fxW-6i-0as"/>
                 <outlet property="rightBtn" destination="toE-8t-FBs" id="2aA-5Y-xPT"/>
                 <outlet property="saveButton" destination="HuX-BZ-n6g" id="JUv-UA-qEM"/>
                 <outlet property="snapshotConfirmView" destination="ATF-Eo-LdI" id="qY7-WL-wRA"/>
@@ -77,11 +78,19 @@
                                 <outlet property="delegate" destination="-1" id="PBo-4l-pqF"/>
                             </connections>
                         </scrollView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vVt-Om-ANc">
+                            <rect key="frame" x="372" y="430" width="24" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="action_refresh.png"/>
+                            <connections>
+                                <action selector="refreshAction:" destination="-1" eventType="touchUpInside" id="f8p-fh-qG1"/>
+                            </connections>
+                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera is offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0OB-RN-Sn7">
                             <rect key="frame" x="315" y="476" width="138" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.86274509799999999" green="0.29803921570000003" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.71764705882352942" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="Im9-gb-Jb8">
@@ -322,6 +331,7 @@
         </pinchGestureRecognizer>
     </objects>
     <resources>
+        <image name="action_refresh.png" width="24" height="24"/>
         <image name="back.png" width="10" height="17"/>
         <image name="btn_pause.png" width="150" height="150"/>
         <image name="btn_save.png" width="150" height="150"/>

@@ -21,6 +21,7 @@
 #import "Config.h"
 #import "ForgotPasswordViewController.h"
 #import "Intercom/intercom.h"
+#import "EvercamUtility.h"
 
 @interface LoginViewController ()
 {
@@ -36,8 +37,12 @@
     
     self.screenName = @"Login";
     // Do any additional setup after loading the view from its nib.
+    if (IS_IPHONE_4) {
+        self.contentView.contentSize = CGSizeMake(self.contentView.frame.size.width, 548.0);
+    }else{
+        self.contentView.contentSize = self.contentView.bounds.size;
+    }
     
-    self.contentView.contentSize = self.contentView.bounds.size;
     
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor lightGrayColor];
