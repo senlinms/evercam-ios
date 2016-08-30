@@ -93,6 +93,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     ptzViewTap.numberOfTouchesRequired = 1;
     [self.ptc_Control_View addGestureRecognizer:ptzViewTap];
     [self.playerLayerView addGestureRecognizer:ptzViewTap];
+    [self.playerView addGestureRecognizer:ptzViewTap];
     
     self.liveViewScroll.minimumZoomScale=1;
     self.liveViewScroll.maximumZoomScale=5;
