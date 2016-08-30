@@ -27,6 +27,7 @@
 #import "EvercamUtility.h"
 #import "EvercamPtzControls.h"
 #import "EvercamCameraModelInfo.h"
+#import "EvercamRefreshCamera.h"
 #import "PresetListViewController.h"
 
 static void *MyStreamingMovieViewControllerTimedMetadataObserverContext = &MyStreamingMovieViewControllerTimedMetadataObserverContext;
@@ -77,35 +78,10 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 @synthesize playerLayerView;
 @synthesize player, playerItem;
 
-
-/*
-static void set_message_proxy (const gchar *message, gpointer app)
-{
-    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
-    [self setMessage:[NSString stringWithUTF8String:message]];
-}
-
-void set_current_position_proxy (gint position, gint duration, gpointer app)
-{
-    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
-    [self setCurrentPosition:position duration:duration];
-}
-
-void initialized_proxy (gpointer app)
-{
-    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
-    [self initialized];
-}
-
-void media_size_changed_proxy (gint width, gint height, gpointer app)
-{
-    CameraPlayViewController *self = (__bridge CameraPlayViewController *) app;
-    [self mediaSizeChanged:width height:height];
-}
-*/
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-//    [self setTitleBarAccordingToOrientation];
+    
     runFirstTime            = YES;
     videoController.alpha   = 0.0;
     self.screenName         = @"Video View";
@@ -650,6 +626,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     if ([self.cameraInfo isOnline]) {
         self.lblOffline.hidden = YES;
+        self.refreshBtn.hidden = YES;
         [loadingView startAnimating];
         
         if (self.imageView)
@@ -692,6 +669,7 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
         self.imageView.image = nil;
         [loadingView stopAnimating];
         self.lblOffline.hidden = NO;
+        self.refreshBtn.hidden = NO;
     }
     isPlaying = YES;
 }
@@ -1057,7 +1035,6 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
     
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:self.cameraInfo.timezone]];
     
-    //[formatter dateFromString:dateAsString]
     
     NSString *hlsCameraDateString  = [dateFormatter stringFromDate:[dateFormatter dateFromString:utcDateString]];
     
@@ -1395,4 +1372,22 @@ void media_size_changed_proxy (gint width, gint height, gpointer app)
 }
 
 
+- (IBAction)refreshAction:(id)sender {
+    NSLog(@"Call Refresh");
+    [MBProgressHUD showHUDAddedTo:MainWindow animated:YES];
+    EvercamRefreshCamera *refreshObj = [[EvercamRefreshCamera alloc] init];
+    
+    NSDictionary * param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.cameraInfo.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
+    
+    [refreshObj refreshOfflineCamera:param_Dictionary withBlock:^(id details, NSError *error) {
+        if (!error) {
+            [MBProgressHUD hideHUDForView:MainWindow animated:YES];
+            NSLog(@"Successfully refresh the camera");
+        }else{
+            [MBProgressHUD hideHUDForView:MainWindow animated:YES];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
+            NSLog(@"Error: %@",error.localizedDescription);
+        }
+    }];
+}
 @end

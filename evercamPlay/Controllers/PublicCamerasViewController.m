@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view from its nib.
     [self.loading_ActivityIndicator startAnimating];
     self.cameras_WebView.hidden = YES;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.evercam.io/public/cameras"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://evercam.io/public/cameras"]];
     [self.cameras_WebView loadRequest:request];
 }
 
