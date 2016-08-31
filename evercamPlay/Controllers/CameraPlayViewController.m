@@ -53,12 +53,12 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     NSTimer *timeCounter;
     NSString* currentImage;
     BOOL runFirstTime;
-    __weak IBOutlet UIButton *playOrPauseButton;
-    __weak IBOutlet UIView *videoController;
-    __weak IBOutlet UIButton *saveButton;
+    __weak IBOutlet UIButton                *playOrPauseButton;
+    __weak IBOutlet UIView                  *videoController;
+    __weak IBOutlet UIButton                *saveButton;
     
-    __weak IBOutlet UIView *snapshotConfirmView;
-    __weak IBOutlet UIImageView *imvSnapshot;
+    __weak IBOutlet UIView                  *snapshotConfirmView;
+    __weak IBOutlet UIImageView             *imvSnapshot;
     __weak IBOutlet UIActivityIndicatorView *loadingView;
     
     NSTimer *liveViewSwitchTimer;
@@ -85,8 +85,10 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     runFirstTime            = YES;
     videoController.alpha   = 0.0;
     self.screenName         = @"Video View";
-    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     
+
+
+    [self changeBtnTitle];
     runFirstTime            = NO;
     
     ptzViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
@@ -98,7 +100,26 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     self.liveViewScroll.minimumZoomScale=1;
     self.liveViewScroll.maximumZoomScale=5;
     self.liveViewScroll.delegate=self;
+    
+    
 //    self.liveViewScroll.decelerationRate = UIScrollViewDecelerationRateFast;
+}
+
+- (CGFloat)widthOfString:(NSString *)string withFont:(UIFont *)font {
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
+    CGSize widthOne = [string sizeWithAttributes:attributes];
+    CGFloat width = [[[NSAttributedString alloc] initWithString:string attributes:attributes] size].width;
+    return width + 20;
+}
+
+-(void)changeBtnTitle{
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
+        [self.btnTitle setFrame:CGRectMake(self.btnTitle.frame.origin.x, self.btnTitle.frame.origin.y, [self widthOfString:self.cameraInfo.name withFont:[UIFont fontWithName:@"Arial" size:16]], self.btnTitle.frame.size.height)];
+        self.downImgView.frame = CGRectMake(self.btnTitle.frame.origin.x + self.btnTitle.frame.size.width + 10, self.downImgView.frame.origin.y, self.downImgView.frame.size.width, self.downImgView.frame.size.height);
+    }];
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -1160,7 +1181,8 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 #pragma mark - ViewCameraViewController Delegate Method
 - (void)cameraEdited:(EvercamCamera *)camera {
     self.cameraInfo = camera;
-    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
+    [self changeBtnTitle];
+//    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
     if ([self.delegate respondsToSelector:@selector(cameraEdited:)]) {
         [self.delegate cameraEdited:camera];
@@ -1188,7 +1210,8 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     self.socket = nil;
     
     self.cameraInfo = [self.cameras objectAtIndex:index];
-    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
+    [self changeBtnTitle];
+//    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     self.ptc_Control_View.hidden = YES;
     [self getCameraModelInformation];
     [self playCamera];
@@ -1257,6 +1280,10 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
         //zoom out
         [self setCameraDirection:@"zoom=-1"];
     }
+}
+
+- (IBAction)dropDownImg_Tapped:(id)sender {
+    [self cameraItemTapped:self.btnTitle];
 }
 
 -(void)setCameraToHome{
