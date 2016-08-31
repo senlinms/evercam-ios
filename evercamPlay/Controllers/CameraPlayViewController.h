@@ -61,6 +61,7 @@
 //PTZ controls
 - (IBAction)ptz_Controls_Action:(id)sender;
 
+- (IBAction)dropDownImg_Tapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *ptc_Control_View;
 @property (weak, nonatomic) IBOutlet UIButton *presetBtn;
 @property (weak, nonatomic) IBOutlet UIButton *homeBtn;
