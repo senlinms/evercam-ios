@@ -48,6 +48,7 @@
 #import "PublicCamerasViewController.h"
 #import "CameraScanViewController.h"
 #import "VendorAndModelViewController.h"
+#import "LoginViewController.h"
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -150,6 +151,41 @@
     // row number reveived here with 1 increased
     if (row == 1)
     {
+        
+        newFrontController = [[CameraScanViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CameraScanViewController" : @"CameraScanViewController_iPad" bundle:[NSBundle mainBundle]];
+        
+    }else if (row == 2)
+    {
+        
+        newFrontController = [[PublicCamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"PublicCamerasViewController" : @"PublicCamerasViewController_iPad" bundle:[NSBundle mainBundle]];
+        
+    }else if (row == 3)
+    {
+        
+        newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
+                                                              action:action_settings
+                                                               label:label_settings
+                                                               value:nil] build]];
+        
+    }
+    else if (row == 4)
+    {
+        
+        [Intercom presentConversationList];
+        return;
+    }
+    else if (row == 5)
+    {
+        
+        LoginViewController *vc = [[LoginViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"LoginViewController":@"LoginViewController_iPad" bundle:[NSBundle mainBundle]];
+        vc.isFromAddAccount     = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if (row == 6){
+        
         newFrontController = [[AccountsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AccountsViewController" : @"AccountsViewController_iPad" bundle:nil];
         
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -158,29 +194,6 @@
                                                                label:label_account
                                                                value:nil] build]];
         
-    }else if (row == 2)
-    {
-        newFrontController = [[CameraScanViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CameraScanViewController" : @"CameraScanViewController_iPad" bundle:[NSBundle mainBundle]];
-        
-    }else if (row == 3)
-    {
-        newFrontController = [[PublicCamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"PublicCamerasViewController" : @"PublicCamerasViewController_iPad" bundle:[NSBundle mainBundle]];
-        
-    }
-    else if (row == 4)
-    {
-        newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
-        
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-                                                              action:action_settings
-                                                               label:label_settings
-                                                               value:nil] build]];
-    }
-    else if (row == 5)
-    {
-        [Intercom presentConversationList];
-        return;
     }
     
     [self.navigationController pushViewController:newFrontController animated:YES];
@@ -280,10 +293,10 @@
                                                            label:label_add_camera_manually
                                                            value:nil] build]];
     /*
-    AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:nil];
-    [addCameraVC setDelegate:self];
-    [self.navigationController pushViewController:addCameraVC animated:YES];
-    */
+     AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:nil];
+     [addCameraVC setDelegate:self];
+     [self.navigationController pushViewController:addCameraVC animated:YES];
+     */
     VendorAndModelViewController *addCameraVC = [[VendorAndModelViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"VendorAndModelViewController" : @"VendorAndModelViewController_iPad" bundle:[NSBundle mainBundle]];
     CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:addCameraVC];
     navVC.isPortraitMode        = YES;
@@ -315,7 +328,7 @@
 {
     CameraViewCell *cell = (CameraViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:[GlobalSettings sharedInstance].isPhone ? @"CameraViewCell":@"CameraViewCellPad" forIndexPath:indexPath];
     EvercamCamera *cameraInfo = [cameraArray objectAtIndex:indexPath.row];
-//    NSLog(@"Is Camera Online: %@",cameraInfo.isOnline?@"YES: ONLINE":@"NO: OFFLINE");
+    //    NSLog(@"Is Camera Online: %@",cameraInfo.isOnline?@"YES: ONLINE":@"NO: OFFLINE");
     NSString *thumbnail_ImageUrl_String = [NSString stringWithFormat:@"%@/%@/thumbnail?api_id=%@&api_key=%@",THUMB_IMAGE_BASEURL,cameraInfo.camId,[APP_DELEGATE defaultUser].apiId,[APP_DELEGATE defaultUser].apiKey];
     
     cell.titleLabel.text = cameraInfo.name;
@@ -356,23 +369,23 @@
         cell.greyImv.hidden = YES;
         cell.imvOffline.hidden = YES;
         /*
-        [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String]
-                     placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]
-                              options:SDWebImageRefreshCached];
-        */
+         [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String]
+         placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]
+         options:SDWebImageRefreshCached];
+         */
         [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String] placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]];
-//        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
+        //        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     } else {
         
         cell.greyImv.hidden = NO;
         cell.imvOffline.hidden = NO;
         /*
-        [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String]
-                                   placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]
-                                            options:SDWebImageRefreshCached];
-        */
+         [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String]
+         placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]
+         options:SDWebImageRefreshCached];
+         */
         [cell.thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:thumbnail_ImageUrl_String] placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]];
-//        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
+        //        [cell.thumbnailImageView loadImageFromURL:[NSURL URLWithString:thumbnail_ImageUrl_String] withSpinny:NO];
     }
     
     return cell;
@@ -463,7 +476,7 @@
     [UIViewController attemptRotationToDeviceOrientation];
     [self setCamerasPerRow];
     [self refreshGridView:NO];
-//    [self onRefresh:self];
+    //    [self onRefresh:self];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

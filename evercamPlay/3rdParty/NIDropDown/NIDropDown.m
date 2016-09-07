@@ -65,7 +65,7 @@
         
         gradient = [CAGradientLayer layer];
         gradient.frame = self.bounds;
-        gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] CGColor], nil];
+        gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor colorWithRed:39.0/255.0 green:45.0/255.0 blue:51.0/255.0 alpha:1.0] CGColor], nil];
         [self.layer insertSublayer:gradient atIndex:0];
     }
     return self;
@@ -175,7 +175,7 @@
         }
     }
     
-    cell.textLabel.textColor = [UIColor blackColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
     cell.contentView.backgroundColor = [UIColor clearColor];
     

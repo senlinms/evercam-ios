@@ -300,11 +300,26 @@
     }
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+-(void)removeUserImageFromDirectory:(NSString *)email{
+    
+    NSArray *paths          = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    
+    NSString *filePath      = [documentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",email]];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) { // if file is not exist, create it.
+        
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        
+    }
+}
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
     if (buttonIndex == 1) {
         
         AppUser *user = [self.users objectAtIndex:selectedIndexPath.row];
+        [self removeUserImageFromDirectory:user.email];
         if (self.users.count == 1) {
             //clear intercom at logout
             [Intercom reset];
