@@ -26,15 +26,18 @@
 
 #import <UIKit/UIKit.h>
 #import "GravatarServiceFactory.h"
-
-@interface MenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,GravatarServiceDelegate>
+#import "AccountsTableView.h";
+@interface MenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,GravatarServiceDelegate,AccountTable>
 @property (nonatomic, retain) IBOutlet UIView *containerView;
 @property (nonatomic, retain) IBOutlet UITableView *rearTableView;
+@property (weak, nonatomic) IBOutlet AccountsTableView *accountsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *email;
 @property (weak, nonatomic) IBOutlet UILabel *appVersion;
 
+@property (weak, nonatomic) IBOutlet UIView *offline_view;
 - (IBAction)showOfflineModeChanged:(id)sender;
+- (IBAction)show_Accounts:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 
 @property (weak, nonatomic) IBOutlet UISwitch *cameraOffOn_Switch;

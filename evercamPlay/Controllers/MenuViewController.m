@@ -42,6 +42,11 @@
 #import "Struts.h"
 #import "GravatarServiceFactory.h"
 #import "CamerasViewController.h"
+#import "AccountsTableViewCell.h"
+
+#import "Intercom/intercom.h"
+#import "Mixpanel.h"
+
 @interface MenuViewController()
 {
     NSInteger _presentedRow;
@@ -69,7 +74,10 @@
     SWRevealViewController *revealController = [self revealViewController];
     UINavigationController *navigation = (UINavigationController *)revealController.frontViewController;
     
-    NSLog(@"%@",revealController.frontViewController);
+    //Side Menu Accounts code
+    self.accountsTableView.AccountTableDelegate = self;
+    [self.accountsTableView registerNib:[UINib nibWithNibName:([GlobalSettings sharedInstance].isPhone)?@"AccountsTableViewCell":@"AccountsTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Cell"];
+    //+++++++
     
 }
 
@@ -82,7 +90,13 @@
     self.email.text = [APP_DELEGATE defaultUser].email;
     [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:gravatarServerImageMysteryMan size:72 delegate:self];
     
-//    [self changeFrame];
+    
+    //Side Menu Accounts code
+    self.accountsTableView.accountsArray = [[APP_DELEGATE allUserList] mutableCopy];
+    [self.accountsTableView.accountsArray removeObject:[APP_DELEGATE defaultUser]];
+    [self.accountsTableView reloadData];
+    //+++++++++
+    
     if ([PreferenceUtil isShowOfflineCameras]) {
         [self.cameraOffOn_Switch setOn:YES];
     } else {
@@ -104,7 +118,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-//    [self changeFrame];
+    
 }
 
 -(void)changeFrame
@@ -135,7 +149,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -159,25 +173,22 @@
     }
     
     NSString *text = nil;
+    
     if (row == 0)
-    {
-        text = @"Accounts";
-        cell.imageView.image = [UIImage imageNamed:@"ic_accounts.png"];
-    }else if (row == 1)
     {
         text = @"Scan for cameras";
         cell.imageView.image = [UIImage imageNamed:@"ic_search.png"];
-    }else if (row == 2)
+    }else if (row == 1)
     {
         text = @"Public cameras";
         cell.imageView.image = [UIImage imageNamed:@"ic_compass.png"];
     }
-    else if (row == 3)
+    else if (row == 2)
     {
         text = @"Settings";
         cell.imageView.image = [UIImage imageNamed:@"ic_settings.png"];
     }
-    else if (row == 4)
+    else if (row == 3)
     {
         text = @"Live Support";
         cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
@@ -221,6 +232,45 @@
         return;
     }
 }
+//++++++++
+#pragma AccountsTableView Delegate Methods
+
+-(void)loadController:(NSInteger)row{
+    if (row == 0 || row == 1 || row == 2 || row == 3 || row == 4 || row == 5)
+    {
+        row += 1;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"K_LOAD_SIDE_MENU_CONTROLLERS" object:[NSNumber numberWithInteger:row]];
+    }
+}
+
+-(void)useSelectedAccount:(NSMutableArray *)accountsArray withIndex:(NSInteger)selectedIndex{
+    //clear intercom at logout
+    [Intercom reset];
+    
+    AppUser *user = accountsArray[selectedIndex];
+    
+    [APP_DELEGATE setDefaultUser:user];
+    
+    //Registering user with Intercom
+    [Intercom registerUserWithUserId:user.username];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel identify:user.username];
+    [mixpanel track:mixpanel_event_sign_in properties:@{
+                                                        @"Client-Type": @"Play-iOS"
+                                                        }];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    UINavigationController *navigation = (UINavigationController *)revealController.frontViewController;
+    CamerasViewController *cVC = (CamerasViewController *)navigation.viewControllers[0];
+    [cVC onRefresh:cVC];
+    [self.revealViewController revealToggleAnimated:YES];
+    
+}
+
+#pragma END AccountsTableView Delegate Methods
+//+++++++
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -237,7 +287,7 @@
 }
 
 - (IBAction)showOfflineModeChanged:(id)sender {
-    NSLog(@"Navigation: %@",self.navigationController.viewControllers);
+    
     UISwitch *switchView = (UISwitch *)sender;
     if ([switchView isOn]) {
         [PreferenceUtil setIsShowOfflineCameras:YES];
@@ -248,6 +298,24 @@
     UINavigationController *navigation = (UINavigationController *)revealController.frontViewController;
     CamerasViewController *cVC = (CamerasViewController *)navigation.viewControllers[0];
     [cVC onRefresh:cVC];
+}
+
+- (IBAction)show_Accounts:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        if (CGAffineTransformEqualToTransform(btn.transform, CGAffineTransformIdentity)) {
+            btn.transform = CGAffineTransformMakeRotation(M_PI * 0.999);
+            self.rearTableView.hidden = YES;
+            self.offline_view.hidden = YES;
+            self.accountsTableView.hidden = NO;
+        } else {
+            btn.transform = CGAffineTransformIdentity;
+            self.rearTableView.hidden = NO;
+            self.offline_view.hidden = NO;
+            self.accountsTableView.hidden = YES;
+        }
+    }];
 }
 
 @end

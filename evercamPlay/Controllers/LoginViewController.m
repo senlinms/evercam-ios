@@ -150,10 +150,14 @@
                     //Registering user with Intercom
                     [Intercom registerUserWithUserId:newuser.username];
                     
+                    [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:gravatarServerImageMysteryMan size:72 delegate:self];
+                    
                     if (isFromAddAccount) {
                         [self.navigationController popToRootViewControllerAnimated:YES];
                         return;
                     }
+                    
+                    
                     
                     CamerasViewController *camerasViewController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
                     MenuViewController *menuViewController = [[MenuViewController alloc] init];
@@ -186,6 +190,30 @@
             [simpleAlert show];
         }
     }];
+}
+
+-(void)gravatarServiceDone:(id<GravatarService>)gravatarService
+                 withImage:(UIImage *)image{
+    NSLog(@"gravatarServiceDone");
+    NSData *pngData = UIImagePNGRepresentation(image);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",[APP_DELEGATE defaultUser].email]];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) { // if file is not exist, create it.
+        
+        [pngData writeToFile:filePath atomically:YES];
+        
+    }else{
+        //overwrite file it already exist
+        [pngData writeToFile:filePath atomically:YES];
+    }
+}
+
+-(void)gravatarService:(id<GravatarService>)gravatarService
+      didFailWithError:(NSError *)error{
+    NSLog(@"gravatarService");
 }
 
 - (IBAction)onBack:(id)sender
