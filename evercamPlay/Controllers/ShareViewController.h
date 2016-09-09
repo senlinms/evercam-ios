@@ -26,6 +26,7 @@
 - (IBAction)camera_StatusChange_Action:(id)sender;
 - (IBAction)transferOwnerAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *gravator_ImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *camera_Status_ImgView;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)NewShareAction:(id)sender;
