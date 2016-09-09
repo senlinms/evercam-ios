@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="addShareBtn" destination="Lg6-is-JKq" id="hHy-SF-POG"/>
                 <outlet property="cam_status_View" destination="OTQ-IC-ZQX" id="Czm-XE-cNW"/>
+                <outlet property="camera_Status_ImgView" destination="wLK-AA-KDw" id="tnu-3g-P1y"/>
                 <outlet property="camera_Status_Label" destination="n8S-72-hob" id="3Gx-gr-WLb"/>
                 <outlet property="camera_Status_MainLabel" destination="Vwx-yB-XYO" id="2ZC-l3-hRh"/>
                 <outlet property="gravator_ImageView" destination="OcF-0Y-o0g" id="b4H-XO-7th"/>

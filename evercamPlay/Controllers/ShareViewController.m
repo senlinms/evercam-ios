@@ -139,12 +139,15 @@
     if (!camera_Object.is_Public && !camera_Object.is_Discoverable) {
         self.camera_Status_Label.text       = @"Is Public: [No] & Discoverable: [No]";
         self.camera_Status_MainLabel.text   = @"Only specific users";
+        self.camera_Status_ImgView.image    = [UIImage imageNamed:@"ic_fontawsome_users.png"];
     }else if (camera_Object.is_Public && !camera_Object.is_Discoverable){
         self.camera_Status_Label.text       = @"Is Public: [Yes] & Discoverable: [No]";
         self.camera_Status_MainLabel.text   = @"Anyone with the link";
+        self.camera_Status_ImgView.image    = [UIImage imageNamed:@"ic_link_iOS.png"];
     }else if (camera_Object.is_Public && camera_Object.is_Discoverable){
         self.camera_Status_Label.text       = @"Is Public: [Yes] & Discoverable: [Yes]";
         self.camera_Status_MainLabel.text   = @"Public on the web";
+        self.camera_Status_ImgView.image    = [UIImage imageNamed:@"ic_globe_iOS.png"];
     }
 }
 
