@@ -518,7 +518,7 @@ static EvercamShell *instance = nil;
 
 #pragma mark - Model Functions
 - (void)getAllModelsByVendorId:(NSString *)vendorId withBlock:(void (^)(NSArray *models, NSError *error))block {
-    [self getAllModelsByVendorId:vendorId andLimit:100 andPage:0 andCurrentModelsArray:[NSMutableArray new] withBlock:block];
+    [self getAllModelsByVendorId:vendorId andLimit:0 andPage:0 andCurrentModelsArray:[NSMutableArray new] withBlock:block];
 }
 
 - (void)getAllModelsByVendorId:(NSString *)vendorId andLimit:(NSInteger)limit andPage:(NSInteger)page andCurrentModelsArray:(NSMutableArray *)currentModelsArray withBlock:(void (^)(NSArray *models, NSError *error))block {

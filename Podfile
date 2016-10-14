@@ -1,5 +1,4 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '6.0'
+platform :ios, '7.0'
 
 target 'evercamPlay' do
 pod 'Mixpanel'
@@ -9,5 +8,7 @@ pod 'PhoenixClient'
 pod 'ActionSheetPicker-3.0'
 pod 'AFNetworking', '~> 3.0'
 pod 'Unirest'
+pod 'Firebase/Core'
+pod 'Firebase/Crash'
 end
 

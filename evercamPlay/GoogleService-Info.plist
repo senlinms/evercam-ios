@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>461613501728-8in616p4sf3qn6qem2jn6kqkmmvmhpak.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.461613501728-8in616p4sf3qn6qem2jn6kqkmmvmhpak</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCgNcl9Z-Dj5CXR6aOuFhoTmhLF_azIDsU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>461613501728</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.evercam.iosapp</string>
+	<key>PROJECT_ID</key>
+	<string>evercam-46b7e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>evercam-46b7e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<true/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:461613501728:ios:9edce13763514611</string>
+	<key>DATABASE_URL</key>
+	<string>https://evercam-46b7e.firebaseio.com</string>
+</dict>
+</plist>

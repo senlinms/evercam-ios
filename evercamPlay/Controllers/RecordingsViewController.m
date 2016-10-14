@@ -71,7 +71,7 @@
     webView.scrollView.maximumZoomScale = 20; // set as you want.
     webView.scrollView.minimumZoomScale = 1; // set as you want.
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [self.loadingView stopAnimating];
     self.webView.userInteractionEnabled = YES;
     

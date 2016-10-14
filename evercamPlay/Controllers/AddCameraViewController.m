@@ -201,14 +201,15 @@
         return;
     }
     
-    NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",jpg_Url,@"jpg_url",self.tfUsername.text,@"cam_username",self.tfPassword.text,@"cam_password",vendorId,@"vendor_id", nil];
+    NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",jpg_Url,@"jpg_url",self.tfUsername.text,@"cam_username",self.tfPassword.text,@"cam_password",vendorId,@"vendor_id",self.editCamera.camId,@"camera_exid", nil];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     EvercamTestSnapShot *api_snap_Obj = [EvercamTestSnapShot new];
     [api_snap_Obj testSnapShot:postDictionary withBlock:^(UIImage *snapeImage, NSString *statusMessage, NSError *error) {
         if (error) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [self displayErrorAlert:@"Error!" withMessage:@"The port is open but we can't seem to connect. Check that the camera model and credentials are correct."];
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
+//            [self displayErrorAlert:@"Error!" withMessage:@"The port is open but we can't seem to connect. Check that the camera model and credentials are correct."];
         }else{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             if ([statusMessage isEqualToString:@"Success"]) {
@@ -216,8 +217,8 @@
                 self.blackTransparentView.hidden    = NO;
                 self.test_SnapShot_ImageView.image  = snapeImage;
             }else{
-                
-                [self displayErrorAlert:@"Error!" withMessage:@"The port is open but we can't seem to connect. Check that the camera model and credentials are correct."];
+                [AppUtility displayAlertWithTitle:@"Error!" AndMessage:error.localizedDescription];
+//                [self displayErrorAlert:@"Error!" withMessage:@"The port is open but we can't seem to connect. Check that the camera model and credentials are correct."];
                 
             }
             

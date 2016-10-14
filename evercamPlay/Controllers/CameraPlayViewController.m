@@ -9,7 +9,6 @@
 
 #import "CameraPlayViewController.h"
 #import "EvercamShell.h"
-#include "gst-launch-remote.h"
 #import "PreferenceUtil.h"
 #import "CustomNavigationController.h"
 #import "ViewCameraViewController.h"
@@ -29,6 +28,7 @@
 #import "EvercamCameraModelInfo.h"
 #import "EvercamRefreshCamera.h"
 #import "PresetListViewController.h"
+@import Firebase;
 
 static void *MyStreamingMovieViewControllerTimedMetadataObserverContext = &MyStreamingMovieViewControllerTimedMetadataObserverContext;
 static void *MyStreamingMovieViewControllerRateObservationContext = &MyStreamingMovieViewControllerRateObservationContext;
@@ -43,7 +43,6 @@ NSString *kCurrentItemKey	= @"currentItem";
 NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 
 @interface CameraPlayViewController () <ViewCameraViewControllerDelegate> {
-    GstLaunchRemote *launch;
     int media_width;
     int media_height;
     Boolean dragging_slider;
@@ -898,6 +897,11 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
                     isPlayerStarted = YES;
                     [self.playerItem addOutput:self.output];
                     [player play];
+                    
+                    [FIRAnalytics logEventWithName:@"RTSP_Streaming"
+                                        parameters:@{
+                                                     @"RTSP_Stream_Played": @"Successfully played RTSP stream."
+                                                     }];
                 }
                 
             }
@@ -960,6 +964,12 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
         if (self.socket != nil && [self.socket isConnected]) {
             return;
         }
+        
+        [FIRAnalytics logEventWithName:@"JPG_Streaming"
+                            parameters:@{
+                                         @"JPG_Stream_Played": @"Successfully played JPG stream."
+                                         }];
+                
         self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
         
         [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
@@ -1153,7 +1163,6 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 
 -(void) initialized {
     NSLog(@"initialized");
-    gst_launch_remote_play(launch);
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (timeCounter && [timeCounter isValid])

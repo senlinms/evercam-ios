@@ -58,7 +58,7 @@
     self.password_WebView.hidden = NO;
     self.password_WebView.userInteractionEnabled = YES;
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [self.process_ActivityIndicator stopAnimating];
     self.password_WebView.userInteractionEnabled = YES;
     

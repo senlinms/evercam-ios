@@ -174,7 +174,7 @@
 - (IBAction)nextStepBtn:(id)sender {
     
 //    NSMutableDictionary *param_Dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ipAddress_textField.text,@"external_host",self.http_TextField.text,@"external_http_port",self.snapshotPathTextField.text,@"jpg_url",[NSNumber numberWithBool:NO],@"is_public",[NSNumber numberWithBool:YES],@"is_online",(isCompletelyEmpty(self.rtsp_TextField.text))?nil:self.rtsp_TextField.text,@"external_rtsp_port",(isCompletelyEmpty(self.username_TextField.text))?nil:self.username_TextField.text,@"cam_username",(isCompletelyEmpty(self.password_TextField.text))?nil:self.password_TextField.text,@"cam_password", nil];
-    NSMutableDictionary *param_Dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ipAddress_textField.text,@"external_host",self.http_TextField.text,@"external_http_port",self.snapshotPathTextField.text,@"jpg_url",[NSNumber numberWithBool:YES],@"is_online",(isCompletelyEmpty(self.rtsp_TextField.text))?nil:self.rtsp_TextField.text,@"external_rtsp_port",(isCompletelyEmpty(self.username_TextField.text))?nil:self.username_TextField.text,@"cam_username",(isCompletelyEmpty(self.password_TextField.text))?nil:self.password_TextField.text,@"cam_password", nil];
+    NSMutableDictionary *param_Dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ipAddress_textField.text,@"external_host",self.http_TextField.text,@"external_http_port",self.snapshotPathTextField.text,@"jpg_url",[NSNumber numberWithBool:YES],@"is_online",(isCompletelyEmpty(self.rtsp_TextField.text))?@"":self.rtsp_TextField.text,@"external_rtsp_port",(isCompletelyEmpty(self.username_TextField.text))?nil:self.username_TextField.text,@"cam_username",(isCompletelyEmpty(self.password_TextField.text))?nil:self.password_TextField.text,@"cam_password", nil];
     
     
     CameraNameViewController *aVC = [[CameraNameViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"CameraNameViewController":@"CameraNameViewController_iPad" bundle:[NSBundle mainBundle]];
@@ -221,7 +221,7 @@
         return;
     }
     
-    NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",self.snapshotPathTextField.text,@"jpg_url",self.username_TextField.text,@"cam_username",self.password_TextField.text,@"cam_password", nil];
+    NSDictionary *postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"http://%@:%@",ipAddress,httpPort],@"external_url",self.snapshotPathTextField.text,@"jpg_url",self.username_TextField.text,@"cam_username",self.password_TextField.text,@"cam_password",@"",@"camera_exid", nil];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     EvercamTestSnapShot *api_snap_Obj = [EvercamTestSnapShot new];
     [api_snap_Obj testSnapShot:postDictionary withBlock:^(UIImage *snapeImage, NSString *statusMessage, NSError *error) {

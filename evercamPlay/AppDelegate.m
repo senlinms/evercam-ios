@@ -19,6 +19,7 @@
 #import "PreferenceUtil.h"
 #import "Intercom/intercom.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+@import Firebase;
 @interface AppDelegate ()
 
 @end
@@ -33,6 +34,7 @@
     [self integrateIntercom];
     [Crashlytics startWithAPIKey:@"3076ee9439062b784cded123ab7344ffa3b1c872"];
     [Fabric with:@[[Crashlytics class]]];
+    [FIRApp configure];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];

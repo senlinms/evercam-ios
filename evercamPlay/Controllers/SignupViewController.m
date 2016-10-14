@@ -22,6 +22,7 @@
 #import "PreferenceUtil.h"
 #import "Intercom/intercom.h"
 #import "TPKeyboardAvoidingScrollView.h"
+@import Firebase;
 
 @interface SignupViewController ()
 {
@@ -270,6 +271,14 @@
                                     
                                     //Registering user with Intercom
                                     [Intercom registerUserWithUserId:newuser.username];
+                                
+                                    [FIRAnalytics logEventWithName:kFIREventSignUp parameters:@{ kFIRParameterSignUpMethod:action_signup_success}];
+                                    
+                                    [FIRAnalytics logEventWithName:@"Evercam_Signed_Up"
+                                                        parameters:@{
+                                                                     @"Evercam_User_Name": newuser.username,
+                                                                     @"Evercam_Email": newuser.email
+                                                                     }];
                                     
                                     if (isFromAddAccountScreen) {
                                         [self.navigationController popToRootViewControllerAnimated:YES];
