@@ -657,13 +657,12 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
         }
         
         if (self.cameraInfo.hlsUrl && self.cameraInfo.hlsUrl.length > 0) {
+            
             isPlayerStarted = NO;
+            
             NSURL *newMovieURL;
-            if (self.cameraInfo.rtmpUrl && self.cameraInfo.rtmpUrl.length > 0) {
-                newMovieURL = [NSURL URLWithString:self.cameraInfo.rtmpUrl];
-            }else{
-                newMovieURL = [NSURL URLWithString:self.cameraInfo.hlsUrl];
-            }
+            
+            newMovieURL = [NSURL URLWithString:self.cameraInfo.hlsUrl];
             
             if ([newMovieURL scheme])
             {
@@ -681,6 +680,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
             }
             
             self.playerLayerView.hidden = NO;
+            
             [self.liveViewScroll setContentSize:CGSizeMake(self.playerLayerView.frame.size.width, self.playerLayerView.frame.size.height)];
             
         } else {
