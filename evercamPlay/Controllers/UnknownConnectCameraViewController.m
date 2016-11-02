@@ -320,6 +320,14 @@
     }else if (textField.tag == 4 || textField.tag == 5){ // rtsp textfield
         self.textFieldGuideLabel.text = @"Put your camera's username and password. \n It's NOT the credentials for your Evercam account.";
         
+    }else if (textField.tag == 6){
+        
+        self.textFieldGuideLabel.text = @"If you know your camera model we can work this out for you. Otherwise you have to enter it manually. \n eg. snapshot.jpg";
+        
+    }else if (textField.tag == 7){
+        
+        self.textFieldGuideLabel.text = @"If you know your camera model we can work this out for you. Otherwise you have to enter it manually. \n eg. h264/ch1/main/stream";
+        
     }
 }
 
