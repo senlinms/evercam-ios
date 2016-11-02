@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "Config.h"
 #import "GAIDictionaryBuilder.h"
+@import Firebase;
 @interface CameraNameViewController ()
 
 @end
@@ -54,6 +55,12 @@
     EvercamCreateCamera *api_create_Obj = [EvercamCreateCamera new];
     [api_create_Obj createCamera:param_Dictionary withBlock:^(id details, NSError *error) {
         if (!error) {
+            
+            [FIRAnalytics logEventWithName:@"Add_Camera"
+                                parameters:@{
+                                             @"Camera_Addition_Status": @"Successfully added new camera."
+                                             }];
+            
             id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_add_camera
                                                                   action:action_addcamera_success_manual

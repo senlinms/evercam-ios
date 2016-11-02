@@ -57,7 +57,7 @@
     self.cameras_WebView.hidden = NO;
     self.cameras_WebView.userInteractionEnabled = YES;
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [self.loading_ActivityIndicator stopAnimating];
     self.cameras_WebView.userInteractionEnabled = YES;
     

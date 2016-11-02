@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AsyncImageView.h"
 #import "EvercamCamera.h"
-#import "EaglUIView.h"
 #import "GAI.h"
 #import "NIDropdown.h"
 #import "MyPlayerLayerView.h"
@@ -24,7 +23,7 @@
 @end
 
 @interface CameraPlayViewController : GAITrackedViewController<NIDropDownDelegate,UIActionSheetDelegate,UIScrollViewDelegate> {
-    IBOutlet EaglUIView *video_view;
+    IBOutlet UIView *video_view;
     BOOL isCameraRemoved;
     AVPlayer *player;
     AVPlayerItem *playerItem;

@@ -49,6 +49,7 @@
 #import "CameraScanViewController.h"
 #import "VendorAndModelViewController.h"
 #import "LoginViewController.h"
+@import Firebase;
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
@@ -154,6 +155,11 @@
         
         newFrontController = [[CameraScanViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CameraScanViewController" : @"CameraScanViewController_iPad" bundle:[NSBundle mainBundle]];
         
+        [FIRAnalytics logEventWithName:@"Menu"
+                            parameters:@{
+                                         @"Add_Camera_Type": @"Click on add camera in menu, and choose scan."
+                                         }];
+        
     }else if (row == 2)
     {
         
@@ -163,6 +169,11 @@
     {
         
         newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
+        
+        [FIRAnalytics logEventWithName:@"Menu"
+                            parameters:@{
+                                         @"Settings": @"Click on setting menu"
+                                         }];
         
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
@@ -187,6 +198,11 @@
     }else if (row == 6){
         
         newFrontController = [[AccountsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AccountsViewController" : @"AccountsViewController_iPad" bundle:nil];
+        
+        [FIRAnalytics logEventWithName:@"Menu"
+                            parameters:@{
+                                         @"Manage_Account": @"Click on manage account"
+                                         }];
         
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
@@ -228,6 +244,10 @@
 
 - (IBAction)onRefresh: (id)sender
 {
+    [FIRAnalytics logEventWithName:@"Menu"
+                        parameters:@{
+                                     @"Refresh": @"Refresh Camera List"
+                                     }];
     [self refreshGridView:YES];
 }
 
@@ -287,6 +307,11 @@
 
 - (void)addCamera
 {
+    [FIRAnalytics logEventWithName:@"Menu"
+                        parameters:@{
+                                     @"Add_Camera_Type": @"Click on add camera in menu, and choose manually."
+                                     }];
+    
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
                                                           action:category_add_camera
