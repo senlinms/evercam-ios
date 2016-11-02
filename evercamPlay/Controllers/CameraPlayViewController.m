@@ -664,6 +664,8 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
             
             newMovieURL = [NSURL URLWithString:self.cameraInfo.hlsUrl];
             
+            self.playerLayerView.frame = CGRectMake(0, 0, self.playerView.frame.size.width, self.playerView.frame.size.height);
+            
             if ([newMovieURL scheme])
             {
                 AVURLAsset *asset = [AVURLAsset URLAssetWithURL:newMovieURL options:nil];

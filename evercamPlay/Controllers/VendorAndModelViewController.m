@@ -136,7 +136,7 @@
         
         [ActionSheetStringPicker showPickerWithTitle:@"Vendors" rows:vendorsNameArray initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, NSString *selectedValue) {
             [btn setTitle:selectedValue forState:UIControlStateNormal];
-            if ([selectedValue isEqualToString:@"Unknown/Other"]) {
+            if ([selectedValue isEqualToString:@"Unknown/Other"] || [selectedValue isEqualToString:@"Other"]) {
                 self.cameraImage.image      = [UIImage imageNamed:@"cam.png"];
                 self.vendorImageView.image  = nil;
                 self.modelBtn.enabled       = NO;
@@ -184,7 +184,7 @@
 }
 
 - (IBAction)connectCamera:(id)sender {
-    if ([self.vendorBtn.titleLabel.text isEqualToString:@"Unknown/Other"]) {
+    if ([self.vendorBtn.titleLabel.text isEqualToString:@"Unknown/Other"] || [self.vendorBtn.titleLabel.text isEqualToString:@"Other"]) {
         UnknownConnectCameraViewController *aVC = [[UnknownConnectCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"UnknownConnectCameraViewController":@"UnknownConnectCameraViewController_iPad" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:aVC animated:YES];
     }else{
