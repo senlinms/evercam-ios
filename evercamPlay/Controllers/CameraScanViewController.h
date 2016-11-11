@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ScanLAN.h"
-@interface CameraScanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ScanLANDelegate>{
-    
+#import "GCDAsyncUdpSocket.h"
+@interface CameraScanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ScanLANDelegate,GCDAsyncUdpSocketDelegate,NSXMLParserDelegate>{
+
 }
 @property (weak, nonatomic) IBOutlet UITableView *camera_Table;
 - (IBAction)backAction:(id)sender;

@@ -60,6 +60,7 @@
 		585999131BF9C53000CDC457 /* ic_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 585999121BF9C53000CDC457 /* ic_info.png */; };
 		589204A41C11A40800B40DD0 /* cam.png in Resources */ = {isa = PBXBuildFile; fileRef = 589204A31C11A40800B40DD0 /* cam.png */; };
 		58F0F6171C08799B00BC04A3 /* Struts.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F0F6161C08799B00BC04A3 /* Struts.m */; };
+		6221090F1DD08EE200231E6F /* Source in Resources */ = {isa = PBXBuildFile; fileRef = 6221090E1DD08EE200231E6F /* Source */; };
 		622B773B1DA2710B00B8DAE6 /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 622B773A1DA2710B00B8DAE6 /* local.plist */; };
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
@@ -432,6 +433,7 @@
 		589204A31C11A40800B40DD0 /* cam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cam.png; sourceTree = "<group>"; };
 		58F0F6151C08799B00BC04A3 /* Struts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Struts.h; sourceTree = "<group>"; };
 		58F0F6161C08799B00BC04A3 /* Struts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Struts.m; sourceTree = "<group>"; };
+		6221090E1DD08EE200231E6F /* Source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Source; sourceTree = "<group>"; };
 		622B773A1DA2710B00B8DAE6 /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
 		62CEBB7F1DC3644B00C6DF73 /* Evercam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Evercam.entitlements; sourceTree = "<group>"; };
 		6C7262B31BDDF4F300446CBE /* MainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenViewController.h; sourceTree = "<group>"; };
@@ -989,6 +991,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		622109071DD08D6800231E6F /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
 		77079D801CE9EC880073EE16 /* GravatorLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -1136,6 +1145,8 @@
 		CB1C76501AAB144800680FE3 /* evercamPlay */ = {
 			isa = PBXGroup;
 			children = (
+				6221090E1DD08EE200231E6F /* Source */,
+				622109071DD08D6800231E6F /* CocoaAsyncSocket */,
 				62CEBB7F1DC3644B00C6DF73 /* Evercam.entitlements */,
 				77F7227C1D6AFFDF00B8B173 /* EvercamAPI */,
 				CB1C76771AAB7DE900680FE3 /* 3rdParty */,
@@ -1704,6 +1715,7 @@
 				77637B7C1D755E3C00CCC1BE /* action_refresh.png in Resources */,
 				4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */,
 				77F161811CEF0E1100634612 /* ic_accounts@2x.png in Resources */,
+				6221090F1DD08EE200231E6F /* Source in Resources */,
 				AB8097171CC0C742002F5FF9 /* nav@2x.png in Resources */,
 				7766470C1CEEF9090076B9CE /* PublicCamerasViewController_iPad.xib in Resources */,
 				77E791EF1CF337230084CF18 /* ic_home.png in Resources */,
@@ -2195,6 +2207,7 @@
 					"$(USER_LIBRARY_DIR)/Developer/GStreamer/iPhone.sdk",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -2210,9 +2223,9 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-liconv",
 					"-all_load",
 					"-ObjC",
-					"-liconv",
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = Evercam;
@@ -2246,6 +2259,7 @@
 					"$(USER_LIBRARY_DIR)/Developer/GStreamer/iPhone.sdk",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -2262,9 +2276,9 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-liconv",
 					"-all_load",
 					"-ObjC",
-					"-liconv",
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = Evercam;

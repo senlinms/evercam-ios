@@ -27,12 +27,13 @@
 @end
 
 @implementation ConnectCameraViewController
-@synthesize selected_cameraModel,selected_cameraVendor;
+@synthesize selected_cameraModel,selected_cameraVendor,camera_Http_Port;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.textField_scrollView contentSizeToFit];
     self.vendorLabel.text = [NSString stringWithFormat:@"%@ - %@",selected_cameraVendor.name,selected_cameraModel.name];
+    self.http_TextField.text = (!camera_Http_Port || isCompletelyEmpty(camera_Http_Port))?@"80":camera_Http_Port;
     [self getLocalIpAddress];
     [self checkHttpPort];
     [self checkRtstPort];
@@ -71,6 +72,8 @@
         if (!error) {
             ipAddress = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];;
             self.ipAddress_textField.text = [self isValidIPAddress:ipAddress]?ipAddress:@"";
+            [self checkHttpPort];
+            [self checkRtstPort];
         }else{
             self.ipAddress_textField.text = ipAddress;
         }

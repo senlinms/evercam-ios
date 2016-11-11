@@ -15,5 +15,7 @@
 @property NSString *address;
 @property NSString *mac_Address;
 @property NSString *image_url;
+@property NSString *http_Port;
+@property NSString *onvif_Camera_model;
 
 @end

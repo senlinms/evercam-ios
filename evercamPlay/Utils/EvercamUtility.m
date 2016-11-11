@@ -17,7 +17,7 @@
 @end
 
 @implementation EvercamUtility
-@synthesize isFullyDismiss;
+@synthesize isFullyDismiss,isFromScannedScreen;
 +(EvercamUtility *)sharedLRUtility
 {
     static EvercamUtility *sharedInstance = nil;

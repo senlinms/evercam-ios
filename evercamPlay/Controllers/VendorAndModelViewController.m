@@ -32,6 +32,7 @@
 
 @implementation VendorAndModelViewController
 @synthesize vendorIdentifier;
+@synthesize scanned_Device;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -111,8 +112,20 @@
             //Sort evercammodel object array by name
             NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
             modelsObjectArray=[[modelsObjectArray sortedArrayUsingDescriptors:@[sort]] mutableCopy];
-            NSArray *filteredArray = [modelsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name == %@)",@"Default"]];
-            cameraModel = filteredArray[0];
+            if (vendorIdentifier) {
+                NSArray *filteredArray = [modelsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name == %@)",scanned_Device.onvif_Camera_model]];
+                if (filteredArray.count > 0) {
+                    cameraModel = filteredArray[0];
+                }else{
+                    //In case Evercam have not record of this model in it's database
+                    NSArray *filteredArray = [modelsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name == %@)",@"Default"]];
+                    cameraModel = filteredArray[0];
+                    [AppUtility displayAlertWithTitle:@"Alert!" AndMessage:@"Evercam does not have this camera model in it's record. Please report this model."];
+                }
+            }else{
+                NSArray *filteredArray = [modelsObjectArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name == %@)",@"Default"]];
+                cameraModel = filteredArray[0];
+            }
             self.modelBtn.enabled = FALSE;
             [self.modelBtn setTitle:cameraModel.name forState:UIControlStateNormal];
             [self.modelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -172,6 +185,7 @@
 }
 
 - (IBAction)backAction:(id)sender {
+    AppUtility.isFromScannedScreen = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -191,6 +205,9 @@
         ConnectCameraViewController *aVC = [[ConnectCameraViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"ConnectCameraViewController":@"ConnectCameraViewController_iPad" bundle:[NSBundle mainBundle]];
         aVC.selected_cameraModel    = cameraModel;
         aVC.selected_cameraVendor   = cameraVendor;
+        if (vendorIdentifier) {
+            aVC.camera_Http_Port    = scanned_Device.http_Port;
+        }
         [self.navigationController pushViewController:aVC animated:YES];
     }
 

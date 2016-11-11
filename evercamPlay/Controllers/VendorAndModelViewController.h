@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Device.h"
 @class TPKeyboardAvoidingScrollView;
 @interface VendorAndModelViewController : UIViewController{
     NSString *vendorIdentifier;
+    Device *scanned_Device;
 }
+@property (nonatomic,strong) Device *scanned_Device;;
 @property (nonatomic,strong) NSString *vendorIdentifier;
 @property (weak, nonatomic) IBOutlet UIButton *modelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *vendorBtn;

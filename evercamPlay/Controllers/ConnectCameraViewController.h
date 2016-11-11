@@ -15,9 +15,11 @@
 @interface ConnectCameraViewController : UIViewController<UITextFieldDelegate>{
     EvercamModel *selected_cameraModel;
     EvercamVendor *selected_cameraVendor;
+    NSString *camera_Http_Port;
 }
 @property (nonatomic, strong) EvercamModel *selected_cameraModel;
 @property (nonatomic, strong) EvercamVendor *selected_cameraVendor;
+@property (nonatomic, strong) NSString *camera_Http_Port;
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *textField_scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *vendorLabel;
