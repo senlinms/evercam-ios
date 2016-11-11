@@ -185,6 +185,7 @@
 }
 
 - (IBAction)backAction:(id)sender {
+    AppUtility.isFromScannedScreen = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

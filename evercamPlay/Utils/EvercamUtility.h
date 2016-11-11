@@ -21,15 +21,16 @@
 
 @interface EvercamUtility : NSObject{
     BOOL isFullyDismiss;
+    BOOL isFromScannedScreen;
 }
 
 @property (nonatomic,assign) BOOL isFullyDismiss;
+@property (nonatomic,assign) BOOL isFromScannedScreen;
 
 +(EvercamUtility *)sharedLRUtility;
 -(void)displayAlertWithTitle:(NSString *)title AndMessage:(NSString *)msg;
 -(BOOL)InternetReachable;
 -(UIColor *)colorWithHexString:(NSString *)stringToConvert;
-- (NSString *)encodeToBase64String:(UIImage *)image;
 //________________________________________
 -(NSString *)getCameraRights:(NSString *)rights;
 

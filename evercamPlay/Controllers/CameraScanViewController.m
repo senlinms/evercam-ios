@@ -97,6 +97,14 @@
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (AppUtility.isFromScannedScreen) {
+        AppUtility.isFromScannedScreen = NO;
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 /*
  #pragma mark - Navigation
  
@@ -143,8 +151,8 @@
     }
     cell.backgroundColor        = [UIColor clearColor];
     Device *device              = [self.connctedDevices objectAtIndex:indexPath.row];
-    cell.camera_Name_Lbl.text   = [NSString stringWithFormat:@"%@ %@",device.name,device.onvif_Camera_model];
-    cell.ip_Address_Lbl.text    = [NSString stringWithFormat:@"%@:%@",device.address,device.http_Port];
+    cell.camera_Name_Lbl.text   = [NSString stringWithFormat:@"%@ %@",device.name,(!device.onvif_Camera_model)?@"":device.onvif_Camera_model];
+    cell.ip_Address_Lbl.text    = [NSString stringWithFormat:@"%@:%@",device.address,(!device.http_Port)?@"":device.http_Port];
     [cell.camera_Thumb_ImageView sd_setImageWithURL:[NSURL URLWithString:device.image_url] placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]];
     [self assignAttributedString:cell.detail_Lbl withDevice:device];
     return cell;
@@ -396,12 +404,13 @@
 
 -(void)goToVendorScreen:(Device *)scannedDevice{
     VendorAndModelViewController *addCameraVC = [[VendorAndModelViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"VendorAndModelViewController" : @"VendorAndModelViewController_iPad" bundle:[NSBundle mainBundle]];
-    addCameraVC.scanned_Device   = scannedDevice;
-    addCameraVC.vendorIdentifier = scannedDevice.vendorId;
-    CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:addCameraVC];
-    navVC.isPortraitMode        = YES;
+    addCameraVC.scanned_Device          = scannedDevice;
+    addCameraVC.vendorIdentifier        = scannedDevice.vendorId;
+    AppUtility.isFromScannedScreen      = YES;
+    CustomNavigationController *navVC   = [[CustomNavigationController alloc] initWithRootViewController:addCameraVC];
+    navVC.isPortraitMode                = YES;
     [navVC setHasLandscapeMode:YES];
-    navVC.navigationBarHidden   = YES;
+    navVC.navigationBarHidden           = YES;
     [self.navigationController presentViewController:navVC animated:YES completion:nil];
 }
 
