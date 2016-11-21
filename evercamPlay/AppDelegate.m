@@ -30,11 +30,11 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        
-    [self integrateIntercom];
+
+    [FIRApp configure]; //setting up Firebase
+    [self integrateIntercom]; // setting up Intercom
     [Crashlytics startWithAPIKey:@"70e87b744f3bc2c7db518b88faf93411823b45b2"];
     [Fabric with:@[[Crashlytics class]]];
-    [FIRApp configure];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];

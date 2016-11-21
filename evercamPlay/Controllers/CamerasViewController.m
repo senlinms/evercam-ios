@@ -53,7 +53,7 @@
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
 {
-    NSMutableArray *cameraArray;
+    
     CGSize cellSize;
 }
 
@@ -63,7 +63,7 @@
 @end
 
 @implementation CamerasViewController
-
+@synthesize cameraArray;
 #pragma mark - View lifecycle
 
 

@@ -73,12 +73,13 @@ static EvercamShell *instance = nil;
 }
 
 - (void) createUser:(EvercamUser*) user WithBlock:(void (^)(EvercamUser *newuser, NSError *error))block {
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[user.firstname mutableCopy], @"firstname",
-                                [user.lastname mutableCopy], @"lastname",
-                                [user.email mutableCopy], @"email",
-                                [[user.username lowercaseString] mutableCopy], @"username",
-                                [user.password mutableCopy], @"password",
-                                nil];
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
+    NSString *signupToken = @"";
+    if (plistPath) {
+        NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        signupToken = [contents valueForKey:@"SignupToken"];
+    }
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[user.firstname mutableCopy], @"firstname",[user.lastname mutableCopy], @"lastname",[user.email mutableCopy], @"email",[[user.username lowercaseString] mutableCopy], @"username",[user.password mutableCopy], @"password",signupToken,@"token",nil];
     
     NSURLSessionDataTask *task= [[AFEvercamAPIClient sharedClient] POST:@"users" parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
         NSArray *userArray = [JSON valueForKeyPath:@"users"];

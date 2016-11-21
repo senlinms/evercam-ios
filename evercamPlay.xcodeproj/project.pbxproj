@@ -1641,6 +1641,7 @@
 				6CE21A6B1BFDCA30007219BD /* ShellScript */,
 				E1FC7342EB1141EE2C7749D9 /* [CP] Embed Pods Frameworks */,
 				661396DCA5125FAC3A0DC200 /* [CP] Copy Pods Resources */,
+				62AE19B71DD9A24400677E25 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1916,6 +1917,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		62AE19B71DD9A24400677E25 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "GOOGLE_APP_ID=1:461613501728:ios:9edce13763514611\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"/Users/zulqarnainmustafa/Desktop/Development/evercam-ios/evercamPlay/evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json\"";
 		};
 		661396DCA5125FAC3A0DC200 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2199,6 +2213,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DEVELOPMENT_TEAM = WUBG25MK44;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2251,6 +2266,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DEVELOPMENT_TEAM = WUBG25MK44;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

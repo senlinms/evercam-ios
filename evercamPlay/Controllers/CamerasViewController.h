@@ -28,8 +28,10 @@
 #import "GAI.h"
 
 @interface CamerasViewController : GAITrackedViewController  <UICollectionViewDataSource, UICollectionViewDelegate>{
-    
+    NSMutableArray *cameraArray;
 }
+
+@property(strong,nonatomic) NSMutableArray *cameraArray;
 
 - (IBAction)onRefresh: (id)sender;
 

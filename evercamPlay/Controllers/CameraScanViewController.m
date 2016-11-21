@@ -19,6 +19,9 @@
 #import "GCDAsyncUdpSocket.h" // for UDP
 #import "EvercamSingleCameraDetails.h"
 #import "EvercamUtility.h"
+#import "CamerasViewController.h"
+#import "EvercamCamera.h"
+#import <Foundation/Foundation.h>
 
 #include <sys/param.h>
 #include <sys/file.h>
@@ -63,6 +66,7 @@
     NSMutableArray *cameraObjectsArray;
     NSString *xmlTag;
     Device *onvif_Device;
+    NSMutableArray *cameraMacArray;
 }
 @property (nonatomic,strong) ScanLAN *lanScanner;
 @property (nonatomic,strong) NSMutableArray *connctedDevices;
@@ -80,6 +84,10 @@
     cameraObjectsArray      = [NSMutableArray new];
     [self openSocket];
     [self broadcastMessageOnNetwork];
+    
+    NSLog(@"Navigation: %@",self.navigationController.viewControllers);
+    CamerasViewController *vc = (CamerasViewController *)self.navigationController.viewControllers[0];
+     cameraMacArray = [vc.cameraArray valueForKey:@"macAddress"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -152,7 +160,7 @@
     cell.backgroundColor        = [UIColor clearColor];
     Device *device              = [self.connctedDevices objectAtIndex:indexPath.row];
     cell.camera_Name_Lbl.text   = [NSString stringWithFormat:@"%@ %@",device.name,(!device.onvif_Camera_model)?@"":device.onvif_Camera_model];
-    cell.ip_Address_Lbl.text    = [NSString stringWithFormat:@"%@:%@",device.address,(!device.http_Port)?@"":device.http_Port];
+    cell.ip_Address_Lbl.text    = [NSString stringWithFormat:@"%@%@",device.address,(!device.http_Port)?@"":[NSString stringWithFormat:@":%@",device.http_Port]];
     [cell.camera_Thumb_ImageView sd_setImageWithURL:[NSURL URLWithString:device.image_url] placeholderImage:[UIImage imageNamed:@"ic_GridPlaceholder.png"]];
     [self assignAttributedString:cell.detail_Lbl withDevice:device];
     return cell;
@@ -196,7 +204,15 @@
     }else{
         [attributedString addAttribute:NSForegroundColorAttributeName value:greyColor range:NSMakeRange(22,4)];
     }
-    [attributedString addAttribute:NSForegroundColorAttributeName value:greyColor range:NSMakeRange(29,21)];
+    
+    NSArray *array =  [cameraMacArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self CONTAINS[cd] %@",device.mac_Address]];
+    if (array.count > 0) {
+        [attributedString addAttribute:NSForegroundColorAttributeName value:greenColor range:NSMakeRange(43,7)];
+        [attributedString addAttribute:NSForegroundColorAttributeName value:greyColor range:NSMakeRange(29,11)];
+    }else{
+        [attributedString addAttribute:NSForegroundColorAttributeName value:greyColor range:NSMakeRange(29,21)];
+    }
+    
     infoLabel.attributedText = attributedString;
 }
 
@@ -566,70 +582,79 @@ withFilterContext:(id)filterContext
         onvif_obj.onvif_Camera_model    = model;
         onvif_obj.http_Port             = httpPort;
         onvif_obj.address               = ipAddress;
-        /*
-         NSArray *array =  [self.connctedDevices filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[c] %@", @"address", ipAddress]];
-         if (array.count > 0) {
-         NSLog(@"Duplicate ip");
-         Device *existing_device= array[0];
-         existing_device.http_Port = httpPort;
-         existing_device.onvif_Camera_model = model;
-         //            [cameraObjectsArray removeObject:onvif_obj];
-         }else{
-         onvif_obj.name                  = vendor;
-         onvif_obj.onvif_Camera_model    = model;
-         onvif_obj.http_Port             = httpPort;
-         onvif_obj.address               = ipAddress;
-         }
-         */
     }
-    NSLog(@"array: %@",cameraObjectsArray);
     [self startScanningLAN];
 }
 
 -(NSString *)getCameraModel:(NSString *)onvifString{
     
-    NSString *camera_model = [onvifString substringFromIndex:[onvifString rangeOfString: @"onvif://www.onvif.org/hardware/"].location];
+    if ([onvifString rangeOfString:@"onvif://www.onvif.org/hardware/"].location == NSNotFound) {
+        return nil;
+    }
+    NSString *model = nil;
     
-    NSString *model = [[camera_model substringWithRange: NSMakeRange(0, [camera_model rangeOfString: @" "].location)] stringByReplacingOccurrencesOfString:@"onvif://www.onvif.org/hardware/" withString:@""];
-    
+    NSArray *space_separated_Array = [onvifString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+    if (space_separated_Array.count > 0) {
+        for (NSString *str in space_separated_Array) {
+            if ([str rangeOfString:@"onvif://www.onvif.org/hardware/"].location != NSNotFound) {
+                model = [str stringByReplacingOccurrencesOfString:@"onvif://www.onvif.org/hardware/" withString:@""];
+            }
+        }
+    }
     return model;
 }
 
 -(NSString *)getCameraVendor:(NSString *)onvifString{
     
-    NSString *camera_Vendor = [onvifString substringFromIndex:[onvifString rangeOfString: @"onvif://www.onvif.org/name/"].location];
+    if ([onvifString rangeOfString:@"onvif://www.onvif.org/name/"].location == NSNotFound) {
+        return nil;
+    }
     
-    NSString *vendor = [[camera_Vendor substringWithRange: NSMakeRange(0, [camera_Vendor rangeOfString: @" "].location)] stringByReplacingOccurrencesOfString:@"onvif://www.onvif.org/name/" withString:@""];
+    NSString *vendor = nil;
     
+    NSArray *space_separated_Array = [onvifString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+    if (space_separated_Array.count > 0) {
+        for (NSString *str in space_separated_Array) {
+            if ([str rangeOfString:@"onvif://www.onvif.org/name/"].location != NSNotFound) {
+                vendor = [str stringByReplacingOccurrencesOfString:@"onvif://www.onvif.org/name/" withString:@""];
+            }
+        }
+    }
     return vendor;
 }
 
 -(NSString *)getHttpPort:(NSString *)onvifString{
     
+    if ([onvifString rangeOfString:@"http://"].location == NSNotFound) {
+        return nil;
+    }
+    
     NSString *httpPort;
-    
-    NSString *firstString = [onvifString stringByReplacingOccurrencesOfString:@"http://" withString:@""];
-    
-    NSString *secondString = [firstString substringWithRange: NSMakeRange(0, [firstString rangeOfString: @"/"].location)];
-    
-    NSArray *port_localIp_Array = [secondString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
-    if (port_localIp_Array.count > 0) {
-        httpPort = port_localIp_Array[1];
+    NSArray *space_separated_Array = [onvifString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+    if (space_separated_Array.count > 0) {
+        NSString *firstString = [onvifString stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+        NSString *secondString = [firstString substringWithRange: NSMakeRange(0, [firstString rangeOfString: @"/"].location)];
+        NSArray *port_localIp_Array = [secondString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
+        if (port_localIp_Array.count >= 2) {
+            httpPort = port_localIp_Array[1];
+        }
     }
     return httpPort;
 }
 
 -(NSString *)getIpAddress:(NSString *)onvifString{
     
+    if ([onvifString rangeOfString:@"http://"].location == NSNotFound) {
+        return nil;
+    }
+    
     NSString *ipAddress;
     
-    NSString *firstString = [onvifString stringByReplacingOccurrencesOfString:@"http://" withString:@""];
-    
-    NSString *secondString = [firstString substringWithRange: NSMakeRange(0, [firstString rangeOfString: @"/"].location)];
-    
-    NSArray *port_localIp_Array = [secondString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
-    if (port_localIp_Array.count > 0) {
-        ipAddress = port_localIp_Array[0];
+    NSArray *space_separated_Array = [onvifString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+    if (space_separated_Array.count > 0) {
+        NSURL *hostUrl  = [NSURL URLWithString:space_separated_Array[0]];
+        NSString *host  = [hostUrl host];
+        ipAddress       = host;
     }
     return ipAddress;
 }
