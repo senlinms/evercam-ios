@@ -67,6 +67,9 @@
     NSString *xmlTag;
     Device *onvif_Device;
     NSMutableArray *cameraMacArray;
+    //--------------------------
+    
+    NSInteger tableSelectedIndex;
 }
 @property (nonatomic,strong) ScanLAN *lanScanner;
 @property (nonatomic,strong) NSMutableArray *connctedDevices;
@@ -168,7 +171,26 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Device *device              = [self.connctedDevices objectAtIndex:indexPath.row];
-    [self goToVendorScreen:device];
+    if (device.isAlreadyExist) {
+        UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"" message:@"This camera already exists in your Evercam account. Are you sure you want to add it again?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+        tableSelectedIndex  = indexPath.row + 100;
+        alert.tag           = indexPath.row + 100;
+        [alert show];
+    }else{
+        [self goToVendorScreen:device];
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        if (alertView.tag == tableSelectedIndex) {
+            Device *device              = [self.connctedDevices objectAtIndex:tableSelectedIndex - 100];
+            [self goToVendorScreen:device];
+        }
+    }
 }
 
 -(void)assignAttributedString:(UILabel *)infoLabel withDevice:(Device *)device{
@@ -209,8 +231,10 @@
     if (array.count > 0) {
         [attributedString addAttribute:NSForegroundColorAttributeName value:greenColor range:NSMakeRange(43,7)];
         [attributedString addAttribute:NSForegroundColorAttributeName value:greyColor range:NSMakeRange(29,11)];
+        device.isAlreadyExist = YES;
     }else{
         [attributedString addAttribute:NSForegroundColorAttributeName value:greyColor range:NSMakeRange(29,21)];
+        device.isAlreadyExist = NO;
     }
     
     infoLabel.attributedText = attributedString;

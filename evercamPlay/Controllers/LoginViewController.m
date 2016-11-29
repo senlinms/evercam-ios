@@ -35,7 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.screenName = @"Login";
     // Do any additional setup after loading the view from its nib.
     if (IS_IPHONE_4) {
         self.contentView.contentSize = CGSizeMake(self.contentView.frame.size.width, 548.0);

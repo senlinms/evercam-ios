@@ -59,15 +59,16 @@
     if (plistPath) {
         NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:plistPath];
         
-        NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
+//        NSString *GAITrackingID = [contents valueForKey:@"GAITrackingId"];
         NSString *MixpanelToken = [contents valueForKey:@"MixpanelToken"];
         
         [Mixpanel sharedInstanceWithToken:MixpanelToken];
-        
+        /*
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         [GAI sharedInstance].dispatchInterval = 20;
         [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
         [[GAI sharedInstance] trackerWithTrackingId:GAITrackingID];
+        */
     }
     
     

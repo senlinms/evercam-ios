@@ -24,7 +24,6 @@
     [self.loadingView startAnimating];
     self.webView.hidden             = YES;
     [self loadRecordingWidget];
-    self.screenName                 = @"Cloud Recordings";
 }
 
 - (void)didReceiveMemoryWarning {

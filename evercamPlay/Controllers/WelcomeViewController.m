@@ -36,7 +36,6 @@
 
 
     self.navigationController.navigationBarHidden = YES;
-    self.screenName = @"Welcome Page";
     // Do any additional setup after loading the view from its nib.
     self.title = @"";
     self.signInbtn.layer.cornerRadius   = 1.0;

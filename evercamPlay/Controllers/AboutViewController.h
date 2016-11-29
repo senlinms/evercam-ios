@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GAI.h"
 
-@interface AboutViewController : GAITrackedViewController
+@interface AboutViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet UIView *webViewContainer;
 @property (nonatomic, weak) IBOutlet UIWebView *webView;

@@ -27,7 +27,7 @@
 #import <UIKit/UIKit.h>
 #import "GAI.h"
 
-@interface CamerasViewController : GAITrackedViewController  <UICollectionViewDataSource, UICollectionViewDelegate>{
+@interface CamerasViewController : UIViewController  <UICollectionViewDataSource, UICollectionViewDelegate>{
     NSMutableArray *cameraArray;
 }
 

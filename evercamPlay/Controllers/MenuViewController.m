@@ -275,11 +275,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 102 && buttonIndex == 1) {
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-                                                              action:action_logout
-                                                               label:label_user_logout
-                                                               value:nil] build]];
         
         [APP_DELEGATE logout];
         _presentedRow = 0;

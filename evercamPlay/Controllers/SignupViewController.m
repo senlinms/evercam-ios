@@ -35,9 +35,7 @@
 @synthesize isFromAddAccountScreen;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.screenName = @"Create Account";
-    
+        
     // Do any additional setup after loading the view from its nib.
     [self.contentView contentSizeToFit];
 
@@ -298,12 +296,6 @@
                                     [vcArr removeLastObject];
                                     [vcArr addObject:revealController];
                                     [self.navigationController setViewControllers:vcArr animated:YES];
-                                    
-                                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_sign_up
-                                                                                          action:action_signup_success
-                                                                                           label:label_signup_successful
-                                                                                           value:nil] build]];
                                     
                                     [PreferenceUtil setIsShowOfflineCameras:YES];
                                     

@@ -10,7 +10,7 @@
 #import "GAI.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
-@interface WelcomeViewController : GAITrackedViewController
+@interface WelcomeViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIView *tutorialView;
 @property (nonatomic, strong) IBOutlet UIScrollView *tutorialScrollView;
