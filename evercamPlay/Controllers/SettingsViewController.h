@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GAI.h"
 
-@interface SettingsViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIButton *btnMenu;

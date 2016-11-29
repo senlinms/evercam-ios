@@ -83,9 +83,6 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     
     runFirstTime            = YES;
     videoController.alpha   = 0.0;
-    self.screenName         = @"Video View";
-    
-
 
     [self changeBtnTitle];
     runFirstTime            = NO;

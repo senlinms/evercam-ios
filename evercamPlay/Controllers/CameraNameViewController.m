@@ -60,12 +60,7 @@
                                 parameters:@{
                                              @"Camera_Addition_Status": @"Successfully added new camera."
                                              }];
-            
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_add_camera
-                                                                  action:action_addcamera_success_manual
-                                                                   label:label_addcamera_successful
-                                                                   value:nil] build]];
+
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             AppUtility.isFullyDismiss = YES;
             [self.navigationController popToRootViewControllerAnimated:YES];

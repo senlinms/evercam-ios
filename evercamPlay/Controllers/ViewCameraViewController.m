@@ -33,9 +33,9 @@
 @implementation ViewCameraViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
-    self.screenName = @"View Camera Detail";
     [self fillCameraDetails];
 }
 
@@ -62,12 +62,6 @@
 }
 
 - (IBAction)edit:(id)sender {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_add_camera
-                                                          action:category_add_camera
-                                                           label:label_add_camera_manually
-                                                           value:nil] build]];
-    
     
     AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:[NSBundle mainBundle]];
     addCameraVC.editCamera = self.camera;

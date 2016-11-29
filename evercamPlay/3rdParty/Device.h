@@ -17,5 +17,6 @@
 @property NSString *image_url;
 @property NSString *http_Port;
 @property NSString *onvif_Camera_model;
+@property BOOL isAlreadyExist;
 
 @end

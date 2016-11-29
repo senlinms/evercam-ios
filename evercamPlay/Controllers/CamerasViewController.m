@@ -73,8 +73,6 @@
     
     self.navigationController.navigationBarHidden = YES;
     
-    self.screenName = @"Camera Grid View";
-    
     cameraArray = [[NSMutableArray alloc] initWithCapacity:0];
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -174,13 +172,6 @@
                             parameters:@{
                                          @"Settings": @"Click on setting menu"
                                          }];
-        
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-                                                              action:action_settings
-                                                               label:label_settings
-                                                               value:nil] build]];
-        
     }
     else if (row == 4)
     {
@@ -203,13 +194,6 @@
                             parameters:@{
                                          @"Manage_Account": @"Click on manage account"
                                          }];
-        
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-                                                              action:action_manage_account
-                                                               label:label_account
-                                                               value:nil] build]];
-        
     }
     
     [self.navigationController pushViewController:newFrontController animated:YES];
@@ -252,12 +236,6 @@
 }
 
 -(void)refreshGridView:(BOOL)isReloadImages{
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-                                                          action:action_refresh
-                                                           label:label_list_refresh
-                                                           value:nil] build]];
-    
     
     if (![APP_DELEGATE defaultUser]) {
         return;
@@ -311,12 +289,6 @@
                         parameters:@{
                                      @"Add_Camera_Type": @"Click on add camera in menu, and choose manually."
                                      }];
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category_menu
-                                                          action:category_add_camera
-                                                           label:label_add_camera_manually
-                                                           value:nil] build]];
     /*
      AddCameraViewController *addCameraVC = [[AddCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AddCameraViewController" : @"AddCameraViewController_iPad" bundle:nil];
      [addCameraVC setDelegate:self];

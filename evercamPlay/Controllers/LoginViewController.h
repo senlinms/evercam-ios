@@ -10,7 +10,7 @@
 #import "GAI.h"
 #import "GravatarServiceFactory.h"
 
-@interface LoginViewController : GAITrackedViewController<GravatarServiceDelegate>{
+@interface LoginViewController : UIViewController<GravatarServiceDelegate>{
     BOOL isFromAddAccount;
 }
 

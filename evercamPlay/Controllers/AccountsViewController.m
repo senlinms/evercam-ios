@@ -42,7 +42,7 @@
 @implementation AccountsViewController
 
 - (void)viewDidLoad {
-    self.screenName = @"Manage Accounts";
+//    self.screenName = @"Manage Accounts";
     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

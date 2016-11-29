@@ -84,7 +84,6 @@
     [super viewDidLoad];
     [self.main_Scroll contentSizeToFit];
     self.tfExternalHost.text    = @"5.149.169.19";
-    self.screenName             = @"Add/Edit Camera";
     self.tfVendor.text          = @"Unknown/Other";
     self.cameraView.hidden      = true;
     
@@ -119,25 +118,7 @@
 }
 
 -(void)setTextFieldsPlaceHolder{
-    /*
-    if ([self.tfID respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [AppUtility colorWithHexString:@"C7C7CD"];
-        self.tfID.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"roof-cam" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Name" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfVendor.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Unknown/Other" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfModel.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Unknown/Other" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfUsername.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfSnapshot.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/snapshot.jpg" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfExternalHost.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"149.5.43.10" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfExternalHttpPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"80" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfExternalRtspPort.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"554" attributes:@{NSForegroundColorAttributeName: color}];
-        self.tfExternalRtspUrl.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"/h264/ch1/mail/av_stream" attributes:@{NSForegroundColorAttributeName: color}];
-    } else {
-        NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
-        // TODO: Add fall-back code to set placeholder color.
-    }
-    */
+    
 }
 
 - (IBAction)back:(id)sender {

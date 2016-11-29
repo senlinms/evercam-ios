@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.screenName = @"About Page";
+//    self.screenName = @"About Page";
     isWebLoaded = NO;
     // Do any additional setup after loading the view from its nib.
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.evercam.io"]]];
