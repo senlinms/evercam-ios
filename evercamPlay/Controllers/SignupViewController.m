@@ -15,7 +15,6 @@
 #import "SWRevealViewController.h"
 #import "EvercamApiKeyPair.h"
 #import "MenuViewController.h"
-#import "GAIDictionaryBuilder.h"
 #import "Config.h"
 #import "GlobalSettings.h"
 #import "Mixpanel.h"

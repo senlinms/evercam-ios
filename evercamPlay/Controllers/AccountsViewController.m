@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Evercam. All rights reserved.
 //
 
-#import "GAIDictionaryBuilder.h"
 #import "AppDelegate.h"
 #import "AccountsViewController.h"
 #import "CamerasViewController.h"

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AsyncImageView.h"
 #import "EvercamCamera.h"
-#import "GAI.h"
 #import "NIDropdown.h"
 #import "MyPlayerLayerView.h"
 #import <AVFoundation/AVFoundation.h>

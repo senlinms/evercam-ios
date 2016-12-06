@@ -34,7 +34,6 @@
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
 #import "GlobalSettings.h"
-#import "GAIDictionaryBuilder.h"
 #import "Config.h"
 #import "MenuViewControllerCell.h"
 #import "PreferenceUtil.h"

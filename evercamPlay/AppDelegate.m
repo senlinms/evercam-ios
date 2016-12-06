@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "WelcomeViewController.h"
 #import "AppUser.h"
-#import "GAI.h"
 #import "EvercamShell.h"
 #import "GlobalSettings.h"
 #import "Mixpanel.h"

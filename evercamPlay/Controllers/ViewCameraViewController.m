@@ -17,7 +17,6 @@
 #import "EvercamShell.h"
 #import "MBProgressHUD.h"
 #import "CommonUtil.h"
-#import "GAIDictionaryBuilder.h"
 #import "GlobalSettings.h"
 #import "Config.h"
 #import "BlockActionSheet.h"

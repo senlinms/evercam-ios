@@ -35,7 +35,6 @@
 #import "PreferenceUtil.h"
 #import "CustomNavigationController.h"
 #import "AddCameraViewController.h"
-#import "GAIDictionaryBuilder.h"
 #import "Config.h"
 #import "GlobalSettings.h"
 #import "AccountsViewController.h"
@@ -273,11 +272,11 @@
         }
         else
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                [alertView show];
-            });
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ops!" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+//                [alertView show];
+//            });
         }
     }];
 }
