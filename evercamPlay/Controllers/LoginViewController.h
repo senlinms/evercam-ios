@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GAI.h"
 #import "GravatarServiceFactory.h"
 
 @interface LoginViewController : UIViewController<GravatarServiceDelegate>{

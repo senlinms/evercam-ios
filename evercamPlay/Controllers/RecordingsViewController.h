@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GAI.h"
 
 @interface RecordingsViewController : UIViewController <UIWebViewDelegate, UIScrollViewDelegate>{
     

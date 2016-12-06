@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "EvercamCamera.h"
-#import "GAI.h"
 
 @protocol ViewCameraViewControllerDelegate <NSObject>
 - (void)cameraDeletedSettings:(EvercamCamera *)camera;

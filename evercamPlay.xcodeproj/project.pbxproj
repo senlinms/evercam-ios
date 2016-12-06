@@ -14,7 +14,6 @@
 		410748791ADFDBE0004D10C9 /* btn_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 410748761ADFDBE0004D10C9 /* btn_play.png */; };
 		4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 410748771ADFDBE0004D10C9 /* btn_save.png */; };
 		410748851AE04DAB004D10C9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748841AE04DAB004D10C9 /* CoreTelephony.framework */; };
-		410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */; };
 		410A13B31AE230A9008CA21C /* icon_online.png in Resources */ = {isa = PBXBuildFile; fileRef = 410A13B21AE230A9008CA21C /* icon_online.png */; };
 		410A13B51AE232D5008CA21C /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 410A13B41AE232D5008CA21C /* dropdown.png */; };
 		411C90E71AE573D10048FF3D /* bottom_fade.png in Resources */ = {isa = PBXBuildFile; fileRef = 411C90E61AE573D10048FF3D /* bottom_fade.png */; };
@@ -362,17 +361,6 @@
 		410748761ADFDBE0004D10C9 /* btn_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_play.png; sourceTree = "<group>"; };
 		410748771ADFDBE0004D10C9 /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
 		410748841AE04DAB004D10C9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		410748891AE052C8004D10C9 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		4107488A1AE052C8004D10C9 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		4107488B1AE052C8004D10C9 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
-		4107488C1AE052C8004D10C9 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
-		4107488D1AE052C8004D10C9 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
-		4107488E1AE052C8004D10C9 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
-		4107488F1AE052C8004D10C9 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
-		410748901AE052C8004D10C9 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
-		410748911AE052C8004D10C9 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		410748921AE052C8004D10C9 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
-		410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		410A13B21AE230A9008CA21C /* icon_online.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_online.png; sourceTree = "<group>"; };
 		410A13B41AE232D5008CA21C /* dropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdown.png; sourceTree = "<group>"; };
 		411C90E61AE573D10048FF3D /* bottom_fade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_fade.png; sourceTree = "<group>"; };
@@ -863,7 +851,6 @@
 				41BEFB6B1AD6DBB50016ACCA /* AVFoundation.framework in Frameworks */,
 				41BEFB691AD6DBAA0016ACCA /* CoreFoundation.framework in Frameworks */,
 				41BEFB671AD6DB560016ACCA /* libresolv.dylib in Frameworks */,
-				410748941AE052C8004D10C9 /* libGoogleAnalyticsServices.a in Frameworks */,
 				41BEFB651AD6DB480016ACCA /* libstdc++.dylib in Frameworks */,
 				41BEFB4C1AD6CE880016ACCA /* CoreGraphics.framework in Frameworks */,
 				41BEFB4A1AD6CE7F0016ACCA /* VideoToolbox.framework in Frameworks */,
@@ -882,25 +869,6 @@
 			);
 			path = Task;
 			sourceTree = "<group>";
-		};
-		410748881AE052C8004D10C9 /* GoogleAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				410748891AE052C8004D10C9 /* GAI.h */,
-				4107488A1AE052C8004D10C9 /* GAIDictionaryBuilder.h */,
-				4107488B1AE052C8004D10C9 /* GAIEcommerceFields.h */,
-				4107488C1AE052C8004D10C9 /* GAIEcommerceProduct.h */,
-				4107488D1AE052C8004D10C9 /* GAIEcommerceProductAction.h */,
-				4107488E1AE052C8004D10C9 /* GAIEcommercePromotion.h */,
-				4107488F1AE052C8004D10C9 /* GAIFields.h */,
-				410748901AE052C8004D10C9 /* GAILogger.h */,
-				410748911AE052C8004D10C9 /* GAITrackedViewController.h */,
-				410748921AE052C8004D10C9 /* GAITracker.h */,
-				410748931AE052C8004D10C9 /* libGoogleAnalyticsServices.a */,
-			);
-			name = GoogleAnalytics;
-			path = evercamPlay/GoogleAnalytics;
-			sourceTree = SOURCE_ROOT;
 		};
 		41208A391AD725CC009C4FC2 /* CoreData */ = {
 			isa = PBXGroup;
@@ -1202,7 +1170,6 @@
 				77079D801CE9EC880073EE16 /* GravatorLib */,
 				ABDAE07B1CBB8749002285B7 /* TPKeyboardAvoiding */,
 				E30900811B16B78600E5B5C0 /* BlockAction */,
-				410748881AE052C8004D10C9 /* GoogleAnalytics */,
 				413BB27E1AD992890083A5DC /* Reachability */,
 				41208A5E1AD97D44009C4FC2 /* SMTPAPI */,
 				41208A4C1AD8DC59009C4FC2 /* CustomNavigationController */,

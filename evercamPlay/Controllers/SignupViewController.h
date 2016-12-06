@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GAI.h"
 @class TPKeyboardAvoidingScrollView;
 @interface SignupViewController : UIViewController{
     BOOL isFromAddAccountScreen;

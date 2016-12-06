@@ -12,7 +12,6 @@
 #import "EvercamCreateCamera.h"
 #import "AppDelegate.h"
 #import "Config.h"
-#import "GAIDictionaryBuilder.h"
 @import Firebase;
 @interface CameraNameViewController ()
 

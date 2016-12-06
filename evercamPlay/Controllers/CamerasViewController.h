@@ -25,7 +25,6 @@
 */
 
 #import <UIKit/UIKit.h>
-#import "GAI.h"
 
 @interface CamerasViewController : UIViewController  <UICollectionViewDataSource, UICollectionViewDelegate>{
     NSMutableArray *cameraArray;

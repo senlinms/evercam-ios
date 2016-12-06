@@ -11,7 +11,6 @@
 
 #import "WelcomeViewController.h"
 #import "AppUser.h"
-#import "GAI.h"
 #import "EvercamShell.h"
 #import "GlobalSettings.h"
 

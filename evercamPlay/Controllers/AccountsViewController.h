@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GAI.h"
 #import "AddAccountView.h"
 
 @interface AccountsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, AddAccountViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate>

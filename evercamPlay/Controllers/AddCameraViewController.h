@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EvercamCamera.h"
 #import "Intercom/intercom.h"
-#import "GAI.h"
+
 @class TPKeyboardAvoidingScrollView;
 @protocol AddCameraViewControllerDelegate <NSObject>
 
