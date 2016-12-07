@@ -164,12 +164,16 @@
     NSString *api_id                = parameterDictionary[@"api_id"];
     NSString *api_key               = parameterDictionary[@"api_Key"];
     NSString *presetName            = parameterDictionary[@"name"];
-    
+    NSDictionary *postDictionary    = [NSDictionary dictionaryWithObjectsAndKeys:presetName,@"preset_name", nil];
+    NSData *putData         = [NSJSONSerialization dataWithJSONObject:postDictionary options:kNilOptions error:nil];
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
-        NSString *jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@/ptz/presets/create/%@?api_id=%@&api_key=%@",KBASEURL,cameraId,presetName,api_id,api_key];
+        NSString *jsonUrlString = [NSString stringWithFormat:@"%@cameras/%@/ptz/presets/create?api_id=%@&api_key=%@",KBASEURL,cameraId,api_id,api_key];
+        
         NSMutableURLRequest *request = [APIUtility createRequestWithUrl:jsonUrlString withType:@"POST"];
+        
+        [request setHTTPBody:putData];
         
         NSHTTPURLResponse *response = nil;
         NSError *error              = nil;
