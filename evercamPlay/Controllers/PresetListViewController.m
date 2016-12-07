@@ -65,9 +65,23 @@
             [self.activityIndicator stopAnimating];
             presetArray = details[@"Presets"];
             if (presetArray.count > 0) {
-                self.caution_Label.hidden       = YES;
-                self.preset_TableView.hidden    = NO;
-                [self.preset_TableView reloadData];
+                NSMutableArray *filteredArray = [NSMutableArray new];
+                for (NSDictionary *dict in presetArray) {
+                     int token = [dict[@"token"] intValue];
+                    if (token < 33) {
+                        [filteredArray addObject:dict];
+                    }
+                }
+                presetArray = filteredArray;
+                if (presetArray.count > 0) {
+                    self.caution_Label.hidden       = YES;
+                    self.preset_TableView.hidden    = NO;
+                    [self.preset_TableView reloadData];
+                }else{
+                    self.caution_Label.hidden       = NO;
+                    self.preset_TableView.hidden    = YES;
+                }
+                
             }else{
                 self.caution_Label.hidden       = NO;
                 self.preset_TableView.hidden    = YES;
