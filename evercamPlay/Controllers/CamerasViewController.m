@@ -48,9 +48,10 @@
 #import "CameraScanViewController.h"
 #import "VendorAndModelViewController.h"
 #import "LoginViewController.h"
+#import "LocationUpdateViewController.h"
 @import Firebase;
 
-@interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate>
+@interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate,LocationUpdateViewControllerDelegate>
 {
     
     CGSize cellSize;

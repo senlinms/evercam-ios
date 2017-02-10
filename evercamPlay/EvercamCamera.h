@@ -35,6 +35,9 @@
 @property (nonatomic,assign)  BOOL is_Public;
 @property (nonatomic,assign)  BOOL is_Discoverable;
 
+@property (nonatomic)  double latitude;
+@property (nonatomic)  double longitude;
+
 - (id) initWithDictionary: (NSDictionary *)cameraDict;
 - (BOOL) isHikvision;
 - (NSString *)getJpgPath;

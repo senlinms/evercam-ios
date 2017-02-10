@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.0</string>
+	<string>1.2.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0</string>
+	<string>1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -43,6 +43,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Please allow Evercam to access your location.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please allow Evercam to access your location.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow Evercam to access your photo library.</string>
 	<key>UIMainStoryboardFile</key>

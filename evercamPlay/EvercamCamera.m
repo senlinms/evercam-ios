@@ -83,6 +83,8 @@
         self.is_Public          = [cameraDict[@"is_public"] boolValue];
         self.is_Discoverable    = [cameraDict[@"discoverable"] boolValue];
         self.model_id           = cameraDict[@"model_id"];
+        self.latitude           = [cameraDict[@"location"][@"lat"] doubleValue];
+        self.longitude          = [cameraDict[@"location"][@"lng"] doubleValue];
         
     }
     
