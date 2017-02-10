@@ -59,8 +59,15 @@
 		585999131BF9C53000CDC457 /* ic_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 585999121BF9C53000CDC457 /* ic_info.png */; };
 		589204A41C11A40800B40DD0 /* cam.png in Resources */ = {isa = PBXBuildFile; fileRef = 589204A31C11A40800B40DD0 /* cam.png */; };
 		58F0F6171C08799B00BC04A3 /* Struts.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F0F6161C08799B00BC04A3 /* Struts.m */; };
+		6218006D1E4B0AFC00708E60 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6218006C1E4B0AFC00708E60 /* CoreLocation.framework */; };
+		6218006F1E4B0B0300708E60 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6218006E1E4B0B0300708E60 /* MapKit.framework */; };
+		621800781E4B319600708E60 /* LocationUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 621800761E4B319600708E60 /* LocationUpdateViewController.m */; };
+		621800791E4B319600708E60 /* LocationUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 621800771E4B319600708E60 /* LocationUpdateViewController.xib */; };
+		6218FEC11E4C839E001C37B0 /* CameraDetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6218FEC01E4C839E001C37B0 /* CameraDetailViewController_iPad.xib */; };
 		6221090F1DD08EE200231E6F /* Source in Resources */ = {isa = PBXBuildFile; fileRef = 6221090E1DD08EE200231E6F /* Source */; };
 		622B773B1DA2710B00B8DAE6 /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 622B773A1DA2710B00B8DAE6 /* local.plist */; };
+		628141CF1E49999A00FA63F3 /* CameraDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 628141CD1E49999A00FA63F3 /* CameraDetailViewController.m */; };
+		628141D01E49999A00FA63F3 /* CameraDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 628141CE1E49999A00FA63F3 /* CameraDetailViewController.xib */; };
 		6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */; };
 		6CCB482A1BDF4D7A00A62C28 /* SharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB48291BDF4D7A00A62C28 /* SharedManager.m */; };
 		6CF591FB1BF05FE20044B0F1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF591FA1BF05FE20044B0F1 /* logo.png */; };
@@ -421,8 +428,17 @@
 		589204A31C11A40800B40DD0 /* cam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cam.png; sourceTree = "<group>"; };
 		58F0F6151C08799B00BC04A3 /* Struts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Struts.h; sourceTree = "<group>"; };
 		58F0F6161C08799B00BC04A3 /* Struts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Struts.m; sourceTree = "<group>"; };
+		6218006C1E4B0AFC00708E60 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6218006E1E4B0B0300708E60 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		621800751E4B319600708E60 /* LocationUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUpdateViewController.h; sourceTree = "<group>"; };
+		621800761E4B319600708E60 /* LocationUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUpdateViewController.m; sourceTree = "<group>"; };
+		621800771E4B319600708E60 /* LocationUpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationUpdateViewController.xib; sourceTree = "<group>"; };
+		6218FEC01E4C839E001C37B0 /* CameraDetailViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraDetailViewController_iPad.xib; sourceTree = "<group>"; };
 		6221090E1DD08EE200231E6F /* Source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Source; sourceTree = "<group>"; };
 		622B773A1DA2710B00B8DAE6 /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
+		628141CC1E49999A00FA63F3 /* CameraDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraDetailViewController.h; sourceTree = "<group>"; };
+		628141CD1E49999A00FA63F3 /* CameraDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraDetailViewController.m; sourceTree = "<group>"; };
+		628141CE1E49999A00FA63F3 /* CameraDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraDetailViewController.xib; sourceTree = "<group>"; };
 		62CEBB7F1DC3644B00C6DF73 /* Evercam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Evercam.entitlements; sourceTree = "<group>"; };
 		6C7262B31BDDF4F300446CBE /* MainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenViewController.h; sourceTree = "<group>"; };
 		6C7262B41BDDF4F300446CBE /* MainScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenViewController.m; sourceTree = "<group>"; };
@@ -829,6 +845,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6218006F1E4B0B0300708E60 /* MapKit.framework in Frameworks */,
+				6218006D1E4B0AFC00708E60 /* CoreLocation.framework in Frameworks */,
 				770C9E5E1CDA0A8F003BC4E1 /* CoreImage.framework in Frameworks */,
 				7732ED981CD735C000EC9C6B /* MediaPlayer.framework in Frameworks */,
 				E356C9D91B179E2A007BB101 /* libicucore.dylib in Frameworks */,
@@ -927,6 +945,8 @@
 		41BEFB4D1AD6CE980016ACCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6218006E1E4B0B0300708E60 /* MapKit.framework */,
+				6218006C1E4B0AFC00708E60 /* CoreLocation.framework */,
 				770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */,
 				7732ED971CD735C000EC9C6B /* MediaPlayer.framework */,
 				AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */,
@@ -1382,10 +1402,6 @@
 				410748711ADF6F3E004D10C9 /* RecordingsViewController.m */,
 				410748721ADF6F3E004D10C9 /* RecordingsViewController.xib */,
 				77C08AB51CD0AE21005F9427 /* RecordingsViewController_iPad.xib */,
-				413BB2B21ADC10690083A5DC /* ViewCameraViewController.h */,
-				413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */,
-				7736DBE71D07E7E400376E40 /* ViewCameraViewController_iPad.xib */,
-				7736DBE81D07E7E400376E40 /* ViewCameraViewController.xib */,
 				413BB28F1ADAB6900083A5DC /* AddCameraViewController.h */,
 				413BB2901ADAB6900083A5DC /* AddCameraViewController.m */,
 				413BB2911ADAB6900083A5DC /* AddCameraViewController.xib */,
@@ -1481,6 +1497,17 @@
 				77B498941D12B690003FC91C /* UnknownConnectCameraViewController.m */,
 				77B498951D12B690003FC91C /* UnknownConnectCameraViewController.xib */,
 				77B498981D12C3E8003FC91C /* UnknownConnectCameraViewController_iPad.xib */,
+				413BB2B21ADC10690083A5DC /* ViewCameraViewController.h */,
+				413BB2B31ADC10690083A5DC /* ViewCameraViewController.m */,
+				7736DBE71D07E7E400376E40 /* ViewCameraViewController_iPad.xib */,
+				7736DBE81D07E7E400376E40 /* ViewCameraViewController.xib */,
+				628141CC1E49999A00FA63F3 /* CameraDetailViewController.h */,
+				628141CD1E49999A00FA63F3 /* CameraDetailViewController.m */,
+				6218FEC01E4C839E001C37B0 /* CameraDetailViewController_iPad.xib */,
+				628141CE1E49999A00FA63F3 /* CameraDetailViewController.xib */,
+				621800751E4B319600708E60 /* LocationUpdateViewController.h */,
+				621800761E4B319600708E60 /* LocationUpdateViewController.m */,
+				621800771E4B319600708E60 /* LocationUpdateViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1708,6 +1735,7 @@
 				410748781ADFDBE0004D10C9 /* btn_pause.png in Resources */,
 				E309009C1B16B96000E5B5C0 /* action-black-button-selected@2x.png in Resources */,
 				CBDFA5601AE92806007CC199 /* ic_menu.png in Resources */,
+				621800791E4B319600708E60 /* LocationUpdateViewController.xib in Resources */,
 				77423E5F1D1D443C00462283 /* ic_person_grey@3x.png in Resources */,
 				E30900A31B16B96000E5B5C0 /* action-red-button-selected.png in Resources */,
 				77F305E51D0044A300FB4293 /* AllDevicesCell_iPad.xib in Resources */,
@@ -1773,6 +1801,7 @@
 				775353BC1D827B3800F82973 /* ic_globe_iOS@3x.png in Resources */,
 				77E74E631D0818D500EC336D /* VendorAndModelViewController.xib in Resources */,
 				E30201C91B16C82D0006DAE8 /* alert-window@2x.png in Resources */,
+				628141D01E49999A00FA63F3 /* CameraDetailViewController.xib in Resources */,
 				77F9DCA51CFEE11A000EA6A9 /* ic_search.png in Resources */,
 				413BB2931ADAB6900083A5DC /* AddCameraViewController.xib in Resources */,
 				41BEFB431AD609A10016ACCA /* CameraPlayViewController.xib in Resources */,
@@ -1813,6 +1842,7 @@
 				E356C9D41B17985D007BB101 /* (null) in Resources */,
 				E369E4A81B137AC9009D2D9E /* AddAccountView.xib in Resources */,
 				E3CB15A91B2879C700413197 /* btn_delete.png in Resources */,
+				6218FEC11E4C839E001C37B0 /* CameraDetailViewController_iPad.xib in Resources */,
 				77B498921D12ACE7003FC91C /* CameraNameViewController_iPad.xib in Resources */,
 				AB6E77E31CBE1A1600DE6310 /* ForgotPasswordViewController.xib in Resources */,
 				E30201BF1B16C82D0006DAE8 /* alert-black-button@2x.png in Resources */,
@@ -2012,6 +2042,7 @@
 				CB44E87A1AAE9E7D00A78C11 /* SignupViewController.m in Sources */,
 				77F722B51D6AFFF700B8B173 /* EvercamVendor.m in Sources */,
 				77F722A81D6AFFF700B8B173 /* EvercamCameraModelInfo.m in Sources */,
+				628141CF1E49999A00FA63F3 /* CameraDetailViewController.m in Sources */,
 				77F722B21D6AFFF700B8B173 /* EvercamSingleCameraDetails.m in Sources */,
 				77F722A51D6AFFF700B8B173 /* EvercamApiUtility.m in Sources */,
 				6C7262B51BDDF4F300446CBE /* MainScreenViewController.m in Sources */,
@@ -2039,6 +2070,7 @@
 				CB44E8761AAE9E7D00A78C11 /* MenuViewController.m in Sources */,
 				CB318E561AFC3565004FFA8E /* SDImageCache.m in Sources */,
 				CB1C76541AAB144800680FE3 /* main.m in Sources */,
+				621800781E4B319600708E60 /* LocationUpdateViewController.m in Sources */,
 				77F9DCB01CFEE663000EA6A9 /* CameraScanCell.m in Sources */,
 				CB1C767B1AAB7DE900680FE3 /* SWRevealViewController.m in Sources */,
 				77F722AA1D6AFFF700B8B173 /* EvercamCameraVendor.m in Sources */,

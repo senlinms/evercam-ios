@@ -28,6 +28,7 @@
 #import "EvercamCameraModelInfo.h"
 #import "EvercamRefreshCamera.h"
 #import "PresetListViewController.h"
+#import "CameraDetailViewController.h"
 @import Firebase;
 
 static void *MyStreamingMovieViewControllerTimedMetadataObserverContext = &MyStreamingMovieViewControllerTimedMetadataObserverContext;
@@ -42,7 +43,7 @@ NSString *kPlayableKey		= @"playable";
 NSString *kCurrentItemKey	= @"currentItem";
 NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 
-@interface CameraPlayViewController () <ViewCameraViewControllerDelegate> {
+@interface CameraPlayViewController () <ViewCameraViewControllerDelegate,CameraViewControllerDelegate> {
     int media_width;
     int media_height;
     Boolean dragging_slider;
@@ -318,7 +319,8 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 - (void)showCameraView {
-    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ViewCameraViewController":@"ViewCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+//    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ViewCameraViewController":@"ViewCameraViewController_iPad" bundle:[NSBundle mainBundle]];
+    CameraDetailViewController *viewCameraVC = [[CameraDetailViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"CameraDetailViewController":@"CameraDetailViewController_iPad" bundle:[NSBundle mainBundle]];
     viewCameraVC.camera = self.cameraInfo;
     viewCameraVC.delegate = self;
     CustomNavigationController *navVC = [[CustomNavigationController alloc] initWithRootViewController:viewCameraVC];
@@ -545,10 +547,10 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     {
         UIActionSheet *sheet;
         if ([self.cameraInfo.rights.rightsString rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
-            sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera Settings",@"Share",@"Saved Images",@"Cloud Recordings", nil];
+            sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera Details",@"Share",@"Saved Images",@"Cloud Recordings", nil];
             sheet.tag = 5608;
         }else{
-            sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera Settings",@"Saved Images",@"Cloud Recordings", nil];
+            sheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera Details",@"Saved Images",@"Cloud Recordings", nil];
         }
         [sheet showInView:self.view];
     }
@@ -565,7 +567,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
                                  preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction* viewDetails = [UIAlertAction
-                                  actionWithTitle:@"Camera Settings"
+                                  actionWithTitle:@"Camera Details"
                                   style:UIAlertActionStyleDefault
                                   handler:^(UIAlertAction * action)
                                   {

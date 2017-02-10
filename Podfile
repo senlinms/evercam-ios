@@ -10,5 +10,6 @@ pod 'AFNetworking', '~> 3.0'
 pod 'Unirest'
 pod 'Firebase/Core'
 pod 'Firebase/Crash'
+pod 'INTULocationManager'
 end
 

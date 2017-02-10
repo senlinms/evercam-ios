@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationUpdateViewController">
+            <connections>
+                <outlet property="location_Map" destination="F04-to-f1a" id="8cq-zK-hkb"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NQA-1T-DIc" userLabel="titlebar">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8z-Ld-hZG">
+                            <frame key="frameInset" minX="8" minY="77.78%" width="28" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="back.png">
+                                <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="goBack:" destination="-1" eventType="touchUpInside" id="vj9-Dd-oem"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2re-TT-UVc">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="126" id="7vI-BI-015"/>
+                                <constraint firstAttribute="height" constant="44" id="vWF-AO-emX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="16"/>
+                            <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfj-GA-4sL">
+                            <frame key="frameInset" minY="27" width="87" height="30" maxX="8"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="12"/>
+                            <state key="normal" title="Save Location">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="update_Location:" destination="-1" eventType="touchUpInside" id="wji-qM-0rq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.20392156859999999" green="0.22352941179999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="2re-TT-UVc" firstAttribute="centerX" secondItem="NQA-1T-DIc" secondAttribute="centerX" id="Gud-uG-M7e"/>
+                        <constraint firstAttribute="height" constant="64" id="N7J-XH-0x0"/>
+                        <constraint firstItem="2re-TT-UVc" firstAttribute="top" secondItem="NQA-1T-DIc" secondAttribute="top" constant="20" id="hb4-5d-769"/>
+                    </constraints>
+                </view>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F04-to-f1a">
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="PhO-KE-0w9"/>
+                    </connections>
+                </mapView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwR-WX-vWX">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ima-eG-wHd">
+                            <frame key="frameInset" minX="27" minY="53" height="21" maxX="27"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="12"/>
+                            <state key="normal" title="USE CURRENT LOCATION">
+                                <color key="titleColor" red="0.25882352941176467" green="0.54509803921568623" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="getCurrentLocation:" destination="-1" eventType="touchUpInside" id="pjz-9I-1Vw"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feU-7g-1Pq">
+                            <frame key="frameInset" minX="20" minY="31" height="21" maxX="20"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="12"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mark Clinic Location on Map" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rq-MC-c5i">
+                            <frame key="frameInset" minX="20" minY="7" height="21" maxX="20"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="215" id="RvB-Ci-ckQ"/>
+                        <constraint firstAttribute="height" constant="80" id="toH-ht-XbJ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="NQA-1T-DIc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1Yb-Wb-cXb"/>
+                <constraint firstAttribute="trailing" secondItem="F04-to-f1a" secondAttribute="trailing" id="EjT-th-2LR"/>
+                <constraint firstItem="F04-to-f1a" firstAttribute="top" secondItem="cwR-WX-vWX" secondAttribute="bottom" id="M2I-mW-XG8"/>
+                <constraint firstItem="F04-to-f1a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qok-hk-Q8j"/>
+                <constraint firstItem="cwR-WX-vWX" firstAttribute="top" secondItem="NQA-1T-DIc" secondAttribute="bottom" constant="2" id="azY-TM-iuk"/>
+                <constraint firstAttribute="bottom" secondItem="F04-to-f1a" secondAttribute="bottom" id="bVa-DQ-fPu"/>
+                <constraint firstItem="NQA-1T-DIc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cmB-se-6V3"/>
+                <constraint firstAttribute="trailing" secondItem="NQA-1T-DIc" secondAttribute="trailing" id="dQM-VO-qwo"/>
+                <constraint firstItem="cwR-WX-vWX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xph-dl-SFi"/>
+            </constraints>
+            <point key="canvasLocation" x="-96" y="17"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back.png" width="10" height="17"/>
+    </resources>
+</document>
