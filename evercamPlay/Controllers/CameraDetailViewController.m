@@ -224,7 +224,9 @@
             
             break;
         case 1:{
-            [self deleteCamera];
+            if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Remove Camera"]) {
+                [self deleteCamera];
+            }
         }
         default:
             break;
@@ -258,6 +260,12 @@
     MKCoordinateRegionMakeWithDistance (
                                         location.coordinate, 1000, 1000);
     [self.camera_Map setRegion:region animated:YES];
+    
+    if ([self.camera.rights.rightsString rangeOfString:@"edit" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        self.editLocationBtn.hidden = NO;
+    }else{
+        self.editLocationBtn.hidden = YES;
+    }
     
 }
 

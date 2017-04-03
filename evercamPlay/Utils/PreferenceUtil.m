@@ -19,7 +19,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger cameraPerRow = [userDefaults integerForKey:CAMERA_PER_ROW_KEY];
     if (cameraPerRow == 0) {
-        return 2;
+        return 1;
     }
     return cameraPerRow;
 }

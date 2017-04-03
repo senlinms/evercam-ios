@@ -24,5 +24,6 @@
 - (IBAction)onLogin:(id)sender;
 - (IBAction)onBack:(id)sender;
 - (IBAction)onForgotPassword:(id)sender;
+- (IBAction)showPassAction:(id)sender;
 
 @end

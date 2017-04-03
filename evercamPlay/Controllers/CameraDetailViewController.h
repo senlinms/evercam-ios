@@ -33,5 +33,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *camera_Vendor_ImageView;
 @property (weak, nonatomic) IBOutlet MKMapView *camera_Map;
 - (IBAction)goUpdateLocation:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *editLocationBtn;
 
 @end
