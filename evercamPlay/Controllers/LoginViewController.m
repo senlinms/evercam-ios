@@ -26,6 +26,7 @@
 @interface LoginViewController ()
 {
     UITextField *activeTextField;
+    BOOL isPasswordHidden;
     
 }
 @end
@@ -223,6 +224,37 @@
 - (IBAction)onForgotPassword:(id)sender {
     ForgotPasswordViewController *fVc = [[ForgotPasswordViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ForgotPasswordViewController":@"ForgotPasswordViewController_iPad" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:fVc animated:YES];
+}
+
+- (IBAction)showPassAction:(id)sender {
+    
+    UIButton *btn = (UIButton *)sender;
+    
+    isPasswordHidden = !isPasswordHidden;
+    
+    if (isPasswordHidden) {
+        if ([GlobalSettings sharedInstance].isPhone)
+        {
+            [btn setImage:[UIImage imageNamed:@"hidePass.png"] forState:UIControlStateNormal];
+        }else{
+            [btn setBackgroundImage:[UIImage imageNamed:@"hidePass.png"] forState:UIControlStateNormal];
+        }
+
+        
+        self.txt_password.secureTextEntry = NO;
+        
+    }else{
+        
+        if ([GlobalSettings sharedInstance].isPhone)
+        {
+            [btn setImage:[UIImage imageNamed:@"showPassword.png"] forState:UIControlStateNormal];
+        }else{
+            [btn setBackgroundImage:[UIImage imageNamed:@"showPassword.png"] forState:UIControlStateNormal];
+        }
+        
+        self.txt_password.secureTextEntry = YES;
+    }
+    
 }
 
 - (IBAction)onCreateAccount:(id)sender

@@ -96,6 +96,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     
     self.liveViewScroll.minimumZoomScale=1;
     self.liveViewScroll.maximumZoomScale=5;
+//    self.liveViewScroll.maximumZoomScale=100.0;
     self.liveViewScroll.delegate=self;
     
     
@@ -319,7 +320,6 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 - (void)showCameraView {
-//    ViewCameraViewController *viewCameraVC = [[ViewCameraViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ViewCameraViewController":@"ViewCameraViewController_iPad" bundle:[NSBundle mainBundle]];
     CameraDetailViewController *viewCameraVC = [[CameraDetailViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"CameraDetailViewController":@"CameraDetailViewController_iPad" bundle:[NSBundle mainBundle]];
     viewCameraVC.camera = self.cameraInfo;
     viewCameraVC.delegate = self;
@@ -328,7 +328,6 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     [navVC setHasLandscapeMode:YES];
     navVC.navigationBarHidden   = YES;
     [self.navigationController presentViewController:navVC animated:YES completion:nil];
-//    [self.navigationController presentViewController:viewCameraVC animated:YES completion:nil];
 }
 
 - (void)showSavedImages {
@@ -1135,6 +1134,10 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     [self.imageView addGestureRecognizer:self.pinchGesture_outlet];
     [self.imageView addGestureRecognizer:ptzViewTap];
     [self.liveViewScroll setContentSize:CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height)];
+    
+//    CGPoint centerPoint = CGPointMake(CGRectGetMidX(self.liveViewScroll.bounds),
+//                                      CGRectGetMidY(self.liveViewScroll.bounds));
+//    [self view:self.imageView setCenter:centerPoint];
 //    [self.playerView addSubview:self.imageView];
 //    [self.playerView sendSubviewToBack:self.imageView];
 }
@@ -1147,6 +1150,69 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     self.lblTimeCode.hidden = NO;
     timeCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTimeCode) userInfo:nil repeats:YES];
 }
+
+//- (void)view:(UIView*)view setCenter:(CGPoint)centerPoint
+//{
+//    CGRect vf = view.frame;
+//    CGPoint co = self.liveViewScroll.contentOffset;
+//    
+//    CGFloat x = centerPoint.x - vf.size.width / 2.0;
+//    CGFloat y = centerPoint.y - vf.size.height / 2.0;
+//    
+//    if(x < 0)
+//    {
+//        co.x = -x;
+//        vf.origin.x = 0.0;
+//    }
+//    else
+//    {
+//        vf.origin.x = x;
+//    }
+//    if(y < 0)
+//    {
+//        co.y = -y;
+//        vf.origin.y = 0.0;
+//    }
+//    else
+//    {
+//        vf.origin.y = y;
+//    }
+//    
+//    view.frame = vf;
+//    self.liveViewScroll.contentOffset = co;
+//}
+
+//// MARK: - UIScrollViewDelegate
+//- (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView
+//{
+//    return  self.imageView;
+//}
+//
+//- (void)scrollViewDidZoom:(UIScrollView *)sv
+//{
+//    UIView* zoomView = [sv.delegate viewForZoomingInScrollView:sv];
+//    CGRect zvf = zoomView.frame;
+//    if(zvf.size.width < sv.bounds.size.width)
+//    {
+//        zvf.origin.x = (sv.bounds.size.width - zvf.size.width) / 2.0;
+//    }
+//    else
+//    {
+//        zvf.origin.x = 0.0;
+//    }
+//    if(zvf.size.height < sv.bounds.size.height)
+//    {
+//        zvf.origin.y = (sv.bounds.size.height - zvf.size.height) / 2.0;
+//    }
+//    else
+//    {
+//        zvf.origin.y = 0.0;
+//    }
+//    zoomView.frame = zvf;
+//}
+
+
+
 
 #pragma mark Timer
 -(void) updateTimeCode
@@ -1357,6 +1423,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     }
     
 }
+
 - (void)scrollViewDidZoom:(UIScrollView *)aScrollView {
   
         CGFloat offsetX = (self.liveViewScroll.bounds.size.width > self.liveViewScroll.contentSize.width)?
@@ -1381,6 +1448,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
             }
         }
 }
+
 
 -(UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
