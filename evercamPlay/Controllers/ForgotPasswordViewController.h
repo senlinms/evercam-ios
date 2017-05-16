@@ -10,9 +10,14 @@
 
 @interface ForgotPasswordViewController : UIViewController<UIWebViewDelegate>{
     
+    BOOL isTermofUse;
+    
 }
+@property(nonatomic,assign) BOOL isTermofUse;
+
 - (IBAction)backAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIWebView *password_WebView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *process_ActivityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end

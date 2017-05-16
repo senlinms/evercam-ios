@@ -82,3 +82,10 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-Public-3.4.0-Release/GoogleCast.framework"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-Public-3.4.0-Release/GoogleCast.framework"
+fi

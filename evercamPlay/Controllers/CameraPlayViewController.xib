@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="NO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="NO">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
@@ -25,6 +25,7 @@
                 <outlet property="leftBtn" destination="iaZ-AB-PeI" id="CDg-ER-2b4"/>
                 <outlet property="liveViewScroll" destination="1Wy-xv-6ew" id="c8h-5Z-Iog"/>
                 <outlet property="loadingView" destination="fbV-26-bT6" id="7mP-94-3T1"/>
+                <outlet property="option_Button" destination="cTv-9Z-hVP" id="hSC-hZ-TJa"/>
                 <outlet property="pinchGesture_outlet" destination="mFN-Ha-lKk" id="W6g-HG-cxA"/>
                 <outlet property="playOrPauseButton" destination="QCn-Zg-5jB" id="f9x-cm-Y1p"/>
                 <outlet property="playerLayerView" destination="v7W-LO-o9w" id="3AG-Vu-gbY"/>
@@ -347,7 +348,7 @@
     </objects>
     <resources>
         <image name="action_refresh.png" width="24" height="24"/>
-        <image name="back.png" width="10" height="17"/>
+        <image name="back.png" width="128" height="128"/>
         <image name="btn_pause.png" width="150" height="150"/>
         <image name="btn_save.png" width="150" height="150"/>
         <image name="dropdown.png" width="30" height="30"/>
@@ -359,7 +360,7 @@
         <image name="ic_home.png" width="64" height="64"/>
         <image name="ic_presets.png" width="64" height="64"/>
         <image name="ic_zoom_out.png" width="64" height="64"/>
-        <image name="nav.png" width="1" height="1"/>
+        <image name="nav.png" width="1" height="44"/>
         <image name="pull-out.png" width="80" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

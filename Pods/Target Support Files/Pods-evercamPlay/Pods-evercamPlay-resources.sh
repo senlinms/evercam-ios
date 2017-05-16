@@ -93,10 +93,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "Mixpanel/Mixpanel/Images/MPDismissKeyboard@2x.png"
   install_resource "Mixpanel/Mixpanel/Images/MPLogo.png"
   install_resource "Mixpanel/Mixpanel/Images/MPLogo@2x.png"
-  install_resource "Mixpanel/Mixpanel/MPNotification~ipad.storyboard"
-  install_resource "Mixpanel/Mixpanel/MPNotification~iphonelandscape.storyboard"
-  install_resource "Mixpanel/Mixpanel/MPNotification~iphoneportrait.storyboard"
-  install_resource "Mixpanel/Mixpanel/MPSurvey.storyboard"
+  install_resource "Mixpanel/Mixpanel/Images/placeholder-image.png"
+  install_resource "Mixpanel/Mixpanel/MPTakeoverNotificationViewController~ipad.xib"
+  install_resource "Mixpanel/Mixpanel/MPTakeoverNotificationViewController~iphonelandscape.xib"
+  install_resource "Mixpanel/Mixpanel/MPTakeoverNotificationViewController~iphoneportrait.xib"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "Mixpanel/Mixpanel/Images/MPArrowLeft.png"
@@ -112,10 +112,10 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "Mixpanel/Mixpanel/Images/MPDismissKeyboard@2x.png"
   install_resource "Mixpanel/Mixpanel/Images/MPLogo.png"
   install_resource "Mixpanel/Mixpanel/Images/MPLogo@2x.png"
-  install_resource "Mixpanel/Mixpanel/MPNotification~ipad.storyboard"
-  install_resource "Mixpanel/Mixpanel/MPNotification~iphonelandscape.storyboard"
-  install_resource "Mixpanel/Mixpanel/MPNotification~iphoneportrait.storyboard"
-  install_resource "Mixpanel/Mixpanel/MPSurvey.storyboard"
+  install_resource "Mixpanel/Mixpanel/Images/placeholder-image.png"
+  install_resource "Mixpanel/Mixpanel/MPTakeoverNotificationViewController~ipad.xib"
+  install_resource "Mixpanel/Mixpanel/MPTakeoverNotificationViewController~iphonelandscape.xib"
+  install_resource "Mixpanel/Mixpanel/MPTakeoverNotificationViewController~iphoneportrait.xib"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

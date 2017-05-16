@@ -70,4 +70,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *zoomOutBtn;
 @property (weak, nonatomic) IBOutlet UIButton *zoomInBtn;
 - (IBAction)refreshAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *option_Button;
 @end

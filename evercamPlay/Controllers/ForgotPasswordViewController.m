@@ -13,13 +13,21 @@
 @end
 
 @implementation ForgotPasswordViewController
-
+@synthesize isTermofUse;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.process_ActivityIndicator startAnimating];
     self.password_WebView.hidden = YES;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://dash.evercam.io/v1/users/password-reset"]];
+    NSURLRequest *request;
+    if (isTermofUse) {
+        request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://evercam.io/terms/"]];
+        self.titleLabel.text = @"Terms of Use";
+    }else{
+        request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://dash.evercam.io/v1/users/password-reset"]];
+        self.titleLabel.text = @"Forgot Password";
+    }
+    
     [self.password_WebView loadRequest:request];
 }
 

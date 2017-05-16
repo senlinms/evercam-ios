@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "AppUser.h"
 #import "CustomNavigationController.h"
+#import <GoogleCast/GoogleCast.h>
 
 #define APP_DELEGATE (AppDelegate *)[[UIApplication sharedApplication] delegate]
 #define THUMB_IMAGE_BASEURL @"https://media.evercam.io/v1/cameras"
@@ -20,7 +21,7 @@ green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
 blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
 alpha:1.0]
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,GCKLoggerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) CustomNavigationController *viewController;
