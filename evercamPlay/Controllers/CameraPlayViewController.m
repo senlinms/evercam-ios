@@ -29,7 +29,14 @@
 #import "EvercamRefreshCamera.h"
 #import "PresetListViewController.h"
 #import "CameraDetailViewController.h"
+#import <GoogleCast/GoogleCast.h>
+#import "MediaItem.h"
 @import Firebase;
+
+
+NSString *const kMediaKeyDescription = @"description";
+NSString *const kMediaKeyPosterURL = @"posterUrl";
+NSString *const kPrefPreloadTime = @"preload_time_sec";
 
 static void *MyStreamingMovieViewControllerTimedMetadataObserverContext = &MyStreamingMovieViewControllerTimedMetadataObserverContext;
 static void *MyStreamingMovieViewControllerRateObservationContext = &MyStreamingMovieViewControllerRateObservationContext;
@@ -43,7 +50,7 @@ NSString *kPlayableKey		= @"playable";
 NSString *kCurrentItemKey	= @"currentItem";
 NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 
-@interface CameraPlayViewController () <ViewCameraViewControllerDelegate,CameraViewControllerDelegate> {
+@interface CameraPlayViewController () <ViewCameraViewControllerDelegate,CameraViewControllerDelegate,GCKSessionManagerListener> {
     int media_width;
     int media_height;
     Boolean dragging_slider;
@@ -66,10 +73,17 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     BOOL isPlayerStarted;
     
     UITapGestureRecognizer *ptzViewTap;
+    
+    
+    GCKSessionManager *_sessionManager;
+    GCKCastSession *_castSession;
+    GCKUIMediaController *_castMediaController;
+    GCKUICastButton *castButton;
 }
 
 @property (nonatomic, retain) PhxSocket *socket;
 @property (nonatomic, retain) PhxChannel *channel;
+@property(nonatomic, strong, readwrite) MediaItem *mediaInfo;
 
 @end
 
@@ -81,10 +95,11 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    NSLog(@"viewDidLoad");
     
     runFirstTime            = YES;
     videoController.alpha   = 0.0;
-
+    
     [self changeBtnTitle];
     runFirstTime            = NO;
     
@@ -96,11 +111,18 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     
     self.liveViewScroll.minimumZoomScale=1;
     self.liveViewScroll.maximumZoomScale=5;
-//    self.liveViewScroll.maximumZoomScale=100.0;
+    //    self.liveViewScroll.maximumZoomScale=100.0;
     self.liveViewScroll.delegate=self;
     
     
-//    self.liveViewScroll.decelerationRate = UIScrollViewDecelerationRateFast;
+    
+    _sessionManager = [GCKCastContext sharedInstance].sessionManager;
+    _castMediaController = [[GCKUIMediaController alloc] init];
+    [_sessionManager addListener:self];
+    
+    
+    
+    //    self.liveViewScroll.decelerationRate = UIScrollViewDecelerationRateFast;
 }
 
 - (CGFloat)widthOfString:(NSString *)string withFont:(UIFont *)font {
@@ -109,6 +131,84 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     CGFloat width = [[[NSAttributedString alloc] initWithString:string attributes:attributes] size].width;
     return width + 20;
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    NSLog(@"viewDidAppear");
+    if (isCameraRemoved) {
+        [self closeCastSession];
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
+    if (AppUtility.isFullyDismiss) {
+        AppUtility.isFullyDismiss = NO;
+        [self closeCastSession];
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
+    
+    if (self.cameraInfo.hlsUrl && self.cameraInfo.hlsUrl.length != 0) {
+        
+        
+        if(![self.titlebar.subviews containsObject:castButton]) {
+            [self addCastButton];
+        }
+    }
+    
+    if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
+        NSLog(@"ViewDidAppear: channel and livestreamstop");
+        [self removeLiveViewObservers];
+        [self.channel leave];
+        [self.socket disconnect];
+        self.channel = nil;
+        self.socket = nil;
+    }
+    
+    [[GCKCastContext sharedInstance] presentCastInstructionsViewControllerOnce];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"viewWillAppear");
+    
+    if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
+        return;
+    }
+    
+    [self getCameraModelInformation];
+    [self setTitleBarAccordingToOrientation];
+    [self playCamera];
+    [self disableSleep];
+    
+    long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
+    [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"viewWillDisappear");
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [self enableSleep];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    NSLog(@"viewDidDisappear");
+    [self removeLiveViewObservers];
+    [self.channel leave];
+    [self.socket disconnect];
+    self.channel = nil;
+    self.socket = nil;
+}
+
+-(void)addCastButton{
+    CGRect frame = CGRectMake(self.option_Button.frame.origin.x - 25, 29, 24, 24);
+    castButton = [[GCKUICastButton alloc] initWithFrame:frame];
+    castButton.tintColor = [UIColor whiteColor];
+    castButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin |
+    UIViewAutoresizingFlexibleLeftMargin;
+    [self.titlebar addSubview:castButton];
+}
+
 
 -(void)changeBtnTitle{
     
@@ -120,21 +220,12 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [self removeLiveViewObservers];
-    [self.channel leave];
-    [self.socket disconnect];
-    self.channel = nil;
-    self.socket = nil;
-}
-
 -(void)setTitleBarAccordingToOrientation{
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
         
         [self setNavigationBarAnimation:NO isPortrait:YES];
-
+        
     } else {
         
         [self setNavigationBarAnimation:YES isPortrait:NO];
@@ -195,34 +286,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     self.zoomOutBtn.frame = CGRectMake(self.homeBtn.frame.origin.x+self.homeBtn.frame.size.width+70, self.zoomOutBtn.frame.origin.y, self.zoomOutBtn.frame.size.width, self.zoomOutBtn.frame.size.height);
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    if (isCameraRemoved) {
-        [self dismissViewControllerAnimated:NO completion:nil];
-    }
-    if (AppUtility.isFullyDismiss) {
-        AppUtility.isFullyDismiss = NO;
-        [self dismissViewControllerAnimated:NO completion:nil];
-    }
-}
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self getCameraModelInformation];
-    [self setTitleBarAccordingToOrientation];
-    [self playCamera];
-    [self disableSleep];
-        
-    long sleepTimerSecs = [PreferenceUtil getSleepTimerSecs];
-    [self performSelector:@selector(enableSleep) withObject:nil afterDelay:sleepTimerSecs];
-    
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [self enableSleep];
-}
 
 - (void)disableSleep {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -426,6 +490,8 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 - (IBAction)back:(id)sender {
+    
+    [self closeCastSession];
     [self dismissViewControllerAnimated:YES completion:nil];
     
     if (timeCounter && [timeCounter isValid])
@@ -436,13 +502,15 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 - (IBAction)playOrPause:(id)sender {
-    if (isPlaying) {
-        [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_play.png"] forState:UIControlStateNormal];
-        [self stopCamera];
-    } else {
-        [self showVideoController:NO];
-        [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_pause.png"] forState:UIControlStateNormal];
-        [self playCamera];
+    if (_sessionManager.connectionState != GCKConnectionStateConnected) {
+        if (isPlaying) {
+            [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_play.png"] forState:UIControlStateNormal];
+            [self stopCamera];
+        } else {
+            [self showVideoController:NO];
+            [playOrPauseButton setBackgroundImage:[UIImage imageNamed:@"btn_pause.png"] forState:UIControlStateNormal];
+            [self playCamera];
+        }
     }
 }
 - (IBAction)handleSingleTap:(id)sender {
@@ -476,6 +544,9 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     }
     
     if (videoController.hidden) {
+        if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
+            return;
+        }
         [self showVideoController:YES];
         //        videoController.hidden = NO;
         
@@ -513,7 +584,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
             if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Share"]) {
                 [self showShareView];
             }else{
-             [self showSavedImages];   
+                [self showSavedImages];
             }
         }
             
@@ -561,9 +632,9 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 
 -(void)presentPopOverForiPad:(id)sender{
     UIAlertController * popOverView=   [UIAlertController
-                                 alertControllerWithTitle:nil
-                                 message:nil
-                                 preferredStyle:UIAlertControllerStyleActionSheet];
+                                        alertControllerWithTitle:nil
+                                        message:nil
+                                        preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction* viewDetails = [UIAlertAction
                                   actionWithTitle:@"Camera Details"
@@ -623,12 +694,12 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     
     
     UIPopoverPresentationController *popPresenter = [popOverView
-                                                         popoverPresentationController];
+                                                     popoverPresentationController];
     popPresenter.sourceView = (UIView *)sender;
     popPresenter.sourceRect = ((UIView *)sender).bounds;
     [self presentViewController:popOverView animated:YES completion:nil];
     
-
+    
 }
 
 - (void)playCamera {
@@ -696,6 +767,9 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 -(void)setUpJPGView{
+    if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
+        return;
+    }
     self.lblTimeCode.hidden = NO;
     self.lblTimeCode.text   = @"";
     [self createBrowseView];
@@ -827,6 +901,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
         [liveViewDateStringUpdater invalidate];
         liveViewDateStringUpdater = nil;
     }
+    
     [self setUpJPGView];
 }
 
@@ -969,23 +1044,34 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
                             parameters:@{
                                          @"JPG_Stream_Played": @"Successfully played JPG stream."
                                          }];
-                
-        self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
+        if (!self.socket) {
+            self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
+        }
         
         [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
         
-        self.channel = [[PhxChannel alloc] initWithSocket:self.socket topic:[NSString stringWithFormat:@"cameras:%@",self.cameraInfo.camId] params:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
-        [self.channel onEvent:@"snapshot-taken" callback:^(id message, id ref) {
-            [loadingView stopAnimating];
-            UIImage *jpgImage =  [self decodeBase64ToImage:message[@"image"]];
-            self.imageView.image = jpgImage;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // Update the UI
-                [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:NO];
-            });
-            
-        }];
-        [self.channel join];
+        if (!self.channel) {
+            NSLog(@"New Channel Opened");
+            self.channel = [[PhxChannel alloc] initWithSocket:self.socket topic:[NSString stringWithFormat:@"cameras:%@",self.cameraInfo.camId] params:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+            self.channel.delegate = self;
+            [self.channel onEvent:@"snapshot-taken" callback:^(id message, id ref) {
+                [loadingView stopAnimating];
+                if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
+                    return;
+                }
+                UIImage *jpgImage =  [self decodeBase64ToImage:message[@"image"]];
+                self.imageView.image = jpgImage;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    [self performSelectorOnMainThread:@selector(setDateLabel:) withObject:message waitUntilDone:NO];
+                });
+                
+            }];
+            [self.channel join];
+        }else{
+            NSLog(@"Channel already open.");
+        }
+        
     });
     /*
      if (self.socket != nil && [self.socket isConnected]) {
@@ -1006,6 +1092,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
      [self.channel join];
      */
 }
+
 
 - (UIImage *)decodeBase64ToImage:(NSString *)strEncodeData {
     NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
@@ -1135,11 +1222,11 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     [self.imageView addGestureRecognizer:ptzViewTap];
     [self.liveViewScroll setContentSize:CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height)];
     
-//    CGPoint centerPoint = CGPointMake(CGRectGetMidX(self.liveViewScroll.bounds),
-//                                      CGRectGetMidY(self.liveViewScroll.bounds));
-//    [self view:self.imageView setCenter:centerPoint];
-//    [self.playerView addSubview:self.imageView];
-//    [self.playerView sendSubviewToBack:self.imageView];
+    //    CGPoint centerPoint = CGPointMake(CGRectGetMidX(self.liveViewScroll.bounds),
+    //                                      CGRectGetMidY(self.liveViewScroll.bounds));
+    //    [self view:self.imageView setCenter:centerPoint];
+    //    [self.playerView addSubview:self.imageView];
+    //    [self.playerView sendSubviewToBack:self.imageView];
 }
 
 - (void)createBrowseJpgTask {
@@ -1155,10 +1242,10 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 //{
 //    CGRect vf = view.frame;
 //    CGPoint co = self.liveViewScroll.contentOffset;
-//    
+//
 //    CGFloat x = centerPoint.x - vf.size.width / 2.0;
 //    CGFloat y = centerPoint.y - vf.size.height / 2.0;
-//    
+//
 //    if(x < 0)
 //    {
 //        co.x = -x;
@@ -1177,7 +1264,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 //    {
 //        vf.origin.y = y;
 //    }
-//    
+//
 //    view.frame = vf;
 //    self.liveViewScroll.contentOffset = co;
 //}
@@ -1258,7 +1345,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 - (void)cameraEdited:(EvercamCamera *)camera {
     self.cameraInfo = camera;
     [self changeBtnTitle];
-//    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
+    //    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     [self playCamera];
     if ([self.delegate respondsToSelector:@selector(cameraEdited:)]) {
         [self.delegate cameraEdited:camera];
@@ -1276,7 +1363,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 - (void) niDropDown:(NIDropDown*)dropdown didSelectAtIndex:(NSInteger)index {
     
     
-    
+    [self closeCastSession];
     [self removeLiveViewObservers];
     
     dropDown = nil;
@@ -1285,11 +1372,19 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     self.channel = nil;
     self.socket = nil;
     
+    
     self.cameraInfo = [self.cameras objectAtIndex:index];
     [self changeBtnTitle];
-//    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
+    //    [self.btnTitle setTitle:self.cameraInfo.name forState:UIControlStateNormal];
     self.ptc_Control_View.hidden = YES;
     [self getCameraModelInformation];
+    if (self.cameraInfo.hlsUrl && self.cameraInfo.hlsUrl.length == 0) {
+        [castButton removeFromSuperview];
+    }else{
+        if(![self.titlebar.subviews containsObject:castButton]) {
+            [self addCastButton];
+        }
+    }
     [self playCamera];
     runFirstTime = YES;
 }
@@ -1363,7 +1458,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 -(void)setCameraToHome{
-
+    
     NSDictionary * param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.cameraInfo.camId,@"camId",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
     EvercamPtzControls *ptz_Object = [EvercamPtzControls new];
     [ptz_Object ptz_Home:param_Dictionary withBlock:^(id details, NSError *error) {
@@ -1397,7 +1492,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     CGFloat currentScale = recognizer.view.frame.size.width / recognizer.view.bounds.size.width;
     CGFloat newScale = currentScale * recognizer.scale;
     if (newScale <= 1) {
-//        NSLog(@"scale is 1 or less");
+        //        NSLog(@"scale is 1 or less");
         newScale = 1;
     }
     if (newScale >= 5) {
@@ -1416,7 +1511,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
             self.playerLayerView.frame = CGRectMake(self.playerLayerView.frame.origin.x, self.playerLayerView.frame.origin.x,self.view.frame.size.width, self.view.frame.size.height);
             self.liveViewScroll.contentSize = CGSizeMake(self.playerLayerView.frame.size.width, self.playerLayerView.frame.size.height);
         }
-
+        
         CGFloat newContentOffsetX = (self.liveViewScroll.contentSize.width - self.liveViewScroll.frame.size.width) / 2;
         CGFloat newContentOffsetY = (self.liveViewScroll.contentSize.height - self.liveViewScroll.frame.size.height) / 2;
         self.liveViewScroll.contentOffset = CGPointMake(newContentOffsetX, newContentOffsetY);
@@ -1425,28 +1520,28 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)aScrollView {
-  
-        CGFloat offsetX = (self.liveViewScroll.bounds.size.width > self.liveViewScroll.contentSize.width)?
-        (self.liveViewScroll.bounds.size.width - self.liveViewScroll.contentSize.width) * 0.5 : 0.0;
-        CGFloat offsetY = (self.liveViewScroll.bounds.size.height > self.liveViewScroll.contentSize.height)?
-        (self.liveViewScroll.bounds.size.height - self.liveViewScroll.contentSize.height) * 0.5 : 0.0;
-        if (self.playerLayerView.hidden) {
-            
-            if (self.imageView.frame.size.width < self.view.frame.size.width || self.imageView.frame.size.height < self.view.frame.size.height) {
-                self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-            }else{
-                self.imageView.center = CGPointMake(self.liveViewScroll.contentSize.width * 0.5 + offsetX,
-                                                    self.liveViewScroll.contentSize.height * 0.5 + offsetY);
-            }
+    
+    CGFloat offsetX = (self.liveViewScroll.bounds.size.width > self.liveViewScroll.contentSize.width)?
+    (self.liveViewScroll.bounds.size.width - self.liveViewScroll.contentSize.width) * 0.5 : 0.0;
+    CGFloat offsetY = (self.liveViewScroll.bounds.size.height > self.liveViewScroll.contentSize.height)?
+    (self.liveViewScroll.bounds.size.height - self.liveViewScroll.contentSize.height) * 0.5 : 0.0;
+    if (self.playerLayerView.hidden) {
+        
+        if (self.imageView.frame.size.width < self.view.frame.size.width || self.imageView.frame.size.height < self.view.frame.size.height) {
+            self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         }else{
-            
-            if (self.playerLayerView.frame.size.width < self.view.frame.size.width ) {
-                self.playerLayerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-            }else{
-                self.playerLayerView.center = CGPointMake(self.liveViewScroll.contentSize.width * 0.5 + offsetX,
-                                                          self.liveViewScroll.contentSize.height * 0.5 + offsetY);
-            }
+            self.imageView.center = CGPointMake(self.liveViewScroll.contentSize.width * 0.5 + offsetX,
+                                                self.liveViewScroll.contentSize.height * 0.5 + offsetY);
         }
+    }else{
+        
+        if (self.playerLayerView.frame.size.width < self.view.frame.size.width ) {
+            self.playerLayerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+        }else{
+            self.playerLayerView.center = CGPointMake(self.liveViewScroll.contentSize.width * 0.5 + offsetX,
+                                                      self.liveViewScroll.contentSize.height * 0.5 + offsetY);
+        }
+    }
 }
 
 
@@ -1496,4 +1591,123 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
         }
     }];
 }
+
+
+/**
+ * Loads the currently selected item in the current cast media session.
+ * @param appending If YES, the item is appended to the current queue if there
+ * is one. If NO, or if
+ * there is no queue, a new queue containing only the selected item is created.
+ */
+- (void)loadSelectedItemByAppending:(BOOL)appending {
+    NSLog(@"enqueue item %@", self.mediaInfo);
+}
+
+- (void)sessionManager:(GCKSessionManager *)sessionManager
+       didStartSession:(GCKSession *)session {
+    NSLog(@"MediaViewController: sessionManager didStartSession %@", session);
+    [self switchToRemotePlayback];
+}
+
+- (void)sessionManager:(GCKSessionManager *)sessionManager
+      didResumeSession:(GCKSession *)session {
+    NSLog(@"MediaViewController: sessionManager didResumeSession %@", session);
+    [self switchToRemotePlayback];
+}
+
+- (void)sessionManager:(GCKSessionManager *)sessionManager
+         didEndSession:(GCKSession *)session
+             withError:(NSError *)error {
+    NSLog(@"session ended with error: %@", error);
+    NSString *message =
+    [NSString stringWithFormat:@"The Casting session has ended.\n%@",
+     [error description]];
+    //    [self switchToLocalPlayback];
+//    [self viewWillAppear:YES];
+        [self playCamera];
+}
+
+- (void)sessionManager:(GCKSessionManager *)sessionManager
+didFailToStartSessionWithError:(NSError *)error {
+    [self showAlertWithTitle:@"Failed to start a session"
+                     message:[error description]];
+}
+
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+
+- (void)switchToRemotePlayback {
+    NSLog(@"switchToRemotePlayback; mediaInfo is %@", self.mediaInfo);
+    
+    if (self.cameraInfo.hlsUrl && self.cameraInfo.hlsUrl.length == 0) {
+        [self closeCastSession];
+        return;
+    }
+    
+    _castSession = _sessionManager.currentCastSession;
+    
+    // If we were playing locally, load the local media on the remote player
+    GCKMediaQueueItemBuilder *builder = [[GCKMediaQueueItemBuilder alloc] init];
+    builder.mediaInformation = [self buildMediaInformation];
+    builder.autoplay = YES;
+    builder.preloadTime =
+    [[NSUserDefaults standardUserDefaults] integerForKey:kPrefPreloadTime];
+    GCKMediaQueueItem *item = [builder build];
+    
+    [_castSession.remoteMediaClient queueLoadItems:@[ item ]
+                                        startIndex:0
+                                      playPosition:0
+                                        repeatMode:GCKMediaRepeatModeOff
+                                        customData:nil];
+    [self stopCamera];
+}
+
+
+- (GCKMediaInformation *)buildMediaInformation {
+    NSString *thumbnail_ImageUrl = [NSString stringWithFormat:@"https://media.evercam.io/v1/cameras/%@/thumbnail",self.cameraInfo.camId];
+    NSURL *imageUrl = [NSURL URLWithString:thumbnail_ImageUrl];
+    NSURL *posterUrl = [NSURL URLWithString:thumbnail_ImageUrl];
+    NSURL *testUrl = [NSURL URLWithString:self.cameraInfo.hlsUrl];
+    
+    _mediaInfo = [[MediaItem alloc] initWithTitle:self.cameraInfo.name subtitle:self.cameraInfo.owner studio:@"Evercam" url:testUrl imageURL:imageUrl posterURL:posterUrl duration:0 parent:nil];
+
+    GCKMediaMetadata *metadata =
+    [[GCKMediaMetadata alloc] initWithMetadataType:GCKMediaMetadataTypeMovie];
+    [metadata setString:self.mediaInfo.title forKey:kGCKMetadataKeyTitle];
+    [metadata setString:self.mediaInfo.subtitle forKey:kMediaKeyDescription];
+    [metadata setString:self.mediaInfo.studio forKey:kGCKMetadataKeyStudio];
+    
+    [metadata setString:[self.mediaInfo.posterURL absoluteString]
+                 forKey:kMediaKeyPosterURL];
+    [metadata addImage:[[GCKImage alloc] initWithURL:self.mediaInfo.posterURL
+                                               width:1200
+                                              height:780]];
+    
+    GCKMediaInformation *mediaInfo = [[GCKMediaInformation alloc]
+                                      initWithContentID:[self.mediaInfo.url absoluteString]
+                                      streamType:GCKMediaStreamTypeBuffered
+                                      contentType:@"video/hls"
+                                      metadata:metadata
+                                      streamDuration:self.mediaInfo.duration
+                                      mediaTracks:nil
+                                      textTrackStyle:nil
+                                      customData:nil];
+    return mediaInfo;
+}
+
+-(void)closeCastSession{
+    if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
+        [_sessionManager endSessionAndStopCasting:YES];
+    }
+}
+
+
 @end

@@ -21,6 +21,7 @@
 #import "PreferenceUtil.h"
 #import "Intercom/intercom.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "ForgotPasswordViewController.h"
 @import Firebase;
 
 @interface SignupViewController ()
@@ -40,13 +41,13 @@
 
 
     if ([self.txt_username respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor lightGrayColor];
-        self.txt_firstname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"First name" attributes:@{NSForegroundColorAttributeName: color}];
-        self.txt_lastname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Last name" attributes:@{NSForegroundColorAttributeName: color}];
+        UIColor *color = [UIColor blackColor];
+        self.txt_firstname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"First Name" attributes:@{NSForegroundColorAttributeName: color}];
+        self.txt_lastname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Last Name" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_username.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_email.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email" attributes:@{NSForegroundColorAttributeName: color}];
         self.txt_password.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: color}];
-        self.txt_confirmPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Confirm Password" attributes:@{NSForegroundColorAttributeName: color}];
+//        self.txt_confirmPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Confirm Password" attributes:@{NSForegroundColorAttributeName: color}];
     } else {
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
         // TODO: Add fall-back code to set placeholder color.
@@ -94,6 +95,12 @@
     return [emailTest evaluateWithObject:checkString];
 }
 
+- (IBAction)termofUseAction:(id)sender {
+    ForgotPasswordViewController *fVc = [[ForgotPasswordViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ForgotPasswordViewController":@"ForgotPasswordViewController_iPad" bundle:[NSBundle mainBundle]];
+    fVc.isTermofUse                     = YES;
+    [self.navigationController pushViewController:fVc animated:YES];
+}
+
 - (IBAction)onCreateAccount:(id)sender
 {
     EvercamUser *user = [EvercamUser new];
@@ -102,7 +109,7 @@
     NSString *email = _txt_email.text;
     NSString *username = _txt_username.text;
     NSString *password = _txt_password.text;
-    NSString *repassword = _txt_confirmPassword.text;
+//    NSString *repassword = _txt_confirmPassword.text;
     /*
     NSLocale *locale = [NSLocale currentLocale];
     NSString *countryCode = [locale objectForKey: NSLocaleCountryCode];
@@ -201,6 +208,7 @@
         
         return;
     }
+    /*
     else if (repassword.length <= 0)
     {
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Confirm password required", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -209,6 +217,7 @@
         
         return;
     }
+    
     else if ([password isEqualToString:repassword] == NO)
     {
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Password not match", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -216,6 +225,7 @@
         
         return;
     }
+    */
     else if ([password rangeOfString:@" "].location != NSNotFound) {
         UIAlertView *simpleAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign up", nil) message:NSLocalizedString(@"Password should not contain space", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [simpleAlert show];

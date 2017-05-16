@@ -223,6 +223,7 @@
 
 - (IBAction)onForgotPassword:(id)sender {
     ForgotPasswordViewController *fVc = [[ForgotPasswordViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ?@"ForgotPasswordViewController":@"ForgotPasswordViewController_iPad" bundle:[NSBundle mainBundle]];
+    fVc.isTermofUse                 = NO;
     [self.navigationController pushViewController:fVc animated:YES];
 }
 

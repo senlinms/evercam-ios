@@ -18,6 +18,8 @@
 #import "PreferenceUtil.h"
 #import "Intercom/intercom.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+
+static const BOOL kDebugLoggingEnabled = YES;
 @import Firebase;
 @interface AppDelegate ()
 
@@ -34,6 +36,13 @@
     [self integrateIntercom]; // setting up Intercom
     [Crashlytics startWithAPIKey:@"70e87b744f3bc2c7db518b88faf93411823b45b2"];
     [Fabric with:@[[Crashlytics class]]];
+    
+    GCKCastOptions *options =
+    [[GCKCastOptions alloc] initWithReceiverApplicationID:kGCKMediaDefaultReceiverApplicationID];
+    [GCKCastContext setSharedInstanceWithOptions:options];
+    
+    [GCKLogger sharedInstance].delegate = self;
+    
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
@@ -309,5 +318,15 @@
     [self deleteUser:self.defaultUser];
     [self.viewController popToRootViewControllerAnimated:YES];
 }
+
+
+#pragma mark - GCKLoggerDelegate
+
+- (void)logMessage:(NSString *)message fromFunction:(NSString *)function {
+    if (kDebugLoggingEnabled) {
+        NSLog(@"%@  %@", function, message);
+    }
+}
+
 
 @end

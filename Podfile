@@ -1,4 +1,4 @@
-platform :ios, '7.0'
+platform :ios, '8.0'
 
 target 'evercamPlay' do
 pod 'Mixpanel'
@@ -11,5 +11,6 @@ pod 'Unirest'
 pod 'Firebase/Core'
 pod 'Firebase/Crash'
 pod 'INTULocationManager'
+pod 'google-cast-sdk'
 end
 
