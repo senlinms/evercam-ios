@@ -13,6 +13,7 @@
 #import <GoogleCast/GoogleCast.h>
 
 #define APP_DELEGATE (AppDelegate *)[[UIApplication sharedApplication] delegate]
+#define appDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 #define THUMB_IMAGE_BASEURL @"https://media.evercam.io/v1/cameras"
 
 #define UIColorFromRGB(rgbValue) \
@@ -31,6 +32,8 @@ alpha:1.0]
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic, strong) AppUser *defaultUser;
+
+//@property(nonatomic, assign, readwrite) BOOL castControlBarsEnabled;
 
 -(void) saveContext;
 -(AppUser *)userWithName:(NSString *)username;

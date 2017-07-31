@@ -50,7 +50,7 @@ NSString *kPlayableKey		= @"playable";
 NSString *kCurrentItemKey	= @"currentItem";
 NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 
-@interface CameraPlayViewController () <ViewCameraViewControllerDelegate,CameraViewControllerDelegate,GCKSessionManagerListener> {
+@interface CameraPlayViewController () <ViewCameraViewControllerDelegate,CameraViewControllerDelegate,GCKSessionManagerListener,GCKUIMiniMediaControlsViewControllerDelegate> {
     int media_width;
     int media_height;
     Boolean dragging_slider;
@@ -84,6 +84,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 @property (nonatomic, retain) PhxSocket *socket;
 @property (nonatomic, retain) PhxChannel *channel;
 @property(nonatomic, strong, readwrite) MediaItem *mediaInfo;
+@property(nonatomic,strong,readwrite) GCKUIMiniMediaControlsViewController *miniMediaControlsViewController;
 
 @end
 
@@ -120,10 +121,44 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     _castMediaController = [[GCKUIMediaController alloc] init];
     [_sessionManager addListener:self];
     
+    GCKCastContext *castContext = [GCKCastContext sharedInstance];
+    _miniMediaControlsViewController =
+    [castContext createMiniMediaControlsViewController];
+    _miniMediaControlsViewController.delegate = self;
+    
+    [self addChildViewController:_miniMediaControlsViewController];
+    _miniMediaControlsViewController.view.frame = self.test.bounds;
+    [self.test addSubview:_miniMediaControlsViewController.view];
+    [_miniMediaControlsViewController didMoveToParentViewController:self];
+    
+    [self updateControlBarsVisibility];
+    self.test.hidden = YES;
+    
     
     
     //    self.liveViewScroll.decelerationRate = UIScrollViewDecelerationRateFast;
 }
+- (void)updateControlBarsVisibility {
+//    if (self.miniMediaControlsViewEnabled &&
+//        _miniMediaControlsViewController.active) {
+//        _miniMediaControlsHeightConstraint.constant =
+//        _miniMediaControlsViewController.minHeight;
+//    } else {
+//        _miniMediaControlsHeightConstraint.constant = 0;
+//    }
+    [self.view layoutIfNeeded];
+//    [UIView animateWithDuration:kCastControlBarsAnimationDuration
+//                     animations:^{
+//                         [self.view layoutIfNeeded];
+//                     }];
+}
+
+- (void)miniMediaControlsViewController:(GCKUIMiniMediaControlsViewController *)
+miniMediaControlsViewController
+                           shouldAppear:(BOOL)shouldAppear {
+    [self updateControlBarsVisibility];
+}
+
 
 - (CGFloat)widthOfString:(NSString *)string withFont:(UIFont *)font {
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
@@ -169,6 +204,9 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     [super viewWillAppear:animated];
     NSLog(@"viewWillAppear");
     
+    NSLog(@"Main navigation: %@",[APP_DELEGATE viewController].viewControllers);
+    NSLog(@"Current navigation: %@",self.navigationController.viewControllers);
+    
     if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
         return;
     }
@@ -201,6 +239,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 -(void)addCastButton{
+    NSLog(@"Option Button Frame: %@",NSStringFromCGRect(self.option_Button.frame));
     CGRect frame = CGRectMake(self.option_Button.frame.origin.x - 25, 29, 24, 24);
     castButton = [[GCKUICastButton alloc] initWithFrame:frame];
     castButton.tintColor = [UIColor whiteColor];
@@ -772,7 +811,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     }
     self.lblTimeCode.hidden = NO;
     self.lblTimeCode.text   = @"";
-    [self createBrowseView];
+    [self createBrowseView_WithGesture:YES];
     [self phoenixConnect];
 }
 
@@ -1045,15 +1084,19 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
                                          @"JPG_Stream_Played": @"Successfully played JPG stream."
                                          }];
         if (!self.socket) {
+            NSLog(@"SOCKET CREATED.");
             self.socket = [[PhxSocket alloc] initWithURL:[NSURL URLWithString:@"wss://media.evercam.io/socket/websocket"] heartbeatInterval:20];
+            [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+        }else{
+            NSLog(@"SOCKET ALREADY EXIST.");
         }
         
-        [self.socket connectWithParams:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
+        
         
         if (!self.channel) {
-            NSLog(@"New Channel Opened");
+            NSLog(@"CHANNEL OPENED.");
             self.channel = [[PhxChannel alloc] initWithSocket:self.socket topic:[NSString stringWithFormat:@"cameras:%@",self.cameraInfo.camId] params:@{@"api_key":[APP_DELEGATE defaultUser].apiKey,@"api_id":[APP_DELEGATE defaultUser].apiId}];
-            self.channel.delegate = self;
+//            self.channel.delegate = self;
             [self.channel onEvent:@"snapshot-taken" callback:^(id message, id ref) {
                 [loadingView stopAnimating];
                 if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
@@ -1069,8 +1112,16 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
             }];
             [self.channel join];
         }else{
-            NSLog(@"Channel already open.");
+            NSLog(@"CHANNEL ALREADY OPEN.");
         }
+        
+        [self.channel onClose:^(id event) {
+            NSLog(@"the channel has gone away gracefully");
+        }];
+        
+        [self.channel onError:^(id error) {
+            NSLog(@"there was an error!");
+        }];
         
     });
     /*
@@ -1206,7 +1257,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     }
 }
 
-- (void)createBrowseView {
+- (void)createBrowseView_WithGesture:(BOOL)agree {
     if (self.imageView)
     {
         [self.imageView removeFromSuperview];
@@ -1215,12 +1266,18 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     self.imageView = [[AsyncImageView alloc] initWithFrame:CGRectMake(0, 0, self.playerView.frame.size.width, self.playerView.frame.size.height)];
     self.imageView.autoresizingMask= UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.imageView.userInteractionEnabled = YES;
+    
     [self.liveViewScroll addSubview:self.imageView];
     [self.liveViewScroll sendSubviewToBack:self.imageView];
-    [self.imageView addGestureRecognizer:self.pinchGesture_outlet];
-    [self.imageView addGestureRecognizer:ptzViewTap];
-    [self.liveViewScroll setContentSize:CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height)];
+    
+    if (agree) {
+        self.imageView.userInteractionEnabled = agree;
+        [self.imageView addGestureRecognizer:self.pinchGesture_outlet];
+        [self.imageView addGestureRecognizer:ptzViewTap];
+        [self.liveViewScroll setContentSize:CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height)];
+    }
+    
+    
     
     //    CGPoint centerPoint = CGPointMake(CGRectGetMidX(self.liveViewScroll.bounds),
     //                                      CGRectGetMidY(self.liveViewScroll.bounds));
@@ -1230,7 +1287,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
 }
 
 - (void)createBrowseJpgTask {
-    [self createBrowseView];
+    [self createBrowseView_WithGesture:YES];
     browseJpgTask = [[BrowseJpgTask alloc] initWithCamera:self.cameraInfo andImageView:self.imageView andLoadingView:loadingView];
     [browseJpgTask start];
     
@@ -1369,8 +1426,16 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     dropDown = nil;
     [self.channel leave];
     [self.socket disconnect];
+    if (self.socket.socketState == SocketOpen ) {
+        NSLog(@"SOCKET STATE SocketOpen");
+    }else if (self.socket.socketState == SocketClosed){
+        NSLog(@"SOCKET STATE SocketClosed");
+    }else if (self.socket.socketState == SocketClosing){
+        NSLog(@"SOCKET STATE SocketClosing");
+    }
     self.channel = nil;
     self.socket = nil;
+    
     
     
     self.cameraInfo = [self.cameras objectAtIndex:index];
@@ -1488,6 +1553,10 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     if ([loadingView isAnimating]) {
         return;
     }
+    if (_sessionManager.connectionState == GCKConnectionStateConnecting || _sessionManager.connectionState == GCKConnectionStateConnected) {
+        return;
+    }
+    
     UIPinchGestureRecognizer *recognizer = (UIPinchGestureRecognizer *)sender;
     CGFloat currentScale = recognizer.view.frame.size.width / recognizer.view.bounds.size.width;
     CGFloat newScale = currentScale * recognizer.scale;
@@ -1607,6 +1676,7 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
        didStartSession:(GCKSession *)session {
     NSLog(@"MediaViewController: sessionManager didStartSession %@", session);
     [self switchToRemotePlayback];
+    self.test.hidden = NO;
 }
 
 - (void)sessionManager:(GCKSessionManager *)sessionManager
@@ -1623,8 +1693,9 @@ NSString *kTimedMetadataKey	= @"currentItem.timedMetadata";
     [NSString stringWithFormat:@"The Casting session has ended.\n%@",
      [error description]];
     //    [self switchToLocalPlayback];
-//    [self viewWillAppear:YES];
-        [self playCamera];
+    //    [self viewWillAppear:YES];
+    [self playCamera];
+    self.test.hidden = YES;
 }
 
 - (void)sessionManager:(GCKSessionManager *)sessionManager
@@ -1668,17 +1739,23 @@ didFailToStartSessionWithError:(NSError *)error {
                                         repeatMode:GCKMediaRepeatModeOff
                                         customData:nil];
     [self stopCamera];
+    [self createBrowseView_WithGesture:NO];
+    
+    NSString *thumbnail_ImageUrl = [NSString stringWithFormat:@"https://media.evercam.io/v1/cameras/%@/thumbnail?api_id=%@&api_key=%@",self.cameraInfo.camId,[APP_DELEGATE defaultUser].apiId,[APP_DELEGATE defaultUser].apiKey];
+    NSURL *imageUrl = [NSURL URLWithString:thumbnail_ImageUrl];
+    
+    self.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
 }
 
 
 - (GCKMediaInformation *)buildMediaInformation {
-    NSString *thumbnail_ImageUrl = [NSString stringWithFormat:@"https://media.evercam.io/v1/cameras/%@/thumbnail",self.cameraInfo.camId];
+    NSString *thumbnail_ImageUrl = [NSString stringWithFormat:@"https://media.evercam.io/v1/cameras/%@/thumbnail?api_id=%@&api_key=%@",self.cameraInfo.camId,[APP_DELEGATE defaultUser].apiId,[APP_DELEGATE defaultUser].apiKey];
     NSURL *imageUrl = [NSURL URLWithString:thumbnail_ImageUrl];
     NSURL *posterUrl = [NSURL URLWithString:thumbnail_ImageUrl];
     NSURL *testUrl = [NSURL URLWithString:self.cameraInfo.hlsUrl];
     
     _mediaInfo = [[MediaItem alloc] initWithTitle:self.cameraInfo.name subtitle:self.cameraInfo.owner studio:@"Evercam" url:testUrl imageURL:imageUrl posterURL:posterUrl duration:0 parent:nil];
-
+    
     GCKMediaMetadata *metadata =
     [[GCKMediaMetadata alloc] initWithMetadataType:GCKMediaMetadataTypeMovie];
     [metadata setString:self.mediaInfo.title forKey:kGCKMetadataKeyTitle];
@@ -1708,6 +1785,41 @@ didFailToStartSessionWithError:(NSError *)error {
         [_sessionManager endSessionAndStopCasting:YES];
     }
 }
-
-
+/*
+ #pragma mark - Notifications
+ 
+ - (void)setCastControlBarsEnabled:(BOOL)notificationsEnabled {
+ GCKUICastContainerViewController *castContainerVC;
+ castContainerVC = (GCKUICastContainerViewController *)self.navigationController;
+ castContainerVC.miniMediaControlsItemEnabled = notificationsEnabled;
+ }
+ 
+ - (BOOL)castControlBarsEnabled {
+ GCKUICastContainerViewController *castContainerVC;
+ castContainerVC =
+ (GCKUICastContainerViewController *)self.navigationController;
+ return castContainerVC.miniMediaControlsItemEnabled;
+ }
+ 
+ - (void)presentExpandedMediaControls {
+ NSLog(@"present expanded media controls");
+ // Segue directly to the ExpandedViewController.
+ UINavigationController *navigationController;
+ GCKUICastContainerViewController *castContainerVC;
+ castContainerVC =
+ (GCKUICastContainerViewController *)self.navigationController;
+ navigationController =
+ (UINavigationController *)castContainerVC.contentViewController;
+ 
+ navigationController.navigationItem.backBarButtonItem =
+ [[UIBarButtonItem alloc] initWithTitle:@""
+ style:UIBarButtonItemStylePlain
+ target:nil
+ action:nil];
+ if (self.castControlBarsEnabled) {
+ self.castControlBarsEnabled = NO;
+ }
+ [[GCKCastContext sharedInstance] presentDefaultExpandedMediaControls];
+ }
+ */
 @end

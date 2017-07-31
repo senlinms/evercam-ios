@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <sys/sysctl.h>
 
+#import <objc/runtime.h>
 #import "Mixpanel.h"
 #import "MixpanelPrivate.h"
 #import "MixpanelPeople.h"
@@ -20,7 +21,11 @@
 #import <IOKit/IOKitLib.h>
 #endif
 
-#define VERSION @"3.1.3"
+#if !__has_feature(objc_arc)
+#error The Mixpanel library must be compiled with ARC enabled
+#endif
+
+#define VERSION @"3.1.9"
 
 @implementation Mixpanel
 
@@ -72,6 +77,7 @@ static NSString *defaultProjectToken;
         dispatch_once(&onceToken, ^{
             instances = [NSMutableDictionary dictionary];
             defaultProjectToken = apiToken;
+            loggingLockObject = [[NSObject alloc] init];
         });
     }
 
@@ -87,8 +93,10 @@ static NSString *defaultProjectToken;
         MPLogWarning(@"%@ empty api token", self);
     }
     if (self = [self init:apiToken]) {
+#if !MIXPANEL_NO_AUTOMATIC_EVENTS_SUPPORT
         // Install uncaught exception handlers first
         [[MixpanelExceptionHandler sharedHandler] addMixpanelInstance:self];
+#endif
 #if !MIXPANEL_NO_REACHABILITY_SUPPORT
         self.telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
 #endif
@@ -126,13 +134,17 @@ static NSString *defaultProjectToken;
         
         self.network = [[MPNetwork alloc] initWithServerURL:[NSURL URLWithString:self.serverURL] mixpanel:self];
         self.people = [[MixpanelPeople alloc] initWithMixpanel:self];
-
         [self setUpListeners];
         [self unarchive];
+#if !MIXPANEL_NO_AUTOMATIC_EVENTS_SUPPORT
+        self.automaticEvents = [[AutomaticEvents alloc] init];
+        self.automaticEvents.delegate = self;
+        [self.automaticEvents initializeEvents:self.people];
+#endif
 #if !MIXPANEL_NO_NOTIFICATION_AB_TEST_SUPPORT
         [self executeCachedVariants];
         [self executeCachedEventBindings];
-
+        [self setupAutomaticPushTracking];
         NSDictionary *remoteNotification = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
         if (remoteNotification) {
             [self trackPushNotification:remoteNotification event:@"$app_open"];
@@ -193,6 +205,24 @@ static NSString *defaultProjectToken;
 - (void)setUseIPAddressForGeoLocation:(BOOL)useIPAddressForGeoLocation {
     self.network.useIPAddressForGeoLocation = useIPAddressForGeoLocation;
 }
+
+#if !MIXPANEL_NO_AUTOMATIC_EVENTS_SUPPORT
+- (UInt64)minimumSessionDuration {
+    return self.automaticEvents.minimumSessionDuration;
+}
+
+- (void)setMinimumSessionDuration:(UInt64)minimumSessionDuration {
+    self.automaticEvents.minimumSessionDuration = minimumSessionDuration;
+}
+
+- (UInt64)maximumSessionDuration {
+    return self.automaticEvents.maximumSessionDuration;
+}
+
+- (void)setMaximumSessionDuration:(UInt64)maximumSessionDuration {
+    self.automaticEvents.maximumSessionDuration = maximumSessionDuration;
+}
+#endif
 
 #pragma mark - Tracking
 + (void)assertPropertyTypes:(NSDictionary *)properties
@@ -340,8 +370,8 @@ static NSString *defaultProjectToken;
     
 #if !MIXPANEL_NO_AUTOMATIC_EVENTS_SUPPORT
     // Safety check
-    BOOL isAutomaticEvent = [event isEqualToString:kAutomaticEventName];
-    if (isAutomaticEvent && !self.isValidationEnabled) return;
+    BOOL isAutomaticTrack = [event isEqualToString:kAutomaticTrackName];
+    if (isAutomaticTrack && !self.isValidationEnabled) return;
 #endif
     
     properties = [properties copy];
@@ -368,8 +398,8 @@ static NSString *defaultProjectToken;
         
 #if !MIXPANEL_NO_AUTOMATIC_EVENTS_SUPPORT
         if (self.validationEnabled) {
-            if (self.validationMode == AutomaticEventModeCount) {
-                if (isAutomaticEvent) {
+            if (self.validationMode == AutomaticTrackModeCount) {
+                if (isAutomaticTrack) {
                     self.validationEventCount++;
                 } else {
                     if (self.validationEventCount > 0) {
@@ -398,6 +428,25 @@ static NSString *defaultProjectToken;
 #endif
 }
 
+#if !MIXPANEL_NO_NOTIFICATION_AB_TEST_SUPPORT
+- (void)setupAutomaticPushTracking {
+    SEL selector = nil;
+    Class cls = [[UIApplication sharedApplication].delegate class];
+    if (class_getInstanceMethod(cls, NSSelectorFromString(@"application:didReceiveRemoteNotification:fetchCompletionHandler:"))) {
+        selector = NSSelectorFromString(@"application:didReceiveRemoteNotification:fetchCompletionHandler:");
+    } else if (class_getInstanceMethod(cls, NSSelectorFromString(@"application:didReceiveRemoteNotification:"))) {
+        selector = NSSelectorFromString(@"application:didReceiveRemoteNotification:");
+    }
+
+    if (selector) {
+        [MPSwizzler swizzleSelector:selector
+                            onClass:cls
+                          withBlock:^(id view, SEL command, UIApplication *application, NSDictionary *userInfo) {
+                              [self trackPushNotification:userInfo];
+                          }
+                              named:@"notification opened"];
+    }
+}
 
 - (void)trackPushNotification:(NSDictionary *)userInfo event:(NSString *)event
 {
@@ -409,9 +458,14 @@ static NSString *defaultProjectToken;
         NSDictionary *mpPayload = [rawMp isKindOfClass:[NSDictionary class]] ? rawMp : nil;
 
         if (mpPayload[@"m"] && mpPayload[@"c"]) {
-            [self track:event properties:@{@"campaign_id": mpPayload[@"c"],
-                                           @"message_id": mpPayload[@"m"],
-                                           @"message_type": @"push"}];
+            NSMutableDictionary *properties = [mpPayload mutableCopy];
+            properties[@"campaign_id"] = mpPayload[@"c"];
+            properties[@"message_id"] = mpPayload[@"m"];
+            properties[@"message_type"] = @"push";
+            [properties removeObjectForKey:@"c"];
+            [properties removeObjectForKey:@"m"];
+
+            [self track:event properties:properties];
         } else {
             MPLogInfo(@"%@ malformed mixpanel push payload %@", self, mpPayload);
         }
@@ -422,6 +476,7 @@ static NSString *defaultProjectToken;
 {
     [self trackPushNotification:userInfo event:@"$campaign_received"];
 }
+#endif
 
 - (void)registerSuperProperties:(NSDictionary *)properties
 {
@@ -493,6 +548,15 @@ static NSString *defaultProjectToken;
     });
 }
 
+- (double)eventElapsedTime:(NSString *)event {
+    NSNumber *startTime = self.timedEvents[event];
+    if (!startTime) {
+        return 0;
+    } else {
+        return [[NSDate date] timeIntervalSince1970] - [startTime doubleValue];
+    }
+}
+
 - (void)clearTimedEvents
 {   dispatch_async(self.serialQueue, ^{
         self.timedEvents = [NSMutableDictionary dictionary];
@@ -505,22 +569,23 @@ static NSString *defaultProjectToken;
     dispatch_async(self.serialQueue, ^{
         // wait for all current network requests to finish before resetting
         dispatch_sync(self.networkQueue, ^{ return; });
-
-        self.distinctId = [self defaultDistinctId];
-        self.superProperties = [NSMutableDictionary dictionary];
-        self.people.distinctId = nil;
-        self.alias = nil;
-        self.people.unidentifiedQueue = [NSMutableArray array];
-        self.eventsQueue = [NSMutableArray array];
-        self.peopleQueue = [NSMutableArray array];
-        self.timedEvents = [NSMutableDictionary dictionary];
-        self.shownNotifications = [NSMutableSet set];
-        self.decideResponseCached = NO;
-        self.variants = [NSSet set];
-        self.eventBindings = [NSSet set];
+        @synchronized (self) {
+            self.distinctId = [self defaultDistinctId];
+            self.superProperties = [NSMutableDictionary dictionary];
+            self.people.distinctId = nil;
+            self.alias = nil;
+            self.people.unidentifiedQueue = [NSMutableArray array];
+            self.eventsQueue = [NSMutableArray array];
+            self.peopleQueue = [NSMutableArray array];
+            self.timedEvents = [NSMutableDictionary dictionary];
+            self.shownNotifications = [NSMutableSet set];
+            self.decideResponseCached = NO;
+            self.variants = [NSSet set];
+            self.eventBindings = [NSSet set];
 #if !MIXPANEL_NO_NOTIFICATION_AB_TEST_SUPPORT
-        [[MPTweakStore sharedInstance] reset];
+            [[MPTweakStore sharedInstance] reset];
 #endif
+        }
         [self archive];
     });
 }
@@ -586,7 +651,7 @@ static NSString *defaultProjectToken;
     [self flushWithCompletion:nil];
 }
 
-- (void)flushWithCompletion:(void (^)())handler
+- (void)flushWithCompletion:(void (^)(void))handler
 {
     [self dispatchOnNetworkQueue:^{
         MPLogInfo(@"%@ flush starting", self);
@@ -661,60 +726,63 @@ static NSString *defaultProjectToken;
 
 - (void)archiveEvents
 {
-    NSString *filePath = [self eventsFilePath];
-    NSMutableArray *eventsQueueCopy;
     @synchronized (self) {
-        eventsQueueCopy = [self.eventsQueue mutableCopy];
-    }
-    MPLogInfo(@"%@ archiving events data to %@: %@", self, filePath, eventsQueueCopy);
-    if (![self archiveObject:eventsQueueCopy withFilePath:filePath]) {
-        MPLogError(@"%@ unable to archive event data", self);
+        NSString *filePath = [self eventsFilePath];
+        MPLogInfo(@"%@ archiving events data to %@: %@", self, filePath, self.eventsQueue);
+        if (![self archiveObject:self.eventsQueue withFilePath:filePath]) {
+            MPLogError(@"%@ unable to archive event data", self);
+        }
     }
 }
 
 - (void)archivePeople
 {
-    NSString *filePath = [self peopleFilePath];
-    NSMutableArray *peopleQueueCopy;
     @synchronized (self) {
-        peopleQueueCopy = [self.peopleQueue mutableCopy];
-    }
-    MPLogInfo(@"%@ archiving people data to %@: %@", self, filePath, peopleQueueCopy);
-    if (![self archiveObject:peopleQueueCopy withFilePath:filePath]) {
-        MPLogError(@"%@ unable to archive people data", self);
+        NSString *filePath = [self peopleFilePath];
+        MPLogInfo(@"%@ archiving people data to %@: %@", self, filePath, self.peopleQueue);
+        if (![self archiveObject:self.peopleQueue withFilePath:filePath]) {
+            MPLogError(@"%@ unable to archive people data", self);
+        }
     }
 }
 
 - (void)archiveProperties
 {
-    NSString *filePath = [self propertiesFilePath];
-    NSMutableDictionary *p = [NSMutableDictionary dictionary];
-    [p setValue:self.distinctId forKey:@"distinctId"];
-    [p setValue:self.alias forKey:@"alias"];
-    [p setValue:self.superProperties forKey:@"superProperties"];
-    [p setValue:self.people.distinctId forKey:@"peopleDistinctId"];
-    [p setValue:self.people.unidentifiedQueue forKey:@"peopleUnidentifiedQueue"];
-    [p setValue:self.shownNotifications forKey:@"shownNotifications"];
-    [p setValue:self.timedEvents forKey:@"timedEvents"];
-    MPLogInfo(@"%@ archiving properties data to %@: %@", self, filePath, p);
-    if (![self archiveObject:p withFilePath:filePath]) {
-        MPLogError(@"%@ unable to archive properties data", self);
+    @synchronized (self) {
+        NSString *filePath = [self propertiesFilePath];
+        NSMutableDictionary *p = [NSMutableDictionary dictionary];
+        [p setValue:self.distinctId forKey:@"distinctId"];
+        [p setValue:self.alias forKey:@"alias"];
+        [p setValue:self.superProperties forKey:@"superProperties"];
+        [p setValue:self.people.distinctId forKey:@"peopleDistinctId"];
+        [p setValue:self.people.unidentifiedQueue forKey:@"peopleUnidentifiedQueue"];
+        [p setValue:self.shownNotifications forKey:@"shownNotifications"];
+        [p setValue:self.timedEvents forKey:@"timedEvents"];
+        [p setValue:self.automaticEventsEnabled forKey:@"automaticEvents"];
+        MPLogInfo(@"%@ archiving properties data to %@: %@", self, filePath, p);
+        if (![self archiveObject:p withFilePath:filePath]) {
+            MPLogError(@"%@ unable to archive properties data", self);
+        }
     }
 }
 
 - (void)archiveVariants
 {
-    NSString *filePath = [self variantsFilePath];
-    if (![self archiveObject:self.variants withFilePath:filePath]) {
-        MPLogError(@"%@ unable to archive variants data", self);
+    @synchronized (self) {
+        NSString *filePath = [self variantsFilePath];
+        if (![self archiveObject:self.variants withFilePath:filePath]) {
+            MPLogError(@"%@ unable to archive variants data", self);
+        }
     }
 }
 
 - (void)archiveEventBindings
 {
-    NSString *filePath = [self eventBindingsFilePath];
-    if (![self archiveObject:self.eventBindings withFilePath:filePath]) {
-        MPLogError(@"%@ unable to archive tracking events data", self);
+    @synchronized (self) {
+        NSString *filePath = [self eventBindingsFilePath];
+        if (![self archiveObject:self.eventBindings withFilePath:filePath]) {
+            MPLogError(@"%@ unable to archive tracking events data", self);
+        }
     }
 }
 
@@ -724,7 +792,7 @@ static NSString *defaultProjectToken;
             return NO;
         }
     } @catch (NSException* exception) {
-        NSAssert(@"Got exception: %@, reason: %@. You can only send to Mixpanel values that inherit from NSObject and implement NSCoding.", exception.name, exception.reason);
+        MPLogError(@"Got exception: %@, reason: %@. You can only send to Mixpanel values that inherit from NSObject and implement NSCoding.", exception.name, exception.reason);
         return NO;
     }
 
@@ -741,7 +809,7 @@ static NSString *defaultProjectToken;
     BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
                                   forKey: NSURLIsExcludedFromBackupKey error: &error];
     if (!success) {
-        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+        MPLogError(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
     }
     return success;
 }
@@ -808,6 +876,7 @@ static NSString *defaultProjectToken;
         self.variants = properties[@"variants"] ?: [NSSet set];
         self.eventBindings = properties[@"event_bindings"] ?: [NSSet set];
         self.timedEvents = properties[@"timedEvents"] ?: [NSMutableDictionary dictionary];
+        self.automaticEventsEnabled = properties[@"automaticEvents"];
     }
 }
 
@@ -970,7 +1039,7 @@ static NSString *defaultProjectToken;
 - (NSDictionary *)collectAutomaticProperties
 {
     NSMutableDictionary *p = [NSMutableDictionary dictionary];
-    NSString *deviceModel = [self deviceModel];
+    id deviceModel = [self deviceModel] ? : [NSNull null];
 
     // Use setValue semantics to avoid adding keys where value can be nil.
     [p setValue:[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"] forKey:@"$app_version"];
@@ -993,15 +1062,6 @@ static NSString *defaultProjectToken;
                                   }];
     [p addEntriesFromDictionary:[self collectDeviceProperties]];
     return [p copy];
-}
-
-+ (BOOL)inBackground
-{
-#if !MIXPANEL_NO_UIAPPLICATION_ACCESS
-    return [UIApplication sharedApplication].applicationState == UIApplicationStateBackground;
-#else
-    return NO;
-#endif
 }
 
 #pragma mark - UIApplication Events
@@ -1141,18 +1201,13 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
             if (self.showNotificationOnActive && notifications.count > 0) {
                 [self showNotificationWithObject:notifications[0]];
             }
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                for (MPVariant *variant in variants) {
-                    [variant execute];
-                    [self markVariantRun:variant];
-                }
-            });
-
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                for (MPEventBinding *binding in eventBindings) {
-                    [binding execute];
-                }
-            });
+            for (MPVariant *variant in variants) {
+                [variant execute];
+                [self markVariantRun:variant];
+            }
+            for (MPEventBinding *binding in eventBindings) {
+                [binding execute];
+            }
         }];
     }
 #endif // MIXPANEL_NO_NOTIFICATION_AB_TEST_SUPPORT
@@ -1166,20 +1221,16 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 #if defined(MIXPANEL_MACOS)
     if (self.flushOnBackground) {
         [self flush];
-    }
-
-    dispatch_async(_serialQueue, ^{
+    } else {
         [self archive];
-    });
+    }
 #endif
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
     MPLogInfo(@"%@ application will terminate", self);
-    dispatch_async(_serialQueue, ^{
-        [self archive];
-    });
+    [self archive];
 }
 
 #if !defined(MIXPANEL_MACOS)
@@ -1210,18 +1261,20 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
             dispatch_group_leave(bgGroup);
         }] resume];
     }
-    
-    if (self.flushOnBackground) {
-        [self flush];
-    }
-    
-    dispatch_group_enter(bgGroup);
-    dispatch_async(_serialQueue, ^{
-        [self archive];
+
+    @synchronized (self) {
         self.decideResponseCached = NO;
-        dispatch_group_leave(bgGroup);
-    });
-    
+    }
+    if (self.flushOnBackground) {
+        dispatch_group_enter(bgGroup);
+        [self flushWithCompletion:^{
+            dispatch_group_leave(bgGroup);
+        }];
+    } else {
+        // only need to archive if don't flush because flush archives at the end
+        [self archive];
+    }
+
     dispatch_group_notify(bgGroup, dispatch_get_main_queue(), ^{
         MPLogInfo(@"%@ ending background cleanup task %lu", self, (unsigned long)self.taskId);
         if (self.taskId != UIBackgroundTaskInvalid) {
@@ -1260,18 +1313,22 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 
 #pragma mark - Logging
 - (void)setEnableLogging:(BOOL)enableLogging {
-    gLoggingEnabled = enableLogging;
+    @synchronized (loggingLockObject) {
+        gLoggingEnabled = enableLogging;
 
-    if (gLoggingEnabled) {
-        asl_add_log_file(NULL, STDERR_FILENO);
-        asl_set_filter(NULL, ASL_FILTER_MASK_UPTO(ASL_LEVEL_DEBUG));
-    } else {
-        asl_remove_log_file(NULL, STDERR_FILENO);
+        if (gLoggingEnabled) {
+            asl_add_log_file(NULL, STDERR_FILENO);
+            asl_set_filter(NULL, ASL_FILTER_MASK_UPTO(ASL_LEVEL_DEBUG));
+        } else {
+            asl_remove_log_file(NULL, STDERR_FILENO);
+        }
     }
 }
 
 - (BOOL)enableLogging {
-    return gLoggingEnabled;
+    @synchronized (loggingLockObject) {
+        return gLoggingEnabled;
+    }
 }
 
 #if !MIXPANEL_NO_NOTIFICATION_AB_TEST_SUPPORT
@@ -1312,7 +1369,12 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
         NSMutableSet *newEventBindings = [NSMutableSet set];
         __block BOOL hadError = NO;
 
-        if (!useCache || !self.decideResponseCached) {
+        BOOL decideResponseCached;
+        @synchronized (self) {
+            decideResponseCached = self.decideResponseCached;
+        }
+
+        if (!useCache || !decideResponseCached) {
             // Build a proper URL from our parameters
             NSArray *queryItems = [MPNetwork buildDecideQueryForProperties:self.people.automaticPeopleProperties
                                                             withDistinctID:self.people.distinctId ?: self.distinctId
@@ -1360,7 +1422,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                         NSString *method = validationConfig[@"method"];
                         if (method && [method isKindOfClass:NSString.class]) {
                             if ([method isEqualToString:@"count"]) {
-                                self.validationMode = AutomaticEventModeCount;
+                                self.validationMode = AutomaticTrackModeCount;
                             }
                         }
                     }
@@ -1397,6 +1459,14 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                     }
                 } else {
                     MPLogError(@"%@ variants check response format error: %@", self, object);
+                }
+
+                id rawAutomaticEvents = object[@"automatic_events"];
+                if ([rawAutomaticEvents isKindOfClass:[NSNumber class]]) {
+                    if (!self.automaticEventsEnabled || [self.automaticEventsEnabled boolValue] != [rawAutomaticEvents boolValue]) {
+                        self.automaticEventsEnabled = rawAutomaticEvents;
+                        [self archiveProperties];
+                    }
                 }
 
                 // Variants that are already running (may or may not have been marked as finished).
@@ -1449,7 +1519,9 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                 self.variants = [allVariants copy];
                 self.eventBindings = [allEventBindings copy];
 
-                self.decideResponseCached = YES;
+                @synchronized (self) {
+                    self.decideResponseCached = YES;
+                }
 
                 dispatch_semaphore_signal(semaphore);
             }] resume];
@@ -1639,9 +1711,12 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 
 - (void)markNotificationShown:(MPNotification *)notification
 {
-    MPLogInfo(@"%@ marking notification shown: %@, %@", self, @(notification.ID), _shownNotifications);
+    MPLogInfo(@"%@ marking notification shown: %@, %@", self, @(notification.ID), self.shownNotifications);
 
-    [_shownNotifications addObject:@(notification.ID)];
+    dispatch_async(self.serialQueue, ^{
+        [self.shownNotifications addObject:@(notification.ID)];
+        [self archiveProperties];
+    });
 
     NSDictionary *properties = @{
                                  @"$campaigns": @(notification.ID),
@@ -1753,9 +1828,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 {
     MPLogInfo(@"%@ marking variant %@ shown for experiment %@", self, @(variant.ID), @(variant.experimentID));
     NSDictionary *shownVariant = @{@(variant.experimentID).stringValue: @(variant.ID)};
-    if (self.people.distinctId) {
-        [self.people merge:@{@"$experiments": shownVariant}];
-    }
+    [self.people merge:@{@"$experiments": shownVariant}];
 
     dispatch_async(self.serialQueue, ^{
         NSMutableDictionary *superProperties = [NSMutableDictionary dictionaryWithDictionary:self.superProperties];
@@ -1763,15 +1836,19 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
         [shownVariants addEntriesFromDictionary:shownVariant];
         [superProperties addEntriesFromDictionary:@{@"$experiments": [shownVariants copy]}];
         self.superProperties = [superProperties copy];
-        if ([Mixpanel inBackground]) {
-            [self archiveProperties];
-        }
+#if !MIXPANEL_NO_UI_APPLICATION_ACCESS
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+                [self archiveProperties];
+            }
+        });
+#endif
     });
 
     [self track:@"$experiment_started" properties:@{@"$experiment_id": @(variant.experimentID), @"$variant_id": @(variant.ID)}];
 }
 
-- (void)joinExperimentsWithCallback:(void(^)())experimentsLoadedCallback
+- (void)joinExperimentsWithCallback:(void(^)(void))experimentsLoadedCallback
 {
     [self checkForVariantsWithCompletion:^(NSSet *newVariants) {
         for (MPVariant *variant in newVariants) {

@@ -15,39 +15,45 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Crashlytics (3.8.4):
+  - Crashlytics (3.8.5):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.11)
-  - Firebase/Core (3.17.0):
-    - FirebaseAnalytics (= 3.9.0)
-    - FirebaseCore (= 3.6.0)
-  - Firebase/Crash (3.17.0):
+  - Fabric (1.6.12)
+  - Firebase/Core (4.0.4):
+    - FirebaseAnalytics (= 4.0.2)
+    - FirebaseCore (= 4.0.4)
+  - Firebase/Crash (4.0.4):
     - Firebase/Core
-    - FirebaseCrash (= 1.1.6)
-  - FirebaseAnalytics (3.9.0):
-    - FirebaseCore (~> 3.6)
-    - FirebaseInstanceID (~> 1.0)
+    - FirebaseCrash (= 2.0.0)
+  - FirebaseAnalytics (4.0.2):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.6.0):
+  - FirebaseCore (4.0.4):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCrash (1.1.6):
-    - FirebaseAnalytics (~> 3.7)
-    - FirebaseInstanceID (~> 1.0)
+    - nanopb (~> 0.3)
+  - FirebaseCrash (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - Protobuf (~> 3.1)
-  - FirebaseInstanceID (1.0.10):
-    - FirebaseCore (~> 3.6)
-  - google-cast-sdk (3.4.0):
-    - google-cast-sdk/Core (= 3.4.0)
-  - google-cast-sdk/Core (3.4.0)
+  - FirebaseInstanceID (2.0.0):
+    - FirebaseCore (~> 4.0)
+  - google-cast-sdk (3.5.2):
+    - google-cast-sdk/Core (= 3.5.2)
+  - google-cast-sdk/Core (3.5.2)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/Logger (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - INTULocationManager (4.2.0)
-  - Mixpanel (3.1.3)
+  - Mixpanel (3.1.9)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
   - PhoenixClient (1.1.0):
     - SocketRocket (= 0.4.2)
   - Protobuf (3.3.0)
@@ -70,17 +76,18 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  Firebase: 4b66b5b59c43edac745b87f0c87e42cdd0279c13
-  FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
-  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
-  FirebaseCrash: db4c05d9c75baa050744d31b36357c8f1efba481
-  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
-  google-cast-sdk: 35da95f568b50d72628014f3320e2f3240bf2a7a
+  Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
+  Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
+  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
+  FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
+  FirebaseCrash: 600ec2cbd8e10c3064a42de2c6ee7687bd02a076
+  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  google-cast-sdk: 6f2d788ef20f2e750360f632996fa038aca329ea
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   INTULocationManager: 73f8254b3d05c897c56bb13c190e5b7c648c0998
-  Mixpanel: 232acf98cecd94fbb58630ff8512a54ff8d99373
+  Mixpanel: 57923411aec1a1c7926efbb158f0bbd4460803fa
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PhoenixClient: bb4b343dc16df49ad168c7833a06b0953f991df3
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
@@ -88,4 +95,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: dbff7038a81a9d9000cf104fe200e2b00c383302
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.1

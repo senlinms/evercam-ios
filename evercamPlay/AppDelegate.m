@@ -60,8 +60,21 @@ static const BOOL kDebugLoggingEnabled = YES;
     self.viewController = [[CustomNavigationController alloc] initWithRootViewController:vc];
     [self.viewController setNavigationBarHidden:YES animated:NO];
     self.viewController.isPortraitMode = true;
+    
+//    GCKUICastContainerViewController *castContainerVC;
+//    castContainerVC = [[GCKCastContext sharedInstance]
+//                       createCastContainerControllerForViewController:self.viewController];
+//    castContainerVC.miniMediaControlsItemEnabled = YES;
+//    self.window.rootViewController = castContainerVC;
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+//    [[NSNotificationCenter defaultCenter]
+//     addObserver:self
+//     selector:@selector(presentExpandedMediaControls)
+//     name:kGCKExpandedMediaControlsTriggeredNotification
+//     object:nil];
+//    [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
     
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"plist"];
     if (plistPath) {
@@ -125,6 +138,11 @@ static const BOOL kDebugLoggingEnabled = YES;
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+//    [[NSNotificationCenter defaultCenter]
+//     removeObserver:self
+//     name:kGCKExpandedMediaControlsTriggeredNotification
+//     object:nil];
 }
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window  // iOS 6 autorotation fix
@@ -328,5 +346,52 @@ static const BOOL kDebugLoggingEnabled = YES;
     }
 }
 
+
+/*
+#pragma mark - Notifications
+
+- (void)setCastControlBarsEnabled:(BOOL)notificationsEnabled {
+    GCKUICastContainerViewController *castContainerVC;
+    castContainerVC = (GCKUICastContainerViewController *)self.window.rootViewController;
+    castContainerVC.miniMediaControlsItemEnabled = notificationsEnabled;
+}
+
+- (BOOL)castControlBarsEnabled {
+    GCKUICastContainerViewController *castContainerVC;
+    castContainerVC =
+    (GCKUICastContainerViewController *)self.window.rootViewController;
+    return castContainerVC.miniMediaControlsItemEnabled;
+}
+
+- (void)presentExpandedMediaControls {
+    NSLog(@"present expanded media controls");
+    // Segue directly to the ExpandedViewController.
+    UINavigationController *navigationController;
+    GCKUICastContainerViewController *castContainerVC;
+    castContainerVC =
+    (GCKUICastContainerViewController *)self.window.rootViewController;
+    navigationController =
+    (UINavigationController *)castContainerVC.contentViewController;
+    
+    navigationController.navigationItem.backBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    if (appDelegate.castControlBarsEnabled) {
+        appDelegate.castControlBarsEnabled = NO;
+    }
+    [[GCKCastContext sharedInstance] presentDefaultExpandedMediaControls];
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+*/
 
 @end
