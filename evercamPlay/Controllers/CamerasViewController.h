@@ -40,4 +40,5 @@
 @property (nonatomic, strong) IBOutlet UICollectionView *camerasView;
 @property (nonatomic) NSInteger selectedRow;
 
+
 @end

@@ -1,1 +1,1 @@
-../../../../google-cast-sdk/GoogleCastSDK-Public-3.4.0-Release/GoogleCast.framework/Headers/GCKMediaQueueItem.h
+../../../../google-cast-sdk/GoogleCastSDK-Public-3.5.2-Release/GoogleCast.framework/Headers/GCKMediaQueueItem.h

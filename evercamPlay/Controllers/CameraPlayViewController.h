@@ -71,4 +71,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *zoomInBtn;
 - (IBAction)refreshAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *option_Button;
+@property (weak, nonatomic) IBOutlet UIView *test;
+
+//@property(nonatomic, assign, readwrite) BOOL castControlBarsEnabled;
 @end

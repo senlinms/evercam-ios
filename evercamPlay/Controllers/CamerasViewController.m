@@ -55,6 +55,8 @@
 {
     
     CGSize cellSize;
+    
+    CustomNavigationController *cameraPlayNavVC;
 }
 
 // Private Methods:
@@ -99,16 +101,16 @@
 -(void)pushAccountsViewController{
     AccountsViewController *aVc = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:[NSBundle mainBundle]];
     
-    CustomNavigationController *cameraPlayNavVC = [[CustomNavigationController alloc] initWithRootViewController:aVc];
+    CustomNavigationController *cameraAccountNavVC = [[CustomNavigationController alloc] initWithRootViewController:aVc];
     if ([PreferenceUtil isForceLandscape]) {
-        [cameraPlayNavVC setIsPortraitMode:NO];
+        [cameraAccountNavVC setIsPortraitMode:NO];
     } else {
-        [cameraPlayNavVC setIsPortraitMode:YES];
-        [cameraPlayNavVC setHasLandscapeMode:YES];
+        [cameraAccountNavVC setIsPortraitMode:YES];
+        [cameraAccountNavVC setHasLandscapeMode:YES];
     }
-    cameraPlayNavVC.navigationBarHidden = YES;
+    cameraAccountNavVC.navigationBarHidden = YES;
     
-    [[APP_DELEGATE viewController] presentViewController:cameraPlayNavVC animated:YES completion:nil];
+    [[APP_DELEGATE viewController] presentViewController:cameraAccountNavVC animated:YES completion:nil];
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -431,7 +433,8 @@
     cameraPlayVC.cameraInfo = camera;
     cameraPlayVC.cameras = cameraArray;
     
-    CustomNavigationController *cameraPlayNavVC = [[CustomNavigationController alloc] initWithRootViewController:cameraPlayVC];
+    cameraPlayNavVC = [[CustomNavigationController alloc] initWithRootViewController:cameraPlayVC];
+    
     if ([PreferenceUtil isForceLandscape]) {
         [cameraPlayNavVC setIsPortraitMode:NO];
     } else {
@@ -440,8 +443,13 @@
     }
     cameraPlayNavVC.navigationBarHidden = YES;
     
+    
     [[APP_DELEGATE viewController] presentViewController:cameraPlayNavVC animated:YES completion:nil];
+    
 }
+
+
+//================================================================
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

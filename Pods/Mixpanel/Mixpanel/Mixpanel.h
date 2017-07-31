@@ -238,6 +238,30 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (atomic) CGFloat miniNotificationPresentationTime;
 
+#if !MIXPANEL_NO_AUTOMATIC_EVENTS_SUPPORT
+/*!
+ @property
+
+ @abstract
+ The minimum session duration (ms) that is tracked in automatic events.
+
+ @discussion
+ The default value is 10000 (10 seconds).
+ */
+@property (atomic) UInt64 minimumSessionDuration;
+
+/*!
+ @property
+
+ @abstract
+ The maximum session duration (ms) that is tracked in automatic events.
+
+ @discussion
+ The default value is UINT64_MAX (no maximum session duration).
+ */
+@property (atomic) UInt64 maximumSessionDuration;
+#endif
+
 /*!
  @property
 
@@ -411,24 +435,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)track:(NSString *)event properties:(nullable NSDictionary *)properties;
 
-
-/*!
- @method
-
- @abstract
- Track a push notification using its payload sent from Mixpanel.
-
- @discussion
- To simplify user interaction tracking and a/b testing, Mixpanel
- automatically sends IDs for the relevant notification and a/b variants
- of each push. This method parses the standard payload and queues a
- track call using this information.
-
- @param userInfo         remote notification payload dictionary
- */
-- (void)trackPushNotification:(NSDictionary *)userInfo;
-
-
 /*!
  @method
 
@@ -553,6 +559,16 @@ NS_ASSUME_NONNULL_BEGIN
  @method
 
  @abstract
+ Retrieves the time elapsed for the named event since <code>timeEvent:</code> was called.
+
+ @param event   the name of the event to be tracked that was passed to <code>timeEvent:</code>
+ */
+- (double)eventElapsedTime:(NSString *)event;
+
+/*!
+ @method
+
+ @abstract
  Clears all current event timers.
  */
 - (void)clearTimedEvents;
@@ -594,7 +610,7 @@ NS_ASSUME_NONNULL_BEGIN
  are called when an app is brought to the background and require a handler to
  be called when it finishes.
  */
-- (void)flushWithCompletion:(nullable void (^)())handler;
+- (void)flushWithCompletion:(nullable void (^)(void))handler;
 
 /*!
  @method
@@ -712,7 +728,7 @@ NS_ASSUME_NONNULL_BEGIN
  Same as joinExperiments but will fire the given callback after all experiments
  have been loaded and applied.
  */
-- (void)joinExperimentsWithCallback:(nullable void (^)())experimentsLoadedCallback;
+- (void)joinExperimentsWithCallback:(nullable void (^)(void))experimentsLoadedCallback;
 
 #endif // MIXPANEL_NO_NOTIFICATION_AB_TEST_SUPPORT
 
