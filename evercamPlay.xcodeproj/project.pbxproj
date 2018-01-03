@@ -67,7 +67,6 @@
 		6218FEC11E4C839E001C37B0 /* CameraDetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6218FEC01E4C839E001C37B0 /* CameraDetailViewController_iPad.xib */; };
 		621E14D51EBC99AB00A1D565 /* MediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 621E14D41EBC99AB00A1D565 /* MediaItem.m */; };
 		6221090F1DD08EE200231E6F /* Source in Resources */ = {isa = PBXBuildFile; fileRef = 6221090E1DD08EE200231E6F /* Source */; };
-		622B773B1DA2710B00B8DAE6 /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 622B773A1DA2710B00B8DAE6 /* local.plist */; };
 		623A9D181E8A6D8E00B29250 /* hidePass.png in Resources */ = {isa = PBXBuildFile; fileRef = 623A9D151E8A6D8E00B29250 /* hidePass.png */; };
 		623A9D191E8A6D8E00B29250 /* hidePass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 623A9D161E8A6D8E00B29250 /* hidePass@2x.png */; };
 		623A9D1A1E8A6D8E00B29250 /* hidePass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 623A9D171E8A6D8E00B29250 /* hidePass@3x.png */; };
@@ -87,6 +86,7 @@
 		77079D8C1CEA05280073EE16 /* circleImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77079D8A1CEA05280073EE16 /* circleImage@2x.png */; };
 		770C9E5C1CDA0978003BC4E1 /* MyPlayerLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 770C9E5B1CDA0978003BC4E1 /* MyPlayerLayerView.m */; };
 		770C9E5E1CDA0A8F003BC4E1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */; };
+		771AE02D1FFCE02B0078FF47 /* evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json in Resources */ = {isa = PBXBuildFile; fileRef = 771AE02C1FFCE02B0078FF47 /* evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json */; };
 		771F5C6A1D1BB07700621EA1 /* question_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 771F5C671D1BB07700621EA1 /* question_icon@2x.png */; };
 		771F5C6B1D1BB07700621EA1 /* question_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 771F5C681D1BB07700621EA1 /* question_icon.png */; };
 		771F5C6C1D1BB07700621EA1 /* question_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 771F5C691D1BB07700621EA1 /* question_icon@3x.png */; };
@@ -143,6 +143,8 @@
 		7779AF0D1CF493040036A0F5 /* AddPresetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7779AF0B1CF493040036A0F5 /* AddPresetViewController.xib */; };
 		777B3D7E1D0EAB9600BCB0AE /* CameraNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777B3D7C1D0EAB9600BCB0AE /* CameraNameViewController.m */; };
 		777B3D7F1D0EAB9600BCB0AE /* CameraNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 777B3D7D1D0EAB9600BCB0AE /* CameraNameViewController.xib */; };
+		779DAF551FFBB76A0065C508 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 779DAF521FFBB7690065C508 /* GoogleService-Info.plist */; };
+		779DAF591FFBB81E0065C508 /* local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 779DAF581FFBB81E0065C508 /* local.plist */; };
 		77B4988E1D129C91003FC91C /* VendorAndModelViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B4988D1D129C91003FC91C /* VendorAndModelViewController_iPad.xib */; };
 		77B498901D129F75003FC91C /* ConnectCameraViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B4988F1D129F75003FC91C /* ConnectCameraViewController_iPad.xib */; };
 		77B498921D12ACE7003FC91C /* CameraNameViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B498911D12ACE7003FC91C /* CameraNameViewController_iPad.xib */; };
@@ -444,7 +446,6 @@
 		621E14D31EBC99AB00A1D565 /* MediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaItem.h; sourceTree = "<group>"; };
 		621E14D41EBC99AB00A1D565 /* MediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaItem.m; sourceTree = "<group>"; };
 		6221090E1DD08EE200231E6F /* Source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Source; sourceTree = "<group>"; };
-		622B773A1DA2710B00B8DAE6 /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
 		623A9D151E8A6D8E00B29250 /* hidePass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hidePass.png; sourceTree = "<group>"; };
 		623A9D161E8A6D8E00B29250 /* hidePass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hidePass@2x.png"; sourceTree = "<group>"; };
 		623A9D171E8A6D8E00B29250 /* hidePass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hidePass@3x.png"; sourceTree = "<group>"; };
@@ -473,6 +474,7 @@
 		770C9E5A1CDA0978003BC4E1 /* MyPlayerLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlayerLayerView.h; sourceTree = "<group>"; };
 		770C9E5B1CDA0978003BC4E1 /* MyPlayerLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlayerLayerView.m; sourceTree = "<group>"; };
 		770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		771AE02C1FFCE02B0078FF47 /* evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json"; sourceTree = "<group>"; };
 		771F5C671D1BB07700621EA1 /* question_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question_icon@2x.png"; sourceTree = "<group>"; };
 		771F5C681D1BB07700621EA1 /* question_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question_icon.png; sourceTree = "<group>"; };
 		771F5C691D1BB07700621EA1 /* question_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question_icon@3x.png"; sourceTree = "<group>"; };
@@ -539,6 +541,8 @@
 		777B3D7B1D0EAB9600BCB0AE /* CameraNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraNameViewController.h; sourceTree = "<group>"; };
 		777B3D7C1D0EAB9600BCB0AE /* CameraNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraNameViewController.m; sourceTree = "<group>"; };
 		777B3D7D1D0EAB9600BCB0AE /* CameraNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraNameViewController.xib; sourceTree = "<group>"; };
+		779DAF521FFBB7690065C508 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		779DAF581FFBB81E0065C508 /* local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = local.plist; sourceTree = "<group>"; };
 		77B4988D1D129C91003FC91C /* VendorAndModelViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VendorAndModelViewController_iPad.xib; sourceTree = "<group>"; };
 		77B4988F1D129F75003FC91C /* ConnectCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectCameraViewController_iPad.xib; sourceTree = "<group>"; };
 		77B498911D12ACE7003FC91C /* CameraNameViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraNameViewController_iPad.xib; sourceTree = "<group>"; };
@@ -1011,6 +1015,14 @@
 			name = GravatorLib;
 			sourceTree = "<group>";
 		};
+		771AE0291FFCDFE60078FF47 /* CrashKey */ = {
+			isa = PBXGroup;
+			children = (
+				771AE02C1FFCE02B0078FF47 /* evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json */,
+			);
+			path = CrashKey;
+			sourceTree = "<group>";
+		};
 		77F7227C1D6AFFDF00B8B173 /* EvercamAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1146,9 +1158,11 @@
 		CB1C76501AAB144800680FE3 /* evercamPlay */ = {
 			isa = PBXGroup;
 			children = (
+				771AE0291FFCDFE60078FF47 /* CrashKey */,
 				6221090E1DD08EE200231E6F /* Source */,
 				622109071DD08D6800231E6F /* CocoaAsyncSocket */,
 				62CEBB7F1DC3644B00C6DF73 /* Evercam.entitlements */,
+				779DAF521FFBB7690065C508 /* GoogleService-Info.plist */,
 				77F7227C1D6AFFDF00B8B173 /* EvercamAPI */,
 				CB1C76771AAB7DE900680FE3 /* 3rdParty */,
 				CB44E84E1AAE9E7D00A78C11 /* Controllers */,
@@ -1172,7 +1186,7 @@
 		CB1C76511AAB144800680FE3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				622B773A1DA2710B00B8DAE6 /* local.plist */,
+				779DAF581FFBB81E0065C508 /* local.plist */,
 				CB1C76521AAB144800680FE3 /* Info.plist */,
 				CB1C76531AAB144800680FE3 /* main.m */,
 			);
@@ -1653,7 +1667,7 @@
 				6CE21A6B1BFDCA30007219BD /* ShellScript */,
 				E1FC7342EB1141EE2C7749D9 /* [CP] Embed Pods Frameworks */,
 				661396DCA5125FAC3A0DC200 /* [CP] Copy Pods Resources */,
-				62AE19B71DD9A24400677E25 /* ShellScript */,
+				771AE0281FFCDEDB0078FF47 /* Upload symbols */,
 			);
 			buildRules = (
 			);
@@ -1737,6 +1751,7 @@
 				774EF1131CE3063700D97805 /* ShareViewController_iPad.xib in Resources */,
 				776647171CEEFE940076B9CE /* ic_feedback@2x.png in Resources */,
 				589204A41C11A40800B40DD0 /* cam.png in Resources */,
+				779DAF551FFBB76A0065C508 /* GoogleService-Info.plist in Resources */,
 				E309007C1B1659DB00E5B5C0 /* CamerasViewController_iPad.xib in Resources */,
 				E30900A61B16B96000E5B5C0 /* action-red-button@2x.png in Resources */,
 				E3CB15AB1B2879C700413197 /* btn_export.png in Resources */,
@@ -1782,6 +1797,7 @@
 				E309007A1B16510900E5B5C0 /* CameraPlayViewController_iPad.xib in Resources */,
 				776647111CEEFD280076B9CE /* ic_settings@2x.png in Resources */,
 				CB44E8811AAE9E7D00A78C11 /* AddAccountCell.xib in Resources */,
+				771AE02D1FFCE02B0078FF47 /* evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json in Resources */,
 				CB1C76D11AAB871A00680FE3 /* ic_person.png in Resources */,
 				413BB2B11ADBFB710083A5DC /* pull-out.png in Resources */,
 				CB44E8771AAE9E7D00A78C11 /* MenuViewController.xib in Resources */,
@@ -1791,7 +1807,6 @@
 				CB840D221ACAF38900F289A9 /* CameraViewCell.xib in Resources */,
 				773CC1D11D7D4D2C000403E8 /* ic_dropdown_new@2x.png in Resources */,
 				E30201CF1B16CE290006DAE8 /* SettingsViewController_iPad.xib in Resources */,
-				622B773B1DA2710B00B8DAE6 /* local.plist in Resources */,
 				410748741ADF6F3F004D10C9 /* RecordingsViewController.xib in Resources */,
 				E30201D51B173B760006DAE8 /* AddAccountCell_iPad.xib in Resources */,
 				776647161CEEFE940076B9CE /* ic_feedback.png in Resources */,
@@ -1902,6 +1917,7 @@
 				E30900A11B16B96000E5B5C0 /* action-gray-button.png in Resources */,
 				E309009F1B16B96000E5B5C0 /* action-gray-button-selected.png in Resources */,
 				CB1C765F1AAB144800680FE3 /* Images.xcassets in Resources */,
+				779DAF591FFBB81E0065C508 /* local.plist in Resources */,
 				E30900801B16A2C000E5B5C0 /* AddCameraViewController_iPad.xib in Resources */,
 				CB1C76C91AAB871A00680FE3 /* ic_action_refresh.png in Resources */,
 				E30201C81B16C82D0006DAE8 /* alert-window.png in Resources */,
@@ -1927,27 +1943,17 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-evercamPlay-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		62AE19B71DD9A24400677E25 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "GOOGLE_APP_ID=1:461613501728:ios:9edce13763514611\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"/Users/zulqarnainmustafa/Desktop/Development/evercam-ios/evercamPlay/evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json\"";
 		};
 		661396DCA5125FAC3A0DC200 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1955,9 +1961,28 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-evercamPlay/Pods-evercamPlay-resources.sh",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCheckmark.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCheckmark@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton@3x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPDismissKeyboard.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPDismissKeyboard@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPLogo.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPLogo@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/placeholder-image.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPTakeoverNotificationViewController~ipad.xib",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPTakeoverNotificationViewController~iphonelandscape.xib",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPTakeoverNotificationViewController~iphoneportrait.xib",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1975,7 +2000,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 70e87b744f3bc2c7db518b88faf93411823b45b2 f4f47afde6cab35a5457b6554f984349eb6c0a52aa7e6cc1489745b89b059d14";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 85f1113ef6081830ad7d2a9ecae01bb60dfb0462 f4f47afde6cab35a5457b6554f984349eb6c0a52aa7e6cc1489745b89b059d14";
+		};
+		771AE0281FFCDEDB0078FF47 /* Upload symbols */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload symbols";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:461613501728:ios:9edce13763514611\n\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym-util.bash \"${PROJECT_DIR}/CrashKey/evercam-46b7e-firebase-crashreporting-w9750-46ccb3bd8b.json\"";
 		};
 		E1FC7342EB1141EE2C7749D9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1983,9 +2022,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-evercamPlay/Pods-evercamPlay-frameworks.sh",
+				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.0.2/GoogleCast.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleCast.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2150,10 +2192,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Evercam Ltd (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Evercam Ltd (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2197,8 +2239,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Evercam Ltd (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Evercam Ltd (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2229,10 +2271,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = evercamPlay/Evercam.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Evercam Ltd (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Evercam Ltd (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = WUBG25MK44;
 				ENABLE_BITCODE = NO;
@@ -2265,8 +2307,8 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = Evercam;
-				PROVISIONING_PROFILE = "b3fceb8e-2c1d-4cab-bdf1-76aa41158ec0";
-				PROVISIONING_PROFILE_SPECIFIER = Evercam_Distribution_may2017;
+				PROVISIONING_PROFILE = "7ddaa9e0-691f-4ffb-a58a-bc2578ba6931";
+				PROVISIONING_PROFILE_SPECIFIER = Evercam_Development_Provision;
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2282,8 +2324,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = evercamPlay/Evercam.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Evercam Ltd (WUBG25MK44)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Evercam Ltd (WUBG25MK44)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -2319,8 +2361,8 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = Evercam;
-				PROVISIONING_PROFILE = "b3fceb8e-2c1d-4cab-bdf1-76aa41158ec0";
-				PROVISIONING_PROFILE_SPECIFIER = Evercam_Distribution_may2017;
+				PROVISIONING_PROFILE = "7ddaa9e0-691f-4ffb-a58a-bc2578ba6931";
+				PROVISIONING_PROFILE_SPECIFIER = Evercam_Development_Provision;
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";

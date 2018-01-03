@@ -1,1 +1,1 @@
-../../../../google-cast-sdk/GoogleCastSDK-Public-3.5.2-Release/GoogleCast.framework/Headers/GCKUIStreamPositionController.h
+../../../../google-cast-sdk/GoogleCastSDK-ios-4.0.2/GoogleCast.framework/Headers/GCKUIStreamPositionController.h

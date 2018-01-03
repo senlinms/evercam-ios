@@ -49,7 +49,8 @@
 #include "if_dl.h"
 #include "if_types.h"
 #if TARGET_IPHONE_SIMULATOR
-#include <net/route.h>
+//#include <net/route.h>
+#include "route.h"
 #define TypeEN    "en1"
 #else
 #include "route.h"
@@ -245,7 +246,7 @@
 - (void)scanLANDidFindNewAdrress:(NSString *)address havingHostName:(NSString *)hostName {
     
     const char *c   = [address UTF8String];
-    NSString * complete_Mac_Address = [self getCompleteMacAddress:[self ip2mac:c]];
+    NSString * complete_Mac_Address =  [self getCompleteMacAddress:[self ip2mac:c]];
     NSString *required_Mac_Address =  [complete_Mac_Address substringToIndex:8];
     NSLog(@"MAC ADDRESS: %@",complete_Mac_Address);
     NSDictionary *param_Dictionary = [NSDictionary dictionaryWithObjectsAndKeys:required_Mac_Address,@"mac_address",[APP_DELEGATE defaultUser].apiId,@"api_id",[APP_DELEGATE defaultUser].apiKey,@"api_Key", nil];
@@ -437,6 +438,8 @@
         return mAddr;
     }
 }
+
+
 
 - (IBAction)addCamera:(id)sender {
     [self goToVendorScreen:nil];
