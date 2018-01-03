@@ -155,6 +155,10 @@ static const BOOL kDebugLoggingEnabled = YES;
     [Intercom setDeviceToken:deviceToken];
 }
 
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"Error %@",error.localizedDescription);
+}
+
 
 
 -(void)integrateIntercom{

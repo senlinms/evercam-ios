@@ -47,6 +47,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
+  - Intercom (4.1.8)
   - INTULocationManager (4.2.0)
   - Mixpanel (3.2.5)
   - nanopb (0.3.8):
@@ -68,6 +69,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Crash
   - google-cast-sdk
+  - Intercom
   - INTULocationManager
   - Mixpanel
   - PhoenixClient
@@ -85,6 +87,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
   google-cast-sdk: 64e135f63f6c1d7d8e5ea8d240ae6c918877ce62
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  Intercom: 2d2f4ad2d24f7b7e2d5b2b0d74bb02bc0e0f756a
   INTULocationManager: 73f8254b3d05c897c56bb13c190e5b7c648c0998
   Mixpanel: 7445c8e19c00df6d792ea8dda1b4d32f5acd4ac2
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -93,6 +96,6 @@ SPEC CHECKSUMS:
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
   Unirest: 5e4d93eaf32463bf619a4ecd3bbc8c32acf21eac
 
-PODFILE CHECKSUM: dbff7038a81a9d9000cf104fe200e2b00c383302
+PODFILE CHECKSUM: 3fa40d3a00afd27ad670be3b722e5d5bd10ac287
 
 COCOAPODS: 1.3.1

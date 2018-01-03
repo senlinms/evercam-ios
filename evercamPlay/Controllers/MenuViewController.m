@@ -245,8 +245,8 @@
 
 -(void)useSelectedAccount:(NSMutableArray *)accountsArray withIndex:(NSInteger)selectedIndex{
     //clear intercom at logout
-    [Intercom reset];
-    
+//    [Intercom reset];
+    [Intercom logout];
     AppUser *user = accountsArray[selectedIndex];
     
     [APP_DELEGATE setDefaultUser:user];

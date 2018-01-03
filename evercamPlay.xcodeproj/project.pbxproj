@@ -233,8 +233,6 @@
 		77FB34261D094F1200B3D4C9 /* buttonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FB34241D094F1200B3D4C9 /* buttonBg.png */; };
 		77FB34271D094F1200B3D4C9 /* buttonBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FB34251D094F1200B3D4C9 /* buttonBg@2x.png */; };
 		77FB342B1D09879600B3D4C9 /* getgateway.c in Sources */ = {isa = PBXBuildFile; fileRef = 77FB34291D09879600B3D4C9 /* getgateway.c */; };
-		AB242FEC1CBE41AC00C5F2F7 /* Intercom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */; };
-		AB242FED1CBE41AC00C5F2F7 /* Intercom.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */; };
 		AB6E77E21CBE1A1600DE6310 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */; };
 		AB6E77E31CBE1A1600DE6310 /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6E77E11CBE1A1500DE6310 /* ForgotPasswordViewController.xib */; };
 		AB6E77E91CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6E77E81CBE202D00DE6310 /* ForgotPasswordViewController_iPad.xib */; };
@@ -671,8 +669,6 @@
 		77FB34251D094F1200B3D4C9 /* buttonBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBg@2x.png"; sourceTree = "<group>"; };
 		77FB34291D09879600B3D4C9 /* getgateway.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getgateway.c; sourceTree = "<group>"; };
 		77FB342A1D09879600B3D4C9 /* getgateway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getgateway.h; sourceTree = "<group>"; };
-		AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Intercom.framework; sourceTree = "<group>"; };
-		AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Intercom.bundle; sourceTree = "<group>"; };
 		AB6E77DF1CBE1A1500DE6310 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		AB6E77E01CBE1A1500DE6310 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		AB6E77E11CBE1A1500DE6310 /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
@@ -866,7 +862,6 @@
 				7732ED981CD735C000EC9C6B /* MediaPlayer.framework in Frameworks */,
 				E356C9D91B179E2A007BB101 /* libicucore.dylib in Frameworks */,
 				E30201D71B1782970006DAE8 /* SpriteKit.framework in Frameworks */,
-				AB242FEC1CBE41AC00C5F2F7 /* Intercom.framework in Frameworks */,
 				C40639981B05FC3F00FC5D67 /* libsqlite3.0.dylib in Frameworks */,
 				C40639941B05F96C00FC5D67 /* libz.dylib in Frameworks */,
 				C40639921B05F96200FC5D67 /* WebKit.framework in Frameworks */,
@@ -965,8 +960,6 @@
 				6218006C1E4B0AFC00708E60 /* CoreLocation.framework */,
 				770C9E5D1CDA0A8F003BC4E1 /* CoreImage.framework */,
 				7732ED971CD735C000EC9C6B /* MediaPlayer.framework */,
-				AB242FEA1CBE41AC00C5F2F7 /* Intercom.framework */,
-				AB242FEB1CBE41AC00C5F2F7 /* Intercom.bundle */,
 				E356C9D81B179E2A007BB101 /* libicucore.dylib */,
 				E30201D61B1782970006DAE8 /* SpriteKit.framework */,
 				C40639971B05FC3F00FC5D67 /* libsqlite3.0.dylib */,
@@ -1690,6 +1683,7 @@
 					CB1C764D1AAB144700680FE3 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = WUBG25MK44;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1844,7 +1838,6 @@
 				77B498971D12B690003FC91C /* UnknownConnectCameraViewController.xib in Resources */,
 				E30900A71B16B96000E5B5C0 /* action-sheet-panel.png in Resources */,
 				E309006E1B162B7000E5B5C0 /* WelcomeViewController_iPad.xib in Resources */,
-				AB242FED1CBE41AC00C5F2F7 /* Intercom.bundle in Resources */,
 				777B3D7F1D0EAB9600BCB0AE /* CameraNameViewController.xib in Resources */,
 				E30201C41B16C82D0006DAE8 /* alert-red-button.png in Resources */,
 				CB1C76CA1AAB871A00680FE3 /* ic_action_save.png in Resources */,
@@ -1962,6 +1955,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-evercamPlay/Pods-evercamPlay-resources.sh",
+				"${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/Intercom.bundle",
+				"${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/IntercomTranslations.bundle",
 				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png",
 				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png",
 				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight.png",
@@ -2272,7 +2267,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = evercamPlay/Evercam.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -2307,8 +2303,8 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = Evercam;
-				PROVISIONING_PROFILE = "7ddaa9e0-691f-4ffb-a58a-bc2578ba6931";
-				PROVISIONING_PROFILE_SPECIFIER = Evercam_Development_Provision;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2325,7 +2321,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = evercamPlay/Evercam.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -2361,8 +2358,8 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = Evercam;
-				PROVISIONING_PROFILE = "7ddaa9e0-691f-4ffb-a58a-bc2578ba6931";
-				PROVISIONING_PROFILE_SPECIFIER = Evercam_Development_Provision;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
