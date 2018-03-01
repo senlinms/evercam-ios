@@ -21,9 +21,6 @@ PODS:
   - Firebase/Core (4.8.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.13)
-  - Firebase/Crash (4.8.0):
-    - Firebase/Core
-    - FirebaseCrash (= 2.0.2)
   - FirebaseAnalytics (4.0.5):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -31,20 +28,12 @@ PODS:
     - nanopb (~> 0.3)
   - FirebaseCore (4.0.13):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCrash (2.0.2):
-    - FirebaseAnalytics (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/Logger (~> 2.1)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - Protobuf (~> 3.1)
   - FirebaseInstanceID (2.0.8):
     - FirebaseCore (~> 4.0)
   - google-cast-sdk (4.0.2):
     - google-cast-sdk/Core (= 4.0.2)
   - google-cast-sdk/Core (4.0.2)
   - GoogleToolboxForMac/Defines (2.1.3)
-  - GoogleToolboxForMac/Logger (2.1.3):
-    - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - Intercom (4.1.8)
@@ -57,7 +46,6 @@ PODS:
   - nanopb/encode (0.3.8)
   - PhoenixClient (1.1.0):
     - SocketRocket (= 0.4.2)
-  - Protobuf (3.5.0)
   - SocketRocket (0.4.2)
   - Unirest (1.1.4)
 
@@ -65,9 +53,10 @@ DEPENDENCIES:
   - ActionSheetPicker-3.0
   - AFNetworking (~> 3.0)
   - Crashlytics
+  - Crashlytics (~> 3.9.3)
   - Fabric
+  - Fabric (~> 1.7.2)
   - Firebase/Core
-  - Firebase/Crash
   - google-cast-sdk
   - Intercom
   - INTULocationManager
@@ -83,7 +72,6 @@ SPEC CHECKSUMS:
   Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
-  FirebaseCrash: cded0fc566c03651aea606a101bc156085f333ca
   FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
   google-cast-sdk: 64e135f63f6c1d7d8e5ea8d240ae6c918877ce62
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
@@ -92,10 +80,9 @@ SPEC CHECKSUMS:
   Mixpanel: 7445c8e19c00df6d792ea8dda1b4d32f5acd4ac2
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PhoenixClient: bb4b343dc16df49ad168c7833a06b0953f991df3
-  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
   Unirest: 5e4d93eaf32463bf619a4ecd3bbc8c32acf21eac
 
-PODFILE CHECKSUM: 3fa40d3a00afd27ad670be3b722e5d5bd10ac287
+PODFILE CHECKSUM: 6cb6a55b5b637501fe91403630e871d863ead270
 
 COCOAPODS: 1.3.1
