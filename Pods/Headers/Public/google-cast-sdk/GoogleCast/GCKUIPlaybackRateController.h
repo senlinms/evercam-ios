@@ -1,0 +1,1 @@
+../../../../google-cast-sdk/GoogleCastSDK-ios-4.0.2/GoogleCast.framework/Headers/GCKUIPlaybackRateController.h

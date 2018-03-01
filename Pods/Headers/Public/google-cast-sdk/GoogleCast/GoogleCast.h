@@ -1,1 +1,1 @@
-../../../../google-cast-sdk/GoogleCastSDK-Public-3.5.2-Release/GoogleCast.framework/Headers/GoogleCast.h
+../../../../google-cast-sdk/GoogleCastSDK-ios-4.0.2/GoogleCast.framework/Headers/GoogleCast.h

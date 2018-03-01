@@ -38,7 +38,7 @@ static const BOOL kDebugLoggingEnabled = YES;
     [Fabric with:@[[Crashlytics class]]];
     
     GCKCastOptions *options =
-    [[GCKCastOptions alloc] initWithReceiverApplicationID:kGCKMediaDefaultReceiverApplicationID];
+    [[GCKCastOptions alloc] initWithReceiverApplicationID:kGCKDefaultMediaReceiverApplicationID];
     [GCKCastContext setSharedInstanceWithOptions:options];
     
     [GCKLogger sharedInstance].delegate = self;
@@ -153,6 +153,10 @@ static const BOOL kDebugLoggingEnabled = YES;
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"Device Token: %@",deviceToken);
     [Intercom setDeviceToken:deviceToken];
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"Error %@",error.localizedDescription);
 }
 
 

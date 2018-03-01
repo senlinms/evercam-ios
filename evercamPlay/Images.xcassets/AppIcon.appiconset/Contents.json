@@ -145,6 +145,12 @@
       "scale" : "2x"
     },
     {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "1024.jpg",
+      "scale" : "1x"
+    },
+    {
       "idiom" : "car",
       "size" : "120x120",
       "scale" : "1x"

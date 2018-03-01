@@ -12,5 +12,6 @@ pod 'Firebase/Core'
 pod 'Firebase/Crash'
 pod 'INTULocationManager'
 pod 'google-cast-sdk'
+pod 'Intercom'
 end
 

@@ -127,7 +127,8 @@
 - (void)useAccount: (id)object
 {
     //clear intercom at logout
-    [Intercom reset];
+//    [Intercom reset];
+    [Intercom logout];
     NSNumber *number = (NSNumber *)object;
     NSInteger index = [number integerValue];
     AppUser *user = [self.users objectAtIndex:index];
@@ -321,12 +322,14 @@
         [self removeUserImageFromDirectory:user.email];
         if (self.users.count == 1) {
             //clear intercom at logout
-            [Intercom reset];
+//            [Intercom reset];
+            [Intercom logout];
             [APP_DELEGATE logout];
             return;
         }
         //clear intercom at logout
-        [Intercom reset];
+//        [Intercom reset];
+        [Intercom logout];
         if ([user.username isEqualToString:[APP_DELEGATE defaultUser].username]) {
             [APP_DELEGATE deleteUser:user];
             [APP_DELEGATE saveContext];

@@ -133,8 +133,8 @@
                 if (error == nil) {
                     
                     //clear intercom at logout
-                    [Intercom reset];
-                    
+//                    [Intercom reset];
+                    [Intercom logout];
                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
                     [mixpanel identify:newuser.username];
                     [mixpanel track:mixpanel_event_sign_in properties:@{

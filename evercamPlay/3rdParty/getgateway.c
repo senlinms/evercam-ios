@@ -15,7 +15,8 @@
 
 #include "TargetConditionals.h"
 #if TARGET_IPHONE_SIMULATOR
-#include <net/route.h>
+//#include <net/route.h>
+#include "route.h"
 #define TypeEN    "en1"
 #else
 #include "route.h"
