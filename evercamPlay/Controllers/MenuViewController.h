@@ -26,7 +26,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GravatarServiceFactory.h"
-#import "AccountsTableView.h";
+#import "AccountsTableView.h"//;
 @interface MenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,GravatarServiceDelegate,AccountTable>
 @property (nonatomic, retain) IBOutlet UIView *containerView;
 @property (nonatomic, retain) IBOutlet UITableView *rearTableView;

@@ -153,6 +153,38 @@
     if (row == 1)
     {
         
+        newFrontController = [[SettingsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"SettingsViewController" : @"SettingsViewController_iPad" bundle:nil];
+        
+        [FIRAnalytics logEventWithName:@"Menu"
+                            parameters:@{
+                                         @"Settings": @"Click on setting menu"
+                                         }];
+    }
+    else if (row == 2)
+    {
+        
+        [Intercom presentConversationList];
+        return;
+    }else if (row == 5)
+    {
+        
+        LoginViewController *vc = [[LoginViewController alloc] initWithNibName:([GlobalSettings sharedInstance].isPhone)?@"LoginViewController":@"LoginViewController_iPad" bundle:[NSBundle mainBundle]];
+        vc.isFromAddAccount     = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if (row == 6){
+        
+        newFrontController = [[AccountsViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"AccountsViewController" : @"AccountsViewController_iPad" bundle:nil];
+        
+        [FIRAnalytics logEventWithName:@"Menu"
+                            parameters:@{
+                                         @"Manage_Account": @"Click on manage account"
+                                         }];
+    }
+    /*
+    if (row == 1)
+    {
+        
         newFrontController = [[CameraScanViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CameraScanViewController" : @"CameraScanViewController_iPad" bundle:[NSBundle mainBundle]];
         
         [FIRAnalytics logEventWithName:@"Menu"
@@ -197,6 +229,7 @@
                                          @"Manage_Account": @"Click on manage account"
                                          }];
     }
+    */
     
     [self.navigationController pushViewController:newFrontController animated:YES];
     self.navigationController.navigationBarHidden = YES;

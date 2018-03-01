@@ -148,7 +148,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -172,7 +172,17 @@
     }
     
     NSString *text = nil;
-    
+    if (row == 0)
+    {
+        text = @"Settings";
+        cell.imageView.image = [UIImage imageNamed:@"ic_settings.png"];
+    }
+    else if (row == 1)
+    {
+        text = @"Live Support";
+        cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
+    }
+    /*
     if (row == 0)
     {
         text = @"Scan for cameras";
@@ -192,6 +202,7 @@
         text = @"Live Support";
         cell.imageView.image = [UIImage imageNamed:@"ic_feedback.png"];
     }
+    */
     cell.textLabel.text = NSLocalizedString( text,nil );
     return cell;
 }
@@ -306,7 +317,7 @@
         } else {
             btn.transform = CGAffineTransformIdentity;
             self.rearTableView.hidden = NO;
-            self.offline_view.hidden = NO;
+            self.offline_view.hidden = YES;
             self.accountsTableView.hidden = YES;
         }
     }];
