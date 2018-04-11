@@ -34,7 +34,7 @@ static const BOOL kDebugLoggingEnabled = YES;
 
     [FIRApp configure]; //setting up Firebase
     [self integrateIntercom]; // setting up Intercom
-    [Crashlytics startWithAPIKey:@"85f1113ef6081830ad7d2a9ecae01bb60dfb0462"];
+    [Crashlytics startWithAPIKey:@"70e87b744f3bc2c7db518b88faf93411823b45b2"];
     [Fabric with:@[[Crashlytics class]]];
     
     GCKCastOptions *options =
