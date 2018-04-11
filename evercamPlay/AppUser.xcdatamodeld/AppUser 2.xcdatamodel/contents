@@ -6,12 +6,13 @@
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intercom_hmac_ios" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AppUser" positionX="6145" positionY="-1737" width="128" height="178"/>
+        <element name="AppUser" positionX="6145" positionY="-1737" width="128" height="195"/>
     </elements>
 </model>

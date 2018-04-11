@@ -148,7 +148,9 @@
                     [APP_DELEGATE setDefaultUser:user];
                     
                     //Registering user with Intercom
+                    [Intercom setUserHash:newuser.intercom_hmac_ios];
                     [Intercom registerUserWithUserId:newuser.username];
+                    
                     
                     [GravatarServiceFactory requestUIImageByEmail:[APP_DELEGATE defaultUser].email defaultImage:gravatarServerImageMysteryMan size:72 delegate:self];
                     

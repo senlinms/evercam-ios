@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSString *country;
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSString *intercom_hmac_ios;
 
 - (id) initWithDictionary: (NSDictionary *)userDict;
 @end

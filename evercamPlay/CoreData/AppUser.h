@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSNumber * isDefault;
 @property (nonatomic, retain) NSString * apiKey;
 @property (nonatomic, retain) NSString * apiId;
+@property (nonatomic, retain) NSString * intercom_hmac_ios;
 
 - (id) initWithEvercamUser: (EvercamUser *)evercamUser;
 - (void)setDataWithEvercamUser:(EvercamUser *)evercamUser;

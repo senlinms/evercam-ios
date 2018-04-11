@@ -263,7 +263,9 @@
     [APP_DELEGATE setDefaultUser:user];
     
     //Registering user with Intercom
+    [Intercom setUserHash:user.intercom_hmac_ios];
     [Intercom registerUserWithUserId:user.username];
+    
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:user.username];

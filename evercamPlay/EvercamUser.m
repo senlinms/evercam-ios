@@ -25,6 +25,7 @@
         self.email = [userDict valueForKeyPath:@"email"];
         self.country = [userDict valueForKeyPath:@"country"];
         self.billingId = [userDict valueForKeyPath:@"billing_id"];
+        self.intercom_hmac_ios = [userDict valueForKeyPath:@"intercom_hmac_ios"];
     }
 
     return  self;
