@@ -20,6 +20,7 @@
 @dynamic isDefault;
 @dynamic apiKey;
 @dynamic apiId;
+@dynamic intercom_hmac_ios;
 
 - (id) initWithEvercamUser: (EvercamUser *)evercamUser {
     self= [super init];
@@ -30,6 +31,7 @@
         self.firstName = evercamUser.firstname;
         self.lastName = evercamUser.lastname;
         self.country = evercamUser.country;
+        self.intercom_hmac_ios = evercamUser.intercom_hmac_ios;
     }
     return self;
 }
@@ -40,6 +42,7 @@
     self.firstName = evercamUser.firstname;
     self.lastName = evercamUser.lastname;
     self.country = ([evercamUser.country isKindOfClass:[NSNull class]])?@"":evercamUser.country;
+    self.intercom_hmac_ios = evercamUser.intercom_hmac_ios;
 }
 
 - (void) setApiKeyPairWithApiKey:(NSString *)apiKey andApiId:(NSString *)apiId {

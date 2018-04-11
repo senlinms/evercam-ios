@@ -277,7 +277,11 @@
                                     [APP_DELEGATE setDefaultUser:user];
                                     
                                     //Registering user with Intercom
+                                    [Intercom setUserHash:newuser.intercom_hmac_ios];
                                     [Intercom registerUserWithUserId:newuser.username];
+                                    
+                                    
+                                   
                                 
                                     [FIRAnalytics logEventWithName:kFIREventSignUp parameters:@{ kFIRParameterSignUpMethod:action_signup_success}];
                                     

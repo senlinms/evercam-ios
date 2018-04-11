@@ -49,6 +49,7 @@
 #import "VendorAndModelViewController.h"
 #import "LoginViewController.h"
 #import "LocationUpdateViewController.h"
+#import "EvercamUtility.h"
 @import Firebase;
 
 @interface CamerasViewController() <AddCameraViewControllerDelegate, CameraPlayViewControllerDelegate,LocationUpdateViewControllerDelegate>
@@ -162,8 +163,13 @@
     }
     else if (row == 2)
     {
+        if ([APP_DELEGATE defaultUser].intercom_hmac_ios == NULL) {
+            [AppUtility displayAlertWithTitle:@"Error!" AndMessage:@"Please sign out and login again to avail this feature."];
+        }else{
+            [Intercom presentConversationList];
+        }
         
-        [Intercom presentConversationList];
+        
         return;
     }else if (row == 5)
     {

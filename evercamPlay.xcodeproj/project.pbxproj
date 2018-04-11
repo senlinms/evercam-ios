@@ -63,7 +63,6 @@
 		6218006F1E4B0B0300708E60 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6218006E1E4B0B0300708E60 /* MapKit.framework */; };
 		621800781E4B319600708E60 /* LocationUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 621800761E4B319600708E60 /* LocationUpdateViewController.m */; };
 		621800791E4B319600708E60 /* LocationUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 621800771E4B319600708E60 /* LocationUpdateViewController.xib */; };
-		62184D6D1EB8A14700559B41 /* EVERCAM-2-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 62184D6C1EB8A14700559B41 /* EVERCAM-2-01.png */; };
 		6218FEC11E4C839E001C37B0 /* CameraDetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6218FEC01E4C839E001C37B0 /* CameraDetailViewController_iPad.xib */; };
 		621E14D51EBC99AB00A1D565 /* MediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 621E14D41EBC99AB00A1D565 /* MediaItem.m */; };
 		6221090F1DD08EE200231E6F /* Source in Resources */ = {isa = PBXBuildFile; fileRef = 6221090E1DD08EE200231E6F /* Source */; };
@@ -197,6 +196,7 @@
 		77F305E51D0044A300FB4293 /* AllDevicesCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F305E41D0044A300FB4293 /* AllDevicesCell_iPad.xib */; };
 		77F33DCE1CE0B99C00461117 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F33DCC1CE0B99C00461117 /* ShareViewController.m */; };
 		77F33DCF1CE0B99C00461117 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F33DCD1CE0B99C00461117 /* ShareViewController.xib */; };
+		77F3F2F620772BE800494DBA /* EVERCAM-2-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F3F2F520772BE700494DBA /* EVERCAM-2-01.png */; };
 		77F722A31D6AFFF700B8B173 /* AFEvercamAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7227E1D6AFFF700B8B173 /* AFEvercamAPIClient.m */; };
 		77F722A41D6AFFF700B8B173 /* EvercamApiKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722801D6AFFF700B8B173 /* EvercamApiKeyPair.m */; };
 		77F722A51D6AFFF700B8B173 /* EvercamApiUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F722821D6AFFF700B8B173 /* EvercamApiUtility.m */; };
@@ -435,7 +435,6 @@
 		621800751E4B319600708E60 /* LocationUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUpdateViewController.h; sourceTree = "<group>"; };
 		621800761E4B319600708E60 /* LocationUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUpdateViewController.m; sourceTree = "<group>"; };
 		621800771E4B319600708E60 /* LocationUpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationUpdateViewController.xib; sourceTree = "<group>"; };
-		62184D6C1EB8A14700559B41 /* EVERCAM-2-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EVERCAM-2-01.png"; sourceTree = "<group>"; };
 		6218FEC01E4C839E001C37B0 /* CameraDetailViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraDetailViewController_iPad.xib; sourceTree = "<group>"; };
 		621E14AC1EBC853E00A1D565 /* GoogleCastResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleCastResources.bundle; sourceTree = "<group>"; };
 		621E14AE1EBC856600A1D565 /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = "../../../Downloads/GoogleCastSDK-Public-3.4.0-Release/GoogleCast.framework"; sourceTree = "<group>"; };
@@ -487,6 +486,7 @@
 		77359D5B1CE5B135000574C5 /* ic_Transfer_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_Transfer_icon@2x.png"; sourceTree = "<group>"; };
 		7736DBE71D07E7E400376E40 /* ViewCameraViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController_iPad.xib; sourceTree = "<group>"; };
 		7736DBE81D07E7E400376E40 /* ViewCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCameraViewController.xib; sourceTree = "<group>"; };
+		773796732074C50C0029CF10 /* AppUser 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AppUser 2.xcdatamodel"; sourceTree = "<group>"; };
 		773CC1CD1D7D4D2C000403E8 /* ic_dropdown_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_dropdown_new.png; sourceTree = "<group>"; };
 		773CC1CE1D7D4D2C000403E8 /* ic_dropdown_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_dropdown_new@2x.png"; sourceTree = "<group>"; };
 		773CC1CF1D7D4D2C000403E8 /* ic_dropdown_new@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_dropdown_new@3x.png"; sourceTree = "<group>"; };
@@ -603,6 +603,7 @@
 		77F33DCB1CE0B99C00461117 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		77F33DCC1CE0B99C00461117 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		77F33DCD1CE0B99C00461117 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
+		77F3F2F520772BE700494DBA /* EVERCAM-2-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EVERCAM-2-01.png"; sourceTree = "<group>"; };
 		77F7227D1D6AFFF700B8B173 /* AFEvercamAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEvercamAPIClient.h; sourceTree = "<group>"; };
 		77F7227E1D6AFFF700B8B173 /* AFEvercamAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEvercamAPIClient.m; sourceTree = "<group>"; };
 		77F7227F1D6AFFF700B8B173 /* EvercamApiKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvercamApiKeyPair.h; sourceTree = "<group>"; };
@@ -1238,9 +1239,9 @@
 		CB1C76891AAB871A00680FE3 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				77F3F2F520772BE700494DBA /* EVERCAM-2-01.png */,
 				627B20B31E9E10E7008A1412 /* new-back.png */,
 				627B20B41E9E10E7008A1412 /* new-back@2x.png */,
-				62184D6C1EB8A14700559B41 /* EVERCAM-2-01.png */,
 				627B20AB1E9DFF97008A1412 /* New-Logo.png */,
 				6241CB341E9230970093BDA2 /* showPassword.png */,
 				6241CB351E9230970093BDA2 /* showPassword@2x.png */,
@@ -1725,7 +1726,6 @@
 				77E5ACFA1CF58112002DD002 /* AddPresetViewController_iPad.xib in Resources */,
 				413BB29B1ADAD13D0083A5DC /* SelectVendorViewController.xib in Resources */,
 				CB1C76C71AAB871A00680FE3 /* ic_action_new.png in Resources */,
-				62184D6D1EB8A14700559B41 /* EVERCAM-2-01.png in Resources */,
 				77637B7C1D755E3C00CCC1BE /* action_refresh.png in Resources */,
 				4107487A1ADFDBE0004D10C9 /* btn_save.png in Resources */,
 				77F161811CEF0E1100634612 /* ic_accounts@2x.png in Resources */,
@@ -1808,6 +1808,7 @@
 				CB44E8711AAE9E7D00A78C11 /* CamerasViewController.xib in Resources */,
 				AB8097161CC0C742002F5FF9 /* nav.png in Resources */,
 				77EEF5FF1D378F4F00AB3EDC /* gpoview.mp4 in Resources */,
+				77F3F2F620772BE800494DBA /* EVERCAM-2-01.png in Resources */,
 				E30201C21B16C82D0006DAE8 /* alert-green-button.png in Resources */,
 				775353C11D827E2400F82973 /* ic_link_iOS@2x.png in Resources */,
 				6241CB381E9230970093BDA2 /* showPassword@2x.png in Resources */,
@@ -2164,8 +2165,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2211,8 +2212,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2243,7 +2244,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = evercamPlay/Evercam.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
@@ -2297,7 +2298,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = evercamPlay/Evercam.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zulqarnain mustafa (8L88GYNMS9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
@@ -2370,9 +2371,10 @@
 		41208A331AD7244A009C4FC2 /* AppUser.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				773796732074C50C0029CF10 /* AppUser 2.xcdatamodel */,
 				41208A341AD7244A009C4FC2 /* AppUser.xcdatamodel */,
 			);
-			currentVersion = 41208A341AD7244A009C4FC2 /* AppUser.xcdatamodel */;
+			currentVersion = 773796732074C50C0029CF10 /* AppUser 2.xcdatamodel */;
 			path = AppUser.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

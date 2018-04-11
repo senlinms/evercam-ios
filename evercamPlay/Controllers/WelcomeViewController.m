@@ -46,7 +46,9 @@
         [APP_DELEGATE setDefaultUser:defaultUser];
         
         //registering user with Intercom
+        [Intercom setUserHash:defaultUser.intercom_hmac_ios];
         [Intercom registerUserWithUserId:defaultUser.username];
+        
         
         CamerasViewController *camerasViewController = [[CamerasViewController alloc] initWithNibName:[GlobalSettings sharedInstance].isPhone ? @"CamerasViewController" : @"CamerasViewController_iPad" bundle:nil];
         MenuViewController *menuViewController = [[MenuViewController alloc] init];
